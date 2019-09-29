@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM information_schema.constraint_column_usage where constraint_name = 'table_name_foreign_table_id_foreign';

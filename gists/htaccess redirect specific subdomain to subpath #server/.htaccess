@@ -1,3 +1,0 @@
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^download.tld.com
-RewriteRule ^(.*)$ https://www.tld.com/download/$1 [L,NC,QSA]

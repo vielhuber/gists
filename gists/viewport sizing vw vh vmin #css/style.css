@@ -1,8 +1,0 @@
-div {
-    width: 100vw; /* 100% of viewport width */
-    height: 100vh; /* 100% of viewport height */
-}
-p {
-    width: 100vmin; /* min(100vw, 100vh) */
-    height: 100vmax; /* max(100vw, 100vh) */
-}

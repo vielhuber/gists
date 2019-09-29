@@ -31,5 +31,9 @@ while ($url !== null) {
         }
     }
     sleep(0.25);
+    break;
 }
 print_r($count);
+exec('git add -A .');
+exec('git commit -m "update on 2019-08-08"');
+exec('git push origin HEAD');

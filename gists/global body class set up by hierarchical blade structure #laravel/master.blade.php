@@ -1,1 +1,0 @@
-<html class="{{'master'}}@yield('global_class')">
