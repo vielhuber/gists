@@ -34,7 +34,6 @@ while ($url !== null) {
     break;
 }
 print_r($count);
-file_put_contents('gists/_updated', 'last update on '.date('Y-m-d').'');
 exec('git add -A .');
 exec('git commit -m "last update on '.date('Y-m-d').'"');
 exec('git push origin HEAD');
