@@ -2,20 +2,30 @@
 
 this is a synced repo of all public github gists.
 
-you can use this script also for your own purposes.
+the two main purposes are backup and activity signals on the main github account.
 
-the recommended way of using this is by running a cronjob.
+you can use this script also for your own purposes.
 
 ### installation
 
 ```bash
 mkdir gists
 cd gists
-git clone https://github.com/vielhuber/gists .
+# make a fresh repo on github and clone it
+git clone https://github.com/foo/bar .
+# fetch the sync script
+wget https://github.com/vielhuber/gists/archive/master.zip .
+unzip master.zip -d .
+cp -r ./gists-master/* .
+cp .env.example .env
+# edit your personal access token with the scope "gist" which can be obtained here:
+# https://github.com/settings/tokens/new
+nano .env
+rm -rf gists-master gists README.MD master.zip .env.example
 composer install
 ```
 
-### usage
+### usage (manual or via cron)
 
 ```bash
 php _sync.php
