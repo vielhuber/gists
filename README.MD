@@ -19,7 +19,4 @@ composer install
 
 ```bash
 php _sync.php
-git add -A .
-git commit -m "update"
-git push origin HEAD
 ```
