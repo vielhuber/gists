@@ -30,8 +30,7 @@ while ($url !== null) {
             file_put_contents($folder . '/' . $files__value->filename, $files__value->content);
         }
     }
-    sleep(0.25);
-    break;
+    sleep(0.15);
 }
 print_r($count);
 exec('git add -A .');

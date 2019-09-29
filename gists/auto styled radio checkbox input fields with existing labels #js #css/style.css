@@ -1,0 +1,48 @@
+.styled-input
+{
+    display:inline-block;
+    vertical-align: top;
+    position:relative;
+  	font-size:0;
+}
+.styled-input input
+{
+    opacity: 0;
+    position:absolute;
+    display: block;
+    pointer-events:none;
+}
+.styled-input input + label
+{
+    display:block;
+    width: 30px;
+    height: 30px;
+    background-color:#fff;
+    border-radius: 5px;
+    border:1px solid #eee;
+    cursor:pointer;
+    margin:0 !important;
+    padding:0;
+    position:relative;
+}
+.styled-input input + label:after
+{
+    content:"";
+    position:absolute;
+    top:15%;
+    left:15%;
+    right:15%;
+    bottom:15%;
+    background-color:transparent;
+    border-radius:5px;
+    transition: all 0.15s ease-in-out;
+}
+.styled-input input:checked + label:after
+{
+    background-color: #d39c0b;
+}
+.styled-input--radio input + label,
+.styled-input--radio input + label:after
+{
+    border-radius:50%;
+}

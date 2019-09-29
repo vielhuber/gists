@@ -1,0 +1,11 @@
+{
+  "name": "vielhuber-casperjs-test",
+  "version": "1.0.0",
+  "dependencies": {
+    "casperjs": "^1.1.4",
+    "nodemailer": "^4.1.0",
+    "phantomjs-prebuilt": "^2.1.15",
+    "spooky": "^0.2.5",
+    "tiny-jsonrpc": "^2.0.1"
+  }
+}

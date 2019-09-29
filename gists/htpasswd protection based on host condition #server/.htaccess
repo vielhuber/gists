@@ -1,0 +1,26 @@
+SetEnvIf HOST ".local$" allow_localhost
+SetEnvIf Request_URI "/path$" allow_path
+SetEnvIf Cookie "access_token" allow_logged_in
+Order Deny,Allow
+AuthType Basic
+AuthName "Interner Bereich"
+AuthUserFile /path/to/.htpasswd
+AuthGroupFile /dev/null
+require valid-user
+Deny from all
+Allow from env=allow_localhost
+Allow from env=allow_path
+Allow from env=allow_logged_in
+Satisfy any
+
+# and the opposite
+SetEnvIf HOST "^test" disable_testing
+Order Allow,Deny
+AuthType Basic
+AuthName "Interner Bereich"
+AuthUserFile /path/to/.htpasswd
+AuthGroupFile /dev/null
+require valid-user
+Allow from all
+Deny from env=disable_testing
+Satisfy any

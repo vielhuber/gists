@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <title>.</title>
+    <style>
+    .foo1
+    {
+        background-color:red;
+        width:300px;
+        height:100px;
+        display:flex;
+    }
+    .foo2
+    {
+        background-color:yellow;
+        flex: 0 0 50%;
+    }
+    .foo3
+    {
+        background-color:orange;
+        flex: 0 0 50%;
+        border:0;
+        /* this is needed, because input elements have a default width(!) */
+        min-width: 0;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="foo1">
+        <div class="foo2"></div>
+        <input class="foo3" type="text" />
+    </div>
+
+</body>
+</html>

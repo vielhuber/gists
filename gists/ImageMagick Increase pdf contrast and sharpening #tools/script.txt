@@ -1,0 +1,5 @@
+convert -density 300 input.pdf -colorspace gray -normalize -level 50%,51% -sharpen 0x1 output.pdf
+
+convert -density 300 input.pdf -colorspace gray -normalize -level 25%,26% -sharpen 0x1 output.pdf
+
+convert -density 300 input.pdf -colorspace gray -normalize -modulate 150 -sharpen 0x1 output.pdf

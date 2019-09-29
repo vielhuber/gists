@@ -1,0 +1,4 @@
+SET GLOBAL log_output = 'TABLE';
+SET GLOBAL general_log = 'ON';
+SELECT * FROM mysql.general_log WHERE command_type = 'Query' AND argument LIKE '%13388%' ORDER BY event_time DESC LIMIT 50;
+SET GLOBAL general_log = 'OFF';

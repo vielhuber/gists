@@ -1,0 +1,1 @@
+$sql->query("DELETE FROM table WHERE ID = '1'");

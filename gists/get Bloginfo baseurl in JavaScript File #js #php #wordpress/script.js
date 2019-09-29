@@ -1,0 +1,2 @@
+alert(baseurl);
+alert(tplurl);

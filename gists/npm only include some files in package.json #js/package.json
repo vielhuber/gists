@@ -1,0 +1,11 @@
+{
+  "files": [
+    "file1.js",
+    "file2.js"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    ...
+  }
+}

@@ -1,0 +1,1 @@
+UPDATE wp_comments SET comment_author_IP = '';

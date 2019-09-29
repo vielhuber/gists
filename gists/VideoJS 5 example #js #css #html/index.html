@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>VideoJS</title>
+
+  	<link href="http://vjs.zencdn.net/5.0.2/video-js.css" rel="stylesheet">
+  	<script src="http://vjs.zencdn.net/5.0.2/video.js"></script>
+
+    <style type='text/css'>
+    <!--
+    .video {
+    	width:50%;
+    	margin:0 auto;
+    }
+  	.video {
+  		border: 1px solid #EAEAEA;
+  	}
+  	.video .vjs-default-skin .vjs-play-progress,
+  	.video .vjs-default-skin .vjs-volume-level {
+  		background-color: #F36F27;
+  	}
+    -->
+    </style>
+</head>
+<body>
+
+	<div class="video">
+		<video
+			id="example_video_1"
+			class="video-js vjs-big-play-centered vjs-default-skin"
+			controls="controls"
+			preload="auto"
+			poster="http://video-js.zencoder.com/oceans-clip.png"
+			data-setup='{"fluid":true}'
+		>
+			<source src="tectareal_1920_1080_low.mp4" type='video/mp4' />
+			<source src="tectareal_1920_1080_low.webm" type='video/webm' />
+			<source src="tectareal_1920_1080_low.ogv" type='video/ogg' />
+			<p class="vjs-no-js">Videoplayer nicht vorhanden</p>
+		</video>
+	</div>
+
+</body>
+</html>

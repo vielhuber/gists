@@ -1,0 +1,44 @@
+.top-button
+{
+    width: 5rem;
+    height: 5rem;
+    position: fixed;
+    bottom: 5%;
+    right: 2%;
+    text-indent: -9999px;
+    background-color: #F00;
+    border-radius: 50%;
+    z-index:2147483647;
+  	display: none;
+    opacity:0;
+    pointer-events:none;
+    transform: translateZ(0);
+    transition: opacity 0.25s ease-in-out;
+}
+.top-button:before
+{
+    content: "";
+    width: 40%;
+    height: 40%;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    margin-left: -1px;
+    margin-top: -1px;
+    border-top: 2px solid #FFF;
+    border-left: 2px solid #FFF;
+    transform: rotate(45deg);
+}
+.top-button--visible
+{
+    opacity:1;
+    pointer-events:auto;
+}
+
+@media screen and (max-width: 800px)
+{
+  .top-button
+  {
+    display:none !important;
+  }  
+}
