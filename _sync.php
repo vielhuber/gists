@@ -4,6 +4,7 @@ $dotenv = Dotenv\Dotenv::create(__DIR__);
 $dotenv->load();
 $headers = ['Authorization' => 'token ' . getenv('TOKEN'), 'User-Agent' => 'gists'];
 $count = ['public' => 0, 'private' => 0];
+exec('git pull');
 __rrmdir('gists');
 mkdir('gists');
 $url = 'https://api.github.com/gists?page=1&per_page=100';
