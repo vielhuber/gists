@@ -1,0 +1,1 @@
+SELECT * FROM (VALUES (1, 'a'),(7, 'b'),(8, 'c'),(12, 'd')) as T (foo, bar)

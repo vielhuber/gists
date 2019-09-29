@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <title>.</title>
+  	<style>
+    .grecaptcha-badge {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }  
+  	</style>
+    <script>
+    function waitUntil(selector) {
+        return new Promise((resolve, reject) => {
+            let timeout = setInterval(() => {
+                if ( document.querySelector(selector) !== null ) {
+                    window.clearInterval(timeout);
+                    resolve();
+                }
+            }, 30);
+        });
+    }
+    document.addEventListener('DOMContentLoaded', function()
+    {
+        if (document.querySelector('.form') !== null) {
+            // dynamically load recaptcha
+            let script = document.createElement('script');
+            script.src = 'https://www.google.com/recaptcha/api.js?render=6LeLXX4UAAAAAM-UQW18IebrAAa5N79Q7Vc-oTMa';
+            document.head.appendChild(script);
+
+            [].forEach.call(document.querySelectorAll('.form'), function(el) {
+                // append manual badge
+                waitUntil('.grecaptcha-badge').then(() => {
+                    var badge = document.querySelector('.grecaptcha-badge');
+                    var badgeNew = badge.cloneNode(true);
+                    badgeNew.classList.remove('grecaptcha-badge');
+                    badgeNew.style.display = 'block';
+                    badgeNew.style.visibility = 'visible';
+                  	badgeNew.style.opacity = 1;
+                  	badgeNew.style.filter = 'grayscale(100%)';
+                    badgeNew.style.position = 'relative';
+                    badgeNew.style.right = 0;
+                    badgeNew.style.bottom = 0;
+                    el.appendChild(badgeNew);
+                });             
+
+                el.addEventListener('submit', function(e)
+                {
+                    e.preventDefault();
+                    var form = e.target;
+                    form.querySelector('form').disabled = true;
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute('6LeLXX4UAAAAAM-UQW18IebrAAa5N79Q7Vc-oTMa', {action: 'homepage'}).then(function(token) {
+                            form.querySelector('input[name="g-recaptcha-response"]').value = token;
+                            var data = new FormData(form);
+                                request = new XMLHttpRequest();
+                            request.onreadystatechange = function()
+                            {
+                                if( request.readyState <= 3 )
+                                {
+                                    return;
+                                }
+                                form.querySelector('form').disabled = false;
+                                console.log(JSON.parse(request.responseText));
+                                if( request.status == 200 )
+                                {
+                                    form.reset();
+                                }              
+                            }
+                            request.open(form.method, form.action);
+                            request.send(data);
+                        });
+                    });
+                });
+            });
+
+        }
+    });
+    </script>
+</head>
+<body>
+
+    <h2>Form #1</h2>
+    <div class="form">
+        <form action="script.php" method="post">
+            <input type="hidden" name="g-recaptcha-response" value="" />
+            <input type="submit" name="submit" value="GO" />
+        </form>
+    </div>
+
+    <h2>Form #2</h2>
+    <div class="form">
+        <form action="script.php" method="post">
+            <input type="hidden" name="g-recaptcha-response" value="" />
+            <input type="submit" name="submit" value="GO" />
+        </form>
+    </div>
+
+</body>
+</html>

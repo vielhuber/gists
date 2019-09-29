@@ -1,0 +1,50 @@
+[data-lanimate]
+{
+    opacity:0;
+}
+[data-lanimate="fade"]
+{
+    
+}
+[data-lanimate="scrollX"]
+{
+    transform: translateX(30px);
+}
+[data-lanimate="scrollY"]
+{
+    transform: translateY(30px);
+}
+[data-lanimate="scale"]
+{
+    transform: scale(1.1) translateY(30px);
+}
+[data-lanimate-finished]
+{
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    opacity:1;
+}
+[data-lanimate="fade"][data-lanimate-finished]
+{
+
+}
+[data-lanimate="scrollX"][data-lanimate-finished]
+{
+    transform: translateX(0px);  
+}
+[data-lanimate="scrollY"][data-lanimate-finished]
+{
+    transform: translateX(0px);  
+}
+[data-lanimate="scale"][data-lanimate-finished]
+{
+    transform: scale(1) translateY(0px);  
+}
+
+/* disable on mobile */
+@media screen and (max-width: 1100px)
+{  
+  [data-lanimate]
+  {
+  	transition:all 0s ease 0s;
+  }
+}

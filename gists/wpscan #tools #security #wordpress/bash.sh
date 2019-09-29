@@ -1,0 +1,1 @@
+wpscan --url https://www.domain.tld

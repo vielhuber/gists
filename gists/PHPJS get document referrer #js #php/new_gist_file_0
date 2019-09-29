@@ -1,0 +1,5 @@
+// js
+document.referrer
+
+// php
+$_SERVER['HTTP_REFERER']

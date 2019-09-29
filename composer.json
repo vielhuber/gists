@@ -1,0 +1,6 @@
+{
+    "require": {
+        "vielhuber/stringhelper": "^2.5",
+        "vlucas/phpdotenv": "^3.6"
+    }
+}

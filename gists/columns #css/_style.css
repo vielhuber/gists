@@ -1,0 +1,12 @@
+ul {
+  column-count: 5; 
+  column-width: 200px; /* important for responsive: always set this to a px value (% is not supported); this is like a breakpoint */
+  column-gap: 0px;
+  column-rule: 1px dotted #ddd;
+}
+li {
+  break-inside: avoid-column; /* this is important to avoid bugs */
+}
+li.break {
+  column-span: all; /* use this to break an element out of the content flow */
+}

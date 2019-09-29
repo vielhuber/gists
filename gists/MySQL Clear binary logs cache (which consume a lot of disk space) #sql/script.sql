@@ -1,0 +1,3 @@
+# Console
+PURGE BINARY LOGS BEFORE '2020-03-09'
+

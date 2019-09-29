@@ -1,0 +1,1 @@
+curl -T my-local-file.txt ftp://ftp.example.com --user user:secret

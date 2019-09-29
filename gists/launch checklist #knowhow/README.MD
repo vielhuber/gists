@@ -1,0 +1,55 @@
+## PRE-LAUNCH
+- 301-Redirects bei Relaunch vorhanden
+- HTML-Validierung erfolgreich geprüft
+- 404-Fehlerseite vorhanden / Status-Code geprüft
+- XML-Sitemap vorhanden und aktiv
+- robots.txt vorhanden und aktiv
+- Manuelles Backup erstellt
+- WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
+- Passwortschutz für Testing aktiv, für Production inaktiv
+- git auf Production, Testing und Local auf demselben Stand
+- Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
+- Alle CMS Updates (WordPress) installiert
+- RSS-Feed vorhanden und funktional
+- Impressum + Datenschutzseite vorhanden und gepflegt
+- Google Analytics Opt Out Link gesetzt und funktional
+- .git-Verzeichnis geschützt
+- Limit Login Access aktiv + DSGVO konform
+- Archivseiten (Autoren, Tags, Datum, ...) deaktiviert
+- Testseiten / Dummyseiten gelöscht, Papierkorb gelöscht
+- Liveseiten sortiert in der Reihenfolge
+- Formulare funktionsfähig und scharf geschalten an Kunden
+- Copyright für alle Bilder vorhanden (am Bild oder im Impressum)
+- Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
+- Google Analytics / Google Tag Manager aktiviert und IP Anonymisierung aktiviert
+- Google Maps JS API Key hinterlegen
+- Alle Bilder komprimiert
+- Grundlegende Meta-Tags gesetzt (prüfen, ob Startseite diese ausspielt)
+- JavaScript Fehler in Console überprüft
+- console.log Ausgaben deaktiviert
+- Branch in master gemergt
+- Favicon vorhanden
+- Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
+- Cross-Browser-Check (inkl. Responsive) durchgeführt
+- WordPress Zugänge (personengebunden, also pro Person einen Account) ausstellen
+- Kontaktformulare durch Captcha (reCAPTCHA) oder alternativ Honeypot schützen
+- reCAPTCHA registrieren
+- E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
+- socialfoo: Facebook Developers App Id eintragen
+
+## POST-LAUNCH
+- Pro Plugins registriert (WPML, ACF)
+- htaccess Rewrite Rules: Force https und force www oder non-www
+- Open Graph Social Sharing funktionsfähig
+- syncdb für Production -> Local und Testing -> Local vorhanden und 1x durchgeführt
+- SSL-Zertifikat aktiv (forced)
+- Kein Mixed SSL Content vorhanden
+- Production-Links prüfen, ob diese auf local/testing führen!
+- Caching aktiviert
+- Google Search Console aktiviert, Sitemap eingereicht oder initiale Indexierung beantragt
+- Broken Links geprüft mit Screaming Frog
+- Rich Snippets geprüft und validiert
+- Google PageSpeed (web.dev) einmalig durchlaufen lassen und gröbste Fehler fixen
+- PHP-Version aktualisiert / geprüft
+- Jira Ticket abgehakt
+- Abrechnung geprüft und durchgeführt

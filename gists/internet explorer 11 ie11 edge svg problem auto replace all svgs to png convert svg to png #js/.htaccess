@@ -1,0 +1,5 @@
+# automatically redirect ie11/edge users to png fallback if exists
+RewriteCond %{HTTP_USER_AGENT} Trident|MSIE|Edge [NC]
+RewriteCond %{REQUEST_URI} \.(svg)$ [NC]
+RewriteCond %{REQUEST_FILENAME}.png -f
+RewriteRule ^ %{REQUEST_URI}.png [QSA,L]

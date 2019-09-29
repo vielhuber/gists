@@ -1,0 +1,1 @@
+rm -f storage/framework/sessions/*

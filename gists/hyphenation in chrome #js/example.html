@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <title>.</title>
+    <script>
+    let Hyphenopoly = {
+        paths: {
+            patterndir: './hyphenopoly/patterns/',
+            maindir: './hyphenopoly/'
+        },
+        require: {
+          	// Only use Hyphenopoly when the browser does not support it
+            'de-de': 'Silbentrennungsalgorithmus',
+            'en-us': 'supercalifragilisticexpialidocious',
+            'fr-fr': 'anticonstitutionnellement',
+          	// Always use Hyphenopoly, have a fine grained control over the rules
+            // Don't forget to disable css hyphenation below in this case
+          	//'de-de': 'FORCEHYPHENOPOLY'
+        },
+        setup: {
+            exceptions: {
+                 'de-de': ['Company Name', 'Someotherword', 'Andanotherword'].join(', ')
+            },
+            selectors: {
+                'body': {
+                    minWordLength: 7,
+                    leftmin: 4,
+                    rightmin: 4
+                }
+            }
+        }
+    };
+    </script>
+    <script src="./hyphenopoly/Hyphenopoly_Loader.js"></script>
+    <style>
+    body
+    {
+      	/* this is important */
+        /* MUST be disabled if FORCEHYPHENOPOLY is used! */
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
+    </style>
+</head>
+<body>
+  <h1 style="font-size:100px;">Lorem ipsum dolor sit amet, ea vim utroque recusabo. Quo vitae quidam luptatum ne, vis erat commune nominati ne. His ea recusabo salutandi moderatius, sed ei noster impetus. Vivendo alienum splendide nec ea, eu cum veritus principes accommodare.</h1>
+</body>
+</html>

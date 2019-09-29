@@ -1,0 +1,38 @@
+<table>
+
+  <caption>Überschrift der Tabelle</caption>
+
+  <colgroup>
+    <col style="background-color:red;">
+    <col span="2" style="background-color:grey;">
+  </colgroup>
+
+  <thead>
+    <tr>
+      <th>head1</td>
+      <th>head2</td>
+      <th>head3</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td colspan="2">body1</td>
+      <td rowspan="2">body4</td>
+    </tr>
+    <tr>
+      <td>body2</td>
+      <td>body3</td>
+    </tr>
+  </tbody>
+
+  <!-- tfoot can also come above tbody, but thats bad for screenreaders and print.css order -->
+  <tfoot>
+    <tr>
+      <td>foot1</td>
+      <td>foot2</td>
+      <td>foot3</td>
+    </tr>
+  </tfoot>
+
+</table>

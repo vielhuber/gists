@@ -1,0 +1,3 @@
+- create a new folder "App/Models" and move all your models inside there
+- add this to ```composer.json```: ```"autoload": { "classmap": ["app/Models"] }```
+- ```composer dump-autoload```

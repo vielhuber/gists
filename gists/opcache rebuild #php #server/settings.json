@@ -1,0 +1,10 @@
+{
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.php$",
+                "cmd": "curl http://tld.com/flush.php"
+            }
+        ]
+    }
+}

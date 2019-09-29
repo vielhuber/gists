@@ -1,0 +1,17 @@
+### setup
+
+- travis-ci.com > sign up with github
+- add ```.travis.yml``` to your root folder
+
+```yml
+language: php
+php:
+    - 7.3.7
+os:
+    - linux
+    #- osx (currently no support for php in travis ci)
+    #- windows (currently no support for php in travis ci)
+```
+
+- push with new version tag to github
+- enjoy

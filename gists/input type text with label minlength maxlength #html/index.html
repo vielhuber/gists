@@ -1,0 +1,30 @@
+<label for="request_name">Ihr Name<span class="req">*</span></label>
+<input
+  autocomplete="on"
+  autofocus="autofocus"
+  value=""
+  maxlength="255"
+  type="text"
+  placeholder="Vor- &amp; Nachname"
+  required="required"
+  name="request_name"
+  id="request_name"
+/>
+
+<!-- input with minimum 3 characters -->
+<input type="text" pattern=".{3,}" />
+<input type="text" minlength="3" />
+
+<!-- input with maximum 7 characters -->
+<input type="text" pattern=".{0,7}" />
+<input type="text" maxlength="7" />
+
+<!-- input with minimum 3 and maximum 7 characters -->
+<input type="text" pattern=".{3,7}" />
+<input type="text" minlength="3" maxlength="7" />
+
+<!-- cleaner -->
+<label>
+  <input type="text" name="foo" value="1" />
+  Input doesn't need an id and label no for
+</label>
