@@ -77,7 +77,7 @@ cp -r /folder1/. folder2/
 cp -r folder1 folder2/
 
 # copy contents of subfolder in current folder
-cp -r ./folder1/. .
+cp -r ./subfolder/. .
 
 # copy contents of one folder to another folder (excluding one specific folder)
 rsync -a --info=progress2 ~/source/ ~/target --exclude excludedfolder
