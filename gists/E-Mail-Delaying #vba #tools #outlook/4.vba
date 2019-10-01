@@ -9,8 +9,11 @@ Private Sub Application_ItemSend(ByVal Item As Object, Cancel As Boolean)
             Case 7: d = DateAdd("d", 1, d)
         End Select
         d = d & " 09:00:00"
-        If MsgBox("Wollen Sie diese E-Mail verzögern auf den Zeitpunkt " & d & "?", vbYesNo + vbQuestion + vbMsgBoxSetForeground, "E-Mail-Verzögerung") = vbYes Then
+        Response = MsgBox("Wollen Sie diese E-Mail verzögern auf den Zeitpunkt " & d & "?", vbYesNoCancel + vbQuestion + vbMsgBoxSetForeground, "E-Mail-Verzögerung")
+        If Response = vbYes Then
             Mail.DeferredDeliveryTime = d
+        Elseif Response = vbCancel Then
+            Cancel = True
         End If
     End If
 End Sub
