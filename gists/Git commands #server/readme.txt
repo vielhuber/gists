@@ -110,7 +110,7 @@ git config --global core.safecrlf false
 # this does not delete the folder but remove it from git
 git rm -rf --cached specific-file
 git rm -rf --cached specific-folder/
-
+find . -type f -name "*.*" | xargs git rm -rf --cached
 
 # if you want to delete the folder also from history
 git filter-branch --tree-filter 'rm -rf custom/directory/' --prune-empty HEAD

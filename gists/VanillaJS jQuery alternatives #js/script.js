@@ -156,6 +156,8 @@ $('#el').children().first()
 document.getElementById("el").children[0]
 $('#el').children().length > 0
 document.getElementById("el").children.length > 0
+$('#el').children('.foo')
+$('#el').querySelectorAll(':scope > .foo')
 
 if( $('#el').length > 0 ) { }
 if( document.getElementById("el") ) { }
@@ -386,26 +388,27 @@ document.getElementById('el').offsetLeft
 $('#el').prevAll();
 $('#el').prevAll('.foo');
 prevAll(elem, filter) {
-  var sibs = [];
-  while (elem = elem.previousSibling) {
-      if (elem.nodeType === 3) continue; // ignore text nodes
-      if (!filter || filter(elem)) sibs.push(elem);
-  }
-  return sibs;
+	let sibs = [];
+	while ((elem = elem.previousElementSibling)) {
+	    if (filter === undefined || elem.matches(filter)) {
+		sibs.push(elem);
+	    }
+	}
+	return sibs;
 }
 prevAll(document.querySelector('#el'));
 prevAll(document.querySelector('#el'),'.foo');
 $('#el').nextAll();
 $('#el').nextAll('.foo');
-nextAll(el, selector = null)
+nextAll(elem, filter)
 {
-	let next = false;
-	return [].filter.call(el.parentNode.children, (htmlElement) =>
-	{
-		if( htmlElement === el ) { next = true; return false; }
-		if( selector !== null && !htmlElement.classList.contains(selector.replace('.','')) ) { return false; }
-		return next;
-	});
+        let sibs = [];
+        while ((elem = elem.nextElementSibling)) {
+            if (filter === undefined || elem.matches(filter)) {
+                sibs.push(elem);
+            }
+        }
+        return sibs;
 }
 nextAll(document.querySelector('#el'));
 nextAll(document.querySelector('#el'),'.foo');
