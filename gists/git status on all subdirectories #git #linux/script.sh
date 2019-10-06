@@ -1,1 +1,0 @@
-find . -type d -name '.git' | while read dir ; do sh -c "if [ -z \"$(cd $dir/../ && git status --porcelain)\" ]; then tput setaf 2 && echo \"${dir//\.git/} clean\"; else tput setaf 1 && echo \"${dir//\.git/} modified\"; fi" ; done

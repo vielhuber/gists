@@ -1,1 +1,0 @@
-if ('prop' in obj) { }
