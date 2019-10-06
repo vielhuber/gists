@@ -30,7 +30,6 @@ while ($url !== null) {
             file_put_contents($folder . '/' . $files__value->filename, $files__value->content);
         }
     }
-    $url = null;
     sleep(0.15);
 }
 print_r($count);
