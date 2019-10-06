@@ -4,7 +4,6 @@ $dotenv = Dotenv\Dotenv::create(__DIR__);
 $dotenv->load();
 $headers = ['Authorization' => 'token ' . getenv('TOKEN'), 'User-Agent' => 'gists'];
 $count = ['public' => 0, 'private' => 0];
-exec('git pull');
 __rrmdir('gists');
 mkdir('gists');
 $url = 'https://api.github.com/gists?page=1&per_page=100';
@@ -35,8 +34,3 @@ while ($url !== null) {
     sleep(0.15);
 }
 print_r($count);
-exec('git config --global user.name "David Vielhuber"');
-exec('git config --global user.email "david@vielhuber.de"');
-exec('git add -A .');
-exec('git commit -m "last update on '.date('Y-m-d').'"');
-exec('git push origin HEAD');

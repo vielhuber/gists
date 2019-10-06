@@ -25,8 +25,12 @@ rm -rf gists-master gists README.MD master.zip .env.example
 composer install
 ```
 
-### usage (manual or via cron)
+### usage (manually or via cron)
 
 ```bash
+git pull
 php _sync.php
+git add -A .
+git commit -m "last update on `date +'%Y-%m-%d'`"
+git push origin HEAD
 ```
