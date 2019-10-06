@@ -25,7 +25,7 @@ rm -rf gists-master gists README.MD master.zip .env.example
 composer install
 ```
 
-### usage (manually or via cron)
+### usage (manually or via cronjob)
 
 ```bash
 git pull
