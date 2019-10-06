@@ -1,1 +1,0 @@
-warning: third party cookies must not be disabled (for both ways(!))

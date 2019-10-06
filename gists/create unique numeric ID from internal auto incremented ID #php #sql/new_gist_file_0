@@ -1,5 +1,0 @@
-PHP
-substr(hexdec(substr(sha1($ID),0,15)),0,8)
-
-MySQL
-SUBSTR(CONV(SUBSTR(SHA1(ID),1,15),16,10),1,8)

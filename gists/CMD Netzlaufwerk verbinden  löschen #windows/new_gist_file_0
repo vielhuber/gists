@@ -1,2 +1,0 @@
-net use Z: /USER:Username \\SERVER\Folder "Password"
-net use Z: /delete
