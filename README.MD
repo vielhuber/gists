@@ -25,7 +25,7 @@ rm -rf gists-master gists README.MD master.zip .env.example
 composer install
 ```
 
-### usage (manual or via cronjob)
+### usage (manual or via cron)
 
 ```bash
 php _sync.php
