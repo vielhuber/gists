@@ -1,0 +1,62 @@
+<!-- date has the format YYYY-MM-DD -->
+<input
+  type="date"
+  autofocus="autofocus"
+  disabled="disabled"
+  value="<?php echo date('Y-m-d',strtotime('now')); ?>"
+  id="date_field"
+  name="date_field"
+  placeholder="E-Mail-Adresse"
+  required="required"
+/>
+
+<!-- datetime-local has the format YYYY-MM-DDTHH:II:SS and should be used when the timezone is not relevant for the application -->
+<input
+  type="datetime-local"
+  autofocus="autofocus"
+  disabled="disabled"
+  value="<?php echo date('Y-m-d\TH:i:s',strtotime('now')); ?>"
+  id="date_field"
+  name="date_field"
+  placeholder="E-Mail-Adresse"
+  required="required"
+/>
+
+<!-- datetime-local: also show and allow seconds (step is normally 60!) -->
+<input
+  type="datetime-local"
+  autofocus="autofocus"
+  disabled="disabled"
+  value="<?php echo date('Y-m-d\TH:i:s',strtotime('now')); ?>"
+  step="1"
+  id="date_field"
+  name="date_field"
+  placeholder="E-Mail-Adresse"
+  required="required"
+/>
+
+<!-- datetime has the format YYYY-MM-DDTHH:II:SS and should not be used atm (chrome dropped support for it!) -->
+<input
+  type="datetime"
+  autofocus="autofocus"
+  disabled="disabled"
+  value="<?php echo date('c', strtotime('now')); ?>"
+  id="date_field"
+  name="date_field"
+  placeholder="E-Mail-Adresse"
+  required="required"
+/>
+
+<!-- time has the format HH:II -->
+<input
+  type="time"
+  min="10:00"
+  max="20:00"
+  step="1"
+  autofocus="autofocus"
+  disabled="disabled"
+  value="<?php echo date('H:i',strtotime('now')); ?>"
+  id="date_field"
+  name="date_field"
+  placeholder="E-Mail-Adresse"
+  required="required"

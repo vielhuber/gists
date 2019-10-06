@@ -1,0 +1,119 @@
+#!/bin/bash
+
+# start
+if [ $1 = "start" ]; then
+
+sudo service apache2 start
+sudo service mysql start
+sudo service postgresql start
+sudo service php5.6-fpm start
+sudo service php7.0-fpm start
+sudo service php7.1-fpm start
+sudo service php7.2-fpm start
+sudo service php7.3-fpm start
+
+# restart
+elif [ $1 = "restart" ]; then
+
+sudo service apache2 restart
+sudo service mysql restart
+sudo service postgresql restart
+sudo service php5.6-fpm restart
+sudo service php7.0-fpm restart
+sudo service php7.1-fpm restart
+sudo service php7.2-fpm restart
+sudo service php7.3-fpm restart
+
+# stop
+elif [ $1 = "stop" ]; then
+
+sudo service apache2 stop
+sudo service mysql stop
+killall -KILL mysqld
+killall -KILL mysqld
+killall -KILL mysqld
+killall -KILL mysqld
+sudo service postgresql stop
+sudo service php5.6-fpm stop
+sudo service php7.0-fpm stop
+sudo service php7.1-fpm stop
+sudo service php7.2-fpm stop
+sudo service php7.3-fpm stop
+
+# add
+elif [ $1 = "add" ]; then
+
+PROJECT=$2
+FILE="/etc/apache2/sites-available/$PROJECT.conf"
+
+if [ -f $FILE ]; then
+echo "Project $PROJECT already exists."
+else  
+
+if [ -n "$3" ]; then
+PHP_LINE="<FilesMatch \.php$>
+    SetHandler \"proxy:unix:/var/run/php/$3-fpm.sock|fcgi://localhost/\"
+</FilesMatch>"
+else
+PHP_LINE=""
+fi
+
+if [ -n "$4" ]; then
+FOLDER="$4"
+else
+FOLDER=$PROJECT
+fi
+
+cat > $FILE << EOF
+<VirtualHost *:80>
+  ServerAdmin david@close2.de
+  ServerName $PROJECT.local.vielhuber.de
+  DocumentRoot /mnt/c/htdocs/$FOLDER
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+  <Directory /mnt/c/htdocs>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Require all granted
+  </Directory>
+  $PHP_LINE
+</VirtualHost>
+<VirtualHost *:443>
+  ServerAdmin david@close2.de
+  ServerName $PROJECT.local.vielhuber.de
+  DocumentRoot /mnt/c/htdocs/$FOLDER
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+  <Directory /mnt/c/htdocs>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Require all granted
+  </Directory>
+  $PHP_LINE
+  SSLEngine on
+  SSLCertificateFile /mnt/c/htdocs/lamp/ssl.cert
+  SSLCertificateKeyFile /mnt/c/htdocs/lamp/ssl.key
+</VirtualHost>
+EOF
+sudo a2ensite $PROJECT.conf
+sudo service apache2 reload
+fi
+
+# remove
+elif [ $1 = "remove" ]; then
+
+PROJECT=$2
+FILE="/etc/apache2/sites-available/$PROJECT.conf"
+if [ -f $FILE ]; then
+rm $FILE
+sudo a2dissite $PROJECT.conf
+sudo service apache2 reload
+else
+echo "Project $PROJECT does not exist."
+fi
+
+else
+
+echo "unknown method"
+
+fi

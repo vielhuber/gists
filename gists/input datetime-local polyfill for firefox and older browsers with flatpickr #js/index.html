@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <title>flatpickr</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/de.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+        flatpickr('input[type="datetime-local"]', {
+            enableTime: true,
+            altInput: true,
+            altFormat: 'd.m.Y H:i',
+            dateFormat: 'Y-m-dTH:i:S',
+            locale: 'de',
+            time_24hr: true
+        });
+    });
+    </script>
+</head>
+<body>
+
+    <input
+      type="datetime-local"
+      value="2018-01-01T08:00:00"
+    />
+
+    <input
+      type="datetime-local"
+      value=""
+    />
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>.</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    <!--
+    $(document).ready(function() {
+	    $('#securimage').click(function() {
+			$(this).attr('src','securimage/securimage_show.php?namespace=captcha&' + Math.random());
+			return false;
+	    });
+	});
+    -->
+    </script>
+    <style type='text/css'>
+    <!--
+    #securimage {
+    	width:auto;
+    	height:45px;
+    	cursor:pointer;
+    }
+    -->
+    </style>
+</head>
+<body>
+
+<form method="post" action="form.php" enctype="multipart/form-data">
+  <input type="text" name="captcha" value="" maxlength="255" required="required" placeholder="Captcha *" />
+  <img id="securimage" src="securimage/securimage_show.php?namespace=foo" alt="CAPTCHA Image" title="Captcha neu generieren" />
+  <input type="submit" value="Abschicken" />
+</form>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+li {
+  float:left;
+  font-weight:normal;
+}
+li.active {
+  font-weight:bold;
+}
+li[data-content]:after {
+  display: block;
+  content: attr(data-content);
+  font-weight: bold;
+  height: 1px;
+  color: transparent;
+  overflow: hidden;
+  visibility: hidden;
+}

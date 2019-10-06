@@ -1,0 +1,30 @@
+/* has attribute */
+div[class] { }
+
+/* is attribute */
+div[class="foo"] { }
+
+/* contains single word */
+div[class~="foo"] { }
+
+/* starts with single word */
+div[class|="foo"] { }
+
+/* starts with */
+div[class^="foo"] { }
+
+/* ends with */
+div[class$="foo"] { }
+
+/* contains */
+div[class*="foo"] { }
+
+
+/* if is child (or subchild) of */
+.foo .bar { }
+/* if is direct child of */
+.foo > .bar { }
+/* if is next sibling */
+.foo + .bar { }
+/* if is any sibling coming AFTER it */
+.foo ~ .bar { }

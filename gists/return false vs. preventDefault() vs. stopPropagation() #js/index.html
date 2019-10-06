@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>.</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    <!--
+    $(document).ready(function() {
+
+        var example = 5;
+
+        // link1 => 1
+        // link2 => 2,1,redirect
+        // explanation: everything gets executed in the expected order
+        if(example === 1) {
+            $('#link1').click(function(e) {
+                alert('1');
+            });
+            $('#link2').click(function(e) {
+                alert('2');
+            });
+        }
+
+        // link1 => 1
+        // link2 => 2,1
+        // explanation: preventDefault (only) prevents the browsers default action (the redirect)
+        if(example === 2) {
+            $('#link1').click(function(e) {
+                alert('1');
+            });
+            $('#link2').click(function(e) {
+                alert('2');
+                e.preventDefault();
+            });
+        }
+
+        // link1 => 1
+        // link2 => 2,redirect
+        // explanation: stopPropagation prevents the event from "bubbling up" the dom (propagating)
+        if(example === 3) {
+            $('#link1').click(function(e) {
+                alert('1');
+            });
+            $('#link2').click(function(e) {
+                alert('2');
+                e.stopPropagation();
+            });
+        }
+
+        // link1 => 1
+        // link2 => 2
+        // explanation: combination of example 2 and 3
+        if(example === 4) {
+            $('#link1').click(function(e) {
+                alert('1');
+            });
+            $('#link2').click(function(e) {
+                alert('2');
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        }
+
+        // link1 => 1
+        // link2 => 2
+        // explanation: same as example 4 (plus that the function returns immediately)
+        if(example === 5) {
+            $('#link1').click(function(e) {
+                alert('1');
+            });
+            $('#link2').click(function(e) {
+                alert('2');
+                return false;
+            });
+        }
+
+    });
+    -->
+    </script>
+
+</head>
+<body>
+
+    <div id="link1">
+        link1
+        <a href="http://test.de" id="link2">
+            link2
+        </div>
+    </div>
+
+</body>
+</html>

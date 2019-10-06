@@ -1,0 +1,82 @@
+<!-- validate with https://search.google.com/structured-data/testing-tool -->
+
+<!-- variant 1 (json-ld, recommended) -->
+<script type="application/ld+json">
+{
+	"@context": "http://www.schema.org",
+	"@type": "Article",
+	"mainEntityOfPage": {
+		"@type": "WebPage",
+		"@id": "https://google.com/article"
+	},
+	"headline": "Article headline",
+	"description": "A most wonderful article",
+	"datePublished": "2015-02-05T08:00:00+08:00",
+	"dateModified": "2015-02-05T09:20:00+08:00",
+	"image": {
+		"@type": "ImageObject",
+		"url": "https://www.link.de/bild.jpg",
+		"height": 800,
+		"width": 800
+	},
+	"publisher": {
+		"@type": "Organization",
+		"name": "Firma",
+		"logo": {
+			"@type": "ImageObject",
+			"url": "https://www.link.de/images/logo.png",
+			"width": 600,
+			"height": 60
+		}
+	},
+	"author": {
+		"@type": "Person",
+		"name": "Firma"
+	},
+	"aggregateRating": {
+		"@type": "AggregateRating",
+		"ratingValue": "5",
+		"bestRating": "5",
+		"worstRating": "1",
+		"ratingCount": "3"
+	}
+}
+</script>
+
+<!-- variant 2: html microdata -->
+<div style="display: none;" itemscope itemtype="http://schema.org/Article">
+	<meta itemprop="headline" content="Titel des Artikels" />
+	<meta itemprop="description" content="Inhalt des Artikels (encodet mit strip_tags und htmlentities)" />
+	<meta itemprop="datePublished" content="2016-10-11T15:56:56+00:00" />
+	<meta itemprop="dateModified" content="2016-10-11T15:56:56+00:00" />
+	<meta itemprop="url" content="https://www.link.de/foo/" />
+	<meta itemprop="mainEntityOfPage" content="https://www.link.de/foo/" />
+  <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+    <meta itemprop="url" content="https://www.link.de/bild.jpg" />
+    <meta itemprop="width" content="150" />
+    <meta itemprop="height" content="150" />
+  </div>
+
+	<div itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+		<meta itemprop="name" content="Firma" />
+    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+      <meta itemprop="url" content="https://www.link.de/images/logo.png" />
+      <meta itemprop="width" content="150" />
+      <meta itemprop="height" content="150" />
+    </div>
+	</div>
+	<div itemprop="author" itemscope itemtype="http://schema.org/Organization">
+		<meta itemprop="name" content="Firma" />
+    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+      <meta itemprop="url" content="https://www.link.de/images/logo.png" />
+      <meta itemprop="width" content="150" />
+      <meta itemprop="height" content="150" />
+    </div>
+	</div>
+	<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+		<meta itemprop="bestRating" content="5" />
+		<meta itemprop="worstRating" content="1" />
+		<meta itemprop="ratingValue" content="5" />
+		<meta itemprop="ratingCount" content="3" />
+	</div>
+</div>

@@ -1,0 +1,5 @@
+# no options
+ffmpeg -i input.wav -acodec libmp3lame output.mp3
+
+# with options (no video, set frequency and audio channels)
+ffmpeg -i input.wav -vn -ar 44100 -ac 2 -ab 192k -f mp3 output.mp3
