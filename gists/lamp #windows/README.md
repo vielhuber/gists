@@ -244,6 +244,9 @@ xdebug.max_nesting_level = 10000
 - ```git config --global user.name "David Vielhuber"```
 - ```git config --global user.email "david@vielhuber.de"```
 - ```git config --global core.mergeoptions --no-edit```
+- further do this (--no-edit does sometimes not work):
+  - ```sudo nano ~/.bash_profile```
+  - ```export GIT_MERGE_AUTOEDIT=no```
 
 #### lamp repo
 - in this repo we store our ssl certificate, our ssh keys and all current active symlinks
