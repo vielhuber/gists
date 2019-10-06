@@ -31,9 +31,12 @@ while ($url !== null) {
             file_put_contents($folder . '/' . $files__value->filename, $files__value->content);
         }
     }
+    $url = null;
     sleep(0.15);
 }
 print_r($count);
+exec('git config --global user.name "David Vielhuber"');
+exec('git config --global user.email "david@vielhuber.de"');
 exec('git add -A .');
 exec('git commit -m "last update on '.date('Y-m-d').'"');
 exec('git push origin HEAD');
