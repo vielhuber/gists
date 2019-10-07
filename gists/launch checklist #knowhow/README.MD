@@ -43,6 +43,7 @@
 - Open Graph Social Sharing funktionsfähig
 - syncdb für Production -> Local und Testing -> Local vorhanden und 1x durchgeführt
 - SSL-Zertifikat aktiv (forced)
+- Forced htaccess Umleitung von nicht-www auf www (oder umgekehrt)
 - Kein Mixed SSL Content vorhanden
 - Production-Links prüfen, ob diese auf local/testing führen!
 - Caching aktiviert
