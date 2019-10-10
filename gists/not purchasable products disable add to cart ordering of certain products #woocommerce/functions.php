@@ -1,10 +1,18 @@
 add_filter('woocommerce_is_purchasable', function ($is_purchasable, $product) {
     return (productIsInSpecialCategory($product) ? false : $is_purchasable);
 }, 10, 2);
-add_action('woocommerce_simple_add_to_cart', function () {
+add_filter('woocommerce_variation_is_purchasable', function ($is_purchasable, $product) {
+    return (productIsInSpecialCategory($product->get_parent_id()) ? false : $is_purchasable);
+}, 10, 2);
+add_action('woocommerce_simple_add_to_cart', 'showNotPurchasableNotice');
+add_action('woocommerce_variable_add_to_cart', 'showNotPurchasableNotice');
+function showNotPurchasableNotice()
+{
     global $product;
-    if (productIsInSpecialCategory($product)) { echo 'Nicht bestellbar'; }
-});
+    if (productIsInSpecialCategory($product->ID)) {
+        echo '<div class="product-not-deliverable-note">Nicht bestellbar</div>';
+    }
+}
 function productIsInSpecialCategory($product)
 {
     $terms = null;

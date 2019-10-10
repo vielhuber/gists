@@ -27,6 +27,8 @@ cd C:\Program Files\MySQL\MySQL Server 5.6\bin
 --set-gtid-purged=OFF: set this if the source database is part of a replication system
 --ignore-table=dbname.tblname: set this if you want to exclude a certain table
 --single-transaction: set this, if you don't have full access to lock tables
+--routines: export procedures and functions (this is false by default)
+--triggers: exportr triggers (this is true by default)
 
 // exclude data from specific table (but get schema)
 mysqldump --ignore-table=dbname.tblname dbname > dump.sql

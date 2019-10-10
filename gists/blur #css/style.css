@@ -1,0 +1,5 @@
+/* blur everything */
+filter: blur(1px);
+
+/* blur like a mirror */
+backdrop-filter: blur(5px);
