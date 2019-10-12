@@ -1,0 +1,1 @@
+./hardwaretoggler.ps1 -device "XXX" -type YYY

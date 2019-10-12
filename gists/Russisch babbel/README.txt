@@ -17,6 +17,7 @@ c = S ("simmloses" S)
 ч = tsch ["ch"]
 б = B
 й = J ["jj"]
+е = JE
 ё = JO
 ж = g ["zh"]
 ю = ju ["ju"]
@@ -48,8 +49,8 @@ a = aber   ("a")
 за = für ("sa")
 Тогда = dann ("tagda")
 это = das, es ("eta")
-всё = alles ("vso")
-ещё = noch ("jescho")
+всё = alles ("vsjo")
+ещё = noch ("jeschjo")
 сейчас = jetzt ("sitscha")
 
 Akkusativ
@@ -287,7 +288,14 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 объём = Volumen ("abjom")
 объявление = Anzeige ("abjivlenje")
 трансъевропейский = transeuropäisch ("transjeuropäskie")
+евро = Euro ("jevro")
+влияние = Einfluss ("vlijanije")
+доверие = Vertrauen ("dawrije")
 цель = Ziel ("zäl")
+ёлка = Tannenbaum ("jolka")
+ёж = Igel ("josch")
+самолёт = Flugzeut ("samaljot")
+актёр = Schauspieler ("aktjor")
 наполовину = halb ("napolovinu")
 письмо = Brief ("pismo")
 офис = Büro ("ofis")
@@ -510,7 +518,7 @@ Bei der Mehrzahl sind Geschlecht und Person allerdings unwichtig. Für alle Pers
 дом = Haus ("dom") - в доме = im Haus ("v dome")
 квартира = Wohnung ("kwartira") - в квартире = in der Wohnung ("v kwartire")
 центр = Zentrum ("zentr") - в центре = im Zentrum ("v zentre")
-общежитие = Wohnheim ("obscheschitije") - в общежитии = im Wohnheim ("v obscheschitije")
+общежитие = Wohnheim / Studentenwohnheim ("obscheschitije") - в общежитии = im Wohnheim ("v obscheschitije")
 Берлин = Berlin ("berlin") - в Берлине = in Berlin ("v berline")
 Москва = Moskau ("moskwa") - в Москве = in Moskau ("v moskwe")
 здание = Gebäude ("stanie") - в здании = im Gebäude ("v staniee")
