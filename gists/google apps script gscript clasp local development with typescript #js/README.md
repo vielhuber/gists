@@ -15,5 +15,5 @@
 
 ## define unknown vendor lib variables in first line
 ```ts
-declare let SpreadsheetApp: any, UrlFetchApp: any, Utilities: any, console: any;
+declare let SpreadsheetApp: any, UrlFetchApp: any, Utilities: any, console: any, Logger: any, Session: any, Analytics: any, SCRIPTS: any;
 ```

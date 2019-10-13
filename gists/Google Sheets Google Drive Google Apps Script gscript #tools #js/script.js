@@ -47,6 +47,9 @@ SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').getVa
 /* set value of specific cell */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setValue('foo');
 
+/* print array */
+SpreadsheetApp.getActiveSpreadsheet().getSheetByName('DEBUG').getRange(1, 1, arr.length, arr[0].length).setValues(data);
+
 /* get formula of specific cell */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').getFormula()
 
