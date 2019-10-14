@@ -121,6 +121,7 @@ Die meisten Monatsnamen gehören zu dieser Gruppe.
 там = dort "tam"
 в = in/im ("we")
 Как = wie ("kak")
+Сколько = wie viel ("skolka")
 из = aus "is"
 этот = diesen ("etot")
 тоже = auch ("toscha")
@@ -271,6 +272,13 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 больнице = Krankenhaus ("Krankenhaus")
 поэтому = deswegen / deshalb ("pajetama")
 в порядке = in Ordnung ("v poryadke")
+банан = Banane ("banan")
+ананас = Ananas ("ananas")
+апельсин = Orange/Apfelsine ("apelsin")
+огурец = Gurke ("agurez")
+помидор = Tomate ("pomidor")
+лимон = Zitrone ("limon")
+на столе = auf dem Tisch ("na stale")
 
 папа = Papa ("papa")
 мама = Mama ("mama")
@@ -588,3 +596,9 @@ Monate
 в ноябре = im November ("v nojabre")
 в декабре = im Dezember ("v dekabre")
 
+Mehrzahl
+Die meisten männlichen Nomen bekommen bei der Bildung der Mehrzahl im Nominativ die Endung -ы.
+Männliche Nomen auf -ец verlieren den Vokal e, bevor die Mehrzahlendung hinzugefügt wird.
+лимон, лимоны: Zitrone, Zitronen
+помидор, помидоры: Tomate, Tomaten
+огурец, огурцы: Gurke / Gurken
