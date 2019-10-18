@@ -61,7 +61,9 @@ SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getDataRange().getVa
 
 /* get range with indexes */
 var s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO');
-foo.getRange(1, 1, foo.getMaxRows(), foo.getMaxColumns());
+s.getRange(1, 1, s.getLastRow(), s.getLastColumn()); // filled sheet
+s.getDataRange() // equivalent of above
+s.getRange(1, 1, s.getMaxRows(), s.getMaxColumns()); // complete sheet
 
 /* get remote sheet */
 SpreadsheetApp.openById('1UmhbdLw1OmEmSxjtT2hKsmsDgExOxMZmeOAL_ChVs_Q').getSheetByName('FOO')

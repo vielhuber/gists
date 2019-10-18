@@ -43,6 +43,7 @@
 #### string concatenation
 ```
 ="FOO"&" "&"BAR"
+=CONCAT("FOO"; " "; "BAR") // use this in arrayformula!
 =VERKETTEN("FOO";" ";"BAR")
 ```
 
@@ -180,9 +181,14 @@ WENNFEHLER(QUERY( IMPORTRANGE("SHEETID";"Tabellenblatt1!A2:F"); "SELECT Col1, Co
 
 #### arrayformula: enhance formula to entire column (don't use this with queries / importranges / indirect because it does NOT work!)
 ```
-=VERKETTEN(A1;"TEST"); // formula before
-=ARRAYFORMULA(VERKETTEN(A1:A;"TEST") // formula after
+=CONCAT(A1;"TEST"); // formula before
+=ARRAYFORMULA(CONCAT(A1:A;"TEST") // formula after
 =ARRAYFORMULA(A1:A&"TEST")
+```
+
+#### arrayformula trick: place them in a fixed first row to always view the formula
+```
+=ARRAYFORMULA(WENN(ZEILE(A:A)=1;"Überschrift";WENN(ISTLEER(A:A);"";CONCAT(A:A;"TEST"))))
 ```
 
 #### arrayformula with and/or
