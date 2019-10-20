@@ -19,7 +19,7 @@ class ConvenienceCollection extends Collection
         this makes things possible like: 
         Person::find(42)->getAddresses()->getPerson()->getAddresses()->getPerson()->getId()->contains(42)
         */
-        if (is_subclass_of($collection->first(), 'App\Model')) {
+        if ($collection->count() === 0 || is_subclass_of($collection->first(), 'App\Model')) {
             $collection = new ConvenienceCollection($collection);
         } else {
             $collection = collect($collection);
