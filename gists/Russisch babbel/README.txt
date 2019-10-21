@@ -33,6 +33,7 @@ a = aber   ("a")
 но = aber ("no")
 не = kein ("ne")
 или = oder ("ili")
+Эти = diese ("eti")
 
 я = ich    ("ja")
 ты = du    ("ti")
@@ -117,16 +118,18 @@ Die meisten Monatsnamen gehören zu dieser Gruppe.
 просто = einfach "prosta"
 вот = hier "vot"
 по = von "po"
+слишком = zu/auch ("shischkom")
 кто = wer "kto"
 там = dort "tam"
 в = in/im ("we")
 Как = wie ("kak")
+Какие = welch ("kakie")
 Сколько = wie viel ("skolka")
 из = aus "is"
 этот = diesen ("etot")
 тоже = auch ("toscha")
 ведь = doch ("ved")
-только = nur ("tolka")
+только = nur/erst ("tolka")
 Где = wo ("gdi")
 каком = welche/welcher ("kakom")
 Слушай = Hör zu ("Sluschi")
@@ -150,6 +153,7 @@ Die meisten Monatsnamen gehören zu dieser Gruppe.
 Круто = cool ("kruta")
 Кстати = übrigens / apropos ("kstati")
 Договорились = Abgemacht ("dagawarillis")
+посмотрим = mal schauen ("posmotrim")
 
 спасибо = danke ("spaciba")
 пожалуйста = bitte ("baschausta")
@@ -276,6 +280,14 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 ананас = Ananas ("ananas")
 апельсин = Orange/Apfelsine ("apelsin")
 огурец = Gurke ("agurez")
+ягода = Beere ("yagoda")
+слива = Pflaume ("sliva")
+вишня = Sauerkirsche ("vischnja")
+печь = Ofen ("petsch")
+тыква = Kürbis ("tikwa")
+дыня = Melone ("dinja")
+рыба = Fisch ("riba")
+
 помидор = Tomate ("pomidor")
 лимон = Zitrone ("limon")
 на столе = auf dem Tisch ("na stale")
@@ -349,7 +361,7 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 
 ### Adjektive
 
-вкусный / вкусная = lecker ("vkusni")
+вкусный / вкусная / вкусные = lecker ("vkusni")
 всегда = immer ("vsigda")
 Иногда = manchmal ("inagda")
 часто = oft ("chasto")
@@ -362,7 +374,8 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 тепло = warm ("tiblo")
 жарко = heiß ("scharka")
 холодно = kalt ("choladna")
-дорогой = teuer ("dragoi")
+дорого = teuer ("doroga")
+дёшево = billig ("dioschova")
 последняя = letzte ("pasnebalja")
 красное = rot ("krassnaja")
 белое = weiß ("bellie")
@@ -426,6 +439,10 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 встреча = treffen ("vstrecha")
 может = können ("moschet")
 знать = wissen ("znat")
+стоить = kosten/wert sein ("stoit")
+купить = kaufen ("kupit")
+забывать = vergessen ("sabivat")
+взять = nehmen ("visjat")
 
 работать = arbeiten ("rabotet")
 я работаю = ich arbeite ("ja rabotajo")
@@ -599,6 +616,15 @@ Monate
 Mehrzahl
 Die meisten männlichen Nomen bekommen bei der Bildung der Mehrzahl im Nominativ die Endung -ы.
 Männliche Nomen auf -ец verlieren den Vokal e, bevor die Mehrzahlendung hinzugefügt wird.
+Bei der Bildung der Mehrzahl von weiblichen Nomen auf -a wird dieser durch die Endung -ы ersetzt.
+Bei der Bildung der Mehrzahl von weiblichen Nomen auf -я oder -ь werden diese durch die Endung -и ersetzt.
 лимон, лимоны: Zitrone, Zitronen
 помидор, помидоры: Tomate, Tomaten
 огурец, огурцы: Gurke / Gurken
+ягода, ягоды: Beere / Beeren
+слива, сливы: Pflaume / Pflaumen
+вишня, вишни: Sauerkirsche / Sauerkirschen
+печь, печи: Ofen / Öfen
+тыква, тыквы: Kürbis / Kürbisse
+дыня, дыни: Melone / Melonen
+рыба, рыбы: Fisch / Fische

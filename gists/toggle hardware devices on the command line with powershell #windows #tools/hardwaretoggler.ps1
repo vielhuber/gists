@@ -14,11 +14,24 @@ $d = Get-PnpDevice | where { $_.friendlyname -like $device -or $_.instanceid -li
 # output device
 $d
 
+# auto
+if($type -ne "enable" -and $type -ne "disable") {
+    if( Get-PnpDevice -status OK | where { $_.friendlyname -like $device -or $_.instanceid -like $device } ) {
+        $type = "disable"
+    }
+    else {
+        $type = "enable"
+    }
+}
+
+# enable
 if ($type -eq "enable") {
     "ENABLING $d"
     $d | Enable-PnpDevice -Confirm:$false
 }
-else {
+
+# disable
+if ($type -eq "disable") {
     "DISABLING $d"
     $d | Disable-PnpDevice -Confirm:$false
 }

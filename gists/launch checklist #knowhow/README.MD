@@ -1,12 +1,10 @@
 ## PRE-LAUNCH
 - 301-Redirects bei Relaunch vorhanden
 - HTML-Validierung erfolgreich geprüft
-- 404-Fehlerseite vorhanden / Status-Code geprüft
-- XML-Sitemap vorhanden und aktiv
+- XML-Sitemap vorhanden und aktiv und Einträge geprüft
 - robots.txt vorhanden und aktiv
 - Manuelles Backup erstellt
 - WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
-- Passwortschutz für Testing aktiv, für Production inaktiv
 - git auf Production, Testing und Local auf demselben Stand
 - Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
 - Alle CMS Updates (WordPress) installiert
@@ -36,8 +34,11 @@
 - reCAPTCHA registrieren
 - E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
 - socialfoo: Facebook Developers App Id eintragen
+- WordPress Admin E-Mail-Adresse auf Kunden ändern
+- Passwortschutz für Testing aktiv, für Production inaktiv
 
 ## POST-LAUNCH
+- 404-Fehlerseite vorhanden / Status-Code geprüft
 - Pro Plugins registriert (WPML, ACF)
 - htaccess Rewrite Rules: Force https und force www oder non-www
 - Open Graph Social Sharing funktionsfähig
@@ -48,8 +49,8 @@
 - Production-Links prüfen, ob diese auf local/testing führen!
 - Caching aktiviert
 - Google Search Console aktiviert, Sitemap eingereicht oder initiale Indexierung beantragt
-- Broken Links geprüft mit Screaming Frog
 - Rich Snippets geprüft und validiert
+- Seite 1x komplett mit Screaming Frog durchprüfen (Broken Links)
 - Google PageSpeed (web.dev) einmalig durchlaufen lassen und gröbste Fehler fixen
 - PHP-Version aktualisiert / geprüft
 - Jira Ticket abgehakt
