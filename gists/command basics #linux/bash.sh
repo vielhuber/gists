@@ -187,6 +187,9 @@ unzip output.zip -d .; rm -f output.zip
 # unzip specific subfolder
 unzip output.zip 'subfolder/to/extract/*' -d .
 
+# unzip quietly and update files/folders if exists
+unzip -uq output.zip -d /path/to/folder
+
 # tar compress folder
 tar -cf output.tar /path/to/folder # quiet and no compression
 tar -czvf output.tar.gz /path/to/folder
