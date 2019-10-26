@@ -36,6 +36,7 @@
 - socialfoo: Facebook Developers App Id eintragen
 - WordPress Admin E-Mail-Adresse auf Kunden ändern
 - Passwortschutz für Testing aktiv, für Production inaktiv
+- Silbentrennung auf allen Browsern testen (force hyphenopoly)
 
 ## POST-LAUNCH
 - 404-Fehlerseite vorhanden / Status-Code geprüft
