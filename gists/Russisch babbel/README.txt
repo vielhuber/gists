@@ -118,7 +118,8 @@ Die meisten Monatsnamen gehören zu dieser Gruppe.
 просто = einfach "prosta"
 вот = hier "vot"
 по = von "po"
-слишком = zu/auch ("shischkom")
+слишком = zu/auch ("slischkom")
+опять = wieder ("apiet")
 кто = wer "kto"
 там = dort "tam"
 в = in/im ("we")
@@ -191,7 +192,7 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 Когда = wann/wenn ("kogda")
 потом = danach ("patom")
 После = Nach / nachher ("posle")
-Правда = Wirklich ("bravda")
+Правда = Stimmt/Wirklich ("bravda")
 действительно = tatsächlich ("destvitelna")
 Ничего страшного = Macht nichts ("nitschiwo strassnava")
 вместе = zusammen ("vmestie")
@@ -236,6 +237,7 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 борщ = Borsch / Suppe ("Borschtsch")
 щи = Schtschi / Kohlsuppe ("schi")
 винегрет = Salat ("vinigret")
+фрукты = Früchte / Obst ("frukty")
 Счёт = Rechnung ("Schot")
 колбаса = Wurst ("kalbasa")
 конфета = Praline ("konfeta")
@@ -374,6 +376,7 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 тепло = warm ("tiblo")
 жарко = heiß ("scharka")
 холодно = kalt ("choladna")
+свежие = frisch ("sweschije")
 дорого = teuer ("doroga")
 дёшево = billig ("dioschova")
 последняя = letzte ("pasnebalja")
@@ -512,6 +515,7 @@ Bei der Mehrzahl sind Geschlecht und Person allerdings unwichtig. Für alle Pers
 звонить = anrufen ("zwanit")
 курить = rauchen ("kurit")
 любовь = lieben ("ljubov")
+стоить = kosten ("stoit")
 
 я говорю = Ich spreche ("ja gawaru")
 ты говоришь = Du sprichst ("ti gawarisch")
@@ -628,3 +632,5 @@ Bei der Bildung der Mehrzahl von weiblichen Nomen auf -я oder -ь werden diese 
 тыква, тыквы: Kürbis / Kürbisse
 дыня, дыни: Melone / Melonen
 рыба, рыбы: Fisch / Fische
+банан, бананы: Banane / Bananen
+апельсин / апельсины = Orange / Orangen
