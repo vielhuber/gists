@@ -258,7 +258,13 @@ Usage: git acp
 ### push changes to remote branch and permanently "connect" your local branch with the remote branch
 - git push --set-upstream origin branch-name
 
-### pull request
+### rename a branch (locally and remotely)
+- git checkout old-name
+- git branch -m new-name
+- git push origin :old-name new-name
+- git push origin -u new-name
+
+## pull request
 #### make a pull request on github (for an external project), go to github.com to the repository you want to make a pull request, click "Fork"
 - git clone https://github.com/vielhuber/MSYS2-packages .
 - git branch new-branch
