@@ -173,6 +173,9 @@ opcache.revalidate_freq=2
 xdebug.remote_enable = 1
 xdebug.remote_autostart = 1
 xdebug.max_nesting_level = 10000
+xdebug.var_display_max_children= -1
+xdebug.var_display_max_data = -1
+xdebug.var_display_max_depth = -1
 ```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/apache2/conf.d/custom.ini```
