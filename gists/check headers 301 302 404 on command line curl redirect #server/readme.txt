@@ -1,4 +1,5 @@
-curl -I https://www.tld.com
+# show response headers
+curl -sD - -o /dev/null https://www.tld.com
 
 # ignore ssl errors
 curl --insecure -I https://www.tld.local
