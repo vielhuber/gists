@@ -13,9 +13,16 @@
 </select>
 <input type="hidden" name="foo" value="2" />
 
-<!-- solution 3 (best) -->
+<!-- solution 3 (this does not get submitted) -->
 <select name="foo">
   <option disabled="disabled">1</option>
   <option selected="selected">2</option>
   <option disabled="disabled">3</option>
+</select>
+
+<!-- solution 4 (not safe) -->
+<select name="foo" style="pointer-events:none">
+  <option>1</option>
+  <option selected="selected">2</option>
+  <option>3</option>
 </select>
