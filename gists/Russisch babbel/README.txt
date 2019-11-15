@@ -108,7 +108,7 @@ Regel: Voranstellen eines "h"s
 у неё = hat sie / bei ihr ("un ijo")
 у них = haben sie /bei ihnen ("un ich")
 
-Wortendungen
+Geschlechter von Nomen; Wortendungen
 -o/-e "sächlich"
 -a/-я "weiblich"
 sonst "männlich"
@@ -282,6 +282,7 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 Наконец = endlich ("nakonets")
 больнице = Krankenhaus ("Krankenhaus")
 аэропорт = Flughafen ("aeraport")
+студентка = Studentin ("studentka")
 поэтому = deswegen / deshalb ("pajetamo")
 в порядке = in Ordnung ("v poryadke")
 банан = Banane ("banan")
@@ -349,6 +350,7 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 работа = Arbeit ("rabota")
 паспорт = Pass ("passport")
 билет = Ticket ("billet")
+номер = Nummer ("nommer")
 багаж = Gepäck ("bagasch")
 чемодан = Koffer ("tschimadan")
 сюрприз = Überraschung ("surpris")
@@ -395,10 +397,12 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 умная = klug ("umnaja")
 здесь = hier ("zdes")
 молодо = jung ("molodo")
+новый = neues ("novi")
 выглядит = aussehen ("vyglyidit")
 муж = Mann/Ehemann ("musch")
 интересно = interessant ("interessna")
 дома = Zuhause ("doma")
+комната = Zimmer ("komnata")
 непонятно = undeutlich ("nepanjatna")
 понятно = deutlich ("panjatna")
 быстро = schnell ("bistro")
@@ -541,7 +545,7 @@ Bei der Mehrzahl sind Geschlecht und Person allerdings unwichtig. Für alle Pers
 - Auch sächliche Nomen, die im Nominativ auf -ие enden, bekommen im Präpositiv die Endung -ии.
 
 в = in der ("v")
-на = in der ("na")
+на = in der / auf dem ("na")
 
 офис = Büro - в офисе = im Büro
 банк = Bank - в банке = in der Bank
@@ -641,3 +645,11 @@ Bei der Bildung der Mehrzahl von weiblichen Nomen auf -я oder -ь werden diese 
 рыба, рыбы: Fisch / Fische
 банан, бананы: Banane / Bananen
 апельсин / апельсины = Orange / Orangen
+
+Zahlen
+
+Das Zahlwort один (eins) wird wie ein Adjektiv verwendet und passt sich dem Geschlecht des Nomens an, auf das es sich bezieht. Deswegen hat es drei verschiedene grammatische Geschlechter.
+один / одна / одно = eins [männlich/weiblich/sächlich] ("adin")
+два = zwei ("dwa")
+три = drei ("dri")
+четыре = vier ("tschitiri")
