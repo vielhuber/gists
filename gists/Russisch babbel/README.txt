@@ -92,6 +92,7 @@ Anpassung an Bezugswort
 у = bei ("un")
 у Вас = Ihnen ("u was")
 есть = haben / es gibt "jest"
+нет = es gibt nicht ("niet")
 Что Вы желаете? = Was wünschen Sie? ("schto wi schulaete")
 Спасибо за заказ! = Danke für die Bestellung ("spaciba sasacast")
 Ты знаешь = Du weißt
@@ -120,6 +121,9 @@ Die meisten Monatsnamen gehören zu dieser Gruppe.
 просто = einfach "prosta"
 вот = hier "vot"
 по = von "po"
+даже = sogar ("dasche")
+Зато = Dafür / aber dann ("zato")
+недалеко = nicht weit / nah ("nedaleko")
 слишком = zu/auch ("slischkom")
 опять = wieder ("apiet")
 кто = wer "kto"
@@ -167,6 +171,7 @@ Die meisten Monatsnamen gehören zu dieser Gruppe.
 Пока = tschüss ("baka")
 Здорово = toll/cool "sdorova"
 Классно = klasse "klassna"
+правильно = richtig ("pravilna")
 Конечно = natürlich "kanjeschna"
 Извините = Verzeihung / Entschuldigen Sie "iswinitje"
 С удовольствием = Gerne, mit Vergnügen ("cu dawolstjem")
@@ -342,6 +347,8 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 Дедушка = Opa ("deduschka")
 в выходные = Am Wochenende ("v vichodnije")
 в отпуске = Im Urlaub ("v botkuske")
+почта = Post ("potschta")
+вокзал = Bahnhof ("wagsal")
 
 метро = U-Bahn ("metroo")
 кафе = Café ("kaffe")
@@ -367,6 +374,7 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 За нас! = auf uns! ("za nas")
 За здоровье! = Prost! ("za zstarovie")
 Вы знаете = Wissen Sie ("vi znaete")
+знаю = Ich weiß ("znajo")
 
 апрель = April ("aprel")
 
@@ -648,8 +656,15 @@ Bei der Bildung der Mehrzahl von weiblichen Nomen auf -я oder -ь werden diese 
 
 Zahlen
 
-Das Zahlwort один (eins) wird wie ein Adjektiv verwendet und passt sich dem Geschlecht des Nomens an, auf das es sich bezieht. Deswegen hat es drei verschiedene grammatische Geschlechter.
+Das Zahlwort один (eins) wird wie ein Adjektiv verwendet und passt sich dem Geschlecht des Nomens an, auf das es sich bezieht.
+Deswegen hat es drei verschiedene grammatische Geschlechter.
+Nach den Zahlwörtern два, три und четыре verändert sich das folgende Nomen, es steht dann im Genitiv Einzahl.
+Männliche Nomen erhalten im Genitiv Einzahl die Endung -а.
+Bei weiblichen Nomen wird die Endung -a im Genitiv Einzahl durch ein -ы ersetzt (Tipp: Wortendung ist ohnehin schon "a", darauf folgt dann ein "y")
 один / одна / одно = eins [männlich/weiblich/sächlich] ("adin")
-два = zwei ("dwa")
+два / две = zwei [männlich/weiblich] ("dwa")
 три = drei ("dri")
 четыре = vier ("tschitiri")
+
+аэропорт / три аэропорта = Flughafen / drei Flughäfen ("aeroport" / "tri aeroporta")
+школа / четыре школы = Schule / vier Schulen ("schkola" / "tschitiri schkoli")
