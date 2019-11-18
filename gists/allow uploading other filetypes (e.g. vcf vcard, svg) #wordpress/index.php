@@ -1,5 +1,4 @@
 <?php
-// this whole script is obsolete when using the plugin "WP Media Folder"
 function my_upload_mimes( $existing_mimes = [] )
 {
     $existing_mimes['vcf'] = 'text/x-vcard';
@@ -8,6 +7,7 @@ function my_upload_mimes( $existing_mimes = [] )
 }
 add_filter( 'upload_mimes', 'my_upload_mimes' );
 // this is needed for all wordpress versions >= 4.7.1
+// this is also needed for svg files without proper mime types (without the <?xml tag inside!)
 add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mimes)
 {
   $filetype = wp_check_filetype( $filename, $mimes );
