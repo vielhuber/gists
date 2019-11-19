@@ -39,6 +39,7 @@
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
 
 ## POST-LAUNCH
+- WordPress: Werkzeuge > Website-Zustand prüfen
 - 404-Fehlerseite vorhanden / Status-Code geprüft
 - Pro Plugins registriert (WPML, ACF)
 - htaccess Rewrite Rules: Force https und force www oder non-www

@@ -8,7 +8,7 @@ class ConvenienceCollection extends Collection
         $collection = $this->map(function ($item, $key) use ($name, $args) {
             return $item->$name(...$args);
         })->flatten()->unique()->filter(function ($value, $key) {
-            return __x($value);
+            return __x($value) || $value === false;
         });
         /*
         here it get's tricky:
