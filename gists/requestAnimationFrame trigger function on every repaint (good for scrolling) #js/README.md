@@ -46,6 +46,24 @@ function repeatOften(() =>
 requestAnimationFrame(repeatOften);
 ```
 
+#### order: the following statements are equivalent (because raf is asynchronous)
+```js
+function repeatOften(() =>
+{
+    /* ... */
+    requestAnimationFrame(repeatOften);
+});
+requestAnimationFrame(repeatOften);
+```
+```js
+function repeatOften(() =>
+{
+    requestAnimationFrame(repeatOften);
+    /* ... */
+});
+requestAnimationFrame(repeatOften);
+```
+
 #### example: scrolling
 
 ```js
