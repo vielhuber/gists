@@ -202,10 +202,16 @@ tar -xzvf output.tar.gz -C /path/to/target
 tar -xvjf output.tar.bz2
 
 
-# set folder permissions (the correct way)
+# set permissions (the correct way)
 chmod 755 /path/to/folder # only for folder itself, not recursively for all folders AND files
+chmod 644 /path/to/file
 find /path/to/folder -type d -exec chmod 755 {} \; # then for all subfolders
 find /path/to/folder -type f -exec chmod 644 {} \; # then for all files
+
+# owner/user/group
+ls -l /path/to/file # fetch user and group of file
+chown -R username /path
+chown -R username:group /path
 
 # create a symlink
 ln -s /path/to/folder /path/to/symlink
@@ -256,8 +262,3 @@ find . -type f -name "*.txt" -print0 | xargs -0 sed -i '' -e 's/foo/bar/g'
 tail -10 path/to/file.log
 tail -f path/to/file.log # live updates
 tail -f path/to/file.log | grep "string to match" # live updates and filtering
-
-# owner/user/group
-ls -l /path/to/file # fetch user and group of file
-chown -R username /path
-chown -R username:group /path
