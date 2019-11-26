@@ -14,6 +14,7 @@ SELECT * FROM tbl WHERE DIFFERENCE(name, 'Your Name') = 4;
 ```sql
 CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
 SELECT * FROM tbl WHERE LEVENSHTEIN(name, 'Your Name') <= 2;
+SELECT * FROM tbl WHERE LEVENSHTEIN(name, 'Your Name') <= (LENGTH('Your Name')*(1-0.8)); // where 0.8 is the "error rate" in percent
 ```
 
 ### always useful (in combination with the above)

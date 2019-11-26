@@ -23,6 +23,7 @@ for(let item of ["a", "b", "c"]) {
     {
      	continue; // continue works here! 
     }
+  	await foo(); // async await works here
 }
 for(var item of ["a", "b", "c"]) {
     console.log(item);
