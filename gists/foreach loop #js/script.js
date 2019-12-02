@@ -69,7 +69,7 @@ Object.keys(obj).forEach(key => { console.log([key,obj[key]]); }); // alternativ
 
 // old
 for(var key in obj) {
-    if (!obj.hasOwnProperty(key)) { continue; } // filter out prototype things
+    if (!obj.hasOwnProperty(key)) { continue; } // filter out prototype things; NOT needed, if this is only a plain object
     console.log(key, obj[key])
 }
 
