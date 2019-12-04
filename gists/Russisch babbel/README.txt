@@ -88,12 +88,13 @@ Anpassung an Bezugswort
 
 нас = uns ("nas")
 его = ihn ("evo")
-Что = was ("schto")
+Что = was / dass ("schto")
 у = bei ("un")
 у Вас = Ihnen ("u was")
 есть = haben / es gibt "jest"
 нет = es gibt nicht ("niet")
 Что Вы желаете? = Was wünschen Sie? ("schto wi schulaete")
+Ты что! = Was glaubst Du denn! ("Ti schto")
 Спасибо за заказ! = Danke für die Bestellung ("spaciba sasacast")
 Ты знаешь = Du weißt
 у Вас есть = "Haben Sie / sie haben...?" (wörtlich, Ist das bei ihnen) ("u was jest")
@@ -131,21 +132,25 @@ Die meisten Monatsnamen gehören zu dieser Gruppe.
 в = in/im ("we")
 Как = wie ("kak")
 Какие = welch ("kakie")
-Сколько = wie viel ("skolka")
+Сколько = wie viel / wie viele ("skolka")
 из = aus "is"
 этот = diesen ("etot")
 тоже = auch ("toscha")
 ведь = doch ("ved")
+Значит = also / das heißt ("znachit")
 только = nur/erst ("tolka")
 Где = wo ("gdi")
 каком = welche/welcher ("kakom")
 Слушай = Hör zu ("Sluschi")
-так = so ("tak")
+права = Recht haben ("prawa")
+так = so / aha ("tak")
 Ах да = Ach ja ("ah da")
 Точно = Stimmt ("totschna")
 против = gegen ("protiv")
+Ладно = meinetwegen ("ladno")
 давай = Lass uns / wollen wir / komm schon ("davay")
 идём = Lass uns gehen / gehen wir ("idiom")
+Спишь = Du schläfst ("spish")
 
 отлично = ausgezeichnet ("atlitschna")
 супер = super "super"
@@ -287,6 +292,7 @@ Wörtlich: Wie nennt man Dich / Mich nennt man / ihn nennt man / ... (Akkusativ)
 Наконец = endlich ("nakonets")
 больнице = Krankenhaus ("Krankenhaus")
 аэропорт = Flughafen ("aeraport")
+школа = Schule ("schkola")
 студентка = Studentin ("studentka")
 поэтому = deswegen / deshalb ("pajetamo")
 в порядке = in Ordnung ("v poryadke")
@@ -530,6 +536,8 @@ Bei der Mehrzahl sind Geschlecht und Person allerdings unwichtig. Für alle Pers
 - Für die Beugung dieser Verben benötigt man die Grundform ohne die Endung -ить.
 
 говорить = sprechen / sagen / reden ("gawarid")
+сказать = sagen ("skazat")
+отправить = senden / schicken ("otpravit")
 смотреть / посмотреть = schauen ("smatret"/"pasmatret")
 звонить = anrufen ("zwanit")
 курить = rauchen ("kurit")
@@ -665,6 +673,8 @@ Bei weiblichen Nomen wird die Endung -a im Genitiv Einzahl durch ein -ы ersetzt
 два / две = zwei [männlich/weiblich] ("dwa")
 три = drei ("dri")
 четыре = vier ("tschitiri")
+пять = fünf ("piat")
 
 аэропорт / три аэропорта = Flughafen / drei Flughäfen ("aeroport" / "tri aeroporta")
 школа / четыре школы = Schule / vier Schulen ("schkola" / "tschitiri schkoli")
+вокзал / два вокзала = Bahnhof / zwei Bahnhöfe ("wagsala" / "dwa wagsala")

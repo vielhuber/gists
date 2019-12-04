@@ -24,7 +24,8 @@ function getGeocodingDataFromAddress($address)
         'https://maps.googleapis.com/maps/api/geocode/json?address=' .
         urlencode($address) .
         '&key=' . $key .
-        '&region=' . $country_code;
+        '&region=' . $country_code .
+        '&language=' . $country_code;
     $status = '';
     $resp = [];
     $tries = 0;
@@ -86,7 +87,8 @@ function getGeocodingDataFromAddress($address)
             'https://maps.googleapis.com/maps/api/geocode/json?latlng=' .
             urlencode($return['lat'] . ',' . $return['lng']) .
             '&key=' . $key .
-            '&region=' . $country_code;
+            '&region=' . $country_code .
+			'&language=' . $country_code;
         $status = '';
         $resp = [];
         $tries = 0;
