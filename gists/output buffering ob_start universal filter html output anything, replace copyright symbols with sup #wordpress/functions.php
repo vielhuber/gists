@@ -10,4 +10,4 @@ add_action('after_setup_theme', function() {
 });
 add_action('shutdown', function() {
     ob_end_flush();
-});
+}, 0);
