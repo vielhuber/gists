@@ -13,10 +13,17 @@
         flatpickr('input[type="datetime-local"]', {
             enableTime: true,
             altInput: true,
+            allowInput: false,
             altFormat: 'd.m.Y H:i',
             dateFormat: 'Y-m-dTH:i:S',
             locale: 'de',
-            time_24hr: true
+            time_24hr: true,
+            /* bugfix: https://github.com/flatpickr/flatpickr/issues/2040 */
+            onChange: function(selectedDates, dateStr, instance) {
+                if (dateStr === '') {
+                    instance.close();
+                }
+            }
         });
     });
     </script>
