@@ -154,6 +154,12 @@ zip -r file.zip .
 # zip directory without compression (only store)
 zip -r -0 file.zip .
 
+# zip directory with default compression
+zip -r -6 file.zip .
+
+# zip directory with best compression (most cpu usage)
+zip -r -9 file.zip .
+
 # zip folder
 zip -r file.zip path/to/folder
 

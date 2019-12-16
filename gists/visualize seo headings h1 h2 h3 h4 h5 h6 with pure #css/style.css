@@ -1,0 +1,34 @@
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+  display: inline-block; 
+  margin-right: 15px;
+}
+
+h1::before {
+  content: 'H1';
+  color: yellow;
+}
+
+h2::before {
+  content: 'H2';
+  color: red;
+}
+
+h3::before {
+  content: 'H3';
+  color: orange;
+}
+
+h4::before {
+  content: 'H4';
+  color: blueviolet;
+}
+
+h5::before {
+  content: 'H5';
+  color: blue;
+}
+
+h6::before {
+  content: 'H6';
+  color: green;
+}
