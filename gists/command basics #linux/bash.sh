@@ -235,6 +235,8 @@ echo 'string to append' >> path/to/file.txt
 # prepend to file
 echo -e "string to prepend\n$(cat path/to/file.txt)" > path/to/file.txt
 
+# clear font cache
+sudo fc-cache -f -v
 
 # disk space
 df -h # in total

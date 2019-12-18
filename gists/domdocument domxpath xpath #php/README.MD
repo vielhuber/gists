@@ -32,6 +32,16 @@ $DOMXpath->query('/html/body//node()');
 ```php
 $DOMXpath->query('/html/body//text()');
 ```
+
+### class selector
+```php
+$DOMXpath->query('/html/body//*[contains(concat(" ", normalize-space(@class), " "), " foo ")]');
+```
+
+### attribute selector
+```php
+$DOMXpath->query('/html/body//input[@placeholder]');
+```
  
 ### check if is text node
 ```php
@@ -82,6 +92,22 @@ $nodes = $DOMXpath->query('/html/body//node()');
 foreach ($nodes as $nodes__value) {
 	$id = $nodes__value->getNodePath();
 ];
+```
+
+### add child
+```php
+$child = $DOMDocument->createElement('a', '');
+$child->setAttribute('href', 'https://tld.com');
+$parent->appendChild($child);
+```
+
+### prepend child
+```php
+if ($parent->hasChildNodes()) {
+    $parent->insertBefore($child,$parent->firstChild);
+} else {
+    $parent->appendChild($child);
+}
 ```
 
 ### get inner html of node

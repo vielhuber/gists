@@ -333,6 +333,7 @@ host    all   all        ::1/128        md5
 - ```cd /tmp/```
 - ```rm -rf dl```
 - ```wkhtmltopdf --version```
+- if an error like "Fontconfig warning: FcPattern object weight does not accept value [0.5 15.3)" appears, clear font cache: ```sudo fc-cache -f -v```
 
 #### cpdf
 - ```cd /opt/```
