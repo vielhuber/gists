@@ -39,6 +39,7 @@ class Syncer {}
 - three simple rules for using classes:
    - just use the same namespace and reference other classes in the same namespace: $foo = new Foo;
    - use another namespace or no namespace at all and reference other classes in different namespaces: 
-       - option 1: ```$foo = new \Full\Path\To\Foo;```
-       - option 2: ```use Full\Path\To\Foo; $foo = new Foo;```
-   - also use aliases for duplicate classes or for convenience: ```use Full\Path\To\Foo as Bar; $foo = new Bar;```
+       - option 1: ```$foo = new \Full\Path\To\Foo();```
+       - option 2: ```use Full\Path\To\Foo; $foo = new Foo();```
+       - option 3: ```namespace Example; $foo = new Foo();```
+   - also use aliases for duplicate classes or for convenience: ```use Full\Path\To\Foo as Bar; $foo = new Bar();```
