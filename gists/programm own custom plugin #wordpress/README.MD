@@ -1,0 +1,2 @@
+- just create ```/wp-content/plugins/pluginname/pluginname.php```
+- enable the plugin in the wordpress backend

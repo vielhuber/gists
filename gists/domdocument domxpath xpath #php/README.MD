@@ -26,11 +26,13 @@ $html = $DOMDocument->saveHTML();
 ### get all nodes (including text nodes)
 ```php
 $DOMXpath->query('/html/body//node()');
+$DOMXpath->query('/html/body//node()[normalize-space()]'); // exclude whitespace text nodes
 ```
 
 ### get text nodes only
 ```php
 $DOMXpath->query('/html/body//text()');
+$DOMXpath->query('/html/body//text()[normalize-space()]'); // exclude whitespace text nodes
 ```
 
 ### class selector
@@ -61,11 +63,13 @@ $node->nodeValue
 ### get children of node (recursively)
 ```php
 $DOMXpath->query('.//node()', $node);
+$DOMXpath->query('.//node()[normalize-space()]', $node); // exclude whitespace text nodes
 ```
  
 ### get children count of node (recursively)
 ```php
 $DOMXpath->evaluate('count(./node())', $node);
+$DOMXpath->evaluate('count(./node()[normalize-space()])', $node); // exclude whitespace text nodes
 ```
  
 ### get dom attribute
