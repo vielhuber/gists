@@ -1,8 +1,5 @@
 <?php
-// how to access these options:
-//get_option('my_plugin_example_1');
-//get_option('my_plugin_example_2');
-
+// using the settings api
 $opts = [
     'title' => 'My Plugin',
     'slug' => 'my_plugin',
