@@ -7,7 +7,7 @@ class TestClass
    public static $var2 = 'im a static property';
    private $var3 = 'im a private property';
       
-   public function __construct()
+   public function __construct() // must be public
    {
       echo __CLASS__.' was initiated';
      
