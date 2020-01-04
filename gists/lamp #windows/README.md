@@ -33,8 +33,9 @@
 - open PowerShell as admin
 - ```Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux```
 - reboot
-- Windows Store > - "Ubuntu"
-- Note: This is always the latest version, but needs manual upgrade; see https://blogs.msdn.microsoft.com/commandline/2018/07/09/upgrading-ubuntu/
+- Windows Store > "Ubuntu 18.04 LTS"
+  - available versions: https://blogs.msdn.microsoft.com/commandline/2018/07/09/upgrading-ubuntu/
+  - i had problems in using the version "Ubuntu" (it was not 18, but 16), so just always use the last direct version
 - UNIX username: root (cancel when prompting for a new default username)
 - Change password with ```passwd```: "root"
 - ```sudo apt-get update && sudo apt-get upgrade```
