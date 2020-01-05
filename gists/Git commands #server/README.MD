@@ -152,6 +152,13 @@ if gitignore is not working for a specific file/folder (this does not delete the
 #### clone with autocrlf false (if you fetch linux bash scripts on windows and run on wsl)
 - git clone git@bitbucket.org:vielhuber/lamp.git . --config core.autocrlf=false
 
+#### if ip address of remote server changed: WARNING: POSSIBLE DNS SPOOFING DETECTED! / WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+- variant 1
+  - nano ~/.ssh/known_hosts
+  - delete specific line (or all lines)
+- variant 2
+  - ssh-keygen -f "~/.ssh/known_hosts" -R host.tld
+
 ## workflow
 
 ### see changed files
