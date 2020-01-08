@@ -1,4 +1,5 @@
 - flexbox: one dimension, grid: two dimensions
+- grid is container-based (you define the dimensions), flexbox is content-based (the content defines the dimensions)
 - grid always applies to one container element and to direct childs; if you go deeper, the grid is useless
  -"grid system: you do not need a grid framework; your browser is the framework!"
 - browser support: available, but ie11 only supports the basics (autoprefixer need to be configured to target ie11)
