@@ -19,7 +19,6 @@
 - Formulare funktionsfähig und scharf geschalten an Kunden
 - Copyright für alle Bilder vorhanden (am Bild oder im Impressum)
 - Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
-- Google Analytics / Google Tag Manager aktiviert und IP Anonymisierung aktiviert
 - Google Maps JS API Key hinterlegen
 - Alle Bilder komprimiert
 - Grundlegende Meta-Tags gesetzt (prüfen, ob Startseite diese ausspielt)
@@ -39,6 +38,7 @@
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
 
 ## POST-LAUNCH
+- Google Analytics / Google Tag Manager aktiviert und IP Anonymisierung aktiviert (Echtzeitdaten prüfen)
 - WordPress: Werkzeuge > Website-Zustand prüfen
 - 404-Fehlerseite vorhanden / Status-Code geprüft
 - Pro Plugins registriert (WPML, ACF)

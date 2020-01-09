@@ -1,5 +1,5 @@
 ## notes
-- Empfehlung: utf8mb4 + utf8_unicode_ci
+- Empfehlung: utf8mb4 + utf8mb4_unicode_ci
 - Ein Character Set ist der Zeichenvorrat für alle Daten in der Datenbank.
   - utf8: Entspricht utf8mb3 (später wird utf8mb3 auf mb4 gemappt)
   - utf8mb4: Für jeden Charakter werden 4 Bytes reserviert. Nur dann passen auch Emojis rein.
