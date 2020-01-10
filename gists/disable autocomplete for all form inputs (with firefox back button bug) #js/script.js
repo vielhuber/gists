@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener(
     'focus',
     e => {
-      if (e.target.closest('form')) {
+      if (typeof e.target.closest !== 'undefined' && e.target.closest('form')) {
         if (!e.target.closest('form').hasAttribute('autocomplete')) {
           e.target.closest('form').setAttribute('autocomplete', 'off');
         }
