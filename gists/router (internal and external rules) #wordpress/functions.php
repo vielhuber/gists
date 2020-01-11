@@ -6,6 +6,13 @@ add_action('init', function () {
 		'index.php',
 		'top'
 	);
+  
+  	/* example */
+  	add_rewrite_rule(
+      'blog/([0-9]+)/?$',
+      'index.php?pagename=blog&pagination=$matches[1]',
+      'top'
+    );
 
 	/* how to debug */
 	/*
@@ -29,6 +36,12 @@ add_action('init', function () {
 	global $wp_rewrite;
 	print_r($wp_rewrite->non_wp_rules);
 	*/
+});
+
+/* if you have added (custom) query vars */
+add_filter('query_vars', function ($query_vars) {
+    $query_vars[] = 'pagination';
+    return $query_vars;
 });
 
 /* only run this once(!) */
