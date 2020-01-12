@@ -201,6 +201,16 @@ WENNFEHLER(QUERY( IMPORTRANGE("SHEETID";"Tabellenblatt1!A2:F"); "SELECT Col1, Co
 =ARRAYFORMULA(WENN((B2:B="baz")*((A2:A="foo")+(A2:A="bar")));"baz";"gnarr"))
 ```
 
+#### arrayformula with sum
+##### before
+```
+=ARRAYFORMULA(WENN(ZEILE(J:J)=1;"foo";WENN(ISTLEER(G:G);"";SUM(G:G;I:I)))
+```
+##### after
+```
+=ARRAYFORMULA(WENN(ZEILE(J:J)=1;"foo";WENN(ISTLEER(G:G);"";G:G+H:H+I:I)))
+```
+
 #### arrayformula with sverweis
 ##### before
 ```
