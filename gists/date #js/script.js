@@ -18,6 +18,22 @@ new Date('2000-07-28T11:32:00');
 // date from timestamp
 new Date(1515107594 * 1000);
 
+// add years to date
+function addYears(date, years)
+{
+  var result = new Date(date);
+  result = new Date(result.setFullYear(result.getFullYear() + years));
+  return result;
+}
+
+// add months to date
+function addMonths(date, months)
+{
+  var result = new Date(date);
+  result = new Date(result.setMonth(result.getMonth() + months));
+  return result;
+}
+
 // add days to date
 function addDays(date, days)
 {
