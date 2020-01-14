@@ -5,3 +5,6 @@ CONCAT(col, 'foo')
 CONCAT_WS('', col, 'foo')
 CONCAT(IFNULL(col, ''),'foo') 
 CONCAT(COALESCE(col,''),'foo')
+
+// concat with separator
+CONCAT_WS(' ', IFNULL(col, ''), 'foo')
