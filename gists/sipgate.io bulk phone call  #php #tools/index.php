@@ -39,6 +39,10 @@ function call($number)
                 'method' => "POST",
                 'header' => sprintf("Content-Type: text/xml\r\nAuthorization: Basic %s)", $auth),
                 'content' => $request
+            ],
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
             ]
         ]
     );

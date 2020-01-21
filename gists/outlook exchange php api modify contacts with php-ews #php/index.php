@@ -37,6 +37,8 @@ use jamesiarmes\PhpEws\Type\PathToExtendedFieldType;
 use jamesiarmes\PhpEws\Type\PhoneNumberDictionaryEntryType;
 use jamesiarmes\PhpEws\Type\PhysicalAddressDictionaryEntryType;
 use jamesiarmes\PhpEws\Type\PhoneNumberDictionaryType;
+use jamesiarmes\PhpEws\Request\DeleteItemType;
+use jamesiarmes\PhpEws\Enumeration\DisposalType;
 
 class ExchangeContacts
 {
@@ -44,7 +46,13 @@ class ExchangeContacts
 
     public function __construct()
     {
-        $this->client = new Client('***host****', '***email****', '***password****', Client::VERSION_2013);
+        $this->client = new Client('exchange2013.df.eu', 'david@vielhuber.de', '*********', Client::VERSION_2013);
+        $this->client->setCurlOptions([CURLOPT_SSL_VERIFYPEER => false]);
+    }
+
+    public function debugRequest()
+    {
+        return @$this->client->getClient()->__last_request;
     }
 
     public function getAllContacts()
@@ -94,31 +102,56 @@ class ExchangeContacts
 
         $contacts = $this->getAllContacts();
         foreach ($contacts as $contacts__value) {
-            if ($contacts__value->Surname !== 'Alcala') {
-                continue;
-            }
-
-            //$contacts__value->FileAs = $contacts__value->CompleteName->FullName;
-            //$contacts__value->Subject = $contacts__value->CompleteName->FullName;
-
             $change = new ItemChangeType();
             $change->ItemId = new ItemIdType();
             $change->ItemId->Id = $contacts__value->ItemId->Id;
             $change->Updates = new NonEmptyArrayOfItemChangeDescriptionsType();
 
             $field = new SetItemFieldType();
-            $field->IndexedFieldURI = new PathToUnindexedFieldType();
-            $field->IndexedFieldURI->FieldURI = UnindexedFieldURIType::CONTACTS_FILE_AS;
+            $field->FieldURI = new PathToUnindexedFieldType();
+            $field->FieldURI->FieldURI = UnindexedFieldURIType::CONTACTS_FILE_AS;
             $field->Contact = new ContactItemType();
-            $field->Contact->fileAs = $contacts__value->CompleteName->FullName;
+            $field->Contact->FileAs = $contacts__value->CompleteName->FullName;
+            $change->Updates->SetItemField[] = $field;
+
+            $field = new SetItemFieldType();
+            $field->FieldURI = new PathToUnindexedFieldType();
+            $field->FieldURI->FieldURI = UnindexedFieldURIType::CONTACTS_FILE_AS_MAPPING;
+            $field->Contact = new ContactItemType();
+            $field->Contact->FileAsMapping = FileAsMappingType::NONE;
+            $change->Updates->SetItemField[] = $field;
+
+            $field = new SetItemFieldType();
+            $field->FieldURI = new PathToUnindexedFieldType();
+            $field->FieldURI->FieldURI = UnindexedFieldURIType::ITEM_SUBJECT;
+            $field->Contact = new ContactItemType();
+            $field->Contact->Subject = $contacts__value->CompleteName->FullName;
+            $change->Updates->SetItemField[] = $field;
+
+            $field = new SetItemFieldType();
+            $field->FieldURI = new PathToUnindexedFieldType();
+            $field->FieldURI->FieldURI = UnindexedFieldURIType::CONTACTS_DISPLAY_NAME;
+            $field->Contact = new ContactItemType();
+            $field->Contact->DisplayName = $contacts__value->CompleteName->FullName;
             $change->Updates->SetItemField[] = $field;
 
             $request->ItemChanges[] = $change;
-            //var_dump([$contacts__value->ItemId->Id, $contacts__value->DisplayName, $contacts__value]);
-            //die('OK');
         }
         $response = $this->client->UpdateItem($request);
-        return true;
+
+        $response_messages = $response->ResponseMessages->UpdateItemResponseMessage;
+        foreach ($response_messages as $response_messages__value) {
+            if ($response_messages__value->ResponseClass !== ResponseClassType::SUCCESS) {
+                return [
+                    'success' => false,
+                    'message' => $response_messages__value->MessageText
+                ];
+            }
+        }
+        return [
+            'success' => true,
+            'message' => null
+        ];
     }
 
     public function addContact($data)
@@ -178,27 +211,84 @@ class ExchangeContacts
 
         $request->Items->Contact[] = $contact;
         $response = $this->client->CreateItem($request);
+
+        var_dump($response);
+
+        return [
+            'success' =>
+                $response->ResponseMessages->CreateItemResponseMessage[0]->ResponseClass === ResponseClassType::SUCCESS,
+            'message' => @$response->ResponseMessages->CreateItemResponseMessage[0]->MessageText,
+            'data' => ['id' => $response->ResponseMessages->CreateItemResponseMessage[0]->Items->Contact[0]->ItemId->Id]
+        ];
+    }
+
+    public function removeContact($id)
+    {
+        $request = new DeleteItemType();
+        $request->DeleteType = DisposalType::HARD_DELETE;
+        $request->ItemIds = (object) [];
+        $request->ItemIds->ItemId = new ItemIdType();
+        $request->ItemIds->ItemId->Id = $id;
+        $response = $this->client->DeleteItem($request);
+        var_dump($response);
+
+        return [
+            'success' =>
+                $response->ResponseMessages->DeleteItemResponseMessage[0]->ResponseClass === ResponseClassType::SUCCESS,
+            'message' => @$response->ResponseMessages->DeleteItemResponseMessage[0]->MessageText
+        ];
     }
 }
 
 $exchangecontacts = new ExchangeContacts();
-//$exchangecontacts->fixDisplayNames();
 
-$exchangecontacts->addContact([
-    'first_name' => 'David',
-    'last_name' => 'Vielhuber',
+$switch = 1;
+
+if ($switch === 1) {
+    $response = $exchangecontacts->fixDisplayNames();
+    var_dump($response);
+}
+
+if ($switch === 2) {
+    $response = $exchangecontacts->addContact([
+        'first_name' => '_DIES IST',
+        'last_name' => 'EIN TEST',
+        'emails' => ['david@vielhuber.de'],
+        'phones' => ['private' => ['+4915158754691'], 'business' => ['+4989546564']]
+    ]);
+    var_dump($response);
+}
+
+if ($switch === 3) {
+    $contacts = $exchangecontacts->getAllContacts();
+    foreach ($contacts as $contacts__value) {
+        var_dump($contacts__value);
+
+        /*
+        var_dump([
+            $contacts__value->ItemId->Id,
+            $contacts__value->DisplayName,
+            $contacts__value->CompanyName,
+            $contacts__value->EmailAddresses,
+            $contacts__value->PhoneNumbers
+        ]);
+*/
+    }
+}
+
+if ($switch === 4) {
+    $response = $exchangecontacts->removeContact(
+        'AAMkAGI4NWMxMGIzLTQ5MTctNGYyNy1hY2YzLWQ1YmZmMTA5ZjI5NgBGAAAAAADwZNIaQJ0wSJhwQ+Ev0+N8BwD9iZ7Ufh2ZQ6EkqgYz5YriAAABaHWVAADGiw/HQBXsRpCB1hsLE6h3AAUitU4VAAA='
+    );
+    var_dump($response);
+}
+
+/* TODO */
+
+$exchangecontacts->updateContact([
+    'id' => '***',
+    'first_name' => 'DIES IST',
+    'last_name' => 'EIN TEST',
     'emails' => ['david@vielhuber.de'],
     'phones' => ['private' => ['+4915158754691'], 'business' => ['+4989546564']]
 ]);
-die();
-
-$contacts = $exchangecontacts->getAllContacts();
-foreach ($contacts as $contacts__value) {
-    var_dump([
-        $contacts__value->ItemId->Id,
-        $contacts__value->DisplayName,
-        $contacts__value->CompanyName,
-        $contacts__value->EmailAddresses,
-        $contacts__value->PhoneNumbers
-    ]);
-}
