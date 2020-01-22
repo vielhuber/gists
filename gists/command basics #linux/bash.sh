@@ -128,8 +128,12 @@ cal -3 -y
 # find files by extension
 find . -name '*.php'
 
+# find files by extension (case insensitive)
+find . -iname '*.php'
+
 # find files by extensions
 find . -iregex '.*\.\(jpg\|gif\|png\|jpeg\)$'
+find . \( -iname '*.jpg' -o -iname '*.png' \)
 
 # find files by name (and suppress permission denied errors)
 find / -type f -name "authorized_keys" 2>/dev/null
@@ -178,8 +182,14 @@ zip -r "backup-$(date +"%Y-%m-%d").zip"
 # zip file and exclude folder
 zip -r file.zip . -x */\vendor/\* -x */\node_modules/\*
 
+# zip all files found with find (preserving directory structure)
+find . -name 'foo' -print | zip file.zip -@
+
 # zip folder with only certail filetype
 zip -r file.zip path/to/folder/ -i '*.php' '*.html'
+
+# zip folder with only certail filetype (case insensitive)
+find . \( -iname '*.jpg' -o -iname '*.png' \) -print | zip file.zip -@
 
 # delete file with shifted date (for rotation)
 rm -f "backup-$(date --date="6 months ago" +"%Y-%m-%d").zip"

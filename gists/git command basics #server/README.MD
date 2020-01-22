@@ -122,6 +122,12 @@ if gitignore is not working for a specific file/folder (this does not delete the
 #### clean up repo
 - git gc
 
+#### rename folder (from filesystem and from git, this is important when git needs to track the history properly)
+- git mv oldfolder newfolder
+
+#### delete file (from filesystem and from git, this is important when git needs to track the history properly)
+- git rm file
+
 #### show last change of file
 - git blame path/to/file
 
