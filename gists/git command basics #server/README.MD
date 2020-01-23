@@ -430,3 +430,22 @@ Usage: git acp
 - git ls-files -v | grep ^S
 #### undo ignore:
 - git update-index --no-skip-worktree path/to/file
+
+
+## rename main folders
+- if you rename a main folder, make changes on files and merge from another branch (where those files were already changed, but in the original folder structure), this leads to annoying conflicts
+- recipe to get that working:
+  - rename the folder in master
+    - git checkout master
+    - make file changes
+    - git mv main-folder new-main-folder
+    - git add -A . && git commit -m "." && git push origin HEAD
+  - now when we want to merge a branch with the old path
+    - git checkout master
+    - git mv new-main-folder main-folder
+    - git add -A . && git commit -m "." && git push origin HEAD
+    - git merge another-branch
+    - git push origin HEAD
+    - git mv main-folder new-main-folder
+    - git add -A . && git commit -m “.” && git push origin HEAD
+
