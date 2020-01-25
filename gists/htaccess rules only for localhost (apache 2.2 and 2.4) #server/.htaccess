@@ -7,3 +7,8 @@ AddHandler php-fastcgi5.4 .php .phtml
 <IfModule !mod_win32.c>
 AddHandler php-fastcgi5.4 .php .phtml
 </IfModule>
+
+# apache 2.2
+<IfModule mod_php7.c>
+AddHandler php-fastcgi5.4 .php .phtml
+</IfModule>
