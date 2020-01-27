@@ -24,5 +24,12 @@ function my_plugin_uninstall() {
     delete_option('my_plugin_settings')
 }
 
+// localization
+// first create languages/my-plugin-de_DE.po/.mo
+add_action('plugins_loaded', function () {
+  load_plugin_textdomain('my-plugin', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+});
+
 // your code (like in functions.php)
 /* ... */
+echo __('String', 'my-plugin');

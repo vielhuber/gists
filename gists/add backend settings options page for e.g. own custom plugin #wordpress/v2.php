@@ -1,7 +1,7 @@
 <?php
 // using custom code
 add_action('admin_menu', function () {
-    add_menu_page(
+    $menu = add_menu_page(
         'My Plugin',
         'My Plugin',
         'manage_options',
@@ -62,4 +62,10 @@ add_action('admin_menu', function () {
         'dashicons-admin-site',
         100
     );
+  	add_action('admin_print_styles-' . $menu, function () {
+    	wp_enqueue_style('my-plugin-css', plugins_url('my-plugin.css', __FILE__));
+  	});
+  	add_action('admin_print_scripts-' . $menu, function () {
+	    wp_enqueue_script('my-plugin-js', plugins_url('my-plugin.js', __FILE__));
+  	});  	
 });
