@@ -179,8 +179,8 @@ zip --password SECRET output.zip input.txt
 # zip file with date
 zip -r "backup-$(date +"%Y-%m-%d").zip"
 
-# zip file and exclude folder
-zip -r file.zip . -x */\vendor/\* -x */\node_modules/\*
+# zip file and exclude folders
+zip -r file.zip . -x \*vendor/\* -x \*node_modules/\* -x \*.git/\* 
 
 # zip all files found with find (preserving directory structure)
 find . -name 'foo' -print | zip file.zip -@

@@ -26,17 +26,17 @@ add_action('admin_menu', function () {
                 console.log('OK');
             </script>
             <?php
-            echo '<div class="my-plugin wrap">';
-            echo '<h1 class="my-plugin__title">My Plugin</h1>';
+            $message = '';
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 $settings = @$_POST['my_plugin'];
                 update_option('my_plugin_settings', $settings);
-                echo '<div class="my-plugin__notice notice notice-success is-dismissible"><p>Erfolgreich editiert</p></div>';
+                $message = '<div class="my-plugin__notice notice notice-success is-dismissible"><p>Erfolgreich editiert</p></div>';
             }
             $settings = get_option('my_plugin_settings');
-            echo '<form class="my-plugin__form" method="post" action="' .
-                admin_url('admin.php?page=my-plugin') .
-                '">';
+            echo '<div class="my-plugin wrap">';
+            echo '<form class="my-plugin__form" method="post" action="' . admin_url('admin.php?page=my-plugin') . '">';
+            echo '<h1 class="my-plugin__title">My Plugin</h1>';
+            echo $message;
             echo '<ul class="my-plugin__fields">';
             echo '<li class="my-plugin__field">';
             echo '<label class="my-plugin__label-wrapper">';
