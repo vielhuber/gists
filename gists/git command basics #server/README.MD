@@ -344,6 +344,11 @@ Usage: git acp
 - git reset --hard
 - git clean -df
 
+### remove big file unintentionally committed (but not pushed)
+- git rm --cached giant_file
+- vim .gitignore # add giant_file
+- git commit --amend -CHEAD
+- git push origin HEAD
 
 ## make a release of current development branch and push it on master
 

@@ -253,6 +253,7 @@ df -h # in total
 df -k . # for current folder
 df -k /folder # for specific folder
 du -d 1 -xh /folder 2>/dev/null | sort -h -r # show all big folders
+find . -type f -printf "%s\t%p\n" | sort -n | tail -10 # show all big files
 du -d 1 -xh . 2>/dev/null | sort -h -r # same as above only for current folder
 ls -haltrS # show contents of folder sorted by size
 du -sh folder/ # show size of folder
