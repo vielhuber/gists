@@ -34,7 +34,7 @@ require_once('template.html');
 $html = ob_get_contents();
 ob_end_clean();
 $html = str_replace('foo','bar',$html);
-echo $content;
+echo $html;
 ```
 
 ```php

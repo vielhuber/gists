@@ -5,27 +5,28 @@ class Test extends \PHPUnit\Framework\TestCase
   	protected $var;
   
   	// runs before every single test
-  	protected function setUp()
+  	protected function setUp(): void
     {
     }
   
   	// runs before all tests
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
     }
   
   	// runs after every single test
-  	protected function tearDown()
+  	protected function tearDown(): void
     {
     }
   
   	// runs after all tests
-  	public static function tearDownAfterClass()
+  	public static function tearDownAfterClass(): void
     {
       
     }
   
-    public function test123()
+  	// functions that start with the keyword "test" in the name run sequentially
+    public function testSomeFunction()
     {
       
         $this->assertTrue(true);
