@@ -100,9 +100,21 @@ if gitignore is not working for a specific file/folder (this does not delete the
 #### see latest diffs / changes
 - git diff
 
-#### if you want to revert the last commit, replace a0d3fe6 with the ID of the commit you want to forget
-- git reset --hard a0d3fe6
-- git push -f origin master
+#### reset master to specific commit (forget all changes); replace a0d3fe6 with the ID of the commit you want to reset to
+- option 1 (with rewriting history)
+  - locally
+    - git reset --hard a0d3fe6
+    - git push -f origin master
+  - remotely (on all clients)
+    - git fetch origin
+    - git reset --hard origin/master
+- option 2 (without rewriting history)
+  - locally
+    - git revert --no-commit a0d3fe6..HEAD
+    - git commit
+    - git push origin HEAD
+  - remotely (on all clients)
+    - git pull
 
 #### get current commit hash (outputs: 6e559cb)
 - git rev-parse --short HEAD
@@ -112,7 +124,7 @@ if gitignore is not working for a specific file/folder (this does not delete the
 - git checkout 6e559cb # go to that commit
 - git checkout master # go back to current head
 
-#### go to specific commit (create a branch from it!)
+#### go to specific commit (create a branch from it)
 - git checkout -b some_new_test_branch 6e559cb
 
 #### setting author details

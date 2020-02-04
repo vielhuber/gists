@@ -1,3 +1,8 @@
+# . and ..: name-inode maps
+- .: referring to the directory itself
+- ..: referring to the parent directory
+- its good practice to always use ./file or ./folder/ instead of file and folder/
+
 # clear console
 Ctrl+L
 cls
@@ -179,8 +184,8 @@ zip --password SECRET output.zip input.txt
 # zip file with date
 zip -r "backup-$(date +"%Y-%m-%d").zip"
 
-# zip file and exclude folders
-zip -r file.zip . -x \*vendor/\* -x \*node_modules/\* -x \*.git/\* 
+# zip file and exclude folders and files
+zip -r file.zip . -x \*"vendor/"\* -x \*"node_modules/"\* -x \*".git/"\* -x \*"filename-in-any-folder"\* -x "explicit-filename-in-root-folder" -x "folder/explicit-filename"
 
 # zip all files found with find (preserving directory structure)
 find . -name 'foo' -print | zip file.zip -@
