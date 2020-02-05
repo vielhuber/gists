@@ -2,6 +2,7 @@
 
 - namespaces are a virtual directory structure for your classes
 - without namespaces, there is a potential conflict between class names in different packages
+- with namespaces, you can have same class names / function names in different namespaces (they do not collide)
 - important: there is NO connection between namespaces and your file structure (this connection only comes into play when using psr-4 autoloading)
 - example without namespaces
 ```php
@@ -9,7 +10,7 @@ class Vielhuber_Database_Syncer {}
 ```
 - example with namespaces
 ```php
-namespace Vielhuber\Database;
+namespace vielhuber\database;
 class Syncer {}
 ```
 - three simple rules for creating classes:

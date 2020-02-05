@@ -17,5 +17,25 @@
 - you have to publish your vendor folder completely
 - problem: if another plugin uses (different) versions of the same dependencies, they clash
 - solution: https://github.com/humbug/php-scoper
+  - replace composer embedding with:
+  ```php
+  if( file_exists(__DIR__ . '/vendor/scoper-autoload.php') ) { require_once __DIR__ . '/vendor/scoper-autoload.php'; }
+  else { require_once __DIR__ . '/vendor/autoload.php'; }
+  ```
   - wget https://github.com/humbug/php-scoper/releases/download/0.13.1/php-scoper.phar
-  - php php-scoper.phar add-prefix
+  - without config
+    - php php-scoper.phar add-prefix --no-config
+  - with config
+    - php php-scoper.phar add-prefix  --config scoper.inc.php
+    ```php
+    <?php
+	declare(strict_types=1);
+    return [
+    	'whitelist' => ['*'] // exclude native wordpress global functions
+    ];
+    ```
+  - cd build
+  - composer dump-autoload
+  
+ 
+  
