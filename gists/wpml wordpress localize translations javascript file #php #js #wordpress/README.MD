@@ -8,5 +8,5 @@ wp_enqueue_script( 'some_handle' );
 ```
 
 ```js
-alert( object_name.some_string);
+alert( object_name.some_string );
 ```
