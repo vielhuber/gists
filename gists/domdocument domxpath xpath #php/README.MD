@@ -60,6 +60,11 @@ $node->tagName
 $node->nodeValue
 ```
 
+### get content of text value
+```php
+$node->textContent
+```
+
 ### get children of node (recursively)
 ```php
 $DOMXpath->query('.//node()', $node);
