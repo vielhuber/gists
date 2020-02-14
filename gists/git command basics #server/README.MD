@@ -306,6 +306,20 @@ Usage: git acp
 #### click "Compare & pull request"
 
 
+## a note on merging
+- git merge foo merges the branch foo into the current checked out branch
+- if no conflict has been found it is automatically committed
+- if a conflict has been found it is not automatically comitted
+
+#### undo (uncomitted) changes from a merge where conflicts have happened
+- git merge --abort
+
+#### undo (comitted) changes from a merge where no conflicts appeared
+- git reset --merge ORIG_HEAD
+
+#### how to merge without a commit
+- git merge branch --no-commit --no-ff
+
 
 ## conflicts
 
@@ -339,9 +353,6 @@ Usage: git acp
    
 #### download the conflicted files, use WinMerge to fix conflicts, upload the conflicted files
 #### the git add -A .; git commit "fixed conflicts"; git push origin HEAD
-
-#### go to the state before git pull
-- git merge --abort
 
 ### remove untracked files
 - rm file # simply remove the file
