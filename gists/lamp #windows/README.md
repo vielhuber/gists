@@ -94,7 +94,7 @@ PS1="\n\[\e[1;30m\][$$:$PPID - \j:\!\[\e[1;30m\]]\[\e[0;36m\] \T \[\e[1;30m\][\[
 - setup with presets from gist.github.com
 - ```sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf```
 - ```sudo nano /etc/apache2/apache2.conf```
-- ```sudo nano /etc/php/X.X/fpm/pool.d/www.conf```
+- ```sudo nano /etc/php/X.X/fpm/pool.d/www.conf``` (important!)
 - ```sudo nano /etc/php/X.X/apache2/php.ini``` (not needed, see below)
 - ```sudo nano /etc/php/X.X/cli/php.ini``` (not needed, see below)
 
