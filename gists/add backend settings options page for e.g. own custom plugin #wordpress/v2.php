@@ -62,10 +62,16 @@ add_action('admin_menu', function () {
         'dashicons-admin-site',
         100
     );
+  	// if you want to add external css/js files
   	add_action('admin_print_styles-' . $menu, function () {
     	wp_enqueue_style('my-plugin-css', plugins_url('my-plugin.css', __FILE__));
   	});
   	add_action('admin_print_scripts-' . $menu, function () {
 	    wp_enqueue_script('my-plugin-js', plugins_url('my-plugin.js', __FILE__));
-  	});  	
+  	});  
+  	// if you want to add a special class to the body
+    add_filter('admin_body_class', function ($classes) {
+        $classes .= ' gtbabel-wrapper';
+        return $classes;
+    });
 });
