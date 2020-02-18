@@ -17,6 +17,9 @@ window.addEventListener('load', e => {
   document.addEventListener(
     'change',
     e => {
+        if (e.target.classList.contains('exclude')) {
+        	return;
+        }
     	somethingHasChanged = true;
     },
     true
