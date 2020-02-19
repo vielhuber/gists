@@ -62,16 +62,39 @@ add_action('admin_menu', function () {
         'dashicons-admin-site',
         100
     );
-  	// if you want to add external css/js files
+  
+  	/* if you want to add external css/js files */
   	add_action('admin_print_styles-' . $menu, function () {
     	wp_enqueue_style('my-plugin-css', plugins_url('my-plugin.css', __FILE__));
   	});
   	add_action('admin_print_scripts-' . $menu, function () {
 	    wp_enqueue_script('my-plugin-js', plugins_url('my-plugin.js', __FILE__));
   	});  
-  	// if you want to add a special class to the body
+  
+  	/* if you want to add a special class to the body */
     add_filter('admin_body_class', function ($classes) {
-        $classes .= ' gtbabel-wrapper';
+        if (@$_GET['page'] == 'my-plugin') {
+          $classes .= ' my-plugin-wrapper';
+        }
         return $classes;
     });
+  
+    /* if you want to add submenus */
+    // the first line modifies the name of the first (auto created) submenu entry
+    add_submenu_page('my-plugin', 'My Plugin First', 'My Plugin First', 'manage_options', 'my-plugin');
+  	// this adds the submenu entry
+    $submenu = add_submenu_page('my-plugin', 'My Plugin Second', 'My Plugin Second', 'manage_options', 'my-plugin-second', function () { echo 'FOO'; });
+    // the above scripts/styles don't apply to any submenus; uncomment them and apply it to all (sub)menus instead
+    $menus = [];
+    $menus[] = $menu;
+    $menus[] = $submenu;
+    foreach ($menus as $menus__value) {
+      add_action('admin_print_styles-' . $menus__value, function () {
+        wp_enqueue_style('gtbabel-css', plugins_url('gtbabel.css', __FILE__));
+      });
+      add_action('admin_print_scripts-' . $menus__value, function () {
+        wp_enqueue_script('gtbabel-js', plugins_url('gtbabel.js', __FILE__));
+      });
+    }
+  
 });

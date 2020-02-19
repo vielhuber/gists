@@ -345,12 +345,13 @@ Usage: git acp
 
 ### automatic merge failed; fix conflicts and then commit the result
 
+#### if you pushed accidently the conflicted files
+- simply search for "<<<<<<<" or "=======" or ">>>>>>>" and fix it by hand
+- then do: git add -A .; git commit -m "fix merge conflicts"; git push origin HEAD
+
 #### if a merge tool is available (usually not on shared hosts)
 - git mergetool
-   
-#### if you pushed accidently the conflicted files
-#### simply search for "<<<<<<<" or "=======" or ">>>>>>>" and fix it by hand
-   
+      
 #### download the conflicted files, use WinMerge to fix conflicts, upload the conflicted files
 #### the git add -A .; git commit "fixed conflicts"; git push origin HEAD
 
@@ -366,6 +367,9 @@ Usage: git acp
 ### revert all changes
 - git reset --hard
 - git clean -df
+
+### undo last commit that has not been pushed yet
+- git reset --hard HEAD~1
 
 ### remove big file unintentionally committed (but not pushed)
 - git rm --cached giant_file

@@ -10,10 +10,12 @@ fetch(
   }
 ).then((response) =>
 {
-  let data = response.json(), // this is another promise which gets resolved in the second then
-      status = response.status;
+  // this is another promise which gets resolved in the second then
   // do something if you want with it
   // or simply return it
+  // important: to check for status codes (like 404 or 500), check here if needed
+  let data = response.json(),
+      status = response.status;
   return data;
 }).catch((error) => 
 {
