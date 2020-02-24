@@ -14,6 +14,9 @@ history
 # show path of program
 which node
 
+# run bash script inline
+echo $(ls)
+
 # show running processes
 ps aux
 ps aux | grep 1337| grep -v grep # search for pid

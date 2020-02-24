@@ -22,11 +22,16 @@
   if( file_exists(__DIR__ . '/vendor/scoper-autoload.php') ) { require_once __DIR__ . '/vendor/scoper-autoload.php'; }
   else { require_once __DIR__ . '/vendor/autoload.php'; }
   ```
+  - currently global wordpress functions are also prefixed (see: https://github.com/humbug/php-scoper/issues/303); workaround:
+    - composer require ua1-labs/php-scoper-wp-patch
   - wget https://github.com/humbug/php-scoper/releases/download/0.13.1/php-scoper.phar
   - without config
     - php php-scoper.phar add-prefix --no-config
   - with config
     - php php-scoper.phar add-prefix  --config scoper.inc.php
+  - cd build
+  - composer dump-autoload
+  - example config
     ```php
     <?php
     declare(strict_types=1);
@@ -57,8 +62,7 @@
         ]
     ];
     ```
-  - cd build
-  - composer dump-autoload
+
   
  
   
