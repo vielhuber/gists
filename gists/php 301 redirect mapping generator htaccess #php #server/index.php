@@ -45,6 +45,10 @@ foreach ($reader->getSheetIterator() as $sheets__key => $sheets__value) {
                 }
                 // rel links
                 $source = str_replace(['http://www.tld.com/','https://www.tld.com/'], '', $source);
+              	// escape spaces
+              	if( strpos($source, ' ') !== false ) {
+                 	$source = str_replace(' ', '\ ', $source); 
+                }
                 $rules[] = [$source, $target];
             }
         }

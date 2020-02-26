@@ -15,12 +15,15 @@ $DOMDocument->loadHTML(file_get_contents('tpl.html'));
 ```php
 // if the html source doesn't contain a valid utf8 header, domdocument interprets is as iso
 // we circumvent this with mb_convert_encoding
+// warning: if you don't add a doctype/html tag, domdocument adds that information for you
+// also if only a text node is provided, it is surrounded by a p-tag
 @$DOMDocument->loadHTML(mb_convert_encoding(file_get_contents('tpl.html'), 'HTML-ENTITIES', 'UTF-8'));
 ```
 
 ### get back html from domdocument
 ```php
 $html = $DOMDocument->saveHTML();
+$html = html_entity_decode($html); // domdocument converts all umlauts to html entities, revert that
 ```
 
 ### get all nodes (including text nodes)
