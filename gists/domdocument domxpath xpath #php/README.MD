@@ -43,6 +43,11 @@ $DOMXpath->query('/html/body//text()[normalize-space()]'); // exclude whitespace
 $DOMXpath->query('/html/body//*[contains(concat(" ", normalize-space(@class), " "), " foo ")]');
 ```
 
+### id selector
+```php
+$DOMXpath->query('/html/body//*[@id="root")]');
+```
+
 ### attribute selector
 ```php
 $DOMXpath->query('/html/body//input[@placeholder]');

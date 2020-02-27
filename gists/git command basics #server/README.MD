@@ -195,7 +195,7 @@ if gitignore is not working for a specific file/folder (this does not delete the
 ### check if there is a pull needed from remote
 - git remote show origin
 
-### pull
+### pull (this does fetch and merge!)
 - git pull
 
 ### push
@@ -335,7 +335,7 @@ Usage: git acp
 #### possibility 1: remove untracked files
 - rm path/to/file
 
-#### possibility 2: reset all
+#### possibility 2: undo last git pull
 - git reset --hard
 
 #### possibility 3:
@@ -364,7 +364,7 @@ Usage: git acp
 - git reset --hard HEAD
 - git clean -fdx
 
-### revert all changes
+### revert all changes (undo last git pull)
 - git reset --hard
 - git clean -df
 

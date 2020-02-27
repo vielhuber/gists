@@ -96,5 +96,26 @@ add_action('admin_menu', function () {
         wp_enqueue_script('gtbabel-js', plugins_url('gtbabel.js', __FILE__));
       });
     }
-  
 });
+// add menu item (with icon) to top bar
+add_action(
+  'admin_bar_menu',
+  function ($admin_bar) {
+    $admin_bar->add_menu([
+      'id' => 'my-plugin-item',
+      'parent' => null,
+      'group' => null,
+      'title' => '<span class="ab-icon"></span>' . __('My Plugin Item', 'gtbabel-plugin'),
+      'href' => admin_url('admin.php?page=my-plugin'),
+      'meta' => []
+    ]);
+  },
+  500
+);
+add_action(
+  'admin_head',
+  function () {
+    echo '<style>#wpadminbar #wp-admin-bar-my-plugin-item .ab-icon:before { content: "\f306"; top: 3px; }</style>';
+  },
+  100
+);
