@@ -3,14 +3,15 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 // simple
-use Example\Example;
-new Example();
+use Example\App;
+new App();
 
-// more detailled
+// explicit
 /*
-use Example\Example;
+use Example\App;
 use Example\Test1;
 use Example\Test2;
 use Example\Test3;
-new Example(new Test1(), new Test2(), new Test3());
+use Example\Test4;
+new App(new Test1(), new Test2(), new Test3(), new Test4());
 */

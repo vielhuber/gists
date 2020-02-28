@@ -6,6 +6,7 @@
 
 ### solve circular references
 
-- combine those circular classes
-- extract a third class that both classes depend on
-- use setter injection (https://codeinphp.github.io/post/dependency-injection-in-php/)
+- recommended: extract a third class that both classes depend on
+- perhaps: refactor your code
+- perhaps: combine those circular classes
+- perhaps: use setter injection (https://codeinphp.github.io/post/dependency-injection-in-php/)

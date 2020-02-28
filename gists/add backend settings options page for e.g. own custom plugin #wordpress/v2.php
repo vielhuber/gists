@@ -115,7 +115,37 @@ add_action(
 add_action(
   'admin_head',
   function () {
-    echo '<style>#wpadminbar #wp-admin-bar-my-plugin-item .ab-icon:before { content: "\f306"; top: 3px; }</style>';
+    ?>
+    <style>
+      /* add icon */
+      #wpadminbar #wp-admin-bar-my-plugin-item .ab-icon:before { content: "\f306"; top: 3px; }
+    </style>
+    <script>
+      /* reflect url changes in gutenberg */
+      document.addEventListener('DOMContentLoaded', function() {
+        if( wp !== undefined && wp.data !== undefined ) {
+          if( window.location.href.indexOf('post-new.php') > -1 || window.location.href.indexOf('post.php') > -1 ) {
+            let prev = wp.data.select('core/editor').getEditedPostAttribute('status');
+            wp.data.subscribe(function () {
+              let isSavingPost = wp.data.select('core/editor').isSavingPost(),
+              isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+              if (isSavingPost && !isAutosavingPost) {
+                let cur = wp.data.select('core/editor').getEditedPostAttribute('status');
+                if( prev === cur ) { prev = cur; return; }
+                prev = cur;
+                fetch(window.location.href).then(v=>v.text()).catch(v=>v).then(data => {
+                  let dom = new DOMParser().parseFromString(data, 'text/html').querySelector('#wp-admin-bar-my-plugin-iten');
+                  if( dom !== null ) {
+                    document.querySelector('#wp-admin-bar-my-plugin-iten').innerHTML = dom.innerHTML;
+                  }
+                }); 
+              }
+            });
+          }
+        }
+      });
+    </script>
+    <?php
   },
   100
 );
