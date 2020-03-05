@@ -452,6 +452,11 @@ host    all   all        ::1/128        md5
 - ```sudo apt install ffmpeg```
 - ```ffmpeg -version```
 
+#### youtube-dl
+- ```sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl```
+- ```sudo chmod a+rx /usr/local/bin/youtube-dl```
+- ```youtube-dl --version```
+
 #### inkscape
 - ```sudo apt-get install inkscape```
 

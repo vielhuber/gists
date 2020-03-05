@@ -355,10 +355,23 @@ Usage: git acp
 #### download the conflicted files, use WinMerge to fix conflicts, upload the conflicted files
 #### the git add -A .; git commit "fixed conflicts"; git push origin HEAD
 
+### revert to last committed state (to undo a git pull)
+- git reset --hard HEAD
+- git reset --hard # same as above
+
 ### remove untracked files
-- rm file # simply remove the file
-- git clean -f -n # do this for all files (just test which files would be removed)
-- git clean -f # remove them all
+#### recommended way
+- git clean -dn
+- git clean -df
+#### variants
+- git clean -n # remove untracked files (only show, not remove)
+- git clean -f # remove untracked files
+- git clean -dn # remove untracked files and empty untracked directories (only show, not remove)
+- git clean -df # remove untracked files and empty untracked directories
+- git clean -di # interactively remove untracked files and empty untracked directories
+- git clean -dnx # remove untracked files and empty untracked directories and all ignored files (only show, not remove)
+- git clean -dnX # remove only ignored files (only show, not remove)
+- rm file # simply remove the file (this is also possible)
 
 ### revert ALL changes since the last commit (revert to HEAD of master), also remove files created in gitignore
 - git reset --hard HEAD

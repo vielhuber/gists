@@ -4,19 +4,63 @@
 - without namespaces, there is a potential conflict between class names in different packages
 - with namespaces, you can have same class names / function names in different namespaces (they do not collide)
 - important: there is NO connection between namespaces and your file structure (this connection only comes into play when using psr-4 autoloading)
-- example without namespaces
-```php
-class Vielhuber_Database_Syncer {}
-```
-- example with namespaces
-```php
-namespace vielhuber\database;
-class Syncer {}
-```
 - three simple rules for creating classes:
    - always add namespaces to every file your classes sit in
    - always include one class per file
    - always name the file the same as the class
+
+
+### examples
+
+#### 1
+```php
+// example without namespace
+class Vielhuber_Database_Syncer {}
+```
+```php
+// example with namespace
+namespace vielhuber\database;
+class Syncer {}
+```
+
+
+#### 2
+```php
+// NamespaceTest.php
+<?php
+namespace NamespaceTest;
+function test() { echo '42'; }
+```
+
+```php
+// Test1.php
+<?php
+require_once('NamespaceTest.php');
+test(); // does not work, because we have no namespace declared
+```
+
+```php
+// Test2.php
+<?php
+namespace NamespaceTest;
+require_once('NamespaceTest.php');
+test(); // does work, because we are in the same namespace
+```
+
+```php
+// Test3.php
+<?php
+namespace NamespaceTest\Subnamespace;
+require_once('NamespaceTest.php');
+test(); // does not work, because subnamespaces don't inherit
+```
+
+```php
+// Test4.php
+<?php
+require_once('NamespaceTest.php');
+NamespaceTest\test(); // does work, because we call the function directly
+```
 
 
 ### composer

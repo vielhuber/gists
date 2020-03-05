@@ -22,47 +22,10 @@
   if( file_exists(__DIR__ . '/vendor/scoper-autoload.php') ) { require_once __DIR__ . '/vendor/scoper-autoload.php'; }
   else { require_once __DIR__ . '/vendor/autoload.php'; }
   ```
-  - currently global wordpress functions are also prefixed (see: https://github.com/humbug/php-scoper/issues/303); workaround:
-    - composer require ua1-labs/php-scoper-wp-patch
-  - wget https://github.com/humbug/php-scoper/releases/download/0.13.1/php-scoper.phar
+  - ```wget https://github.com/humbug/php-scoper/releases/download/0.13.1/php-scoper.phar```
+  - with config (recommended, see below)
+    - ```php php-scoper.phar add-prefix  --config scoper.inc.php```
   - without config
-    - php php-scoper.phar add-prefix --no-config
-  - with config
-    - php php-scoper.phar add-prefix  --config scoper.inc.php
-  - cd build
-  - composer dump-autoload
-  - example config
-    ```php
-    <?php
-    declare(strict_types=1);
-    return [
-        // don't prefix the following namespaces
-        'whitelist' => [
-            'GtbabelWordPress\*', // all global/native/class based functions in the wordpress plugin class (you must add a namespace "namespace GtbabelWordPress;" inside the file before!)
-            'vielhuber\gtbabel\*', // all global/native/class based functions in the main wordpress class
-        ],
-        'files-whitelist' => [
-            'uninstall.php', // the uninstall file
-            'helpers.php', // all hotloaded global functions by the composer package itself
-            'vendor/vielhuber/stringhelper/stringhelper.php', // all libraries with global functions that are hotloaded
-        ],
-        // all global functions/classes should NOT be prefixed
-        'whitelist-global-constants' => true,
-        'whitelist-global-classes' => true,
-        'whitelist-global-functions' => true,
-        // correct custom code
-        'patchers' => [
-            function (string $filePath, string $prefix, string $content): string {
-                // DOMXPath is wrongly prefixed
-                if (strpos($filePath,'src/Dom.php') !== false) {
-                    $content = str_replace('\\'.$prefix.'\\DOMXpath', '\\DOMXpath', $content);
-                }
-                return $content;
-            }
-        ]
-    ];
-    ```
-
-  
- 
-  
+    - ```php php-scoper.phar add-prefix --no-config```
+  - ```cd build```
+  - ```composer dump-autoload```

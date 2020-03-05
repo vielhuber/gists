@@ -257,6 +257,7 @@ echo -e "string to prepend\n$(cat path/to/file.txt)" > path/to/file.txt
 sudo fc-cache -f -v
 
 # disk space
+df . # show in which device a folder is located
 df -h # in total
 df -k . # for current folder
 df -k /folder # for specific folder
