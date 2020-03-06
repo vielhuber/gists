@@ -251,9 +251,13 @@ Usage: git acp
 - git push origin master
 
 ### merge A in B and push B
+- git checkout A
+- git pull
 - git checkout B
+- git pull
 - git merge A
 - git push origin HEAD
+- git checkout A
 
 ### merge changes without a merge message
 - git merge branch-name --no-edit
