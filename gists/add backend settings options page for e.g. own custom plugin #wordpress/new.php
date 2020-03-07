@@ -28,13 +28,17 @@ add_action('admin_menu', function () {
             <?php
             $message = '';
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+              	check_admin_referer('my-plugin-submit'); // check nonce
                 $settings = @$_POST['my_plugin'];
+              	// always sanitize, escape, validate here!
+              	// ...
                 update_option('my_plugin_settings', $settings);
                 $message = '<div class="my-plugin__notice notice notice-success is-dismissible"><p>Erfolgreich editiert</p></div>';
             }
             $settings = get_option('my_plugin_settings');
             echo '<div class="my-plugin wrap">';
             echo '<form class="my-plugin__form" method="post" action="' . admin_url('admin.php?page=my-plugin') . '">';
+          	wp_nonce_field('my-plugin-submit'); // setup nonce
             echo '<h1 class="my-plugin__title">My Plugin</h1>';
             echo $message;
             echo '<ul class="my-plugin__fields">';

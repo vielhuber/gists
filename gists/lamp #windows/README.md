@@ -407,6 +407,10 @@ host    all   all        ::1/128        md5
 - ```rm -rf gifsicle/```
 - ```gifsicle --version```
 
+#### exiftool
+- ```sudo apt-get install libimage-exiftool-perl```
+- ```exiftool```
+
 #### phpmyadmin
 - ```sudo apt-get install phpmyadmin```
   - Web server to reconfigure automatically: apache2

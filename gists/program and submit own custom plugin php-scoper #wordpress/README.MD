@@ -6,6 +6,7 @@
 ## submission
 
 - create a ```readme.txt``` file and validate via https://de.wordpress.org/plugins/developers/readme-validator/
+- always sanitize, escape, validate, use nonces after post requests
 - zip the folder "pluginname" (the folder must be a subfolder inside the zip directory)
 - submit via https://de.wordpress.org/plugins/developers/add/
 - wait for manual verification
