@@ -30,7 +30,10 @@ add_action('admin_menu', function () {
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
               	check_admin_referer('my-plugin-submit'); // check nonce
                 $settings = @$_POST['my_plugin'];
-              	// always sanitize, escape, validate here!
+              	// always sanitize, escape, validate here, otherwise your plugin will be rejected!
+                $settings = __array_map_deep($settings, function ($settings__value) {
+                  return sanitize_textarea_field($settings__value);
+                });
               	// ...
                 update_option('my_plugin_settings', $settings);
                 $message = '<div class="my-plugin__notice notice notice-success is-dismissible"><p>Erfolgreich editiert</p></div>';
@@ -46,7 +49,7 @@ add_action('admin_menu', function () {
             echo '<label class="my-plugin__label-wrapper">';
             echo '<span class="my-plugin__label">Example #1</span>';
             echo '<input class="my-plugin__input" type="text" name="my_plugin[example_1]" value="' .
-                $settings['example_1'] .
+                esc_attr($settings['example_1']) .
                 '" />';
             echo '</label>';
             echo '</li>';
@@ -54,7 +57,7 @@ add_action('admin_menu', function () {
             echo '<label class="my-plugin__label-wrapper">';
             echo '<span class="my-plugin__label">Example #2</span>';
             echo '<input class="my-plugin__input" type="text" name="my_plugin[example_2]" value="' .
-                $settings['example_2'] .
+                esc_attr($settings['example_2']) .
                 '" />';
             echo '</label>';
             echo '</li>';
