@@ -113,9 +113,6 @@ shopt -s dotglob # match hidden files
 cd folder
 mv * /another/folder/
 
-# get general quotas
-df -h
-
 # reboot
 reboot
 shutdown -r now
@@ -225,6 +222,11 @@ tar -xzvf output.tar.gz
 tar -xzvf output.tar.gz -C /path/to/target
 tar -xvjf output.tar.bz2
 
+# show permissions
+ls -l file
+stat -c "%a %n" file
+ls -ld folder
+stat -c "%a %n" folder
 
 # set permissions (the correct way)
 chmod 755 /path/to/folder # only for folder itself, not recursively for all folders AND files

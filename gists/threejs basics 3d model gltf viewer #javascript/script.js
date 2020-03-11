@@ -67,6 +67,7 @@ const Render = function(el) {
 
         // lights
         this.scene.add(new THREE.HemisphereLight(0xf2f2f2, 0x2b2b2b, 1));
+      	this.scene.add(new THREE.DirectionalLight( 0xffffff, 0.5 ));
 
         // loader
         this.loader = new GLTFLoader();

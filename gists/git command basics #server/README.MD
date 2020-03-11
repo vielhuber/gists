@@ -339,7 +339,7 @@ Usage: git acp
 #### possibility 1: remove untracked files
 - rm path/to/file
 
-#### possibility 2: undo last git pull
+#### possibility 2: undo last git pull or a git merge
 - git reset --hard
 
 #### possibility 3:
@@ -359,7 +359,7 @@ Usage: git acp
 #### download the conflicted files, use WinMerge to fix conflicts, upload the conflicted files
 #### the git add -A .; git commit "fixed conflicts"; git push origin HEAD
 
-### revert to last committed state (to undo a git pull)
+### revert to last committed state (to undo a git pull or a git merge)
 - git reset --hard HEAD
 - git reset --hard # same as above
 
