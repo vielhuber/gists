@@ -133,11 +133,12 @@ add_action(
         if( wp !== undefined && wp.data !== undefined ) {
             if( window.location.href.indexOf('post-new.php') > -1 || window.location.href.indexOf('post.php') > -1 ) {
                 let prev_status = wp.data.select('core/editor').getEditedPostAttribute('status'),
-                    prev_permalink = wp.data.select('core/editor').getPermalink();
+                    prev_permalink = wp.data.select('core/editor').getPermalink(),
+                    ready = false;
                 wp.data.subscribe(function () {
                     let isSavingPost = wp.data.select('core/editor').isSavingPost(),
                         isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
-                    if (isSavingPost && !isAutosavingPost) {
+                    if (isSavingPost && !isAutosavingPost && ready === false) {
                         let cur_status = wp.data.select('core/editor').getEditedPostAttribute('status'),
                             cur_permalink = wp.data.select('core/editor').getPermalink();
                         let skip = false;
@@ -145,6 +146,10 @@ add_action(
                         prev_status = cur_status;
                         prev_permalink = cur_permalink;
                         if( skip === true ) { return; }
+                        ready = true;
+                    }
+                    else if(!isSavingPost && !isAutosavingPost && ready === true) {
+                        ready = false;
                         fetch(window.location.href).then(v=>v.text()).catch(v=>v).then(data => {
                             let dom = new DOMParser().parseFromString(data, 'text/html').querySelector('#wp-admin-bar-my-plugin-item');
                             if( dom !== null ) {
