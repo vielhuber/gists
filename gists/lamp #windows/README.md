@@ -252,6 +252,10 @@ xdebug.var_display_max_depth = -1
   - ```sudo nano ~/.bash_profile```
   - ```export GIT_MERGE_AUTOEDIT=no```
 
+#### subversion (svn)
+- ```sudo apt-get install subversion```
+- ```svn --version```
+
 #### lamp repo
 - in this repo we store our ssl certificate, our ssh keys and all current active symlinks
 - ```mkdir /mnt/c/htdocs```
