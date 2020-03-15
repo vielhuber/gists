@@ -13,6 +13,7 @@
 
 ## release
 
+- create an assets folder with the following files: `banner-1544x500.png`, `banner-772x250.png`, `icon-256x256.png`, `icon-128x128.png`, `screenshot-1.png`, `screenshot-2.png`, `screenshot-3.png`
 - see deployment script
 
 ## dependencies
