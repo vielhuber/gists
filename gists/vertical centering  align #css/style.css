@@ -32,7 +32,7 @@
   transform: translateY(-50%);
 }
 
-/* method 3: flexbox */
+/* method 3: flexbox (you don't need a child here!) */
 .parent {
   display: flex;
   flex-direction: column;
