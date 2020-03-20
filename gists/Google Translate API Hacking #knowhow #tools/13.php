@@ -1,2 +1,168 @@
 <?php
-// TODO
+require_once __DIR__ . '/vendor/autoload.php';
+use vielhuber\stringhelper\__;
+use Faker\Factory;
+
+class GoogleTranslate
+{
+    function translate($string)
+    {
+        $args = [
+            'anno' => 3,
+            'client' => 'webapp',
+            'format' => 'html',
+            'v' => '1.0',
+            'key' => 'AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw',
+            'logld' => 'vTE_20200210_00',
+            'sl' => 'de',
+            'tl' => 'en',
+            'sp' => 'nmt',
+            'tc' => 1,
+            'sr' => 1,
+            'tk' => $this->generateTk($string, $this->generateTkk()),
+            'mode' => 1
+        ];
+        $response = __::curl(
+            'https://translate.googleapis.com/translate_a/t?' . http_build_query($args),
+            ['q' => $string],
+            'POST',
+            null,
+            false,
+            false,
+            3
+        );
+        var_dump($response->result);
+    }
+
+    private function generateTkk()
+    {
+        $cache = sys_get_temp_dir() . '/tkk.cache';
+        if (file_exists($cache) && filemtime($cache) > strtotime('now - 1 hour')) {
+            return file_get_contents($cache);
+        }
+        $data = __::curl('https://translate.googleapis.com/translate_a/element.js', null, 'GET');
+        $response = $data->result;
+        $pos1 = mb_strpos($response, 'c._ctkk=\'') + mb_strlen('c._ctkk=\'');
+        $pos2 = mb_strpos($response, '\'', $pos1);
+        $tkk = mb_substr($response, $pos1, $pos2 - $pos1);
+        file_put_contents($cache, $tkk);
+        return $tkk;
+    }
+
+    private function generateTk($f0, $w1)
+    {
+        // ported from js to php from https://translate.googleapis.com/element/TE_20200210_00/e/js/element/element_main.js
+        $w1 = explode('.', $w1);
+        $n2 = $w1[0];
+        for ($j3 = [], $t4 = 0, $h5 = 0; $h5 < strlen(mb_convert_encoding($f0, 'UTF-16LE', 'UTF-8')) / 2; $h5++) {
+            $z6 =
+                ord(mb_convert_encoding($f0, 'UTF-16LE', 'UTF-8')[$h5 * 2]) +
+                (ord(mb_convert_encoding($f0, 'UTF-16LE', 'UTF-8')[$h5 * 2 + 1]) << 8);
+            if (128 > $z6) {
+                $j3[$t4++] = $z6;
+            } else {
+                if (2048 > $z6) {
+                    $j3[$t4++] = ($z6 >> 6) | 192;
+                } else {
+                    if (
+                        55296 == ($z6 & 64512) &&
+                        $h5 + 1 < strlen(mb_convert_encoding($f0, 'UTF-16LE', 'UTF-8')) / 2 &&
+                        56320 ==
+                            ((ord(mb_convert_encoding($f0, 'UTF-16LE', 'UTF-8')[($h5 + 1) * 2]) +
+                                (ord(mb_convert_encoding($f0, 'UTF-16LE', 'UTF-8')[($h5 + 1) * 2 + 1]) << 8)) &
+                                64512)
+                    ) {
+                        $h5++;
+                        $z6 =
+                            65536 +
+                            (($z6 & 1023) << 10) +
+                            ((ord(mb_convert_encoding($f0, 'UTF-16LE', 'UTF-8')[$h5 * 2]) +
+                                (ord(mb_convert_encoding($f0, 'UTF-16LE', 'UTF-8')[$h5 * 2 + 1]) << 8)) &
+                                1023);
+                        $j3[$t4++] = ($z6 >> 18) | 240;
+                        $j3[$t4++] = (($z6 >> 12) & 63) | 128;
+                    } else {
+                        $j3[$t4++] = ($z6 >> 12) | 224;
+                    }
+                    $j3[$t4++] = (($z6 >> 6) & 63) | 128;
+                }
+                $j3[$t4++] = ($z6 & 63) | 128;
+            }
+        }
+        $f0 = $n2;
+        for ($t4 = 0; $t4 < count($j3); $t4++) {
+            $f0 += $j3[$t4];
+            $c7 = $f0;
+            $x8 = '+-a^+6';
+            for ($r9 = 0; $r9 < strlen($x8) - 2; $r9 += 3) {
+                $u10 = $x8[$r9 + 2];
+                $u10 = 'a' <= $u10 ? ord($u10[0]) - 87 : intval($u10);
+                $a11 = $c7;
+                $c12 = $u10;
+                if ($c12 >= 32 || $c12 < -32) {
+                    $c13 = (int) ($c12 / 32);
+                    $c12 = $c12 - $c13 * 32;
+                }
+                if ($c12 < 0) {
+                    $c12 = 32 + $c12;
+                }
+                if ($c12 == 0) {
+                    return (($a11 >> 1) & 0x7fffffff) * 2 + (($a11 >> $c12) & 1);
+                }
+                if ($a11 < 0) {
+                    $a11 = $a11 >> 1;
+                    $a11 &= 2147483647;
+                    $a11 |= 0x40000000;
+                    $a11 = $a11 >> $c12 - 1;
+                } else {
+                    $a11 = $a11 >> $c12;
+                }
+                $b14 = $a11;
+                $u10 = '+' == $x8[$r9 + 1] ? $b14 : $c7 << $u10;
+                $c7 = '+' == $x8[$r9] ? ($c7 + $u10) & 4294967295 : $c7 ^ $u10;
+            }
+            $f0 = $c7;
+        }
+        $c7 = $f0;
+        $x8 = '+-3^+b+-f';
+        for ($r9 = 0; $r9 < strlen($x8) - 2; $r9 += 3) {
+            $u10 = $x8[$r9 + 2];
+            $u10 = 'a' <= $u10 ? ord($u10[0]) - 87 : intval($u10);
+            $a11 = $c7;
+            $c12 = $u10;
+            if ($c12 >= 32 || $c12 < -32) {
+                $c13 = (int) ($c12 / 32);
+                $c12 = $c12 - $c13 * 32;
+            }
+            if ($c12 < 0) {
+                $c12 = 32 + $c12;
+            }
+            if ($c12 == 0) {
+                return (($a11 >> 1) & 0x7fffffff) * 2 + (($a11 >> $c12) & 1);
+            }
+            if ($a11 < 0) {
+                $a11 = $a11 >> 1;
+                $a11 &= 2147483647;
+                $a11 |= 0x40000000;
+                $a11 = $a11 >> $c12 - 1;
+            } else {
+                $a11 = $a11 >> $c12;
+            }
+            $b14 = $a11;
+            $u10 = '+' == $x8[$r9 + 1] ? $b14 : $c7 << $u10;
+            $c7 = '+' == $x8[$r9] ? ($c7 + $u10) & 4294967295 : $c7 ^ $u10;
+        }
+        $f0 = $c7;
+        $f0 ^= $w1[1] ? $w1[1] + 0 : 0;
+        if (0 > $f0) {
+            $f0 = ($f0 & 2147483647) + 2147483648;
+        }
+        $f0 = fmod($f0, pow(10, 6));
+        return $f0 . '.' . ($f0 ^ $n2);
+    }
+}
+$faker = Factory::create();
+$gt = new GoogleTranslate();
+for ($i = 0; $i < 10; $i++) {
+    var_dump($gt->translate($faker->randomHtml(2, 3)));
+}

@@ -41,14 +41,17 @@
 - ```sudo apt-get update && sudo apt-get upgrade```
 - Netzlaufwerk "\wsl$\Ubuntu" auf W: mappen und umbenennen: "WSL"
 
-#### colorize command line
+#### pimp command line
 - ```sudo nano ~/.bash_profile```
 ```
+# colorize and show git branch name
 alias ls='ls --color'
 LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
 export LS_COLORS
-PS1="\n\[\e[1;30m\][$$:$PPID - \j:\!\[\e[1;30m\]]\[\e[0;36m\] \T \[\e[1;30m\][\[\e[1;34m\]\u@\H\[\e[1;30m\]:\[\e[0;37m\]${SSH_TTY:-o} \[\e[0;32m\]+${SHLVL}\[\e[1;30m\]] \[\e[1;37m\]\w\[\e[0;37m\] \n\$ "
+parse_git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'; }
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;36m\]\T\[\033[00m\]~\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
 ```
+- ```source ~/.bash_profile```
 
 #### install basic linux packages
 - ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin```
