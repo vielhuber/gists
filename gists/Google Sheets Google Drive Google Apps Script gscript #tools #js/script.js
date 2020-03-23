@@ -41,6 +41,12 @@ SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO')
 /* get value of current cell */
 SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveCell().getValue()
 
+/* get value of current cell */
+SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveRange().getValue()
+
+/* get value of all selected cells (important for multiple selects) */
+SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveRange().getValues()
+
 /* get value of specific cell */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').getValue()
 
@@ -49,6 +55,9 @@ SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setVa
 
 /* print array */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('DEBUG').getRange(1, 1, arr.length, arr[0].length).setValues(data);
+
+/* clear content */
+SpreadsheetApp.getActiveSpreadsheet().getSheetByName('DEBUG').getRange(1, 1, 1, 5).clearContent();
 
 /* get formula of specific cell */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').getFormula()
@@ -137,6 +146,19 @@ function onEdit(e)
    if( e.source.getActiveSheet().getName() !== 'Sheet1' || e.range.rowStart != 2 || e.range.columnStart != 1 ) { return; }
    // runs automatically when editing cell B1 in Sheet1
    console.log(e.range.getValue());
+   // also helpful: do something with all selected cells (warning, this does not work for splitted cells like in filter)
+   console.log(e.range.getValues());
+   for(var col = e.range.columnStart; col <= e.range.columnEnd; col++) {
+   	for(var row = e.range.rowStart; row <= e.range.rowEnd; row++) {
+      if( col != 2 || row < 2 ) { continue; } // check
+    }
+   }
+   // use this outside of onEdit with any range
+   for (var col = range.getColumn(); col <= range.getLastColumn(); col++) {
+     for (var row = range.getRow(); row <= range.getLastRow(); row++) {
+       if( col != 2 || row < 2 ) { continue; } // check
+     }
+   }
 }
 
 /* popup with link */
@@ -164,7 +186,7 @@ SpreadsheetApp
 
 /* http requests */
 // note: you cannot use UrlFetchApp with onEdit / onOpen because of missing scopes
-// instead use a trigger
+// instead use a trigger (rename the function to onEditTrigger and call function via trigger)
 
 // helper
 function get(args)

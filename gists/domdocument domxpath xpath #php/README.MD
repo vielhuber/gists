@@ -17,13 +17,20 @@ $DOMDocument->loadHTML(file_get_contents('tpl.html'));
 // we circumvent this with mb_convert_encoding
 // warning: if you don't add a doctype/html tag, domdocument adds that information for you
 // also if only a text node is provided, it is surrounded by a p-tag
-@$DOMDocument->loadHTML(mb_convert_encoding(file_get_contents('tpl.html'), 'HTML-ENTITIES', 'UTF-8'));
+// we also add <meta http-equiv="content-type" content="text/html;charset=utf-8" /> got proper encoding (see below)
+$input = file_get_contents('tpl.html');
+$input = mb_convert_encoding($input, 'HTML-ENTITIES', 'UTF-8');
+$input = str_replace('<meta charset="utf-8"','<meta http-equiv="content-type" content="text/html;charset=utf-8" /><meta charset="utf-8"', $input);
+@$DOMDocument->loadHTML($input);
 ```
 
 ### get back html from domdocument
 ```php
 $html = $DOMDocument->saveHTML();
-$html = html_entity_decode($html); // domdocument converts all umlauts to html entities, revert that
+// domdocument converts all umlauts to html entities, revert that
+// this is bad when we use intentionally encoded code e.g. in <pre> tags; another option to prevent html entities (and leave everything intact)
+// is to add <meta http-equiv="content-type" content="text/html;charset=utf-8" /> (see above)
+$html = html_entity_decode($html); 
 ```
 
 ### get all nodes (including text nodes)

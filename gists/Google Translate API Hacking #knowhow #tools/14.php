@@ -9,7 +9,7 @@ class GoogleTranslate
     {
         $args = [
             'anno' => 3,
-            'client' => 'webapp',
+            'client' => 'te_lib',
             'format' => 'html',
             'v' => '1.0',
             'key' => 'AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw',
@@ -26,12 +26,62 @@ class GoogleTranslate
             'https://translate.googleapis.com/translate_a/t?' . http_build_query($args),
             ['q' => $string],
             'POST',
-            null,
+            [
+                'User-Agent' =>
+                    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
+                'Content-Length' => strlen('q=' . urlencode($string))
+            ],
             false,
             false,
             3
         );
-        var_dump($response->result);
+        return ['result' => $this->parseResult($response->result), 'status' => $response->status];
+    }
+
+    private function parseResult($input)
+    {
+        $input = html_entity_decode($input, ENT_QUOTES);
+        $output = '';
+        $pointer = 0;
+        $lvl_i = 0;
+        $lvl_b = 0;
+        $lvl_i_inner = 0;
+        $lvl_b_inner = 0;
+        foreach (preg_split('//u', $input, -1, PREG_SPLIT_NO_EMPTY) as $chars__value) {
+            if ($pointer >= 3 && mb_substr($input, $pointer - 3, 3) === '<i>') {
+                $lvl_i_inner++;
+            }
+            if ($pointer >= 3 && mb_substr($input, $pointer - 3, 3) === '<b>') {
+                $lvl_b_inner++;
+            }
+            if ($pointer >= 4 && mb_substr($input, $pointer - 4, 4) === '</i>') {
+                $lvl_i--;
+            }
+            if ($pointer >= 4 && mb_substr($input, $pointer - 4, 4) === '</b>') {
+                $lvl_b--;
+            }
+            if (mb_substr($input, $pointer, 3) === '<i>') {
+                $lvl_i++;
+            }
+            if (mb_substr($input, $pointer, 3) === '<b>') {
+                $lvl_b++;
+            }
+            if (mb_substr($input, $pointer, 4) === '</i>') {
+                $lvl_i_inner--;
+            }
+            if (mb_substr($input, $pointer, 4) === '</b>') {
+                $lvl_b_inner--;
+            }
+            $pointer++;
+            if ($chars__value === ' ' && mb_strlen($output) > 0 && $output[mb_strlen($output) - 1] === ' ') {
+                continue;
+            }
+            if ($lvl_b_inner >= 1 || ($lvl_b === 0 && $lvl_i === 0)) {
+                $output .= $chars__value;
+            }
+        }
+        $output = trim($output);
+        return $output;
     }
 
     private function generateTkk()
@@ -161,8 +211,19 @@ class GoogleTranslate
         return $f0 . '.' . ($f0 ^ $n2);
     }
 }
-$faker = Factory::create();
+
 $gt = new GoogleTranslate();
-for ($i = 0; $i < 10; $i++) {
-    var_dump($gt->translate($faker->randomHtml(2, 3)));
+$faker = Factory::create('de_DE');
+$chars = 0;
+for ($i = 0; $i < 1000; $i++) {
+    $orig = $faker->realText(250);
+    $chars += mb_strlen($orig);
+    $response = $gt->translate($orig);
+    logStatus([$response['status'], $chars, $orig, $response['result']]);
+    echo $response['status'] . ': ' . $chars . PHP_EOL;
+}
+
+function logStatus($msg)
+{
+    file_put_contents('log.txt', date('Y-m-d H:i:s') . "\t" . implode("\t", $msg) . PHP_EOL, FILE_APPEND);
 }
