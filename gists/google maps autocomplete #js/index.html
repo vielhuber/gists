@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>.</title>
+        <script src="https://maps.googleapis.com/maps/api/js?key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx&libraries=places"></script>
+        <script>
+            google.maps.event.addDomListener(window, 'load', () => {
+                if (document.querySelector('.autocomplete') !== null) {
+                    document.querySelectorAll('.autocomplete').forEach(el => {
+                        let autocomplete;
+                        autocomplete = new google.maps.places.Autocomplete(el, {
+                            types: ['geocode']
+                        });
+                        autocomplete.setFields(['address_component']);
+                        autocomplete.addListener('place_changed', () => {
+                            let place = autocomplete.getPlace(),
+                                preset = [
+                                    {
+                                        addressType: 'route',
+                                        type: 'long_name',
+                                        label: 'Straße'
+                                    },
+                                    {
+                                        addressType: 'street_number',
+                                        type: 'short_name',
+                                        label: 'Hausnummer'
+                                    },
+                                    {
+                                        addressType: 'postal_code',
+                                        type: 'short_name',
+                                        label: 'PLZ'
+                                    },
+                                    {
+                                        addressType: 'locality',
+                                        type: 'long_name',
+                                        label: 'Ort'
+                                    },
+                                    {
+                                        addressType: 'administrative_area_level_1',
+                                        type: 'short_name',
+                                        label: 'Staat'
+                                    },
+                                    {
+                                        addressType: 'country',
+                                        type: 'long_name',
+                                        label: 'Land'
+                                    }
+                                ],
+                                data = [];
+                            for (let i = 0; i < place.address_components.length; i++) {
+                                let addressType = place.address_components[i].types[0];
+                                preset.forEach(preset__value => {
+                                    if (preset__value.addressType !== addressType) {
+                                        return;
+                                    }
+                                    data.push({
+                                        label: preset__value.label,
+                                        value: place.address_components[i][preset__value.type]
+                                    });
+                                });
+                            }
+                            el.nextElementSibling.value = data.map(i => i.label + ': ' + i.value).join('\n');
+                        });
+                    });
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <input class="autocomplete" type="text" />
+            <textarea></textarea>
+        </div>
+        <div>
+            <input class="autocomplete" type="text" />
+            <textarea></textarea>
+        </div>
+    </body>
+</html>
