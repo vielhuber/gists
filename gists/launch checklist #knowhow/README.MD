@@ -16,7 +16,7 @@
 - Archivseiten (Autoren, Tags, Datum, ...) deaktiviert
 - Testseiten / Dummyseiten gelöscht, Papierkorb gelöscht
 - Liveseiten sortiert in der Reihenfolge
-- Formulare funktionsfähig und scharf geschalten an Kunden
+- Alle Formulare: Empfänger und Absender prüfen, Versand nochmal prüfen, scharf schalten an Kunden
 - Copyright für alle Bilder vorhanden (am Bild oder im Impressum)
 - Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
 - Google Maps JS API Key hinterlegen
@@ -45,6 +45,7 @@
 - htaccess Rewrite Rules: Force https und force www oder non-www
 - Open Graph Social Sharing funktionsfähig
 - syncdb für Production -> Local und Testing -> Local vorhanden und 1x durchgeführt
+- flimsy lauffähig für Production und Testing
 - SSL-Zertifikat aktiv (forced)
 - Forced htaccess Umleitung von nicht-www auf www (oder umgekehrt)
 - Kein Mixed SSL Content vorhanden
