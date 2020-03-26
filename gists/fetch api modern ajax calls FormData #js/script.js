@@ -43,7 +43,7 @@ let form = document.querySelector('form');
 fetch(
   form.getAttribute('action'), {
     method: form.getAttribute('method'),
-    body: new URLSearchParams(new FormData(form)), // be aware: only new FormData sets the header automatically to multipart; so be have to wrap it in URLSearchParams
+    body: new URLSearchParams(new FormData(form)), // be aware: only new FormData sets the header automatically to multipart; so we have to wrap it in URLSearchParams
     //headers: { 'Content-Type': 'application/x-www-form-urlencoded' } // you don't need this line because it gets automatically set because of URLSearchParams
   })
   .then(v=>v).catch(v=>v).then(data => { console.log(data); }); 
