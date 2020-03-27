@@ -1,10 +1,10 @@
-$(document).ready(function()
-                  {
-  if( $('.article .article-inner-border table').length > 0 )
+document.addEventListener('DOMContentLoaded', () => {
+  if( document.querySelector('table') !== null )
   {
-    $('.article .article-inner-border table').each(function()
-                                                   {
-      $(this).wrap('<div class="responsive-table-container"></div>');
-    });
+    document.querySelectorAll('table').forEach((el) => {
+        let wrap = new DOMParser().parseFromString('<div class="responsive-table-container"></div>', 'text/html').body.childNodes[0];
+        el.parentNode.insertBefore(wrap, el.nextSibling);
+        wrap.appendChild(el);      
+    })
   }
 });

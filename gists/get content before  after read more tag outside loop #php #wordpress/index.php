@@ -26,6 +26,8 @@ function wp_split_more($content, $type, $more_html = null)
     $return['before'] = str_replace('<!-- /wp:paragraph -->', '', $return['before']);
     $return['before'] = str_replace('<!-- wp:more -->', '', $return['before']);
     $return['after'] = str_replace('<!-- /wp:more -->', '', $return['after']);
+    $return['after'] = str_replace('<!-- wp:paragraph -->', '', $return['after']);
+    $return['after'] = str_replace('<!-- /wp:paragraph -->', '', $return['after']);
     foreach ($return as $return__key => $return__value) {
         // remove whitespace
         $return[$return__key] = trim(preg_replace('/^[\s]*(.*)[\s]*$/', '\\1', $return[$return__key]));

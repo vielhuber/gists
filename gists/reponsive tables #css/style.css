@@ -1,20 +1,11 @@
-.responsive-table-container
-{
-	overflow-x:auto;
-  	width:100%;
-	margin:20px 0;
-	padding:20px 0;
+.responsive-table-container {
+    overflow-x: auto;
+    width: 100%;
+    margin: 30rem 0;
+    padding: 0;
 }
-.responsive-table-container table
-{
-	width:100%;
-	margin:0;
-	border-collapse: collapse;
-	border-top: 12px solid #ff7900;
-	border-bottom: 12px solid #dbdbdb;
-}
-.responsive-table-container table td
-{
-    border: 1px solid #dbdbdb;
-    padding: 10px 20px;
+.responsive-table-container table {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
