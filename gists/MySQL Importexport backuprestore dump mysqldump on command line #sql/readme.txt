@@ -12,6 +12,7 @@ cd C:\Program Files\MySQL\MySQL Server 5.6\bin
 
 // options of mysql
 --force: force import (ignore/skip errors)
+--default-character-set: always choose "utf8mb4"
 
 // options of mysqldump
 --skip-add-locks: don't surround statements with locks
@@ -29,6 +30,7 @@ cd C:\Program Files\MySQL\MySQL Server 5.6\bin
 --single-transaction: set this, if you don't have full access to lock tables
 --routines: export procedures and functions (this is false by default)
 --triggers: exportr triggers (this is true by default)
+--default-character-set: always choose "utf8mb4"
 
 // exclude data from specific table (but get schema)
 mysqldump --ignore-table=dbname.tblname dbname > dump.sql
