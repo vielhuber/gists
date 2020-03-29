@@ -90,7 +90,6 @@ cp -r ./subfolder/. .
 # copy contents of one folder to another folder (excluding one specific folder)
 rsync -a --info=progress2 ~/source/ ~/target --exclude excludedfolder
 
-
 # delete folder recursively
 rm -rf folderName
 
@@ -99,6 +98,10 @@ rm -rf foldername/* foldername/.*
 
 # get size of current folder
 du -hs
+
+# rename/move folder/file
+mv folder_old folder_new
+mv file_old file_new
 
 # move all elements in folder one level up (including dotfiles)
 cd folder

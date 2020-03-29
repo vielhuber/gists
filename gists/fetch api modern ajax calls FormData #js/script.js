@@ -16,7 +16,10 @@ fetch(
   // important: to check for status codes (like 404 or 500), check here if needed
   let data = response.json(),
       status = response.status;
-  return data;
+  if (status == 200 || status == 304) {
+   	return data; 
+  }
+  return { success: false, message: status };
 }).catch((error) => 
 {
 	// this does not fire on 404 or other status codes but on all js errors AND network outage
