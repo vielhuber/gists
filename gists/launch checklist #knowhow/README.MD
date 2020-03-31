@@ -36,6 +36,7 @@
 - WordPress Admin E-Mail-Adresse auf Kunden ändern
 - Passwortschutz für Testing aktiv, für Production inaktiv
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
+- Seite 1x komplett mit Screaming Frog durchprüfen: Passen Permalinks generell? Gibt es kaputte Seiten? Gibt es Broken Links
 
 ## POST-LAUNCH
 - Google Analytics / Google Tag Manager aktiviert und IP Anonymisierung aktiviert (Echtzeitdaten prüfen)
@@ -53,7 +54,7 @@
 - Caching aktiviert
 - Google Search Console aktiviert, Sitemap eingereicht oder initiale Indexierung beantragt
 - Rich Snippets geprüft und validiert
-- Seite 1x komplett mit Screaming Frog durchprüfen (Broken Links)
+- Seite 1x komplett mit Screaming Frog durchprüfen (nochmal Broken Links)
 - Google PageSpeed (web.dev) einmalig durchlaufen lassen und gröbste Fehler fixen
 - PHP-Version aktualisiert / geprüft
 - Jira Ticket abgehakt
