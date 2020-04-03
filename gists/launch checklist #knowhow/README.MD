@@ -1,4 +1,5 @@
 ## PRE-LAUNCH
+- Exakten Zeitpunkt planen: Softlaunch oder Hardlaunch? Kunden informieren, dass es zu Verzögerungen wegen DNS kommen kann
 - 301-Redirects bei Relaunch vorhanden
 - HTML-Validierung erfolgreich geprüft
 - XML-Sitemap vorhanden und aktiv und Einträge geprüft
@@ -33,12 +34,15 @@
 - reCAPTCHA registrieren
 - E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
 - socialfoo: Facebook Developers App Id eintragen
-- WordPress Admin E-Mail-Adresse auf Kunden ändern
+- WordPress Admin E-Mail-Adresse auf Kunden ändern(?)
 - Passwortschutz für Testing aktiv, für Production inaktiv
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
-- Seite 1x komplett mit Screaming Frog durchprüfen: Passen Permalinks generell? Gibt es kaputte Seiten? Gibt es Broken Links
+- Backend komplett abriegeln, damit sich Kunde nicht mehr einloggt
 
 ## POST-LAUNCH
+- 301 Redirects nochmal final testen
+- Kunde kontaktieren, damit er prüft, dass Kontaktformular alle bei ihm ankommen
+- Seite 1x komplett mit Screaming Frog durchprüfen: Passen Permalinks generell? Gibt es kaputte Seiten? Gibt es Broken Links
 - Google Analytics / Google Tag Manager aktiviert und IP Anonymisierung aktiviert (Echtzeitdaten prüfen)
 - WordPress: Werkzeuge > Website-Zustand prüfen
 - 404-Fehlerseite vorhanden / Status-Code geprüft
@@ -58,4 +62,5 @@
 - Google PageSpeed (web.dev) einmalig durchlaufen lassen und gröbste Fehler fixen
 - PHP-Version aktualisiert / geprüft
 - Jira Ticket abgehakt
+- Offizielles Angebot durchgeschaut, ob irgendetwas fehlt
 - Abrechnung geprüft und durchgeführt

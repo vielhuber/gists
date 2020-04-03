@@ -39,6 +39,12 @@ sudo su # runs a new shell as root (first sudo asks for your password and if you
 # cd and enter folder
 mkdir ~/folder && cd "$_"
 
+# clear file
+> file.txt
+
+# replace file
+echo "foo" > file.txt
+
 # append to file
 sed -i '$ a\some text' file.txt # unix
 sed -i '$ a\'$'\n'' some text' file.txt # universal

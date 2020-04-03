@@ -20,7 +20,9 @@ $DOMDocument->loadHTML(file_get_contents('tpl.html'));
 // we also add <meta http-equiv="content-type" content="text/html;charset=utf-8" /> got proper encoding (see below)
 $input = file_get_contents('tpl.html');
 $input = mb_convert_encoding($input, 'HTML-ENTITIES', 'UTF-8');
-$input = str_replace('<meta charset="utf-8"','<meta http-equiv="content-type" content="text/html;charset=utf-8" /><meta charset="utf-8"', $input);
+if (mb_strpos($html, '</head>') !== false) { $html = str_replace('</head>', '<!--remove--><meta http-equiv="Content-type" content="text/html; charset=utf-8" /><!--/remove--></head>', $html); }
+elseif (mb_strpos($html, '<body') !== false) { $html = str_replace('<body', '<!--remove--><head><meta http-equiv="content-type" content="text/html;charset=utf-8" /></head><!--/remove--><body', $html); }
+else { $html = '<!--remove--><head><meta http-equiv="content-type" content="text/html;charset=utf-8" /></head><!--/remove-->' . $html; }
 @$DOMDocument->loadHTML($input);
 ```
 
@@ -28,9 +30,14 @@ $input = str_replace('<meta charset="utf-8"','<meta http-equiv="content-type" co
 ```php
 $html = $DOMDocument->saveHTML();
 // domdocument converts all umlauts to html entities, revert that
-// this is bad when we use intentionally encoded code e.g. in <pre> tags; another option to prevent html entities (and leave everything intact)
+// $html = html_entity_decode($html); 
+// this method is bad when we use intentionally encoded code e.g. in <pre> tags; another option to prevent html entities (and leave everything intact)
 // is to add <meta http-equiv="content-type" content="text/html;charset=utf-8" /> (see above)
-$html = html_entity_decode($html); 
+// warning: this still encodes < to &gt; because < is invalid html!
+// undo above changes
+if (mb_strpos($html, '<!--remove-->') !== false && mb_strpos($html, '<!--/remove-->') !== false) {
+    $html = mb_substr($html, 0, mb_strpos($html, '<!--remove-->')) . mb_substr($html, mb_strpos($htmlModified, '<!--/remove-->') + mb_strlen('<!--/remove-->'));
+}
 ```
 
 ### get all nodes (including text nodes)

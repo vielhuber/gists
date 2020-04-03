@@ -84,6 +84,12 @@ public function findForPassport($identifier) {
     ->first();
 }
 
+// hide authentication from error log, edit app/Exceptions/Handler.php
+<?php
+protected $dontReport = [
+  /* ... */
+  \League\OAuth2\Server\Exception\OAuthServerException::class
+];
 
 
 // now we have fully setup laravel passport / oauth2
