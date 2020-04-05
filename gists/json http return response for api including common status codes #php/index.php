@@ -4,7 +4,7 @@
 201: Created (when a object is successfully created)
 301: Moved permanently
 302: Moved temporarily
-304: Not modified (cached)
+304: Not modified (cached) (this is like 200!)
 400: Bad request (malformed request syntax, invalid request message parameters, missing required fields, ...)
 401: Unauthorized (Auth missing)
 403: Forbidden (Auth is available but not sufficient)
