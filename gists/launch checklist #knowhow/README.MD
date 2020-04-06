@@ -22,7 +22,7 @@
 - Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
 - Google Maps JS API Key hinterlegen
 - Alle Bilder komprimiert
-- Grundlegende Meta-Tags gesetzt (prüfen, ob Startseite diese ausspielt)
+- Grundlegende Meta-Tags gesetzt (Titel+Description) (prüfen, ob Startseite diese ausspielt)
 - JavaScript Fehler in Console überprüft
 - console.log Ausgaben deaktiviert
 - Branch in master gemergt
