@@ -4,10 +4,14 @@
 <html>...</html>
 ```
 
-### code for rtl languages (no css required)
+### code for rtl languages
 
 ```html
 <html dir="rtl">...</html>
+```
+
+```css
+h1 { text-align:start; } /* always "start" instead of "left" */
 ```
 
 ### list of language codes with ltr

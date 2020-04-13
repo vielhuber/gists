@@ -104,6 +104,19 @@ add_action('admin_menu', function () {
       });
     }
 });
+// add gutenberg sidebar metabox
+add_action('add_meta_boxes', function () {
+  add_meta_box(
+    'plugin-box-1',
+    'Plugin box 1',
+    function ($post) {
+      echo $post->ID;
+    },
+    ['post','page'],
+    'side',
+    'high'
+  );
+});
 // add menu item (with icon) to top bar
 add_action(
   'admin_bar_menu',
