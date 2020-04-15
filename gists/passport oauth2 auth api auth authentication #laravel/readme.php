@@ -84,6 +84,21 @@ public function findForPassport($identifier) {
     ->first();
 }
 
+// to allow "login on behalf of", add this to User.php
+<?php
+public function validateForPassportPasswordGrant($password) {
+  if (Input::get('login_on_behalf_of_access_token') !== null) {
+    $http = new \GuzzleHttp\Client();
+    $response = $http->get(url('/') . '/api/user', ['headers' => ['Authorization' => Input::get('login_on_behalf_of_access_token')], 'http_errors' => false]);
+    if ($response->getStatusCode() != 200) { return false; }
+    $user_id = json_decode((string) $response->getBody())->data->id;
+    Auth::login(User::find($user_id));
+    // now check if the current user is able to login as another user based on custom rules
+    return Auth::user()->id == 42;
+  }
+  return Hash::check($password, $this->password);
+}  
+
 // hide authentication from error log, edit app/Exceptions/Handler.php
 <?php
 protected $dontReport = [
@@ -126,7 +141,8 @@ class ApiController extends Controller
         return $this->proxy([
             'grant_type' => 'password',
             'username' => $request->input('username'),
-            'password' => $request->input('password')
+            'password' => $request->input('password'),
+          	'login_on_behalf_of_access_token' => $request->header('Authorization') // only needed if you want to enable "login on behalf of"
         ]);
     }
     public function refresh(Request $request)
@@ -210,6 +226,13 @@ Authorization = Bearer TOKEN
 Method: POST
 URL: http://laravel.local/api/logout
 Headers:
+Authorization = Bearer TOKEN
+  
+Method: POST
+URL: http://laravel.local/api/login
+Body (form-data):
+username: other@vielhuber.de
+password: 
 Authorization = Bearer TOKEN
 
 // e.g. with laravel itself
@@ -394,6 +417,33 @@ Route::get('/test', function() {
                 }
             }
             request.send(JSON.stringify({ 'username': username, 'password': password }));
+        }
+        function apiLoginAs(username, complete = null, error = null) {
+            var request = new XMLHttpRequest();
+            request.open('POST', window.location.protocol + '//' + window.location.host + '/api/login', true);
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            request.setRequestHeader('Authorization', 'Bearer ' + hlp.cookieGet('accessToken'));
+            request.onreadystatechange = function() {
+                if (request.readyState < 4) {
+                    return;
+                } else if (request.status != 200) {
+                    if (error !== null) {
+                        error(request);
+                    }
+                } else {
+                    hlp.cookieSet('accessToken', JSON.parse(request.responseText)['access_token']);
+                    if (complete !== null) {
+                        complete();
+                    }
+                }
+            };
+            request.send(
+                JSON.stringify({
+                    username: username,
+                    password: ''
+                })
+            );
         }
 
 
