@@ -144,6 +144,11 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo nano /etc/php/custom.ini```
   - ```sendmail_path = "/usr/sbin/sendmail -t -i"```
 
+#### php error logging
+- ```touch /var/log/php-error.log```
+- ```chmod +x /var/log/php-error.log```
+- in combination with ```error_log``` in php.ini logging now works for both php fpm (this is always the case for specific versions) and php as an apache module (this is always the case for general version)
+
 #### shared php.ini configuration
 - ```sudo nano /etc/php/custom.ini```
 ```
@@ -158,6 +163,7 @@ realpath_cache_size = 4M
 allow_url_include = On
 date.timezone = 'Europe/Berlin'
 display_errors = On
+error_log = /var/log/php-error.log
 #error_reporting = E_ALL & ~E_NOTICE
 error_reporting = E_ALL
 phar.readonly = 0
