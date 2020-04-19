@@ -1,6 +1,6 @@
 <?php
-$username = '123';
-$password = '456';
+$username = '42';
+$password = '42';
 
 $content = "";
 $content .= 'AuthName "Interner Bereich"'."\n";
