@@ -1,18 +1,5 @@
 <?php
-$handle = fopen('test.txt', 'w');
-fwrite($handle, 'foo');
-fclose($handle);
-
-$handle = fopen('test.txt', 'r');
-$contents = fread($handle, filesize('test.txt')); 
-fclose($handle);
-print_r($contents); // foo
-
-$handle = fopen('test.txt', 'w');
-fwrite($handle, 'foobar');
-fclose($handle);
-
-$handle = fopen('test.txt', 'r');
-$contents = fread($handle, filesize('test.txt')); 
-fclose($handle);
-print_r($contents); // foo
+function w($m) { $h = fopen('f', 'w'); fwrite($h, $m); fclose($h); }
+function r() { $h = fopen('f', 'r'); $c = fread($h, filesize('f')); fclose($h); echo $c; }
+w('foo'); r(); // foo
+w('foobar'); r(); // foo

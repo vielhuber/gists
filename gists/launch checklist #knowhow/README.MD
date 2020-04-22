@@ -29,6 +29,7 @@
 - Favicon vorhanden
 - Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
 - Cross-Browser-Check (inkl. Responsive) durchgeführt
+- browser-update.org integriert
 - WordPress Zugänge (personengebunden, also pro Person einen Account) ausstellen
 - Kontaktformulare durch Captcha (reCAPTCHA) oder alternativ Honeypot schützen
 - reCAPTCHA registrieren
