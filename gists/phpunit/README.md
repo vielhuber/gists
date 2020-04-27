@@ -38,3 +38,14 @@ if you want to use traits / class inheritance in phpunit, simply do the followin
 - do a ```composer dump-autoload```
 - add ```namespace Tests;``` on top of each test file
 - now you can use classes from other classes (that are not tests)
+
+#### failed tests
+
+- with `stopOnFailure="false"` in `phpunit.xml`, phpunit does not stop if a test fails
+- however if inside a single test multiple assertions are made, phpunit also stops on the first wrong assertion (even with this setting)
+- to overcome this, collect the failures manually and make a dummy assertion like `$this->assertTrue(false);` at the end
+
+#### logging
+
+- phpunit does not show `echo` statements
+- instead, use this: `fwrite(STDERR, print_r($msg . PHP_EOL, true));`
