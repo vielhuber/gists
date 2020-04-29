@@ -49,3 +49,8 @@ if you want to use traits / class inheritance in phpunit, simply do the followin
 
 - phpunit does not show `echo` statements
 - instead, use this: `fwrite(STDERR, print_r($msg . PHP_EOL, true));`
+
+#### variables
+
+- if you make changes to globals like ```$_SERVER```, these changes are not resetted after a test has finished
+- do reach some form of isolation, use the option ```backupGlobals="true"``` (now all global variables are reset before each test)

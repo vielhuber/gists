@@ -4,6 +4,7 @@
     colors="true"
     verbose="true"
     stopOnFailure="false"
+    backupGlobals="false"
 >
     <testsuites>
         <testsuite

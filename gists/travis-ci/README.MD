@@ -19,4 +19,5 @@ script: ./vendor/bin/phpunit
 ```
 
 - push with new version tag to github
+- add a badge to README.MD: [![Build Status](https://travis-ci.org/vielhuber/project.svg?branch=master)](https://travis-ci.org/vielhuber/project)
 - enjoy
