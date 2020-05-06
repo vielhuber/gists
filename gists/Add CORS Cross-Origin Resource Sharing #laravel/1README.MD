@@ -1,0 +1,1 @@
+This is obsolete for laravel >= 7

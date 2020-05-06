@@ -1,5 +1,6 @@
 <template>
     <div class="component">
+      	<!-- naming convention: always use "app-"-prefix do prevent conflicts with native dom elements -->
         <app-other-component></app-other-component>
         <ul>
             <li v-for="ninja in ninjas">{{ ninja }}</li>

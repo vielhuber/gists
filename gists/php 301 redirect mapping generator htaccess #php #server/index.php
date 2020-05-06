@@ -7,8 +7,8 @@ $config = [
     'skip_first_line' => false,
     'follow_redirects' => false,
     'domains' => [
-        'old' => 'tld.de',
-        'new' => 'www.tld.de',
+        'old' => 'tld.com',
+        'new' => 'tld.de',
         'test' => 'tld.dev'
     ]
 ];

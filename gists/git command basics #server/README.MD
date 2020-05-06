@@ -296,6 +296,10 @@ Usage: git acp
 - git branch -m new-name
 - git push origin :old-name new-name
 - git push origin -u new-name
+- Now your local and remote branch is OK, but other colleagues don't see the new branch. So they have to do:
+  - git branch -d old-name
+  - git remote update origin --prune
+  - git pull
 
 ## pull request
 #### make a pull request on github (for an external project), go to github.com to the repository you want to make a pull request, click "Fork"
