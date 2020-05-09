@@ -84,6 +84,9 @@ sed -e 's/ /\\\n/g' # mac os
 # list all files in folder (in [h]uman readable format, list [a]ll, [l]ist details, [tr] order by time)
 ls -haltr
 
+# copy file
+cp file1 file2
+
 # copy contents of one folder to another folder (recursively)
 cp -r /folder1/. folder2/
 

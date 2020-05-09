@@ -398,6 +398,10 @@ Usage: git acp
 - git commit --amend -CHEAD
 - git push origin HEAD
 
+### change commit message of last pushed commit
+- git commit --amend -m "New commit message"
+- git push --force
+
 ## make a release of current development branch and push it on master
 
 ### PRODUCTION
