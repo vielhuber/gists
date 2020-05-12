@@ -14,6 +14,11 @@
 h1 { text-align:start; } /* always "start" instead of "left" */
 ```
 
+### reset rtl for some specific dom nodes
+```css
+.foo { direction: ltr; }
+```
+
 ### list of language codes with ltr
 - ae
 - ar
