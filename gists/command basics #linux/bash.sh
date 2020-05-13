@@ -199,13 +199,18 @@ zip -r "backup-$(date +"%Y-%m-%d").zip"
 # zip file and exclude folders and files
 zip -r file.zip . -x \*"vendor/"\* -x \*"node_modules/"\* -x \*".git/"\* -x \*"filename-in-any-folder"\* -x "explicit-filename-in-root-folder" -x "folder/explicit-filename"
 
+# zip and log errors (files that are not readable)
+zip -r file.zip . &>> file.zip.log
+cat file.zip.log # full log
+grep "zip warning" file.zip.log # error log
+
 # zip all files found with find (preserving directory structure)
 find . -name 'foo' -print | zip file.zip -@
 
-# zip folder with only certail filetype
+# zip folder with only certain filetype
 zip -r file.zip path/to/folder/ -i '*.php' '*.html'
 
-# zip folder with only certail filetype (case insensitive)
+# zip folder with only certain filetype (case insensitive)
 find . \( -iname '*.jpg' -o -iname '*.png' \) -print | zip file.zip -@
 
 # delete file with shifted date (for rotation)
