@@ -3,6 +3,7 @@
 - there are two concepts for responsive images
 - <img srcset ... />: give the browser alternative images for smaller resolutions, the browser chooses the best fit (based on size, bandwidth, ...)
 - <picture ... />: best for fine-grained manipulation, alternative image formats and showing alternative images on mobile reliably
+- <div ... />: simple and effective, good for showing compressed versions for background images
 
 ## srcset
 
@@ -129,5 +130,38 @@
       <source media="(max-width: 1200px)" srcset="https://via.placeholder.com/1200x400.png?text=medium">
       <img src="https://via.placeholder.com/1920x200.png?text=large" alt="" />
     </picture>
+</body></html>
+```
+
+## media queries
+
+### example
+
+```html
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" /><title>.</title><style>
+    .img {
+        width:100%;
+        height:0;
+        padding-bottom:20%;
+        display:block;
+        float:left;
+        background-size:cover;
+        background-repeat:no-repeat;
+        background-position:center;
+        background-image:url('https://via.placeholder.com/1920x200.png?text=large');
+    }
+    @media screen and (max-width: 1200px) {
+        .img {
+            background-image:url('https://via.placeholder.com/1200x400.png?text=medium');
+        }
+    }
+    @media screen and (max-width: 800px) {
+        .img {
+            background-image:url('https://via.placeholder.com/800x800.png?text=small');
+        }
+    }
+</style></head>
+<body>
+    <div class="img"></div>
 </body></html>
 ```
