@@ -39,6 +39,7 @@
 - Passwortschutz für Testing aktiv, für Production inaktiv
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
 - Backend komplett abriegeln, damit sich Kunde nicht mehr einloggt
+- Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
 
 ## POST-LAUNCH
 - 301 Redirects nochmal final testen
