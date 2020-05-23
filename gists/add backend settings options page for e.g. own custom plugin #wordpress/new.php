@@ -30,6 +30,7 @@ add_action('admin_menu', function () {
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
               	check_admin_referer('my-plugin-submit'); // check nonce
                 $settings = @$_POST['my_plugin'];
+              	$settings = stripslashes_deep($settings); // remove slashes
               	// always sanitize, escape, validate here, otherwise your plugin will be rejected!
                 $settings = __array_map_deep($settings, function ($settings__value) {
                   return sanitize_textarea_field($settings__value);
