@@ -175,6 +175,36 @@ add_action(
             }
         }
     });
+    /* open media library and pick file */
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('click', e => {
+          let el = e.target.closest('.file-upload');
+          if (el) {
+              let image_frame;
+              if (image_frame) {
+                  image_frame.open();
+              }
+              image_frame = wp.media({
+                  title: 'Select Media',
+                  multiple: false,
+                  button: { text: 'Insert' },
+                  library: {
+                      type: 'image'
+                  }
+              });
+              image_frame.on('close', function () {
+                  image_frame
+                      .state()
+                      .get('selection')
+                      .forEach(attachment => {
+                          console.log(attachment.attributes.url);
+                      });
+              });
+              image_frame.open();
+              e.preventDefault();
+          }
+      });
+    });
     </script>
     <?php
   },
