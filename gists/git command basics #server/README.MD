@@ -328,6 +328,16 @@ Usage: git acp
 #### how to merge without a commit
 - git merge branch --no-commit --no-ff
 
+#### put together all commits from branch in one single commit (good for code reviews)
+##### in master
+- git checkout master
+- git merge --squash special-branch
+
+##### in another branch
+- git checkout master # branch to compare to
+- git checkout -b special-branch--squashed
+- git merge --squash special-branch
+
 
 ## conflicts
 
