@@ -41,6 +41,7 @@ mkdir ~/folder && cd "$_"
 
 # clear file
 > file.txt
+echo "" > file.txt
 
 # replace file
 echo "foo" > file.txt

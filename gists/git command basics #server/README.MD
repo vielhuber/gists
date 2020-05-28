@@ -100,21 +100,23 @@ if gitignore is not working for a specific file/folder (this does not delete the
 #### see latest diffs / changes
 - git diff
 
-#### reset master to specific commit (forget all changes); replace a0d3fe6 with the ID of the commit you want to reset to
-- option 1 (with rewriting history)
+#### undo commit that has been pushed
+- replace a0d3fe6 with the ID of the commit you want to undo: `git log --oneline -n 10`
+- option 1 (with rewriting history, recommended way)
+  - locally
+    - git revert --no-commit a0d3fe6
+    	(if theres some error about cherry picking, do: git cherry-pick --abort)
+    - git commit -m "Reverted a0d3fe6"
+    - git push origin HEAD
+  - remotely (on all clients)
+    - git pull
+- option 2 (without rewriting history, this resets master to specific commit (forget all changes up until now))
   - locally
     - git reset --hard a0d3fe6
     - git push -f origin master
   - remotely (on all clients)
     - git fetch origin
     - git reset --hard origin/master
-- option 2 (without rewriting history)
-  - locally
-    - git revert --no-commit a0d3fe6..HEAD
-    - git commit
-    - git push origin HEAD
-  - remotely (on all clients)
-    - git pull
 
 #### get current commit hash (outputs: 6e559cb)
 - git rev-parse --short HEAD
@@ -331,7 +333,9 @@ Usage: git acp
 #### put together all commits from branch in one single commit (good for code reviews)
 ##### in master
 - git checkout master
-- git merge --squash special-branch
+- git merge --squash feature/XX-XX
+- git commit -m "feature/XX-XX"
+- git push origin HEAD
 
 ##### in another branch
 - git checkout master # branch to compare to
