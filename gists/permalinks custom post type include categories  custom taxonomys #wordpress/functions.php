@@ -5,19 +5,24 @@
 // https://tld.com/dummy/category => taxonomy-dummykategorie.php
 // https://tld.com/dummy/category/item => single-dummy.php
 
+register_post_type(
+    'dummy',
+    [
+        'public' => true, 
+        'label' => 'dummy',
+        'rewrite' => [ 'slug' => 'dummy/%dummykategorie%', 'with_front' => false ],
+        'has_archive' => 'dummy',
+    ]
+);
 register_taxonomy(
     'dummykategorie',
     'dummy', // name of the custom post type
-    array(
-        'rewrite' => array( 'slug' => 'dummykategorie', 'with_front' => false ),
-    )
-);
-register_post_type(
-    'dummy',
-    array(
-        'rewrite' => array( 'slug' => 'dummy/%dummykategorie%', 'with_front' => false ),
-        'has_archive' => 'dummy',
-    )
+    [
+        'public' => true,
+        'label' => 'dummykategorie',
+        'rewrite' => [ 'slug' => 'dummykategorie', 'with_front' => false ],
+        'hierarchical' => true
+    ]
 );
 add_filter( 'post_type_link', function( $url, $post ) {
     if( isset($post->post_type) && $post->post_type == 'dummy' ){
@@ -34,4 +39,6 @@ add_filter('term_link', function($url, $term) {
     }
     return $url;
 }, 10, 3);
-// save permalinks again
+
+// save permalinks
+// create a page with slug "dummy"
