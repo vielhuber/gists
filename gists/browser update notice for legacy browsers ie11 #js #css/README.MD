@@ -5,12 +5,12 @@ npm install browser-update --save
 ```js
 var browserUpdate = require('browser-update');
 browserUpdate({
-    required: { e: -3, f: -3, o: -3, s: -1, c: -3 },
+    required: { i: 99, e: 80, f: -4, o: -4, s: -4, c: -4 },
     reminder: 0, // always show (if no user interaction)
     reminderClosed: 1, // show after 1 hour again (after user interaction)
-    insecure: true,
+    insecure: false,
     api: 2020.04,
-    test: true,
+    test: false, // test with true or with #test-bu
     shift_page_down: false,
     no_permanent_hide: true,
     newwindow: false,
