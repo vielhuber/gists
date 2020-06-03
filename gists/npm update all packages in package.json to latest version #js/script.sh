@@ -1,5 +1,8 @@
 # installation
 npm i -g npm-check-updates
+# update
+npm update -g npm-check-updates
+
 # check
 npm-check-updates
 # update
