@@ -36,7 +36,7 @@
 - E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
 - socialfoo: Facebook Developers App Id eintragen
 - WordPress Admin E-Mail-Adresse auf Kunden ändern(?)
-- Passwortschutz für Testing aktiv, für Production inaktiv
+- Passwortschutz: htaccess/htpasswd im Einsatz (für Testing aktiv, für Production inaktiv)
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
 - Backend komplett abriegeln, damit sich Kunde nicht mehr einloggt
 - Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
