@@ -98,6 +98,15 @@ $DOMXpath->query('.//node()[normalize-space()]', $node); // exclude whitespace t
 $DOMXpath->evaluate('count(./node())', $node);
 $DOMXpath->evaluate('count(./node()[normalize-space()])', $node); // exclude whitespace text nodes
 ```
+
+### get attributes of node beginning with "data-"
+```php
+$attrs = $this->DOMXpath->query('./@*[starts-with(name(),"data-")]', $node);
+if (!empty($attrs)) {
+    echo $attrs__value->nodeName;
+    echo $attrs__value->nodeValue;
+}
+```
  
 ### get dom attribute
 ```php

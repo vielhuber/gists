@@ -1,0 +1,4 @@
+div {
+ 	height:100vh; /* this does not work on every device */
+  	width:100vh;
+}
