@@ -28,8 +28,9 @@
 #### run
 ```
 phpunit
-phpunit --filter testUpdateFailure # run a specific method (in all tests)
-phpunit --filter testUpdateFailure tests/Feature/MenuTest # run a specific method (in specific test)
+phpunit --filter "/::testUpdateFailure$/" # run a specific method (in all tests)
+phpunit --filter testUpdateFailure # run a specific method (in all tests) beginning with testUpdateFailure
+phpunit --filter "/::testUpdateFailure$/" tests/Feature/MenuTest # run a specific method (in specific test)
 ```
 
 #### psr4
