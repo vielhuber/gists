@@ -1,0 +1,3 @@
+- json files always have priority in the frontend.
+- sync is displayed if the json is more recent than the database.
+- in the backend you see an image of the database (not the json).
