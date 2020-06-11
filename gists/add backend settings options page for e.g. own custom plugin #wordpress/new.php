@@ -98,10 +98,10 @@ add_action('admin_menu', function () {
     $menus[] = $submenu;
     foreach ($menus as $menus__value) {
       add_action('admin_print_styles-' . $menus__value, function () {
-        wp_enqueue_style('gtbabel-css', plugins_url('gtbabel.css', __FILE__));
+        wp_enqueue_style('my-plugin-css', plugins_url('my-plugin.css', __FILE__));
       });
       add_action('admin_print_scripts-' . $menus__value, function () {
-        wp_enqueue_script('gtbabel-js', plugins_url('gtbabel.js', __FILE__));
+        wp_enqueue_script('my-plugin-js', plugins_url('my-plugin.js', __FILE__));
       });
     }
 });
@@ -126,7 +126,7 @@ add_action(
       'id' => 'my-plugin-item',
       'parent' => null,
       'group' => null,
-      'title' => '<span class="ab-icon"></span>' . __('My Plugin Item', 'gtbabel-plugin'),
+      'title' => '<span class="ab-icon"></span>' . __('My Plugin Item', 'my-plugin'),
       'href' => admin_url('admin.php?page=my-plugin'),
       'meta' => ['target' => '_blank']
     ]);
