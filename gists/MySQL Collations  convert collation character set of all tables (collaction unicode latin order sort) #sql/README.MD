@@ -14,22 +14,22 @@
 
 ### to convert a database (without tables and columns)
 ```sql
-ALTER DATABASE database_name CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 ```
 
 ### to convert a table (not columns)
 ```sql
-ALTER TABLE tablename COLLATE utf8_general_ci
+ALTER TABLE tablename COLLATE utf8mb4_unicode_ci
 ```
 
 ### to convert a table and columns
 ```sql
-ALTER TABLE tablename CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci
+ALTER TABLE tablename CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ```
 
 ### to convert all tables (without columns)
 ```sql
-SELECT CONCAT("ALTER TABLE ", TABLE_NAME," COLLATE utf8_general_ci;") AS ExecuteTheString
+SELECT CONCAT("ALTER TABLE ", TABLE_NAME," COLLATE utf8mb4_unicode_ci;") AS ExecuteTheString
 FROM INFORMATION_SCHEMA.TABLES
 WHERE TABLE_SCHEMA="dbname"
 AND TABLE_TYPE="BASE TABLE"
@@ -37,7 +37,7 @@ AND TABLE_TYPE="BASE TABLE"
 
 ### to convert all tables and columns
 ```sql
-SELECT CONCAT("ALTER TABLE ", TABLE_NAME," CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;") AS ExecuteTheString
+SELECT CONCAT("ALTER TABLE ", TABLE_NAME," CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;") AS ExecuteTheString
 FROM INFORMATION_SCHEMA.TABLES
 WHERE TABLE_SCHEMA="dbname"
 AND TABLE_TYPE="BASE TABLE"
