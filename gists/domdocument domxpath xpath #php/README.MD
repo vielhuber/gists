@@ -66,6 +66,11 @@ $DOMXpath->query('/html/body//*[@id="root")]');
 ```php
 $DOMXpath->query('/html/body//input[@placeholder]');
 ```
+
+### attribute selector (key wildcard)
+```php
+$DOMXpath->query('/html/body//@*[starts-with(name(), \'data-\')]/parent::*'');
+```
  
 ### check if is text node
 ```php
@@ -148,6 +153,13 @@ if ($parent->hasChildNodes()) {
 } else {
     $parent->appendChild($child);
 }
+```
+
+### get outer html of node
+```php
+$doc = new \DOMDocument();
+$doc->appendChild($doc->importNode($node, true));
+echo $doc->saveHTML();
 ```
 
 ### get inner html of node
