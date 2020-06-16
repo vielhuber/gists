@@ -40,6 +40,8 @@ class GoogleTranslate
 
     private function parseResult($input)
     {
+        // google sometimes surrounds the translation with <i> and <b> tags
+        // discard the (outer) <i>-tags and take the content of the <b>-tags
         $input = html_entity_decode($input, ENT_QUOTES);
         $output = '';
         $pointer = 0;
@@ -73,7 +75,7 @@ class GoogleTranslate
                 $lvl_b_inner--;
             }
             $pointer++;
-            if ($chars__value === ' ' && mb_strlen($output) > 0 && $output[mb_strlen($output) - 1] === ' ') {
+            if ($chars__value === ' ' && mb_strlen($output) > 0 && mb_substr($output, -1) === ' ') {
                 continue;
             }
             if ($lvl_b_inner >= 1 || ($lvl_b === 0 && $lvl_i === 0)) {
