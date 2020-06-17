@@ -180,8 +180,9 @@ opcache.validate_timestamps=1 # we set this to 1 (so that we can set revalidate_
 opcache.revalidate_freq=2
 
 [XDebug]
-xdebug.remote_enable = 1
-xdebug.remote_autostart = 1
+xdebug.remote_enable = 0
+xdebug.remote_autostart = 0
+xdebug.profiler_enable = 0
 xdebug.max_nesting_level = 10000
 xdebug.var_display_max_children= -1
 xdebug.var_display_max_data = -1

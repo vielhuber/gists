@@ -216,6 +216,10 @@ Usage: git acp
 
 ## branches
 
+### tl;dr
+- git checkout -b branch-name
+- git push --set-upstream origin branch-name
+
 ### pull a branch from remote (from branch-name remote to branch-name local)
 - git fetch origin branch-name:branch-name
 
