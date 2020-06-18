@@ -249,6 +249,18 @@ xdebug.var_display_max_depth = -1
 - ```sudo pip3 --version```
 - ```cd /usr/bin && sudo rm python && ln -s ./python3 ./python``` (currently not active)
 
+#### blackfire.io php debugger
+
+- ```wget -q -O - https://packages.blackfire.io/gpg.key | sudo apt-key add -```
+- ```echo "deb http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list```
+- ```sudo apt update```
+- ```sudo apt install blackfire-agent```
+- ```sudo blackfire-agent --register --server-id=xxx --server-token=xxx``` (see blackfire.io)
+- ```sudo /etc/init.d/blackfire-agent restart```
+- ```sudo apt install blackfire-php```
+- ```blackfire config --client-id=xxx --client-token=xxx``` (see blackfire.io)
+- ```blackfire run ./vendor/bin/phpunit```
+
 #### git
 - ```sudo apt-get install git```
 - ```git config --global core.filemode false```
