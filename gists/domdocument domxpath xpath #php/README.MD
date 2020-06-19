@@ -67,9 +67,14 @@ $DOMXpath->query('/html/body//*[@id="root")]');
 $DOMXpath->query('/html/body//input[@placeholder]');
 ```
 
+### attribute value selector
+```php
+$DOMXpath->query('/html/body//a[starts-with(@href, 'tel:')]);
+```
+
 ### attribute selector (key wildcard)
 ```php
-$DOMXpath->query('/html/body//@*[starts-with(name(), \'data-\')]/parent::*'');
+$DOMXpath->query('/html/body//@*[starts-with(name(), \'data-\')]/parent::*');
 ```
  
 ### check if is text node
