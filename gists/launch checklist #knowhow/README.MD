@@ -9,6 +9,7 @@
 - git auf Production, Testing und Local auf demselben Stand
 - Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
 - Alle CMS Updates (WordPress) installiert
+- WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
 - RSS-Feed vorhanden und funktional
 - Impressum + Datenschutzseite vorhanden und gepflegt
 - Google Analytics Opt Out Link gesetzt und funktional
