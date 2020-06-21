@@ -2,7 +2,7 @@ let instance = null;
 
 export default class Example {
     constructor() {
-      	/* this is called "the singleton pattern"
+      	/* this is called "the singleton pattern" */
         if (!instance) {
             instance = this;
         }
