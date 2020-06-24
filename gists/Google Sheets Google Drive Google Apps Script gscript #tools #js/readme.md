@@ -29,6 +29,13 @@
 =WENN(LÄNGE(MONAT(EDATUM(HEUTE();(ZEILE(A2)-1))))<2;"0";"")&MONAT(EDATUM(HEUTE();(ZEILE(A2)-1)))&"/"&JAHR(EDATUM(HEUTE();(ZEILE(A2)-1)))
 ```
 
+#### auto date ranges (F1 = start date, F2 = days in future)
+```
+=ARRAYFORMULA(WENN((DATWERT($F1)-1+ZEILE(A1:A))>HEUTE()+$F2;"";DATWERT($F1)-1+ZEILE(A1:A)))
+=UNIQUE(ARRAYFORMULA(WENN((DATWERT($F1)-1+ZEILE(B1:B))>HEUTE()+$F2;"";ISOWEEKNUM(DATWERT($F1)-1+ZEILE(B1:B))&"/"&JAHR(DATWERT($F1)-1+ZEILE(B1:B)))))
+=UNIQUE(ARRAYFORMULA(WENN((DATWERT($F1)-1+ZEILE(C1:C))>HEUTE()+$F2;"";JAHR(DATWERT($F1)-1+ZEILE(C1:C)))))
+```
+
 #### and/or multiplication of truth
 ```
 =WENN(UND(ODER(A1="ja";A1="nein");C1="foo");"foo";"bar")
