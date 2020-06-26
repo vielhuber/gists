@@ -1,5 +1,6 @@
 .class1 { & .class2 { } }                                                                =>     .class1 .class2 { }
 .class1 { &.class2 { } }                                                                 =>     .class1.class2 { }
+.class1 { .class2 { @at-root html.foo & { } } }                                          =>     .html.foo .class1 .class2 { }
 .class1 { &:hover { } }                                                                  =>     .class1:hover { }
 .class1 { &-left { } }                                                                   =>     .class1-left { }
 .class1 { $parent: &; .class2 { #{$parent}-left & } }                                    =>     .class2-left { }

@@ -1,7 +1,26 @@
+### installation
 ```bash
 npm install browser-update --save
 ```
 
+### notes
+- be aware: don't necessarily include browserUpdate into your build script (because it can crash on old browsers
+
+### embed in head (safest approach)
+```html
+<script> 
+var $buoop = { /* options see below */ }; 
+function $buo_f(){ 
+var e = document.createElement("script"); 
+e.src = "//browser-update.org/update.min.js"; 
+document.body.appendChild(e);
+};
+try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+catch(e){window.attachEvent("onload", $buo_f)}
+</script>
+```
+
+### directly embed in js
 ```js
 var browserUpdate = require('browser-update');
 browserUpdate({
@@ -13,6 +32,7 @@ browserUpdate({
     test: false, // test with true or with #test-bu
     shift_page_down: false,
     no_permanent_hide: true,
+  	noclose: true,
     newwindow: false,
     l: document.documentElement.getAttribute('lang'), // don't use browser lng but website lng
     url: 'https://bestvpn.org/outdatedbrowser/',
@@ -40,6 +60,8 @@ browserUpdate({
     }
 });
 ```
+
+### styling
 
 ```scss
 html.browserupdate--active {
