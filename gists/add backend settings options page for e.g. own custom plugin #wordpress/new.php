@@ -122,6 +122,10 @@ add_action('add_meta_boxes', function () {
 add_action(
   'admin_bar_menu',
   function ($admin_bar) {
+    // if you only want to show it on the frontend menu bar
+    if (is_admin()) {
+		return;
+	}
     $admin_bar->add_menu([
       'id' => 'my-plugin-item',
       'parent' => null,
