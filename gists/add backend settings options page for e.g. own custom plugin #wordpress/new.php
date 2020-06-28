@@ -126,6 +126,8 @@ add_action(
     if (is_admin()) {
 		return;
 	}
+    // add icon
+    echo '<style>#wpadminbar #wp-admin-bar-gtbabel-translate .ab-icon:before { content: "\f306"; top: 3px; }</style>';
     $admin_bar->add_menu([
       'id' => 'my-plugin-item',
       'parent' => null,
