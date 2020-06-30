@@ -41,7 +41,18 @@ formData = new FormData(document.querySelector('form'));
 formData.forEach((value, key) => { body[key] = value; });
 body = JSON.stringify(body);
 
-/* how to send a basic form with x-www-form-urlencoded with fetch */
+/* how to send manually a x-www-form-urlencoded with fetch */
+let data = new URLSearchParams();
+data.append('foo','bar');
+data.append('bar','baz');
+fetch(
+  'https://tld.com/foo', {
+    method: 'POST',
+    body: data
+  })
+  .then(v=>v).catch(v=>v).then(data => { console.log(data); }); 
+
+/* how to send an existing basic form with x-www-form-urlencoded with fetch */
 let form = document.querySelector('form');
 fetch(
   form.getAttribute('action'), {

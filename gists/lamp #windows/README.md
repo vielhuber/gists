@@ -105,11 +105,11 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo a2dissite 000-default.conf```
 
 #### ssl
-- create a real let's encrypt certificate via https://zerossl.com/free-ssl/
+- create a real let's encrypt certificate via https://gethttpsforfree.com/
 - Domain: *.local.vielhuber.de
 - DNS-verification via txt-record over DomainFactory
-- key.txt => C:\htdocs\lamp\ssl.key
-- crt.txt => C:\htdocs\lamp\ssl.cert
+- domain.key => C:\htdocs\lamp\ssl.key
+- domain.cert => C:\htdocs\lamp\ssl.cert
 
 #### postfix
 - ```sudo apt-get install postfix```
