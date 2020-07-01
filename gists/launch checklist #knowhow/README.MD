@@ -8,6 +8,8 @@
 - WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
 - git auf Production, Testing und Local auf demselben Stand
 - Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
+- Erweiterte Cookie-Leiste und/oder Zwei-Klick-Lösungen für Google Maps implementiert
+- YouTube-/Vimeo-Links GDPR tauglich gemacht
 - Alle CMS Updates (WordPress) installiert
 - WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
 - RSS-Feed vorhanden und funktional

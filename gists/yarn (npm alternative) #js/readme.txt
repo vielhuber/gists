@@ -17,6 +17,9 @@ yarn upgrade
 # upgrade specific package
 yarn upgrade gulp@4.0
 
+# see why a dependency is installed
+yarn why jest
+
 # remove package
 yarn remove gulp
 
