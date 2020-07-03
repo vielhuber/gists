@@ -4,7 +4,8 @@ npm install browser-update --save
 ```
 
 ### notes
-- be aware: don't necessarily include browserUpdate into your build script (because it can crash on old browsers
+- be aware: don't  include browserUpdate into your build script (because it can crash on old browsers)
+- always include it before all other scripts are included (on top of head)
 
 ### embed in head (safest approach)
 ```html
@@ -25,8 +26,8 @@ catch(e){window.attachEvent("onload", $buo_f)}
 var browserUpdate = require('browser-update');
 browserUpdate({
     required: { i: 99, e: 80, f: -4, o: -4, s: -4, c: -4 },
-    reminder: 0, // always show (if no user interaction)
-    reminderClosed: 1, // show after 1 hour again (after user interaction)
+    reminder: 0, // always show (if no user interaction); set this to 0 if you always show it
+    reminderClosed: 1, // show after 1 hour again (after user interaction); set this to 0 if you always show it
     insecure: false,
     api: 2020.04,
     test: false, // test with true or with #test-bu
