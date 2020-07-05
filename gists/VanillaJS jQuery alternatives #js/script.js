@@ -478,6 +478,15 @@ new DOMParser().parseFromString('<p>foo</p>', 'text/html').querySelectorAll('p')
 let tmp = document.createElement('div');
 tmp.innerHTML = '<p>foo</p>';
 tmp.querySelectorAll('p')
+// variant 3
+let html = '<p>foo</p>';
+let template = document.createElement('template');
+html = html.trim();
+template.innerHTML = html;
+let dom = template.content.firstChild;
+dom.querySelectorAll('p');
+
+
 
 
 
