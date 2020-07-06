@@ -87,14 +87,11 @@ if($node->nodeName === '#text') {}
 $node->tagName
 ```
  
-### get content of text value
+### get/set content of text value
 ```php
 $node->nodeValue
-```
-
-### get content of text value
-```php
 $node->textContent
+// difference: https://stackoverflow.com/questions/12380919/php-dom-textcontent-vs-nodevalue
 ```
 
 ### get children of node (recursively)

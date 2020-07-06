@@ -86,7 +86,7 @@ $('.selector').each(function() { });
 [].forEach.call(document.querySelectorAll('.selector'), function(el) { }); // querySelectorAll does not return an array!
 [].forEach.call(document.querySelectorAll('.selector'), (el) => { });
 document.querySelectorAll('.selector').forEach((el) => { }); // this does not work in IE
-
+for(let el of document.querySelectorAll('.selector')) {}; // this does not work in IE
 
 $('head')
 document.head
