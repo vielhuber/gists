@@ -3,7 +3,7 @@
 ```php
 $DOMDocument = new \DOMDocument();
 $DOMDocument->loadHTML('<div>foo</div>');
-$DOMXpath = new \DOMXpath($DOMDocument);
+$DOMXPath = new \DOMXPath($DOMDocument);
 ```
 
 ### load html file
@@ -42,39 +42,39 @@ if (mb_strpos($html, '<!--remove-->') !== false && mb_strpos($html, '<!--/remove
 
 ### get all nodes (including text nodes)
 ```php
-$DOMXpath->query('/html/body//node()');
-$DOMXpath->query('/html/body//node()[normalize-space()]'); // exclude whitespace text nodes
+$DOMXPath->query('/html/body//node()');
+$DOMXPath->query('/html/body//node()[normalize-space()]'); // exclude whitespace text nodes
 ```
 
 ### get text nodes only
 ```php
-$DOMXpath->query('/html/body//text()');
-$DOMXpath->query('/html/body//text()[normalize-space()]'); // exclude whitespace text nodes
+$DOMXPath->query('/html/body//text()');
+$DOMXPath->query('/html/body//text()[normalize-space()]'); // exclude whitespace text nodes
 ```
 
 ### class selector
 ```php
-$DOMXpath->query('/html/body//*[contains(concat(" ", normalize-space(@class), " "), " foo ")]');
+$DOMXPath->query('/html/body//*[contains(concat(" ", normalize-space(@class), " "), " foo ")]');
 ```
 
 ### id selector
 ```php
-$DOMXpath->query('/html/body//*[@id="root")]');
+$DOMXPath->query('/html/body//*[@id="root")]');
 ```
 
 ### attribute selector
 ```php
-$DOMXpath->query('/html/body//input[@placeholder]');
+$DOMXPath->query('/html/body//input[@placeholder]');
 ```
 
 ### attribute value selector
 ```php
-$DOMXpath->query('/html/body//a[starts-with(@href, 'tel:')]);
+$DOMXPath->query('/html/body//a[starts-with(@href, 'tel:')]);
 ```
 
 ### attribute selector (key wildcard)
 ```php
-$DOMXpath->query('/html/body//@*[starts-with(name(), \'data-\')]/parent::*');
+$DOMXPath->query('/html/body//@*[starts-with(name(), \'data-\')]/parent::*');
 ```
  
 ### check if is text node
@@ -96,19 +96,19 @@ $node->textContent
 
 ### get children of node (recursively)
 ```php
-$DOMXpath->query('.//node()', $node);
-$DOMXpath->query('.//node()[normalize-space()]', $node); // exclude whitespace text nodes
+$DOMXPath->query('.//node()', $node);
+$DOMXPath->query('.//node()[normalize-space()]', $node); // exclude whitespace text nodes
 ```
  
 ### get children count of node (recursively)
 ```php
-$DOMXpath->evaluate('count(./node())', $node);
-$DOMXpath->evaluate('count(./node()[normalize-space()])', $node); // exclude whitespace text nodes
+$DOMXPath->evaluate('count(./node())', $node);
+$DOMXPath->evaluate('count(./node()[normalize-space()])', $node); // exclude whitespace text nodes
 ```
 
 ### get attributes of node beginning with "data-"
 ```php
-$attrs = $this->DOMXpath->query('./@*[starts-with(name(),"data-")]', $node);
+$attrs = $this->DOMXPath->query('./@*[starts-with(name(),"data-")]', $node);
 if (!empty($attrs)) {
     echo $attrs__value->nodeName;
     echo $attrs__value->nodeValue;
@@ -127,17 +127,17 @@ $node->setAttribute('foo','bar');
 
 ### get unique id of node (this is very neat for comparing nodes etc)
 ```php
-$nodes = $DOMXpath->query('/html/body//node()');
+$nodes = $DOMXPath->query('/html/body//node()');
 foreach ($nodes as $nodes__value) {
-	$id = intval($DOMXpath->evaluate('count(.//following::node()|.//child::node())',$nodes__value))+1;
+    $id = intval($DOMXPath->evaluate('count(.//following::node()|.//child::node())',$nodes__value))+1;
 ];
 ```
 
 ### get unique id of node (way faster)
 ```php
-$nodes = $DOMXpath->query('/html/body//node()');
+$nodes = $DOMXPath->query('/html/body//node()');
 foreach ($nodes as $nodes__value) {
-	$id = $nodes__value->getNodePath();
+    $id = $nodes__value->getNodePath();
 ];
 ```
 
@@ -168,7 +168,7 @@ echo $doc->saveHTML();
 ```php
 $inner = '';
 foreach ($node->childNodes as $child) {
-	$inner .= $node->ownerDocument->saveXML($child);
+    $inner .= $node->ownerDocument->saveXML($child);
 }
 return $inner;
 ```
