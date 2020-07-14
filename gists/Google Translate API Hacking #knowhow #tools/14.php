@@ -42,7 +42,6 @@ class GoogleTranslate
     {
         // google sometimes surrounds the translation with <i> and <b> tags
         // discard the (outer) <i>-tags and take the content of the <b>-tags
-        $input = html_entity_decode($input, ENT_QUOTES);
         $output = '';
         $pointer = 0;
         $lvl_i = 0;

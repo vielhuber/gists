@@ -1,8 +1,3 @@
-### installation
-```bash
-npm install browser-update --save
-```
-
 ### notes
 - be aware: don't  include browserUpdate into your build script (because it can crash on old browsers)
 - always include it before all other scripts are included (on top of head)
@@ -11,20 +6,25 @@ npm install browser-update --save
 ```html
 <script> 
 var $buoop = { /* options see below */ }; 
-function $buo_f(){ 
-var e = document.createElement("script"); 
-e.src = "//browser-update.org/update.min.js"; 
-document.body.appendChild(e);
-};
-try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
-catch(e){window.attachEvent("onload", $buo_f)}
+function $buo_f() { var e = document.createElement('script'); e.src = '//browser-update.org/update.min.js'; document.body.appendChild(e); };
+try {document.addEventListener('DOMContentLoaded', $buo_f,false)}
+catch(e){window.attachEvent('onload', $buo_f)}
 </script>
 ```
 
 ### directly embed in js
+```sh
+npm install browser-update --save
+```
+
 ```js
 var browserUpdate = require('browser-update');
-browserUpdate({
+browserUpdate({ /* options see below */ });
+```
+
+### options
+```js
+{
     required: { i: 99, e: 80, f: -4, o: -4, s: -4, c: -4 },
     reminder: 0, // always show (if no user interaction); set this to 0 if you always show it
     reminderClosed: 1, // show after 1 hour again (after user interaction); set this to 0 if you always show it
@@ -59,7 +59,7 @@ browserUpdate({
         msgmore:
             'Mettez à jour votre navigateur afin que ce site Web puisse être rendu sans erreur et sécurisé.'
     }
-});
+}
 ```
 
 ### styling
@@ -79,8 +79,13 @@ html {
     .buorg strong {
         color: #fff;
     }
+    /* hide icon */
+    .buorg-icon {
+        /*display: none;*/
+    }
     .buorg {
         background-color: #283340;
+        border-bottom: 1px solid #a29330;
     }
     #buorgig,
     #buorgul,
