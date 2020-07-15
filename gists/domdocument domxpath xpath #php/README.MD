@@ -28,6 +28,11 @@ else { $html = '<!--remove--><head><meta http-equiv="content-type" content="text
 
 ### get back html from domdocument
 ```php
+// domdocument does not close empty li tags (because they're valid html)
+// to circumvent that, use:
+$nodes = $DOMXPath->query('/html/body//*[not(node())]');
+foreach($nodes as $nodes__value) { $nodes__value->nodeValue = ''; }
+
 $html = $DOMDocument->saveHTML();
 // domdocument converts all umlauts to html entities, revert that
 // $html = html_entity_decode($html); 
@@ -37,6 +42,14 @@ $html = $DOMDocument->saveHTML();
 // undo above changes
 if (mb_strpos($html, '<!--remove-->') !== false && mb_strpos($html, '<!--/remove-->') !== false) {
     $html = mb_substr($html, 0, mb_strpos($html, '<!--remove-->')) . mb_substr($html, mb_strpos($htmlModified, '<!--/remove-->') + mb_strlen('<!--/remove-->'));
+}
+```
+
+### query nodes
+```php
+$nodes = $DOMXPath->query('/html/body//*[@id="foo"]');
+foreach($nodes as $nodes__value) {
+    /* ... */
 }
 ```
 
@@ -59,7 +72,7 @@ $DOMXPath->query('/html/body//*[contains(concat(" ", normalize-space(@class), " 
 
 ### id selector
 ```php
-$DOMXPath->query('/html/body//*[@id="root")]');
+$DOMXPath->query('/html/body//*[@id="root"]');
 ```
 
 ### attribute selector
