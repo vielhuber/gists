@@ -1,10 +1,14 @@
 <?php
-require_once(__DIR__.'/vendor/autoload.php');
+require_once __DIR__ . '/vendor/autoload.php';
 use Nesk\Puphpeteer\Puppeteer;
 use Nesk\Rialto\Data\JsFunction;
-$puppeteer = new Puppeteer;
-$browser = $puppeteer->launch([
-   'args' => [
+
+try {
+    $puppeteer = new Puppeteer([
+        /* 'executable_path' => '/root/.nvm/versions/node/v12.10.0/bin/node' (https://github.com/nesk/puphpeteer/issues/65) */
+    ]);
+
+    $args = [
         '--disable-gpu',
         '--disable-dev-shm-usage',
         '--disable-setuid-sandbox',
@@ -12,37 +16,36 @@ $browser = $puppeteer->launch([
         '--no-sandbox',
         '--no-zygote',
         '--single-process',
-   ]
-]);
-$page = $browser->newPage();
-$page->goto('https://skyronic.github.io/vue-spa/#/', [ 'waitUntil' => 'networkidle2' ]);
-$response = $page->evaluate(JsFunction::create('return { html: new XMLSerializer().serializeToString(document) };'));
-$browser->close();
-echo htmlentities($response['html']);
+    ];
 
-<?php
-require_once __DIR__ . '/vendor/autoload.php';
-use Nesk\Puphpeteer\Puppeteer;
-use Nesk\Rialto\Data\JsFunction;
-$puppeteer = new Puppeteer([
-    /* 'executable_path' => '/root/.nvm/versions/node/v12.10.0/bin/node' (https://github.com/nesk/puphpeteer/issues/65) */
-]);
-$browser = $puppeteer->launch([
-    'args' => [
-        '--disable-gpu',
-        '--disable-dev-shm-usage',
-        '--disable-setuid-sandbox',
-        '--no-first-run',
-        '--no-sandbox',
-        '--no-zygote',
-        '--single-process'
-    ]
-]);
-$page = $browser->newPage();
-$page->setViewport(['width' => 1920, 'height' => 1080]);
+    $proxy = (object) [
+        'ip' => 'xxx',
+        'port' => 'xxx',
+        'username' => 'xxx',
+        'password' => 'xxx',
+    ];
+    $proxy = null;
 
-try {
-    go('https://tld.com');
+    if ($proxy !== null) {
+        $args[] = '--proxy-server=' . $proxy->ip . ':' . $proxy->port;
+    }
+
+    $browser = $puppeteer->launch([
+        'ignoreHTTPSErrors' => true,
+        'args' => $args,
+    ]);
+    $page = $browser->newPage();
+  	$this->page->setDefaultNavigationTimeout(5000);
+    if ($proxy !== null) {
+        $page->authenticate([
+            'username' => $proxy->username,
+            'password' => $proxy->password,
+        ]);
+    }
+  	disableImages();    
+    $page->setViewport(['width' => 1920, 'height' => 1080]);
+  
+  	go('https://tld.com');    
     wait('.login-form');
     shot();
     type('.login-form__input--email', 'xxx');
@@ -58,16 +61,27 @@ try {
     shot();
     wait('.baz');
     shot();
+    $browser->close();
 } catch (\Exception $e) {
+    echo $e->getMessage();
 }
-
-$browser->close();
 
 /* helpers */
 function go($url)
 {
     global $page;
     $page->goto($url, ['waitUntil' => 'networkidle2']);
+}
+function disableImages()
+{
+  global $page;
+  $page->setRequestInterception(true);
+  $page->on(
+    'request',
+    JsFunction::createWithParameters(['request'])->body(
+      'request.resourceType() === "image" ? request.abort() : request.continue()'
+    )
+  );
 }
 function shot()
 {
@@ -94,7 +108,9 @@ function html()
 {
     global $page;
     $response = $page->evaluate(
-        JsFunction::create('return { html: new XMLSerializer().serializeToString(document) };')
+        JsFunction::create(
+            'return { html: new XMLSerializer().serializeToString(document) };'
+        )
     );
     return htmlentities($response['html']);
 }
