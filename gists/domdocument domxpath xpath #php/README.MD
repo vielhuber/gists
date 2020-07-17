@@ -102,9 +102,16 @@ $node->tagName
  
 ### get/set content of text value
 ```php
+// difference: https://stackoverflow.com/questions/12380919/php-dom-textcontent-vs-nodevalue
 $node->nodeValue
 $node->textContent
-// difference: https://stackoverflow.com/questions/12380919/php-dom-textcontent-vs-nodevalue
+
+// this is important: domdocument set strings with encoded html chars
+// for text nodes as plain text (and not html)
+// we therefore use the parent node and set the node value accordingly
+$node->parentNode->nodeValue = 'That&#39;s cool';
+// if you don't want to lose the text node, you can do:
+$node->nodeValue = html_entity_decode('That&#39;s cool', ENT_QUOTES | ENT_XML1, 'UTF-8');
 ```
 
 ### get children of node (recursively)
