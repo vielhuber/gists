@@ -11,19 +11,21 @@ $DOMXPath = new \DOMXPath($DOMDocument);
 $DOMDocument->loadHTML(file_get_contents('tpl.html'));
 ```
 
-### load html file (without header)
+### load html file (with or without header)
 ```php
 // if the html source doesn't contain a valid utf8 header, domdocument interprets is as iso
 // we circumvent this with mb_convert_encoding
 // warning: if you don't add a doctype/html tag, domdocument adds that information for you
 // also if only a text node is provided, it is surrounded by a p-tag
 // we also add <meta http-equiv="content-type" content="text/html;charset=utf-8" /> got proper encoding (see below)
-$input = file_get_contents('tpl.html');
-$input = mb_convert_encoding($input, 'HTML-ENTITIES', 'UTF-8');
+$html = file_get_contents('tpl.html');
+$html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+$has_wrapper = strpos($html, '<html') !== false;
+if ($has_wrapper === false) { $html = '<!DOCTYPE html><html data-please-remove-wrapper><body>' . $html . '</body></html>'; }
 if (mb_strpos($html, '</head>') !== false) { $html = str_replace('</head>', '<!--remove--><meta http-equiv="Content-type" content="text/html; charset=utf-8" /><!--/remove--></head>', $html); }
 elseif (mb_strpos($html, '<body') !== false) { $html = str_replace('<body', '<!--remove--><head><meta http-equiv="content-type" content="text/html;charset=utf-8" /></head><!--/remove--><body', $html); }
 else { $html = '<!--remove--><head><meta http-equiv="content-type" content="text/html;charset=utf-8" /></head><!--/remove-->' . $html; }
-@$DOMDocument->loadHTML($input);
+@$DOMDocument->loadHTML($html);
 ```
 
 ### get back html from domdocument
@@ -32,7 +34,6 @@ else { $html = '<!--remove--><head><meta http-equiv="content-type" content="text
 // to circumvent that, use:
 $nodes = $DOMXPath->query('/html/body//*[not(node())]');
 foreach($nodes as $nodes__value) { $nodes__value->nodeValue = ''; }
-
 $html = $DOMDocument->saveHTML();
 // domdocument converts all umlauts to html entities, revert that
 // $html = html_entity_decode($html); 
@@ -42,6 +43,12 @@ $html = $DOMDocument->saveHTML();
 // undo above changes
 if (mb_strpos($html, '<!--remove-->') !== false && mb_strpos($html, '<!--/remove-->') !== false) {
     $html = mb_substr($html, 0, mb_strpos($html, '<!--remove-->')) . mb_substr($html, mb_strpos($htmlModified, '<!--/remove-->') + mb_strlen('<!--/remove-->'));
+}
+// if domdocument added previously a default header, we squish that
+if (mb_stripos($html, 'data-please-remove-wrapper') !== false) {
+  $pos1 = mb_strpos($html, '<body>') + mb_strlen('<body>');
+  $pos2 = mb_strpos($html, '</body>');
+  $html = mb_substr($html, $pos1, $pos2 - $pos1);
 }
 ```
 

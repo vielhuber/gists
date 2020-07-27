@@ -7,6 +7,7 @@ class GoogleTranslate
 {
     function translate($string)
     {
+        $string = $this->parseResultPre($string);
         $args = [
             'anno' => 3,
             'client' => 'te_lib',
@@ -35,19 +36,33 @@ class GoogleTranslate
             false,
             3
         );
-        return ['result' => $this->parseResult($response->result), 'status' => $response->status];
+        return ['result' => $this->parseResultPost($response->result), 'status' => $response->status];
     }
 
-    private function parseResult($input)
+    private function parseResultPre($input)
     {
         // google sometimes surrounds the translation with <i> and <b> tags
+        // do distinguish real i-/b-tags, replace them (we undo that later on)
+        $dom = self::str_to_dom($input);
+        foreach (['i', 'b'] as $tags__value) {
+            foreach ($dom->getElementsByTagName($tags__value) as $divs__value) {
+                $divs__value->setAttribute('data-native', 'true');
+            }
+        }
+        $output = self::dom_to_str($dom);
+        return $output;
+    }
+
+    private function parseResultPost($input)
+    {
         // discard the (outer) <i>-tags and take the content of the <b>-tags
         $output = '';
         $pointer = 0;
         $lvl_i = 0;
-        $lvl_b = 0;
         $lvl_i_inner = 0;
+        $lvl_b = 0;
         $lvl_b_inner = 0;
+        // multibyte split to array of chars
         foreach (preg_split('//u', $input, -1, PREG_SPLIT_NO_EMPTY) as $chars__value) {
             if ($pointer >= 3 && mb_substr($input, $pointer - 3, 3) === '<i>') {
                 $lvl_i_inner++;
@@ -55,11 +70,11 @@ class GoogleTranslate
             if ($pointer >= 3 && mb_substr($input, $pointer - 3, 3) === '<b>') {
                 $lvl_b_inner++;
             }
-            if ($pointer >= 4 && mb_substr($input, $pointer - 4, 4) === '</i>') {
-                $lvl_i--;
+            if (mb_substr($input, $pointer, 4) === '</i>' && $lvl_i_inner > 0) {
+                $lvl_i_inner--;
             }
-            if ($pointer >= 4 && mb_substr($input, $pointer - 4, 4) === '</b>') {
-                $lvl_b--;
+            if (mb_substr($input, $pointer, 4) === '</b>' && $lvl_b_inner > 0) {
+                $lvl_b_inner--;
             }
             if (mb_substr($input, $pointer, 3) === '<i>') {
                 $lvl_i++;
@@ -67,21 +82,30 @@ class GoogleTranslate
             if (mb_substr($input, $pointer, 3) === '<b>') {
                 $lvl_b++;
             }
-            if (mb_substr($input, $pointer, 4) === '</i>') {
-                $lvl_i_inner--;
+            if ($pointer >= 4 && mb_substr($input, $pointer - 4, 4) === '</i>' && $lvl_i > 0) {
+                $lvl_i--;
             }
-            if (mb_substr($input, $pointer, 4) === '</b>') {
-                $lvl_b_inner--;
+            if ($pointer >= 4 && mb_substr($input, $pointer - 4, 4) === '</b>' && $lvl_b > 0) {
+                $lvl_b--;
             }
             $pointer++;
+            // discard multiple spaces
             if ($chars__value === ' ' && mb_strlen($output) > 0 && mb_substr($output, -1) === ' ') {
                 continue;
             }
-            if ($lvl_b_inner >= 1 || ($lvl_b === 0 && $lvl_i === 0)) {
+            // save
+            if (($lvl_b_inner >= 1 && $lvl_i_inner === 0) || ($lvl_b === 0 && $lvl_i === 0)) {
                 $output .= $chars__value;
             }
         }
         $output = trim($output);
+        $dom = self::str_to_dom($output);
+        foreach (['i', 'b'] as $tags__value) {
+            foreach ($dom->getElementsByTagName($tags__value) as $divs__value) {
+                $divs__value->removeAttribute('data-native');
+            }
+        }
+        $output = self::dom_to_str($dom);
         return $output;
     }
 
