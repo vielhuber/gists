@@ -1,3 +1,6 @@
+/* basic for */
+for(let i = 0; i < 10; i++) {}
+
 /* arrays and objects */
 Object.keys(item).forEach(item__key => { console.log([item__key,item[item__key]]); }); // every array is an object
 for(const [item__key, item__value] of Object.entries(item)) { console.log([item__key,item[item__key]]); }
