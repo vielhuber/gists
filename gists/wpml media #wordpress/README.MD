@@ -73,3 +73,4 @@
   - Wenn man die Datei tatsächlich ersetzt, also den Namen beibehält, dann hat es den Effekt als würde man die Datei in allen Sprachen ersetzen.
   - Verwendet man einen neuen Namen wirkt es wie unterschiedliche Bilder pro Sprache. Die alte Datei bleibt erhalten und wird in der Übersetzung dieses Attachments weiterhin verwendet.
   - Einbettungen wurden (bei einem begrenzten Test) auch nur in der Sprache aktualisiert, in der das Bild ersetzt wurde. WPML Media zeigt fortan für diese Bild unterschiedliche Bilder in den Sprachen.
+  - Das bedeutet: Es darf NIE die 2. Option ausgewählt werden, da man sonst Chaos in unterschiedlichen Sprachen erhält
