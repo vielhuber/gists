@@ -25,6 +25,7 @@ for(let item of ["a", "b", "c"]) {
   	if( item === 'b' )
     {
      	continue; // continue works here! 
+      	break; // break works here!
     }
   	await foo(); // async await works here
 }
