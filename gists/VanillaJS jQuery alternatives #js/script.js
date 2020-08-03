@@ -22,8 +22,10 @@ if( document.querySelector('.selector').hasAttribute('name') ) { }
 
 
 $('.selector')
-document.querySelector(".selector") // gets the first item
-document.querySelectorAll(".selector") // gets all items
+document.querySelector('.selector') // gets the first item
+document.querySelectorAll('.selector') // gets all items
+document.querySelectorAll('.foo, .bar') // gets all items of multiple selectors
+document.querySelectorAll(['.foo','.bar']) // this also works!
 
 
 $('.parent').find('.children')

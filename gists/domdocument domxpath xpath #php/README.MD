@@ -66,6 +66,11 @@ $DOMXPath->query('/html/body//node()');
 $DOMXPath->query('/html/body//node()[normalize-space()]'); // exclude whitespace text nodes
 ```
 
+### get all nodes (without text nodes)
+```php
+$DOMXPath->query('/html/body//*');
+```
+
 ### get text nodes only
 ```php
 $DOMXPath->query('/html/body//text()');
@@ -152,6 +157,11 @@ $node->getAttribute('foo');
 $node->setAttribute('foo','bar');
 ```
 
+### check if dom attribute exists
+```php
+$node->hasAttribute('foo');
+```
+
 ### get unique id of node (this is very neat for comparing nodes etc)
 ```php
 $nodes = $DOMXPath->query('/html/body//node()');
@@ -182,6 +192,11 @@ if ($parent->hasChildNodes()) {
 } else {
     $parent->appendChild($child);
 }
+```
+
+### remove node
+```php
+$node->parentNode->removeChild($node);
 ```
 
 ### get outer html of node
