@@ -216,3 +216,27 @@ add_action(
   },
   100
 );
+
+// show individual plugin notice that is dismissable
+add_action('admin_notices', function () {
+    if (get_option('dismiss_custom_notice') == 1) {
+        return;
+    }
+    global $pagenow;
+    if ($pagenow === 'admin.php' && $_GET['page'] === 'custom_page') {
+        return;
+    }
+    echo '<div class="notice notice-my-plugin is-dismissible">';
+    echo '<p>Lorem ipsum</p>';
+    echo '</div>';
+    echo "<script>
+    jQuery(function($) {
+        $(document).on('click', '.notice-my-plugin .notice-dismiss', function() {
+            $.ajax(ajaxurl, { type: 'POST', data: { action: 'dismiss_my_plugin_notice' } } );
+        });
+    });
+    </script>";
+});
+add_action('wp_ajax_dismiss_my_plugin_notice', function () {
+    update_option('dismiss_custom_notice', 1);
+});
