@@ -216,6 +216,10 @@ add_action(
   },
   100
 );
+// this is needed when wp.media is called!
+add_action('admin_enqueue_scripts', function () {
+  wp_enqueue_media();
+});
 
 // show individual plugin notice that is dismissable
 add_action('admin_notices', function () {
