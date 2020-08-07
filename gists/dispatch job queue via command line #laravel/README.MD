@@ -1,4 +1,5 @@
 ### dispatch job
+- `php artisan queue:restart`
 - `php artisan job:dispatch --env=production TestQueue argument1`
 
 ### test queue
