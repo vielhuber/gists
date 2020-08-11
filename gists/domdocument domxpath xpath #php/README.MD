@@ -101,7 +101,12 @@ $DOMXPath->query('/html/body//a[starts-with(@href, 'tel:')]);
 ```php
 $DOMXPath->query('/html/body//@*[starts-with(name(), \'data-\')]/parent::*');
 ```
- 
+
+### next sibling selector ".foo + .bar"
+```php
+$DOMXPath->query('//*[contains(concat(" ", normalize-space(@class), " "), " foo ")]/following::*[contains(concat(" ", normalize-space(@class), " "), " bar ")]');
+``` 
+
 ### check if is text node
 ```php
 if($node->nodeName === '#text') {}
