@@ -143,6 +143,11 @@ $DOMXPath->evaluate('count(./node())', $node);
 $DOMXPath->evaluate('count(./node()[normalize-space()])', $node); // exclude whitespace text nodes
 ```
 
+### get text siblings including oneself of text node
+```php
+$DOMXPath->query('./../text()[normalize-space()]');
+```
+
 ### get attributes of node beginning with "data-"
 ```php
 $attrs = $this->DOMXPath->query('./@*[starts-with(name(),"data-")]', $node);
