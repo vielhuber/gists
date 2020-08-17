@@ -6,13 +6,13 @@ add_action('rest_api_init', function () {
     // url: https://tld.com/wp-json/v1/custom/path/1337
     // for strings use '/custom/path/(?P<id>[a-zA-Z0-9]+)'
     register_rest_route('v1', '/custom/path/(?P<id>\d+)', [
-        'methods' => WP_REST_Server::READABLE, // 'GET', for 'POST use WP_REST_Server::CREATABLE
-        'callback' => function (WP_REST_Request $request) {
+        'methods' => \WP_REST_Server::READABLE, // 'GET', for 'POST use WP_REST_Server::CREATABLE
+        'callback' => function (\WP_REST_Request $request) {
             $request->get_params();
             $request->get_param('example');
             /* ... */
             if (1 == 0) {
-                return new WP_REST_Response(
+                return new \WP_REST_Response(
                     [
                         'success' => false,
                         'message' => 'server error',
@@ -21,7 +21,7 @@ add_action('rest_api_init', function () {
                     404
                 );
             }
-            return new WP_REST_Response(
+            return new \WP_REST_Response(
                 [
                     'success' => true,
                     'message' => 'successfully created object',

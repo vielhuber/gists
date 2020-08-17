@@ -15,7 +15,9 @@ fetch(
   // or simply return it
   // important: to check for status codes (like 404 or 500), check here if needed
   let data = response.json(),
-      status = response.status;
+      status = response.status,
+      headers = Object.fromEntries(response.headers.entries()),
+      specificHeader = response.headers.get('foo');
   if (status == 200 || status == 304) {
    	return data; 
   }

@@ -74,7 +74,7 @@ NamespaceTest\test(); // does work, because we call the function directly
 {
     "autoload": {
         "psr-4": {
-	        "ExampleNamespace\\": "src/"
+	        "NamespaceTest\\": "src/"
     	}
     }
 }
