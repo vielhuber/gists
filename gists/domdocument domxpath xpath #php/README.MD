@@ -60,10 +60,30 @@ foreach($nodes as $nodes__value) {
 }
 ```
 
+### check length of query
+```php
+$nodes = $DOMXPath->query('/html/body//*[@id="foo"]');
+if( $nodes->length > 0 ) {}
+```
+
+### get first item
+```php
+$nodes = $DOMXPath->query('/html/body//*[@id="foo"]');
+if( $nodes->length > 0 ) { $node = $nodes[0]; }
+```
+
+### types of selectors
+- `node()`: any node (including text nodes)
+- `text()`: text nodes
+- `comment()`: comment nodes
+- `*`: dom nodes
+- `node()[normalize-space()]`: any node (including text nodes) excluding whitespace text nodes (and also including <br/>)
+- `text()[normalize-space()]`: any text node excluding whitespace
+- `/html/body//*|/html/body//text()[normalize-space()]`: dom nodes and test nodes (without whitespace)
+
 ### get all nodes (including text nodes)
 ```php
 $DOMXPath->query('/html/body//node()');
-$DOMXPath->query('/html/body//node()[normalize-space()]'); // exclude whitespace text nodes
 ```
 
 ### get all nodes (without text nodes)
@@ -74,7 +94,6 @@ $DOMXPath->query('/html/body//*');
 ### get text nodes only
 ```php
 $DOMXPath->query('/html/body//text()');
-$DOMXPath->query('/html/body//text()[normalize-space()]'); // exclude whitespace text nodes
 ```
 
 ### class selector
@@ -134,18 +153,22 @@ $node->nodeValue = html_entity_decode('That&#39;s cool', ENT_QUOTES | ENT_XML1, 
 ### get children of node (recursively)
 ```php
 $DOMXPath->query('.//node()', $node);
-$DOMXPath->query('.//node()[normalize-space()]', $node); // exclude whitespace text nodes
 ```
- 
+
 ### get children count of node (recursively)
 ```php
 $DOMXPath->evaluate('count(./node())', $node);
-$DOMXPath->evaluate('count(./node()[normalize-space()])', $node); // exclude whitespace text nodes
 ```
 
 ### get text siblings including oneself of text node
 ```php
-$DOMXPath->query('./../text()[normalize-space()]');
+$DOMXPath->query('./../text()[normalize-space()]', $node);
+```
+
+### get direct sibling of node
+```php
+$DOMXPath->query('(./following-sibling::*|./following-sibling::text()[normalize-space()])[1]', $node);
+$DOMXPath->query('(/html/body//*[@id="foo"]/following-sibling::*|/html/body//*[@id="foo"]/following-sibling::text()[normalize-space()])[1]');
 ```
 
 ### get attributes of node beginning with "data-"

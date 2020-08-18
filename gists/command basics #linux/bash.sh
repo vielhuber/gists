@@ -1,3 +1,9 @@
+# multiple commands
+- A; B    # run A and then B, regardless of success of A
+- A && B  # run B if and only if A succeeded
+- A || B  # run B if and only if A failed
+- A &     # run A in background
+
 # . and ..: name-inode maps
 - .: referring to the directory itself
 - ..: referring to the parent directory

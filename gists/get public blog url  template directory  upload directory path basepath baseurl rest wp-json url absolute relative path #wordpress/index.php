@@ -6,6 +6,7 @@ get_stylesheet_directory_uri() // use this for child themes
 wp_upload_dir()['baseurl']
 admin_url( 'admin-ajax.php' ) // ajax url
 get_rest_url(null, 'v1/foo/bar') // rest url
+wp_lostpassword_url() // reset password url
 
 // public url without language
 site_url()
