@@ -243,7 +243,7 @@ echo $doc->saveHTML();
 ```php
 $inner = '';
 foreach ($node->childNodes as $child) {
-    $inner .= $node->ownerDocument->saveXML($child);
+    $inner .= $node->ownerDocument->saveHTML($child);
 }
 return $inner;
 ```

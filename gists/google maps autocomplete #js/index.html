@@ -4,16 +4,33 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
         <title>.</title>
-        <script src="https://maps.googleapis.com/maps/api/js?key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx&libraries=places"></script>
         <script>
-            google.maps.event.addDomListener(window, 'load', () => {
+            document.addEventListener('DOMContentLoaded', () => {
+                // trigger global load event
+                if (document.querySelector('.autocomplete') !== null) {
+                    let script = document.createElement('script');
+                    script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&libraries=places');
+                    script.onload = () => { google.maps.event.addDomListener(window, 'load', () => {
+                        // this can also be a private function inside a class
+                        runMapsFunctions();
+                    }); };
+                    document.head.appendChild(script);
+                }
+            });
+            function runMapsFunctions() {
+                initAutocomplete();
+                /* others */
+                /* ... */
+            }
+            function initAutocomplete()
+            {
                 if (document.querySelector('.autocomplete') !== null) {
                     document.querySelectorAll('.autocomplete').forEach(el => {
                         let autocomplete;
                         autocomplete = new google.maps.places.Autocomplete(el, {
                             types: ['geocode']
                         });
-                        autocomplete.setFields(['address_component']);
+                        autocomplete.setFields(['address_component', 'geometry']);
                         autocomplete.addListener('place_changed', () => {
                             let place = autocomplete.getPlace(),
                                 preset = [
@@ -61,11 +78,13 @@
                                     });
                                 });
                             }
+                            let lat = place.geometry.location.lat(),
+                                lng = place.geometry.location.lng();
                             el.nextElementSibling.value = data.map(i => i.label + ': ' + i.value).join('\n');
                         });
                     });
                 }
-            });
+            }
         </script>
     </head>
     <body>
