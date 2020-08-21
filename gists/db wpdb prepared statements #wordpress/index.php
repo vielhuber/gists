@@ -1,4 +1,23 @@
 <?php
+/*
+placeholders:
+  - %s (string)
+  - %d (integer)
+  - %f (float)
+  
+functions:
+  - get_results
+  - get_var
+  - get_row
+  - get_col
+  - query
+  - insert
+  - update
+  - delete
+  - prepare
+*/
+  
+// examples
 $wpdb->get_var($wpdb->prepare('
   SELECT * FROM table WHERE col_digit = %d AND col_string = %s
 ', 1337, 'foo'));
