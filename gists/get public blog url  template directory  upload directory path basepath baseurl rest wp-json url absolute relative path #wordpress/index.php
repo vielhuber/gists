@@ -5,8 +5,8 @@ get_bloginfo('template_directory')
 get_stylesheet_directory_uri() // use this for child themes
 wp_upload_dir()['baseurl']
 admin_url( 'admin-ajax.php' ) // ajax url
-get_rest_url(null, 'v1/foo/bar') // rest url
-get_rest_url(null, 'v1/foo/bar?lang='.ICL_LANGUAGE_CODE) // rest url with wpml
+rest_url('v1/foo/bar') // rest url
+rest_url('v1/foo/bar?lang='.ICL_LANGUAGE_CODE) // rest url with wpml
 wp_lostpassword_url() // reset password url
 
 // public url without language
