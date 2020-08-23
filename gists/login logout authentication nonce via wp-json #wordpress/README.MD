@@ -23,6 +23,16 @@ add_filter(
   \PHP_INT_MAX
 );
 
+// this cookie can be read by javascript and isset either via backend login or js login
+add_action('wp_login', function () {
+	setcookie('wp_user_logged_in', 1, time() + 31556926, '/');
+	$_COOKIE['wp_user_logged_in'] = 1;
+});
+add_action('wp_logout', function () {
+	unset($_COOKIE['wp_user_logged_in']);
+	setcookie('wp_user_logged_in', null, -1, '/');
+});
+
 // login
 add_action('rest_api_init', function () {
     register_rest_route('v1', '/user/login', [
