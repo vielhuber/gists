@@ -2,7 +2,7 @@
 <?php
 // enqueue api nonce
 wp_enqueue_script('bundle', get_bloginfo('template_directory') . '/dist/js/bundle.js', ['jquery'], false, true);
-wp_localize_script('bundle', 'wpApiSettings', [
+wp_localize_script('bundle', 'settings', [
     'root' => esc_url_raw(rest_url()),
     'nonce' => wp_create_nonce('wp_rest')
 ]);
@@ -23,14 +23,17 @@ add_filter(
   \PHP_INT_MAX
 );
 
+// to generate a link via GET, use this:
+rest_url('v1/foo/bar?_wpnonce=' . wp_create_nonce('wp_rest'));
+
 // this cookie can be read by javascript and isset either via backend login or js login
 add_action('wp_login', function () {
-	setcookie('wp_user_logged_in', 1, time() + 31556926, '/');
-	$_COOKIE['wp_user_logged_in'] = 1;
+    setcookie('wp_user_logged_in', 1, time() + 31556926, '/');
+    $_COOKIE['wp_user_logged_in'] = 1;
 });
 add_action('wp_logout', function () {
-	unset($_COOKIE['wp_user_logged_in']);
-	setcookie('wp_user_logged_in', null, -1, '/');
+    unset($_COOKIE['wp_user_logged_in']);
+    setcookie('wp_user_logged_in', null, -1, '/');
 });
 
 // login
@@ -90,17 +93,17 @@ document.querySelector('.login').addEventListener('click', e => {
     let data = new URLSearchParams();
     data.append('email', 'xxx');
     data.append('password', 'xxx');
-    fetch(window.wpApiSettings.root + 'v1/user/login', {
+    fetch(window.settings.resturl + 'v1/user/login', {
         method: 'POST',
         body: data,
         cache: 'no-cache',
         headers: {
             'content-type': 'application/x-www-form-urlencoded',
-            'X-WP-Nonce': window.wpApiSettings.nonce
+            'X-WP-Nonce': window.settings.nonce
         }
     })
         .then(response => {
-          if (response.headers.get('X-WP-Nonce') !== null) { window.wpApiSettings.nonce = response.headers.get('X-WP-Nonce'); }
+          if (response.headers.get('X-WP-Nonce') !== null) { window.settings.nonce = response.headers.get('X-WP-Nonce'); }
           return response.json();
         })
         .catch(v => v)
@@ -112,14 +115,14 @@ document.querySelector('.login').addEventListener('click', e => {
 
 // check
 document.querySelector('.check').addEventListener('click', e => {
-    fetch(window.wpApiSettings.root + 'v1/user/check', {
+    fetch(window.settings.resturl + 'v1/user/check', {
         method: 'GET',
         headers: {
-            'X-WP-Nonce': window.wpApiSettings.nonce
+            'X-WP-Nonce': window.settings.nonce
         }
     })
         .then(response => {
-          if (response.headers.get('X-WP-Nonce') !== null) { window.wpApiSettings.nonce = response.headers.get('X-WP-Nonce'); }
+          if (response.headers.get('X-WP-Nonce') !== null) { window.settings.nonce = response.headers.get('X-WP-Nonce'); }
           return response.json();
         })
         .catch(v => v)
@@ -131,14 +134,14 @@ document.querySelector('.check').addEventListener('click', e => {
 
 // logout
 document.querySelector('.logout').addEventListener('click', e => {
-    fetch(window.wpApiSettings.root + 'v1/user/logout', {
+    fetch(window.settings.resturl + 'v1/user/logout', {
         method: 'GET',
         headers: {
-            'X-WP-Nonce': window.wpApiSettings.nonce
+            'X-WP-Nonce': window.settings.nonce
         }
     })
         .then(response => {
-          if (response.headers.get('X-WP-Nonce') !== null) { window.wpApiSettings.nonce = response.headers.get('X-WP-Nonce'); }
+          if (response.headers.get('X-WP-Nonce') !== null) { window.settings.nonce = response.headers.get('X-WP-Nonce'); }
           return response.json();
         })
         .catch(v => v)

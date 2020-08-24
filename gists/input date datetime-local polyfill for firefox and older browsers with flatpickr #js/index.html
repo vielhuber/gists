@@ -25,6 +25,20 @@
                 }
             }
         });
+        flatpickr('input[type="date', {
+            enableTime: false,
+            altInput: true,
+            allowInput: false,
+            altFormat: 'd.m.Y',
+            dateFormat: 'Y-m-d',
+            locale: 'de',
+            /* bugfix: https://github.com/flatpickr/flatpickr/issues/2040 */
+            onChange: function(selectedDates, dateStr, instance) {
+                if (dateStr === '') {
+                    instance.close();
+                }
+            }
+        });
     });
     </script>
 </head>
@@ -37,6 +51,11 @@
 
     <input
       type="datetime-local"
+      value=""
+    />
+
+    <input
+      type="date"
       value=""
     />
 

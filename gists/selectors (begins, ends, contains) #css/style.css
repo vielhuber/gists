@@ -19,6 +19,19 @@ div[class$="foo"] { }
 /* contains */
 div[class*="foo"] { }
 
+/* specific position selectors */
+:first-child
+:last-child
+:nth-child()
+:nth-last-child()
+:first-of-type
+:last-of-type
+:nth-of-type()
+:nth-last-of-type()
+:only-child
+:only-of-type
+:empty
+:not()
 
 /* if is child (or subchild) of */
 .foo .bar { }

@@ -10,6 +10,7 @@ $height_old = imagesy($image_old);
 $width_new = 400;
 $height_new = ($width_new*($height_old/$width_old));
 $image_new = imagecreatetruecolor($width_new, $height_new);
+imagefill($image_new, 0, 0, imagecolorallocate($image_new, 255, 255, 255)); // white background
 imagecopyresampled($image_new, $image_old, 0, 0, 0, 0, $width_new, $height_new, $width_old, $height_old);
 ob_start();
 imagejpeg($image_new);
