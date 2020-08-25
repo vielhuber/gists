@@ -9,7 +9,7 @@
 - switch php/cli version (globally and host based)
 - access via all devices in your local network
 - real ssl certificates for all hosts and all devices
-- native linux performance (can handle node_modules and vendor)
+- native linux performance (can handle node_modules and vendor) with wsl2
 
 ## installation
 
@@ -17,8 +17,8 @@
 - we abuse our own public domain as a dns that maps to a local ip in order to prevent setting local hosts AND having the ability to access via smartphones/tablets from the same network
 - DomainFactory
 - A-Records
-- local.vielhuber.de => 192.168.178.21
-- *.local.vielhuber.de => 192.168.178.21
+- local.vielhuber.de => 192.168.188.22
+- *.local.vielhuber.de => 192.168.188.22
 - fritz.box > Heimnetz > Netzwerk > Netzwerkeinstellungen > DNS-Rebind-Schutz:
   - vielhuber.de
   - local.vielhuber.de
@@ -39,7 +39,63 @@
 - UNIX username: root (cancel when prompting for a new default username)
 - Change password with ```passwd```: "root"
 - ```sudo apt-get update && sudo apt-get upgrade```
-- Netzlaufwerk "\wsl$\Ubuntu" auf W: mappen und umbenennen: "WSL"
+- Netzlaufwerk "\\wsl$\Ubuntu" auf W: mappen und umbenennen: "WSL"
+
+#### wsl2
+- open PowerShell as admin
+- `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
+- `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
+- reboot
+- `wsl --list --verbose`
+- `wsl --set-default-version 2`
+- `wsl --set-version Ubuntu 2`
+- `wsl --list --verbose`
+
+#### xserver
+
+- download vcxsrv (https://sourceforge.net/projects/vcxsrv/files/latest/download)
+- Installation: Full
+- `nano ~/.bash_profile`
+- `export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0`
+- `export LIBGL_ALWAYS_INDIRECT=1`
+- `source ~/.bash_profile`
+- XLaunch
+- Multiple Windows
+- Display number -1
+- Start no client
+- [x] Clipboard, [x] Primary Selection [x] Native opengl [x] Disable access control
+- Zugriff zulassen
+- Windows Defender Firwall mit erweiterter Sicherheit > Eingehende Regeln > "VcXsrv windows xserver" 2x rot Doppelklick > Verbindung zulassen
+- Autostart
+  - Aufgabenplanung
+  - "vcxsrv"
+  - Nur ausführen, wenn der Benutzer angemeldet ist
+  - Trigger: Bei Anmeldung
+  - Aktion: Programm starten
+  - "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -ac -clipboard -wgl
+- install desktop
+  - apt-get update
+  - apt-get install gedit
+  - gedit
+  - apt-get install xfce4
+  - startxfce4
+
+#### vscode
+
+- install Remote - WSL Installieren
+- Erweiterungen > Wolke: Lokale Erweiterungen in WSL - Ubuntu installieren > Alle markieren
+- Innerhalb von WSL ausführen: `code .`
+
+#### smartgit
+
+- `cd usr/local`
+- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-20_1_4.tar.gz .`
+- `tar xzf smartgit-linux-20_1_4.tar.gz`
+- `rm smartgit-linux-20_1_4.tar.gz`
+- `nano usr/local/bin/sgit`
+- `( /usr/local/smartgit/bin/smartgit.sh & ) > /dev/null 2>&1`
+- `chmod +x usr/local/bin/sgit`
+- `sgit`
 
 #### pimp command line
 - ```sudo nano ~/.bash_profile```
@@ -108,8 +164,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - create a real let's encrypt certificate via https://gethttpsforfree.com/
 - Domain: *.local.vielhuber.de
 - DNS-verification via txt-record over DomainFactory
-- domain.key => C:\htdocs\lamp\ssl.key
-- domain.cert => C:\htdocs\lamp\ssl.cert
+- domain.key => \\wsl$\Ubuntu\var\www\lamp\ssl.key
+- domain.cert => \\wsl$\Ubuntu\var\www\lamp\ssl.cert
 
 #### postfix
 - ```sudo apt-get install postfix```
@@ -211,6 +267,32 @@ xdebug.var_display_max_depth = -1
 - ```sudo service mysql stop```
 - ```sudo usermod -d /var/lib/mysql/ mysql```
 
+#### fix wsl2 errors
+- apache not reachable
+  - \\wsl$\Ubuntu\var\www\lamp\firewall.ps1 anlegen mit Inhalt von https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723
+  - Aufgabenplanung
+  - wsl2 Firewall
+  - Bei Anmeldung
+  - Verzögern für 30 Sekunden
+  - Programm starten
+  - PowerShell.exe -File \\wsl$\Ubuntu\var\www\lamp\firewall.ps1
+  - Mit höchsten Privilegien ausführen
+  - OBSOLET: etc/hosts: 172.31.142.215 ***.vielhuber.de
+  - OBSOLET: Oder alternativ bei DF von 192.168.188.22 auf 172.31.142.215 setzen (muss ich später wieder rückgängig machen!)
+  - OBSOLET: etc/hosts: #127.0.0.1      localhost und #::1             localhost einkommentieren
+- apache permissions
+  - `chown -R www-data /var/www`
+- php error
+  - `mkdir -p /run/php/`
+- ram overload
+  - create `%UserProfile%\.wslconfig`
+  ```
+  [wsl2]
+  memory=4GB
+  swap=16GB
+  localhostForwarding=true
+  ```
+
 #### composer
 - ```php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
 - ```php composer-setup.php```
@@ -282,17 +364,17 @@ xdebug.var_display_max_depth = -1
 
 #### lamp repo
 - in this repo we store our ssl certificate, our ssh keys and all current active symlinks
-- ```mkdir /mnt/c/htdocs```
-- ```mkdir /mnt/c/htdocs/lamp```
-- ```cd /mnt/c/htdocs/lamp```
+- ```mkdir /var/www/lamp```
+- ```cd /var/www/lamp```
 - ```git clone git@bitbucket.org:vielhuber/lamp.git . --config core.autocrlf=false```
 - ```sudo nano ~/.bash_profile```
-- export PATH="$PATH:/mnt/c/htdocs/lamp"
+- ```export PATH="$PATH:/var/www/lamp"```
+- ```source ~/.bash_profile```
 
 #### ssh
 - ```mkdir ~/.ssh```
-- ```cp /mnt/c/htdocs/lamp/id_rsa ~/.ssh/id_rsa```
-- ```cp /mnt/c/htdocs/lamp/id_rsa.pub ~/.ssh/id_rsa.pub```
+- ```cp /var/www/lamp/id_rsa ~/.ssh/id_rsa```
+- ```cp /var/www/lamp/id_rsa.pub ~/.ssh/id_rsa.pub```
 - ```chmod 600 ~/.ssh/id_rsa```
 - ```chmod 600 ~/.ssh/id_rsa.pub```
 
@@ -301,9 +383,10 @@ xdebug.var_display_max_depth = -1
 - ```cd ~/.syncdb```
 - ```composer require vielhuber/syncdb```
 - ```chmod +x vendor/vielhuber/syncdb/src/syncdb```
-- ```ln -s /mnt/c/htdocs/lamp/syncdb ~/.syncdb/profiles```
+- ```ln -s /var/www/lamp/syncdb ~/.syncdb/profiles```
 - ```sudo nano ~/.bash_profile```
-- export PATH="$PATH:/root/.syncdb/vendor/vielhuber/syncdb/src"
+- ```export PATH="$PATH:/root/.syncdb/vendor/vielhuber/syncdb/src"```
+- ```source ~/.bash_profile ```
 
 #### postgres
 - ```nano /etc/apt/sources.list.d/pgdg.list```
@@ -444,8 +527,8 @@ host    all   all        ::1/128        md5
   - Web server to reconfigure automatically: apache2
   - Configure database for phpmyadmin with dbconfig-common: Yes
   - MySQL application password for phpmyadmin: root
-- ln -s /usr/share/phpmyadmin /mnt/c/htdocs/phpmyadmin
-- lamp add phpmyadmin
+- ```ln -s /usr/share/phpmyadmin /var/www/phpmyadmin```
+- ```lamp add phpmyadmin```
 - https://phpmyadmin.local.vielhuber.de
 
 #### include windows fonts in linux
@@ -495,12 +578,19 @@ host    all   all        ::1/128        md5
 #### rsvg
 - ```sudo apt-get install librsvg2-bin```
 
-#### autostart services
-- Aufgabenplanung
-- "lamp"
-- Nur ausführen, wenn der Benutzer angemeldet ist
-- Trigger: Bei Anmeldung, verzögern für: 90 Sekunden
-- Aktion: Programm starten (C:\htdocs\lamp\start.bat)
+#### autostart
+- wsl
+  - Aufgabenplanung
+  - "wsl"
+  - Nur ausführen, wenn der Benutzer angemeldet ist
+  - Trigger: Bei Anmeldung
+  - Aktion: Programm starten (C:\Windows\System32\bash.exe -c "")
+- services
+  - Aufgabenplanung
+  - "lamp"
+  - Nur ausführen, wenn der Benutzer angemeldet ist
+  - Trigger: Bei Anmeldung, verzögern für: 90 Sekunden
+  - Aktion: Programm starten (\\wsl$\Ubuntu\var\www\lamp\start.bat)
 
 #### wsl improve i/o performance
 - https://medium.com/@leandrw/speeding-up-wsl-i-o-up-than-5x-fast-saving-a-lot-of-battery-life-cpu-usage-c3537dd03c74
@@ -540,4 +630,3 @@ host    all   all        ::1/128        md5
 
 #### remove project
 - ```lamp remove project```
-

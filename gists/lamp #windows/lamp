@@ -68,10 +68,10 @@ cat > $FILE << EOF
 <VirtualHost *:80>
   ServerAdmin david@close2.de
   ServerName $PROJECT.local.vielhuber.de
-  DocumentRoot /mnt/c/htdocs/$FOLDER
+  DocumentRoot /var/www/$FOLDER
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
-  <Directory /mnt/c/htdocs>
+  <Directory /var/www>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Require all granted
@@ -81,18 +81,18 @@ cat > $FILE << EOF
 <VirtualHost *:443>
   ServerAdmin david@close2.de
   ServerName $PROJECT.local.vielhuber.de
-  DocumentRoot /mnt/c/htdocs/$FOLDER
+  DocumentRoot /var/www/$FOLDER
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
-  <Directory /mnt/c/htdocs>
+  <Directory /var/www/htdocs>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Require all granted
   </Directory>
   $PHP_LINE
   SSLEngine on
-  SSLCertificateFile /mnt/c/htdocs/lamp/ssl.cert
-  SSLCertificateKeyFile /mnt/c/htdocs/lamp/ssl.key
+  SSLCertificateFile /var/www/lamp/ssl.cert
+  SSLCertificateKeyFile /var/www/lamp/ssl.key
 </VirtualHost>
 EOF
 sudo a2ensite $PROJECT.conf

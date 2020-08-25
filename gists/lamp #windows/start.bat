@@ -1,1 +1,1 @@
-C:\Windows\System32\bash.exe -c "/mnt/c/htdocs/lamp/lamp start"
+C:\Windows\System32\bash.exe -c "/var/www/lamp/lamp start"

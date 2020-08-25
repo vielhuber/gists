@@ -310,7 +310,8 @@ find . -type d -empty -delete # delete empty folders
 find . -name "node_modules" -type d -prune -exec rm -rf {} \; # delete all folders recursively with name
 
 # recursively search and replace file contents
-find . -type f -name "*.txt" -print0 | xargs -0 sed -i '' -e 's/foo/bar/g'
+find . -type f -name "*.txt" -print0 | xargs -0 sed -i -e 's/foo/bar/g' # linux
+find . -type f -name "*.txt" -print0 | xargs -0 sed -i '' -e 's/foo/bar/g' # mac
 
 # show last entries (10 lines) of file
 tail -10 path/to/file.log
