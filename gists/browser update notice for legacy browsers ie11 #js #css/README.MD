@@ -12,6 +12,15 @@ catch(e){window.attachEvent('onload', $buo_f)}
 </script>
 ```
 
+```php
+// wordpress: functions.php
+add_action('wp_head', function () { ?>
+    <script> 
+    var $buoop = { /* ... */ };
+    </script>
+<?php }, -9999 );
+```
+
 ### directly embed in js
 ```sh
 npm install browser-update --save
