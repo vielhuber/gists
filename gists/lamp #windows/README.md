@@ -63,7 +63,7 @@
 - Multiple Windows
 - Display number -1
 - Start no client
-- [x] Clipboard, [x] Primary Selection [x] Native opengl [x] Disable access control
+- Disable access control: an
 - Zugriff zulassen
 - Windows Defender Firwall mit erweiterter Sicherheit > Eingehende Regeln > "VcXsrv windows xserver" 2x rot Doppelklick > Verbindung zulassen
 - Autostart
@@ -79,6 +79,7 @@
   - gedit
   - apt-get install xfce4
   - startxfce4
+    - Applications > Settings > Screensaver > Mode: Disable Screensaver
 
 #### vscode
 

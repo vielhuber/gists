@@ -10,7 +10,7 @@
 - Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
 - Erweiterte Cookie-Leiste und/oder Zwei-Klick-Lösungen für Google Maps implementiert
 - YouTube-/Vimeo-Links GDPR tauglich gemacht
-- Alle CMS Updates (WordPress) installiert
+- Alle CMS Updates (WordPress Core+Plugins) installiert
 - WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
 - RSS-Feed vorhanden und funktional
 - Impressum + Datenschutzseite vorhanden und gepflegt
@@ -28,7 +28,7 @@
 - Grundlegende Meta-Tags gesetzt (Titel+Description) (prüfen, ob Startseite diese ausspielt)
 - JavaScript Fehler in Console überprüft
 - console.log Ausgaben deaktiviert
-- Branch in master gemergt
+- git dev-/feature-Branch in master gemergt
 - Favicon vorhanden
 - Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
 - Cross-Browser-Check (inkl. Responsive) durchgeführt
@@ -41,7 +41,7 @@
 - WordPress Admin E-Mail-Adresse auf Kunden oder bewusst auf support@close2.de lassen
 - Passwortschutz: htaccess/htpasswd im Einsatz (für Testing aktiv, für Production inaktiv)
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
-- Backend komplett abriegeln, damit sich Kunde nicht mehr einloggt
+- Backend Testing komplett abriegeln, damit sich Kunde nicht mehr einloggt
 - Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
 
 ## POST-LAUNCH
@@ -69,3 +69,4 @@
 - Jira Ticket abgehakt
 - Offizielles Angebot durchgeschaut, ob irgendetwas fehlt
 - Abrechnung geprüft und durchgeführt
+- Wartungsvertrag (Backup+Monitoring) einrichten oder Kunden verkaufen
