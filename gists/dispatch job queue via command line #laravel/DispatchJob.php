@@ -5,7 +5,7 @@ use Illuminate\Console\Command;
 class DispatchJob extends Command
 {
     protected $signature = 'job:dispatch {job} {jobargument?}';
-    protected $description = 'Manually dispatches jobs on the command line';
+    protected $description = 'Manually dispatches jobs on the command line.';
     public function __construct()
     {
         parent::__construct();
