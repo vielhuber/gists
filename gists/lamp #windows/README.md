@@ -289,7 +289,7 @@ xdebug.var_display_max_depth = -1
   - create `%UserProfile%\.wslconfig`
   ```
   [wsl2]
-  memory=4GB
+  memory=2GB
   swap=16GB
   localhostForwarding=true
   ```
