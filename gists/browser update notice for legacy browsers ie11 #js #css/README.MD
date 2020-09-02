@@ -82,6 +82,10 @@ html.browserupdate--active {
     }
 }
 html {
+  	/* increase z-index */
+  	.buorg {
+    	z-index: 2147483647;  
+  	}
     /* colors */
     .buorg,
     .buorg b,
