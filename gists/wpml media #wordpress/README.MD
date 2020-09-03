@@ -3,6 +3,7 @@
 - WPML Media aktivieren
 - Bei Ersteinrichtung: WPML -> Einstellungen -> Media Translations alle Haken setzen und Start
 - Nach Hinzufügen einer neuen Sprache: WPML -> Einstellungen -> Media Translations > Start
+- WooCommerce: Unterschiedliche Bilder pro Produkt sind realisierbar über WPML > Media Translations > Original suchen > Sprache wählen > “Use different file”
 
 #### Empfehlung
 

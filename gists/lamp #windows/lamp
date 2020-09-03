@@ -11,6 +11,7 @@ sudo service php7.0-fpm start
 sudo service php7.1-fpm start
 sudo service php7.2-fpm start
 sudo service php7.3-fpm start
+sudo service php7.4-fpm start
 
 # restart
 elif [ $1 = "restart" ]; then
@@ -23,6 +24,7 @@ sudo service php7.0-fpm restart
 sudo service php7.1-fpm restart
 sudo service php7.2-fpm restart
 sudo service php7.3-fpm restart
+sudo service php7.4-fpm restart
 
 # stop
 elif [ $1 = "stop" ]; then
@@ -39,6 +41,7 @@ sudo service php7.0-fpm stop
 sudo service php7.1-fpm stop
 sudo service php7.2-fpm stop
 sudo service php7.3-fpm stop
+sudo service php7.4-fpm stop
 
 # add
 elif [ $1 = "add" ]; then

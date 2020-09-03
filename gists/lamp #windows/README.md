@@ -135,6 +135,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo apt-get install -y php7.1 php7.1-fpm libapache2-mod-php7.1 php7.1-mysql php7.1-cli php7.1-common php7.1-xdebug php7.1-mbstring php7.1-xmlrpc php7.1-gd php7.1-intl php7.1-xml php7.1-mysql php7.1-mcrypt php7.1-zip php7.1-soap php7.1-curl php7.1-bcmath php7.1-xml php7.1-sqlite php7.1-imap php7.1-opcache php7.1-pgsql php7.1-pdo php7.1-gd```
 - ```sudo apt-get install -y php7.2 php7.2-fpm libapache2-mod-php7.2 php7.2-mysql php7.2-cli php7.2-common php7.2-xdebug php7.2-mbstring php7.2-xmlrpc php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.2-zip php7.2-soap php7.2-curl php7.2-bcmath php7.2-xml php7.2-sqlite php7.2-imap php7.2-opcache php7.2-pgsql php7.2-pdo php7.2-gd```
 - ```sudo apt-get install -y php7.3 php7.3-fpm libapache2-mod-php7.3 php7.3-mysql php7.3-cli php7.3-common php7.3-xdebug php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-intl php7.3-xml php7.3-mysql php7.3-zip php7.3-soap php7.3-curl php7.3-bcmath php7.3-xml php7.3-sqlite php7.3-imap php7.3-opcache php7.3-pgsql php7.3-pdo php7.3-gd```
+- ```sudo apt-get install -y php7.4 php7.4-fpm libapache2-mod-php7.4 php7.4-mysql php7.4-cli php7.4-common php7.4-xdebug php7.4-mbstring php7.4-xmlrpc php7.4-gd php7.4-intl php7.4-xml php7.4-mysql php7.4-zip php7.4-soap php7.4-curl php7.4-bcmath php7.4-xml php7.4-sqlite php7.4-imap php7.4-opcache php7.4-pgsql php7.4-pdo php7.4-gd```
 - note: extensions must not be uncommented in php.ini but installed on the command line
 
 #### apache extensions
@@ -217,7 +218,7 @@ upload_max_filesize = 800M
 max_input_vars = 100000
 max_file_uploads = 5000
 realpath_cache_size = 4M
-allow_url_include = On
+#allow_url_include = On
 date.timezone = 'Europe/Berlin'
 display_errors = On
 error_log = /var/log/php-error.log
@@ -250,16 +251,19 @@ xdebug.var_display_max_depth = -1
 - ```ln -s /etc/php/custom.ini /etc/php/7.1/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.2/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/apache2/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/7.4/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.1/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.2/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/fpm/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/7.4/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.1/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.2/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/cli/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/7.4/cli/conf.d/custom.ini```
 
 #### fix small wsl warnings
 - ```sudo nano /etc/apache2/apache2.conf```
@@ -597,7 +601,7 @@ host    all   all        ::1/128        md5
 - https://medium.com/@leandrw/speeding-up-wsl-i-o-up-than-5x-fast-saving-a-lot-of-battery-life-cpu-usage-c3537dd03c74
 - Windows Defender Security Center > Viren- & Bedrohungsschutz > Einstellungen für Viren- & Bedrohungsschutz > Ausschlüsse hinzufügen oder entfernen
   - Ordner: C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc
-  - Prozesse: git, node, dpkg, php5.6, php7.0, php7.1, php7.2, php7.3, php-fpm5.6, php-fpm7.0, php-fpm7.1, php-fpm7.2, php-fpm7.3, mysql, mysqld, apache2, bash, postgres, wkhtmltopdf
+  - Prozesse: git, node, dpkg, php5.6, php7.0, php7.1, php7.2, php7.3, php7.4, php-fpm5.6, php-fpm7.0, php-fpm7.1, php-fpm7.2, php-fpm7.3, php-fpm7.4, mysql, mysqld, apache2, bash, postgres, wkhtmltopdf
 
 #### switch cli php version
 - ```sudo update-alternatives --config php```
@@ -626,8 +630,8 @@ host    all   all        ::1/128        md5
 
 #### create project
 - ```lamp add project```
-- ```lamp add project php7.3```
-- ```lamp add project php7.3 custom/subfolder/public```
+- ```lamp add project php7.4```
+- ```lamp add project php7.4 custom/subfolder/public```
 
 #### remove project
 - ```lamp remove project```
