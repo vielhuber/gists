@@ -4,6 +4,12 @@
 - A || B  # run B if and only if A failed
 - A &     # run A in background
 
+# autorun scripts
+- /etc/profile (systemwide, always run)
+- ~/.bash_profile => ~/.bash_login => ~/.profile (personal, run first found on login shells; that means if you login on local machine or via ssh)
+- ~/.bashrc (run for interactive non login shells; that means if you are already logged in and open a terminal window)
+- ~/.bash_logout (run on logout)
+
 # . and ..: name-inode maps
 - .: referring to the directory itself
 - ..: referring to the parent directory
@@ -317,3 +323,13 @@ find . -type f -name "*.txt" -print0 | xargs -0 sed -i '' -e 's/foo/bar/g' # mac
 tail -10 path/to/file.log
 tail -f path/to/file.log # live updates
 tail -f path/to/file.log | grep "string to match" # live updates and filtering
+
+# ip / networking
+ip
+ip route show
+ip address show
+ip -4 address show
+ip -color address show
+ip -6 address show
+ip -6 route show
+ip -stats -human link show
