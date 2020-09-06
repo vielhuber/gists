@@ -185,6 +185,9 @@ find /source/folder -name '.otf' -o -name '.ttf' -exec cp {} /target/folder/ \;
 # zip current directory
 zip -r file.zip .
 
+# zip specific file
+zip file.zip file.txt
+
 # zip directory without compression (only store)
 zip -r -0 file.zip .
 
