@@ -160,9 +160,19 @@ $DOMXPath->query('.//node()', $node);
 $DOMXPath->evaluate('count(./node())', $node);
 ```
 
-### get text siblings including oneself of text node
+### get text siblings (including oneself if text node) node
 ```php
 $DOMXPath->query('./../text()[normalize-space()]', $node);
+```
+
+### get text siblings that are longer than 3 chars
+```php
+$DOMXPath->query('./../text()[normalize-space()][string-length() > 3]', $node);
+```
+
+### get text siblings that are longer than 1 char (excluding whitespace)
+```php
+$DOMXPath->query('./../text()[normalize-space()][string-length(normalize-space(.)) > 1]', $node);
 ```
 
 ### get direct sibling of node

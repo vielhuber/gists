@@ -7,6 +7,7 @@ do sanitization when accepting input and storing it to the database.
 - `sanitize_textarea_field()`
 - `sanitize_email()`
 - `wp_filter_post_kses()`
+- `wp_kses_post()`
 
 #### more functions
 - `sanitize_user()`
