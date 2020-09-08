@@ -22,3 +22,6 @@ document.cookie = 'cookie_name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'+
 - recommendation: set SameSite=None AND Secure on https sites to avoid third party cookie errors
 - warning: also unsetting cookies needs the samesite argument
 - this is needed on chrome >= 80
+
+// note on subdomains
+- if you want to set cookies for all domains and subdomains (and vice versa), add ";domain=tld.com"
