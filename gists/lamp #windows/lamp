@@ -6,6 +6,7 @@ if [ $1 = "start" ]; then
 sudo service apache2 start
 sudo service mysql start
 sudo service postgresql start
+mkdir -p /run/php/
 sudo service php5.6-fpm start
 sudo service php7.0-fpm start
 sudo service php7.1-fpm start
@@ -19,6 +20,7 @@ elif [ $1 = "restart" ]; then
 sudo service apache2 restart
 sudo service mysql restart
 sudo service postgresql restart
+mkdir -p /run/php/
 sudo service php5.6-fpm restart
 sudo service php7.0-fpm restart
 sudo service php7.1-fpm restart
