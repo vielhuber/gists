@@ -3,6 +3,7 @@
 - A && B  # run B if and only if A succeeded
 - A || B  # run B if and only if A failed
 - A &     # run A in background
+- { A && B; } || { C && D; }      # run A and B if A succeeded; if A or B failed, run C and D if C succeeded
 
 # autorun scripts
 - /etc/profile (systemwide, always run)
