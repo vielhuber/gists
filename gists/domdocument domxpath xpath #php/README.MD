@@ -136,14 +136,17 @@ if($node->nodeName === '#text') {}
 $node->tagName
 ```
  
-### get/set content of text value
+### get/set content of text node
 ```php
 // difference: https://stackoverflow.com/questions/12380919/php-dom-textcontent-vs-nodevalue
 $node->nodeValue
 $node->textContent
-
-// this is important: domdocument set strings with encoded html chars
-// for text nodes as plain text (and not html)
+// reading (this is important): if you fetch the variable of a text node with nodeValue (or even textContent)
+// the content is automatically is encoded (what we usually don't want)
+// we use htmlentities (or the even weaker htmlspecialchars) to revert that
+htmlentities($node->nodeValue)
+htmlspecialchars($node->nodeValue)
+// writing (this is important): domdocument sets strings with encoded html chars for text nodes as plain text (and not html)
 // we therefore use the parent node and set the node value accordingly
 $node->parentNode->nodeValue = 'That&#39;s cool';
 // if you don't want to lose the text node, you can do:
