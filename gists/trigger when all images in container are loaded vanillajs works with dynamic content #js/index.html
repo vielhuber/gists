@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>.</title>
+        <script>
+            triggerAfterAllImagesLoaded('.container', '.container__image', () => {
+                document.querySelector('.status').textContent =
+                    ('0' + new Date().getHours()).slice(-2) +
+                    ':' +
+                    ('0' + new Date().getMinutes()).slice(-2) +
+                    ':' +
+                    ('0' + new Date().getSeconds()).slice(-2);
+            });
+
+            function triggerAfterAllImagesLoaded(selectorContainer, selectorImage, fn) {
+                window.addEventListener('load', (e) => {
+                    if (document.querySelector(selectorContainer + ' ' + selectorImage) !== null) {
+                        document.querySelectorAll(selectorContainer + ' ' + selectorImage).forEach((el) => {
+                            triggerAfterAllImagesLoadedBindLoadEvent(el, selectorContainer, selectorImage, fn);
+                        });
+                    }
+                });
+                document.addEventListener('DOMContentLoaded', () => {
+                    if (document.querySelector(selectorContainer) !== null) {
+                        new MutationObserver((mutations) => {
+                            mutations.forEach((mutation) => {
+                                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                                    mutation.addedNodes.forEach((el) => {
+                                        triggerAfterAllImagesLoadedHandleEl(el, selectorContainer, selectorImage, fn);
+                                    });
+                                } else if (
+                                    mutation.type === 'attributes' &&
+                                    mutation.attributeName === 'src' &&
+                                    mutation.target.classList.contains(selectorImage.replace('.', '')) &&
+                                    mutation.oldValue !== mutation.target.getAttribute('src')
+                                ) {
+                                    triggerAfterAllImagesLoadedHandleEl(
+                                        mutation.target,
+                                        selectorContainer,
+                                        selectorImage,
+                                        fn
+                                    );
+                                }
+                            });
+                        }).observe(document.querySelector(selectorContainer), {
+                            attributes: true,
+                            childList: true,
+                            characterData: false,
+                            subtree: true,
+                            attributeOldValue: true,
+                            characterDataOldValue: false,
+                        });
+                    }
+                });
+            }
+
+            function triggerAfterAllImagesLoadedHandleEl(el, selectorContainer, selectorImage, fn) {
+                if (el.nodeType === Node.ELEMENT_NODE) {
+                    el.classList.remove('loaded-img');
+                    el.closest(selectorContainer).classList.remove('loaded-all');
+                    // only bind if not yet binded
+                    if (!el.classList.contains('binded-trigger')) {
+                        el.classList.add('binded-trigger');
+                        el.addEventListener('load', () => {
+                            triggerAfterAllImagesLoadedBindLoadEvent(el, selectorContainer, selectorImage, fn);
+                        });
+                    }
+                }
+            }
+
+            function triggerAfterAllImagesLoadedBindLoadEvent(el, selectorContainer, selectorImage, fn) {
+                el.classList.add('loaded-img');
+                if (
+                    el.closest(selectorContainer).querySelectorAll('.loaded-img').length ===
+                    el.closest(selectorContainer).querySelectorAll(selectorImage).length
+                ) {
+                    el.closest(selectorContainer).classList.add('loaded-all');
+                    fn();
+                }
+            }
+
+            /* test */
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.test').forEach((el) => {
+                    el.addEventListener('click', (e) => {
+                        let url = null;
+                        if (e.currentTarget.getAttribute('data-type') === 'remote') {
+                            let d =
+                                ('0' + new Date().getHours()).slice(-2) +
+                                ':' +
+                                ('0' + new Date().getMinutes()).slice(-2) +
+                                ':' +
+                                ('0' + new Date().getSeconds()).slice(-2);
+                            url = 'https://via.placeholder.com/728x90.png?text=' + d;
+                        } else {
+                            if (~~(Math.random() * (1 - 0 + 1)) + 0 === 0) {
+                                url = '1.jpg';
+                            } else {
+                                url = '2.jpg';
+                            }
+                        }
+                        if (e.currentTarget.getAttribute('data-action') === 'html') {
+                            document.querySelector('.container').innerHTML = `
+                                <img class="container__image" src="${url}" alt="" />
+                                <img class="container__image" src="${url}" alt="" />
+                                <img class="container__image" src="${url}" alt="" />
+                            `;
+                        } else {
+                            document
+                                .querySelector(
+                                    '.container__image:nth-child(' + (~~(Math.random() * (3 - 1 + 1)) + 1) + ')'
+                                )
+                                .setAttribute('src', url);
+                        }
+                        e.preventDefault();
+                    });
+                });
+            });
+        </script>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            .status {
+                color: red;
+            }
+            .loaded-img {
+                border: 5px solid green;
+            }
+            .loaded-all {
+                background-color:lightgreen;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="#" data-action="html" data-type="remote" class="test">innerHTML (remote)</a>
+        <a href="#" data-action="attribute" data-type="remote" class="test">Attribute (remote)</a>
+        <a href="#" data-action="html" data-type="local" class="test">innerHTML (local)</a>
+        <a href="#" data-action="attribute" data-type="local" class="test">Attribute (local)</a>
+
+        <div class="status"></div>
+
+        <div class="container">
+            <img class="container__image" src="1.jpg" alt="" />
+            <img class="container__image" src="2.jpg" alt="" />
+            <img class="container__image" src="1.jpg" alt="" />
+        </div>
+    </body>
+</html>
