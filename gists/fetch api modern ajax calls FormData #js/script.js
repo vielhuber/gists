@@ -35,7 +35,13 @@ fetch(
 fetch('http://example.com/movies.json').then(res => res.json()).then(response => { console.log('Success:', response); });
 fetch('http://example.com/movies.json').then(res => res.json()).catch(error => { console.error('Error:', error); return error; }).then(response_or_error => console.log(response_or_error));
 
-fetch('http://example.com/movies.json').then(v=>v).catch(v=>v).then(data => { console.log(data); }); 
+fetch('http://example.com/movies.json').then(v=>v).catch(v=>v).then(data => { console.log(data); });
+
+/* pass object to GET request */
+fetch('http://example.com/foo?' + (new URLSearchParams(Object.entries({'zip': '94036', 'location': 'Passau', 'street': 'Baumannstraße'}))))
+
+/* add current client cookies to request (by default, fetch does NOT do this) */
+fetch('http://example.com/movies.json', { method: 'GET', credentials: 'include' })
 
 /* here is a way to construct the body data from a dom form automatically */
 let body = {},
