@@ -1,5 +1,5 @@
-/* blur everything */
-filter: blur(1px);
+/* blur everything (this has issues with absolute positioned elements) */
+filter: blur(5px);
 
-/* blur like a mirror */
+/* blur like a mirror (also works for full pages) */
 backdrop-filter: blur(5px);

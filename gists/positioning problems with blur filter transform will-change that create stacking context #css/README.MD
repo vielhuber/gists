@@ -7,7 +7,7 @@
   - `transform-style`
   - `will-change`
 - all child elements, that are positioned absolute/fixed, are not working anymore as expected!
-- there is currently no real fix available ("it's a feature, not a bug")
+- workaround: just use `backdrop-filter` instead of `filter`!
 
 ```html
 <div class="foo">

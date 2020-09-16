@@ -421,6 +421,20 @@ Usage: git acp
     - git fetch origin
     - git reset --hard origin/master
 
+## fix corrupt repo
+
+- messages
+  - error: object file .git/objects/... is empty
+  - fatal: loose object ... (stored in .git/objects/...) is corrupt
+- fix
+  - cp -R project project-backup # create backup (if needed)
+  - git clone xxx/xxx.git project-restore
+  - cd project-restore && git checkout feature/foo # checkout specific branch (if needed)
+  - rm -rf project/.git
+  - mv project-restore/.git project
+  - rm -rf project-restore
+  - rm -rf project-backup # delete backup (if needed)
+
 ## make a release of current development branch and push it on master
 
 ### PRODUCTION
