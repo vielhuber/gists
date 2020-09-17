@@ -262,16 +262,40 @@ stat -c "%a %n" file
 ls -ld folder
 stat -c "%a %n" folder
 
+# set permissions
+- chmod u=rwx,g=rwx,o=rwx file
+- chmod 777 file
+- r = 4
+- w = 2
+- x = 1
+- - = 0
+
+# file permissions explained
+ABCDEFGHIJ 
+A: file type (- file, d dir, i link)
+B: file permission of owner/user (r = read, - = no read)
+C: file permission of owner/user (w = write, - = no write)
+D: file permission of owner/user (e = execute, - = no execute)
+E: file permission of group (r = read, - = no read)
+F: file permission of group (w = write, - = no write)
+G: file permission of group (e = execute, - = no execute)
+H: file permission of other users (r = read, - = no read)
+I: file permission of other users (w = write, - = no write)
+J: file permission of other users (e = execute, - = no execute)
+
+# owner/user/group
+ls -l /path/to/file # fetch user and group of file
+chown -R username /path # change owner
+chown -R username:group /path # change owner and group
+chown -R username: /path # change owner and set group to users login group
+chown -R :group /path # change group
+chgrp -R group /path # change group
+
 # set permissions (the correct way)
 chmod 755 /path/to/folder # only for folder itself, not recursively for all folders AND files
 chmod 644 /path/to/file
 find /path/to/folder -type d -exec chmod 755 {} \; # then for all subfolders
 find /path/to/folder -type f -exec chmod 644 {} \; # then for all files
-
-# owner/user/group
-ls -l /path/to/file # fetch user and group of file
-chown -R username /path
-chown -R username:group /path
 
 # create a symlink
 ln -s /path/to/folder /path/to/symlink

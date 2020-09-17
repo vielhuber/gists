@@ -141,7 +141,7 @@ $node->tagName
 // difference: https://stackoverflow.com/questions/12380919/php-dom-textcontent-vs-nodevalue
 $node->nodeValue
 $node->textContent
-// reading (this is important): if you fetch the variable of a text node with nodeValue (or even textContent)
+// reading (this is important): if you fetch the variable of a text node with nodeValue (or even textContent) and also getAttribute
 // the content is automatically is encoded (what we usually don't want)
 // we use htmlentities (or the even weaker htmlspecialchars) to revert that
 htmlentities($node->nodeValue)

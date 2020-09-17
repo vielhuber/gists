@@ -265,6 +265,12 @@ xdebug.var_display_max_depth = -1
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.4/cli/conf.d/custom.ini```
 
+#### correct local environment permissions
+- ```adduser $USER www-data``` # add current user to www-data group
+- ```chgrp -R www-data /var/www``` # change group to www-data group
+- ```chmod g+rwx -R /var/www``` # give group all permissions
+- ```chmod g+s /var/www``` # set group id (sticky bit), so that new files inherit the group www-data
+
 #### fix small wsl warnings
 - ```sudo nano /etc/apache2/apache2.conf```
 - AcceptFilter https none
