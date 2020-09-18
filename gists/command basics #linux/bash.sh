@@ -153,6 +153,9 @@ pwd
 # show current user
 whoami
 
+# switch user
+su -s /bin/bash customuser
+
 # show calendar
 cal -3 -y
 
@@ -265,10 +268,15 @@ stat -c "%a %n" folder
 # set permissions
 - chmod u=rwx,g=rwx,o=rwx file
 - chmod 777 file
+- chmod o+rwx file # add rwx execution rights to others group
 - r = 4
 - w = 2
 - x = 1
 - - = 0
+
+# allow script to be run as root from another user
+- EDITOR=nano sudo -E visudo
+- customuser ALL=(ALL) NOPASSWD: /path/to/script.sh
 
 # file permissions explained
 ABCDEFGHIJ 

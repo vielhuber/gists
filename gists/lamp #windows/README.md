@@ -467,6 +467,10 @@ host    all   all        ::1/128        md5
 - ```rm master.zip```
 - ```cpdf --help```
 
+#### msgconvert
+- ```sudo apt-get install libemail-outlook-message-perl```
+- ```msgconvert --version```
+
 #### jpegoptim
 - ```sudo apt-get install jpegoptim```
 
