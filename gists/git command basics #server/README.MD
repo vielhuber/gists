@@ -43,10 +43,10 @@
 #### settings
 
 ##### git config locations (down to up)
-- C:\Program Files (x86)\Git\etc\gitconfig    # system
-- C:\Users\David\.gitconfig                   # user/global
-- C:\MAMP\htdocs\vielhuber.de\.git\config     # project
-- git config --list --show-origin             # see where your config settings come from
+- `/etc/gitconfig` # system (often empty)
+- `~/.gitconfig` # global/user
+- `/var/www/project/.git/config` # project
+- `git config --list --show-origin` # see where your config settings come from
 
 ##### ignore warnings for line endings
 - git config --global core.safecrlf false

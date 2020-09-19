@@ -265,11 +265,20 @@ xdebug.var_display_max_depth = -1
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.4/cli/conf.d/custom.ini```
 
-#### correct local environment permissions
-- ```adduser $USER www-data``` # add current user to www-data group
-- ```chgrp -R www-data /var/www``` # change group to www-data group
-- ```chmod g+rwx -R /var/www``` # give group all permissions
-- ```chmod g+s /var/www``` # set group id (sticky bit), so that new files inherit the group www-data
+#### local environment permissions
+- reset
+  - `chown -R root:root /var/www`
+  - `chmod 755 /var`
+  - `chmod 755 /var/www`
+  - `find /var/www -type d -exec chmod 755 {} \;`
+  - `find /var/www -type f -exec chmod 644 {} \;`
+- run php as root
+  - `nano /etc/php/X.X/fpm/pool.d/www.conf`
+    - `user = root`
+    - `group = root`
+  - `nano /etc/init.d/phpX.X-fpm`
+    - `DAEMON_ARGS="-R --daemonize --fpm-config $CONFFILE"`
+  - `service phpX.X-fpm restart`
 
 #### fix small wsl warnings
 - ```sudo nano /etc/apache2/apache2.conf```
@@ -291,8 +300,6 @@ xdebug.var_display_max_depth = -1
   - OBSOLET: etc/hosts: 172.31.142.215 ***.vielhuber.de
   - OBSOLET: Oder alternativ bei DF von 192.168.188.22 auf 172.31.142.215 setzen (muss ich später wieder rückgängig machen!)
   - OBSOLET: etc/hosts: #127.0.0.1      localhost und #::1             localhost einkommentieren
-- apache permissions
-  - `chown -R www-data /var/www`
 - php error
   - `mkdir -p /run/php/`
 - ram overload

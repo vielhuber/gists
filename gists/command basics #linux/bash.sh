@@ -268,7 +268,8 @@ stat -c "%a %n" folder
 # set permissions
 - chmod u=rwx,g=rwx,o=rwx file
 - chmod 777 file
-- chmod o+rwx file # add rwx execution rights to others group
+- chmod o+rwx file # add rwx rights to others group
+- chmod +x file # add execution rights to all groups (same as chmod a+x file)
 - r = 4
 - w = 2
 - x = 1
@@ -299,11 +300,12 @@ chown -R username: /path # change owner and set group to users login group
 chown -R :group /path # change group
 chgrp -R group /path # change group
 
-# set permissions (the correct way)
-chmod 755 /path/to/folder # only for folder itself, not recursively for all folders AND files
-chmod 644 /path/to/file
-find /path/to/folder -type d -exec chmod 755 {} \; # then for all subfolders
-find /path/to/folder -type f -exec chmod 644 {} \; # then for all files
+# reset permissions for /var/www (the correct way)
+chown -R root:root /var/www
+chmod 755 /var
+chmod 755 /var/www # only for folder itself, not recursively for all folders AND files
+find /var/www -type d -exec chmod 755 {} \; # then for all subfolders
+find /var/www -type f -exec chmod 644 {} \; # then for all files
 
 # create a symlink
 ln -s /path/to/folder /path/to/symlink
