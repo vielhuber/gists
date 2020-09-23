@@ -280,6 +280,12 @@ stat -c "%a %n" folder
 - customuser ALL=(ALL) NOPASSWD: /path/to/script.sh
 
 # file permissions explained
+- Files and folders belong to a user (he is the owner).
+- Files and folders are assigned to a group.
+- The owner does not necessarily have to be part of the group.
+- All users that are not owners or belong to the assigned group are treated with the others class.
+- It is checked in descending order if a user is the user/owner, then if it belongs to the group, otherwise it is others.
+
 ABCDEFGHIJ 
 A: file type (- file, d dir, i link)
 B: file permission of owner/user (r = read, - = no read)
