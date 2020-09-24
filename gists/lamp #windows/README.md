@@ -302,6 +302,8 @@ xdebug.var_display_max_depth = -1
   - OBSOLET: etc/hosts: #127.0.0.1      localhost und #::1             localhost einkommentieren
 - php error
   - `mkdir -p /run/php/`
+- remove zone identifier files
+  - `find . -name "*:Zone.Identifier" -type f -delete`
 - ram overload
   - create `%UserProfile%\.wslconfig`
   ```

@@ -22,7 +22,7 @@
   - `chmod g+s /var/www` # set group id (sticky bit), so that new files set the group www-data (and not the owners group)
 - nachteile
   - rsync, git, ..., können rechte zerstören
-  - im wordpress backend kommen warnungen (von z.B. w3 total cache), dass die standardrchte 755/644 nicht gesetzt sind
+  - im wordpress backend kommen warnungen (von z.B. w3 total cache), dass die standardrechte 755/644 nicht gesetzt sind
   
 #### #2: php als root ausführen (empfohlene lösung für lokale entwicklungsumgebung)
 - `chown -R root:root /var/www`
