@@ -89,14 +89,24 @@
 
 #### smartgit
 
-- `cd usr/local`
-- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-20_1_4.tar.gz .`
+- `cd /usr/local`
+- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-20_1_4.tar.gz`
 - `tar xzf smartgit-linux-20_1_4.tar.gz`
 - `rm smartgit-linux-20_1_4.tar.gz`
 - `nano usr/local/bin/sgit`
 - `( /usr/local/smartgit/bin/smartgit.sh & ) > /dev/null 2>&1`
 - `chmod +x usr/local/bin/sgit`
 - `sgit`
+- Non-commercial use only
+- User Name: David Vielhuber
+- Email: david@vielhuber.de
+- Use SmartGit as SSH client
+- Style: Working Tree
+- Edit > Preferences > User Interface > Dark (independent of system)
+- Edit > Preferences > User Interface > On start-up: Open the last used repositories AUS
+- Repository > Search for Repositories > /var/www
+- Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
+- Wenn non-commercial Lizenz abläuft: rm -rf ~/.config/smartgit/
 
 #### pimp command line
 - ```sudo nano ~/.bash_profile```

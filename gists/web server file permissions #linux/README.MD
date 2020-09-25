@@ -34,13 +34,14 @@
 - `sudo service php7.4-fpm restart`
 - hinweise: wir bearbeiten `/etc/init.d/php7.4-fpm` und nicht `/lib/systemd/system/php7.4-fpm.service`, da wsl service (init.d) statt systemctl (systemd) benutzt
   
-#### #3: restriktiver zugriff
+#### #3: owner auf root, gruppe auf apache setzen (empfohlene lösung für sichere server)
 - setup
   - man setzt die werte auf default werte (755, 644, root:www-data)
   - nun kann der apache (bewusst) nicht mehr schreiben
   - man gibt einzelnen ordnern schreibrechte ("uploads", "cache")
 - nachteile
   - wordpress backend updates nicht mehr möglich
+  - in den ordnern mit schreibrechten gibt es ggf. unterschiedliche rechte, was zu problemen führen kann (wordpress ansatz hier: ftp user credentials)
 
 #### #4: apache als lokaler user ausführen
 - setup

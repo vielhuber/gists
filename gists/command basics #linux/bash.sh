@@ -285,6 +285,8 @@ stat -c "%a %n" folder
 - The owner does not necessarily have to be part of the group.
 - All users that are not owners or belong to the assigned group are treated with the others class.
 - It is checked in descending order if a user is the user/owner, then if it belongs to the group, otherwise it is others.
+- Only the owner and root (super user) are allowed to the change the permission of a file or directory.
+- Only root (super user) is allowed to change the ownership (user/group) a file or directory (Exception: The owner of a file can change the group ownership of that file if the user is member of the new group)
 
 ABCDEFGHIJ 
 A: file type (- file, d dir, i link)
