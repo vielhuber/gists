@@ -129,6 +129,12 @@ $DOMXPath->query('//*[contains(concat(" ", normalize-space(@class), " "), " foo 
 ### check if is text node
 ```php
 if($node->nodeName === '#text') {}
+if($node->nodeType === 3) {}
+```
+
+### check if is dom/element node
+```php
+if($node->nodeType === 1) {}
 ```
  
 ### get tag name of node
