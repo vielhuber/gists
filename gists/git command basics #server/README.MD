@@ -316,18 +316,19 @@ Usage: git acp
 #### how to merge without a commit
 - git merge branch --no-commit --no-ff
 
-#### put together all commits from branch in one single commit (good for code reviews)
+#### put together / squash all commits from branch in one single commit (good for code reviews)
+##### in another branch (recommended)
+- `git checkout master` # switch to branch to compare to
+- `git checkout -b special-branch--squashed` # create new branch from it
+- `git merge --squash special-branch` # merge branch with changes into current branch
+- do code review
+- `git branch --delete special-branch--squashed` # delete special branch locally
+
 ##### in master
 - git checkout master
 - git merge --squash feature/XX-XX
 - git commit -m "feature/XX-XX"
 - git push origin HEAD
-
-##### in another branch
-- git checkout master # branch to compare to
-- git checkout -b special-branch--squashed
-- git merge --squash special-branch
-
 
 ## conflicts
 
