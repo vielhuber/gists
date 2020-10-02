@@ -104,6 +104,7 @@
 - Style: Working Tree
 - Edit > Preferences > User Interface > Dark (independent of system)
 - Edit > Preferences > User Interface > On start-up: Open the last used repositories AUS
+- Edit > Preferences > User Interface > Built-in Text Editors > Font Size: 9
 - Repository > Search for Repositories > /var/www
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
 - Wenn non-commercial Lizenz abläuft: rm -rf ~/.config/smartgit/
@@ -312,6 +313,8 @@ xdebug.var_display_max_depth = -1
   - OBSOLET: etc/hosts: #127.0.0.1      localhost und #::1             localhost einkommentieren
 - php error
   - `mkdir -p /run/php/`
+- /tmp clean
+  - `find /tmp -ctime +2 -exec rm -rf {} +`
 - remove zone identifier files
   - `find . -name "*:Zone.Identifier" -type f -delete`
 - ram overload
