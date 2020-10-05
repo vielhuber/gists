@@ -174,7 +174,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo a2dissite 000-default.conf```
 
 #### ssl
-- create a real let's encrypt certificate via https://gethttpsforfree.com/
+- create a real let's encrypt certificate via https://punchsalad.com/ssl-certificate-generator/
 - Domain: *.local.vielhuber.de
 - DNS-verification via txt-record over DomainFactory
 - domain.key => \\wsl$\Ubuntu\var\www\lamp\ssl.key
