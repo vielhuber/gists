@@ -358,13 +358,24 @@ xdebug.var_display_max_depth = -1
 - ```sudo apt-get update && sudo apt-get install yarn```
 
 #### python
-- ```sudo apt-get update```
-- ```sudo apt-get install python python-pip python3 python3-pip```
-- ```sudo python --version```
-- ```sudo pip --version```
-- ```sudo python3 --version```
-- ```sudo pip3 --version```
-- ```cd /usr/bin && sudo rm python && ln -s ./python3 ./python``` (currently not active)
+- install python 2
+  - ```sudo apt-get update```
+  - ```sudo apt-get install python python-pip```
+  - ```python --version```
+  - ```pip --version```
+- install python 3.5
+  - ```sudo apt-get update```
+  - ```sudo apt-get install python3 python3-pip```
+  - ```python3 --version```
+  - ```pip3 --version```
+- install python 3.6
+  - ```sudo add-apt-repository ppa:deadsnakes/ppa```
+  - ```sudo apt-get update```
+  - ```sudo apt-get install python3.6```
+  - ```python3.6 --version```
+  - ```python3.6 -m pip --version```
+- change default version (currently not done)
+  - ```cd /usr/bin && sudo rm python && ln -s ./python3 ./python```
 
 #### blackfire.io php debugger
 
