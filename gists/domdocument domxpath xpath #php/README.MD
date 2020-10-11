@@ -64,6 +64,7 @@ foreach($nodes as $nodes__value) {
 ```php
 $nodes = $DOMXPath->query('/html/body//*[@id="foo"]');
 if( $nodes->length > 0 ) {}
+if( count($nodes) > 0 ) {}
 ```
 
 ### get first item
@@ -246,6 +247,17 @@ if ($parent->hasChildNodes()) {
 }
 ```
 
+### insert before
+```php
+$node->parentNode->insertBefore($newNode, $node);
+```
+
+### insert after
+```
+if($node->nextSibling === null) { $node->parentNode->appendChild($newNode); }
+else { $node->parentNode->insertBefore($newNode, $node->nextSibling);  }
+```
+
 ### remove node
 ```php
 $node->parentNode->removeChild($node);
@@ -293,4 +305,27 @@ if ($value != '') {
         }
     }
 }
+```
+
+### load xml
+```php
+$DOMDocument = new \DOMDocument();
+@$DOMDocument->loadXML($html);
+$DOMXPath = new \DOMXPath($DOMDocument);
+```
+
+### write xml
+```php
+$html = $DOMDocument->saveXML();
+```
+
+### if domdocument is from xml
+```php
+if($dom->xmlVersion != '') {}
+```
+
+### search in all namespaces
+```php
+$DOMXPath->query('//loc'); // this does not work, if the <loc> nodes are inside a socalled namespace (<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">)
+$DOMXPath->query('//*[name()=\'loc\']'); // this works in all namespaces
 ```
