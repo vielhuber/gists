@@ -1,0 +1,1 @@
+ssh -TNL 5001:/var/lib/mysql/mysql.sock username@domain # then connect via localhost:5001 to mysql db
