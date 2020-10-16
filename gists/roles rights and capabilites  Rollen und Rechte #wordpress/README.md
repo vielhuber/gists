@@ -1,8 +1,8 @@
-| label (en) | label (de) | explanation | check | strict check |
-|---|---|---|---|---|
-| Super Admin | Super Administrator | master of multisite | ```current_user_can('manage_network')``` |```current_user_can('manage_network')``` |
-| Administrator | Administrator | master of single site | ```current_user_can('manage_options')``` |```current_user_can('manage_options')&&!current_user_can('manage_network')``` |
-| Editor | Redakteur | publish / manage posts AND pages (also of others) | ```current_user_can('edit_others_posts')``` |```current_user_can('edit_others_posts')&&!current_user_can('manage_options')``` |
-| Author | Autor | publish / manage posts (only own) | ```current_user_can('publish_posts')``` |```current_user_can('publish_posts')&&!current_user_can('edit_others_posts')``` |
-| Contributor | Mitarbeiter | manage posts (only own) | ```current_user_can('edit_posts')``` |```current_user_can('edit_posts')&&!current_user_can('publish_posts')``` |
-| Subscriber | Abonnent | manage profile | ```current_user_can('read')``` |```current_user_can('read')&&!current_user_can('edit_posts')``` |
+| label (en) | label (de) | key | explanation | strict check | minimum check | strict check |
+|---|---|---|---|---|---|---|
+| Super Admin | Super Administrator | – | master of multisite | ```is_super_admin()``` | ```current_user_can('manage_network')``` |```current_user_can('manage_network')``` |
+| Administrator | Administrator | administrator | master of single site | ```in_array('administrator', (array) wp_get_current_user()->roles)``` | ```current_user_can('manage_options')``` |```current_user_can('manage_options')&&!current_user_can('manage_network')``` |
+| Editor | Redakteur | editor | publish / manage posts AND pages (also of others) | ```in_array('editor', (array) wp_get_current_user()->roles)``` | ```current_user_can('edit_others_posts')``` |```current_user_can('edit_others_posts')&&!current_user_can('manage_options')``` |
+| Author | Autor | author | publish / manage posts (only own) | ```in_array('author', (array) wp_get_current_user()->roles)``` | ```current_user_can('publish_posts')``` |```current_user_can('publish_posts')&&!current_user_can('edit_others_posts')``` |
+| Contributor | Mitarbeiter | contributor | manage posts (only own) | ```in_array('contributor', (array) wp_get_current_user()->roles)``` | ```current_user_can('edit_posts')``` |```current_user_can('edit_posts')&&!current_user_can('publish_posts')``` |
+| Subscriber | Abonnent | subscriber | manage profile | ```in_array('subscriber', (array) wp_get_current_user()->roles)``` | ```current_user_can('read')``` |```current_user_can('read')&&!current_user_can('edit_posts')``` |
