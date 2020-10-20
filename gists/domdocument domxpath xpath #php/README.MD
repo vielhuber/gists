@@ -307,6 +307,16 @@ if ($value != '') {
 }
 ```
 
+### replace node with string
+```php
+$str = '<strong>String that replaces the node</strong>';
+$tmp = new \DOMDocument();
+$str = mb_convert_encoding($str, 'HTML-ENTITIES', 'UTF-8');
+$tmp->loadHTML($str, LIBXML_HTML_NOIMPLIED);
+$repl = $DOMDocument->importNode($tmp->documentElement, true);
+$node->parentNode->replaceChild($repl, $node);
+```
+
 ### load xml
 ```php
 $DOMDocument = new \DOMDocument();
