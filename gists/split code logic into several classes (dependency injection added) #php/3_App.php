@@ -4,6 +4,7 @@ namespace Example;
 
 class App
 {
+  	/* this is not strictly necessary */
     private $test1;
     private $test2;
     private $test3;

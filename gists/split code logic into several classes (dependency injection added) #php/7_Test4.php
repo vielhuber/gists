@@ -4,6 +4,7 @@ namespace Example;
 
 class Test4
 {
+  	/* this is not strictly necessary */
   	public $test2;
   	public $test3;
   
