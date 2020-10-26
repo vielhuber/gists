@@ -307,6 +307,15 @@ if ($value != '') {
 }
 ```
 
+### string to single node
+```php
+$DOMDocument = new \DOMDocument(); // master dom document (needed for reference)
+$str = mb_convert_encoding($str, 'HTML-ENTITIES', 'UTF-8');
+$tmp = new \DOMDocument();
+$tmp->loadHTML($str, LIBXML_HTML_NOIMPLIED);
+$node = $DOMDocument->importNode($tmp->documentElement,true);
+```
+
 ### replace node with string
 ```php
 $str = '<strong>String that replaces the node</strong>';
