@@ -312,6 +312,7 @@ Usage: git acp
 
 #### undo (comitted) changes from a merge where no conflicts appeared
 - git reset --merge ORIG_HEAD
+- git reset --hard origin/master # if the command above is not working
 
 #### how to merge without a commit
 - git merge branch --no-commit --no-ff

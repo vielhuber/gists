@@ -34,4 +34,41 @@ add_action('plugins_loaded', function () {
 
 // your code (like in functions.php)
 /* ... */
-echo __('String', 'my-plugin');
+add_action('after_setup_theme', function () {
+	echo __('String', 'my-plugin');
+});
+
+// run migrations on plugin update
+add_action('after_setup_theme', function () {
+    if( !is_admin() && !in_array($GLOBALS['pagenow'], ['wp-login.php', 'wp-register.php']) ) {
+        return;
+    }
+    $version_prev = get_option('my-plugin_plugin_version');
+    $version_next = get_file_data(__FILE__, ['Version' => 'Version'], false)['Version'];
+    if ($version_prev === false || $version_prev === null || $version_prev === '') {
+        $version_prev = $version_next;
+    }
+    // debug
+    //$version_prev = '4.9.5';
+    if ($version_next === $version_prev) {
+        return;
+    }
+    $migrations = [
+        '4.9.6' => function () {
+            // running update 4.9.6
+        },
+        '4.9.7' => function () {
+            // running update 4.9.7
+        }
+        /* ... */
+    ];
+    foreach ($migrations as $migrations__key => $migrations__value) {
+        if (
+            intval(str_replace('.', '', $migrations__key)) > intval(str_replace('.', '', $version_prev)) &&
+            intval(str_replace('.', '', $migrations__key)) <= intval(str_replace('.', '', $version_next))
+        ) {
+            $migrations__value();
+        }
+    }
+    update_option('my-plugin_plugin_version', $version_next);
+});
