@@ -279,10 +279,10 @@ xdebug.var_display_max_depth = -1
 #### local environment permissions
 - reset
   - `chown -R root:root /var/www`
-  - `chmod 755 /var`
-  - `chmod 755 /var/www`
-  - `find /var/www -type d -exec chmod 755 {} \;`
-  - `find /var/www -type f -exec chmod 644 {} \;`
+  - `chmod 00755 /var`
+  - `chmod 00755 /var/www`
+  - `find /var/www -type d -exec chmod 00755 {} \;`
+  - `find /var/www -type f -exec chmod 00644 {} \;`
 - run php as root
   - `nano /etc/php/X.X/fpm/pool.d/www.conf`
     - `user = root`

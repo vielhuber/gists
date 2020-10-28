@@ -270,10 +270,6 @@ stat -c "%a %n" folder
 - chmod 777 file
 - chmod o+rwx file # add rwx rights to others group
 - chmod +x file # add execution rights to all groups (same as chmod a+x file)
-- r = 4
-- w = 2
-- x = 1
-- - = 0
 
 # allow script to be run as root from another user
 - EDITOR=nano sudo -E visudo
@@ -300,6 +296,25 @@ H: file permission of other users (r = read, - = no read)
 I: file permission of other users (w = write, - = no write)
 J: file permission of other users (e = execute, - = no execute)
 
+# setuid / setgid / sticky bit
+- the first bit in octal notation is often omitted ("0")
+- be aware: chmod 0755 does not clear the first bit (on linux); fix: add a double zero!
+- setuid (4/s)
+  - files with this bit can be executed with the privileges of the file\'s owner (must be used carefully only in spoecial cases)
+- setgid (2/s)
+  - files with this bit can be executed with the privileges of the file\'s group (must be used carefully only in spoecial cases)
+  - folders with this bit have the property, that all newly created files and folders within this folder inherit the group from that directory (and not the group of the creator as it is by default)
+- sticky bit (1/t)
+  - folders with this bit have the property, that all files or folders inside this folder can only be moved or deleted by the owner of this directory (and not by other users that have access)
+
+# convert permission in human readable format to octal format
+- r = 4
+- w = 2
+- x = 1
+- - = 0
+- (B+C+D)(E+F+G)(H+I+J)
+- example: 770 <=> -rwerwe---
+
 # owner/user/group
 ls -l /path/to/file # fetch user and group of file
 chown -R username /path # change owner
@@ -310,10 +325,10 @@ chgrp -R group /path # change group
 
 # reset permissions for /var/www (the correct way)
 chown -R root:root /var/www
-chmod 755 /var
-chmod 755 /var/www # only for folder itself, not recursively for all folders AND files
-find /var/www -type d -exec chmod 755 {} \; # then for all subfolders
-find /var/www -type f -exec chmod 644 {} \; # then for all files
+chmod 00755 /var
+chmod 00755 /var/www # only for folder itself, not recursively for all folders AND files
+find /var/www -type d -exec chmod 00755 {} \; # then for all subfolders
+find /var/www -type f -exec chmod 00644 {} \; # then for all files
 
 # create a symlink
 ln -s /path/to/folder /path/to/symlink

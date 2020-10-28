@@ -310,6 +310,9 @@ Usage: git acp
 #### undo (uncomitted) changes from a merge where conflicts have happened
 - git merge --abort
 
+#### undo (uncomitted) changes from a merge where no conflict has happened
+- git reset --hard; git clean -df;
+
 #### undo (comitted) changes from a merge where no conflicts appeared
 - git reset --merge ORIG_HEAD
 - git reset --hard origin/master # if the command above is not working
@@ -323,6 +326,8 @@ Usage: git acp
 - `git checkout -b special-branch--squashed` # create new branch from it
 - `git merge --squash special-branch` # merge branch with changes into current branch
 - do code review
+- `git reset --hard; git clean -df` # undo uncomitted changes
+- `git checkout master` # switch back to master
 - `git branch --delete special-branch--squashed` # delete special branch locally
 
 ##### in master
