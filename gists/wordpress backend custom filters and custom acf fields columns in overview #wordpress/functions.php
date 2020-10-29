@@ -19,7 +19,7 @@ add_action('restrict_manage_posts', function() {
     echo '</select>';
 
     // example: search for meta field
-    echo '<input name="custom_filter_custom_field" value="'.(isset($_GET['custom_filter_custom_field'])?($_GET['custom_filter_custom_field']):('')).'" placeholder="Spezielles Feld" />';
+    echo '<input type="search" name="custom_filter_custom_field" value="'.(isset($_GET['custom_filter_custom_field'])?($_GET['custom_filter_custom_field']):('')).'" placeholder="Spezielles Feld" />';
 
 });
 add_filter('parse_query', function($query) {

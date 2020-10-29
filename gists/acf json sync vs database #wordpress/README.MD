@@ -10,4 +10,4 @@ tl;dr
 - Never exclude the acf-json folder (it must be inside git)
 - Before editing fields in the backend:
   - Always check if git is up to date and all updates on acf json files are applied
-  - Always click on **Sync** (otherwise, you will overwrite new data with old data!)
+  - Always click on **Sync** (otherwise, you will overwrite old data with new data!)

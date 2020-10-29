@@ -411,6 +411,7 @@ xdebug.var_display_max_depth = -1
 - ```mkdir /var/www/lamp```
 - ```cd /var/www/lamp```
 - ```git clone git@bitbucket.org:vielhuber/lamp.git . --config core.autocrlf=false```
+- ```chmod +x /var/www/lamp/lamp```
 - ```sudo nano ~/.bash_profile```
 - ```export PATH="$PATH:/var/www/lamp"```
 - ```source ~/.bash_profile```

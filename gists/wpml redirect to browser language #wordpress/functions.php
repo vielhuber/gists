@@ -2,6 +2,8 @@
 /* this solution is way better than the crappy js redirect of wpml (which leads to Page Speed issues) */
 // only on root, and only if wpml
 if ($_SERVER['REQUEST_URI'] == '/' && function_exists('icl_get_languages')) {
+  	// disable caching
+  	define('DONOTCACHEPAGE', true);
     // get all languages
     $available_languages = icl_get_languages('skip_missing=0');
     // set default
