@@ -53,9 +53,6 @@ add_filter('parse_query', function($query) {
     }
 });
 
-
-
-
 /* add a custom column */
 $custom_field_post_type = 'posts';
 $custom_field_post_type = 'contacts';
@@ -78,3 +75,9 @@ add_action(
     10,
     2
 );
+
+/* remove columns in taxonomies */
+add_filter('manage_edit-custom_taxonomy_columns', function ($defaults) {
+  unset($defaults['posts']);
+  return $defaults;
+});

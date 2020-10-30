@@ -467,8 +467,13 @@ if( !!( document.querySelector('.selector').offsetWidth || document.querySelecto
 
 $(document).on('click', 'a[href*="test.de"]', () => { });
 $('#el').on('click', '.selector', (el) => { });
-document.addEventListener('click', (e) => { if( e.target.closest('a[href*="test.de"]') ) { } });
+// always choose if possible a most specific parent selector, which is not dynamically created
 document.querySelector('#el').addEventListener('click', (e) => { if( e.target.closest('.selector') ) { } });
+// otherwise choose <body>
+document.addEventListener('click', (e) => { if( e.target.closest('a[href*="test.de"]') ) { } });
+// if you only want to trigger on the button and not on any child elements
+document.addEventListener('click', (e) => { if( e.target.classList.contains('.selector') ) { } });
+
 
 $('#el').on('blur', 'input.selector', (el) => { });
 document.querySelector('#el').addEventListener('blur', (e) => { if( e.target.closest('.selector') ) { } }, true);
