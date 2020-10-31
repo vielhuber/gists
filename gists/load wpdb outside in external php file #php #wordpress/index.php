@@ -15,6 +15,7 @@ header('HTTP/1.1 200 OK');
 // full
 define('WP_USE_THEMES', false);
 require($_SERVER['DOCUMENT_ROOT'].'/wp-blog-header.php');
+header('HTTP/1.1 200 OK');
 
 // warning: this approach does NOT WORK with the plugin All 404 Redirect to Homepage(!)
 
