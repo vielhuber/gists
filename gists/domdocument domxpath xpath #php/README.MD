@@ -154,9 +154,9 @@ $node->textContent
 htmlentities($node->nodeValue)
 htmlspecialchars($node->nodeValue)
 // writing (this is important): domdocument sets strings with encoded html chars for text nodes as plain text (and not html)
-// we therefore use the parent node and set the node value accordingly
+// we therefore use the parent node and set the node value accordingly (so that the encoded strings are properly set)
 $node->parentNode->nodeValue = 'That&#39;s cool';
-// if you don't want to lose the text node, you can do:
+// if you really want to use the text node, you can do:
 $node->nodeValue = html_entity_decode('That&#39;s cool', ENT_QUOTES | ENT_XML1, 'UTF-8');
 ```
 
