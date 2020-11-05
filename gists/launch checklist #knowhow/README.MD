@@ -61,6 +61,7 @@
 - Kein Mixed SSL Content vorhanden
 - Production-Links prüfen, ob diese auf local/testing führen!
 - Caching aktiviert
+- Dauerhaftes Backup eingerichtet (DropMySite)
 - Google Search Console aktiviert, Sitemap eingereicht oder initiale Indexierung beantragt
 - Rich Snippets geprüft und validiert
 - Seite 1x komplett mit Screaming Frog durchprüfen (nochmal Broken Links)

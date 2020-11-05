@@ -107,6 +107,11 @@ $DOMXPath->query('/html/body//*[contains(concat(" ", normalize-space(@class), " 
 $DOMXPath->query('/html/body//*[@id="root"]');
 ```
 
+### tag selector
+```php
+$DOMXPath->query('/html/body//input');
+```
+
 ### attribute selector
 ```php
 $DOMXPath->query('/html/body//input[@placeholder]');
