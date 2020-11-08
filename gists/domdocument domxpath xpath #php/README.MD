@@ -119,6 +119,11 @@ $DOMXPath->query('/html/body//input[@placeholder]');
 
 ### attribute value selector
 ```php
+$DOMXPath->query('/html/body//a[@href="#"]);
+```
+
+### attribute value selector
+```php
 $DOMXPath->query('/html/body//a[starts-with(@href, 'tel:')]);
 ```
 

@@ -64,6 +64,11 @@
 =INDIRECT("DYNAMIC_TABLE_NAME!"&B10);
 ```
 
+#### integer to column names
+```
+=REGEXEXTRACT(ADDRESS(ROW(); COLUMN()); "[A-Z]+")
+```
+
 #### sverweis to the left
 ```
 =SVERWEIS(D2;{$B$1:$B;$A$1:$A};2;FALSCH)
