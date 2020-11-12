@@ -15,9 +15,15 @@ export default class Example {
 
     dynamicFunction() {
         alert('bar');
+      	// call another dynamic function
+      	this.otherDynamicFunction();
       	// call a static method from a dynamic one
       	Example.staticFunction();
       	this.constructor.staticFunction(); // same
+    }
+  
+  	otherDynamicFunction() {
+     	alert('baz'); 
     }
     
 }
