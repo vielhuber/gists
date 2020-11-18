@@ -47,5 +47,6 @@ add_action('admin_init', function () {
 ### check capability
 ```php
 if( current_user_can('custom_capability') ) { }
+$user->has_cap('custom_capability') { }
 ```
 
