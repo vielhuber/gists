@@ -1,5 +1,8 @@
-mysql -u username -p"password" -e "drop database `dbname`; create database `dbname`;"
+# tldr
+mysqldump -u[USERNAME] -p[PASSWORD] --add-drop-table --no-data [DATABASE] | grep -e '^DROP \| FOREIGN_KEY_CHECKS' | mysql -u[USERNAME] -p[PASSWORD] [DATABASE]
 
+# if you have the permission
+mysql -u username -p"password" -e "drop database `dbname`; create database `dbname`;"
 
 # alternative (if you dont want to create the entire table new)
 mysql -u username -p'password' -e "SET FOREIGN_KEY_CHECKS = 0;
