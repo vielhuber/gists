@@ -1,8 +1,0 @@
-- Stil: **Inline-Format**
-- Schrift: **In Konturen umwandeln**
-- Bilder: **Einbetten**
-- Objekt-IDs: **Minimal**
-- Dezimalstellen: **2**
-- Minifizieren: **An**
-- Responsiv: **An**
-- Zeichenflächen verwenden: **Je nach Anwendungsfall**

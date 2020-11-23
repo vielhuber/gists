@@ -1,4 +1,6 @@
 <?php
+// wordpress by default sends comment emails to the admin email AND the email of the author of the post
+// here you can modify/overwrite that email addresses
 function se_comment_moderation_recipients( $emails, $comment_id ) {
     $emails[] = 'custom@tld.com';
     return $emails;

@@ -30,6 +30,7 @@
 - console.log Ausgaben deaktiviert
 - git dev-/feature-Branch in master gemergt
 - Favicon vorhanden
+- Prüfen, ob Seite mit WordPress Admin Bar gut funktioniert (padding)
 - Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
 - Cross-Browser-Check (inkl. Responsive) durchgeführt
 - browser-update.org integriert
