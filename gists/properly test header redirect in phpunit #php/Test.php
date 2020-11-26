@@ -17,18 +17,18 @@ class Test extends \PHPUnit\Framework\TestCase
             ->method('redirect')
             ->will(
                 $this->returnCallback(function ($url) {
-                    header('Location: ' . $url, true, 302);
-                    // here we don't use "die()" as in the original code
+                    throw new \Exception($url);
                 })
             );
     }
 
-    /**
-     * @runInSeparateProcess
-     **/
     public function testRedirect()
     {
-        $this->app->redirect('https://test.de');
-        $this->assertContains('Location: https://test.de', xdebug_get_headers());
+        try {
+            $this->app->redirect('https://test.de');
+        }
+        catch(\Exception $e) {
+            $this->assertEquals($e->getMessage(), 'https://test.de');
+        }
     }
 }
