@@ -16,7 +16,7 @@ $google_maps_args = array(
 		"" => $google_maps_location
 	)
 );
-echo '<a href="https://www.google.de/maps/place/'.$google_maps_location.'/" target="_blank" title="Zu Google Maps">';
+echo '<a href="https://www.google.de/maps/dir//'.$google_maps_location.'/" target="_blank" title="Zu Google Maps">';
   echo '<img src="http://maps.googleapis.com/maps/api/staticmap?';
   foreach($google_maps_args as $key=>$val) {
   	if(!is_array($val)) {
