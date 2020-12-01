@@ -5,4 +5,4 @@ wpscan --no-banner --url https://www.domain.tld
 wpscan --url https://www.domain.tld | grep '[!]'
 
 # with wpvulndb.com api
-wpscan --url https://www.domain.tld --api-token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+wpscan --api-token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --url https://www.domain.tld | grep '[!]'
