@@ -1,9 +1,10 @@
 #### tl;dr
 
-- WPML Media aktivieren
+- WPML Media deaktiviert lassen
 - Bei Ersteinrichtung: WPML -> Einstellungen -> Media Translations alle Haken setzen und Start
 - Nach Hinzufügen einer neuen Sprache: WPML -> Einstellungen -> Media Translations > Start
-- WooCommerce: Unterschiedliche Bilder pro Produkt sind realisierbar über WPML > Media Translations > Original suchen > Sprache wählen > “Use different file”
+- Falls unterschiedliche Bilder pro Sprache realisiert werden sollen: WPML Media aktivieren
+  - Beispiel: WooCommerce: Unterschiedliche Bilder pro Produkt sind realisierbar über WPML > Media Translations > Original suchen > Sprache wählen > “Use different file”
 
 #### Empfehlung
 
@@ -75,3 +76,6 @@
   - Verwendet man einen neuen Namen wirkt es wie unterschiedliche Bilder pro Sprache. Die alte Datei bleibt erhalten und wird in der Übersetzung dieses Attachments weiterhin verwendet.
   - Einbettungen wurden (bei einem begrenzten Test) auch nur in der Sprache aktualisiert, in der das Bild ersetzt wurde. WPML Media zeigt fortan für diese Bild unterschiedliche Bilder in den Sprachen.
   - Das bedeutet: Es darf NIE die 2. Option ausgewählt werden, da man sonst Chaos in unterschiedlichen Sprachen erhält
+- WPML
+  - Das Plugin WPML Media führt dazu, dass sofern ein Beitrag in einer Quellsprache in eine Zielsprache dupliziert wird, alle Meta-Felder nicht übernommen werden
+  - Da Attachments auch ohne WPML Media unterschiedliche Alt-Tags pro Sprache haben können, verzichten wir deshalb auf dessen Einsatz
