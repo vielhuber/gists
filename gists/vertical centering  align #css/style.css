@@ -1,9 +1,46 @@
-/* method 1: when parent has a fixed height */
+/*
+method 1: flexbox
+- you don't special rules for the child here
+- height of parent should be defined via min-height
+*/
+.parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  min-height: 100vh; /* change this */
+}
+/* ie11 fix */
+.parent, .parent > *
+{
+    max-width:100%;
+}
+
+/*
+method 2: position
+- height of parent must not be explicitly defined (except it has no other childs)
+- bad when the child element is bigger than the screen height
+*/
+.parent {
+  position: relative;
+  height:100vh; /* change this */
+}
+.child {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/*
+method 3: legacy
+- height of parent must be explicitly defined
+*/
 .parent
 {
   text-align: center;
   white-space: nowrap;
   font-size:0;
+  height:100vh; /* change this */
 } 
 .parent:before
 {
@@ -19,28 +56,4 @@
   width: 100%;
   font-size:13px;
   white-space:normal;
-}
-
-
-/* method 2: when parent has an unknown height */
-.parent {
-  position: relative;
-}
-.child {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-/* method 3: flexbox (you don't need a child here!) */
-.parent {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items:center;
-}
-/* ie11 fix */
-.parent, .parent > *
-{
-    max-width:100%;
 }
