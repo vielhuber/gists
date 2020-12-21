@@ -10,7 +10,7 @@ div
     animation-play-state: running; // paused|running|initial|inherit
   
   	// shorthand
-	animation: example 5s linear 2s infinite alternate;
+	animation: example 5s linear 2s infinite alternate forwards;
 }
 
 @keyframes example
