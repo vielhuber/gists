@@ -1,28 +1,109 @@
-<div class="box"><h2 data-lanimate="fade">Test</h2></div>
-<div class="box"><h2 data-lanimate="fade">Test</h2></div>
-<div class="box">
-  <h2 data-lanimate="fade">Test</h2>
-  <h2 data-lanimate="fade" data-lanimate-delay="500">Test2</h2>
-  <h2 data-lanimate="scrollX" data-lanimate-delay="1000">Test</h2>
-  <h2 data-lanimate="scrollY" data-lanimate-delay="1500">Test</h2>
-  <h2 data-lanimate="scale" data-lanimate-delay="1500">Test</h2>
-</div>
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>.</title>
+        <script>
+            function initLanimate() {
+                if (document.querySelectorAll('[data-lanimate]').length > 0) {
+                    [].forEach.call(document.querySelectorAll('[data-lanimate]'), (el) => {
+                        startLanimate(el);
+                        window.addEventListener('scroll', () => {
+                            this.startLanimate(el);
+                        });
+                    });
+                }
+            }
+            function startLanimate(el) {
+                if (!el.hasAttribute('data-lanimate-finished') && scrollTop() + window.innerHeight >= offsetTop(el)) {
+                    let delay = 0;
+                    if (el.hasAttribute('data-lanimate-delay')) {
+                        delay = el.getAttribute('data-lanimate-delay');
+                    }
+                    setTimeout(() => {
+                        el.setAttribute('data-lanimate-finished', 'true');
+                    }, delay);
+                }
+            }
+            function scrollTop() {
+                let doc = document.documentElement;
+                return (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+            }
+            function offsetTop(el) {
+                return el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop;
+            }
+            window.addEventListener('load', (e) => {
+                initLanimate();
+            });
+        </script>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            .box {
+                width: 100%;
+                padding: 250px 0;
+                text-align: center;
+                background-color: red;
+            }
+            .box:nth-child(odd) {
+                background-color: blue;
+            }
+            h2 {
+                font-size: 100px;
+                color: #fff;
+            }
 
-<style>
-.box
-{
-	width:100%;
-	padding:250px 0;
-	text-align:center;
-	background-color:red;
-}
-.box:nth-child(odd)
-{
-	background-color:blue;
-}
-h2
-{
-	font-size:100px;
-	color:#fff;
-}
-</style>
+            [data-lanimate] {
+                opacity: 0;
+            }
+            [data-lanimate='fade'] {
+            }
+            [data-lanimate='scrollX'] {
+                transform: translateX(30px);
+            }
+            [data-lanimate='scrollY'] {
+                transform: translateY(30px);
+            }
+            [data-lanimate='scale'] {
+                transform: scale(1.1) translateY(30px);
+            }
+            [data-lanimate-finished] {
+                transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+                opacity: 1;
+            }
+            [data-lanimate='fade'][data-lanimate-finished] {
+            }
+            [data-lanimate='scrollX'][data-lanimate-finished] {
+                transform: translateX(0px);
+            }
+            [data-lanimate='scrollY'][data-lanimate-finished] {
+                transform: translateX(0px);
+            }
+            [data-lanimate='scale'][data-lanimate-finished] {
+                transform: scale(1) translateY(0px);
+            }
+
+            /* disable on mobile */
+            @media screen and (max-width: 1100px) {
+                [data-lanimate] {
+                    transition: all 0s ease 0s;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box"><h2 data-lanimate="fade">Test</h2></div>
+        <div class="box"><h2 data-lanimate="fade">Test</h2></div>
+        <div class="box">
+            <h2 data-lanimate="fade">Test</h2>
+            <h2 data-lanimate="fade" data-lanimate-delay="500">Test2</h2>
+            <h2 data-lanimate="scrollX" data-lanimate-delay="1000">Test</h2>
+            <h2 data-lanimate="scrollY" data-lanimate-delay="1500">Test</h2>
+            <h2 data-lanimate="scale" data-lanimate-delay="1500">Test</h2>
+        </div>
+    </body>
+</html>
