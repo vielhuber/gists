@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
 (async () => {
+  	let browser = null;
   	try {
-      const browser = await puppeteer.launch({
+      browser = await puppeteer.launch({
           headless: true,
           ignoreHTTPSErrors: true,
           args: [
@@ -14,8 +15,19 @@ const puppeteer = require('puppeteer');
               '--single-process',
           ],
       });
-      const page = await browser.newPage();
-      await page.setDefaultTimeout(3000);
+      let page = await browser.newPage();
+      await page.setDefaultTimeout(3000);      
+      await page.setViewport({ width: 800, height: 600 });
+      /* block images and css */
+      await page.setRequestInterception(true);
+      page.on('request', (req) => {
+        if(req.resourceType() == 'stylesheet' || req.resourceType() == 'font' || req.resourceType() == 'image') {
+          req.abort();
+        }
+        else {
+          req.continue();
+        }
+      });      
       await page.goto('https://vielhuber.de', { waitUntil: 'networkidle2' });
       await page.waitForSelector('.text');
       let foo = await page.$eval('.text', (e) => e.innerHTML);
@@ -24,5 +36,8 @@ const puppeteer = require('puppeteer');
     }
   	catch (e) {
      	console.log(e); 
+    }
+  	finally {
+      	browser.close();
     }
 })();

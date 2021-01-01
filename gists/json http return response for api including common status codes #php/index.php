@@ -10,6 +10,7 @@
 403: Forbidden (Auth is available but not sufficient)
 404: Not found
 405: Method not allowed (GET/POST, ...)
+408: Timeout
 500: Internal server error (some server side exception is thrown)
 */
 

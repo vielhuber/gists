@@ -24,17 +24,17 @@ npx nodemon # to automatically reload on route changes
 const express = require('express'),
     app = express(),
     port = process.env.PORT || 3000;
+app.use(this.express.static('public')); // make all static files in "public" folder available (without "public" in url)
 app.get('/', (req, res) => {
 	// get query args
     let foo = req.query.foo;
-    // send 404
-    res.sendStatus(400);
-    // send json
+    // send status + data
+    res.send(200);
     res.json({
     	success: true,
     	data: null
     });
-    res.send('Hello World!');
+    return; // this has to be calld if you don't use "send"
 });
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

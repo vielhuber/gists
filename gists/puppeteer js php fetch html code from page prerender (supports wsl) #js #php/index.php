@@ -3,10 +3,14 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Nesk\Puphpeteer\Puppeteer;
 use Nesk\Rialto\Data\JsFunction;
 
+$browser = null;
+
 try {
-    $puppeteer = new Puppeteer([
-        /* 'executable_path' => '/root/.nvm/versions/node/v12.10.0/bin/node' (https://github.com/nesk/puphpeteer/issues/65) */
-    ]);
+    $args = [];
+    if (@$_SERVER['SERVER_ADMIN'] === 'david@close2.de' || @$_SERVER['NAME'] === 'DAVID-DESKTOP') {
+      $args['executable_path'] = '/root/.nvm/versions/node/v12.10.0/bin/node'; // https://github.com/nesk/puphpeteer/issues/65
+    }
+    $puppeteer = new Puppeteer($args);
 
     $args = [
         '--disable-gpu',
@@ -35,14 +39,14 @@ try {
         'args' => $args,
     ]);
     $page = $browser->newPage();
-  	$this->page->setDefaultNavigationTimeout(5000);
+  	$page->setDefaultTimeout(5000);
     if ($proxy !== null) {
         $page->authenticate([
             'username' => $proxy->username,
             'password' => $proxy->password,
         ]);
     }
-  	disableImages();    
+  	disableImagesAndStylesheets();    
     $page->setViewport(['width' => 1920, 'height' => 1080]);
   
   	go('https://tld.com');    
@@ -60,26 +64,32 @@ try {
     wait(100);
     shot();
     wait('.baz');
+    innerHTML('.baz');
     shot();
     $browser->close();
 } catch (\Exception $e) {
     echo $e->getMessage();
+}
+finally {
+  if ($browser !== null) {
+    $browser->close();
+  }
 }
 
 /* helpers */
 function go($url)
 {
     global $page;
-    $page->goto($url, ['waitUntil' => 'networkidle2']);
+    $page->tryCatch->goto($url, ['waitUntil' => 'networkidle2']);
 }
-function disableImages()
+function disableImagesAndStylesheets()
 {
   global $page;
   $page->setRequestInterception(true);
   $page->on(
     'request',
     JsFunction::createWithParameters(['request'])->body(
-      'request.resourceType() === "image" ? request.abort() : request.continue()'
+      'request.resourceType() === "image" || request.resourceType() === "stylesheet" || request.resourceType() === "font" ? request.abort() : request.continue()'
     )
   );
 }
@@ -113,4 +123,11 @@ function html()
         )
     );
     return htmlentities($response['html']);
+}
+function innerHTML($selector) {
+  	global $page;
+    return $page->querySelectorEval(
+      $selector,
+      JsFunction::createWithParameters(['e'])->body('return e.innerHTML')
+    );
 }
