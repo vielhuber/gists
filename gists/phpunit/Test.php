@@ -34,6 +34,7 @@ class Test extends \PHPUnit\Framework\TestCase
         $this->assertSame('1',1); // fails
         $this->assertEquals((object)['foo'],(object)['foo']); // passes
 		$this->assertSame((object)['foo'],(object)['foo']); // fails
+      	$this->assertContains('foo',['foo','bar']); // passes
       
       	// live log to console while running
       	fwrite(STDERR, print_r('foo'.PHP_EOL, true));
