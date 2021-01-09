@@ -51,6 +51,11 @@
 - `wsl --set-version Ubuntu 2`
 - `wsl --list --verbose`
 
+#### docker
+-	Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
+-	Installation: „Install required Windows components for WSL 2“
+-	Settings > General > „Use the WSL 2 based engine“
+
 #### xserver
 
 - download vcxsrv (https://sourceforge.net/projects/vcxsrv/files/latest/download)
