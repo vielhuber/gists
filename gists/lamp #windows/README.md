@@ -339,6 +339,8 @@ xdebug.var_display_max_depth = -1
 - hide sudo message:
   - ```sudo nano ~/.bash_profile```
   - ```export COMPOSER_ALLOW_SUPERUSER=1```
+- ```composer self-update```
+- ```composer --version``` # 2
 
 #### node / npm
 - nvm

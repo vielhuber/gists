@@ -71,9 +71,9 @@ sed -i '1s;^;some text;' file.txt
 sed -i -e 's/foo/bar/g' -e 's/gna/gnarr/g' -e 's/abc/cde/g' file.txt
 
 # sed inplace editing
-sed -i -e 's/foo/bar/' target.file # unix
-sed -i'' -e 's/foo/bar/' target.file # unix
-sed -i '' -e 's/foo/bar/' target.file # mac os
+sed -i -e 's/foo/bar/g' target.file # unix
+sed -i'' -e 's/foo/bar/g' target.file # unix
+sed -i '' -e 's/foo/bar/g' target.file # mac os
 
 # sed new line (unix/mac)
 sed -e 's/ /\'$'\n/g' # universal

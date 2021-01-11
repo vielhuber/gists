@@ -57,6 +57,8 @@ export default {
                 menubar: false,
                 statusbar: false,
                 toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons mybutton',
+              	// set this if you want to prevent p tags (normally not!)
+              	invalid_elements: 'p',
               	// set this to false if no p tag should be wrapped
               	forced_root_block: 'p',
               	// these three options prevent tinymce from auto converting links to relative links
@@ -81,6 +83,12 @@ export default {
                         }
                     });
                     this.maxLengthPreventInput(editor);
+                  	// add this if you want to prevent shift enter (and do a normal enter instead)
+                    editor.on('keydown', function(event) {
+                      if (event.keyCode == 13 && event.shiftKey) {
+                        event.shiftKey = false;
+                      }
+                    });
                     editor.on('focus', (e) => {
 						/* focus event */
                     });
