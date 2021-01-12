@@ -139,6 +139,11 @@ shopt -s dotglob # match hidden files
 cd folder
 mv * /another/folder/
 
+# pipe to clipboard
+sudo apt-get install xclip
+echo "foo" | xclip
+cat ~/.ssh/id_rsa.pub | xclip
+
 # reboot
 reboot
 shutdown -r now

@@ -634,6 +634,10 @@ host    all   all        ::1/128        md5
 #### rsvg
 - ```sudo apt-get install librsvg2-bin```
 
+#### xclip (pipe to clipboard)
+- ```sudo apt-get install xclip```
+- ```echo "foo" | xclip```
+
 #### autostart
 - wsl
   - Aufgabenplanung
