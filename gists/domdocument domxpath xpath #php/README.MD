@@ -241,7 +241,7 @@ foreach ($nodes as $nodes__value) {
 ];
 ```
 
-### add child
+### add / append child
 ```php
 $child = $DOMDocument->createElement('a', '');
 $child->setAttribute('href', 'https://tld.com');
