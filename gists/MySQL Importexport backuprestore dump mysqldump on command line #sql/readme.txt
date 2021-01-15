@@ -4,6 +4,9 @@ mysqldump -h localhost --port 3306 -u username -p"password" database > dump.sql
 // import
 mysql -h localhost --port 3306 -u username -p"XXX" --default-character-set=utf8 database < dump.sql
 
+// import with progress
+pv dump.sql | mysql -h localhost --port 3306 -u username -p"XXX" --default-character-set=utf8 database
+
 // note when using passwords with "$": escape passwords needed
 mysql -p "ugly\$password"
 
