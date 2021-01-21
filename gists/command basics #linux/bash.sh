@@ -383,7 +383,12 @@ find . -name "node_modules" -type d -prune -exec rm -rf {} \; # delete all folde
 
 # recursively search and replace file contents
 find . -type f -name "*.txt" -print0 | xargs -0 sed -i -e 's/foo/bar/g' # linux
+find . -type f -name "*" -print0 | xargs -0 sed -i -e 's/foo/bar/g' -e 's/gna/gnarr/g' -e 's/abc/cde/g' # in all files and multiple replacements (case sensitive)
 find . -type f -name "*.txt" -print0 | xargs -0 sed -i '' -e 's/foo/bar/g' # mac
+
+# recursively search and replace files and directory names
+find . -type d -name "*" -print0 | xargs -0 rename 's/foo/bar/g' {} # this must be done first!
+find . -type f -name "*" -print0 | xargs -0 rename 's/foo/bar/g' {} # this afterwards
 
 # show last entries (10 lines) of file
 tail -10 path/to/file.log
