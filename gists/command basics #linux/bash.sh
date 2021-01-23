@@ -110,6 +110,9 @@ cp -r folder1 folder2/
 # copy contents of subfolder in current folder
 cp -r ./subfolder/. .
 
+# copy contents of current folder to subfolder
+rsync -Rr . ./subfolder/
+
 # copy contents of one folder to another folder (excluding one specific folder)
 rsync -a --info=progress2 ~/source/ ~/target --exclude excludedfolder
 
@@ -138,6 +141,12 @@ mv subfolder/* subfolder/.[^.]* .
 shopt -s dotglob # match hidden files
 cd folder
 mv * /another/folder/
+
+# move all elements in current folder to subfolder
+mkdir subfolder
+shopt -s extglob dotglob
+mv !(subfolder) subfolder
+shopt -u dotglob
 
 # pipe to clipboard
 sudo apt-get install xclip
