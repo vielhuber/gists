@@ -1,7 +1,7 @@
 ## tl;dr
 
-- if you are encoding path segment, use `rawurlencode()`
-- if you are encoding query component, use `urlencode()`
+- if you are encoding a path segment, use `rawurlencode()`
+- if you are encoding a query component, use `urlencode()`
 - `&` is not part of both groups => manually encode it to `&amp;`
 
 ## example
