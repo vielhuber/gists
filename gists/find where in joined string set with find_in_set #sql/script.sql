@@ -1,7 +1,17 @@
-table `test`
-name		parents
-foo			1
-bar			1,7
-baz			7,2
+# foo
+id
+1
+2
+3
 
-SELECT * FROM test WHERE FIND_IN_SET(7,parents); // [bar, baz]
+# bar
+id | name | foo_id
+3 | foo | 1
+4 | bar | 2
+5 | baz | 2
+
+# query all entries in foo where connected bar rows have name "baz" => 2
+SELECT id FROM test1
+LEFT JOIN test2 ON test2.foo_id = test1.id
+GROUP BY test1.id
+HAVING FIND_IN_SET('baz', GROUP_CONCAT(test2.name));
