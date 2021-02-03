@@ -18,6 +18,10 @@ add_action('wp_head', function () { ?>
     <script> 
     var $buoop = { /* ... */ };
     </script>
+  	<style>
+  	html.browserupdate--active { }
+	/* ... */
+  	</style>
 <?php }, -9999 );
 ```
 
@@ -77,8 +81,8 @@ browserUpdate({ /* options see below */ });
 html.browserupdate--active {
     /* reduce opacity in background */
     .buorg ~ * {
-        opacity: 0.1;
-        pointer-events: none;
+      opacity: 0.1 !important;
+      pointer-events: none !important;
     }
 }
 html {
@@ -105,6 +109,7 @@ html {
     #buorgpermanent {
         color: #fff;
         background: #3baa85;
+      	border-radius:0;
     }
     #buorgig {
         background-color: #edbc68;
