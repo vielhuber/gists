@@ -115,6 +115,7 @@
 - Repository > Search for Repositories > /var/www
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
 - Wenn non-commercial Lizenz abläuft: rm -rf ~/.config/smartgit/
+- Wenn es Probleme mit GTK gibt: ```nano ~/.config/smartgit/```, ```swtver=4932``` hinzufügen
 
 #### pimp command line
 - ```sudo nano ~/.bash_profile```
