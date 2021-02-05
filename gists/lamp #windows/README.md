@@ -400,7 +400,10 @@ xdebug.var_display_max_depth = -1
 - ```blackfire run ./vendor/bin/phpunit```
 
 #### git
-- ```sudo apt-get install git```
+- ```sudo add-apt-repository ppa:git-core/ppa -y```
+- ```sudo apt-get update```
+- ```sudo apt-get install git -y```
+- ```git --version```
 - ```git config --global core.filemode false```
 - ```git config --global core.autocrlf true``` # this converts everything to crlf, which is needed for editors in windows
 - ```git config --global core.safecrlf false```
