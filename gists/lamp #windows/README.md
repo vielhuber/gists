@@ -404,6 +404,8 @@ xdebug.var_display_max_depth = -1
 - ```sudo apt-get update```
 - ```sudo apt-get install git -y```
 - ```git --version```
+- ```git config --global core.ignorecase false```
+- ```git config --global pull.rebase false```
 - ```git config --global core.filemode false```
 - ```git config --global core.autocrlf true``` # this converts everything to crlf, which is needed for editors in windows
 - ```git config --global core.safecrlf false```
