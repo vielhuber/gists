@@ -26,3 +26,7 @@ script: ./vendor/bin/phpunit
 
 - can be set via the project settings (and achieve something like a `.env` file on the travis instance)
 - note that `$_ENV` is not available, so use `$_SERVER` instead (in case of https://github.com/vlucas/phpdotenv)
+
+### check for travis CI inside php
+
+- ```if( @$_SERVER['CI'] === true ) { }```
