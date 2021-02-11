@@ -5,6 +5,7 @@ define( 'SAVEQUERIES', true );
 /* functions.php */
 add_action('wp_footer', function($input) {
   global $wpdb;
+  echo '<pre>';
   // show all
   print_r($wpdb->queries);
   // show slowest
@@ -14,4 +15,5 @@ add_action('wp_footer', function($input) {
       return ($a[1] > $b[1]) ? -1 : 1;
   });
   print_r($queries[0][0]);
+  echo '</pre>';
 }, PHP_INT_MAX);

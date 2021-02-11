@@ -21,8 +21,23 @@
 - ```docker build -t name .```
 - ```docker build .```
 
+#### update remote image
+- ```docker-compose pull nginx```
+
 #### run command inside docker-compose.yml
  ```
 php-fpm:
 	command: sh -c 'echo "foo"'
+```
+
+#### wsl compatibility
+- networking only works, when changing ports from ```127.0.0.1:8080:80``` to ```8080:80```
+- permissions only work, when manually giving special folders write permissions:
+```
+chmod 00777 /path/to/project/storage
+chmod 00777 /path/to/project/bootstrap/cache 
+find /path/to/project/storage -type d -exec chmod 00777 {} \;
+find /path/to/project/storage -type f -exec chmod 00777 {} \;
+find /path/to/project/bootstrap/cache -type d -exec chmod 00777 {} \;
+find /path/to/project/bootstrap/cache -type f -exec chmod 00777 {} \;
 ```
