@@ -20,11 +20,20 @@ pg_dump --no-owner --dbname=postgresql://username:password@host:port/database > 
 psql --set ON_ERROR_STOP=on -U postgres -d database -1 -f file.sql
 pg_restore --no-privileges --no-owner -U postgres -d database --clean file.sql # only works for special dumps
 
-# backup exluding table
-pg_dump --no-owner -h 127.0.0.1 -p 5432 -U username --exclude-table=foo database > tmp.sql
+# backup excluding table
+pg_dump --no-owner -h 127.0.0.1 -p 5432 -U username --exclude-table=table1 --exclude-table=table2 --exclude-table=table1_id_seq --exclude-table=table2_id_seq database > tmp.sql
 
-# backup including table
-pg_dump --no-owner -h 127.0.0.1 -p 5432 -U username --table=foo database > tmp.sql
+# backup including only table
+pg_dump --no-owner -h 127.0.0.1 -p 5432 -U username --table=table1 --table=table2 database > tmp.sql
+
+# backup only schema (no data)
+pg_dump --no-owner -h 127.0.0.1 -p 5432 -U username --schema-only database > tmp.sql
+
+# transfer database with 2 tables empty
+pg_dump --no-owner -h 127.0.0.1 -p 5432 -U username --exclude-table=table1 --exclude-table=table2 --exclude-table=table1_id_seq --exclude-table=table2_id_seq database > 1.sql
+pg_dump --no-owner -h 127.0.0.1 -p 5432 -U username --table=table1 --table=table2 --schema-only database > 2.sql
+psql --set ON_ERROR_STOP=on -U username -d database -1 -f 1.sql
+psql --set ON_ERROR_STOP=on -U username -d database -1 -f 2.sql
 
 # backup and restore
 PGPASSWORD=password && pg_dump --no-owner -h 127.0.0.1 -p 5432 -U username database > tmp.sql
