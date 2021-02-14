@@ -1,5 +1,5 @@
-/* script.js should be compiled with babel or https://babeljs.io/en/repl */
 add_action('enqueue_block_editor_assets', function () {
+  	// main script
     wp_enqueue_script('custom-attrs', plugins_url('bundle.js', __FILE__), [
         'wp-blocks',
         'wp-components',
@@ -7,8 +7,19 @@ add_action('enqueue_block_editor_assets', function () {
         'wp-dom-ready',
         'wp-editor',
         'wp-element',
-        'wp-hooks'
+        'wp-hooks',
+        'wp-i18n'
     ]);
+  	// pass data from php
+    wp_localize_script('custom-attrs', 'custom_attrs_data', [
+	   'foo' => 'bar'
+    ]);
+  	// localization
+  	wp_set_script_translations(
+      	'custom-attrs',
+      	'textdomain',
+      	plugin_dir_path(__FILE__) . 'languages'
+    );
 });
 
 /* do something with it in the frontend (surround the block with the attribute) */
