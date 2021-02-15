@@ -112,6 +112,11 @@ $DOMXPath->query('/html/body//*[@id="root"]');
 $DOMXPath->query('/html/body//input');
 ```
 
+### tag selector
+```php
+$DOMDocument->getElementsByTagName('input');
+```
+
 ### attribute selector
 ```php
 $DOMXPath->query('/html/body//input[@placeholder]');
@@ -266,6 +271,11 @@ $node->parentNode->insertBefore($newNode, $node);
 ```
 if($node->nextSibling === null) { $node->parentNode->appendChild($newNode); }
 else { $node->parentNode->insertBefore($newNode, $node->nextSibling);  }
+```
+
+### copy clone node
+```php
+$node->cloneNode(true)
 ```
 
 ### remove node
