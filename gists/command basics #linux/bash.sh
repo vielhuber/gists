@@ -186,8 +186,9 @@ find . \( -iname '*.jpg' -o -iname '*.png' \)
 # find files by name (and suppress permission denied errors)
 find / -type f -name "authorized_keys" 2>/dev/null
 
-# find files by name in current directory
+# find files and folders by name in current directory
 find . -name "foo*"
+find . -name ".git"
 
 # recursively files that contain text
 grep --include=*.php -rnw "/full/path/" -e "your text"
