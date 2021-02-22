@@ -16,6 +16,7 @@ for(const [item__key, item__value] of Object.entries(item)) { console.log([item_
     if( value === 'b' )
     {
         return; // continue
+      	// break does NOT exist in forEach
     }
 });
 
