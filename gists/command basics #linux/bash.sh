@@ -122,6 +122,10 @@ rm -rf folderName
 # delete all files in folder recursively
 rm -rf foldername/* foldername/.*
 
+# delete all files and folders in current folder
+find ./ -mindepth 1 -delete # best approach
+rm -rf ./{*,.*} # productes ugly warnings about "." and ".."
+
 # get size of current folder
 du -hs
 

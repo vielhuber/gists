@@ -17,6 +17,7 @@
 - Google Analytics Opt Out Link gesetzt und funktional
 - .git-Verzeichnis geschützt
 - Limit Login Access aktiv + DSGVO konform
+- WPS Hide Login aktiv (und auf "login" gesetzt)
 - Archivseiten (Autoren, Tags, Datum, ...) deaktiviert
 - Testseiten / Dummyseiten gelöscht, Papierkorb gelöscht
 - Liveseiten sortiert in der Reihenfolge

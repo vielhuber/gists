@@ -587,13 +587,19 @@ host    all   all        ::1/128        md5
 - ```exiftool```
 
 #### phpmyadmin
-- ```sudo apt-get install phpmyadmin```
-  - Web server to reconfigure automatically: apache2
-  - Configure database for phpmyadmin with dbconfig-common: Yes
-  - MySQL application password for phpmyadmin: root
-- ```ln -s /usr/share/phpmyadmin /var/www/phpmyadmin```
-- ```lamp add phpmyadmin```
+- ```mkdir /var/www/phpmyadmin```
+- ```cd /var/www/phpmyadmin```
+- ```composer create-project phpmyadmin/phpmyadmin .```
+- ```lamp add phpmyadmin php7.4```
+- ```cp config.sample.inc.php config.inc.php```
+- ```nano config.inc.php```
+  - ```$cfg['Servers'][$i]['user'] = 'root';```
+  - ```$cfg['Servers'][$i]['password'] = 'root';```
+  - ```$cfg['Servers'][$i]['auth_type'] = 'config';```
+  - ```$cfg['ExecTimeLimit'] = 6000;```
+  - ```$cfg['blowfish_secret'] = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';``` (generate secret with: https://phpsolved.com/phpmyadmin-blowfish-secret-generator/?g=[insert_php]echo%20$code;[/insert_php])
 - https://phpmyadmin.local.vielhuber.de
+  - "Der phpMyAdmin-Konfigurationsspeicher ist nicht vollständig konfiguriert," => operations > create table
 
 #### include windows fonts in linux
 - ```ln -s /mnt/c/Windows/Fonts /usr/share/fonts/WindowsFonts```
