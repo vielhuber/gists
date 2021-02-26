@@ -194,6 +194,9 @@ find / -type f -name "authorized_keys" 2>/dev/null
 find . -name "foo*"
 find . -name ".git"
 
+# find all hidden files in current directory
+find . -name ".*" -print
+
 # recursively files that contain text
 grep --include=*.php -rnw "/full/path/" -e "your text"
 grep --include=*.php -rnwl "/full/path/" -e "your text" # only show filenames
