@@ -24,6 +24,7 @@
 - Alle Formulare: Empfänger und Absender prüfen, Versand nochmal prüfen, scharf schalten an Kunden
 - Copyright für alle Bilder vorhanden (am Bild oder im Impressum)
 - Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
+- Passwortschutz und Entwurf testen, ob das funktioniert
 - Google Maps JS API Key hinterlegen
 - Alle Bilder komprimiert
 - Grundlegende Meta-Tags gesetzt (Titel+Description) (prüfen, ob Startseite diese ausspielt)
