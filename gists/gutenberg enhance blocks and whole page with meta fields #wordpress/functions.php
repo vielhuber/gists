@@ -31,3 +31,22 @@ add_filter( 'render_block', function( $block_content, $block ) {
     }
     return $block_content;
 }, 10, 2 );
+
+/* register page meta fields in gutenberg editor */
+add_action('init', function () {
+    register_post_meta('post', 'page_field_1', [
+        'show_in_rest' => true,
+        'single' => true,
+        'type' => 'string'
+    ]);
+    register_post_meta('post', 'page_field_2', [
+        'show_in_rest' => true,
+        'single' => true,
+        'type' => 'string'
+    ]);
+    register_post_meta('post', 'page_field_3', [
+        'show_in_rest' => true,
+        'single' => true,
+        'type' => 'string'
+    ]);
+});
