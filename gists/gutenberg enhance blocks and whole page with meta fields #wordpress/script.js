@@ -30,6 +30,49 @@
         'custom/attrinputs',
         wp.compose.createHigherOrderComponent(
             BlockEdit => props => {
+              	/* js style */
+                return wp.element.createElement(
+                    wp.element.Fragment,
+                    null,
+                    wp.element.createElement(BlockEdit, props),
+                    wp.element.createElement(
+                        wp.blockEditor.InspectorControls,
+                        null,
+                        wp.element.createElement(
+                            wp.components.PanelBody,
+                            {
+                                title: 'Title of accordeon'
+                            },
+                            wp.element.createElement(wp.components.TextControl, {
+                                label: 'Title of attr1',
+                                value: props.attributes.attr1,
+                                onChange: val => props.setAttributes({ attr1: val })
+                            }),
+                            wp.element.createElement(wp.components.TextControl, {
+                                label: wp.i18n.__('Localized title of attr2', 'textdomain'),
+                                value: props.attributes.attr2,
+                                onChange: val => props.setAttributes({ attr2: val })
+                            }),
+                            wp.element.createElement(wp.components.SelectControl, {
+                                label: custom_attrs_data.foo,
+                                value: props.attributes.attr3,
+                                onChange: val => props.setAttributes({ attr3: val }),
+                                options: {[
+                                    { value: null, label: '––' },
+                                    { value: 'a', label: 'User A' },
+                                    { value: 'b', label: 'User B' },
+                                    { value: 'c', label: 'User c' }
+                                ]}
+                            }),
+                            wp.element.createElement(wp.components.ToggleControl, {
+                                label: 'Fixed Background',
+                                checked: props.attributes.attr4 === true,
+                                onChange: val => props.setAttributes({ attr4: val })
+                            })
+                        )
+                    )
+                );
+              	/* jsx style */
                 return (
                     <wp.element.Fragment>
                         <BlockEdit {...props} />
@@ -67,7 +110,6 @@
                         }
                     </wp.element.Fragment>
                 );
-                return <BlockEdit {...props} />;
             },
             'withcustomattrinputs'
         )
@@ -87,6 +129,17 @@
                     wp.element.createElement(
                         'div',
                         null,
+                        /* general label / help */
+                        wp.element.createElement(wp.components.BaseControl, {
+                            label: 'foo',
+                            help: 'bar'
+                        }),
+                        /* custom html */
+                        wp.element.createElement('div', {
+                            dangerouslySetInnerHTML: {
+                                __html: '<strong>Custom html!</strong>'
+                            }
+                        }),
                         /* text field */
                         wp.element.createElement(
                             wp.compose.compose(
