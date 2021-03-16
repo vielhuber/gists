@@ -239,7 +239,8 @@ zip --password SECRET output.zip input.txt
 zip -r "backup-$(date +"%Y-%m-%d").zip"
 
 # zip file and exclude folders and files
-zip -r file.zip . -x \*"vendor/"\* -x \*"node_modules/"\* -x \*".git/"\* -x \*"filename-in-any-folder"\* -x "explicit-filename-in-root-folder" -x "folder/explicit-filename"
+zip -r file.zip . -x \*"vendor/"\* -x \*"node_modules/"\* -x \*".git/"\* -x \*"wp-content/uploads/"\* -x \*"wp-content/cache/"\*
+zip -r file.zip . -x \*"filename-in-any-folder"\* -x "explicit-filename-in-root-folder" -x "folder/explicit-filename"
 
 # zip and log errors (files that are not readable)
 zip -r file.zip . &>> file.zip.log
