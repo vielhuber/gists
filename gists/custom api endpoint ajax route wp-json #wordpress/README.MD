@@ -7,6 +7,10 @@ add_action('rest_api_init', function () {
     // for strings use '/custom/path/(?P<id>[a-zA-Z0-9]+)'
     register_rest_route('v1', '/custom/path/(?P<id>\d+)', [
         'methods' => \WP_REST_Server::READABLE, // 'GET', for 'POST use WP_REST_Server::CREATABLE
+        'permission_callback' => '__return_true',
+        'permission_callback' => function () {
+        	return current_user_can( 'edit_others_posts' );
+        },
         'callback' => function (\WP_REST_Request $request) {
             $request->get_params();
             $request->get_param('example');
