@@ -41,7 +41,7 @@
 - reCAPTCHA registrieren
 - E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
 - socialfoo: Facebook Developers App Id eintragen
-- WordPress Admin E-Mail-Adresse auf Kunden oder bewusst auf support@close2.de lassen
+- WordPress Admin E-Mail-Adresse auf support@close2.de setzen (oder alternativ bewusst auf Kunden-E-Mail setzen)
 - Passwortschutz: htaccess/htpasswd im Einsatz (für Testing aktiv, für Production inaktiv)
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
 - Backend Testing komplett abriegeln, damit sich Kunde nicht mehr einloggt
