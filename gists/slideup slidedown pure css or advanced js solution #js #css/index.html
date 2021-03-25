@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>.</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if( document.querySelector('.toggle--1') !== null ) {
+            document.querySelectorAll('.toggle--1').forEach(el => {
+                el.addEventListener('click', e => {
+                    if( !el.nextElementSibling.classList.contains('active') ) {
+                        el.nextElementSibling.classList.add('active');
+                    }
+                    else {
+                        el.nextElementSibling.classList.remove('active');
+                    }
+                    e.preventDefault();
+                });
+            });
+        }
+        if( document.querySelector('.toggle--2') !== null ) {
+            document.querySelectorAll('.toggle--2').forEach(el => {
+                el.addEventListener('click', e => {
+                    if( !el.nextElementSibling.classList.contains('active') ) {
+                        el.nextElementSibling.classList.add('active');
+                        el.nextElementSibling.style.height = el.nextElementSibling.scrollHeight+'px';
+                        // this is necessary so that childs work
+                        setTimeout(() => { if( el.nextElementSibling.classList.contains('active') ) { el.nextElementSibling.style.height = 'auto'; } }, 250);
+                    }
+                    else {
+                        el.nextElementSibling.classList.remove('active');
+                        el.nextElementSibling.style.height = el.nextElementSibling.scrollHeight+'px';
+                        setTimeout(() => { el.nextElementSibling.style.height = 0; }, 30);                        
+                    }
+                    e.preventDefault();
+                });
+            });
+        }
+    });
+    </script>
+    <style>
+    /* basic styles */
+    *
+    {
+        box-sizing: border-box;
+    }
+    .toggle {
+        margin-top:20px;
+        padding:20px;
+        background-color:red;
+        display:inline-block;
+    }
+    .el {
+        background-color:#eee;
+    }
+    .el .el {
+        background-color:#b1b1b1;
+    }
+
+    .toggle--1 + .el
+    {
+        max-height:0;
+        overflow:hidden;
+        transition: all 0.25s ease-in-out;
+    }
+    .toggle--1 + .active
+    {
+        max-height:100vh;
+        padding-top:20px;
+    }
+
+    .toggle--2 + .el
+    {
+        height:0;
+        overflow:hidden;
+        transition: all 0.25s ease-in-out;
+    }
+    </style>
+</head>
+<body>
+
+    <h1>Pure CSS</h1>
+    <a href="#" class="toggle toggle--1">toggle</a>
+    <div class="el">
+        <p>lorem</p>
+        <a href="#" class="toggle--1">toggle</a>
+        <div class="el">lorem</div>
+    </div>
+    <a href="#" class="toggle toggle--1">toggle</a>
+    <div class="el">
+        <p>lorem</p>
+        <a href="#" class="toggle--1">toggle</a>
+        <div class="el">lorem</div>
+    </div>
+    <a href="#" class="toggle toggle--1">toggle</a>
+    <div class="el">
+        <p>lorem</p>
+        <a href="#" class="toggle--1">toggle</a>
+        <div class="el">lorem</div>
+    </div>
+
+    <h1>CSS + JS</h1>
+    <a href="#" class="toggle toggle--2">toggle</a>
+    <div class="el">
+        <p>lorem</p>
+        <a href="#" class="toggle--2">toggle</a>
+        <div class="el">lorem</div>
+    </div>
+    <a href="#" class="toggle toggle--2">toggle</a>
+    <div class="el">
+        <p>lorem</p>
+        <a href="#" class="toggle--2">toggle</a>
+        <div class="el">lorem</div>
+    </div>
+    <a href="#" class="toggle toggle--2">toggle</a>
+    <div class="el">
+        <p>lorem</p>
+        <a href="#" class="toggle--2">toggle</a>
+        <div class="el">lorem</div>
+    </div>
+
+</body>
+</html>
