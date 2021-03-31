@@ -1,3 +1,8 @@
+### network: filter external requests
+```
+-domain:*tld.com
+```
+
 ### current / last nth active dom element
 ```js
 $0
