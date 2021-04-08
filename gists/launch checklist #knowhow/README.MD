@@ -3,7 +3,7 @@
 - 301-Redirects bei Relaunch vorhanden
 - HTML-Validierung erfolgreich geprüft
 - XML-Sitemap vorhanden und aktiv und Einträge geprüft
-- robots.txt vorhanden und aktiv
+- robots.txt prüfen (am besten löschen, da Yoast automatisch generiert); falls manuell erstellt, prüfen ob vollständig (mit WP default vergleichen, siehe separates Gist)
 - Manuelles Backup erstellt
 - WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
 - git auf Production, Testing und Local auf demselben Stand

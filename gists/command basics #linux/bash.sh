@@ -152,6 +152,9 @@ shopt -s extglob dotglob
 mv !(subfolder) subfolder
 shopt -u dotglob
 
+# reverse order of all files in current folder
+for i in *; do mv "$i" "old-$i"; done; ls --color=never -v | tac | sed -e 's/^old-//' | paste <(ls --color=never -v) - | sed -e 's/^/mv /' | bash
+
 # pipe to clipboard
 sudo apt-get install xclip
 echo "foo" | xclip
