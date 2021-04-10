@@ -350,8 +350,12 @@ xdebug.var_display_max_depth = -1
   - ```curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash```
   - copy 3 new lines of ```~/.bashrc``` to ```~/.bash_profile``` (because .bashrc is not loaded on wsl)
   - ```nvm --version```
+  - ```nvm ls```
+  - install/upgrade new/specific node versions
   - ```nvm install node```
   - ```nvm install --lts```
+  - ```nvm install 12.10.0```
+  - ```nvm install 10.16.3```
   - ```nvm use node```
   - Bei manchen Kundenprojekten: ```nvm use --lts```
 - nativ (obsolet)
