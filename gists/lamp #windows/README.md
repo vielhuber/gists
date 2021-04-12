@@ -356,7 +356,8 @@ xdebug.var_display_max_depth = -1
   - ```nvm install --lts```
   - ```nvm install 12.10.0```
   - ```nvm install 10.16.3```
-  - ```nvm use node```
+  - ```nvm alias default 12.10.0```
+  - Version wechseln: ```nvm use 10.16.3```
   - Bei manchen Kundenprojekten: ```nvm use --lts```
 - nativ (obsolet)
   - https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions

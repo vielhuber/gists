@@ -18,13 +18,21 @@ class JConfig {
         $this->log_path = __DIR__.'/logs';
         $this->tmp_path = __DIR__.'/tmp';
     }
+    elseif( strpos(@$_SERVER['HTTP_HOST'], 'close2dev') !== false ) {
+        $this->host = '...';
+        $this->user = '...';
+        $this->password = '...';
+        $this->db = '...';
+        $this->log_path = __DIR__.'/logs';
+        $this->tmp_path = __DIR__.'/tmp';
+    }
     else {
         $this->host = '...';
         $this->user = '...';
         $this->password = '...';
         $this->db = '...';
-        $this->password = '...';
-        $this->db = '...';
+        $this->log_path = '...';
+        $this->tmp_path = '...';
     }
   }
 }
