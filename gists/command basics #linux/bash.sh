@@ -227,7 +227,7 @@ zip -r -6 file.zip .
 zip -r -9 file.zip .
 
 # zip folder
-zip -r file.zip path/to/folder
+zip -r file.zip path/to/folder/
 
 # zip folder (and hide paths)
 zip -j -r output.zip path/to/folder/
