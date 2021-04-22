@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>.</title>
+        <style>
+            .container {
+                width: 50%;
+                margin: 0 auto;
+            }
+            a {
+                text-decoration: underline;
+            }
+        </style>
+        <script>
+            let external_links_config = {
+                icons: [
+                    {
+                        pattern: null,
+                        src:
+                            'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNCAxNCI+PHJlY3Qgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiByeD0iMiIgc3R5bGU9ImZpbGw6I2ZmZiIvPjxwYXRoIGQ9Ik0xMC40LDcuNTJ2My4zNkExLjEyLDEuMTIsMCwwLDEsOS4yOCwxMkgzLjEyQTEuMTIsMS4xMiwwLDAsMSwyLDEwLjg4SDJWNC43MkExLjEyLDEuMTIsMCwwLDEsMy4xMiwzLjZINi40OCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48cGF0aCBkPSJNOC4yNCwySDEyVjUuNzYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDA7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kIi8+PHBhdGggZD0iTTUuMTEsOC44OSwxMiwyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIvPjwvc3ZnPg==',
+                        width: 16,
+                        height: 16,
+                    },
+                    {
+                        pattern: /youtube\.com|youtu\.be/,
+                        src:
+                            'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOCAxNCI+PHJlY3Qgd2lkdGg9IjI4IiBoZWlnaHQ9IjE0IiByeD0iMiIgc3R5bGU9ImZpbGw6I2ZmZiIvPjxwYXRoIGQ9Ik0xMC40LDcuNTJ2My4zNkExLjEyLDEuMTIsMCwwLDEsOS4yOCwxMkgzLjEyQTEuMTIsMS4xMiwwLDAsMSwyLDEwLjg4SDJWNC43MkExLjEyLDEuMTIsMCwwLDEsMy4xMiwzLjZINi40OCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48cGF0aCBkPSJNOC4yNCwySDEyVjUuNzYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDA7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kIi8+PHBhdGggZD0iTTUuMTEsOC44OSwxMiwyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIvPjxyZWN0IHg9IjE1IiB5PSIxIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiLz48cGF0aCBkPSJNMTkuODQsNS4zMmwzLDEuNjktMywxLjY5Wk0yOCwxLjV2MTFBMS41LDEuNSwwLDAsMSwyNi41LDE0aC0xMUExLjUsMS41LDAsMCwxLDE0LDEyLjVWMS41QTEuNSwxLjUsMCwwLDEsMTUuNSwwaDExQTEuNSwxLjUsMCwwLDEsMjgsMS41Wk0yNi42OSw3YTE1LjkxLDE1LjkxLDAsMCwwLS4yNC0yLjc2LDEuNDEsMS40MSwwLDAsMC0xLTFBMzIuODYsMzIuODYsMCwwLDAsMjEsM2EzMi44NiwzMi44NiwwLDAsMC00LjQ0LjI0LDEuNDEsMS40MSwwLDAsMC0xLDEsMTUuOTMsMTUuOTMsMCwwLDAsMCw1LjUxLDEuMzcsMS4zNywwLDAsMCwxLDFBMzMsMzMsMCwwLDAsMjEsMTFhMzIuODYsMzIuODYsMCwwLDAsNC40NC0uMjQsMS40LDEuNCwwLDAsMCwxLTFBMTUuODgsMTUuODgsMCwwLDAsMjYuNjksN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJmaWxsOiNmZmYiLz48L3N2Zz4=',
+                        width: 32,
+                        height: 16,
+                    },
+                    {
+                        pattern: /facebook\.com/,
+                        src:
+                            'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOCAxNCI+PHJlY3Qgd2lkdGg9IjI4IiBoZWlnaHQ9IjE0IiByeD0iMiIgc3R5bGU9ImZpbGw6I2ZmZiIvPjxwYXRoIGQ9Ik0xMC40LDcuNTJ2My4zNkExLjEyLDEuMTIsMCwwLDEsOS4yOCwxMkgzLjEyQTEuMTIsMS4xMiwwLDAsMSwyLDEwLjg4SDJWNC43MkExLjEyLDEuMTIsMCwwLDEsMy4xMiwzLjZINi40OCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48cGF0aCBkPSJNOC4yNCwySDEyVjUuNzYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDA7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kIi8+PHBhdGggZD0iTTUuMTEsOC44OSwxMiwyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIvPjxwYXRoIGQ9Ik0yNC42MywyLjVIMTYuNGEuNjkuNjksMCwwLDAtLjY5LjY5djguMjNhLjY5LjY5LDAsMCwwLC42OS43aDQuNDVWOC40SDE5LjZWNi45NGgxLjI1VjUuODdBMS43NSwxLjc1LDAsMCwxLDIyLjcxLDQsOS40Myw5LjQzLDAsMCwxLDIzLjgzLDR2MS4zaC0uNzZjLS42MSwwLS43Mi4yOC0uNzIuN3YuOTNoMS40NEwyMy42LDguNEgyMi4zNXYzLjcyaDIuMjhhLjcuNywwLDAsMCwuNy0uN1YzLjE5QS42OS42OSwwLDAsMCwyNC42MywyLjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIi8+PC9zdmc+',
+                        width: 32,
+                        height: 16,
+                    },
+                ],
+                blacklist: ['.test'],
+            };
+
+            window.addEventListener('load', function () {
+                external_links_config.blacklist.forEach(function (blacklist__value) {
+                    if (document.querySelector(blacklist__value) !== null) {
+                        [].forEach.call(
+                            document.querySelectorAll(blacklist__value + ', ' + blacklist__value + ' *'),
+                            function (bl) {
+                                bl.classList.add('external-link-exclude');
+                            }
+                        );
+                    }
+                });
+                [].forEach.call(document.querySelectorAll('a'), function (el) {
+                    if (el.children.length > 0) {
+                        return;
+                    }
+                    if (el.classList.contains('external-link-exclude')) {
+                        return;
+                    }
+                    let href = el.getAttribute('href');
+                    if (href === null || href === undefined || href === '') {
+                        return;
+                    }
+                    if (window.location.host != '' && href.indexOf(window.location.host) > -1) {
+                        return;
+                    }
+                    if (href.indexOf('http') !== 0) {
+                        return;
+                    }
+                    if (el.innerText.trim() === '') {
+                        return;
+                    }
+                    let icon = null;
+                    external_links_config.icons.forEach(function (icons__value) {
+                        if (icon === null && icons__value.pattern !== null && icons__value.pattern.test(href)) {
+                            console.log(icons__value);
+                            icon = icons__value;
+                        }
+                    });
+                    if (icon === null) {
+                        external_links_config.icons.forEach(function (icons__value) {
+                            if (icon === null && icons__value.pattern === null) {
+                                icon = icons__value;
+                            }
+                        });
+                    }
+                    if (icon === null) {
+                        return;
+                    }
+                    // split last word
+                    let last_word = '';
+                    let words = el.innerText.split(' ');
+                    last_word = words[words.length - 1];
+                    words.splice(words.length - 1, 1);
+                    words = words.join(' ') + ' ';
+                    el.innerText = words;
+                    el.setAttribute('target', '_blank');
+                    el.style.paddingRight =
+                        parseInt(window.getComputedStyle(el).paddingRight) +
+                        icon.width +
+                        parseInt(window.getComputedStyle(el).paddingLeft) +
+                        'px';
+                    el.innerHTML +=
+                        '<span style="white-space:nowrap">' +
+                        last_word +
+                        '<span style="position:relative; padding-left:4px;">' +
+                        '<img style="width: ' +
+                        icon.width +
+                        'px;height: ' +
+                        icon.height +
+                        'px;position: absolute;top: 50%;transform: translateY(-50%);" src="' +
+                        icon.src +
+                        '" alt="" />' +
+                        '</span>' +
+                        '</span>';
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <p>
+                Lorem ipsum dolor sit amet, <a href="https://youtube.com/foo">consectetuer</a> adipiscing elit. Aenean
+                commodo ligula eget dolor. <a href="/foo">Aenean massa</a>. Cum sociis natoque penatibus et magnis dis
+                parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
+                eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
+                mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                eleifend tellus.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+                massa.
+                <a href="https://facebook.com/bar">Cum sociis natoque penatibus et magnis dis parturient</a> montes,
+                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
+                consequat massa quis enim. Donec pede justo, fringilla vel nec, vulputate eget, arcu. In enim justo,
+                rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+                tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+            </p>
+            <p class="test">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+                massa.
+                <a href="https://facebook.com/bar">Cum sociis natoque penatibus et magnis dis parturient</a> montes,
+                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
+                consequat massa quis enim. Donec pede justo, fringilla vel nec, vulputate eget, arcu. In enim justo,
+                rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+                tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                <a href="https://test.de">Aenean commodo ligula</a> eget dolor. Aenean massa. Cum sociis natoque
+                penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
+                aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+                Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper
+                nisi. Aenean vulputate eleifend tellus.
+            </p>
+        </div>
+    </body>
+</html>
