@@ -186,6 +186,9 @@ find . -name '*.php'
 # find files by extension (case insensitive)
 find . -iname '*.php'
 
+# find folder
+find . -type d -name 'foo'
+
 # find files by extensions
 find . -iregex '.*\.\(jpg\|gif\|png\|jpeg\)$'
 find . \( -iname '*.jpg' -o -iname '*.png' \)
