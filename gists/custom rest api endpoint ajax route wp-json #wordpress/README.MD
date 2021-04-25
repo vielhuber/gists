@@ -7,9 +7,28 @@ add_action('rest_api_init', function () {
     // for strings use '/custom/path/(?P<id>[a-zA-Z0-9]+)'
     register_rest_route('v1', '/custom/path/(?P<id>\d+)', [
         'methods' => \WP_REST_Server::READABLE, // 'GET', for 'POST use WP_REST_Server::CREATABLE
-        'permission_callback' => '__return_true',
         'permission_callback' => function () {
+          	// public route
+          	return true;
+          
+          	// only allow logged in users (via browser)
         	return current_user_can( 'edit_others_posts' );
+          
+          	// for authentication via cookie / api
+          	// see https://gist.github.com/vielhuber/b1647427ddb32c87a9f56e92ed1fd371
+          
+          	// simple basic auth
+            $username = @$_SERVER['PHP_AUTH_USER'];
+            $password = @$_SERVER['PHP_AUTH_PW'];
+            if ($username == '' || $password == '') {
+                return false;
+            }
+            $user = wp_authenticate($username, $password);
+            if (is_wp_error($user)) {
+                return false;
+            }
+            wp_set_current_user($user->ID);
+            return current_user_can('manage_options');
         },
         'callback' => function (\WP_REST_Request $request) {
             $request->get_params();

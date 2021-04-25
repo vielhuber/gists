@@ -15,9 +15,13 @@ class ConvenienceCollection extends Collection
         }
         $collection = $this->map(function ($item, $key) use ($name, $args) {
             return $item->$name(...$args);
-        })->flatten()->unique()->filter(function ($value, $key) {
-            return __x($value) || $value === false;
-        });
+        })
+            ->flatten()
+            ->unique()
+            ->filter(function ($value, $key) {
+                return __x($value) || $value === false;
+            })
+            ->values(); // set consecutive keys;
         /*
         here it get's tricky:
         the ConvenienceCollection is a Database\Eloquent\Collection (which extends Support\Collection)
