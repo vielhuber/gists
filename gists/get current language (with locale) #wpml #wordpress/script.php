@@ -7,7 +7,9 @@ global $sitepress;
 $lang = $sitepress->get_current_language();
 
 // returns 'en' (deprecated, does also not work when you switched languages programmatically)
-ICL_LANGUAGE_CODE
+if(defined('ICL_LANGUAGE_CODE')) { 
+  echo ICL_LANGUAGE_CODE;
+} 
   
 // returns 'en_US'
 $lng = '';

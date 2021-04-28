@@ -4,9 +4,7 @@
 - we apply 3 different fields (you should intersperse them between other valid fields)
 
 ```html
-<style>
-  input[name^="topfhonig"] { opacity:0.0001;position:absolute;top:0;left:-999999px; }  
-</style>
+<style>input[name^="topfhonig"] { opacity:0.0001;position:absolute;top:0;left:-999999px; }</style>
 <input type="text" name="topfhonig1" value="" tabindex="-1" autocomplete="impp" />
 <input type="text" name="topfhonig2" value="" tabindex="-1" autocomplete="impp" />
 <input type="text" name="topfhonig3" value="" tabindex="-1" autocomplete="impp" />
