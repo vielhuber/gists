@@ -9,7 +9,7 @@
 ### plugin
 - add logic to your plugins code (see `test.php` for a full example)
 - zip `test/test.php` to `test.zip`
-- install plugin manually
+- install plugin manually (for the first time, to test further updates)
 
 ## workflow
 

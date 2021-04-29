@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>.</title>
+    <script>
+    function restoreHiddenLinks() {
+        let links = document.querySelectorAll('a[data-hide-crawl]');
+        if( links.length > 0 ) {
+            links.forEach((links__value) => {
+                links__value.setAttribute('href', links__value.getAttribute('data-hide-crawl'));
+                links__value.removeAttribute('data-hide-crawl');
+            });
+        }
+    }
+    window.addEventListener('load', e => {
+        // on desktop: once first parent item is hovered
+        if( document.querySelector('.menu > li') !== null ) {
+            document.querySelectorAll('.menu > li').forEach(el => {
+                el.addEventListener('mouseover', () => {
+                    restoreHiddenLinks();
+                });
+            });
+        }
+        // on mobile: if burger menu is opened
+        if( document.querySelector('.burger') !== null ) {
+            document.querySelectorAll('.burger').forEach(el => {
+                el.addEventListener('click', () => { 
+                    restoreHiddenLinks();
+                    // code just to open burger menu
+                    el.classList.toggle('visible');
+                });
+            });
+        }
+    });
+    </script>
+    <style>
+    *
+    {
+        box-sizing: border-box;
+        margin:0;
+        padding:0;
+    }
+    .menu {
+        display: flex;
+        margin-bottom:100px;
+    }
+    .menu li {
+        list-style-type:none;
+    }
+    .menu a {
+        padding:20px;
+        display:block;
+        border:2px solid red;
+    }
+    .menu > li > ul {
+        display:none;
+        margin-left:10px;
+    }
+    .menu > li > ul a {
+        padding:10px;
+        border-color:blue;
+    }
+    .menu > li:hover > ul {
+        display:block;
+    }
+    .burger { 
+        display:none;
+    }
+    .burger.visible + nav .menu {
+        display:block;
+    }
+    @media screen and (max-width: 768px) {
+        .burger {
+            display:block;
+        }
+        .menu {
+            display:none;
+        }
+        .menu > li > ul {
+            display:block;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>In this menu, 12 links are crawled</h2>
+        <a href="#" class="burger">MENU</a>
+        <nav>
+            <ul class="menu">
+                <li>
+                    <a href="/page1">item</a>
+                    <ul>
+                        <li><a href="/page2">item</a></li>
+                        <li><a href="/page3">item</a></li>
+                        <li><a href="/page4">item</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/page1">item</a>
+                    <ul>
+                        <li><a href="/page2">item</a></li>
+                        <li><a href="/page3">item</a></li>
+                        <li><a href="/page4">item</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/page1">item</a>
+                    <ul>
+                        <li><a href="/page2">item</a></li>
+                        <li><a href="/page3">item</a></li>
+                        <li><a href="/page4">item</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <h2>In this menu, 3 links are crawled</h2>
+        <a href="#" class="burger">MENU</a>
+        <nav>
+            <ul class="menu">
+                <li>
+                    <a href="/page1">item</a>
+                    <ul>
+                        <li><a href="#" data-hide-crawl="/page2">item</a></li>
+                        <li><a href="#" data-hide-crawl="/page3">item</a></li>
+                        <li><a href="#" data-hide-crawl="/page4">item</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/page1">item</a>
+                    <ul>
+                        <li><a href="#" data-hide-crawl="/page2">item</a></li>
+                        <li><a href="#" data-hide-crawl="/page3">item</a></li>
+                        <li><a href="#" data-hide-crawl="/page4">item</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/page1">item</a>
+                    <ul>
+                        <li><a href="#" data-hide-crawl="/page2">item</a></li>
+                        <li><a href="#" data-hide-crawl="/page3">item</a></li>
+                        <li><a href="#" data-hide-crawl="/page4">item</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+</body>
+</html>

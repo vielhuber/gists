@@ -16,6 +16,7 @@
 - Impressum + Datenschutzseite vorhanden und gepflegt
 - Google Analytics Opt Out Link gesetzt und funktional
 - .git-Verzeichnis geschützt
+- Interne Verlinkung: Header und Footer müssen in <header>+<nav> und <footer> sein; Links Mega Menü sollten per JS versteckt werden
 - Limit Login Access aktiv + DSGVO konform
 - WPS Hide Login aktiv (und auf "login" gesetzt)
 - Archivseiten (Autoren, Tags, Datum, ...) deaktiviert
