@@ -31,10 +31,10 @@
 
 ##### set
 - git remote set-url origin ssh://username@vielhuber.de:22/~/vielhuber.git
-- git remote set-url origin git@gitlab.com:c2nm/warnke.git
-- git remote set-url origin https://gitlab.com/c2nm/warnke.git
-- git remote set-url origin https://username:password@gitlab.com/c2nm/warnke.git
-- git remote set-url origin https://david%40close2.de@gitlab.com/c2nm/warnke.git
+- git remote set-url origin git@gitlab.com:c2nm/vielhuber.git
+- git remote set-url origin https://gitlab.com/c2nm/vielhuber.git
+- git remote set-url origin https://username:password@gitlab.com/c2nm/vielhuber.git
+- git remote set-url origin https://david%40close2.de@gitlab.com/c2nm/vielhuber.git
 
 ##### check
 - git remote -v

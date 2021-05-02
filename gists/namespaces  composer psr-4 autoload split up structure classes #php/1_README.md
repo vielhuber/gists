@@ -8,6 +8,7 @@
    - always add namespaces to every file your classes sit in
    - always include one class per file
    - always name the file the same as the class
+- form of namespace: vendor\libraryname
 
 
 ### examples
