@@ -4,6 +4,7 @@
 - In the backend you see an image of the database (not the json)
 - **Sync available** is displayed if the json is more recent than the database
 - When syncing, no files are changed and the database will be updated with the changes from the json files
+- If you want to ditch the json files, make sure to sync the database from the json files(!); Then you can delete the `acf-json`-folder
 
 tl;dr
 - Only use the feature if necessary
