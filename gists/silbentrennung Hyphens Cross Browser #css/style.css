@@ -1,6 +1,12 @@
-overflow-wrap: break-word;
-word-wrap: break-word;
--webkit-hyphens: auto;
--ms-hyphens: auto;
--moz-hyphens: auto;
-hyphens: auto;
+/* applies to all dom elements, even to pseudo selectors */
+html {
+  /* handles very long words, that are not in a dictionary */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  /* vendor prefixes */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  /* the actual hyphenation property */
+  hyphens: auto;
+}
