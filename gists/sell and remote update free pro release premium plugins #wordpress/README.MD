@@ -3,7 +3,8 @@
 ### server
 - install [woocommerce](https://de.wordpress.org/plugins/woocommerce/)
 - install [license manager for woocommerce](https://de.wordpress.org/plugins/license-manager-for-woocommerce/)
-- setup a product and licenses/generator
+- setup a product (downloadable with encrypted link)
+- setup licenses + generator
 - add logic in `server.php` to your `functions.php`
 
 ### plugin
