@@ -38,4 +38,5 @@ $wpdb->get_var($wpdb->prepare('SELECT * FROM table WHERE partner_id = %i AND nam
 // null values only work with db_insert / db_update
 $val = null;
 $wpdb->query($wpdb->prepare('INSERT INTO table(col1) VALUES(%s)',$val)); // does not work
-$wpdb->insert('table', ['col1' => $val], ['%s']); // does work
+$wpdb->insert($wpdb->prefix . 'table', ['col1' => $val], ['%s']); // does work
+$wpdb->update($wpdb->prefix . 'table', ['col1' => $val], ['id' => 1337], ['%s'], ['%d']); // does work

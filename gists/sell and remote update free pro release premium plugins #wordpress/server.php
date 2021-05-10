@@ -76,6 +76,32 @@ class ServerPluginDeploy
                             'icon' => $folder_public . $filename . '.png'
                         ])
                     );
+                    // update wordpress downloadable zip url
+                    global $wpdb;
+                    $files = $wpdb->get_results(
+                        $wpdb->prepare(
+                            'SELECT * FROM ' . $wpdb->prefix . 'postmeta WHERE meta_key = %s',
+                            '_downloadable_files'
+                        )
+                    );
+                    if (!empty($files)) {
+                        foreach ($files as $files__value) {
+                            $files_meta_value = $files__value->meta_value;
+                            $files_meta_value = @unserialize($files_meta_value);
+                            if (!empty($files_meta_value)) {
+                                foreach ($files_meta_value as $files_meta_value__key => $files_meta_value__value) {
+                                    $files_meta_value[$files_meta_value__key]['file'] =
+                                        $folder_public . $filename . '.zip';
+                                }
+                            }
+                            $files_meta_value = serialize($files_meta_value);
+                            $wpdb->update(
+                                $wpdb->prefix . 'postmeta',
+                                ['meta_value' => $files_meta_value],
+                                ['meta_id' => $files__value->meta_id]
+                            );
+                        }
+                    }
                     return new \WP_REST_Response(
                         [
                             'success' => true,

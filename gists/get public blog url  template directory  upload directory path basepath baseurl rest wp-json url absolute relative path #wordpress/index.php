@@ -2,6 +2,7 @@
 // public urls
 get_bloginfo('url')
 get_bloginfo('template_directory')
+get_template_directory_uri()
 get_stylesheet_directory_uri() // use this for child themes
 wp_upload_dir()['baseurl']
 admin_url( 'admin-ajax.php' ) // ajax url
