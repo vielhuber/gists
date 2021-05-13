@@ -60,8 +60,16 @@
                     }
                 });
                 [].forEach.call(document.querySelectorAll('a'), function (el) {
-                    if (el.children.length > 0) {
+                    if (el.children.length >= 2) {
                         return;
+                    }
+                    if( el.children.length === 1 ) {
+                        if( ['STRONG','I','U'].indexOf(el.children[0].tagName) === -1 ) {
+                            return;
+                        }
+                        if( el.innerText.trim() !== el.children[0].innerText.trim() ) {
+                            return;
+                        }
                     }
                     if (el.classList.contains('external-link-exclude')) {
                         return;
@@ -95,15 +103,19 @@
                     if (icon === null) {
                         return;
                     }
+                    let target = el;
+                    if( el.children.length === 1 ) {
+                        target = el.children[0];
+                    }
                     // split last word
                     let last_word = '';
-                    let words = el.innerText.split(' ');
+                    let words = target.innerText.split(' ');
                     last_word = words[words.length - 1];
                     words.splice(words.length - 1, 1);
                     words = words.join(' ') + ' ';
-                    el.innerText = words;
+                    target.innerText = words;
                     el.setAttribute('target', '_blank');
-                    el.innerHTML +=
+                    target.innerHTML +=
                         '<span style="white-space:nowrap; display: inline-flex; align-items: center; color:inherit;">' +
                         last_word +
                         '<span style="position:relative; padding-left:4px; width: '+icon.width+'px; height: '+ icon.height +'px; display: inline-block; color:inherit;">' +
@@ -157,6 +169,27 @@
                 aliquet nec, vulputate eget, arcu. In enim justo, <a href="https://instagram.com/test">mollis pretium</a>, imperdiet a, venenatis vitae, justo.
                 Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper
                 nisi. Aenean vulputate eleifend tellus.
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <a href="https://test.de">
+                            foo                
+                            <img src="https://picsum.photos/200/300" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://test.de">
+                            foo
+                            <strong>bar</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://test.de">
+                            <strong>foobar</strong>
+                        </a>
+                    </li>
+                </ul>
             </p>
         </div>
     </body>
