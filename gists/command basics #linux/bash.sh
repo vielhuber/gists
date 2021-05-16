@@ -98,6 +98,9 @@ sed -e 's/ /\\\n/g' # mac os
 # list all files in folder (in [h]uman readable format, list [a]ll, [l]ist details, [tr] order by time)
 ls -haltr
 
+# merge / concat all files in folder
+cat * > merged-file
+
 # copy file
 cp file1 file2
 
