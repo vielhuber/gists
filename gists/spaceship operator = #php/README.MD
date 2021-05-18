@@ -11,7 +11,8 @@
 ### use case
 ```php
 usort($arr, function($a,$b) {
-	return $a <=> $b; // integers
-    return strcmp($a <=> $b); // strings
+    return $a <=> $b; // integers
+    return $a <=> $b; // strings
+    return strcmp($a, $b); // alternative
 });
 ```
