@@ -417,6 +417,7 @@ xdebug.var_display_max_depth = -1
 - ```git config --global push.default simple```
 - ```git config --global user.name "David Vielhuber"```
 - ```git config --global user.email "david@vielhuber.de"```
+- ```git config --global --add merge.ff false```
 - ```git config --global core.mergeoptions --no-edit```
 - further do this (--no-edit does sometimes not work):
   - ```sudo nano ~/.bash_profile```

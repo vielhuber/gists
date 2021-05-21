@@ -304,8 +304,9 @@ Usage: git acp
 
 ## a note on merging
 - git merge foo merges the branch foo into the current checked out branch
-- if no conflict has been found it is automatically committed
-- if a conflict has been found it is not automatically comitted
+- if no conflict has been found it is automatically committed (fast forward)
+- if a conflict has been found it is not automatically comitted (no fast forward)
+- to get a clean log, always use `--no-ff` or set a global option with `git config --global --add merge.ff false`
 
 #### undo (uncomitted) changes from a merge where conflicts have happened
 - git merge --abort
@@ -316,6 +317,9 @@ Usage: git acp
 #### undo (comitted) changes from a merge where no conflicts appeared
 - git reset --merge ORIG_HEAD
 - git reset --hard origin/master # if the command above is not working
+
+#### how to merge always with a commit
+- git merge branch --no-ff
 
 #### how to merge without a commit
 - git merge branch --no-commit --no-ff
