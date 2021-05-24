@@ -83,7 +83,7 @@ var d = new Date();
 ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'][(new Date()).getMonth()];
 
 // get current day name
-['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'][(new Date()).getDay()];
+['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'][(new Date()).getDay()];
 
 // get previous month
 new Date((new Date()).getFullYear(), (new Date()).getMonth()-1, 1);
