@@ -23,6 +23,8 @@ try {
     $mails_ids = $mailbox->searchMailbox('ALL');
     foreach ($mails_ids as $mails_id__value) {
         $mail = $mailbox->getMail($mails_id__value);
+        $eml_filename = tempnam(sys_get_temp_dir(), 'mail_') . '.eml';
+        $mailbox->saveMail($mails_id__value, $eml_filename);
         $mails[] = [
             'id' => (string) $mail->id,
             'mailbox' => $settings['username'],
@@ -31,6 +33,7 @@ try {
             'to' => (string) $mail->toString,
             'date' => $mail->date,
             'subject' => (string) $mail->subject,
+          	'eml' => base64_encode(file_get_contents($eml_filename)),
             'attachments' => count($mail->getAttachments()),
             'content_html' =>
                 mb_detect_encoding($mail->textHtml, 'UTF-8, ISO-8859-1') !== 'UTF-8'

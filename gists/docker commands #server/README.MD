@@ -22,6 +22,7 @@
 - ```docker build .```
 
 #### update remote image
+- ```docker-compose pull```
 - ```docker-compose pull nginx```
 
 #### run command inside docker-compose.yml

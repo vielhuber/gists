@@ -306,7 +306,8 @@ Usage: git acp
 - git merge foo merges the branch foo into the current checked out branch
 - if no conflict has been found it is automatically committed (fast forward)
 - if a conflict has been found it is not automatically comitted (no fast forward)
-- to get a clean log, always use `--no-ff` or set a global option with `git config --global --add merge.ff false`
+- to get a clean log, always use `--no-ff`
+- you also can set this globally via `git config --global pull.ff only && git config --global merge.ff false`
 
 #### undo (uncomitted) changes from a merge where conflicts have happened
 - git merge --abort
