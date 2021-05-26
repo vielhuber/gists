@@ -5,6 +5,7 @@
 - XML-Sitemap vorhanden und aktiv und Einträge geprüft
 - robots.txt prüfen (am besten löschen, da Yoast automatisch generiert); falls manuell erstellt, prüfen ob vollständig (mit WP default vergleichen, siehe separates Gist)
 - Manuelles Backup erstellt
+- Scroll-Animations-Plugin (lanimate) aktiv
 - WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
 - git auf Production, Testing und Local auf demselben Stand
 - Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
