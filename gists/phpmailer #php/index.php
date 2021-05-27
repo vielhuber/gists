@@ -34,6 +34,11 @@ function mailSend($recipients, $subject = '', $content = '', $attachments = null
         ];
         $mail->CharSet = 'utf-8';
         $mail->isHTML(true);
+      
+        // only send on production to real recipient
+        if (in_array(@$_SERVER['SERVER_ADMIN'], ['david@close2.de'])) {
+          $recipients = $_SERVER['SERVER_ADMIN'];
+        }
         if (!is_array($recipients) || isset($recipients['email'])) {
             $recipients = [$recipients];
         }
@@ -53,6 +58,7 @@ function mailSend($recipients, $subject = '', $content = '', $attachments = null
                 }
             }
         }
+      
         $mail->Subject = $subject;
         $mail->Body = $content;
         $mail->AltBody = strip_tags(str_replace(['<br>', '<br/>', '<br />'], "\r\n", $content));

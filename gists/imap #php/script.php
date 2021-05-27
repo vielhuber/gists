@@ -23,6 +23,7 @@ try {
     $mails_ids = $mailbox->searchMailbox('ALL');
     foreach ($mails_ids as $mails_id__value) {
         $mail = $mailbox->getMail($mails_id__value);
+		$mail->embedImageAttachments();
         $eml_filename = tempnam(sys_get_temp_dir(), 'mail_') . '.eml';
         $mailbox->saveMail($mails_id__value, $eml_filename);
         $mails[] = [
