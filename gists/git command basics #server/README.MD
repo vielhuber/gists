@@ -265,6 +265,7 @@ Usage: git acp
 ### delete branch both locally and remotely
 - git push origin --delete branch-name
 - git branch --delete --force branch_name
+- git fetch --prune # update local list of branches
 
 ### make changes
 - git add -A .

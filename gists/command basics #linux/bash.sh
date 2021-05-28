@@ -101,6 +101,12 @@ ls -haltr
 # merge / concat all files in folder
 cat * > merged-file
 
+# print lines that contain text
+grep 'foo' file
+
+# remove n chars from every line
+cut -c11- file > file2 # remove 10 chars
+
 # copy file
 cp file1 file2
 
