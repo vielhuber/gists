@@ -30,3 +30,10 @@
 - The service worker can be waken up and it shows the push noticiations
 - here some manual work is necessary: is the app currently open or not etc.
 - in the main app only one line of code is necessary: show the push notification in the ui
+
+#### Links
+- https://www.youtube.com/watch?v=baSiSIyTGSk
+- https://maskable.app/
+- https://www.pwabuilder.com/
+- https://mobiforge.com/design-development/pwa-minimus-a-minimal-pwa-checklist
+- https://web.dev/offline-fallback-page/

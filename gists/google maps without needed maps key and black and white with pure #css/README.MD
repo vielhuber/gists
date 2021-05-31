@@ -14,7 +14,7 @@
 
 ### #2
 
-- very important: restrict the api key to domain referrers
+- very important when using this solution: restrict the api key to domain referrers
 
 ```html
 <iframe

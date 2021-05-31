@@ -505,15 +505,28 @@ Usage: git acp
 #### start a new feature
 - gimkdir -p "testcd testvue clicvcvfileztecpa@vueopfalsenpm run buildnpm incnpmcccd helnpm run builduglifyjsuinuglifyjs-webpack-pluginuglifyjs-webpack-plugincvccdf .cd ..cd ..cd uglcgit clone v . . git command# create new branch and change to it in one commandgit checkout -b branch-namegit checkout -b chroot-bugfixccPfolder" && cd "testcd testvue clicvcvfileztecpa@vueopfalsenpm run buildnpm incnpmcccd helnpm run builduglifyjsuinuglifyjs-webpack-pluginuglifyjs-webpack-plugincvccdf .cd ..cd ..cgit@gitlab.com:c2nm/elobau.git
 
-
 ## interesting note
 
 - if you change a branch with uncommitted files, these files get "transferred" to the other branch(!)
 - therefore always commit changes before changing branches
 
+## stash
 
-
-
+- stashes are for code changes you don't want to commit but save for later usage (for example to quickly change to another branch or to pull first)
+- stashes are ONLY local and not transmitted to remote
+- `git stash`: stash everything, that has not yet been committed
+- `git stash push`: equivalent to `git stash`
+- `git stash save`: deprecated
+- `git stash push -m "note about this stash"`
+- `git stash --include-untracked` / `git stash -u`: also new files, that are not yet in index
+- `git stash list`: show current stashes
+- `git stash show`: show stash
+- `git stash apply`: take out stash, but leave it in stash list
+- `git stash pop`: take out stash and remove it from stash list
+- `git stash pop stash@{2}`: take out specific stash
+- `git stash drop stash@{0}`: delete stash and delete num from list
+- `git stash clear`: delete all stashes
+- `git stash branchname`: you can stash branches (but this is not the normal use case)
 
 ## ignore changes
 
