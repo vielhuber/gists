@@ -43,6 +43,7 @@ if you want to use traits / class inheritance in phpunit, simply do the followin
 #### failed tests
 
 - with `stopOnFailure="false"` in `phpunit.xml`, phpunit does not stop if a test fails
+- you can use the command line argument `--stop-on-failure` to circumvent this behaviour
 - however if inside a single test multiple assertions are made, phpunit also stops on the first wrong assertion (even with this setting)
 - to overcome this, collect the failures manually and make a dummy assertion like `$this->assertTrue(false);` at the end
 

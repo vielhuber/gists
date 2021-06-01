@@ -22,10 +22,15 @@ try {
     );
     $mails_ids = $mailbox->searchMailbox('ALL');
     foreach ($mails_ids as $mails_id__value) {
-        $mail = $mailbox->getMail($mails_id__value);
+        $mail = $mailbox->getMail($mails_id__value, false); // don't mark as unread
 		$mail->embedImageAttachments();
+
         $eml_filename = tempnam(sys_get_temp_dir(), 'mail_') . '.eml';
+        $unseen = in_array($mails_id__value, $mailbox->searchMailbox('UNSEEN', true));
         $mailbox->saveMail($mails_id__value, $eml_filename);
+        // undo saveMail setting mail as read
+        if ($unseen) { $mailbox->markMailAsUnread($mail_id); }     
+      
         $mails[] = [
             'id' => (string) $mail->id,
             'mailbox' => $settings['username'],
