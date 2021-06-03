@@ -30,6 +30,5 @@ $src = 'https://www.google.com/maps/embed?pb='.
         '!5m2'.
             '!1s'.$lng.
             '!2s'.$lng;
-?>
 
-<iframe src="<?php echo $src; ?>" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+echo '<iframe src="'.$src.'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';

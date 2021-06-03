@@ -31,6 +31,7 @@
 - Alle Bilder komprimiert
 - Grundlegende Meta-Tags gesetzt (Titel+Description) (prüfen, ob Startseite diese ausspielt)
 - JavaScript Fehler in Console überprüft
+- Alle Notices in der Console ebenfalls gekillt: Console muss komplett leer sein. Ebenfalls in Firefox testen, da hier oft andere Meldungen kommen.
 - console.log Ausgaben deaktiviert
 - git dev-/feature-Branch in master gemergt
 - Favicon vorhanden
