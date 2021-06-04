@@ -64,6 +64,9 @@ public function boot()
   ],
 ],
 ?>
+  
+// if you get a database error (user could not be authenticated), run this to create a config file (where you edit the sql credentials):
+php artisan vendor:publish --tag=passport-config
 
 // now create a simple protected route in routes/api.php
 Route::middleware('auth:api')->get('/user', function (Request $request) {

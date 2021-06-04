@@ -1,2 +1,2 @@
 <?php
-dd(Person::find(42)->getParents()->getAddresses()->sortByMany([['zip','asc'],['location','desc']]);
+dd(Person::find(42)->getParents()->getAddresses()->sortByMulti([['zip','asc'],['location','desc']]);

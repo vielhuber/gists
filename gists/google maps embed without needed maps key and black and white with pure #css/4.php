@@ -1,6 +1,7 @@
 <?php
 $zoom = 5000;
 $address = 'Auenstraße 6, 80469 München';
+//$address = '48.127660,11.575380'; // lat/lng is also possible but without an address card
 $lng = 'de';
 
 $src = 'https://www.google.com/maps/embed?pb='.
