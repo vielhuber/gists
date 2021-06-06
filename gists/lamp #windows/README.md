@@ -612,6 +612,10 @@ host    all   all        ::1/128        md5
 - https://phpmyadmin.local.vielhuber.de
   - "Der phpMyAdmin-Konfigurationsspeicher ist nicht vollständig konfiguriert," => operations > create table
 
+#### speedtest cli
+- ```curl -s https://install.speedtest.net/app/cli/install.deb.sh | sudo bash```
+- ```sudo apt-get install speedtest```
+
 #### include windows fonts in linux
 - ```ln -s /mnt/c/Windows/Fonts /usr/share/fonts/WindowsFonts```
 - ```fc-cache```

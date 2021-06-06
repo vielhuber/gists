@@ -169,6 +169,10 @@ sudo apt-get install xclip
 echo "foo" | xclip
 cat ~/.ssh/id_rsa.pub | xclip
 
+# rename umlauts in files
+sudo apt-get install detox
+detox -nrv -s utf_8 /path/to/folder
+
 # reboot
 reboot
 shutdown -r now
