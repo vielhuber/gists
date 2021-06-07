@@ -18,6 +18,9 @@ new Date('2000-07-28T11:32:00');
 // date from timestamp
 new Date(1515107594 * 1000);
 
+// php time() equivalent
+Math.floor(new Date().getTime() / 1000)
+
 // add years to date
 function addYears(date, years)
 {
