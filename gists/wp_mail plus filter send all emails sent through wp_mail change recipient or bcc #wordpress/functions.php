@@ -4,7 +4,11 @@ wp_mail(
     'foo@bar.com',
     'The subject',
     'The <strong>html</strong> content',
-    ['Content-Type: text/html; charset=UTF-8']
+    ['Content-Type: text/html; charset=UTF-8'],
+  	[
+    	wp_upload_dir()['basedir'].'/uploads/file1.zip',
+        wp_upload_dir()['basedir'].'/uploads/file2.zip',
+    ]
 );
   
 // change recipient on dev
