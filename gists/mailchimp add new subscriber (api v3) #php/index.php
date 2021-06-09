@@ -1,4 +1,5 @@
 <?php
+// composer require drewm/mailchimp-api
 require_once(__DIR__ . '/vendor/autoload.php');
 // OR
 //require_once('https://raw.githubusercontent.com/drewm/mailchimp-api/master/src/MailChimp.php');
