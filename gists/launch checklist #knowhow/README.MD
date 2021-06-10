@@ -12,6 +12,7 @@
 - Erweiterte Cookie-Leiste und/oder Zwei-Klick-Lösungen für Google Maps implementiert
 - YouTube-/Vimeo-Links GDPR tauglich gemacht
 - Alle CMS Updates (WordPress Core+Plugins) installiert
+- Inaktive Plugins gelöscht (außer WPML und ggf. Caching)
 - WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
 - RSS-Feed vorhanden und funktional
 - Impressum + Datenschutzseite vorhanden und gepflegt
