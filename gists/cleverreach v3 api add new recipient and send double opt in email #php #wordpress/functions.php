@@ -9,7 +9,7 @@ $cleverreach = (object) [
     'email' => 'david@vielhuber.de',
     'source' => 'tld.com',
     'attrs' => [
-        // use placeholders here
+        // use placeholders (without "{}" here)
         'SALUTATION' => 'Herr',
         'FIRSTNAME' => 'David',
         'LASTNAME' => 'Vielhuber',
