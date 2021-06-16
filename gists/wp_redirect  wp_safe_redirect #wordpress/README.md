@@ -1,6 +1,6 @@
 ### tl;dr
 
-- usage: ```wp_safe_redirect/wp_redirect($url, $code = 302)```
+- usage: ```wp_safe_redirect($url, $code = 302); die();``` / ```wp_redirect($url, $code = 302); die();```
 - use ```wp_safe_redirect``` when you want to redirect internally (to another url on the same domain)
 - use ```wp_redirect``` in all other cases
 

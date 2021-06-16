@@ -417,6 +417,7 @@ find . -name '*.*' -not -path './node_modules/*' | xargs wc -l
 find . -name "foo" -delete # delete files with name "foo"
 find . -type d -empty -delete # delete empty folders
 find . -name "node_modules" -type d -prune -exec rm -rf {} \; # delete all folders recursively with name
+find /tmp -type f -atime +10 -delete # clean up tmp directory (delete all files older than 10 days)
 
 # recursively search and replace file contents
 find . -type f -name "*.txt" -print0 | xargs -0 sed -i -e 's/foo/bar/g' # linux

@@ -18,6 +18,7 @@ cd C:\Program Files\MySQL\MySQL Server 5.6\bin
 --default-character-set: always choose "utf8mb4"
 
 // options of mysqldump
+--no-tablespaces: don't include tablespaces
 --skip-add-locks: don't surround statements with locks
 --skip-add-drop-table: don't add drop table statements
 --skip-comments: don't include comments
@@ -32,7 +33,7 @@ cd C:\Program Files\MySQL\MySQL Server 5.6\bin
 --ignore-table=dbname.tblname: set this if you want to exclude a certain table
 --single-transaction: set this, if you don't have full access to lock tables
 --routines: export procedures and functions (this is false by default)
---triggers: exportr triggers (this is true by default)
+--triggers: export triggers (this is true by default)
 --default-character-set: always choose "utf8mb4"
 
 // exclude data from specific table (but get schema)
@@ -48,6 +49,12 @@ file_put_contents('my.cnf','[client]'.PHP_EOL.'user = root'.PHP_EOL.'password = 
 exec('mysqldump --defaults-extra-file=myo.cnf --port 3306 database > dump.sql');
 exec('mysql --defaults-extra-file=myo.cnf --default-character-set=utf8 database < dump.sql');
 unlink('my.cnf');
+
+// since mysql 5.7/8.0.21 accessing the information_schema.files table now requires the process privilege.
+// most providers don't have this option available. This results in the error message:
+// Error: 'Access denied; you need (at least one of) the PROCESS privilege(s) for this operation' when trying to dump tablespaces
+// to prevent that, add
+--no-tablespaces
 
 // speed up even more
 https://serverfault.com/a/568465/442998
