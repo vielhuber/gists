@@ -29,7 +29,7 @@
 - Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
 - Passwortschutz und Entwurf testen, ob das funktioniert
 - Google Maps JS API Key hinterlegen
-- Alle Bilder komprimiert
+- Alle Bilder komprimiert, EXIF-Daten überall entfernt, Upload eines Bildes strippt alle EXIF-Daten sauber heraus, Löschen von Bildern löscht auch physische Datei
 - Grundlegende Meta-Tags gesetzt (Titel+Description) (prüfen, ob Startseite diese ausspielt)
 - JavaScript Fehler in Console überprüft
 - Alle Notices in der Console ebenfalls gekillt: Console muss komplett leer sein. Ebenfalls in Firefox testen, da hier oft andere Meldungen kommen.

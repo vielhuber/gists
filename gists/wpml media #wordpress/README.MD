@@ -5,6 +5,7 @@
 - Nach Hinzufügen einer neuen Sprache: WPML -> Einstellungen -> Media Translations > Start
 - Falls unterschiedliche Bilder pro Sprache realisiert werden sollen: WPML Media aktivieren
   - Beispiel: WooCommerce: Unterschiedliche Bilder pro Produkt sind realisierbar über WPML > Media Translations > Original suchen > Sprache wählen > “Use different file”
+- Achtung: Löscht man eine Mediendatei in einer Sprache, muss man diese Datei auch in allen anderen Sprachen löschen (sonst verbleibt sie auf dem Server)
 
 #### Empfehlung
 

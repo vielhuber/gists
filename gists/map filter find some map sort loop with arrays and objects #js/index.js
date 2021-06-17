@@ -5,6 +5,9 @@ arr.map(i => i+1); // [8,9,10]
 /* example of modifying item of array of objects */
 arr = arr.map((i) => { i.content = i.content+'foo'; return i; });
 
+/* get key */
+arr.map((v,i) => v+i); // [7,9,11]
+
 arr.filter(i => i > 7); // [8,9]
 
 arr.find(i => i > 7); // 8

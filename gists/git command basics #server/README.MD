@@ -46,6 +46,7 @@
 - `/etc/gitconfig` # system (often empty)
 - `~/.gitconfig` # global/user
 - `/var/www/project/.git/config` # project
+- `git config --list` # show settings
 - `git config --list --show-origin` # see where your config settings come from
 
 ##### ignore warnings for line endings
