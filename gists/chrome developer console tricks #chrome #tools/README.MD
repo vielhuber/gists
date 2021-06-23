@@ -45,4 +45,5 @@ inspect($('.foo'))
 getEventListeners($('.foo'))
 function fn(x, y) { return x + y; } monitor(fn); fn(1,2)
 monitorEvents(window, 'resize')
+console.log('%ccool stuff', 'background: red; color: blue')
 ```   
