@@ -14,7 +14,12 @@ class ConvenienceCollection extends Collection
             return $this[snake_case(substr($name, 3))];
         }
         $collection = $this->map(function ($item, $key) use ($name, $args) {
-            return $item->$name(...$args);
+            try {
+                $value = $item->$name(...$args);
+            } catch (\Throwable $e) {
+                $value = null;
+            }
+            return $value;
         })
             ->flatten()
             ->unique()

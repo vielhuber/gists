@@ -29,6 +29,6 @@ if ($_SERVER['REQUEST_URI'] == '/' && function_exists('icl_get_languages')) {
         ksort($matches);
         $preferred_language = $matches[key($matches)]['code'];
     }
-    wp_redirect(site_url('/' . $preferred_language . '/'), 302);
+    wp_redirect(site_url('/' . $preferred_language . '/'), 301); // use 301 (becuase of ryte)
     die();
 }
