@@ -1,10 +1,10 @@
 ## PRE-LAUNCH
 - Exakten Zeitpunkt planen: Softlaunch oder Hardlaunch? Kunden informieren, dass es zu Verzögerungen wegen DNS kommen kann
-- 301-Redirects bei Relaunch vorhanden
+- 301-Redirects bei Relaunch vorhanden?
 - HTML-Validierung erfolgreich geprüft
 - XML-Sitemap vorhanden und aktiv und Einträge geprüft
 - robots.txt prüfen (am besten löschen, da Yoast automatisch generiert); falls manuell erstellt, prüfen ob vollständig (mit WP default vergleichen, siehe separates Gist)
-- Manuelles Backup erstellt
+- Manuelles Backup der alten Seite sowie vom Testserver erstellt
 - Scroll-Animations-Plugin (lanimate) aktiv
 - WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
 - git auf Production, Testing und Local auf demselben Stand
@@ -48,7 +48,7 @@
 - WordPress Admin E-Mail-Adresse auf support@close2.de setzen (oder alternativ bewusst auf Kunden-E-Mail setzen)
 - Passwortschutz: htaccess/htpasswd im Einsatz (für Testing aktiv, für Production inaktiv)
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
-- Backend Testing komplett abriegeln, damit sich Kunde nicht mehr einloggt
+- Backend (und ggf. auch Frontend) auf Testing komplett abriegeln, damit sich Kunde nicht mehr einloggt
 - Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
 
 ## POST-LAUNCH
@@ -73,7 +73,7 @@
 - Rich Snippets geprüft und validiert
 - Seite 1x komplett mit Screaming Frog durchprüfen (nochmal Broken Links)
 - Google PageSpeed (web.dev) einmalig durchlaufen lassen und gröbste Fehler fixen
-- PHP-Version aktualisiert / geprüft
+- PHP-Version aktualisiert / geprüft (mind. PHP 7.4!)
 - Jira Ticket abgehakt
 - Offizielles Angebot durchgeschaut, ob irgendetwas fehlt
 - Abrechnung geprüft und durchgeführt
