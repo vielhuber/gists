@@ -16,10 +16,10 @@
 - WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
 - RSS-Feed vorhanden und funktional
 - Impressum + Datenschutzseite vorhanden und gepflegt
-- Google Analytics Opt Out Link gesetzt und funktional
+- Google Analytics Opt Out Link gesetzt und funktional (am besten Link zum Consent-Manager setzen)
 - .git-Verzeichnis geschützt
 - Interne Verlinkung: Header und Footer müssen in <header>+<nav> und <footer> sein; Links Mega Menü sollten per JS versteckt werden
-- Limit Login Access aktiv + DSGVO konform
+- Limit Login Access aktiv
 - WPS Hide Login aktiv (und auf "login" gesetzt)
 - Archivseiten (Autoren, Tags, Datum, ...) deaktiviert
 - Testseiten / Dummyseiten gelöscht, Papierkorb gelöscht
