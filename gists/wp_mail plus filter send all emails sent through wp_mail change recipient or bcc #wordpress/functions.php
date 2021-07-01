@@ -1,7 +1,7 @@
 <?php
 // basic usage
 wp_mail(
-    'foo@bar.com',
+    'foo@bar.com', // use ['foo@bar.com','bar@baz.com'] for multiple recipients
     'The subject',
     'The <strong>html</strong> content',
     ['Content-Type: text/html; charset=UTF-8'],
