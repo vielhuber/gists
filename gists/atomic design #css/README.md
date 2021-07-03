@@ -15,9 +15,10 @@
 ## classes
 
 - prefix all bem classes with `a-` (atom), `m-` (molecule), `o-` (organism), `t-` (template), `p-` (page)
-- example: `a-button a-button--primary`
+- prefix all dom elements where js functions get applied with `js-`
+- example: `a-button a-button--primary js-button`
 
-## folder structure
+## example folder structure
 
 ```
 00_base/

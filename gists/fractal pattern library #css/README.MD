@@ -8,82 +8,134 @@
 
 ## commands
 
-- ```fractal start --sync```
-- ```fractal build```
+- ```fractal start --sync``` (this is the main way to develop in fractal)
+- ```fractal build```: creates a package that can be shown ot the customer (usually not needed)
 
-## installation
+## installation (in existing project)
 
 - ```npm i -g @frctl/fractal```
-- ```mkdir fractal-test```
-- ```cd fractal-test```
-- ```npm init -y```
+- ```cd project```
 - ```npm install --save @frctl/fractal```
-- ```mkdir src```
-- ```mkdir src/components```
-- ```mkdir src/docs```
+- ```mkdir fractal```
+- ```mkdir fractal/src```
+- ```mkdir fractal/src/components```
+
+- ```vim .gitignore```
+
+```
+/fractal/build/
+/fractal/public/css/
+/fractal/public/js/
+```
+
+- ```vim package.json```
+
+```json
+"scripts": {
+    "fractal": "fractal build",
+    "fractal:dev": "fractal start --sync",
+    "fractal:copy": "ncp ./fractal/public ./public",
+    "fractal:copy:watch": "onchange ./fractal/src/**/*.scss ./fractal/src/**/**/*.scss ./fractal/public/**/**/**/*.* --initial --poll 25 --delay 0 --await-write-finish 25 -- onerror \"npm run fractal:copy\" --title \"fractal:copy:watch\" --message \"build failed\" --sound mute",
+}
+```
+
 - ```vim fractal.config.js```
 
 ```js
 'use strict';
 const fractal = (module.exports = require('@frctl/fractal').create());
-fractal.set('project.title', 'HovawartDB Component Library');
+fractal.set('project.title', 'Test Component Library');
 fractal.components.set('path', __dirname + '/fractal/src/components');
-fractal.docs.set('path', __dirname + '/fractal/src/docs');
 fractal.web.set('builder.dest', __dirname + '/fractal/build');
-fractal.web.set('static.path', __dirname + '/fractal/assets');
+fractal.web.set('static.path', __dirname + '/fractal/public');
 fractal.components.set('default.preview', '@preview');
 ```
 
-- ```vim src/components/alert.hbs```
+- ```vim fractal/src/components/button/button.hbs```
 
 ```html
-<div class="alert alert--{{ modifier }}">This is an alert!</div>
-<h1>{{ heading }}</h1>
-<p>{{ text }}</p>
+<div class="a-button a-button--{{ modifier }} js-button">
+    {{ text }}
+</div>
 ```
 
-- ```vim src/components/alert.config.js```
+- ```vim fractal/src/components/button/button.config.json```
 
-```yml
-module.exports = {
-    title: 'Example component 123',
-    status: 'ready',
-    notes: 'These are some **notes** about the component',
-    context: {
-        modifier: 'default',
-        text: 'This is an example component!',
-        heading: 'My heading'
+```json
+{
+    "title": "Button",
+    "status": "ready",
+    "notes": "This is a first **example**.",
+    "context": {
+        "modifier": "default",
+        "text": "Click me"
     },
-    variants: [
+    "variants": [
         {
-            name: 'warning',
-            context: {
-                modifier: 'alert',
-                message: 'This is a warning banner'
-            }
-        },
-        {
-            name: 'success',
-            status: 'prototype',
-            notes: 'These are some special **notes** about the component',
-            context: {
-                modifier: 'success',
-                message: 'This is a success banner'
+            "name": "highlight",
+            "status": "prototype",
+            "notes": "These are some special **notes** about this variant.",
+            "context": {
+                "modifier": "highlight",
+                "text": "Click me!!!"
             }
         }
     ]
-};
+}
 ```
 
-- ```vim src/components/_preview.hbs```
+- ```vim fractal/src/components/button/button.scss```
+
+```scss
+.a-button {
+    background-color: green;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+.a-button--highlight {
+    border: 2px solid red;
+}
+```
+
+- ```vim fractal/src/components/button/button.js```
+
+```js
+export default class button {
+    initOnReady() {
+        this.colorize();
+        this.bindClick();
+    }
+    initOnLoad() {}
+    bindClick() {
+        document.addEventListener(
+            'click',
+            (e) => {
+                if (e.target.closest('.js-button')) {
+                    alert('FOO');
+                    e.preventDefault();
+                }
+            },
+            true
+        );
+    }
+}
+```
+
+- ```vim fractal/src/components/_preview.hbs```
 
 ```hbs
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <meta charset="utf-8">
-    <link media="all" rel="stylesheet" href="{{ path '/css/style.css' }}">
-    <title>Preview Layout</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>Preview</title>
+    <link rel="stylesheet" href="{{ path '/css/style.css' }}" />
+    <script src="{{ path '/js/script.js' }}"></script> 
 </head>
 <body>
 
@@ -93,19 +145,36 @@ module.exports = {
 </html>
 ```
 
-- ```fractal start --sync```
-- ```fractal build```
-- create vhost that points to `fractal-test/bundle/`
+- ```vim fractal/src/scss/style.scss```
 
-### embed in build pipeline
-
-package.json
-
-```json
-"scripts": {
-    "fractal": "fractal build",
-    "fractal:dev": "fractal start --sync",
-    "fractal:copy": "ncp ./original/css/bundle.css ./fractal/assets/css/style.css && ncp ./original/fonts ./fractal/assets/fonts/",
-    "fractal:copy:watch": "onchange ./original/css/bundle.css --initial --poll 25 --delay 0 --await-write-finish 25 -- onerror \"npm run fractal:copy\" --title \"fractal:copy:watch\" --message \"build failed\" --sound mute",
-}
+```scss
+@import 'base/normalize';
+@import 'base/root';
+@import 'base/typography';
+@import '../components/atoms/button/button';
 ```
+
+- ```vim fractal/src/js/script.js```
+
+```js
+import Common from './base/common';
+import Button from './../components/atoms/button/button';
+
+const common = new Common();
+const button = new Button();
+
+document.addEventListener('DOMContentLoaded', () => {
+    common.initOnReady();
+    button.initOnReady();
+});
+window.addEventListener('load', (e) => {
+    common.initOnLoad();
+    button.initOnLoad();
+});
+```
+
+## build pipeline
+
+- first move all existing scss/js files and even fonts to fractal
+- they are copied after building to the main project
+- so you test and develop in fractal(!)
