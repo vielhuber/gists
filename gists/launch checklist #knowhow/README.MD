@@ -14,8 +14,11 @@
 - Alle CMS Updates (WordPress Core+Plugins) installiert
 - Inaktive Plugins gelöscht (außer WPML und ggf. Caching)
 - WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
+- Bilder in Medienverwaltung in Unterordnern sortiert und ungenutzte Bilder manuell ausgemistet
 - RSS-Feed vorhanden und funktional
 - Impressum + Datenschutzseite vorhanden und gepflegt
+- Link zu close2 im Impressum hinterlegt:
+  - Verantwortlich für Programmierung: close2 new media GmbH, Webagentur München, www.close2.de
 - Google Analytics Opt Out Link gesetzt und funktional (am besten Link zum Consent-Manager setzen)
 - .git-Verzeichnis geschützt
 - SEO Interne Verlinkung
