@@ -17,15 +17,12 @@
 - ```cd project```
 - ```npm install --save @frctl/fractal```
 - ```mkdir fractal```
-- ```mkdir fractal/src```
-- ```mkdir fractal/src/components```
 
 - ```vim .gitignore```
 
 ```
 /fractal/build/
-/fractal/public/css/
-/fractal/public/js/
+/fractal/public/
 ```
 
 - ```vim package.json```
@@ -34,8 +31,8 @@
 "scripts": {
     "fractal": "fractal build",
     "fractal:dev": "fractal start --sync",
-    "fractal:copy": "ncp ./fractal/public ./public",
-    "fractal:copy:watch": "onchange ./fractal/src/**/*.scss ./fractal/src/**/**/*.scss ./fractal/public/**/**/**/*.* --initial --poll 25 --delay 0 --await-write-finish 25 -- onerror \"npm run fractal:copy\" --title \"fractal:copy:watch\" --message \"build failed\" --sound mute",
+    "fractal:copy": "ncp ./fractal/src/assets ./fractal/public/assets && ncp ./fractal/public ./public",
+    "fractal:copy:watch": "onchange ./fractal/src/assets/**/*.* ./fractal/src/assets/**/**/*.* ./fractal/public/**/*.css ./fractal/public/**/**/*.css ./fractal/public/**/*.js ./fractal/public/**/**/*.js --initial --poll 25 --delay 0 --await-write-finish 25 -- onerror \"npm run fractal:copy\" --title \"fractal:copy:watch\" --message \"build failed\" --sound mute",
 }
 ```
 
@@ -51,15 +48,15 @@ fractal.web.set('static.path', __dirname + '/fractal/public');
 fractal.components.set('default.preview', '@preview');
 ```
 
-- ```vim fractal/src/components/button/button.hbs```
+- ```vim fractal/src/components/buttons/button.hbs```
 
 ```html
-<div class="a-button a-button--{{ modifier }} js-button">
-    {{ text }}
+<div class='a-button {{viewtypes.modifier}} js-button'>
+    {{content.text}}
 </div>
 ```
 
-- ```vim fractal/src/components/button/button.config.json```
+- ```vim fractal/src/components/buttons/button.config.json```
 
 ```json
 {
@@ -67,8 +64,16 @@ fractal.components.set('default.preview', '@preview');
     "status": "ready",
     "notes": "This is a first **example**.",
     "context": {
-        "modifier": "default",
-        "text": "Click me"
+        "switches": {
+            "asLink": false,
+            "hasIcon": true
+        },
+        "viewtypes": {
+            "modifier": ""
+        },
+        "content": {
+            "text": "Click me"
+        }
     },
     "variants": [
         {
@@ -76,15 +81,23 @@ fractal.components.set('default.preview', '@preview');
             "status": "prototype",
             "notes": "These are some special **notes** about this variant.",
             "context": {
-                "modifier": "highlight",
-                "text": "Click me!!!"
+                "switches": {
+                    "asLink": true,
+                    "hasIcon": false
+                },
+                "viewtypes": {
+                    "modifier": "button--highlight"
+                },
+                "content": {
+                    "text": "Click me!!!"
+                }
             }
         }
     ]
 }
 ```
 
-- ```vim fractal/src/components/button/button.scss```
+- ```vim fractal/src/_scss/_1.atoms.buttons.scss```
 
 ```scss
 .a-button {
@@ -96,17 +109,16 @@ fractal.components.set('default.preview', '@preview');
     padding: 10px 20px;
 }
 
-.a-button--highlight {
+.button--highlight {
     border: 2px solid red;
 }
 ```
 
-- ```vim fractal/src/components/button/button.js```
+- ```vim fractal/src/_js/buttons/button.js```
 
 ```js
 export default class button {
     initOnReady() {
-        this.colorize();
         this.bindClick();
     }
     initOnLoad() {}
@@ -145,20 +157,20 @@ export default class button {
 </html>
 ```
 
-- ```vim fractal/src/scss/style.scss```
+- ```vim fractal/src/_scss/style.scss```
 
 ```scss
-@import 'base/normalize';
-@import 'base/root';
-@import 'base/typography';
-@import '../components/atoms/button/button';
+@import '0.normalize';
+@import '0.root';
+@import '0.typography';
+@import '1.atoms.buttons';
 ```
 
-- ```vim fractal/src/js/script.js```
+- ```vim fractal/src/_js/script.js```
 
 ```js
 import Common from './base/common';
-import Button from './../components/atoms/button/button';
+import Button from './buttons/button';
 
 const common = new Common();
 const button = new Button();
