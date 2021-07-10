@@ -11,6 +11,11 @@ exiftool -iptc:all image.jpg
 exiftool -xmp:all image.jpg
 ```
 
+### write data
+```sh
+exiftool -iptc:copyrightnotice=foo image.jpg
+```
+
 ### single
 ```sh
 exiftool -overwrite_original -all= image.jpg
