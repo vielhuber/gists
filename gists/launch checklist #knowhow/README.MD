@@ -58,6 +58,7 @@
 - Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
 
 ## POST-LAUNCH
+- Login-Zugangsdaten in Chrome gespeichert
 - 301 Redirects nochmal final testen
 - Kunde kontaktieren, damit er prüft, dass Kontaktformular alle bei ihm ankommen
 - Seite 1x komplett mit Screaming Frog durchprüfen: Passen Permalinks generell? Gibt es kaputte Seiten? Gibt es Broken Links? Gibt es Seiten, die auf noindex laufen?
