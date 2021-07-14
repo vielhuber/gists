@@ -4,7 +4,7 @@ wp_mail(
     'foo@bar.com', // use ['foo@bar.com','bar@baz.com'] for multiple recipients
     'The subject',
     'The <strong>html</strong> content',
-    ['Content-Type: text/html; charset=UTF-8'],
+    ['Content-Type: text/html; charset=UTF-8'], // use ['Content-Type: text/html; charset=UTF-8', 'Bcc: foo@bar.com']  to send via bcc
   	[
     	wp_upload_dir()['basedir'].'/uploads/file1.zip',
         wp_upload_dir()['basedir'].'/uploads/file2.zip',
