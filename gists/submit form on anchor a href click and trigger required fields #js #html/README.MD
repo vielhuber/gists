@@ -12,7 +12,7 @@ if (document.querySelector('.form__submit') !== null) {
   document.querySelectorAll('.form__submit').forEach(el => {
     el.addEventListener('click', e => {
       if (el.closest('form').checkValidity()) {
-        el.closest('form').dispatchEvent(new Event('submit', { bubbles: true }));
+        el.closest('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
       } else {
         el.closest('form').reportValidity();
       }

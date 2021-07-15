@@ -1,13 +1,9 @@
 <?php
-function get_posts_with_count() {
-  $wp_query = new WP_Query( $args );
-	$wp_query = new WP_Query( $args );
-	$return = ["count" => 0, "data" => []];
-	$return["count"] = $wp_query->found_posts;
-	if($return["count"] > 0 ) {
-	foreach($wp_query->posts as $post) {
-	    $return["data"][] = $post;
+/* fill in args from https://gist.github.com/luetkemj/2023628 */
+$args = [];
+$wp_query = new WP_Query($args);
+if($wp_query->found_posts > 0 ) {
+	foreach($wp_query->posts as $posts__value) {
+    	/* ... */
 	}
-	}
-	return $return;
 }
