@@ -254,13 +254,12 @@ opcache.max_accelerated_files=32531
 opcache.save_comments=1
 opcache.fast_shutdown=0
 opcache.max_file_size=0
-opcache.validate_timestamps=1 # we set this to 1 (so that we can set revalidate_freq on a project basis to a higher value)
+#we set this to 1 (so that we can set revalidate_freq on a project basis to a higher value)
+opcache.validate_timestamps=1
 opcache.revalidate_freq=2
 
 [XDebug]
-xdebug.remote_enable = 0
-xdebug.remote_autostart = 0
-xdebug.profiler_enable = 0
+xdebug.profiler_enable = off
 xdebug.max_nesting_level = 10000
 xdebug.var_display_max_children= -1
 xdebug.var_display_max_data = -1
@@ -339,9 +338,9 @@ xdebug.var_display_max_depth = -1
   ```
 
 #### composer
-- ```php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
-- ```php composer-setup.php```
-- ```php -r "unlink('composer-setup.php');"```
+- ```sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
+- ```sudo php composer-setup.php```
+- ```sudo php -r "unlink('composer-setup.php');"```
 - ```sudo mv composer.phar /usr/local/bin/composer```
 - hide sudo message:
   - ```sudo nano ~/.bash_profile```
@@ -351,13 +350,15 @@ xdebug.var_display_max_depth = -1
 
 #### node / npm
 - nvm
-  - ```curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash```
+  - ```sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash```
   - copy 3 new lines of ```~/.bashrc``` to ```~/.bash_profile``` (because .bashrc is not loaded on wsl)
+  - restart terminal
   - ```nvm --version```
   - ```nvm ls```
   - install/upgrade new/specific node versions
   - ```nvm install node```
   - ```nvm install --lts```
+  - ```nvm install 16.5.0```
   - ```nvm install 12.10.0```
   - ```nvm install 10.16.3```
   - ```nvm alias default 12.10.0```
