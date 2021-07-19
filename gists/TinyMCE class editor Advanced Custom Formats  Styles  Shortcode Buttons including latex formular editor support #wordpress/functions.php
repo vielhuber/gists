@@ -18,7 +18,8 @@ add_action('admin_head', function()
 });
 add_filter('mce_buttons', function($buttons)
 {
-    array_push( $buttons, 'mce_button_1' );
-    array_push( $buttons, 'mce_button_2' );
+    array_push( $buttons, 'mce_button' );
+    array_push( $buttons, 'mce_dropdown' );
+    array_push( $buttons, 'mce_latex' );
     return $buttons;
 });
