@@ -130,7 +130,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```source ~/.bash_profile```
 
 #### install basic linux packages
-- ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin```
+- ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin net-tools```
 
 #### apache/php/mysql
 - ```sudo apt-get install apache2 mysql-server```
@@ -169,7 +169,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo a2enmod actions```
 - ```sudo a2enmod alias```
 - ```sudo a2enmod proxy_fcgi```
-- ```service apache2 restart```
+- ```sudo service apache2 restart```
 
 #### configs
 - setup with presets from gist.github.com
