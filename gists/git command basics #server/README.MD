@@ -290,6 +290,12 @@ Usage: git acp
   - git branch -d old-name
   - git remote update origin --prune
   - git pull
+ 
+### check if one branch consists another branch
+- `git checkout special-branch`
+- `git branch --merged` # list all branches that the current branch contains
+- `git branch --merged | grep -q "other-branch$" && echo "yes" || echo "no"`
+- `git branch --merged | grep -q "other-branch$\|and-another-branch$" && echo "yes" || echo "no"` # multiple other branches
 
 ## pull request
 #### make a pull request on github (for an external project), go to github.com to the repository you want to make a pull request, click "Fork"
@@ -329,9 +335,7 @@ Usage: git acp
 
 #### put together / squash all commits from branch in one single commit (good for code reviews)
 
-##### solution 1
-
-###### in another branch (recommended)
+##### temporarily in another branch
 - `git checkout master` # switch to branch to compare to
 - `git checkout -b special-branch--squashed` # create new branch from it
 - `git merge --squash special-branch` # merge branch with changes into current branch
@@ -340,13 +344,7 @@ Usage: git acp
 - `git checkout master` # switch back to master
 - `git branch --delete special-branch--squashed` # delete special branch locally
 
-###### in master
-- git checkout master
-- git merge --squash feature/XX-XX
-- git commit -m "feature/XX-XX"
-- git push origin HEAD
-
-##### solution 2
+##### permanently in another branch
 
 - `git checkout branch-name`
 - `git merge master` # merge current state into the branch to only view the differences (if you want to compare to another branch, use "develop" etc. instead of "master")
@@ -354,6 +352,12 @@ Usage: git acp
 - `git reset --soft master`
 - `git add -A . && git commit -m "squash"`
 - `git pull --no-ff`
+- `git push origin HEAD`
+
+##### permanently in master
+- `git checkout master`
+- `git merge --squash feature/XX-XX`
+- `git commit -m "feature/XX-XX"`
 - `git push origin HEAD`
 
 ## conflicts
@@ -523,6 +527,7 @@ Usage: git acp
 
 - if you change a branch with uncommitted files, these files get "transferred" to the other branch(!)
 - therefore always commit changes before changing branches
+- if you switch between branches with a lot of code changes, and branch A consists of committed files that are seen untracked on branch B, suddenly on branch B you get all this untracked files. run `git clean -df` after changing branches solves this problem
 
 ## stash
 

@@ -137,12 +137,22 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo service apache2 start```
 - ```sudo service mysql start```
 - ```sudo mysql_secure_installation```
-- Validate password plugin: n
-- mysql-root-Passwort: root
-- Remove anonymous users: y
-- Disable root login remotely: n
-- Remove test database: y
-- Reload privilege tables: y
+  - Validate password plugin: n
+  - mysql-root-Passwort: root
+  - Remove anonymous users: y
+  - Disable root login remotely: n
+  - Remove test database: y
+  - Reload privilege tables: y
+- allow login to root user without sudo
+  - ```sudo mysql -u root```
+  - ```DROP USER 'root'@'localhost';```
+  - ```CREATE USER 'root'@'%' IDENTIFIED BY '';```
+  - ```GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;```
+  - ```FLUSH PRIVILEGES;```
+  - ```EXIT```
+  - ```mysql -u root```
+  - ```SET PASSWORD FOR root = 'root';```
+  - ```EXIT```
 
 #### add ppa of officially maintained php versions
 - ```sudo add-apt-repository ppa:ondrej/php```
@@ -439,6 +449,8 @@ xdebug.var_display_max_depth = -1
 - ```cd /var/www/lamp```
 - ```git clone git@bitbucket.org:vielhuber/lamp.git . --config core.autocrlf=false```
 - ```chmod +x /var/www/lamp/lamp```
+- ```sudo visudo```
+  - add ```/var/www/lamp``` to ```Defaults  secure_path```
 - ```sudo nano ~/.bash_profile```
 - ```export PATH="$PATH:/var/www/lamp"```
 - ```source ~/.bash_profile```
@@ -497,9 +509,9 @@ host    all   all        ::1/128        md5
 - ```sudo apt-get install imagemagick imagemagick-doc```
 - ```convert --version```
 - ```sudo nano /etc/ImageMagick-6/policy.xml```
-- comment line <!-- <policy domain="coder" rights="none" pattern="MVG" /> -->
-- change ```<policy domain="coder" rights="none" pattern="PDF" />``` to ```<policy domain="coder" rights="read|write" pattern="PDF" />```
-- add ```<policy domain="coder" rights="read|write" pattern="LABEL" />```
+  - uncomment line ```<!-- <policy domain="coder" rights="none" pattern="MVG" /> -->```
+  - change ```<policy domain="coder" rights="none" pattern="PDF" />``` to ```<policy domain="coder" rights="read|write" pattern="PDF" />```
+  - add ```<policy domain="coder" rights="read|write" pattern="LABEL" />```
 
 #### pdftk
 - ```sudo add-apt-repository ppa:malteworld/ppa```
@@ -606,6 +618,8 @@ host    all   all        ::1/128        md5
 - ```cp config.sample.inc.php config.inc.php```
 - ```nano config.inc.php```
   - ```$cfg['Servers'][$i]['user'] = 'root';```
+  - ```$cfg['Servers'][$i]['AllowNoPassword'] = true;```
+  - ```$cfg['Servers'][$i]['host'] = 'localhost';```
   - ```$cfg['Servers'][$i]['password'] = 'root';```
   - ```$cfg['Servers'][$i]['auth_type'] = 'config';```
   - ```$cfg['ExecTimeLimit'] = 6000;```
