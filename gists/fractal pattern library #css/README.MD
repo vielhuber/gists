@@ -16,6 +16,7 @@
 - ```npm i -g @frctl/fractal```
 - ```cd project```
 - ```npm install --save @frctl/fractal```
+- ```npm install --save handlebars-helpers```
 - ```mkdir fractal```
 
 - ```vim .gitignore```
@@ -46,6 +47,12 @@ fractal.components.set('path', __dirname + '/fractal/src/components');
 fractal.web.set('builder.dest', __dirname + '/fractal/build');
 fractal.web.set('static.path', __dirname + '/fractal/public');
 fractal.components.set('default.preview', '@preview');
+
+// use handlebar helpers
+const helpers = require('handlebars-helpers')(),
+    hbs = require('@frctl/handlebars')({ helpers });
+fractal.components.engine(hbs);
+fractal.docs.engine(hbs);
 ```
 
 - ```vim fractal/src/components/buttons/button.hbs```
@@ -190,3 +197,47 @@ window.addEventListener('load', (e) => {
 - first move all existing scss/js files and even fonts to fractal
 - they are copied after building to the main project
 - so you test and develop in fractal(!)
+
+## how to use partials
+
+- `parent.hbs`
+
+```html
+<div class="m-parent">{{ render '@child' partials.child merge=true }}</div>
+```
+
+- `parent.config.json`
+
+```json
+{
+    "title": "Parent",
+    "context": {
+        "partials": {
+            "child": {
+                "content": {
+                    "text": "Kontextspezifischer Text"
+                }
+            }
+        }
+    }
+}
+```
+
+- `child.hbs`
+
+```html
+<div class="a-child">{{ content.text }}</div>
+```
+
+- `child.config.json`
+
+```json
+{
+    "title": "Child",
+    "context": {
+        "content": {
+            "text": "Normaler Text"
+        }
+    }
+}
+```
