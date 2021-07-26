@@ -41,6 +41,11 @@
 - ```sudo apt-get update && sudo apt-get upgrade```
 - Netzlaufwerk "\\wsl$\Ubuntu" auf W: mappen und umbenennen: "WSL"
 
+#### prevent password prompt for sudo commands
+- ```sudo visudo```
+- comment out ```%sudo ALL=(ALL:ALL) ALL```
+- ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
+
 #### wsl2
 - open PowerShell as admin
 - `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
