@@ -58,7 +58,7 @@ fractal.docs.engine(hbs);
 - ```vim fractal/src/components/buttons/button.hbs```
 
 ```html
-<div class='a-button {{viewtypes.modifier}} js-button'>
+<div class='a-button js-button{{#if viewtypes.modifier}}{{ prepend viewtypes.modifier ' '}}{{/if}}'>
     {{content.text}}
 </div>
 ```
@@ -72,7 +72,7 @@ fractal.docs.engine(hbs);
     "notes": "This is a first **example**.",
     "context": {
         "switches": {
-            "asLink": false,
+            "isLink": false,
             "hasIcon": true
         },
         "viewtypes": {
@@ -84,12 +84,12 @@ fractal.docs.engine(hbs);
     },
     "variants": [
         {
-            "name": "highlight",
+            "name": "Highlighted button",
             "status": "prototype",
             "notes": "These are some special **notes** about this variant.",
             "context": {
                 "switches": {
-                    "asLink": true,
+                    "isLink": true,
                     "hasIcon": false
                 },
                 "viewtypes": {
