@@ -106,7 +106,8 @@ public function validateForPassportPasswordGrant($password) {
 <?php
 protected $dontReport = [
   /* ... */
-  \League\OAuth2\Server\Exception\OAuthServerException::class
+  \League\OAuth2\Server\Exception\OAuthServerException::class,
+  \Laravel\Passport\Exceptions\OAuthServerException::class
 ];
 
 
