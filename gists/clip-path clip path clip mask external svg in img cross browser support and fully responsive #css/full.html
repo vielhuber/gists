@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title></title>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if( document.querySelector('[data-clip]') !== null ) {
+            document.querySelectorAll('[data-clip]').forEach(el => {
+                fetch(el.getAttribute('data-clip')).then(v=>v.text()).catch(v=>v).then(html => {
+                    let svg = new DOMParser().parseFromString(html, 'text/html').body.childNodes[0],
+                        clipPath = svg.querySelector('clipPath');
+                    if( clipPath !== null && svg.getAttribute('viewBox') !== null && clipPath.getAttribute('id') !== null ) {
+                        clipPath.setAttribute('clipPathUnits','objectBoundingBox');
+                        let viewBox = svg.getAttribute('viewBox'),
+                            w = parseFloat(viewBox.split(' ')[2]),
+                            h = parseFloat(viewBox.split(' ')[3]),
+                            transform = 'scale('+(1/w)+', '+(1/h)+')' + (clipPath.getAttribute('transform') !== null ? ' ' + clipPath.getAttribute('transform') : '');
+                        svg.style.width = '0';
+                        svg.style.height = '0';
+                        clipPath.setAttribute('transform', transform);
+                        document.body.appendChild(svg);
+                        el.style.clipPath = 'url("#'+clipPath.getAttribute('id')+'")';
+                    }
+                });
+            });
+        }
+    });
+    </script>
+    <style>
+    img {
+        width:100%;
+        max-width:800px;
+        height:auto;
+        display:block;
+    }
+    </style>
+</head>
+<body>
+
+    <img data-clip="clip.svg" src="https://picsum.photos/600/300" alt="" />
+
+</body>
+</html>

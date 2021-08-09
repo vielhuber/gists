@@ -7,3 +7,5 @@ if($wp_query->found_posts > 0 ) {
     	/* ... */
 	}
 }
+// debug query
+echo $wp_query->request;
