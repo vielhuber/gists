@@ -611,6 +611,11 @@ host    all   all        ::1/128        md5
 - ```rm -rf gifsicle/```
 - ```gifsicle --version```
 
+#### webp (cwebp/dwebp)
+- ```sudo apt-get install webp```
+- ```cwebp -version```
+- ```dwebp -version```
+
 #### exiftool
 - ```sudo apt-get install libimage-exiftool-perl```
 - ```exiftool```
