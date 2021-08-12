@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>.</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        /* custom component */
+        if(customElements.get('my-component') === undefined) {
+            customElements.define('my-component', class extends HTMLElement {
+                constructor() {
+                    super();
+                    let shadowRoot = this.attachShadow({ mode: 'open' });
+
+                    shadowRoot.innerHTML = `
+                        <style>
+                            :host {
+                                all: initial !important; /* prevent inheritance from top element from outside */
+                                display: block; /* by default, custom elements are inline */
+                                contain: content; /* performance optimization */
+                            }
+                            :host > *
+                            {
+                                box-sizing: border-box;
+                                margin: 0;
+                                padding: 0;
+                            }
+                            p {
+                                font-size:30px;
+                            }
+                        </style>
+                        <p>
+                            foo ${ this.getAttribute('data-foo') }
+                        </p>
+                        <slot>
+                            fallback content
+                        </slot>
+                    `;
+                }
+            });
+        }
+
+        /* example without custom component */
+        if( document.querySelector('.basic') !== null ) {
+            document.querySelectorAll('.basic').forEach(el => {
+                let shadowRoot = el.attachShadow({ mode: 'open' });
+                shadowRoot.innerHTML = `
+                    <style>
+                        :host {
+                            all: initial !important;
+                            display: block;
+                            contain: content;
+                        }
+                        :host > *
+                        {
+                            box-sizing: border-box;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        p {
+                            font-size:30px;
+                        }
+                    </style>
+                    <p>
+                        foo ${ el.getAttribute('data-foo') }
+                    </p>
+                    <slot>
+                        fallback content
+                    </slot>
+                `;
+            });
+        }
+
+        // access from outside
+        setTimeout(() => {
+            document.querySelector('my-component:nth-child(2)').shadowRoot.querySelector('p').innerHTML = 'outside modification';
+        }, 1000);
+    });
+    </script>
+    <style>
+    /*
+    top-level elements of a shadow tree inherit styles for special properties like background, color, font, line-height, etc. from their host element(!)
+    with "all: initial" above we circumvent this behaviour
+    */
+    my-component, .basic {
+        font-size:50px;
+        color:yellow;
+        background-color:red;
+    }
+    </style>
+</head>
+<body>
+
+    <my-component data-foo="bar"></my-component>
+    <my-component data-foo="bar">slot example</my-component>
+
+    <div class="basic" data-foo="bar"></div>
+    <div class="basic" data-foo="bar">slot example</div>
+
+</body>
+</html>
