@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title></title>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.debug').forEach(el => {
+            el.addEventListener('change', e => {
+                let c = [];
+                document.querySelectorAll('.debug').forEach(el2 => {
+                    c.push(el2.value);
+                });
+                document.body.setAttribute('class',c.join(' '));
+                e.preventDefault();
+            });
+        });
+    });
+    </script>
+    <style>
+    *
+    {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    html {
+        height:100%;
+    }
+    body {
+        min-height:100%;
+    }
+
+    /* consider you have a box with width 500px and height minimum 500px */
+    /* inside that box you have a child that should have minimum the (min-height) of the parent */
+    .box {
+        width:500px;
+        min-height:500px;
+        background-color:#eee;
+    }
+    .box__inner {
+        background-color: yellow;
+    }
+    .sm .box__inner {
+        font-size:10px;
+    }
+    .xl .box__inner {
+        font-size:50px;
+    }
+
+    /* solution 1: this does *not* work (min-height depends on the height of the parent, which is not defined; so min-height gets calculated to "auto") */
+    ._1 .box__inner {
+        min-height: 100%;
+    }
+    /* solution 2: this does *not* work (suddenly a height is set to the parent; explicitely it is then the min-height; but when the container overflows, it does not work) */
+    ._2 .box {
+        height: 1px;
+    }
+    ._2 .box__inner {
+        min-height: 100%;
+    }
+    /* solution 3: this does work (but only, if the parent has a min-height of an absolute value! if you set it to min-height:100%, it is not working!) */
+    ._3 .box__inner {
+        min-height:inherit;
+    }
+    /* solution 4: flex ftw */
+    ._4 .box {
+        display: flex;
+        flex-direction: column;
+    }
+    ._4 .box__inner {
+        flex-grow: 1;
+    }
+    </style>
+</head>
+<body class="_1 sm">
+
+    <div class="box">
+        <div class="box__inner">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+        </div>
+    </div>
+
+    <select class="debug">
+        <option value="_1">solution #1 (not working)</option>
+        <option value="_2">solution #2 (not working)</option>
+        <option value="_3">solution #3 (working)</option>
+        <option value="_3">solution #4 (working)</option>
+    </select>
+    <select class="debug">
+        <option value="sm">small text</option>
+        <option value="xl">big text</option>
+    </select>
+
+</body>
+</html>

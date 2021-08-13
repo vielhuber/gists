@@ -11,9 +11,8 @@
             customElements.define('my-component', class extends HTMLElement {
                 constructor() {
                     super();
-                    let shadowRoot = this.attachShadow({ mode: 'open' });
-
-                    shadowRoot.innerHTML = `
+                    this.attachShadow({ mode: 'open' });
+                    this.shadowRoot.innerHTML = `
                         <style>
                             :host {
                                 all: initial !important; /* prevent inheritance from top element from outside */
@@ -36,7 +35,23 @@
                         <slot>
                             fallback content
                         </slot>
+
+                        <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css" />
+                        <span class="mdi mdi-home"></span>
                     `;
+                }
+                connectedCallback() {
+                    // font files won't load inside the shadow dom, we therefore apply the css (only @font-face)
+                    // outside of the shadow dom (in the global body or also possible in the light dom of the component)
+                    // the stylesheet itself where the families get applied must stay inside of the shadow dom
+                    this.innerHTML = `
+                        <style>
+                            @font-face {
+                                font-family: "Material Design Icons";
+                                src: url("https://cdn.materialdesignicons.com/4.9.95/fonts/materialdesignicons-webfont.woff?v=4.9.95") format("woff");
+                            }
+                        </style>
+                    `
                 }
             });
         }
@@ -44,7 +59,7 @@
         /* example without custom component */
         if( document.querySelector('.basic') !== null ) {
             document.querySelectorAll('.basic').forEach(el => {
-                let shadowRoot = el.attachShadow({ mode: 'open' });
+                let shadowRoot = el.attachShadow({ mode: 'open' }); // same as el.shadowRoot
                 shadowRoot.innerHTML = `
                     <style>
                         :host {
@@ -69,12 +84,22 @@
                         fallback content
                     </slot>
                 `;
+              	// apply css (other method like the one above)
+              	let stylesheet = document.createElement('link');
+                stylesheet.href = 'bundle.css';
+                stylesheet.rel = 'stylesheet';
+                shadowRoot.appendChild(stylesheet);              
+              	// apply font face
+                let stylesheet_font = document.createElement('link');
+                stylesheet_font.href = 'font-face.css';
+                stylesheet_font.rel = 'stylesheet';
+                el.appendChild(stylesheet_font); // must be applied to light dom(!)
             });
         }
 
         // access from outside
         setTimeout(() => {
-            document.querySelector('my-component:nth-child(2)').shadowRoot.querySelector('p').innerHTML = 'outside modification';
+           document.querySelector('my-component:nth-child(2)').shadowRoot.querySelector('p').innerHTML = 'outside modification';
         }, 1000);
     });
     </script>
@@ -92,11 +117,11 @@
 </head>
 <body>
 
-    <my-component data-foo="bar"></my-component>
-    <my-component data-foo="bar">slot example</my-component>
+    <my-component data-foo="bar1"></my-component>
+    <my-component data-foo="bar2">slot example</my-component>
 
-    <div class="basic" data-foo="bar"></div>
-    <div class="basic" data-foo="bar">slot example</div>
+    <div class="basic" data-foo="bar1"></div>
+    <div class="basic" data-foo="bar2">slot example</div>
 
 </body>
 </html>
