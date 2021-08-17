@@ -16,7 +16,7 @@
 - WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
 - Bilder in Medienverwaltung in Unterordnern sortiert und ungenutzte Bilder manuell ausgemistet
 - RSS-Feed vorhanden und funktional
-- Impressum + Datenschutzseite vorhanden und gepflegt
+- Impressum + Datenschutzseite vorhanden und gepflegt; ggf. eRecht24 (+ Plugin) einsetzen
 - Link zu close2 im Impressum hinterlegt:
   - Verantwortlich für Programmierung: close2 new media GmbH, Webagentur München, www.close2.de
 - Google Analytics Opt Out Link gesetzt und funktional (am besten Link zum Consent-Manager setzen)
@@ -45,6 +45,7 @@
 - Prüfen, ob Seite mit WordPress Admin Bar gut funktioniert (padding)
 - Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
 - Cross-Browser-Check (inkl. Responsive) durchgeführt
+- Seite auf Auflöungen >1920x1080 getestet (4k Support!)
 - browser-update.org integriert
 - WordPress Zugänge (personengebunden, also pro Person einen Account) ausstellen
 - Kontaktformulare durch Captcha (reCAPTCHA) oder alternativ Honeypot schützen
@@ -55,9 +56,9 @@
 - Passwortschutz: htaccess/htpasswd im Einsatz (für Testing aktiv, für Production inaktiv)
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
 - Backend (und ggf. auch Frontend) auf Testing komplett abriegeln, damit sich Kunde nicht mehr einloggt
-- Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
 
 ## POST-LAUNCH
+- Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
 - Login-Zugangsdaten in Chrome gespeichert
 - 301 Redirects nochmal final testen, v.a. anhand der Google Suchergebnisse (site:)
 - Kunde kontaktieren, damit er prüft, dass Kontaktformular alle bei ihm ankommen
