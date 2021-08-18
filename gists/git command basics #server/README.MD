@@ -457,14 +457,18 @@ Usage: git acp
 - messages
   - error: object file .git/objects/... is empty
   - fatal: loose object ... (stored in .git/objects/...) is corrupt
-- fix
-  - cp -R project project-backup # create backup (if needed)
-  - git clone xxx/xxx.git project-restore
-  - cd project-restore && git checkout feature/foo # checkout specific branch (if needed)
-  - rm -rf project/.git
-  - mv project-restore/.git project
-  - rm -rf project-restore
-  - rm -rf project-backup # delete backup (if needed)
+- fix #1
+  - ```find .git/objects/ -type f -empty | xargs rm``` # remove any empty object files
+  - ```git fetch -p``` # fetch down missing objects
+  - ```git fsck --full``` # object store check
+- fix #2
+  - ```cp -R project project-backup # create backup``` (if needed)
+  - ```git clone xxx/xxx.git project-restore```
+  - ```cd project-restore && git checkout feature/foo # checkout specific branch``` (if needed)
+  - ```rm -rf project/.git```
+  - ```mv project-restore/.git project```
+  - ```rm -rf project-restore```
+  - ```rm -rf project-backup``` # delete backup (if needed)
 
 ## make a release of current development branch and push it on master
 
