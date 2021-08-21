@@ -11,13 +11,13 @@ bars
 ```php
 Foo:
 public function bar() {
-	return $this->belongsTo('App\Bar', 'bar_id');
+	return $this->belongsTo('App\Models\Bar', 'bar_id');
 }
 ```
 ```php
 Bar:
 public function foos() {
-	return $this->hasMany('App\Foo', 'bar_id');
+	return $this->hasMany('App\Models\Foo', 'bar_id');
 }
 ```
 
@@ -38,7 +38,7 @@ foos_bars
 Foo:
 public function bars() {
   return $this->belongsToMany(
-      'App\Bar',
+      'App\Models\Bar',
       'foo_bar',
       'foo_id',
       'bar_id'
@@ -50,7 +50,7 @@ public function bars() {
 Bar:
 public function foos() {
   return $this->belongsToMany(
-      'App\Foo',
+      'App\Models\Foo',
       'foo_bar',
       'bar_id',
       'foo_id'
@@ -74,8 +74,8 @@ gnarrs
 ```php
 Foo:
 return $this->hasManyThrough(
-    'App\Bar',
-    'App\Gnarr',
+    'App\Models\Bar',
+    'App\Models\Gnarr',
     'foo_id',
     'gnarr_id'
 );
