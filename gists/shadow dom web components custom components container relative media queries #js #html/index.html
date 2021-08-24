@@ -35,10 +35,25 @@
                         <slot>
                             fallback content
                         </slot>
-
+						<div class="container"></div>
                         <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css" />
                         <span class="mdi mdi-home"></span>
                     `;
+                  	// if you want to use media queries relative to the component size, implement the idea from https://philipwalton.com/articles/responsive-components-a-solution-to-the-container-queries-problem/)
+                    const observer = new ResizeObserver(entries => {
+                        let breakpoints = { sm: 450, md: 768, lg: 1024 };
+                        entries.forEach(entry => {
+                            Object.keys(breakpoints).forEach(breakpoint => {
+                                let width = breakpoints[breakpoint];
+                                if (entry.contentRect.width > width) {
+                                    entry.target.classList.remove(breakpoint);
+                                } else {
+                                    entry.target.classList.add(breakpoint);
+                                }
+                            });
+                        });
+                    });
+                    observer.observe(this.shadowRoot.querySelector('.container'));
                 }
                 connectedCallback() {
                     // font files won't load inside the shadow dom, we therefore apply the css (only @font-face)

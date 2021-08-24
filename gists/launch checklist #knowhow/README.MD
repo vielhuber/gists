@@ -13,6 +13,9 @@
 - YouTube-/Vimeo-Links GDPR tauglich gemacht
 - Alle CMS Updates (WordPress Core+Plugins) installiert
 - Inaktive Plugins gelöscht (außer WPML und ggf. Caching)
+- Benennung der Labels im Backend (ACF-Felder) geprüft
+- Für Bilder ausschließlich <img> Tags oder noch besser <picture>-Tags (mit div. Thumbnails) eingesetzt
+- Alt-Tags für Bilder werden überall ausgespielt
 - WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
 - Bilder in Medienverwaltung in Unterordnern sortiert und ungenutzte Bilder manuell ausgemistet
 - RSS-Feed vorhanden und funktional

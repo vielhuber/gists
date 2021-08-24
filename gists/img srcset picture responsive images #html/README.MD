@@ -1,9 +1,9 @@
 ## intro
 
 - there are two concepts for responsive images
-- <img srcset ... />: give the browser alternative images for smaller resolutions, the browser chooses the best fit (based on size, bandwidth, ...)
-- <picture ... />: best for fine-grained manipulation, alternative image formats and showing alternative images on mobile reliably
-- <div ... />: simple and effective, good for showing compressed versions for background images
+- `<img srcset ... />`: give the browser alternative images for smaller resolutions, the browser chooses the best fit (based on size, bandwidth, ...), does not update on resize
+- `<picture ... />`: best for fine-grained manipulation, alternative image formats and showing alternative images on mobile reliably
+- `<div ... />`: simple and effective, good for showing compressed versions for background images
 
 ## srcset
 

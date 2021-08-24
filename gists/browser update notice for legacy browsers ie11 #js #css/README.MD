@@ -80,7 +80,8 @@ browserUpdate({ /* options see below */ });
 ```scss
 html.browserupdate--active {
     /* reduce opacity in background */
-    .buorg ~ * {
+    .buorg ~ *,
+    .chefcookie {
       opacity: 0.1 !important;
       pointer-events: none !important;
     }
