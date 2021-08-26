@@ -17,6 +17,8 @@ functions:
   - prepare
 */
   
+global $wpdb;
+  
 // examples
 $wpdb->get_var($wpdb->prepare('
   SELECT * FROM table WHERE col_digit = %d AND col_string = %s
@@ -40,3 +42,7 @@ $val = null;
 $wpdb->query($wpdb->prepare('INSERT INTO table(col1) VALUES(%s)',$val)); // does not work
 $wpdb->insert($wpdb->prefix . 'table', ['col1' => $val], ['%s']); // does work
 $wpdb->update($wpdb->prefix . 'table', ['col1' => $val], ['id' => 1337], ['%s'], ['%d']); // does work
+
+// retrieve single col/row
+$wpdb->get_row()
+$wpdb->get_col()

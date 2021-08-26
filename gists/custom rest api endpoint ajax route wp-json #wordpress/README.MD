@@ -33,6 +33,9 @@ add_action('rest_api_init', function () {
         'callback' => function (\WP_REST_Request $request) {
             $request->get_params();
             $request->get_param('example');
+          	$request->get_headers();          
+          	/* simple bearer token check */
+          	if( $request->get_header('authorization') != 'Bearer xxx' ) { }
             /* ... */
             if (1 == 0) {
                 return new \WP_REST_Response(

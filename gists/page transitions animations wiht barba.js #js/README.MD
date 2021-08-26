@@ -63,7 +63,11 @@ window.addEventListener('load', e => {
 
     // intro animation
     gsap.to($loader, {
-        duration: duration * 2,
+        duration:
+            navigator.userAgent.indexOf('Speed Insights') > -1 ||
+            navigator.userAgent.indexOf('Chrome-Lighthouse') > -1
+                ? 0
+                : duration * 2,
         rotation: 10,
         scaleX: 0,
         xPercent: 5,

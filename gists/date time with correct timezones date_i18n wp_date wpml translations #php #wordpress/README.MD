@@ -40,3 +40,16 @@ get_date_from_gmt('2021-06-23 12:00:00') // 2021-06-23 14:00:00
 // get timezone from settings
 get_option('timezone_string') // Europe/Berlin
 ```
+
+#### translation
+
+##### output in source language
+
+```php
+$date_time = '2021-09-30 17:00:00';
+echo wp_date(__('d.m.Y H:i', 'custom'),strtotime(get_gmt_from_date($date_time)));
+```
+
+##### translate format via wpml string translations
+
+- `d.m.Y H:i` => `Y-m-d G:i a`

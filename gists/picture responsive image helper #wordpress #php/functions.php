@@ -30,10 +30,19 @@ function renderImage($image, $class = null, $ratio_large = 1, $ratio_medium = 1,
             }
             echo '<source media="(max-width: ' . $i . 'px)" srcset="' . $image['sizes'][$size . 'x'] . '" data-size="' . $size . 'x' . '">';
         }
+        $default_size = null;
+        foreach(getCommonScreenResolutions() as $resolutions__value) {
+            if( $resolutions__value <= getMediaBreakpoints()[0] ) { $default_size = $resolutions__value; }
+            else { break; }
+        }
         echo '<img' .
-          	($class !== null ? ' class="' . $class . '"' : '') .
-          	($lazy === true ? ' loading="lazy"' : '') .
-            ' src="' . $image['url'] . '" alt="' . $image['alt'] . '" />';
+            ($class !== null ? ' class="' . $class . '"' : '') .
+            ($lazy === true ? ' loading="lazy"' : '') .
+            ' width="'.$image['sizes'][$default_size.'x-width'].'"'.
+            ' height="'.$image['sizes'][$default_size.'x-height'].'"'.
+            ' src="' . $image['url'] . '"'.
+            ' alt="' . $image['alt'] . '"'.
+        ' />';
     echo '</picture>';
 }
 renderImage($image, 'custom-class', 0.5, 1, 1);
