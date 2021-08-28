@@ -80,6 +80,9 @@ fractal.docs.engine(hbs);
         },
         "content": {
             "text": "Click me"
+        },
+      	"preview": {
+          	"padding": true
         }
     },
     "variants": [
@@ -156,7 +159,7 @@ export default class button {
     <link rel="stylesheet" href="{{ path '/css/style.css' }}" />
     <script src="{{ path '/js/script.js' }}"></script> 
 </head>
-<body>
+<body class="fractal-preview{{#if this._target.context.preview.padding}} fractal-preview--padding{{/if}}">
 
 {{{ yield }}}
 
@@ -164,12 +167,20 @@ export default class button {
 </html>
 ```
 
+- ```vim fractal/src/_scss/0.base.scss```
+
+```scss
+.fractal-preview--padding {
+    padding: 20px;
+}
+```
+
 - ```vim fractal/src/_scss/style.scss```
 
 ```scss
-@import '0.normalize';
-@import '0.root';
-@import '0.typography';
+@import '0.reset';
+@import '0.base';
+@import '0.fonts';
 @import '1.atoms.buttons';
 ```
 

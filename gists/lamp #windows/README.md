@@ -350,14 +350,13 @@ xdebug.var_display_max_depth = -1
   - create `%UserProfile%\.wslconfig`
   ```
   [wsl2]
-  memory=2GB
+  memory=4GB
   swap=16GB
   localhostForwarding=true
   ```
 - wsl hangs after a while / vscode hangs
   - Docker > Settings > Start Docker Desktop when you log in: aus
-  - WIN+R > SystemPropertiesAdvanced > Erweitert > Leistung > Einstellungen... > Erweitert > Virtueller Arbeitsspeicher > Ändern... > Dateigröße für alle Laufwerke automatisch verwalten: aus & C: > Benutzerdefinierte Größe: 800 MB - 1024 MB
-  - CMD als Admin: wmic computersystem where name="%computername%" set AutomaticManagedPagefile=false
+  - NOT USED: WIN+R > SystemPropertiesAdvanced > Erweitert > Leistung > Einstellungen... > Erweitert > Virtueller Arbeitsspeicher > Ändern... > Dateigröße für alle Laufwerke automatisch verwalten: aus & C: > Benutzerdefinierte Größe: 800 MB - 1024 MB; CMD als Admin: wmic computersystem where name="%computername%" set AutomaticManagedPagefile=false
 
 #### composer
 - ```sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
