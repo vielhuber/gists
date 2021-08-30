@@ -24,7 +24,10 @@ add_action( 'admin_bar_menu', function()
     unset($blog_names[1]);
     asort($blog_names);
     $wp_admin_bar->user->blogs = [];
-    $wp_admin_bar->user->blogs{1} = $sites[1];
+    // if you want to hide the main blog, disable this
+    if(1==1) {
+        $wp_admin_bar->user->blogs{1} = $sites[1];
+    }
     foreach($blog_names as $blog_names__key=>$blog_names__value)
     {
         $wp_admin_bar->user->blogs{$blog_names__key} = $sites[$blog_names__key];
