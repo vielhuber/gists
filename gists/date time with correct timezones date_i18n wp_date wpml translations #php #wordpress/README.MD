@@ -41,7 +41,7 @@ get_date_from_gmt('2021-06-23 12:00:00') // 2021-06-23 14:00:00
 get_option('timezone_string') // Europe/Berlin
 ```
 
-#### translation
+#### translations
 
 ##### output in source language
 
@@ -53,3 +53,8 @@ echo wp_date(__('d.m.Y H:i', 'custom'),strtotime(get_gmt_from_date($date_time)))
 ##### translate format via wpml string translations
 
 - `d.m.Y H:i` => `Y-m-d G:i a`
+
+##### funny problem
+
+- `wp_date(__('d.m.Y H:i \U\h\r', 'custom'))` does not work, because \r is interpreted as a carriage return by the auto register function of wpml
+- use this workaround: `wp_date(ICL_LANGUAGE_CODE == 'en' ? 'Y-m-d H:i a' : 'd.m.Y H:i \U\h\r')`
