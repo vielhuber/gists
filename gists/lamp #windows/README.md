@@ -26,8 +26,9 @@
 - restart FRITZ!Box
 
 #### open firewall
-- Windows Defender Firewall mit erweiterter Sicherheit
-- Eingehende Regeln > Neue Regel > Port > TCP > 80, 443
+- not used, because we use firewall.ps1 (see below)
+- ~~Windows Defender Firewall mit erweiterter Sicherheit~~
+- ~~Eingehende Regeln > Neue Regel > Port > TCP > 80, 443~~
 
 #### wsl
 - open PowerShell as admin
@@ -314,6 +315,7 @@ xdebug.var_display_max_depth = -1
   - `find /var/www -type f -exec chmod 00644 {} \;`
 - run php as root
   - `nano /etc/php/X.X/fpm/pool.d/www.conf`
+  - **be aware: comment out with ";" instead of "#" :)**
     - `user = root`
     - `group = root`
   - `nano /etc/init.d/phpX.X-fpm`
