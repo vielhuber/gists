@@ -44,6 +44,8 @@
     *
     {
         box-sizing: border-box;
+        margin:0;
+        padding:0;
     }
     .toggle {
         margin-top:20px;
@@ -56,6 +58,9 @@
     }
     .el .el {
         background-color:#b1b1b1;
+    }
+    .el__inner {
+        padding:20px;
     }
 
     .toggle--1 + .el
@@ -83,41 +88,53 @@
     <h1>Pure CSS</h1>
     <a href="#" class="toggle toggle--1">toggle</a>
     <div class="el">
-        <p>lorem</p>
-        <a href="#" class="toggle--1">toggle</a>
-        <div class="el">lorem</div>
+        <div class="el__inner">
+            <p>lorem</p>
+            <a href="#" class="toggle--1">toggle</a>
+            <div class="el"><div class="el__inner">lorem</div></div>
+        </div>
     </div>
     <a href="#" class="toggle toggle--1">toggle</a>
     <div class="el">
-        <p>lorem</p>
-        <a href="#" class="toggle--1">toggle</a>
-        <div class="el">lorem</div>
+        <div class="el__inner">
+            <p>lorem</p>
+            <a href="#" class="toggle--1">toggle</a>
+            <div class="el"><div class="el__inner">lorem</div></div>
+        </div>
     </div>
     <a href="#" class="toggle toggle--1">toggle</a>
     <div class="el">
-        <p>lorem</p>
-        <a href="#" class="toggle--1">toggle</a>
-        <div class="el">lorem</div>
+        <div class="el__inner">
+            <p>lorem</p>
+            <a href="#" class="toggle--1">toggle</a>
+            <div class="el"><div class="el__inner">lorem</div></div>
+        </div>
     </div>
 
     <h1>CSS + JS</h1>
     <a href="#" class="toggle toggle--2">toggle</a>
     <div class="el">
-        <p>lorem</p>
-        <a href="#" class="toggle--2">toggle</a>
-        <div class="el">lorem</div>
+        <div class="el__inner">
+            <p>lorem</p>
+            <a href="#" class="toggle--2">toggle</a>
+            <div class="el"><div class="el__inner">lorem</div></div>
+        </div>
     </div>
     <a href="#" class="toggle toggle--2">toggle</a>
     <div class="el">
-        <p>lorem</p>
-        <a href="#" class="toggle--2">toggle</a>
-        <div class="el">lorem</div>
+        <div class="el__inner">
+            <p>lorem</p>
+            <a href="#" class="toggle--2">toggle</a>
+            <div class="el">lorem</div>
+        </div>
     </div>
     <a href="#" class="toggle toggle--2">toggle</a>
     <div class="el">
-        <p>lorem</p>
-        <a href="#" class="toggle--2">toggle</a>
-        <div class="el">lorem</div>
+        <div class="el__inner">
+            <p>lorem</p>
+            <a href="#" class="toggle--2">toggle</a>
+            <div class="el"><div class="el__inner">lorem</div></div>
+        </div>
     </div>
 
 </body>

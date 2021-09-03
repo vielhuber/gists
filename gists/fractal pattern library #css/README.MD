@@ -50,7 +50,18 @@ fractal.components.set('default.preview', '@preview');
 
 // use handlebar helpers
 const helpers = require('handlebars-helpers')(),
-    hbs = require('@frctl/handlebars')({ helpers });
+    hbs = require('@frctl/handlebars')({
+        helpers: {
+            ...helpers,
+            loop: (n, block) => {
+                let accum = '';
+                for (let i = 0; i < n; ++i) {
+                    accum += block.fn(i);
+                }
+                return accum;
+            }
+        }
+    });
 fractal.components.engine(hbs);
 fractal.docs.engine(hbs);
 ```
@@ -59,7 +70,9 @@ fractal.docs.engine(hbs);
 
 ```html
 <div class='a-button js-button{{#if viewtypes.modifier}}{{ prepend viewtypes.modifier ' '}}{{/if}}'>
-    {{content.text}}
+  	{{#loop 10}}
+    	{{upcase content.text}}
+  	{{/loop}}
 </div>
 ```
 
@@ -214,7 +227,14 @@ window.addEventListener('load', (e) => {
 - `parent.hbs`
 
 ```html
-<div class="m-parent">{{ render '@child' partials.child merge=true }}</div>
+<div class="m-parent">
+  {{ render '@child' partials.child merge=true }}
+  {{#loop 10}}
+  	{{#if ../switches.isFoo}}
+  		{{ render '@child' ../partials.child merge=true }}
+  	{{/if}}
+  {{/loop}}
+</div>
 ```
 
 - `parent.config.json`
