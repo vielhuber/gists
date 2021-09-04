@@ -133,6 +133,8 @@ if gitignore is not working for a specific file/folder (this does not delete the
 
 #### find any commit with a particular snippet of code (and also show diff and commit message)
 - git log -S "foobar" --patch
+- git log -S "foobar" -- .
+- git log -S "foobar" --since=2009.1.1 --until=2010.1.1 -- .
 
 #### revise commit history
 - git rebase --interactive
