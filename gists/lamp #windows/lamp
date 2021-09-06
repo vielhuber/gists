@@ -105,6 +105,7 @@ cat > $FILE << EOF
 EOF
 sudo a2ensite $PROJECT.conf
 sudo service apache2 reload
+#"/mnt/c/Users/David/apps/gsudo/gsudo.exe" -d "echo 127.0.0.1 $PROJECT.local.vielhuber.de >> %windir%\System32\drivers\etc\hosts"
 fi
 
 # remove

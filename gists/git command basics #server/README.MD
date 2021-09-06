@@ -125,9 +125,6 @@ if gitignore is not working for a specific file/folder (this does not delete the
 #### delete file (from filesystem and from git, this is important when git needs to track the history properly)
 - git rm file
 
-#### show last change of file
-- git blame path/to/file
-
 #### show commit message and diff for commit
 - git show dbdd0fb9
 
@@ -135,6 +132,10 @@ if gitignore is not working for a specific file/folder (this does not delete the
 - git log -S "foobar" --patch
 - git log -S "foobar" -- .
 - git log -S "foobar" --since=2009.1.1 --until=2010.1.1 -- .
+
+#### show latest changes of every line of specific file (to blame somebody for introducing a bug)
+- git blame path/to/file
+- git blame path/to/file -L 100,200 # show only specific lines
 
 #### revise commit history
 - git rebase --interactive

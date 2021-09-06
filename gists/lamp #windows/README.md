@@ -14,6 +14,9 @@
 ## installation
 
 #### hosts
+
+##### dns based
+
 - we abuse our own public domain as a dns that maps to a local ip in order to prevent setting local hosts AND having the ability to access via smartphones/tablets from the same network
 - DomainFactory
 - A-Records
@@ -24,6 +27,12 @@
   - local.vielhuber.de
   - *.local.vielhuber.de
 - restart FRITZ!Box
+
+##### local based
+
+- run powershell as adminstrator
+- `PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex"`
+- uncomment `"/mnt/c/Users/David/apps/gsudo/gsudo.exe" -d "echo 127.0.0.1 $PROJECT.local.vielhuber.de >> %windir%\System32\drivers\etc\hosts"` from `lamp`
 
 #### open firewall
 - not used, because we use firewall.ps1 (see below)

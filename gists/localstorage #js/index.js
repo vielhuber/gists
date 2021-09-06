@@ -4,3 +4,7 @@ localStorage.removeItem('foo');
 if(localStorage.getItem('foo') !== null) {
   // item exists
 }
+
+// store objects
+localStorage.setItem('foo', JSON.stringify({'foo': 'bar'}));
+JSON.parse(localStorage.getItem('foo'));
