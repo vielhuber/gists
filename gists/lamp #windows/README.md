@@ -8,6 +8,7 @@
 - shared php.ini configuration for all versions
 - switch php/cli version (globally and host based)
 - access via all devices in your local network
+- support for different networks
 - real ssl certificates for all hosts and all devices
 - native linux performance (can handle node_modules and vendor) with wsl2
 
@@ -145,7 +146,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```source ~/.bash_profile```
 
 #### install basic linux packages
-- ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin net-tools```
+- ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin net-tools pv```
 
 #### apache/php/mysql
 - ```sudo apt-get install apache2 mysql-server```
