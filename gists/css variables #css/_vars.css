@@ -2,3 +2,9 @@
   --color-red: red;
   --color-blue: blue;
 }
+
+/* in shadowdom, use this instead */
+:host {
+  --color-red: red;
+  --color-blue: blue;
+}
