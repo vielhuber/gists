@@ -7,5 +7,15 @@ if($wp_query->found_posts > 0 ) {
     	/* ... */
 	}
 }
+
 // debug query
 echo $wp_query->request;
+
+// manually start loop
+if ($wp_query->have_posts()) {
+  while ($wp_query->have_posts()) {
+    $wp_query->the_post();
+    echo get_the_title();
+  }
+}
+wp_reset_postdata();
