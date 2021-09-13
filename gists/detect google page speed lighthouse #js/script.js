@@ -3,3 +3,4 @@ if (navigator.userAgent.indexOf('Speed Insights') > -1 || navigator.userAgent.in
 
 // deprecated
 if (navigator.language === 'en-US' && navigator.platform.indexOf('Linux') > -1) { }
+if (window.innerWidth < 768 || navigator.userAgent.indexOf('Chrome-Lighthouse') > -1) { }
