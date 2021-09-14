@@ -1,3 +1,4 @@
+// magically set all alt tags to title
 add_action('after_setup_theme', function() {
     ob_start(function($html) {
         $html = magic_alt($html);
@@ -7,8 +8,6 @@ add_action('after_setup_theme', function() {
 add_action('shutdown', function() {
     ob_end_flush();
 });
-
-
 function magic_alt($html)
 {
     if(preg_match('/<title>(.+)<\/title>/i', $html, $matches1))
