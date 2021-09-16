@@ -35,6 +35,7 @@ class Test extends \PHPUnit\Framework\TestCase
         $this->assertEquals((object)['foo'],(object)['foo']); // passes
 		$this->assertSame((object)['foo'],(object)['foo']); // fails
       	$this->assertContains('foo',['foo','bar']); // passes
+      	$this->assertMatchesRegularExpression('/PATTERN/', 'foo');
       
       	// live log to console while running
       	fwrite(STDERR, print_r('foo'.PHP_EOL, true));
