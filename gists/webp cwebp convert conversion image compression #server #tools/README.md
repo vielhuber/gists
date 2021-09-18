@@ -12,3 +12,4 @@
 ### bulk convert
 
 - ```find . -iregex '.*\.\(jpg\|jpeg\|png\)$' -type f -exec cwebp -q 80 {} -o {}.webp \;```
+- ```find . -iregex '.*\.\(webp\)$' -type f -exec dwebp {} -o {}.jpg \;```

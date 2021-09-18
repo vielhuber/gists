@@ -17,6 +17,9 @@ catch(e){window.attachEvent('onload', $buo_f)}
 add_action('wp_head', function () { ?>
     <script> 
     var $buoop = { /* ... */ };
+    function $buo_f() { var e = document.createElement('script'); e.src = '//browser-update.org/update.min.js'; document.body.appendChild(e); };
+    try {document.addEventListener('DOMContentLoaded', $buo_f,false)}
+    catch(e){window.attachEvent('onload', $buo_f)}
     </script>
   	<style>
   	html.browserupdate--active { }
@@ -40,7 +43,7 @@ browserUpdate({ /* options see below */ });
 {
     required: { i: 99, e: 80, f: -4, o: -4, s: -4, c: -4 },
     reminder: 0, // always show (if no user interaction); set this to 0 if you always show it
-    reminderClosed: 1, // show after 1 hour again (after user interaction); set this to 0 if you always show it
+    reminderClosed: 0, // show after 1 hour again (after user interaction); set this to 0 if you always show it
     insecure: false,
     api: 2020.04,
     test: false, // test with true or with #test-bu

@@ -49,7 +49,7 @@
 - Favicon vorhanden
 - Prüfen, ob Seite mit WordPress Admin Bar gut funktioniert (padding)
 - Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
-- Cross-Browser-Check (inkl. Responsive) durchgeführt
+- Cross-Browser-Check (inkl. Responsive) durchgeführt: BackstopJS + Screaming Frog kombiniert einsetzen(!)
 - Seite auf Auflöungen >1920x1080 getestet (4k Support!)
 - browser-update.org integriert
 - WordPress Zugänge (personengebunden, also pro Person einen Account) ausstellen
