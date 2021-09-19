@@ -30,6 +30,8 @@ const puppeteer = require('puppeteer');
       });      
       await page.goto('https://vielhuber.de', { waitUntil: 'networkidle2' });
       await page.waitForSelector('.text');
+      await new Promise((resolve) => setTimeout(() => resolve(), 1000));
+      await page.click('.foo');
       let foo = await page.$eval('.text', (e) => e.innerHTML);
       await page.screenshot({ path: 'example.png' });
       await browser.close();
