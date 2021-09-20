@@ -231,7 +231,7 @@ window.addEventListener('load', (e) => {
   {{ render '@child' partials.child merge=true }}
   {{#loop 10}}
   	{{#if ../switches.isFoo}}
-  		{{ render '@child' ../partials.child merge=true }}
+  		{{ render '@child--variant' ../partials.child merge=true }}
   	{{/if}}
   {{/loop}}
 </div>
