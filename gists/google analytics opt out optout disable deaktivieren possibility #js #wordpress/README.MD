@@ -1,1 +1,0 @@
-- if window['ga-disable-UA-XXXXX-Y'] isset to true, analytics.js is still loaded, but no actions are tracked (see live events in analytics to verify)

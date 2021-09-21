@@ -1,1 +1,0 @@
-ssh username@host -t "echo 'rm /tmp/initfile; source ~/.bashrc; cd some/subfolder/; git status' > /tmp/initfile; bash --init-file /tmp/initfile"

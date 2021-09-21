@@ -1,1 +1,0 @@
-git add -A . && git commit -m "initial push with some data" && git push origin master

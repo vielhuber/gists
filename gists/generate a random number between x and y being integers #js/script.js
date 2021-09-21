@@ -1,1 +1,0 @@
-~~(Math.random()*(y-x+1))+x

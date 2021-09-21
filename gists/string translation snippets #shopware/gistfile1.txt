@@ -1,6 +1,0 @@
-# variant a
-{namespace name="frontend/listing/box_article"}
-{s name="sFrontendListingExample"}example text{/s}
-
-# variant b
-{s name="sFrontendListingExample" namespace="frontend/listing/box_article"}example text{/s}
