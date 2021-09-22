@@ -1,0 +1,11 @@
+a + div
+{
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
+    overflow: hidden;
+}
+
+a:hover + div {
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
+}

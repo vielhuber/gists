@@ -19,7 +19,7 @@ function magic_alt($html)
             $replacings = [];
             foreach($matches2[0] as $matches2__key=>$matches2__value)
             {
-                $new = str_replace('alt ', 'alt=""', $matches2__value);
+                $new = str_replace('alt ', 'alt="" ', $matches2__value);
                 $replacings[] = [$matches2__value, $new];
             }
             foreach($replacings as $replacings__value)

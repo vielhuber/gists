@@ -1,0 +1,5 @@
+# primary
+wget --mirror -p --html-extension --convert-links http://www.test.de
+
+# alternative
+wget -r --no-parent http://www.test.de

@@ -1,0 +1,94 @@
+## PRE-LAUNCH
+- Exakten Zeitpunkt planen: Softlaunch oder Hardlaunch? Kunden informieren, dass es zu Verzögerungen wegen DNS kommen kann
+- 301-Redirects bei Relaunch vorhanden
+  - Redirects interner Seiten über Screaming Frog exportieren
+  - Redirects im Google Index über Search Console exportieren, per CURL Status Codes prüfen und 404er manuell redirecten
+- HTML-Validierung erfolgreich geprüft
+- XML-Sitemap vorhanden und aktiv und Einträge geprüft
+- robots.txt prüfen (am besten löschen, da Yoast automatisch generiert); falls manuell erstellt, prüfen ob vollständig (mit WP default vergleichen, siehe separates Gist)
+- Manuelles Backup der alten Seite sowie vom Testserver erstellt
+- Scroll-Animations-Plugin (lanimate) aktiv
+- WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
+- git auf Production, Testing und Local auf demselben Stand
+- Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
+- Erweiterte Cookie-Leiste und/oder Zwei-Klick-Lösungen für Google Maps implementiert
+- YouTube-/Vimeo-Links GDPR tauglich gemacht
+- Alle CMS Updates (WordPress Core+Plugins) installiert
+- Inaktive Plugins gelöscht (außer WPML und ggf. Caching)
+- Benennung der Labels im Backend (ACF-Felder) geprüft
+- Für Bilder ausschließlich <img> Tags oder noch besser <picture>-Tags (mit div. Thumbnails) eingesetzt
+- Alt-Tags für Bilder werden überall ausgespielt
+- WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
+- Bilder in Medienverwaltung in Unterordnern sortiert und ungenutzte Bilder manuell ausgemistet
+- RSS-Feed vorhanden und funktional
+- Impressum + Datenschutzseite vorhanden und gepflegt; ggf. eRecht24 (+ Plugin) einsetzen
+- Link zu close2 im Impressum hinterlegt:
+  - Verantwortlich für Programmierung: close2 new media GmbH, Webagentur München, www.close2.de
+- Google Analytics Opt Out Link gesetzt und funktional (am besten Link zum Consent-Manager setzen)
+- .git-Verzeichnis geschützt
+- SEO Interne Verlinkung
+   - Links mit "mehr erfahren" oder "weiterlesen" eliminieren (stattdessen ganze Kachel verlinken)
+   - Header und Footer müssen in <header>+<nav> und <footer> sein
+   - Links Mega Menü sollten per JS versteckt werden
+- Limit Login Access aktiv
+- WPS Hide Login aktiv (und auf "login" gesetzt)
+- Archivseiten (Autoren, Tags, Datum, ...) deaktiviert
+- Testseiten / Dummyseiten gelöscht, Papierkorb gelöscht
+- Liveseiten sortiert in der Reihenfolge
+- Alle Formulare: Empfänger und Absender prüfen, Versand nochmal prüfen, scharf schalten an Kunden
+- Copyright für alle Bilder vorhanden (am Bild oder im Impressum)
+- Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
+- Passwortschutz und Entwurf testen, ob das funktioniert
+- Google Maps JS API Key hinterlegen
+- Alle Bilder komprimiert, EXIF-Daten überall entfernt, Upload eines Bildes strippt alle EXIF-Daten sauber heraus, Löschen von Bildern löscht auch physische Datei
+- Grundlegende Meta-Tags gesetzt (Titel+Description) (prüfen, ob Startseite diese ausspielt)
+- JavaScript Fehler in Console überprüft
+- Alle Notices in der Console ebenfalls gekillt: Console muss komplett leer sein. Ebenfalls in Firefox testen, da hier oft andere Meldungen kommen.
+- console.log Ausgaben deaktiviert
+- git dev-/feature-Branch in master gemergt
+- Favicon vorhanden
+- Prüfen, ob Seite mit WordPress Admin Bar gut funktioniert (padding)
+- Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
+- Cross-Browser-Check (inkl. Responsive) durchgeführt: BackstopJS + Screaming Frog kombiniert einsetzen(!)
+- Seite auf Auflöungen >1920x1080 getestet (4k Support!)
+- browser-update.org integriert
+- WordPress Zugänge (personengebunden, also pro Person einen Account) ausstellen
+- Kontaktformulare durch Captcha (reCAPTCHA) oder alternativ Honeypot schützen
+- reCAPTCHA registrieren
+- E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
+- socialfoo: Facebook Developers App Id eintragen
+- WordPress Admin E-Mail-Adresse auf support@close2.de setzen (oder alternativ bewusst auf Kunden-E-Mail setzen)
+- Passwortschutz: htaccess/htpasswd im Einsatz (für Testing aktiv, für Production inaktiv)
+- Silbentrennung auf allen Browsern testen (force hyphenopoly)
+- Backend (und ggf. auch Frontend) auf Testing komplett abriegeln, damit sich Kunde nicht mehr einloggt
+- Vom Hauptuser (ID: 1) ggf. E-Mail-Adresse ändern und Website löschen
+
+## POST-LAUNCH
+- Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
+- Login-Zugangsdaten in Chrome gespeichert
+- 301 Redirects nochmal final testen, v.a. anhand der Google Suchergebnisse (site:)
+- Kunde kontaktieren, damit er prüft, dass Kontaktformular alle bei ihm ankommen
+- Seite 1x komplett mit Screaming Frog durchprüfen: Passen Permalinks generell? Gibt es kaputte Seiten? Gibt es Broken Links? Gibt es Seiten, die auf noindex laufen?
+- Google Analytics / Google Tag Manager aktiviert und IP Anonymisierung aktiviert (Echtzeitdaten prüfen)
+- WordPress: Werkzeuge > Website-Zustand prüfen
+- 404-Fehlerseite vorhanden / Status-Code geprüft
+- Pro Plugins registriert (WPML, ACF)
+- htaccess Rewrite Rules: Force https und force www oder non-www
+- Open Graph Social Sharing funktionsfähig
+- syncdb für Production -> Local und Testing -> Local vorhanden und 1x durchgeführt
+- flimsy lauffähig für Production und Testing
+- SSL-Zertifikat aktiv (forced)
+- Forced htaccess Umleitung von nicht-www auf www (oder umgekehrt)
+- Kein Mixed SSL Content vorhanden
+- Production-Links prüfen, ob diese auf local/testing führen!
+- Caching aktiviert
+- Dauerhaftes Backup eingerichtet (DropMySite)
+- Google Search Console aktiviert, Sitemap eingereicht oder initiale Indexierung beantragt
+- Rich Snippets geprüft und validiert
+- Seite 1x komplett mit Screaming Frog durchprüfen (nochmal Broken Links)
+- Google PageSpeed (web.dev) einmalig durchlaufen lassen und gröbste Fehler fixen
+- PHP-Version aktualisiert / geprüft (mind. PHP 7.4!)
+- Jira Ticket abgehakt
+- Offizielles Angebot durchgeschaut, ob irgendetwas fehlt
+- Abrechnung geprüft und durchgeführt
+- Wartungsvertrag (Backup+Monitoring) einrichten oder Kunden verkaufen

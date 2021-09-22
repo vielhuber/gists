@@ -33,7 +33,7 @@
 - rename `backstop.json` to `backstop.config.js`
 - prepend with `module.exports = `
 - run command with `backstop test --config="backstop.config.js"`
-- add alias to `package.json`: `"scripts": { "test": "backstop test --config=\"backstop.config.js\"" }`
+- add alias to `package.json`: `"scripts": { "test": "backstop test --config=\"backstop.config.js\"", "test:ok": "backstop approve --config=\"backstop.config.js\"" }`
 
 ### dynamic urls
 

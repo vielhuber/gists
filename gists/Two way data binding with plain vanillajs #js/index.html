@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <title>.</title>
+    <script>
+    let store = {};
+    document.addEventListener('DOMContentLoaded', () =>
+    {        
+        [].forEach.call(document.querySelectorAll('[data-bind]'), (el) =>
+        {
+            let prop = el.getAttribute('data-bind');
+
+            // dom => store
+            el.addEventListener('input', (e) =>
+            {
+                store[prop] = el.value;
+            });
+
+            // store => dom
+            if(!store.hasOwnProperty(prop))
+            {
+                let value;
+                Object.defineProperty(store, prop,
+                {
+                    set: (newValue) =>
+                    {
+                        value = newValue;
+                        [].forEach.call(document.querySelectorAll('[data-bind]'), (element_updated) =>
+                        {
+                            if(element_updated.getAttribute('data-bind') === prop)
+                            {
+                                let tag = element_updated.tagName.toLowerCase();
+                                if( ['input','textarea','select'].indexOf(tag) > -1 )
+                                {
+                                    element_updated.value = newValue;
+                                }
+                                else
+                                {
+                                    element_updated.innerHTML = newValue;
+                                }
+                            }
+                        });
+                    },
+                    get: () =>
+                    {
+                        return value;
+                    },
+                    enumerable: true
+                });
+            }
+
+        });
+    });
+    </script>
+</head>
+<body>
+
+    <ul>
+        <li><input type="text" data-bind="foo" /></li>
+        <li><textarea data-bind="bar"></textarea></li>
+        <li><span data-bind="foo"></span></li>
+        <li><span data-bind="bar"></span></li>
+    </ul>
+
+</body>
+</html>

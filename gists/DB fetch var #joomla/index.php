@@ -1,0 +1,1 @@
+$db->setQuery($db->getQuery(true)->select("ID")->from($db->quoteName('#__table'))->where($db->quoteName('ID').' = '.$db->quote(1)))->loadObject()->ID
