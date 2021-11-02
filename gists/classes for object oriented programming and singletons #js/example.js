@@ -19,6 +19,8 @@ export default class Example {
       	this.otherDynamicFunction();
       	// call a static method from a dynamic one
       	Example.staticFunction();
+      	// get a static variable from a dynamic one
+      	Example.staticVar;
       	this.constructor.staticFunction(); // same
     }
   

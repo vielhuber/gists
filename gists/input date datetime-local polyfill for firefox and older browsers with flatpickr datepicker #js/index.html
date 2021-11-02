@@ -17,6 +17,7 @@
             altFormat: 'd.m.Y H:i',
             dateFormat: 'Y-m-dTH:i:S',
             locale: 'de',
+            position: 'auto center',
             time_24hr: true,
             /* bugfix: https://github.com/flatpickr/flatpickr/issues/2040 */
             onChange: function(selectedDates, dateStr, instance) {
@@ -25,13 +26,14 @@
                 }
             }
         });
-        flatpickr('input[type="date', {
+        flatpickr('input[type="date"]', {
             enableTime: false,
             altInput: true,
             allowInput: false,
             altFormat: 'd.m.Y',
             dateFormat: 'Y-m-d',
             locale: 'de',
+            position: 'auto center',
             /* bugfix: https://github.com/flatpickr/flatpickr/issues/2040 */
             onChange: function(selectedDates, dateStr, instance) {
                 if (dateStr === '') {

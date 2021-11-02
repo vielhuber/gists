@@ -352,6 +352,7 @@ window.innerWidth; window.innerHeight;
 window.screen.availWidth; window.screen.availHeight; // sometimes in chrome dev tools you have to use this instead
 document.documentElement.clientWidth // window width minus scrollbar
 document.documentElement.clientHeight // window height minus scrollbar
+screen.width; screen.height // physical screen size (independent of size of current browser window)
 
 $(document).height();
 Math.max(document.body.offsetHeight, document.body.scrollHeight, document.documentElement.clientHeight, document.documentElement.offsetHeight, document.documentElement.scrollHeight);

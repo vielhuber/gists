@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>.</title>
+    <script src="https://unpkg.com/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@glidejs/glide@3.4.1/dist/css/glide.theme.min.css">
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if( document.querySelector('.glide') !== null ) {
+            document.querySelectorAll('.glide').forEach($el => {
+                $el.glide = null;
+                $el.slideCount = $el.querySelectorAll('.glide__slide').length;
+                $el.settings = {
+                    type: 'slider',
+                    rewind: false,
+                    startAt: 0,
+                    autoplay: false,
+                    animationDuration: 500
+                };
+                let observer = new ResizeObserver(entries => {
+                    entries.forEach(entries__value => {
+                        initWithSettings(entries__value.target);
+                    });
+                });
+                observer.observe($el);
+            });
+        }
+
+        function initWithSettings($el) {
+            if( $el.offsetWidth < 1280 ) {
+                $el.settings.perView = 1;
+                $el.settings.bound = false;
+            }
+            else {
+                $el.settings.perView = 3;
+                $el.settings.bound = true;
+            }
+            if( 1 + $el.settings.perView > $el.slideCount ) {
+                $el.settings.swipeThreshold = false;
+                $el.settings.dragThreshold = 0;
+            }
+            else {
+                $el.settings.swipeThreshold = true;
+                $el.settings.dragThreshold = 120;
+            }
+            if( $el.glide !== null ) { $el.glide.destroy(); }
+            $el.glide = new Glide($el, $el.settings);
+            $el.glide.on('run', () => { updateArrows($el); });
+            $el.glide.mount();
+            updateArrows($el);
+        }
+
+        function updateArrows($el) {           
+            let enableLeft = $el.glide.index > 0,
+                enableRight = ($el.glide.index+1) + $el.settings.perView <= $el.slideCount;
+            if(enableLeft) { $el.querySelector('.glide__arrow--left').classList.remove('hidden'); }
+            else { $el.querySelector('.glide__arrow--left').classList.add('hidden'); }
+            if(enableRight) { $el.querySelector('.glide__arrow--right').classList.remove('hidden'); }
+            else { $el.querySelector('.glide__arrow--right').classList.add('hidden'); }
+        }
+    });
+    </script>
+    <style>
+    *
+    {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    html {
+        background-color:blue;
+    }
+    .glide__slide {
+        height:200px;
+        background-color:red;
+    }
+    .glide__slide:nth-child(odd) {
+        background-color:#000;
+    }
+    .hidden {
+        opacity:0.5;
+        pointer-events:none;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="glide">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+          <li class="glide__slide"></li>
+          <li class="glide__slide"></li>
+          <li class="glide__slide"></li>
+          <li class="glide__slide"></li>
+        </ul>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+      </div>
+    </div>
+
+    <div class="glide">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+          <li class="glide__slide"></li>
+          <li class="glide__slide"></li>
+        </ul>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+      </div>
+    </div>
+
+</body>
+</html>

@@ -133,6 +133,24 @@ window.addEventListener('load', e => {
                     after() {
                         // run on subsequent load
                         console.log('subsequent load');
+                        // important: manually call analytics scripts
+                        // google analytics
+                        if (window.gtag !== undefined) {
+                            gtag('event', 'page_view', {
+                                page_title: document.title,
+                                page_location: window.location.href,
+                                page_path: window.location.pathname,
+                                send_to: 'xxxxxxxxxx'
+                            });
+                        }
+                        // matomo
+                        if (window._paq !== undefined) {
+                            _paq.push(['trackPageView']);
+                        }
+                        // etracker
+                        if(typeof(_etracker) === 'object') {
+                            et_eC_Wrapper('xxxxxx');
+                        }
                     }
                 }
             ]

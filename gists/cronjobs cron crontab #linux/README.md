@@ -31,7 +31,11 @@ date
 
 ```chmod +x script.sh```
 
-### restart cron
+### check cron daemon status
+
+```systemctl status crond.service```
+
+### restart cron daemon
 
 ```systemctl restart crond.service```
 

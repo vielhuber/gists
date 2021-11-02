@@ -22,6 +22,7 @@
 - Bilder in Medienverwaltung in Unterordnern sortiert und ungenutzte Bilder manuell ausgemistet
 - RSS-Feed vorhanden und funktional
 - Impressum + Datenschutzseite vorhanden und gepflegt; ggf. eRecht24 (+ Plugin) einsetzen
+- Einstellungen > Datenschutz > Seite nicht zugeordnet (sonst ist diese nicht editierbar für Editoren)
 - Link zu close2 im Impressum hinterlegt:
   - Verantwortlich für Programmierung: close2 new media GmbH, Webagentur München, www.close2.de
 - Google Analytics Opt Out Link gesetzt und funktional (am besten Link zum Consent-Manager setzen)
@@ -30,7 +31,7 @@
    - Links mit "mehr erfahren" oder "weiterlesen" eliminieren (stattdessen ganze Kachel verlinken)
    - Header und Footer müssen in <header>+<nav> und <footer> sein
    - Links Mega Menü sollten per JS versteckt werden
-- Limit Login Access aktiv
+- Limit Login Access aktiv und Datenschutzmodus AUS
 - WPS Hide Login aktiv (und auf "login" gesetzt)
 - Archivseiten (Autoren, Tags, Datum, ...) deaktiviert
 - Testseiten / Dummyseiten gelöscht, Papierkorb gelöscht
@@ -52,7 +53,6 @@
 - Cross-Browser-Check (inkl. Responsive) durchgeführt: BackstopJS + Screaming Frog kombiniert einsetzen(!)
 - Seite auf Auflöungen >1920x1080 getestet (4k Support!)
 - browser-update.org integriert
-- WordPress Zugänge (personengebunden, also pro Person einen Account) ausstellen
 - Kontaktformulare durch Captcha (reCAPTCHA) oder alternativ Honeypot schützen
 - reCAPTCHA registrieren
 - E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
@@ -62,6 +62,8 @@
 - Silbentrennung auf allen Browsern testen (force hyphenopoly)
 - Backend (und ggf. auch Frontend) auf Testing komplett abriegeln, damit sich Kunde nicht mehr einloggt
 - Vom Hauptuser (ID: 1) ggf. E-Mail-Adresse ändern und Website löschen
+- WordPress-Zugänge (personengebunden) für Teammitglieder (Rolle: Administrator) sowie Kunden angelegt (Rolle: Redakteur) und Zugangsdaten zugesandt
+- Schulungstermin vereinbart und Schulung im besten Fall vor Launch durchgeführt
 
 ## POST-LAUNCH
 - Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
@@ -74,7 +76,7 @@
 - 404-Fehlerseite vorhanden / Status-Code geprüft
 - Pro Plugins registriert (WPML, ACF)
 - htaccess Rewrite Rules: Force https und force www oder non-www
-- Open Graph Social Sharing funktionsfähig
+- Open Graph Social Sharing funktionsfähig (wichtigste Seiten mit dem Facebook Sharing Debugger testen)
 - syncdb für Production -> Local und Testing -> Local vorhanden und 1x durchgeführt
 - flimsy lauffähig für Production und Testing
 - SSL-Zertifikat aktiv (forced)
@@ -92,3 +94,4 @@
 - Offizielles Angebot durchgeschaut, ob irgendetwas fehlt
 - Abrechnung geprüft und durchgeführt
 - Wartungsvertrag (Backup+Monitoring) einrichten oder Kunden verkaufen
+- Kunde auf positive Bewertung auf https://bewertung.close2.de hingewiesen

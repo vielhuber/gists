@@ -11,3 +11,5 @@
 - ```ln -s /path/to/origfile /path/to/symlinkfile```
 - ```unlink /path/to/symlinkfolder```
 - ```unlink /path/to/symlinkfile```
+- ```rm -i /path/to/symlinkfolder```
+- ```rm -i /path/to/symlinkfile```

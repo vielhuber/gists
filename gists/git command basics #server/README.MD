@@ -227,6 +227,9 @@ Usage: git acp
 - git switch branch-name
 - git switch master
 
+### change to last active branch
+- git checkout -
+
 ### create new branch and change to it in one command
 - git checkout -b branch-name
 - git switch --create branch-name
@@ -337,6 +340,10 @@ Usage: git acp
 - git merge branch --no-commit --no-ff
 
 #### put together / squash all commits from branch in one single commit (good for code reviews)
+
+##### with git diff
+- `git diff master..special-branch` // show all changes between special-branch and master
+- `git diff master..special-branch --name-only` // show only changed files
 
 ##### temporarily in another branch
 - `git checkout master` # switch to branch to compare to

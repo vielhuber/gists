@@ -14,8 +14,12 @@ https://close2.de/foo/
 
 ```sh
 #!/bin/bash
-while read LINE; do
-  curl -o /dev/null --silent --head --write-out "%{http_code} $LINE\n" "$LINE"
+while read LINE || [ -n "$LINE" ]; do
+  curl --insecure -o /dev/null --silent --head --write-out "%{http_code} $LINE\n" "$LINE"
+  # if you want to follow also redirects (to detect 404s), add "-L --max-redirs 500"
+  curl -L --max-redirs 500 --insecure -o /dev/null --silent --head --write-out "%{http_code} $LINE\n" "$LINE"
+  # if your site has basic auth
+  curl -u "42:42" -L --max-redirs 500 --insecure -o /dev/null --silent --head --write-out "%{http_code} $LINE\n" "$LINE"
 done < in.txt
 ```
 

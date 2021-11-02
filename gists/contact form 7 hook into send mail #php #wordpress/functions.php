@@ -1,7 +1,7 @@
 <?php
 add_action('wpcf7_before_send_mail', function($cf7)
 {
-    $wpcf = WPCF7_ContactForm::get_current();
+    $wpcf = \WPCF7_ContactForm::get_current();
     if( strpos($wpcf->title(),'Newsletter') === false )
     {
       return $wpcf;
@@ -9,7 +9,7 @@ add_action('wpcf7_before_send_mail', function($cf7)
     $email = null;
     $first_name = null;
     $last_name = null;
-    $submission = WPCF7_Submission::get_instance();
+    $submission = \WPCF7_Submission::get_instance();
     if($submission)
     {
       $posted = $submission->get_posted_data();

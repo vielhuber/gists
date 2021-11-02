@@ -132,6 +132,7 @@
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
 - Wenn non-commercial Lizenz abläuft: rm -rf ~/.config/smartgit/
 - Wenn es Probleme mit GTK gibt: ```nano ~/.config/smartgit/```, ```swtver=4932``` hinzufügen
+- Falls Updateprozess innerhalb des Programms scheitert: Einfach neue tar.gz downloaden, entzippen (und bestehende Dateien überschreiben)
 
 #### pimp command line
 - ```sudo nano ~/.bash_profile```
@@ -392,9 +393,10 @@ xdebug.var_display_max_depth = -1
   - ```nvm install node```
   - ```nvm install --lts```
   - ```nvm install 16.5.0```
+  - ```nvm install 14.18.0```
   - ```nvm install 12.10.0```
   - ```nvm install 10.16.3```
-  - ```nvm alias default 12.10.0```
+  - ```nvm alias default 14.18.0```
   - Version wechseln: ```nvm use 10.16.3```
   - Bei manchen Kundenprojekten: ```nvm use --lts```
 - nativ (obsolet)
@@ -404,6 +406,10 @@ xdebug.var_display_max_depth = -1
   - ```sudo apt-get install -y build-essential```
 - prevent permission errors
   - ```npm set unsafe-perm true```
+- auto version switching on cd
+  - ```nano ~/.bash_profile```
+  - ```nvm_auto_switch() { if [[ $PWD == $PREV_PWD ]]; then return; fi; PREV_PWD=$PWD; [[ -f ".nvmrc" ]] && nvm use; }; export PROMPT_COMMAND=nvm_auto_switch;```
+  - now place `.nvmrc` with the version (e.g. `12.10.0`) in the folder, where your `package.json` lays
 
 #### yarn
 - ```curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -```

@@ -35,7 +35,7 @@ ps aux
 ps aux | grep 1337| grep -v grep # search for pid
 ps aux | grep 1337 | grep -v grep | wc -l # see if process is running
 
-# kill all processes of type
+# kill all processes of type / name
 killall -KILL php
 
 # search history of commands
@@ -396,11 +396,14 @@ df . # show in which device a folder is located
 df -h # in total
 df -k . # for current folder
 df -k /folder # for specific folder
-du -d 1 -xh /folder 2>/dev/null | sort -h -r # show all big folders
+du -d 1 -xh /folder 2>/dev/null | sort -h -r | head -10 # show all big folders
 find . -type f -printf "%s\t%p\n" | sort -n | tail -10 # show all big files
-du -d 1 -xh . 2>/dev/null | sort -h -r # same as above only for current folder
+du -d 1 -xh . 2>/dev/null | sort -h -r | head -10 # same as above only for current folder
 ls -haltrS # show contents of folder sorted by size
-du -sh folder/ # show size of folder
+du -sh folder/ # show size of folder in human readable format
+find . -type f -newermt '1 month ago' -exec du -ch {} + | grep total$ # sum of filesize found with find (files newer than 1 month)
+find . -type f -newermt '1 month ago' -exec du -cb {} + | grep total$ | cut -f1 | paste -sd+ - | bc # more accurate
+find . -name "node_modules" -type d -prune -exec du -ch {} + | grep total$
 
 # count
 find . -type f | wc -l # count number of files in current folder

@@ -11,9 +11,9 @@ add_filter('posts_results', function( $posts )
 add_action( 'post_submitbox_misc_actions', function()
 {
     $post = get_post();
-    if( $post->post_type !== 'post' || $post->post_status === 'publish' )
+    if( !in_array($post->post_type, ['post', 'custom-post']) || $post->post_status === 'publish' )
     {
         return;
     }
-    echo '<div style="padding:6px 10px 8px"><a href="'.get_permalink($post->ID).'&amp;key='.md5($post->ID.'secret').'" target="_blank">Öffentliche Vorschau</a></div>';
+    echo '<div style="padding:6px 10px 8px"><a href="'.get_permalink($post->ID).'&amp;preview=1&amp;key='.md5($post->ID.'secret').'" target="_blank">Öffentliche Vorschau</a></div>';
 });
