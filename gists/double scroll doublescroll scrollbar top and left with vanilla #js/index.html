@@ -11,6 +11,7 @@
             document.addEventListener('DOMContentLoaded', () => {
                 if (document.querySelector('.doublescroll') !== null) {
                     document.querySelectorAll('.doublescroll').forEach(el => {
+                        if( el.closest('.doublescroll__outer') !== null ) { return; }
                         let doublescroll = el,
                             doublescroll_outer = new DOMParser().parseFromString(
                             '<div class="doublescroll__outer">',
@@ -22,7 +23,7 @@
                         );
                         doublescroll_outer.appendChild(doublescroll);
                         doublescroll_outer.style.position = 'relative';
-                        if (el.classList.contains('doublescroll--x')) {
+                        if (doublescroll.classList.contains('doublescroll--x')) {
                             let doublescroll_copy = doublescroll.cloneNode(true);
                             doublescroll_outer.insertBefore(doublescroll_copy, doublescroll);
                             doublescroll_copy.classList.add('doublescroll--x-fake');
@@ -41,9 +42,9 @@
                                 doublescroll_copy.scrollLeft = doublescroll.scrollLeft;
                             });
                         }
-                        if (el.classList.contains('doublescroll--y')) {
+                        if (doublescroll.classList.contains('doublescroll--y')) {
                             let doublescroll_copy = doublescroll.cloneNode(true);
-                            el.parentNode.insertBefore(doublescroll_copy, doublescroll);
+                            doublescroll.parentNode.insertBefore(doublescroll_copy, doublescroll);
                             doublescroll_copy.classList.add('doublescroll--y-fake');
                             let scrollbar_width =
                                 doublescroll_copy.offsetWidth - doublescroll_copy.clientWidth;

@@ -1,3 +1,18 @@
+/* helpers (not needed) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table td {
+    border:1px solid red;
+}
+
+/* global styling */
 .responsive-table-container {
     width: 100%;
     overflow-x: auto;
@@ -7,11 +22,19 @@
     min-width: 100%;
 }
 
-/* optional */
+/* optional (variant 1) */
 .responsive-table-container table {
- 	table-layout: fixed;
+    table-layout: fixed;
 }
 .responsive-table-container table td {
- 	min-width: 10rem;
-  	width: 20%;
+    min-width: 20rem;
+    width: 50%;
+}
+
+/* optional (variant 2) */
+.responsive-table-container table {
+    width:100%;
+}
+.responsive-table-container table td {
+    white-space:nowrap;
 }
