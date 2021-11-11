@@ -200,6 +200,11 @@ $DOMXPath->query('./../text()[normalize-space()][string-length() > 3]', $node);
 $DOMXPath->query('./../text()[normalize-space()][string-length(normalize-space(.)) > 1]', $node);
 ```
 
+### get dom elements without content inside (empty tags)
+```php
+$DOMXPath->query('/html/body//*[not(node())][not(text())]')
+```
+
 ### get direct sibling of node
 ```php
 $DOMXPath->query('(./following-sibling::*|./following-sibling::text()[normalize-space()])[1]', $node);
