@@ -112,6 +112,11 @@ $DOMXPath->query('/html/body//*[@id="root"]');
 $DOMXPath->query('/html/body//input');
 ```
 
+### multiple tag selector
+```php
+$DOMXPath->query('/html/body//input|/html/body//select');
+```
+
 ### tag selector
 ```php
 $DOMDocument->getElementsByTagName('input');

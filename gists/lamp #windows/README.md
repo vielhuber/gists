@@ -131,7 +131,7 @@
 - Repository > Search for Repositories > /var/www
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
 - Wenn non-commercial Lizenz abläuft: rm -rf ~/.config/smartgit/
-- Wenn es Probleme mit GTK gibt: ```nano ~/.config/smartgit/```, ```swtver=4932``` hinzufügen
+- Wenn es Probleme mit GTK gibt: ```nano ~/.config/smartgit/smartgit.vmoptions```, ```swtver=4932``` hinzufügen
 - Falls Updateprozess innerhalb des Programms scheitert: Einfach neue tar.gz downloaden, entzippen (und bestehende Dateien überschreiben)
 
 #### pimp command line
