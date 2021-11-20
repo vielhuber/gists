@@ -738,6 +738,7 @@ host    all   all        ::1/128        md5
 
 #### switch cli php version
 - ```sudo update-alternatives --config php```
+- ```sudo update-alternatives --set php /usr/bin/php7.4``` (directly set)
 - always choose manual mode (so newer installed versions do not get taken automatically)
 - ```php -v```
 

@@ -6,9 +6,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     /* chrome magic */
     if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
-        if (document.querySelector('input:not([type="password"]):not([autocomplete])') !== null) {
-            document.querySelectorAll('input:not([type="password"]):not([autocomplete])').forEach((el) => {
-                el.setAttribute('autocomplete', '_' + (~~(Math.random() * (9999 - 1000 + 1)) + 1000));
+        if (document.querySelector('input[name]:not([type="password"]):not([autocomplete])') !== null) {
+            document.querySelectorAll('input[name]:not([type="password"]):not([autocomplete])').forEach((el) => {
+                el.setAttribute(
+                    'autocomplete',
+                    el.getAttribute('name').match(/name|address|email|number/) ? 'cc-number' : 'off'
+                );
+                if (el.getAttribute('placeholder') !== null) {
+                    el.setAttribute(
+                        'placeholder',
+                        el.getAttribute('placeholder').slice(0, 1) +
+                            '\u200B' +
+                            el.getAttribute('placeholder').slice(1)
+                    );
+                }
             });
         }
     }
@@ -32,11 +43,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
                 if (
                     typeof e.target.closest !== 'undefined' &&
-                    e.target.closest('input:not([type="password"]):not([autocomplete])') !== null
+                    e.target.closest('input[name]:not([type="password"]):not([autocomplete])') !== null
                 ) {
-                    e.target
-                        .closest('input:not([type="password"]):not([autocomplete])')
-                        .setAttribute('autocomplete', '_' + (~~(Math.random() * (9999 - 1000 + 1)) + 1000));
+                    let el = e.target.closest('input[name]:not([type="password"]):not([autocomplete])');
+                    el.setAttribute(
+                        'autocomplete',
+                        el.getAttribute('name').match(/name|address|email|number/) ? 'cc-number' : 'off'
+                    );
+                    if (el.getAttribute('placeholder') !== null) {
+                        el.getAttribute('placeholder').slice(0, 1) +
+                            '\u200B' +
+                            el.getAttribute('placeholder').slice(1);
+                    }
                 }
             }
             /* if you also want to include password fields */
