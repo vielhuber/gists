@@ -55,6 +55,7 @@
 - browser-update.org integriert
 - Kontaktformulare durch Captcha (reCAPTCHA) oder alternativ Honeypot schützen
 - reCAPTCHA registrieren
+- Siegel wie Jameda etc. prüfen, ob live eingebunden
 - E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
 - socialfoo: Facebook Developers App Id eintragen
 - WordPress Admin E-Mail-Adresse auf support@close2.de setzen (oder alternativ bewusst auf Kunden-E-Mail setzen)
