@@ -404,6 +404,7 @@ du -sh folder/ # show size of folder in human readable format
 find . -type f -newermt '1 month ago' -exec du -ch {} + | grep total$ # sum of filesize found with find (files newer than 1 month)
 find . -type f -newermt '1 month ago' -exec du -cb {} + | grep total$ | cut -f1 | paste -sd+ - | bc # more accurate
 find . -name "node_modules" -type d -prune -exec du -ch {} + | grep total$ # find all node_modules folders sorted by size
+ncdu # install before with "sudo apt-get install ncdu"
 
 # count
 find . -type f | wc -l # count number of files in current folder
