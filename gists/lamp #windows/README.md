@@ -199,6 +199,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo a2enmod proxy```
 - ```sudo a2enmod proxy_html```
 - ```sudo a2enmod proxy_http```
+- ```sudo a2enmod xml2enc```
 - ```sudo service apache2 restart```
 
 #### configs
