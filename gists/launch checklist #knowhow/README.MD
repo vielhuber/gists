@@ -65,6 +65,8 @@
 - Vom Hauptuser (ID: 1) ggf. E-Mail-Adresse ändern und Website löschen
 - WordPress-Zugänge (personengebunden) für Teammitglieder (Rolle: Administrator) sowie Kunden angelegt (Rolle: Redakteur) und Zugangsdaten zugesandt
 - Schulungstermin vereinbart und Schulung im besten Fall vor Launch durchgeführt
+- Burp Suite Professional: Gesamte Webseite nach XSS-Vulnerabilities scannen
+- Alle Inputfelder, (im Themes Ordner nach $_GET suchen) mit Hilfe von esc_attr() escapen(!)
 
 ## POST-LAUNCH
 - Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster

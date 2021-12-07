@@ -10,6 +10,15 @@ wp_mail(
         wp_upload_dir()['basedir'].'/uploads/file2.zip',
     ]
 );
+
+// change attachment names
+// currently not natively possible: https://core.trac.wordpress.org/ticket/28407
+// use this trick:
+// before
+wp_mail('...', '...', '...', ['Content-Type: /html; charset=UTF-8'], [ sys_get_temp_dir().'/'.md5(uniqid(mt_rand(), true)).'.pdf' ]);
+// after
+@mkdir( sys_get_temp_dir().'/'.md5(uniqid(mt_rand(), true)) );
+wp_mail('...', '...', '...', ['Content-Type: text/html; charset=UTF-8'], [ sys_get_temp_dir().'/'.md5(uniqid(mt_rand(), true)).'/My-custom-name.pdf' ]);
   
 // change recipient on dev
 if (!is_production() && isset($_SERVER['SERVER_ADMIN']) && $_SERVER['SERVER_ADMIN'] != '') {
