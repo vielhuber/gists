@@ -5,6 +5,18 @@
 ### generate cronjobs
 
 - https://crontab-generator.org
+- if you want to log errors, add `2>&1`
+  - before: ```0 5 * * * /foo.sh > foo.log```
+  - after: ```0 5 * * * /foo.sh > foo.log 2>&1```
+- cron does not set any environment variables (like in your shell)
+  - option 1 (does not work always)
+    - before: ```0 5 * * * /foo.sh```
+    - after: ```0 5 * * * . $HOME/.profile; /foo.sh```
+  - option 2 (does not work always)
+    - before: ```0 5 * * * /foo.sh```
+    - after: ```0 5 * * * bash -l -c '/foo.sh'```
+  - option 3 (works always)
+    - replace all relative paths in your shell scripts
 
 ### run a task on reboot
 
