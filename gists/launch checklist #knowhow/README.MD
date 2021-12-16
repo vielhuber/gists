@@ -78,12 +78,12 @@
 - WordPress: Werkzeuge > Website-Zustand prüfen
 - 404-Fehlerseite vorhanden / Status-Code geprüft
 - Pro Plugins registriert (WPML, ACF)
-- htaccess Rewrite Rules: Force https und force www oder non-www
+- htaccess Rewrite Rules: Force https und force www oder non-www; Forced htaccess Umleitung von nicht-www auf www (oder umgekehrt)
+- Auch wichtig bei non-www: Prüfen, ob https://www.tld.com/liesmich.html korrekt umleitet auf https://tld.com/liesmich.html (manchmal geht das auf https://tld.comliesmich.html, weil "/" bei der Hoster-Redirect-Regel fehlt)
 - Open Graph Social Sharing funktionsfähig (wichtigste Seiten mit dem Facebook Sharing Debugger testen)
 - syncdb für Production -> Local und Testing -> Local vorhanden und 1x durchgeführt
 - flimsy lauffähig für Production und Testing
 - SSL-Zertifikat aktiv (forced)
-- Forced htaccess Umleitung von nicht-www auf www (oder umgekehrt)
 - Kein Mixed SSL Content vorhanden
 - Production-Links prüfen, ob diese auf local/testing führen!
 - Caching aktiviert
