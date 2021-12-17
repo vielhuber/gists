@@ -67,6 +67,13 @@
 - `wsl --set-version Ubuntu 2`
 - `wsl --list --verbose`
 
+#### backup/restore wsl2
+- Run PowerShell as admin
+- `wsl --shutdown`
+- `wsl --list`
+- `wsl --export "Ubuntu" D:\Ubuntu.tar`
+- `wsl --import "Ubuntu" D:\ D:\Ubuntu.tar`
+
 #### docker
 -	Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
 -	Installation: "Install required Windows components for WSL 2"
