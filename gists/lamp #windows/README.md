@@ -74,6 +74,24 @@
 - `wsl --export "Ubuntu" D:\Ubuntu.tar`
 - `wsl --import "Ubuntu" D:\ D:\Ubuntu.tar`
 
+#### increase disk size
+- https://docs.microsoft.com/en-us/windows/wsl/vhd-size
+- Powershell (Admin)
+  - `wsl --shutdown`
+  - `Get-AppxPackage -Name "*Ubuntu*" | Select PackageFamilyName`
+  - `C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\ext4.vhdx`
+- CMD (Admin)
+  - `diskpart`
+  - `Select vdisk file="C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\ext4.vhdx"`
+  - `detail vdisk`
+  - `expand vdisk maximum=316000`
+  - `exit`
+- WSL
+  - `sudo mount -t devtmpfs none /dev`
+  - `mount | grep ext4`
+  - `sudo resize2fs /dev/sdb 316000M`
+  - `df -h`
+
 #### docker
 -	Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
 -	Installation: "Install required Windows components for WSL 2"

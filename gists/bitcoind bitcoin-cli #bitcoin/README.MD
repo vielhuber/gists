@@ -7,6 +7,13 @@ tar xzf bitcoin-22.0-x86_64-linux-gnu.tar.gz
 sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-22.0/bin/*
 ```
 
+### change data path
+```sh
+mkdir ~/.bitcoin
+nano ~/.bitcoin/bitcoin.conf
+datadir=/mnt/e
+```
+
 ### start (download entire blockchain)
 ```sh
 bitcoind -daemon
@@ -25,6 +32,7 @@ echo `bitcoin-cli getblockcount 2>&1`/`wget -O - http://blockchain.info/q/getblo
 ### get blockchain size on disk
 ```sh
 du -sh ~/.bitcoin/blocks
+du -sh /mnt/e/blocks
 ```
 
 ### clear history (free up space)
@@ -54,8 +62,61 @@ bitcoin-cli getblock "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146
 bitcoin-cli getblock $(bitcoin-cli getblockhash $(bitcoin-cli getblockcount))
 ```
 
-### loop through latest 10 blocks
+### loop through latest blocks and calculate average block time
+```sh
+#!/bin/bash
+#set -x
+MODE_LAST_BLOCKS=10
+MODE_DATE="2016-07-20"
 
+HEIGHT=$(bitcoin-cli getblockcount)
+HASH=$(bitcoin-cli getblockhash "$HEIGHT")
+COUNTER=$HEIGHT
+LAST_TIME=0
+LAST_HASH=0
+LAST_HEIGHT=0
+SUM=0
+COUNT=0
+while [[ $COUNTER -ge 0 ]]
+do
+    echo "processing $COUNTER..."
+
+    HASH=$(bitcoin-cli getblockhash $COUNTER)
+    TIME=$(bitcoin-cli getblock $HASH | grep -Po '(?<="time": )[^,]*')
+    TIME=$((TIME))
+    #date -d @$TIME
+
+    if [[ -n $MODE_LAST_BLOCKS ]]; then
+        if [[ $COUNTER < $((HEIGHT - MODE_LAST_BLOCKS)) ]]; then
+            break
+        fi
+    fi
+    if [[ -n $MODE_DATE ]]; then
+        if [[ $(date -d @$TIME +"%Y-%m-%d") -ne $MODE_DATE ]]; then
+            ((COUNTER--))
+            continue
+        fi
+    fi
+
+    if [[ LAST_TIME -ne 0 ]]; then
+        ((DIFF = LAST_TIME - TIME))
+        ((SUM = SUM + DIFF))
+        ((COUNT++))
+    fi
+    LAST_TIME=$TIME
+    LAST_HASH=$HASH
+    LAST_HEIGHT=$COUNTER
+
+	((COUNTER--))
+done
+
+if [[ $COUNT > 0 ]]; then
+    echo ""
+    echo $SUM
+    echo $COUNT
+    echo "scale=2 ; $SUM / $COUNT" | bc
+fi
+```
 
 ### stop
 ```sh
