@@ -27,6 +27,7 @@ bitcoin-cli getblockchaininfo
 ### status
 ```sh
 echo `bitcoin-cli getblockcount 2>&1`/`wget -O - http://blockchain.info/q/getblockcount 2>/dev/null`
+tail -f ~/.bitcoin/debug.log
 ```
 
 ### get blockchain size on disk
