@@ -14,6 +14,13 @@ nano ~/.bitcoin/bitcoin.conf
 datadir=/mnt/e
 ```
 
+### enable pruning
+```sh
+mkdir ~/.bitcoin
+nano ~/.bitcoin/bitcoin.conf
+prune=1000
+```
+
 ### start (download entire blockchain)
 ```sh
 bitcoind -daemon
@@ -33,7 +40,6 @@ tail -f ~/.bitcoin/debug.log
 ### get blockchain size on disk
 ```sh
 du -sh ~/.bitcoin/blocks
-du -sh /mnt/e/blocks
 ```
 
 ### clear history (free up space)
@@ -67,8 +73,8 @@ bitcoin-cli getblock $(bitcoin-cli getblockhash $(bitcoin-cli getblockcount))
 ```sh
 #!/bin/bash
 #set -x
-MODE_LAST_BLOCKS=10
-MODE_DATE="2016-07-20"
+MODE_LAST_BLOCKS=
+MODE_DATE="2014-02-15"
 
 HEIGHT=$(bitcoin-cli getblockcount)
 HASH=$(bitcoin-cli getblockhash "$HEIGHT")
@@ -78,6 +84,8 @@ LAST_HASH=0
 LAST_HEIGHT=0
 SUM=0
 COUNT=0
+TMP=
+
 while [[ $COUNTER -ge 0 ]]
 do
     echo "processing $COUNTER..."
@@ -85,7 +93,7 @@ do
     HASH=$(bitcoin-cli getblockhash $COUNTER)
     TIME=$(bitcoin-cli getblock $HASH | grep -Po '(?<="time": )[^,]*')
     TIME=$((TIME))
-    #date -d @$TIME
+    date -d @$TIME
 
     if [[ -n $MODE_LAST_BLOCKS ]]; then
         if [[ $COUNTER < $((HEIGHT - MODE_LAST_BLOCKS)) ]]; then
@@ -93,9 +101,16 @@ do
         fi
     fi
     if [[ -n $MODE_DATE ]]; then
-        if [[ $(date -d @$TIME +"%Y-%m-%d") -ne $MODE_DATE ]]; then
+        if [[ $(date -d @$TIME +"%Y-%m-%d") != $MODE_DATE ]]; then
+            if [[ -n $TMP ]]; then
+                if [[ $COUNTER < $TMP ]]; then break; fi
+            fi
+
             ((COUNTER--))
             continue
+        else
+            # fast skip
+            ((TMP = COUNTER - 10))
         fi
     fi
 
@@ -115,7 +130,9 @@ if [[ $COUNT > 0 ]]; then
     echo ""
     echo $SUM
     echo $COUNT
-    echo "scale=2 ; $SUM / $COUNT" | bc
+    SEC=$(echo "scale=2 ; $SUM / $COUNT" | bc)
+    MIN=$(echo "scale=2 ; $SEC / 60" | bc)
+    echo $MIN
 fi
 ```
 
