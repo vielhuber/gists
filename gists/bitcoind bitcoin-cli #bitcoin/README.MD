@@ -21,9 +21,23 @@ nano ~/.bitcoin/bitcoin.conf
 prune=1000
 ```
 
+### enable txindex
+- this is important when getting any transactions (not only those in our wallet)
+- be aware: pruning and txindex=1 is not compatible at the same time(!)
+```sh
+mkdir ~/.bitcoin
+nano ~/.bitcoin/bitcoin.conf
+txindex=1
+```
+
 ### start (download entire blockchain)
 ```sh
 bitcoind -daemon
+```
+
+### stop
+```sh
+bitcoin-cli stop
 ```
 
 ### status
@@ -67,6 +81,11 @@ bitcoin-cli getblock "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146
 ### get latest block
 ```sh
 bitcoin-cli getblock $(bitcoin-cli getblockhash $(bitcoin-cli getblockcount))
+```
+
+### check if own transaction is included in last block
+```sh
+bitcoin-cli getblock $(bitcoin-cli getblockhash $(bitcoin-cli getblockcount)) | grep "<TRANSACTION_ID>"
 ```
 
 ### loop through latest blocks and calculate average block time
@@ -134,9 +153,4 @@ if [[ $COUNT > 0 ]]; then
     MIN=$(echo "scale=2 ; $SEC / 60" | bc)
     echo $MIN
 fi
-```
-
-### stop
-```sh
-bitcoin-cli stop
 ```
