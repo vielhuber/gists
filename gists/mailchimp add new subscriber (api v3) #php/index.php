@@ -17,6 +17,23 @@ $result = $MailChimp->post('lists/'.$list_id.'/members', [
 	'status' => 'subscribed', // use status "pending" to send out email
 ]);
 print_r($result);
+// opt in gdpr fields
+if( !empty($result) && isset($result['marketing_permissions']) && !empty($result['marketing_permissions']) ) {
+    foreach($result['marketing_permissions'] as $marketing_permissions__key=>$marketing_permissions__value) {
+        // only specific fields
+        if(
+            !empty($marketing_permissions__value) &&
+            isset($marketing_permissions__value['text']) &&
+            $marketing_permissions__value['text'] !== 'E-Mail / Newsletter'
+        ) {
+            continue;
+        }
+        $result['marketing_permissions'][$marketing_permissions__key]['enabled'] = true;
+    }
+    $MailChimp->patch('lists/' . $list_id . '/members/'.$result['id'], [
+        'marketing_permissions' => $result['marketing_permissions']
+    ]);
+}
 if ($MailChimp->success()) {
   echo 'OK';
 } else {
