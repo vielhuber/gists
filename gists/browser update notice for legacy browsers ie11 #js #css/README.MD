@@ -41,11 +41,11 @@ browserUpdate({ /* options see below */ });
 ### options
 ```js
 {
-    required: { i: 99, e: 80, f: -4, o: -4, s: -4, c: -4 },
+    required: { i: 99, e: 80, f: -4, o: -4, s: -1, c: -4 },
     reminder: 0, // always show (if no user interaction); set this to 0 if you always show it
     reminderClosed: 0, // show after 1 hour again (after user interaction); set this to 0 if you always show it
     insecure: false,
-    api: 2020.04,
+    api: 2021.12,
     test: false, // test with true or with #test-bu
     shift_page_down: false,
     no_permanent_hide: true,
