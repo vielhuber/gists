@@ -43,7 +43,7 @@ class GoogleTranslate
     {
         // google sometimes surrounds the translation with <i> and <b> tags
         // do distinguish real i-/b-tags, replace them (we undo that later on)
-        $dom = self::str_to_dom($input);
+        $dom = __::str_to_dom($input);
         $xpath = new \DOMXPath($dom);
         foreach (['i', 'b'] as $tags__value) {
             foreach ($dom->getElementsByTagName($tags__value) as $divs__value) {
@@ -58,7 +58,7 @@ class GoogleTranslate
                 $id++;
             }
         }
-        $output = self::dom_to_str($dom);
+        $output = __::dom_to_str($dom);
         return $output;
     }
 
@@ -108,7 +108,7 @@ class GoogleTranslate
             }
         }
         $output = trim($output);
-        $dom = self::str_to_dom($output);
+        $dom = __::str_to_dom($output);
         $xpath = new \DOMXPath($dom);
         foreach (['i', 'b'] as $tags__value) {
             foreach ($dom->getElementsByTagName($tags__value) as $divs__value) {
@@ -149,7 +149,7 @@ class GoogleTranslate
                 }
             }
         }
-        $output = self::dom_to_str($dom);
+        $output = __::dom_to_str($dom);
         return $output;
     }
 
