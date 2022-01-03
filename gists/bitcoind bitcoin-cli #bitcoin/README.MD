@@ -88,69 +88,7 @@ bitcoin-cli getblock $(bitcoin-cli getblockhash $(bitcoin-cli getblockcount))
 bitcoin-cli getblock $(bitcoin-cli getblockhash $(bitcoin-cli getblockcount)) | grep "<TRANSACTION_ID>"
 ```
 
-### loop through latest blocks and calculate average block time
+### get last block time
 ```sh
-#!/bin/bash
-#set -x
-MODE_LAST_BLOCKS=
-MODE_DATE="2014-02-15"
-
-HEIGHT=$(bitcoin-cli getblockcount)
-HASH=$(bitcoin-cli getblockhash "$HEIGHT")
-COUNTER=$HEIGHT
-LAST_TIME=0
-LAST_HASH=0
-LAST_HEIGHT=0
-SUM=0
-COUNT=0
-TMP=
-
-while [[ $COUNTER -ge 0 ]]
-do
-    echo "processing $COUNTER..."
-
-    HASH=$(bitcoin-cli getblockhash $COUNTER)
-    TIME=$(bitcoin-cli getblock $HASH | grep -Po '(?<="time": )[^,]*')
-    TIME=$((TIME))
-    date -d @$TIME
-
-    if [[ -n $MODE_LAST_BLOCKS ]]; then
-        if [[ $COUNTER < $((HEIGHT - MODE_LAST_BLOCKS)) ]]; then
-            break
-        fi
-    fi
-    if [[ -n $MODE_DATE ]]; then
-        if [[ $(date -d @$TIME +"%Y-%m-%d") != $MODE_DATE ]]; then
-            if [[ -n $TMP ]]; then
-                if [[ $COUNTER < $TMP ]]; then break; fi
-            fi
-
-            ((COUNTER--))
-            continue
-        else
-            # fast skip
-            ((TMP = COUNTER - 10))
-        fi
-    fi
-
-    if [[ LAST_TIME -ne 0 ]]; then
-        ((DIFF = LAST_TIME - TIME))
-        ((SUM = SUM + DIFF))
-        ((COUNT++))
-    fi
-    LAST_TIME=$TIME
-    LAST_HASH=$HASH
-    LAST_HEIGHT=$COUNTER
-
-	((COUNTER--))
-done
-
-if [[ $COUNT > 0 ]]; then
-    echo ""
-    echo $SUM
-    echo $COUNT
-    SEC=$(echo "scale=2 ; $SUM / $COUNT" | bc)
-    MIN=$(echo "scale=2 ; $SEC / 60" | bc)
-    echo $MIN
-fi
+date -d @$(bitcoin-cli getblock $(bitcoin-cli getblockhash $(bitcoin-cli getblockcount)) | grep -Po '(?<="time": )[^,]*') +"%H:%M:%S"
 ```
