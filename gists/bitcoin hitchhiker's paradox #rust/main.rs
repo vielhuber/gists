@@ -8,7 +8,7 @@ use std::collections::HashMap;
 fn main() -> io::Result<()> {      
     let min_date = "0";
     let mode_date = "0";
-    let iterations = 50000;
+    let iterations = 10000;
     let filename = "time.txt";
 
     if mode_date != "0" {
@@ -53,16 +53,17 @@ fn main() -> io::Result<()> {
     if count > 0 {
         let sec = sum as f32 / count as f32;
         let min = sec / 60 as f32;
-        println!("Average block time: {} minutes.", min);
+        println!("A) Average block time: {:.2} minutes.", min);
     }
 
     let mut arr: Vec<HashMap<String, i64>> = Vec::new();
     for _iterations_value in 0..iterations {
         let mut arr_this = HashMap::new();
         let mut rng = rand::thread_rng();
-        let rand = rng.gen_range(lowest..highest);
-        arr_this.insert("rand".to_string(), rand);
-        arr_this.insert("diff".to_string(), 9999999999999);
+        let rand_timestamp = rng.gen_range(lowest..highest);
+        arr_this.insert("rand_timestamp".to_string(), rand_timestamp);
+        arr_this.insert("diff_next".to_string(), 9999999999999);
+        arr_this.insert("diff_prev".to_string(), 9999999999999);
         arr.push(arr_this);
     }
 
@@ -80,9 +81,12 @@ fn main() -> io::Result<()> {
         if mode_date != "0" { if date.unwrap().format("%Y-%m-%d").to_string() != mode_date { continue; } }
         if min_date != "0" { if time < NaiveDateTime::parse_from_str(&[min_date.to_string(),"00:00:00".to_string()].join(" "), "%Y-%m-%d %H:%M:%S").unwrap().timestamp() { continue; } }
         for iterations_value in 0..iterations {
-            let diff_this = time - arr[iterations_value]["rand"];
-            if diff_this >= 0 && diff_this < arr[iterations_value]["diff"] {
-                *arr[iterations_value].get_mut("diff").unwrap() = diff_this;
+            let diff_this = time - arr[iterations_value]["rand_timestamp"];
+            if diff_this > 0 && diff_this < arr[iterations_value]["diff_next"] {
+                *arr[iterations_value].get_mut("diff_next").unwrap() = diff_this;
+            }
+            if diff_this < 0 && (-1) * diff_this < arr[iterations_value]["diff_prev"] {
+                *arr[iterations_value].get_mut("diff_prev").unwrap() = (-1) * diff_this;
             }
         }
     }
@@ -90,11 +94,11 @@ fn main() -> io::Result<()> {
     let mut waiting_sum = 0;
     let mut waiting_count = 0;
     for iterations_value in 0..iterations {
-        waiting_sum += arr[iterations_value]["diff"];
+        waiting_sum += arr[iterations_value]["diff_prev"] + arr[iterations_value]["diff_next"];
         waiting_count += 1;
     }
     let waiting_result = waiting_sum as f32 / (waiting_count as f32 * 60 as f32);
-    println!("Averaged waiting time for next block on random start times ({} iterations): {} minutes.", iterations, waiting_result);
+    println!("B) Averaged waiting time from previous block to next block on random start times ({} iterations): {:.2} minutes.", iterations, waiting_result);
 
     Ok(())
 }
