@@ -69,6 +69,7 @@
 - Alle Inputfelder, (im Themes Ordner nach $_GET suchen) mit Hilfe von esc_attr() escapen(!)
 
 ## POST-LAUNCH
+- BackWPup Basic Auth entfernen und überprüfen ob lokales Backup läuft
 - Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
 - Login-Zugangsdaten in Chrome gespeichert
 - 301 Redirects nochmal final testen, v.a. anhand der Google Suchergebnisse (site:)
