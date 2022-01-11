@@ -256,6 +256,11 @@ foreach ($nodes as $nodes__value) {
 ];
 ```
 
+### add text node
+```php
+$parent->appendChild($DOMDocument->createTextNode('test'));
+```
+
 ### add / append child
 ```php
 $child = $DOMDocument->createElement('a', '');
