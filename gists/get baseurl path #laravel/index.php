@@ -1,6 +1,8 @@
 <?php
 // public base url
 url('/')
+// public assets url
+asset('assets/arrow.svg')
   
 // current url without queries
 url()->current()

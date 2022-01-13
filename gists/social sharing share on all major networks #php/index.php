@@ -1,6 +1,7 @@
 <?php
-$url = "https://vielhuber.de";
-$title = "David Vielhuber";
+$url = 'https://vielhuber.de';
+$title = 'David Vielhuber';
+$image = 'https://vielhuber.de/wp-content/themes/vielhuber/_assets/about.jpg';
 echo '<ul>';
     echo '<li><a class="facebook" target="_blank" rel="nofollow" href="https://www.facebook.com/sharer/sharer.php?u='.urlencode($url).'">Facebook</a></li>';
     echo '<li><a class="xing" target="_blank" rel="nofollow" href="https://www.xing.com/app/user?op=share&amp;url='.urlencode($url).'">Xing</a></li>';

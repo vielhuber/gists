@@ -99,6 +99,7 @@ window.addEventListener('load', e => {
 
         // main transition
         barba.init({
+        	timeout: 15000,
             preventRunning: true,
             transitions: [
                 {
