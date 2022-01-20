@@ -131,7 +131,11 @@ window.addEventListener('load', e => {
                             ease: 'power1.inOut'
                         });
                     },
-                    after() {
+                    after(data) {
+                        // update lang attr
+                        let langPrev = data.current.html.indexOf('<html lang="de"') > -1 ? 'de' : 'en',
+                            langCur = data.next.html.indexOf('<html lang="de"') > -1 ? 'de' : 'en';
+                        document.documentElement.setAttribute('lang', langCur);
                         // run on subsequent load
                         console.log('subsequent load');
                         // important: manually call analytics scripts
