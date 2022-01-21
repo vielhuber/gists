@@ -92,7 +92,7 @@ cat > $FILE << EOF
   DocumentRoot /var/www/$FOLDER
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
-  <Directory /var/www/htdocs>
+  <Directory /var/www>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Require all granted

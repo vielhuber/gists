@@ -242,8 +242,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - create a real let's encrypt certificate via https://punchsalad.com/ssl-certificate-generator/
 - Domain: *.local.vielhuber.de
 - DNS-verification via txt-record over DomainFactory
-- domain.key => \\wsl$\Ubuntu\var\www\lamp\ssl.key
-- domain.cert => \\wsl$\Ubuntu\var\www\lamp\ssl.cert
+- private-key.txt => \\wsl$\Ubuntu\var\www\lamp\ssl.key
+- ca-bundle.txt => \\wsl$\Ubuntu\var\www\lamp\ssl.cert
 
 #### postfix
 - ```sudo apt-get install postfix```
