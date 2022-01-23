@@ -72,21 +72,52 @@
 ## _pwa/sw.js
 
 ```js
-const OFFLINE_VERSION = 1;
-const CACHE_NAME = 'offline';
-const OFFLINE_URL = 'offline.html';
+// configuration options
+let VERSION = 14; // increase number to update the service worker itself (not the assets, they are controlled in the "activate" section)
+//VERSION = Date.now(); // only for debugging reasons(!)
+const CACHE_NAME = 'UniqueName'+VERSION;
+const SUBFOLDER = 'app';
+
+// if you really need to import external scripts, you can do something like
+//self.importScripts('idb-keyval.js'); // copy https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/umd.js to idb-keyval.js
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
         (async () => {
+            // open cache
             const cache = await caches.open(CACHE_NAME);
-            await cache.add(new Request(OFFLINE_URL, { cache: 'reload' }));
+            // add assets to cache on installation
+            // this has nothing to do with caching assets
+            // this is done below in the cached section of the fetch listener
+            let assets = [
+                // manifest should also be cached
+                '/_pwa/manifest.json',
+                // icons should also be cached
+                '/_pwa/icon-192x192.png',
+                '/_pwa/icon-256x256.png',
+                '/_pwa/icon-384x384.png',
+                '/_pwa/icon-512x512.png',
+                '/_pwa/icon-maskable.png',
+                // all other static assets
+                '/style.css',
+                '/script.js',
+                '/index.html',
+                // this is needed also
+                '/'
+            ];
+            cache.addAll(assets.map(assets__value => '/'+SUBFOLDER+assets__value));
+            // add offline page (only if you follow the offline-strategy in the fetch event listener)
+            await cache.add(new Request('offline.html', { cache: 'reload' }));
         })()
     );
+
+    // replace old service worker
     self.skipWaiting();
 });
 
+// this is run *NOT* on every page reload(!)
 self.addEventListener('activate', (event) => {
+    // new feature: navigation preload
     event.waitUntil(
         (async () => {
             if ('navigationPreload' in self.registration) {
@@ -94,21 +125,55 @@ self.addEventListener('activate', (event) => {
             }
         })()
     );
+
+    // tell the active service worker to take control of the page immediately
     self.clients.claim();
 });
 
+// intercept fetch calls
 self.addEventListener('fetch', (event) => {
+
+    // only handle GET requests (never POST, since we want to always do this in the frontend, because we don't want to mess with Requests/Responses)
+    if (event.request.method !== 'GET') {
+        return;
+    }
+
+    // exclude certain dynamic routes from caching (we want to handle the error in the client javascript, not here
+    if (event.request.url.match('\/api\.php$')) {
+        return false;
+    }
+
+    // GET strategy: network first, always update cache, cache fallback
+    event.respondWith(
+        (async () => {
+            try {
+                let response = await fetch(event.request),
+                    cache = await caches.open(CACHE_NAME);
+                cache.put(event.request, response.clone());
+                return response;
+            } catch (err) {
+                let response = caches.match(event.request);
+                return response;
+            }
+        })()
+    );
+
+    // different strategy: always serve offline page
     if (event.request.mode === 'navigate') {
         event.respondWith(
             (async () => {
                 try {
+                    // try navigation preload
                     const preloadResponse = await event.preloadResponse;
                     if (preloadResponse) {
-                        return preloadResponse;
+                       return preloadResponse;
                     }
+                    // try network
                     const networkResponse = await fetch(event.request);
                     return networkResponse;
-                } catch (error) {
+                }
+                catch (error) {
+                    // if exception (network error), return offline page
                     const cache = await caches.open(CACHE_NAME);
                     const cachedResponse = await cache.match(OFFLINE_URL);
                     return cachedResponse;
@@ -116,6 +181,7 @@ self.addEventListener('fetch', (event) => {
             })()
         );
     }
+
 });
 ```
 
@@ -200,7 +266,9 @@ self.addEventListener('fetch', (event) => {
 Header add Service-Worker-Allowed /
 ```
 
-## test
+## debug in web developer tools
 
-- web developer > lighthouse > progressive web app
-- web developer > network > offline
+- Application > Service Workers > Offline
+- Application > Storage > Clear site data
+- Lighthouse > Progressive Web App
+- Network > Offline
