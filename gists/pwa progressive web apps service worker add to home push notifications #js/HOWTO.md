@@ -75,8 +75,8 @@
 // configuration options
 let VERSION = 14; // increase number to update the service worker itself (not the assets, they are controlled in the "activate" section)
 //VERSION = Date.now(); // only for debugging reasons(!)
-const CACHE_NAME = 'UniqueName'+VERSION;
-const SUBFOLDER = 'app';
+let CACHE_NAME = 'UniqueName'+VERSION;
+let SUBFOLDER = 'app';
 
 // if you really need to import external scripts, you can do something like
 //self.importScripts('idb-keyval.js'); // copy https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/umd.js to idb-keyval.js
@@ -85,7 +85,7 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         (async () => {
             // open cache
-            const cache = await caches.open(CACHE_NAME);
+            let cache = await caches.open(CACHE_NAME);
             // add assets to cache on installation
             // this has nothing to do with caching assets
             // this is done below in the cached section of the fetch listener
@@ -131,6 +131,7 @@ self.addEventListener('activate', (event) => {
 });
 
 // intercept fetch calls
+// be aware: this also catches static requests and also the initial page request
 self.addEventListener('fetch', (event) => {
 
     // only handle GET requests (never POST, since we want to always do this in the frontend, because we don't want to mess with Requests/Responses)
@@ -139,43 +140,65 @@ self.addEventListener('fetch', (event) => {
     }
 
     // exclude certain dynamic routes from caching (we want to handle the error in the client javascript, not here
-    if (event.request.url.match('\/api\.php$')) {
+    else if (event.request.url.match(/\/api\.php$/)) {
         return false;
+    }
+  
+    // SPA strategy: always serve shell index when offline (ignoring GET URL parameters)
+    if (event.request.mode === 'navigate' && event.request.headers.get('accept').includes('text/html')) {
+        event.respondWith(
+            (async () => {
+                try {
+                    let preloadResponse = await event.preloadResponse;
+                    if (preloadResponse) {
+                        return preloadResponse;
+                    }
+                    let networkResponse = await fetch(event.request);
+                    return networkResponse;
+                } catch (error) {
+                    let cache = await caches.open(CACHE_NAME);
+                    let cachedResponse = await cache.match('/' + SUBFOLDER + '/index.html', { ignoreSearch: true });
+                    return cachedResponse;
+                }
+            })()
+        );
     }
 
     // GET strategy: network first, always update cache, cache fallback
-    event.respondWith(
-        (async () => {
-            try {
-                let response = await fetch(event.request),
-                    cache = await caches.open(CACHE_NAME);
-                cache.put(event.request, response.clone());
-                return response;
-            } catch (err) {
-                let response = caches.match(event.request);
-                return response;
-            }
-        })()
-    );
-
+    else {
+        event.respondWith(
+          (async () => {
+              try {
+                  let response = await fetch(event.request),
+                      cache = await caches.open(CACHE_NAME);
+                  cache.put(event.request, response.clone());
+                  return response;
+              } catch (err) {
+                  let response = caches.match(event.request);
+                  return response;
+              }
+          })()
+        );
+    }
+  
     // different strategy: always serve offline page
-    if (event.request.mode === 'navigate') {
+    else if (event.request.mode === 'navigate') {
         event.respondWith(
             (async () => {
                 try {
                     // try navigation preload
-                    const preloadResponse = await event.preloadResponse;
+                    let preloadResponse = await event.preloadResponse;
                     if (preloadResponse) {
                        return preloadResponse;
                     }
                     // try network
-                    const networkResponse = await fetch(event.request);
+                    let networkResponse = await fetch(event.request);
                     return networkResponse;
                 }
                 catch (error) {
                     // if exception (network error), return offline page
-                    const cache = await caches.open(CACHE_NAME);
-                    const cachedResponse = await cache.match(OFFLINE_URL);
+                    let cache = await caches.open(CACHE_NAME);
+                    let cachedResponse = await cache.match(OFFLINE_URL);
                     return cachedResponse;
                 }
             })()
@@ -204,7 +227,7 @@ self.addEventListener('fetch', (event) => {
                 });
                 async function checkNetworkAndReload() {
                     try {
-                        const response = await fetch('.');
+                        let response = await fetch('.');
                         if (response.status >= 200 && response.status < 500) {
                             window.location.reload();
                             return;

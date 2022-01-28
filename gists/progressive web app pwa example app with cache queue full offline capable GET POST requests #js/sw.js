@@ -40,7 +40,7 @@ self.addEventListener('fetch', (event) => {
     if (event.request.method !== 'GET') {
         return;
     }
-    if (event.request.url.match('\/api\.php$')) {
+    if (event.request.url.match(/\/api\.php$/)) {
         return false;
     }
     event.respondWith(

@@ -1,9 +1,9 @@
 ## PWAs (Progressive Web Apps)
-- mutation of existing pages to apps
-- can be installed via add to home, android app store or even cross platform on windows/linux
-- important for google pagespeed lighthouse
-- can also be used for normal php cms sites to cache static assets
-- tools: https://www.pwabuilder.com, https://serviceworke.rs, https://developers.google.com/web/tools/workbox
+- Mutation of existing pages to apps
+- Can be installed via add to home, android app store or even cross platform on windows/linux
+- Important for google pagespeed lighthouse
+- Can also be used for normal php cms sites to cache static assets
+- Tools: https://www.pwabuilder.com, https://serviceworke.rs, https://developers.google.com/web/tools/workbox
 
 #### Service Worker
 - Installs itself for the first time
