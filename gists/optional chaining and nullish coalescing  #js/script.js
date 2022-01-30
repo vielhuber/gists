@@ -25,8 +25,10 @@ true??'42' // true
 false??'42' // false
 null??'42' // 42
 undefined??'42' // 42
+''??'42' // ''
 
 true||'42' // true
 false||'42' // 42
 null||'42' // 42
 undefined||'42' // 42
+''||'42' // 42
