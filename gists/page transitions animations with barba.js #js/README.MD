@@ -21,7 +21,13 @@ npm install gsap
 <body data-barba="wrapper">
   	<!-- this line is often already done in our boilerplate -->
   	<script>window.pagespeed = navigator.userAgent.indexOf(\'Speed Insights\') > -1 || navigator.userAgent.indexOf(\'Chrome-Lighthouse\') > -1;</script>
-	<script>if(!(window.pagespeed)) { document.body.insertAdjacentHTML('afterbegin','<div class="loader"></div>'); }</script>
+    <script>
+        if(
+            !(window.pagespeed) // add any other exclusion reasons here (e.g. logged in state)
+        ) {
+            document.body.insertAdjacentHTML('afterbegin','<div class="loader"></div>');
+        }
+    </script>
     <div data-barba="container">
         <p>foo</p>
     </div>
@@ -101,6 +107,7 @@ window.addEventListener('load', e => {
         barba.init({
         	timeout: 15000,
             preventRunning: true,
+            prevent: ({ el }) => el.closest('.container-to-ignore') !== null, // exclude special links; note that "data-barba-prevent" works always
             transitions: [
                 {
                     async leave() {
