@@ -6,11 +6,27 @@
 <meta name="theme-color" content="#000000" />
 <link rel="apple-touch-icon" href="_pwa/icon-192x192.png" />
 <script>
+  	// register service worker
     window.addEventListener('load', () => {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('_pwa/sw.js', { scope: '/' });
         }
     });
+
+    // helper method to get variables from the service worker
+    // example: await getValueFromServiceWorker('VERSION')
+    async getValueFromServiceWorker(key) {
+        return new Promise((resolve) => {
+            navigator.serviceWorker.controller.postMessage({ type: 'request-val', key: key });
+            let fn = (event) => {
+                if (event.data.type === 'receive-val' && event.data.key === key) {
+                    navigator.serviceWorker.removeEventListener('message', fn, false);
+                    resolve(event.data.value);
+                }
+            };
+            navigator.serviceWorker.addEventListener('message', fn);
+        });
+    }
 </script>
 <!-- end of pwa -->
 ```
@@ -73,9 +89,9 @@
 
 ```js
 // configuration options
-let VERSION = 14; // increase number to update the service worker itself (not the assets, they are controlled in the "activate" section)
-//VERSION = Date.now(); // only for debugging reasons(!)
-let CACHE_NAME = 'UniqueName'+VERSION;
+self.VERSION = 14; // increase number to update the service worker itself (not the assets, they are controlled in the "activate" section)
+//self.VERSION = Date.now(); // only for debugging reasons(!)
+let CACHE_NAME = 'UniqueName'+self.VERSION;
 let SUBFOLDER = 'app';
 
 // if you really need to import external scripts, you can do something like
@@ -205,6 +221,17 @@ self.addEventListener('fetch', (event) => {
         );
     }
 
+});
+
+// helper to fetch variables from the service worker
+self.addEventListener('message', (event) => {
+    if (event.data.type === 'request-val') {
+        self.clients.matchAll().then((clients) => {
+            clients.forEach((client) => {
+                client.postMessage({ type: 'receive-val', key: event.data.key, value: self[event.data.key] });
+            });
+        });
+    }
 });
 ```
 
