@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // always update textarea on changes (not only on submit)
         editor.model.document.on('change:data', () => {
           editor.updateSourceElement();
+          editor.sourceElement.dispatchEvent(new Event('change', { bubbles: true }));
         });
       });;
     });

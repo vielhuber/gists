@@ -20,6 +20,9 @@ window.addEventListener('load', e => {
         if (e.target.classList.contains('exclude') || e.target.closest('.exclude') !== null) {
         	return;
         }
+        if (window.location.host.indexOf('local') > -1) {
+        	//return;
+        }
     	somethingHasChanged = true;
     },
     true
