@@ -37,7 +37,7 @@
 - `_pwa/icon-256x256.png`: transparent icon in size 256x256
 - `_pwa/icon-384x384.png`: transparent icon in size 384x384
 - `_pwa/icon-512x512.png`: transparent icon in size 512x512
-- `_pwa/icon-maskable.png`: icon generated with https://maskable.app/
+- `_pwa/icon-maskable.png`: icon with background (without corners) in size 192x192 with content a little bit shrinked (85%); checked with https://maskable.app/ (minimum safe area / circle)
 
 ## _pwa/manifest.json
 
@@ -77,7 +77,7 @@
         },
         {
             "src": "/_pwa/icon-maskable.png",
-            "sizes": "196x196",
+            "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
         }

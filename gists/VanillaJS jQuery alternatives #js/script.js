@@ -19,6 +19,7 @@ document.getElementById('input').removeAttribute('foo')
 
 if( $('.selector').is('[name]') ) { }
 if( document.querySelector('.selector').hasAttribute('name') ) { }
+if( document.querySelector('.selector').matches('[name]') ) { }
 
 
 $('.selector')
@@ -453,6 +454,7 @@ document.getElementById('el').closest('.foo')
 
 if( $('#el').is('textarea') ) { }
 if( document.getElementById('el').tagName === 'TEXTAREA' ) { }
+if( document.getElementById('el').matches('textarea') ) { }
 
 
 if( $('.selector').attr('id','foo') ) { }
