@@ -6,8 +6,8 @@
         <title>.</title>
         <script>
             /* start of script */
-            let Lanimate = function () {
-                this.ready = function () {
+            class Lanimate {
+                ready() {
                     document.head.insertAdjacentHTML(
                         'beforeend',
                         `
@@ -60,8 +60,8 @@
                         </style>
                         `
                     );
-                };
-                this.load = function () {
+                }
+                load() {
                     if (document.querySelectorAll('[data-lanimate]').length > 0) {
                         [].forEach.call(document.querySelectorAll('[data-lanimate]'), (el) => {
                             this.start(el);
@@ -70,8 +70,8 @@
                             });
                         });
                     }
-                };
-                this.start = function (el) {
+                }
+                start(el) {
                     if (
                         !el.hasAttribute('data-lanimate-finished') &&
                         this.scrollTop() + window.innerHeight >= this.offsetTop(el)
@@ -84,14 +84,14 @@
                             el.setAttribute('data-lanimate-finished', 'true');
                         }, delay);
                     }
-                };
-                this.scrollTop = function () {
+                }
+                scrollTop() {
                     let doc = document.documentElement;
                     return (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
-                };
-                this.offsetTop = function (el) {
+                }
+                offsetTop(el) {
                     return el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop;
-                };
+                }
             };
             let lanimate = new Lanimate();
             document.addEventListener('DOMContentLoaded', () => {
