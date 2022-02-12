@@ -13,6 +13,7 @@ url()->full()
   
 // public url to named route
 route('named.route', ['with_argument' => 1]);
+URL::route('named.route', ['with_argument' => 1])
 
 // base path (absolute, not public)
 base_path()
