@@ -17,12 +17,12 @@
 - Inaktive Plugins gelöscht (außer WPML und ggf. Caching)
 - Benennung der Labels im Backend (ACF-Felder) geprüft
 - Für Bilder ausschließlich <img> Tags oder noch besser <picture>-Tags (mit div. Thumbnails) eingesetzt
-- Alt-Tags für Bilder werden überall ausgespielt
+- Alt-Tags für Bilder werden überall ausgespielt (prüfen!)
 - WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
 - Bilder in Medienverwaltung in Unterordnern sortiert und ungenutzte Bilder manuell ausgemistet
 - RSS-Feed vorhanden und funktional
 - Impressum + Datenschutzseite vorhanden und gepflegt; ggf. eRecht24 (+ Plugin) einsetzen
-- Einstellungen > Datenschutz > Seite nicht zugeordnet (sonst ist diese nicht editierbar für Editoren)
+- Einstellungen > Datenschutz > Seite nicht zugeordnet (sonst ist diese nicht editierbar für Editoren); Die Funktion get_privacy_policy_url() darf dann nicht verwendet werden!
 - Link zu close2 im Impressum hinterlegt:
   - Verantwortlich für Programmierung: close2 new media GmbH, Webagentur München, www.close2.de
 - Google Analytics Opt Out Link gesetzt und funktional (am besten Link zum Consent-Manager setzen)
