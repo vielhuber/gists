@@ -39,6 +39,15 @@
                 if (dateStr === '') {
                     instance.close();
                 }
+            },
+          	/* this is needed for datetime instances */
+            onReady: (selectedDates, dateStr, instance) => {
+                $input.nextElementSibling.addEventListener('keyup', (e) => {
+                    let val = e.currentTarget.value;
+                    if (val === '') {
+                        instance.close();
+                    }
+                });
             }
         });
     });
