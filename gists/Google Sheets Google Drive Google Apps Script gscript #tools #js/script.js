@@ -64,6 +64,16 @@ SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').getFo
 
 /* set formula of specific cell */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setFormula('1+2');
+SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setFormula('IF(1=1;2;3)'); // this is a little bit weird: use english function names, but german separators (;)
+
+/* set background color of specific sell */
+SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setBackground('#efefef');
+
+/* protect specific cell */
+var protection = e.source.getActiveSheet().getRange(1, 1, 1, 6).protect().setDescription('Nicht mehr änderbar');
+var me = Session.getEffectiveUser();
+protection.addEditor(me);
+protection.removeEditors(protection.getEditors());
 
 /* get all values from sheet */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getDataRange().getValues()
@@ -159,6 +169,8 @@ function onEdit(e)
        if( col != 2 || row < 2 ) { continue; } // check
      }
    }
+   // set formula in current cell
+  	e.source.getActiveSheet().getRange(e.range.rowStart, e.range.columnStart).setFormula('1+2');
 }
 
 /* popup with link */
