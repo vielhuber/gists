@@ -206,4 +206,10 @@ function get(args)
 	return JSON.parse(UrlFetchApp.fetch('https://www.tld.com/api.php?token='+ScriptApp.getOAuthToken()+'&sheet='+DocumentApp.getActiveDocument().getName()+'&user='+Session.getActiveUser()+'&'+encodeURI(args), {'method': 'get', 'muteHttpExceptions': true}));
 }
 
-
+/* send email */
+MailApp.sendEmail({
+    to: "foo@tld.com",
+    subject: "The subject",
+    htmlBody: "Lorem ipsum dolor sit amet."
+});
+Logger.log("remaining email quota: " + MailApp.getRemainingDailyQuota());
