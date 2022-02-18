@@ -89,10 +89,10 @@ SpreadsheetApp.openById('1UmhbdLw1OmEmSxjtT2hKsmsDgExOxMZmeOAL_ChVs_Q').getSheet
 
 /* loop through all cells in specific sheet */
 var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getDataRange().getValues();
-for ( x = 0; x < data.length; x++ ) {
-  for ( y = 0 ; y < data[x].length; y++ ) {
-    if( data[x][y] != '' ) {
-      data[x][y] += 'foo';
+for ( y = 0; y < data.length; y++ ) {
+  for ( x = 0; x < data[y].length; x++ ) {
+    if( data[y][x] != '' ) {
+      data[y][x] += 'foo';
     }
   }
 }
@@ -121,6 +121,11 @@ if( response == ui.Button.YES )
 
 /* show alert */
 SpreadsheetApp.getUi().alert('Hello, world!');
+
+/* get sheet url */
+var spreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
+	sheet = spreadsheet.getActiveSheet(),
+    link = spreadsheet.getUrl() + '#gid=' + sheet.getSheetId();
 
 /* show modal with print link */
 var url = 'https://docs.google.com/spreadsheets/d/1TM0kugtYxAoGxS-zqGwTQQ2Oi54czahfKhcCA7_aVDw/export?exportFormat=pdf&amp;format=pdf&amp;format=pdf&amp;size=7&amp;fzr=true&amp;fzc=true&amp;portrait=true&amp;scale=2&amp;spct=1&amp;gridlines=false&amp;printnotes=false&amp;printtitle=false&amp;printdate=false&amp;printtime=false&amp;sheetnames=false&amp;pagenum=undefined&amp;pageorder=2&amp;attachment=true&amp;top_margin=0.39370078740157477&amp;bottom_margin=0&amp;left_margin=0.5905511811023622&amp;right_margin=0.5905511811023622&amp;timestamp=42973.87412068287&amp;horizontal_alignment=CENTER&amp;vertical_alignment=TOP&amp;gridFiltersProto=[]&amp;gid='+SpreadsheetApp.getActiveSpreadsheet().getSheetId();
