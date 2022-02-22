@@ -4,10 +4,15 @@
 - we apply 3 different fields (you should intersperse them between other valid fields)
 
 ```html
+<!-- you can also put this inside your css/scss files -->
 <style>input[name^="topfhonig"] { opacity:0.0001;position:absolute;top:0;left:-999999px; }</style>
+<!-- ... other fields ... -->
 <input type="text" name="topfhonig1" value="" tabindex="-1" autocomplete="impp" />
+<!-- ... other fields ... -->
 <input type="text" name="topfhonig2" value="" tabindex="-1" autocomplete="impp" />
+<!-- ... other fields ... -->
 <input type="text" name="topfhonig3" value="" tabindex="-1" autocomplete="impp" />
+<!-- ... other fields ... -->
 ```
 
 ## backend
