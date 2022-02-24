@@ -26,20 +26,30 @@
                             [data-lanimate='scale'] {
                                 transform: scale(1.1) translateY(30px);
                             }
-                            [data-lanimate-finished] {
+                            [data-lanimate='rotate'] {
+                                transform: rotate(15deg);
+                                transform-origin: 0 0;
+                            }
+                            [data-lanimate-started] {
                                 transition: opacity 1s ease-in-out, transform 1s ease-in-out;
                                 opacity: 1;
                             }
-                            [data-lanimate='fade'][data-lanimate-finished] {
+                            [data-lanimate-split] span {
+                                display:inline-block;
                             }
-                            [data-lanimate='scrollX'][data-lanimate-finished] {
+                            [data-lanimate='fade'][data-lanimate-started] {
+                            }
+                            [data-lanimate='scrollX'][data-lanimate-started] {
                                 transform: translateX(0px);
                             }
-                            [data-lanimate='scrollY'][data-lanimate-finished] {
+                            [data-lanimate='scrollY'][data-lanimate-started] {
                                 transform: translateX(0px);
                             }
-                            [data-lanimate='scale'][data-lanimate-finished] {
+                            [data-lanimate='scale'][data-lanimate-started] {
                                 transform: scale(1) translateY(0px);
+                            }
+                            [data-lanimate='rotate'][data-lanimate-started] {
+                                transform: rotate(0deg);
                             }
                             /* disable on mobile */
                             @media screen and (max-width: 1100px) {
@@ -56,32 +66,92 @@
                                 [data-lanimate='scale'] {
                                     transform: scale(1) translateY(0px);
                                 }
+                                [data-lanimate='rotate'] {
+                                    transform: rotate(0deg);
+                                }
                             }
                         </style>
                         `
                     );
                 }
+                traverseAllTextNodes($el, $fn) {
+                    if( $el.childNodes.length > 0 ) {
+                        $el.childNodes.forEach($el2 => {
+                            if($el2.nodeType === 3) {
+                                $el2.textContent = $fn($el2.textContent);
+                            }
+                            else {
+                                this.traverseAllTextNodes($el2, $fn);
+                            }
+                        });
+                    }
+                }
                 load() {
+                    if (document.querySelectorAll('[data-lanimate-split]').length > 0) {
+                        document.querySelectorAll('[data-lanimate-split]').forEach($el => {
+                            $el.setAttribute('data-aria-label', $el.innerText.replace(/(?:\r\n|\r|\n)/g, ' '));
+                            $el.innerHTML = $el.innerHTML.split(' ').join('&nbsp;');
+                            let shift = 0;
+                            if( $el.getAttribute('data-lanimate-split') === 'char' ) {
+                                this.traverseAllTextNodes($el, $text => { return '%span%'+$text.split('').join('%/span%%span%')+'%/span%'; });
+                                $el.innerHTML = $el.innerHTML.split('%span%').join('<span>').split('%/span%').join('</span>');
+                                shift = 100;
+                            }
+                            if( $el.getAttribute('data-lanimate-split') === 'word' ) {
+                                this.traverseAllTextNodes($el, $text => { return '%span%'+$text.split(' ').join('%/span% %span%')+'%/span%'; });
+                                $el.innerHTML = $el.innerHTML.split('%span%').join('<span>').split('%/span%').join('</span>');
+                                shift = 250;
+                            }
+                            if( $el.getAttribute('data-lanimate-split') === 'line' ) {
+                                $el.innerHTML = '<span>'+$el.innerHTML.split('<br>').join('</span><br/><span>')+'</span>';
+                                shift = 500;
+                            }
+                            let index = 0;
+                            $el.querySelectorAll('span').forEach(($el2, i) => {
+                                if( $el2.innerText.trim() == '' ) { return; }
+                                $el2.setAttribute('data-lanimate',$el.getAttribute('data-lanimate'));
+                                let delay = 0;
+                                if ($el.hasAttribute('data-lanimate-delay')) {
+                                    delay = parseInt($el.getAttribute('data-lanimate-delay'));
+                                }
+                                if ($el.hasAttribute('data-lanimate-speed')) {
+                                    $el2.setAttribute('data-lanimate-speed',$el.getAttribute('data-lanimate-speed'));
+                                    delay *= 1/parseInt($el.getAttribute('data-lanimate-speed'));
+                                }
+                                $el2.setAttribute('data-lanimate-delay',(delay + (shift*index)));
+                                index++;
+                            });
+                            $el.removeAttribute('data-lanimate');
+                            $el.removeAttribute('data-lanimate-delay');
+                            $el.removeAttribute('data-lanimate-speed');
+                        });
+                    }
+                    if (document.querySelectorAll('[data-lanimate-speed]').length > 0) {
+                        document.querySelectorAll('[data-lanimate-speed]').forEach($el => {
+                            let speed = (parseInt($el.getAttribute('data-lanimate-speed'))/1000);
+                            $el.style.transitionDuration = speed+'s, '+speed+'s';
+                        });
+                    }
                     if (document.querySelectorAll('[data-lanimate]').length > 0) {
-                        [].forEach.call(document.querySelectorAll('[data-lanimate]'), (el) => {
-                            this.start(el);
+                        document.querySelectorAll('[data-lanimate]').forEach($el => {
+                            this.start($el);
                             window.addEventListener('scroll', () => {
-                                this.start(el);
+                                this.start($el);
                             });
                         });
                     }
                 }
-                start(el) {
+                start($el) {
                     if (
-                        !el.hasAttribute('data-lanimate-finished') &&
-                        this.scrollTop() + window.innerHeight >= this.offsetTop(el)
+                        !$el.hasAttribute('data-lanimate-started') &&
+                        this.scrollTop() + window.innerHeight >= this.offsetTop($el)
                     ) {
                         let delay = 0;
-                        if (el.hasAttribute('data-lanimate-delay')) {
-                            delay = el.getAttribute('data-lanimate-delay');
+                        if ($el.hasAttribute('data-lanimate-delay')) {
+                            delay = parseInt($el.getAttribute('data-lanimate-delay'));
                         }
                         setTimeout(() => {
-                            el.setAttribute('data-lanimate-finished', 'true');
+                            $el.setAttribute('data-lanimate-started', 'true');
                         }, delay);
                     }
                 }
@@ -89,10 +159,10 @@
                     let doc = document.documentElement;
                     return (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
                 }
-                offsetTop(el) {
-                    return el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop;
+                offsetTop($el) {
+                    return $el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop;
                 }
-            };
+            }
             let lanimate = new Lanimate();
             document.addEventListener('DOMContentLoaded', () => {
                 lanimate.ready();
@@ -134,8 +204,15 @@
             <h2 data-lanimate="fade">Test</h2>
             <h2 data-lanimate="fade" data-lanimate-delay="500">Test2</h2>
             <h2 data-lanimate="scrollX" data-lanimate-delay="1000">Test</h2>
-            <h2 data-lanimate="scrollY" data-lanimate-delay="1500">Test</h2>
+            <h2 data-lanimate="scrollY" data-lanimate-speed="3000" data-lanimate-delay="1500">Test</h2>
             <h2 data-lanimate="scale" data-lanimate-delay="1500">Test</h2>
+        </div>
+        <div class="box">
+            <h2 data-lanimate="fade" data-lanimate-split="char">Char: Dies ist<br/>ein <strong>Test der <i>rockt</i></strong></h2>
+            <h2 data-lanimate="scrollY" data-lanimate-delay="500" data-lanimate-split="char">Char: Dies ist<br/>ein <strong>Test</strong></h2>
+            <h2 data-lanimate="scrollY" data-lanimate-delay="1000" data-lanimate-split="word">Word: Dies ist<br/>ein <strong>Test</strong></h2>
+            <h2 data-lanimate="scrollY" data-lanimate-delay="1500" data-lanimate-split="line">Dies ist<br/>ein <strong>Test</strong></h2>
+            <h2 data-lanimate="rotate" data-lanimate-split="word" data-lanimate-speed="1000">Dies ist<br/>ein <strong>Test</strong></h2>
         </div>
     </body>
 </html>

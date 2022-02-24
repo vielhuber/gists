@@ -67,6 +67,7 @@
 - Schulungstermin vereinbart und Schulung im besten Fall vor Launch durchgeführt
 - Burp Suite Professional: Gesamte Webseite nach XSS-Vulnerabilities scannen
 - Alle Inputfelder, (im Themes Ordner nach $_GET suchen) mit Hilfe von esc_attr() escapen(!)
+- Seite im Dark Mode testen (Chrome ist dort eh drin und testen, ob Seite kaputt geht)
 
 ## POST-LAUNCH
 - BackWPup Basic Auth entfernen und überprüfen ob lokales Backup läuft

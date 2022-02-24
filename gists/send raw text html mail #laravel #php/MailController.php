@@ -29,7 +29,7 @@ public function send(Request $request)
     });
     
     // html
-    Mail::send([], [], function($message) use ($data) {
+    Mail::send([], [], function($message) use ($data)
     {
       $message->from($data['from_email'], $data['from_name']);
       $message->to($data['to_email'], $data['to_name']);
