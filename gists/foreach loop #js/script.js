@@ -83,3 +83,7 @@ $.each({ a: 'foo', b: 'bar' }, function(key, value)
 {
   console.log(key, value);
 });
+
+// dom elements
+document.querySelectorAll('.foo').forEach($el => { });
+for (let $el of document.querySelectorAll('.foo')) { /* use break, continue, async await here! */ }
