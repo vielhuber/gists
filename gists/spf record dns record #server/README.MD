@@ -16,5 +16,6 @@
 
 ## LINKS
 
+- https://mxtoolbox.com/spf.aspx : Test
 - https://all-inkl.com/wichtig/anleitungen/kas/tools/dns-werkzeuge/spf_482.html?suche=spf&textsuche=ja : Anleitung bei All Inkl
 - https://www.spf-record.de/ : Sehr guter Generator
