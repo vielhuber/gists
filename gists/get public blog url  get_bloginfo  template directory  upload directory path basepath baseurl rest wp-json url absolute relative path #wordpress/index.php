@@ -20,6 +20,7 @@ get_template_directory()
 get_stylesheet_directory() // use this for child themes
 wp_upload_dir()['basedir']
 WP_CONTENT_DIR // wp-content
+get_attached_file($attachment_id) // absolute path for attachment
  
 // relative paths
 parse_url(get_template_directory_uri(), PHP_URL_PATH)
