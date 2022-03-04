@@ -439,13 +439,16 @@ Usage: git acp
 - git commit --amend -CHEAD
 - git push origin HEAD
 
+### pull with merge conflicts that result from different line endings
+- git pull -Xignore-space-at-eol
+
 ### change commit message of last pushed commit
 - git commit --amend -m "New commit message"
 - git push --force
 
 #### undo commit that has been pushed
 - replace a0d3fe6 with the ID of the commit you want to undo: `git log --oneline -n 10`
-- option 1 (with rewriting history, recommended way)
+- option 1 (without rewriting history, recommended way)
   - locally
     - git revert --no-commit a0d3fe6
         - if the commit was a merge, do: git revert --no-commit -m 1 a0d3fe6
@@ -454,7 +457,7 @@ Usage: git acp
     - git push origin HEAD
   - remotely (on all clients)
     - git pull
-- option 2 (without rewriting history, this resets master to specific commit (forget all changes up until now))
+- option 2 (with rewriting history, this resets master to specific commit (forget all changes up until now))
   - locally
     - git reset --hard a0d3fe6
     - git push -f origin master
