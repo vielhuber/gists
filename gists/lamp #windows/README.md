@@ -482,7 +482,7 @@ xdebug.var_display_max_depth = -1
 - ```git config --global core.ignorecase false```
 - ```git config --global pull.rebase false```
 - ```git config --global core.filemode false```
-- ```git config --global core.autocrlf input``` # this converts everything to lf, which is ok when using wsl2 (use true if you need to convert everything to crlf)
+- ```git config --global core.autocrlf input``` # this converts everything to lf on commit, which is ok when using wsl2 (however, there are projects where you want it to be the default value of `false`, set that with `git config core.autocrlf false`)
 - ```git config --global core.safecrlf false```
 - ```git config --global push.default simple```
 - ```git config --global user.name "David Vielhuber"```
