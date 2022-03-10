@@ -1,6 +1,6 @@
 ## illustrator
 
-- Stil: **Inline-Format**
+- Stil: **Präsentationsattribute**
 - Schrift: **In Konturen umwandeln**
 - Bilder: **Einbetten**
 - Objekt-IDs: **Minimal**
