@@ -32,10 +32,14 @@
         }
         handleFocus(event) {
             if (!this.isKeyboardEvent) { return; }
-            event.target.classList.add(this.focusClass);
+          	if (event.target.classList !== undefined) {
+           		event.target.classList.add(this.focusClass);
+            }
         }
         handleBlur(event) {
-            event.target.classList.remove(this.focusClass);
+          	if (event.target.classList !== undefined) {
+            	event.target.classList.remove(this.focusClass);
+            }
         }
     };
     document.addEventListener('DOMContentLoaded', () => {
