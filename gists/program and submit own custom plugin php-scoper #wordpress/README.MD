@@ -10,6 +10,7 @@
 - zip the folder "pluginname" (the folder must be a subfolder inside the zip directory)
 - submit via https://de.wordpress.org/plugins/developers/add/
 - wait for manual verification (correspondence is done via email, the plugin is initially checked by humans, but when doing updates, this is not done)
+- translate ```readme.txt``` via https://translate.wordpress.org (choose language, go to plugin, choose "Stable Readme (latest release)", export as po, translate, import
 
 ## release
 
