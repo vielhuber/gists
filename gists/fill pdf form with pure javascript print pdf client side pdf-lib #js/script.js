@@ -36,6 +36,9 @@ export default class Page {
         let emblemImage = await pdfDoc.embedPng(emblemImageBytes);
         let testImageField = form.getButton('testfield3');
         testImageField.setImage(emblemImage);
+      
+      	// flatten
+       	form.flatten();
 
         // get base64
         let pdfDataUri = await pdfDoc.saveAsBase64({ dataUri: true });
