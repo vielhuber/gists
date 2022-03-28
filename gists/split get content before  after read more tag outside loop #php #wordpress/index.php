@@ -24,7 +24,7 @@ function wp_split_more($content, $type, $more_html = null)
     // remove gutenberg tags
     foreach (['before', 'after'] as $g1__value) {
         foreach (['/', ''] as $g2__value) {
-            foreach (['wp:paragraph', 'wp:more', 'wp:html'] as $g3__value) {
+            foreach (['wp:paragraph', 'wp:more', 'wp:html', 'wp:tadv/classic-paragraph'] as $g3__value) {
                 $return[$g1__value] = str_replace(
                     '<!-- ' . $g2__value . '' . $g3__value . ' -->',
                     '',
