@@ -27,6 +27,15 @@ ob_end_clean();
 ob_end_flush();
 ```
 
+### get current level
+```php
+ob_get_level(); // 0 or 1 (on environments where output_buffering=4096)
+ob_start();
+ob_get_level(); // 1 or 2
+ob_end_flush();
+ob_get_level(); // 0 or 1
+```
+
 ## examples
 ```php
 ob_start();
