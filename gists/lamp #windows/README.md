@@ -295,6 +295,7 @@ max_input_vars = 100000
 max_file_uploads = 5000
 realpath_cache_size = 4M
 #allow_url_include = On
+#allow_url_fopen = On
 date.timezone = 'Europe/Berlin'
 display_errors = On
 error_log = /var/log/php-error.log
