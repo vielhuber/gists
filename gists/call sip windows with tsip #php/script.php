@@ -26,6 +26,9 @@ function call_sip_phone($number, $audio, $path, $ip, $username, $password) {
     if( mb_strpos($number, '0') === '0' ) {
         $number = '+49'.mb_substr($number, 1);
     }
+    if( mb_strpos($number, '+') !== 0 ) {
+        $number = '+'.$number;
+    }
 
     // create status file if not exists
     if( !file_exists($path.'/status.log') ) {
@@ -57,7 +60,7 @@ function call_sip_phone($number, $audio, $path, $ip, $username, $password) {
         end
         SwitchAudioSource("winwave", "")
     end
-    local audio_file_name = "$audio"   
+    local audio_file_name = "audio.wav"   
     local audio_file_length = 100
     local callState = GetCallState()
     writeStatus(GetCallState())
@@ -77,9 +80,9 @@ function call_sip_phone($number, $audio, $path, $ip, $username, $password) {
         'user' => $username,
         'pwd' => $password
     ] as $data__key=>$data__value) {
-        $pos1 = mb_strpos($json, '"'.$data__key.'" : ');
-        $pos2 = mb_strpos($json, ",", $pos1)+1;
-        $json = mb_substr($json, 0, $pos1).'"'.$data__key.'" : "'.$data__value.'",'.mb_substr($json, $pos2);
+        $pos1 = mb_strpos($json, '"'.$data__key.'" : "');
+        $pos2 = mb_strpos($json, '"', $pos1 + mb_strlen('"'.$data__key.'" : "'))+1;
+        $json = mb_substr($json, 0, $pos1).'"'.$data__key.'" : "'.$data__value.'"'.mb_substr($json, $pos2);
     }
     file_put_contents($path.'/tSIP.json', $json);
 
