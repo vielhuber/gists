@@ -36,8 +36,10 @@ function call_sip_phone($number, $audio, $path, $ip, $username, $password) {
     }
 
     // if status file says state is > 0, wait
+    $max = 10;
     while(file_get_contents($path.'/status.log') != '0') {
         sleep(1);
+        $max--; if( $max === 0 ) { throw new \Exception('max while stack exceeded.'); }
     }
 
     // create lua file (inspired by https://tomeko.net/software/SIPclient/howto/playing_audio_after_answering.php)
@@ -61,7 +63,7 @@ function call_sip_phone($number, $audio, $path, $ip, $username, $password) {
         SwitchAudioSource("winwave", "")
     end
     local audio_file_name = "audio.wav"   
-    local audio_file_length = 100
+    local audio_file_length = 40
     local callState = GetCallState()
     writeStatus(GetCallState())
     if callState ~= 6 then
@@ -69,7 +71,7 @@ function call_sip_phone($number, $audio, $path, $ip, $username, $password) {
     end
     playAudio(audio_file_name, audio_file_length)
     writeStatus(GetCallState())
-    EOD;
+EOD;
     file_put_contents($path.'/scripts/PlayAudioFileAuto.lua', $lua);
 
     // modify config file to run that lua file
@@ -94,7 +96,9 @@ function call_sip_phone($number, $audio, $path, $ip, $username, $password) {
 
     // wait until state is 0 again
     sleep(3);
+    $max = 100;
     while(file_get_contents($path.'/status.log') != '0') {
         sleep(1);
+        $max--; if( $max === 0 ) { throw new \Exception('max while stack exceeded.'); }
     }
 }
