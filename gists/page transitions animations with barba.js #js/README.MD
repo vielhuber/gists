@@ -163,6 +163,14 @@ window.addEventListener('load', e => {
                         if(typeof(_etracker) === 'object') {
                             et_eC_Wrapper('xxxxxx');
                         }
+                        
+                        // fix autoplay videos from not playing
+                        let videos = document.querySelectorAll('video[autoplay]');
+                        if (videos.length > 0) {
+                            videos.forEach(vid => {
+                                vid.play();
+                            });
+                        }
                     }
                 }
             ]
