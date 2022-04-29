@@ -521,8 +521,12 @@ xdebug.var_display_max_depth = -1
 - ```mkdir ~/.ssh```
 - ```cp /var/www/lamp/id_rsa ~/.ssh/id_rsa```
 - ```cp /var/www/lamp/id_rsa.pub ~/.ssh/id_rsa.pub```
+- ```cp /var/www/lamp/id_rsa_4096 ~/.ssh/id_rsa_4096```
+- ```cp /var/www/lamp/id_rsa_4096.pub ~/.ssh/id_rsa_4096.pub```
 - ```chmod 600 ~/.ssh/id_rsa```
 - ```chmod 600 ~/.ssh/id_rsa.pub```
+- ```chmod 600 ~/.ssh/id_rsa_4096```
+- ```chmod 600 ~/.ssh/id_rsa_4096.pub```
 
 #### syncdb
 - ```mkdir ~/.syncdb```
