@@ -1,26 +1,23 @@
-var args = {
-   url: "https://vielhuber.de",
-   target: "_blank",
+let args = {
+   url: 'https://tld.com',
+   target: '_blank',
    specs: {
-      width: ($(window).width()/1.5),
-      height: ($(window).height()/1.5),
-      left: (($(window).width()-($(window).width()/1.5))/2),
-      top: (($(window).height()-($(window).height()/1.5))/2),
+      width: Math.round(window.innerWidth/1.5),
+      height: Math.round(window.innerHeight/1.5),
+      left: Math.round((window.innerWidth-(window.innerWidth/1.5))/2),
+      top: Math.round((window.innerHeight-(window.innerHeight/1.5))/1.4), // little bit shifted from top
       menubar: false,
       scrollbars: false,
       status: false,
       toolbar: false
    }
 }
-
-var specs = '';
-for (var p in args.specs) {
-  if (args.specs.hasOwnProperty(p)) {
-    if( args.specs[p] === true ) { args.specs[p] = 1; }
-    if( args.specs[p] === false ) { args.specs[p] = 0; }
-    specs += p + '=' + args.specs[p] + ',';
-  }
-}
+let specs = '';
+Object.entries(args).forEach(([args__key, args__value]) => {
+    if( args__value === true ) { args__value = 1; }
+    if( args__value === false ) { args__value = 0; }
+    specs += args__key + '=' + args__value + ',';
+});
 specs = specs.substring(0, specs.length-1);
 
-window.open(args.url,args.target,specs);
+window.open(args.url, args.target, specs);
