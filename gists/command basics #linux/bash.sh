@@ -438,6 +438,7 @@ find . -type f -name "*" -print0 | xargs -0 rename 's/foo/bar/g' {} # this after
 # show last entries (10 lines) of file
 tail -10 path/to/file.log
 tail -f path/to/file.log # live updates
+tail -f -n 30 path/to/file.log # live updates (with last 30 lines)
 tail -f path/to/file.log | grep "string to match" # live updates and filtering
 
 # ip / networking
