@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>exit intent</title>
+    <script>
+    const exitIntentFn = (e) => {
+        if (!e.toElement && !e.relatedTarget && e.clientY < 10) {
+            document.removeEventListener('mouseout', exitIntentFn);
+            document.cookie = 'exit_intent'+'='+encodeURIComponent('1')+'; '+'expires='+((new Date((new Date()).getTime() + (3*60*60*1000))).toUTCString())+'; path=/'+(window.location.protocol.indexOf('https') > -1 ? '; SameSite=None; Secure' : '');
+            alert('todo: show popup!');
+        }
+    }
+    if (!(document.cookie !== undefined && document.cookie.indexOf('exit_intent') > -1)) {
+        setTimeout(() => {
+            document.addEventListener('mouseout', exitIntentFn);
+        }, 5000);
+    }
+    </script>
+</head>
+<body>
+    <p>Move your mouse (after 5 seconds) outside of this window!</p>
+</body>
+</html>
