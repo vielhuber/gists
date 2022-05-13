@@ -147,12 +147,14 @@ window.addEventListener('load', e => {
                         console.log('subsequent load');
                         // important: manually call analytics scripts
                         // google analytics
+                        // if you use tag manager, this should also work (with chefcookie), but you *manually* have to create a custom
+                        // trigger that fires on page_view and sends the data to analytics
                         if (window.gtag !== undefined) {
                             gtag('event', 'page_view', {
                                 page_title: document.title,
                                 page_location: window.location.href,
                                 page_path: window.location.pathname,
-                                send_to: 'xxxxxxxxxx'
+                                send_to: 'xxxxxxxxxx' // google analytics id
                             });
                         }
                         // matomo

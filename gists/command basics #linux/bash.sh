@@ -228,6 +228,9 @@ find . -type f | egrep -v "folder1|folder2"
 # find files with extensions and copy to folder
 find /source/folder -name '.otf' -o -name '.ttf' -exec cp {} /target/folder/ \;
 
+# find files that changed in the last hour
+find . -newermt '1 hour ago' -type f -print
+
 # zip current directory
 zip -r file.zip .
 
