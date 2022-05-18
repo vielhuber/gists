@@ -39,7 +39,11 @@ function call_sip_phone($number, $audio, $path, $ip, $username, $password) {
     $max = 10;
     while(file_get_contents($path.'/status.log') != '0') {
         sleep(1);
-        $max--; if( $max === 0 ) { throw new \Exception('max while stack exceeded.'); }
+        $max--; if( $max === 0 ) {
+            file_put_contents($path.'/status.log', '0');
+            break;
+            //throw new \Exception('max while stack exceeded. (1)');
+        }
     }
 
     // create lua file (inspired by https://tomeko.net/software/SIPclient/howto/playing_audio_after_answering.php)
@@ -92,13 +96,17 @@ EOD;
     copy($audio, $path.'/audio.wav');
 
     // run tsip from command line
-    shell_exec($path.'/tSIP.exe /tsip='.$number);
+    shell_exec('START /B '.$path.'/tSIP.exe /tsip='.$number);
 
     // wait until state is 0 again
     sleep(3);
     $max = 100;
     while(file_get_contents($path.'/status.log') != '0') {
         sleep(1);
-        $max--; if( $max === 0 ) { throw new \Exception('max while stack exceeded.'); }
+        $max--; if( $max === 0 ) {
+            file_put_contents($path.'/status.log', '0');
+            break;
+            //throw new \Exception('max while stack exceeded. (2)');
+        }
     }
 }
