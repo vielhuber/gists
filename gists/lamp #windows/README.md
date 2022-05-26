@@ -494,6 +494,10 @@ xdebug.var_display_max_depth = -1
 - further do this (--no-edit does sometimes not work):
   - ```sudo nano ~/.bash_profile```
   - ```export GIT_MERGE_AUTOEDIT=no```
+- node 10 hangs (https://stackoverflow.com/questions/45433130/npm-install-gets-stuck-at-fetchmetadata/72391698#72391698)
+  - ```sudo nano ~/.gitconfig```
+  - ```[url "https://"]```
+  - ```   insteadOf = git://```
 
 #### gh (github command line)
 - ```curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg```
