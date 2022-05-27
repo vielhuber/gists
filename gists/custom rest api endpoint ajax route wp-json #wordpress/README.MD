@@ -6,7 +6,7 @@ add_action('rest_api_init', function () {
     // url: https://tld.com/wp-json/v1/custom/path/1337
     // for strings use '/custom/path/(?P<id>[a-zA-Z0-9]+)'
     register_rest_route('v1', '/custom/path/(?P<id>\d+)', [
-        'methods' => \WP_REST_Server::READABLE, // 'GET', for 'POST use WP_REST_Server::CREATABLE
+        'methods' => \WP_REST_Server::READABLE, // 'GET', for 'POST' use WP_REST_Server::CREATABLE
         'permission_callback' => function () {
           	// public route
           	return true;
