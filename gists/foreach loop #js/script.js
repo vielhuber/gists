@@ -34,6 +34,11 @@ for(var item of ["a", "b", "c"]) {
     console.log(item);
 }
 
+let arr = ["a", "b", "c"];
+for(let key in arr) {
+  console.log(arr[key]);
+}
+
 // cool alternative way
 for(let i=0, item; item = ["a", "b", "c"][i]; i++) {
   console.log(item);

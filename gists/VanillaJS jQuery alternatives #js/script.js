@@ -147,6 +147,9 @@ $('.your-iframe').contents().find('body').html()
 document.querySelector('.your-iframe').contentWindow.document.body.innerHTML;
 
 
+$('select option:selected')
+document.querySelector('select').options[document.querySelector('select').selectedIndex];
+
 
 $('#el').parent()
 document.getElementById("el").parentNode;
@@ -157,6 +160,12 @@ document.getElementById("el").nextElementSibling;
 
 $('#el').prev()
 document.getElementById("el").previousElementSibling;
+
+$('.els').first()
+document.querySelectorAll('.els')[0]
+
+$('.els').last()
+document.querySelectorAll('.els')[document.querySelectorAll('.els').length-1]
 
 
 $('#el').children()

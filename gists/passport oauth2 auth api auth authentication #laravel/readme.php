@@ -91,7 +91,7 @@ public function findForPassport($identifier) {
 <?php
 public function validateForPassportPasswordGrant($password) {
   if (Input::get('login_on_behalf_of_access_token') !== null) {
-    $http = new \GuzzleHttp\Client();
+    $http = new \GuzzleHttp\Client(['verify' => false]);
     $response = $http->get(url('/') . '/api/user', ['headers' => ['Authorization' => Input::get('login_on_behalf_of_access_token')], 'http_errors' => false]);
     if ($response->getStatusCode() != 200) { return false; }
     $user_id = json_decode((string) $response->getBody())->data->id;
@@ -158,7 +158,7 @@ class ApiController extends Controller
     }
     public function proxy($params)
     {
-        $http = new Client();
+        $http = new Client(['verify' => false]);
         $client = DB::table('oauth_clients')->where('name', 'LIKE', '%Password Grant Client')->first();
     
         if ($client === null)
