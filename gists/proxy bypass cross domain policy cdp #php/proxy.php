@@ -11,7 +11,8 @@ $receipts = [
         ['location.origin!==n.origin', '1===0&&location.origin!==n.origin'], /* simple replacements (like origin checks) */
         ['/(https:\/\/.+\.example\.net\/assets\/js\/another\/asset.js)/', $proxy_url . '?url=$1'], /* regex is also possible */
         ['</head>', '<style>.ads { display:none; }</style></head>'] /* inject your own styles */
-    ]
+    ],
+    '/regex-match-v.*\.js/' => [/*...*/]
 ];
 
 if (!isset($_REQUEST['url'])) {
@@ -35,10 +36,14 @@ header('Content-Type: ' . $mime_type);
 $output = file_get_contents($url);
 
 foreach ($receipts as $receipts__key => $receipts__value) {
-    if (stripos($url, $receipts__key) !== false) {
+    $is_regex_key = preg_match("/^\/.+\/[a-z]*$/i", $receipts__key);
+    if (
+        ($is_regex_key && preg_match($receipts__key, $url)) ||
+        (!$is_regex_key && stripos($url, $receipts__key) !== false)
+    ) {
         foreach ($receipts__value as $receipts__value__value) {
-            $is_regex = preg_match("/^\/.+\/[a-z]*$/i", $receipts__value__value[0]);
-            if ($is_regex) {
+            $is_regex_value = preg_match("/^\/.+\/[a-z]*$/i", $receipts__value__value[0]);
+            if ($is_regex_value) {
                 $output = preg_replace($receipts__value__value[0], $receipts__value__value[1], $output);
             } else {
                 $output = str_replace($receipts__value__value[0], $receipts__value__value[1], $output);
