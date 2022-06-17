@@ -26,23 +26,27 @@
 - `docker start test-container` # start container
 - `docker stop test-container` # stop container
 
-### docker-compose
+### docker compose
+
+#### legacy
+- `docker-compose` is a deprecated old project, which is replaced with `docker compose`
+- the arguments are (now) mainly compatible
 
 #### start
-- ```docker-compose up```
-- ```docker-compose up --d```
+- ```docker compose up```
+- ```docker compose up -d```
 
 #### stop
-- ```docker-compose stop```
+- ```docker compose stop```
 
 #### reset
-- ```docker-compose down --volumes```
+- ```docker compose down --volumes```
 
 #### login
-- ```docker-compose exec php-fpm /bin/sh```
+- ```docker compose exec php-fpm /bin/sh```
 
 #### commands
-- ```docker-compose exec php-fpm php artisan migrate```
+- ```docker compose exec php-fpm php artisan migrate```
 
 #### process
 - ```Dockerfile =[docker build]=> Docker image =[docker run]=> Docker container```
@@ -52,18 +56,18 @@
 - ```docker build .```
 
 #### update remote image
-- ```docker-compose pull```
-- ```docker-compose pull nginx```
+- ```docker compose pull```
+- ```docker compose pull nginx```
 
-#### run command inside docker-compose.yml
+#### run command inside docker compose.yml
  ```
 php-fpm:
-	command: sh -c 'echo "foo"'
+    command: sh -c 'echo "foo"'
 ```
 
 #### connect to database
 - redirect port
-  - add this to ```docker-compose.yml```: ```mariadb: ports: 3307:3306```
+  - add this to ```docker compose.yml```: ```mariadb: ports: 3307:3306```
   - connect to localhost:3307
 - connect in laravel
   - get ip with ```docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' project_mariadb_1```

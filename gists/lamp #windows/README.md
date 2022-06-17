@@ -10,6 +10,7 @@
 - access via all devices in your local network
 - support for different networks
 - real ssl certificates for all hosts and all devices
+- supports reverse proxy configuration
 - native linux performance (can handle node_modules and vendor) with wsl2
 
 ## installation
@@ -96,6 +97,7 @@
 -	Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
 -	Installation: "Install required Windows components for WSL 2"
 -	Settings > General > "Use the WSL 2 based engine"
+- Login with account
 - ```docker version```
 - ```docker-compose version```
 
@@ -370,6 +372,7 @@ xdebug.var_display_max_depth = -1
 #### fix wsl2 errors
 - apache not reachable
   - \\wsl$\Ubuntu\var\www\lamp\firewall.ps1 anlegen mit Inhalt von https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723
+  - Ports in Datei erweitern: ```$ports=@(80,443,10000,3000,3009,5000,8080,9090,3306);```
   - Aufgabenplanung
   - wsl2 Firewall
   - Bei Anmeldung
@@ -807,6 +810,7 @@ host    all   all        ::1/128        md5
 - ```lamp add project```
 - ```lamp add project php8.0```
 - ```lamp add project php8.0 custom/subfolder/public```
+- ```lamp add project php8.0 custom/subfolder/public 3000```
 
 #### remove project
 - ```lamp remove project```

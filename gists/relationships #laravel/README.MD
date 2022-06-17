@@ -21,6 +21,15 @@ public function foos() {
 }
 ```
 
+```php
+Bar (only first):
+public function foos() {
+	return $this->hasOne('App\Models\Foo', 'bar_id')->latest(); // ->oldest()
+}
+```
+
+
+
 ### with intermediate table
 
 ```txt

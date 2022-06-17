@@ -72,6 +72,14 @@ else
 FOLDER=$PROJECT
 fi
 
+if [ -n "$5" ]; then
+PROXY_LINE="ProxyPreserveHost On
+ProxyPass / http://$PROJECT.local.vielhuber.de:$5/
+ProxyPassReverse / http://$PROJECT.local.vielhuber.de:$5/"
+else
+PROXY_LINE=""
+fi
+
 cat > $FILE << EOF
 <VirtualHost *:80>
   ServerAdmin david@close2.de
@@ -85,6 +93,7 @@ cat > $FILE << EOF
     Require all granted
   </Directory>
   $PHP_LINE
+  $PROXY_LINE
 </VirtualHost>
 <VirtualHost *:443>
   ServerAdmin david@close2.de
