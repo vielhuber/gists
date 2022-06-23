@@ -1,4 +1,8 @@
 <?php
+// this must be outside
+require_once __DIR__ . '/vendor/autoload.php';
+use Foo\Bar;
+  
 class TestClass
 {
 

@@ -548,7 +548,7 @@ Usage: git acp
 
 ## stash
 
-- tl;dr: ```git stash -a; git stash pop```
+- tl;dr: ```git stash; git stash pop```
 - stashes are for code changes you don't want to commit but save for later usage (for example to quickly change to another branch or to pull first)
 - stashes are ONLY local and not transmitted to remote
 - `git stash`: stash everything, that has not yet been committed
@@ -556,7 +556,7 @@ Usage: git acp
 - `git stash save`: deprecated
 - `git stash push -m "note about this stash"`
 - `git stash --include-untracked` / `git stash -u`: stashes also untracked files
-- `git stash --all` / `git stash -a`: stashes both untracked and ignored files
+- `git stash --all` / `git stash -a`: stashes both untracked and ignored files (warning, this stashes full node_modules folder)
 - `git stash list`: show current stashes
 - `git stash show`: show stash
 - `git stash apply`: take out stash, but leave it in stash list
