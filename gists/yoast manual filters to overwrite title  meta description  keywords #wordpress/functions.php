@@ -9,6 +9,9 @@ add_filter('wpseo_metadesc', function($input) {
 add_filter('wpseo_metakey', function($input) {
     return 'BAZ';
 },10,1);
+add_filter('wpseo_robots', function($input) {
+    return 'noindex, nofollow';
+},10,1);
 
 // add custom yoast tags on front page (because we use show latest posts)
 add_action( 'pre_get_posts', function() {
