@@ -19,6 +19,11 @@
 - In cell: ```=FOO()```
 - Datei > Tabelleneinstellungen > Berechnung > Neuberechnung: Bei Änderung und minütlich
 
+#### current unix timestamp (for a unique number)
+```
+=((JETZT()-DATUM(1970;1;1)+ZEIT(6;0;0))*86400))
+```
+
 #### current month
 ```
 =WENN(LÄNGE(MONAT(HEUTE()))<2;"0";"")&MONAT(HEUTE())&"/"&JAHR(HEUTE())
