@@ -369,6 +369,9 @@ xdebug.var_display_max_depth = -1
 - ```sudo service mysql stop```
 - ```sudo usermod -d /var/lib/mysql/ mysql```
 
+#### fix font errors
+- if fonts are garbled: ```sudo fc-cache -f -v```
+
 #### fix wsl2 errors
 - apache not reachable
   - \\wsl$\Ubuntu\var\www\lamp\firewall.ps1 anlegen mit Inhalt von https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723
