@@ -74,6 +74,7 @@ sed -i -e 's/foo/bar/g' -e 's/gna/gnarr/g' -e 's/abc/cde/g' file.txt
 sed -i -e 's/foo/bar/g' target.file # unix
 sed -i'' -e 's/foo/bar/g' target.file # unix
 sed -i '' -e 's/foo/bar/g' target.file # mac os
+sed -i '' -e 's/escaped\.dot\.and\.[(]brackets[)]/bar/g' target.file # escape normally with "\", but "(" needs to be surrounded with "[]"
 
 # sed new line (unix/mac)
 sed -e 's/ /\'$'\n/g' # universal
@@ -113,8 +114,8 @@ cp file1 file2
 # copy contents of one folder to another folder (recursively)
 cp -r /folder1/. folder2/
 
-# copy folder1 to folder2
-cp -r folder1 folder2/
+# copy folder1 to folder2 (-T is needed, if folder2 exists already)
+cp -r -T ./folder1 ./folder2/
 
 # copy contents of subfolder in current folder
 cp -r ./subfolder/. .

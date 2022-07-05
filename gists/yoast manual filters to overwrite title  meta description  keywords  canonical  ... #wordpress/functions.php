@@ -12,6 +12,12 @@ add_filter('wpseo_metakey', function($input) {
 add_filter('wpseo_robots', function($input) {
     return 'noindex, nofollow';
 },10,1);
+add_filter( 'wpseo_opengraph_url', function( $url ) {
+    return $url;
+});
+add_filter( 'wpseo_canonical', function( $url ) {
+    return $url;
+});
 
 // add custom yoast tags on front page (because we use show latest posts)
 add_action( 'pre_get_posts', function() {
