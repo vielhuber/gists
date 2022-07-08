@@ -548,7 +548,7 @@ Usage: git acp
 
 ## stash
 
-- tl;dr: ```git stash; git stash pop```
+- tl;dr: ```git stash -u; git stash pop```
 - stashes are for code changes you don't want to commit but save for later usage (for example to quickly change to another branch or to pull first)
 - stashes are ONLY local and not transmitted to remote
 - `git stash`: stash everything, that has not yet been committed
