@@ -7,12 +7,15 @@ add_action('rest_api_init', function () {
     // for strings use '/custom/path/(?P<id>[a-zA-Z0-9]+)'
     register_rest_route('v1', '/custom/path/(?P<id>\d+)', [
         'methods' => \WP_REST_Server::READABLE, // 'GET', for 'POST' use WP_REST_Server::CREATABLE
-        'permission_callback' => function () {
+        'permission_callback' => function (\WP_REST_Request $request) {
           	// public route
           	return true;
           
           	// only allow logged in users (via browser)
         	return current_user_can( 'edit_others_posts' );
+          
+          	// check for manual token
+          	return $request->get_param('token') === 'abcde';
           
           	// for authentication via cookie / api
           	// see https://gist.github.com/vielhuber/b1647427ddb32c87a9f56e92ed1fd371
