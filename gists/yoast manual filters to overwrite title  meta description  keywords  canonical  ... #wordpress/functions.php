@@ -19,6 +19,11 @@ add_filter( 'wpseo_canonical', function( $url ) {
     return $url;
 });
 
+// show empty categories in sitemap
+add_filter( 'wpseo_sitemap_exclude_empty_terms', function() {
+    return false;
+}, 10, 2);
+
 // add custom yoast tags on front page (because we use show latest posts)
 add_action( 'pre_get_posts', function() {
     if( is_front_page() )

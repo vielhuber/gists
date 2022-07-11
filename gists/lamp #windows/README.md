@@ -431,7 +431,7 @@ xdebug.var_display_max_depth = -1
   - ```nvm install 10.16.3```
   - ```nvm alias default 14.18.0```
   - Version wechseln: ```nvm use 10.16.3```
-  - Bei manchen Kundenprojekten: ```nvm use --lts```
+  - Cache leeren (falls sich package-lock.json ändert: `npm cache verify` bzw `npm cache clean -f`)
 - nativ (obsolet)
   - https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
   - ```curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -```
