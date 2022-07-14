@@ -4,7 +4,7 @@
 - simple usage via command line
 - full control over configuration
 - default remote smtp relay for all mailings
-- includes mysql with phpmyadmin and postgresql
+- databases included: mysql (+phpmyadmin), postgresql, oraclesql
 - shared php.ini configuration for all versions
 - switch php/cli version (globally and host based)
 - access via all devices in your local network
@@ -576,6 +576,32 @@ local   all   all                       md5
 host    all   all        127.0.0.1/32   md5
 host    all   all        ::1/128        md5
 ```
+
+#### oraclesql
+
+- sign in https://container-registry.oracle.com and accept TOS
+- installation
+  - ```docker login container-registry.oracle.com```
+  - ```docker pull container-registry.oracle.com/database/enterprise:12.2.0.1```
+  - ```docker run -dit -p 1521:1521 --name oracle_db container-registry.oracle.com/database/enterprise:12.2.0.1```
+  - ```docker logs -f oracle_db``` # wait for "Done !" in logs
+  - ```docker exec -it oracle_db bash -c "source /home/oracle/.bashrc; sqlplus /nolog"```
+  - ```connect sys as sysdba;```
+  - ```Oradoc_db1```
+  - ```alter session set "_ORACLE_SCRIPT"=true;```
+  - ```create user root identified by root;```
+  - ```GRANT ALL PRIVILEGES TO root;```
+- start/stop:
+  - Docker Desktop
+- credentials:
+  - ip: localhost
+  - port: 1521
+  - service name: ORCLCDB.localdomain
+  - username: root
+  - password: root
+- tablespaces
+  - view: ```SELECT tablespace_name, file_name, bytes / 1024/ 1024  MB FROM dba_data_files;```
+  - create: ```CREATE TABLESPACE DATA1 DATAFILE 'DATA1.dbf' SIZE 10M AUTOEXTEND ON;```
 
 #### ghostscript
 - ```sudo apt-get install ghostscript```
