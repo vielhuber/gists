@@ -589,6 +589,7 @@ host    all   all        ::1/128        md5
   - ```connect sys as sysdba;```
   - ```Oradoc_db1```
   - ```alter session set "_ORACLE_SCRIPT"=true;```
+- create new user (=schema!)
   - ```create user root identified by root;```
   - ```GRANT ALL PRIVILEGES TO root;```
 - start/stop:
