@@ -1,3 +1,4 @@
+<?php
 function get_wpml_translation($str, $lng)
 {
   global $sitepress;

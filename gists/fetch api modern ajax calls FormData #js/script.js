@@ -6,7 +6,8 @@ fetch(
     cache: 'no-cache',
     headers: {
        'Content-Type': 'application/json',
-       //'X-Requested-With': 'XMLHttpRequest' // this should be set e.g. on laravel applications if you don't send any json (otherwise it is not detected that this is a js call)
+       //'X-Requested-With': 'XMLHttpRequest', // this should be set e.g. on laravel applications if you don't send any json (otherwise it is not detected that this is a js call)
+       //'Authorization': 'Basic ' + btoa(username + ':' + password)
     }
   }
 ).then((response) =>
