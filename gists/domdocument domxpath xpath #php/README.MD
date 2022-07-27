@@ -1,4 +1,3 @@
-<?php
 ### setup
 ```php
 $DOMDocument = new \DOMDocument();
