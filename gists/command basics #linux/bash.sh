@@ -397,6 +397,8 @@ echo -e "string to prepend\n$(cat path/to/file.txt)" > path/to/file.txt
 sudo fc-cache -f -v
 
 # disk space
+du -sh folder/ # show size of folder in human readable format
+du -sh . --exclude .git --exclude node_modules # exclude some subfolders
 df . # show in which device a folder is located
 df -h # in total
 df -k . # for current folder
@@ -405,7 +407,6 @@ du -d 1 -xh /folder 2>/dev/null | sort -h -r | head -10 # show all big folders
 find . -type f -printf "%s\t%p\n" | sort -n | tail -10 # show all big files
 du -d 1 -xh . 2>/dev/null | sort -h -r | head -10 # same as above only for current folder
 ls -haltrS # show contents of folder sorted by size
-du -sh folder/ # show size of folder in human readable format
 find . -type f -newermt '1 month ago' -exec du -ch {} + | grep total$ # sum of filesize found with find (files newer than 1 month)
 find . -type f -newermt '1 month ago' -exec du -cb {} + | grep total$ | cut -f1 | paste -sd+ - | bc # more accurate
 find . -name "node_modules" -type d -prune -exec du -ch {} + | grep total$ # find all node_modules folders sorted by size
