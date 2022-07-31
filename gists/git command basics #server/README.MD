@@ -603,3 +603,6 @@ Usage: git acp
     - git mv main-folder new-main-folder
     - git add -A . && git commit -m “.” && git push origin HEAD
 
+## cleanup
+- show biggest 50 files in history: `git rev-list --objects --all | grep -f <(git verify-pack -v .git/objects/pack/*.idx| sort -k 3 -n | cut -f 1 -d " " | tail -50)`
+- remove specific folder from history: `TODO`
