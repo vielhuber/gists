@@ -29,16 +29,26 @@
 ##### check
 - git remote -v
 
-##### set
+##### set (change origin url)
 - git remote set-url origin ssh://username@vielhuber.de:22/~/vielhuber.git
 - git remote set-url origin git@gitlab.com:c2nm/vielhuber.git
 - git remote set-url origin https://gitlab.com/c2nm/vielhuber.git
 - git remote set-url origin https://username:password@gitlab.com/c2nm/vielhuber.git
 - git remote set-url origin https://david%40close2.de@gitlab.com/c2nm/vielhuber.git
 
-##### check
-- git remote -v
+##### add another remote
+- git remote add customname git@github.com:organization/repo.git
 
+##### push to specific remote
+- `git push`: push current branch to remote `origin` (`origin` ist connected to all branches by default)
+- `git push origin`: push current branch to remote `origin` (same as `git push` in a normal scenario)
+- `git push origin master`: push branch `master` to remote `origin` (same as `git push` in a normal scenario)
+- `git push --all`: pushes all branches instead of the current one
+- `git push --mirror`: pushes all branches, tags, notes, ...
+
+##### push to all remotes
+- `git remote | xargs -L1 git push --all`: push all branches to all remotes
+- `git remote | xargs -L1 -I R git push R master`: only push master to all remotes
 
 #### settings
 
