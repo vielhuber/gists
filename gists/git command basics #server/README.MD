@@ -49,6 +49,10 @@
 ##### push to all remotes
 - `git remote | xargs -L1 git push --all`: push all branches to all remotes
 - `git remote | xargs -L1 -I R git push R master`: only push master to all remotes
+- another option is to add a new remote with multiple endpoints
+  - `git remote add all git@gitlab.com:xxx/A.git`
+  - `git remote set-url --add all git@github.com:xxx/B.git``
+  - `git push all --all`
 
 #### settings
 
@@ -312,6 +316,9 @@ Usage: git acp
 - `git branch --merged` # list all branches that the current branch contains
 - `git branch --merged | grep -q "other-branch$" && echo "yes" || echo "no"`
 - `git branch --merged | grep -q "other-branch$\|and-another-branch$" && echo "yes" || echo "no"` # multiple other branches
+
+### checkout all branches locally
+- `git branch -a | grep -v HEAD | perl -ne 'chomp($_); s|^\*?\s*||; if (m|(.+)/(.+)| && not $d{$2}) {print qq(git branch --track $2 $1/$2\n)} else {$d{$_}=1}' | csh -xfs`
 
 ## pull request
 #### make a pull request on github (for an external project), go to github.com to the repository you want to make a pull request, click "Fork"
