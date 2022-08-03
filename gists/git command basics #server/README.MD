@@ -621,5 +621,22 @@ Usage: git acp
     - git add -A . && git commit -m “.” && git push origin HEAD
 
 ## cleanup
-- show biggest 50 files in history: `git rev-list --objects --all | grep -f <(git verify-pack -v .git/objects/pack/*.idx| sort -k 3 -n | cut -f 1 -d " " | tail -50)`
-- remove specific folder from history: `TODO`
+
+- links
+  - https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
+- solutions
+  - bfg (has problems with paths: https://github.com/rtyley/bfg-repo-cleaner/issues/187)
+  - git filter-repo (does delete remotes and gitlab is complicated)
+  - git filter-branch (is not recommended by git itself anymore)
+- show biggest 50 files in history:
+  - `git filter-repo --analyze && cat .git/filter-repo/analysis/directories-all-sizes.txt`
+- remove path from history
+  - mkdir tmp
+  - cd tmp
+  - `git clone git@gitlab.com:xxx/xxx.git .` # make a fresh clone first
+  - `git-filter-repo --path path/to/exclude/ --invert-paths`
+  - `git remote add origin git@gitlab.com:xxx/xxx.git` # git-filter-repo removes all origins; readd them
+  - `git push --set-upstream origin main --force` OR `git push origin --force 'refs/heads/*'`
+  - cd ..
+  - rm -rf tmp/
+  - all teammembers need to make a fresh clone of the repo

@@ -308,6 +308,7 @@ tar -xf output.tar
 tar -xzvf output.tar.gz
 tar -xzvf output.tar.gz -C /path/to/target
 tar -xvjf output.tar.bz2
+tar -xf output.tar.xz
 
 # show permissions
 ls -l file
