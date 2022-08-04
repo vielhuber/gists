@@ -625,18 +625,45 @@ Usage: git acp
 - links
   - https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
 - solutions
+  - git filter-repo (does delete remotes)
   - bfg (has problems with paths: https://github.com/rtyley/bfg-repo-cleaner/issues/187)
-  - git filter-repo (does delete remotes and gitlab is complicated)
   - git filter-branch (is not recommended by git itself anymore)
 - show biggest 50 files in history:
   - `git filter-repo --analyze && cat .git/filter-repo/analysis/directories-all-sizes.txt`
 - remove path from history
-  - mkdir tmp
-  - cd tmp
-  - `git clone git@gitlab.com:xxx/xxx.git .` # make a fresh clone first
-  - `git-filter-repo --path path/to/exclude/ --invert-paths`
-  - `git remote add origin git@gitlab.com:xxx/xxx.git` # git-filter-repo removes all origins; readd them
-  - `git push --set-upstream origin main --force` OR `git push origin --force 'refs/heads/*'`
-  - cd ..
-  - rm -rf tmp/
-  - all teammembers need to make a fresh clone of the repo
+  - solution with git filter-repo (problem: gitlab does not update its quota!)
+```
+mkdir tmp
+cd tmp
+git clone git@gitlab.com:xxx/xxx.git .` # make a fresh clone first
+git-filter-repo --path path/to/exclude/ --invert-paths
+`git remote add origin git@gitlab.com:xxx/xxx.git # git-filter-repo removes all origins; readd them
+git push --set-upstream origin main --force` OR `git push origin --force 'refs/heads/*'
+cd ..
+rm -rf tmp/
+# all teammembers need to make a fresh clone of the repo
+```
+  - solution with git filter-branch
+
+```
+mkdir tmp
+cd tmp
+git clone git@gitlab.com:xxx/xxx.git .
+
+# create tracking branches of all branches
+for remote in `git branch -r | grep -v /HEAD`; do git checkout --track $remote ; done
+
+# remove DIRECTORY_NAME from all commits, then remove the refs to the old commits (repeat these two commands for as many directories that you want to remove)
+git filter-branch --index-filter 'git rm -rf --cached --ignore-unmatch DIRECTORY_NAME/' --prune-empty --tag-name-filter cat -- --all
+git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d
+
+# ensure all old refs are fully removed
+rm -Rf .git/logs .git/refs/original
+
+# perform a garbage collection to remove commits with no refs
+git gc --prune=all --aggressive
+
+# force push all branches to overwrite their history (use with caution!)
+git push origin --all --force
+git push origin --tags --force
+```

@@ -91,3 +91,66 @@ module.exports = async (page, scenario, vp) => {
     }
 };
 ```
+
+### use as a screenshot engine
+
+```js
+let urls = [];
+
+// read from txt file
+let fs = require('fs'),
+    file = fs.readFileSync('urls.txt', 'utf-8');
+    file.split(/\r?\n/).forEach(line => { urls.push(line); });
+
+// read from array
+/*
+urls = [
+    'https://tld.com/',
+    'https://tld.com/foo/',
+    'https://tld.com/foo/bar/'
+];
+*/
+
+let scenarios = [];
+urls.forEach(urls__value => {
+    scenarios.push({
+      "label": urls__value,
+      "url": urls__value
+          //.replace('https://','https://username:password@'),
+    });
+});
+
+let viewports = [
+    {
+      "label": "desktop",
+      "width": 1920,
+      "height": 1080
+    },
+    /*
+    {
+      "label": "tablet_landscape",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "label": "tablet_portrait",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "label": "phone",
+      "width": 320,
+      "height": 568
+    },
+    */
+];
+
+module.exports = {
+  "viewports": viewports,
+  "scenarios": scenarios,
+  /* ... */
+}
+```
+
+- `npm run test`
+- look at /backstop_data/bitmaps_test/*
