@@ -622,48 +622,50 @@ Usage: git acp
 
 ## cleanup
 
-- links
-  - https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
-- solutions
-  - git filter-repo (does delete remotes)
-  - bfg (has problems with paths: https://github.com/rtyley/bfg-repo-cleaner/issues/187)
-  - git filter-branch (is not recommended by git itself anymore)
-- show biggest 50 files in history:
-  - `git filter-repo --analyze && cat .git/filter-repo/analysis/directories-all-sizes.txt`
-- remove path from history
-  - solution with git filter-repo (problem: gitlab does not update its quota!)
-```
-mkdir tmp
-cd tmp
-git clone git@gitlab.com:xxx/xxx.git .` # make a fresh clone first
-git-filter-repo --path path/to/exclude/ --invert-paths
-`git remote add origin git@gitlab.com:xxx/xxx.git # git-filter-repo removes all origins; readd them
-git push --set-upstream origin main --force` OR `git push origin --force 'refs/heads/*'
-cd ..
-rm -rf tmp/
-# all teammembers need to make a fresh clone of the repo
-```
-  - solution with git filter-branch
+### solutions
+- `git filter-repo` (does delete remotes: https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#INTERNALS)
+- `bfg` (has problems with paths: https://github.com/rtyley/bfg-repo-cleaner/issues/187)
+- `git filter-branch` (is officially not recommended: https://git-scm.com/docs/git-filter-branch#SAFETY)
 
-```
-mkdir tmp
-cd tmp
-git clone git@gitlab.com:xxx/xxx.git .
+### analyze
+- `git filter-repo --analyze && cat .git/filter-repo/analysis/directories-all-sizes.txt`
+  
+### remove
 
-# create tracking branches of all branches
-for remote in `git branch -r | grep -v /HEAD`; do git checkout --track $remote ; done
+#### requirements
+- the files need to be already removed from in HEAD (and ignored in .gitignore)
 
-# remove DIRECTORY_NAME from all commits, then remove the refs to the old commits (repeat these two commands for as many directories that you want to remove)
-git filter-branch --index-filter 'git rm -rf --cached --ignore-unmatch DIRECTORY_NAME/' --prune-empty --tag-name-filter cat -- --all
-git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d
+#### github
+- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+- `mkdir tmp-repo`
+- `cd tmp-repo`
+- `git clone git@github.com:foo/bar.git .`
+- `git filter-repo --invert-paths --path path/to/exclude/`
+- `git push origin --force --all`
+- `git push origin --force --tags`
+- add your private account to https://github.com/foo/bar/settings/access and check size after ~15 minutes at https://github.com/settings/repositories
 
-# ensure all old refs are fully removed
-rm -Rf .git/logs .git/refs/original
-
-# perform a garbage collection to remove commits with no refs
-git gc --prune=all --aggressive
-
-# force push all branches to overwrite their history (use with caution!)
-git push origin --all --force
-git push origin --tags --force
-```
+#### gitlab
+- https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
+- `mkdir tmp-repo`
+- `cd tmp-repo`
+- `Settings` > `General` > `Advanced` > `Export project` > download `tar.gz` file into `tmp-repo`
+- `tar xzf 20*.tar.gz`
+- `git clone --bare --mirror project.bundle`
+- `cd project.git`
+- `git filter-repo --invert-paths --path path/to/exclude/`
+- `cp ./filter-repo/commit-map /tmp/commit-map-1`
+- copying the commit-map has to be done after *every* single command from git filter-repo (you need the `commit-map` files later)
+- `git remote remove origin`
+- `git remote add origin git@gitlab.com:foo/bar.git`
+- `Settings` > `Repository` > `Protected branches`/`Protected branches` > enable `Allowed to force push` to `main`/`master`
+- `git push origin --force 'refs/heads/*'`
+- `git push origin --force 'refs/tags/*'`
+- `git push origin --force 'refs/replace/*'`
+- `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` on `main`/`master`
+- `cd ./../../`
+- `rm -rf tmp-repo`
+- `date` – wait 30 minutes (😱) – `date`
+- `Settings` > `Repository` > upload `/tmp/commit-map-X`
+- `date` – wait 5 minutes (😱) – `date`
+- `Settings` > `Usage Quotas`
