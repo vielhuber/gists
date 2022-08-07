@@ -390,6 +390,11 @@ ln -sf /path/to/folder /path/to/symlink
 # remove a symlink (used without trailing slash!)
 rm /path/to/symlink
 
+# create empty file
+touch file.txt
+
+# create file with random data of size x
+head -c 100M </dev/urandom >file.txt
 
 # append to file
 echo 'string to append' >> path/to/file.txt

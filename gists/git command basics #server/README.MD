@@ -633,17 +633,20 @@ Usage: git acp
 ### remove
 
 #### requirements
-- the files need to be already removed from in HEAD (and ignored in .gitignore)
+- the files that should be removed from history need to be already removed from `HEAD` and ignored in `.gitignore`
 
 #### github
 - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
 - `mkdir tmp-repo`
 - `cd tmp-repo`
 - `git clone git@github.com:foo/bar.git .`
+- `cp .git/config /tmp/config-backup`
 - `git filter-repo --invert-paths --path path/to/exclude/`
+- `mv /tmp/config-backup .git/config`
 - `git push origin --force --all`
 - `git push origin --force --tags`
-- add your private account to https://github.com/foo/bar/settings/access and check size after ~15 minutes at https://github.com/settings/repositories
+- check size locally: `git gc && git count-objects -vH`
+- check size remotely: after ~60 minutes at https://github.com/settings/repositories (if it is a repo of an organization, first add your private account to https://github.com/foo/bar/settings/access)
 
 #### gitlab
 - https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
