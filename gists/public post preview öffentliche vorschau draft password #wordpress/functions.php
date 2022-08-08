@@ -8,6 +8,14 @@ add_filter('posts_results', function( $posts )
     }
     return $posts;
 }, 10, 2);
+// siteorigin builder compatiblity (showing old content)
+add_action('pre_get_posts', function() {
+    if( isset($_GET['key']) && $_GET['key'] != '' )
+    {
+        global $preview;
+        $preview = false;
+    }
+}, PHP_INT_MAX);
 add_action( 'post_submitbox_misc_actions', function()
 {
     $post = get_post();
