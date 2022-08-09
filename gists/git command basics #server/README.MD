@@ -620,7 +620,7 @@ Usage: git acp
     - git mv main-folder new-main-folder
     - git add -A . && git commit -m “.” && git push origin HEAD
 
-## cleanup
+## cleanup history
 
 ### solutions
 - `git filter-repo` (does delete remotes: https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#INTERNALS)
@@ -630,7 +630,7 @@ Usage: git acp
 ### analyze
 - `git filter-repo --analyze && cat .git/filter-repo/analysis/directories-all-sizes.txt`
   
-### remove
+### remove data
 
 #### requirements
 - the files that should be removed from history need to be already removed from `HEAD` and ignored in `.gitignore`
@@ -646,7 +646,9 @@ Usage: git acp
 - `git push origin --force --all`
 - `git push origin --force --tags`
 - check size locally: `git gc && git count-objects -vH`
-- check size remotely: after ~60 minutes at https://github.com/settings/repositories (if it is a repo of an organization, first add your private account to https://github.com/foo/bar/settings/access)
+- check size remotely: after ~24 hours at https://github.com/settings/repositories (if it is a repo of an organization, first add your private account to https://github.com/foo/bar/settings/access)
+- `cd ..`
+- `rm -rf tmp-repo`
 
 #### gitlab
 - https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
