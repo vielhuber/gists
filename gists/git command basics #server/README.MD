@@ -620,6 +620,11 @@ Usage: git acp
     - git mv main-folder new-main-folder
     - git add -A . && git commit -m “.” && git push origin HEAD
 
+## backup git repository
+
+- backup: `git bundle create repo.bundle --all`
+- restore: `git clone repo.bundle`
+
 ## cleanup history
 
 ### solutions
@@ -634,6 +639,7 @@ Usage: git acp
 
 #### requirements
 - the files that should be removed from history need to be already removed from `HEAD` and ignored in `.gitignore`
+- you have backuped your local working repo with `git bundle create repo.bundle --all`
 
 #### github
 - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
