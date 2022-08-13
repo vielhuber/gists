@@ -16,7 +16,11 @@
     // helper method to get variables from the service worker
     // example: await getValueFromServiceWorker('VERSION')
     async getValueFromServiceWorker(key) {
-        return new Promise((resolve) => {
+        return new Promise(async (resolve) => {
+            // wait until the controller is ready (this is important especially on first load)
+            while (navigator.serviceWorker.controller === null) {
+                await new Promise((resolve) => setTimeout(() => resolve(), 1000));
+            }
             navigator.serviceWorker.controller.postMessage({ type: 'request-val', key: key });
             let fn = (event) => {
                 if (event.data.type === 'receive-val' && event.data.key === key) {
