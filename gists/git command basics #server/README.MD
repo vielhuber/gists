@@ -91,12 +91,12 @@
 ```  
 
 #### remove cached files
-if gitignore is not working for a specific file/folder (this does not delete the folder but remove it from git):
+if gitignore is not working for a specific file/folder (this does not(!) delete the folder but remove it from git):
 - git rm -rf --cached specific-file
 - git rm -rf --cached specific-folder/
 - find . -type f -name "*.*" | xargs git rm -rf --cached
 
-#### if you want to delete the folder also from history
+#### if you want to delete the folder also from history (deprecated, see below for a better answer)
 - git filter-branch --tree-filter 'rm -rf custom/directory/' --prune-empty HEAD
 - git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d
 - echo /custom/directory/ >> .gitignore
@@ -105,7 +105,7 @@ if gitignore is not working for a specific file/folder (this does not delete the
 - git gc
 - git push origin master --force
 
-#### if you have further problems, reinitialize everything:
+#### if you have further problems, reinitialize everything
 - git pull; git add -A .; git commit -m "commit everything first"; git push origin master;
 - git rm -rf --cached .
 - git add .
@@ -640,6 +640,12 @@ Usage: git acp
 #### requirements
 - the files that should be removed from history need to be already removed from `HEAD` and ignored in `.gitignore`
 - you have backuped your local working repo with `git bundle create repo.bundle --all`
+
+#### other developers / testing / production
+- for all distributed copies of the repo, you will need to request they do a pull with rebasing
+- if a user with their own local copy of the repository did a simple `git pull && git push`, this would result in the big files being reintroduced into the central repository
+- `git pull -r`: the user still has the big repo size locally, but does not reintroduce the wrong history
+- `rm -rf repo && git clone xxx .`: the user has the reduced repo size
 
 #### github
 - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
