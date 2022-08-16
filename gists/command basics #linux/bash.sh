@@ -265,6 +265,9 @@ zip --password SECRET output.zip input.txt
 # zip file with date
 zip -r "backup-$(date +"%Y-%m-%d").zip"
 
+# zip folder with max file size limit
+zip -r -s 1000m file.zip .
+
 # zip file and exclude folders and files
 zip -r file.zip . -x \*"vendor/"\* -x \*"node_modules/"\* -x \*".git/"\* -x \*"wp-content/uploads/"\* -x \*"wp-content/cache/"\*
 zip -r file.zip . -x \*"filename-in-any-folder"\* -x "explicit-filename-in-root-folder" -x "folder/explicit-filename"
