@@ -48,7 +48,7 @@ Foo:
 public function bars() {
   return $this->belongsToMany(
       'App\Models\Bar',
-      'foo_bar',
+      'foos_bars',
       'foo_id',
       'bar_id'
   );
@@ -60,7 +60,7 @@ Bar:
 public function foos() {
   return $this->belongsToMany(
       'App\Models\Foo',
-      'foo_bar',
+      'foos_bars',
       'bar_id',
       'foo_id'
   );
