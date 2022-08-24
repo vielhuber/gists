@@ -38,6 +38,7 @@
 
 ##### add another remote
 - git remote add customname git@github.com:organization/repo.git
+- git remote remove customname
 
 ##### push to specific remote
 - `git push`: push current branch to remote `origin` (`origin` ist connected to all branches by default)
@@ -644,8 +645,9 @@ Usage: git acp
 #### other developers / testing / production
 - for all distributed copies of the repo, you will need to request they do a pull with rebasing
 - if a user with their own local copy of the repository did a simple `git pull && git push`, this would result in the big files being reintroduced into the central repository
-- `git pull -r`: the user still has the big repo size locally, but does not reintroduce the wrong history
+- `rm -rf .git && git clone git@git.close2dev.de:c2nm/close2note.git temp && mv temp/.git ./.git && rm -rf temp && git add -A .`: poor man's fresh clone
 - `rm -rf repo && git clone xxx .`: the user has the reduced repo size
+- `git pull -r`: the user still has the big repo size locally, but does not reintroduce the wrong history
 
 #### github
 - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
