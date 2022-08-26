@@ -84,10 +84,12 @@ module.exports = async (page, scenario, vp) => {
     await require('./loadCookies')(page, scenario);
     if (scenario.login === true) {
         await page.goto('https://tld.com/login');
-        await page.type('input[name="username"]', '***'); // even better: process.env.TEST_USER
-        await page.type('input[name="password"]', '***'); // even better: process.env.TEST_PASSWORD
-        await page.click('input[type="submit"]');
-        await page.waitForNavigation();
+        if (await page.$('input[name="username"]') !== null) {
+          await page.type('input[name="username"]', '***'); // even better: process.env.TEST_USER
+          await page.type('input[name="password"]', '***'); // even better: process.env.TEST_PASSWORD
+          await page.click('input[type="submit"]');
+          await page.waitForNavigation();
+        }
     }
 };
 ```
@@ -148,6 +150,7 @@ let viewports = [
 module.exports = {
   "viewports": viewports,
   "scenarios": scenarios,
+  "asyncCaptureLimit": 5, // how much parallel requests
   /* ... */
 }
 ```
