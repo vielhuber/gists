@@ -1,5 +1,0 @@
-# only .git
-location ~ /\.git { deny all; return 404; }
-
-# all dot files
-location ~ /\..*$ { deny all; return 404; }

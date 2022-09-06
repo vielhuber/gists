@@ -1,1 +1,0 @@
-curl http://tld.local/flush.php

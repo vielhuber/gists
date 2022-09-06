@@ -1,4 +1,0 @@
-{link file='frontend/_public/src/img/icon_ssl.png'}
-{$sBasefile}shopware.php?sViewport=registerFC&sUseSSL=1&sValidation=H
-{url controller='checkout'}
-{url controller='index'}

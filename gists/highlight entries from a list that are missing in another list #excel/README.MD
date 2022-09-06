@@ -1,3 +1,0 @@
-- Spalte A: Liste #1; Spalte B: Liste #2
-- Markiere alle Einträge in Liste #2, die nicht in Liste #1 sind
-- Bedingte Formatierung: - `=NICHT(WENNFEHLER(VERGLEICH(B1;$A$1:$A$99999;0);0))` anwenden auf `=$B:$B` und mit rotem Hintergrund formatieren

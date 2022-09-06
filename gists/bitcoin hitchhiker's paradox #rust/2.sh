@@ -1,1 +1,0 @@
-date -d @$(bitcoin-cli getblock $(bitcoin-cli getblockhash $(bitcoin-cli getblockcount)) | grep -Po '(?<="time": )[^,]*') +"%H:%M:%S"

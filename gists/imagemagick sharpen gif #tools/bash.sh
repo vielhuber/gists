@@ -1,1 +1,0 @@
-convert input.gif -sharpen 0x3 output.gif

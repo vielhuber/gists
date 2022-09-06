@@ -1,7 +1,0 @@
-<!-- html solution: place this in head BEFORE analytics is embedded -->
-<script>
-  var disableStr = 'ga-disable-'+'UA-XXXXXXXX-1'; if( document.cookie.indexOf(disableStr + '=true') > -1 ) { window[disableStr] = true; } document.addEventListener('DOMContentLoaded', function() { document.addEventListener('click', function(e) { if( e.target.tagName === 'A' && e.target.getAttribute('href') === '#ga-disable' ) { alert('OK!'); document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/'; window[disableStr] = true; e.preventDefault(); } }, true); });
-</script>
-
-<!-- use this link to opt out -->
-<a href="#ga-disable">Google Analytics deaktivieren</a>

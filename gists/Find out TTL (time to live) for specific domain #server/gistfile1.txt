@@ -1,1 +1,0 @@
-nslookup -debug www.serverfault.com 8.8.8.8

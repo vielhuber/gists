@@ -1,1 +1,0 @@
-execution time: {{ (microtime(true) - LARAVEL_START) }} seconds

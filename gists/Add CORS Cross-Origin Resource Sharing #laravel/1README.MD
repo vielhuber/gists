@@ -1,2 +1,0 @@
-- The solution below is obsolete for laravel >= 9. Check `config/cors.php` for settings.
-- If you want to enable CORS also for static assets, use `.htaccess` instead (see [different gist](https://gist.github.com/vielhuber/038f48f0dc5449b1355c08a823d938de)); also make sure to disable cors in laravel (disable all cors-middlwares)
