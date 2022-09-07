@@ -1,0 +1,5 @@
+# explanation: https://serverfault.com/questions/278651/relative-substitution-in-mod-rewrite-rewriterule/420751#420751
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond $1#%{REQUEST_URI} ([^#]*)#(.*?)\1$
+RewriteRule ^(.*)$ %2index.php [QSA,L]

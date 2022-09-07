@@ -1,0 +1,1 @@
+bitcoin-cli getblock $(bitcoin-cli getblockhash $(bitcoin-cli getblockcount)) | grep "00000000000000000001231a42bfe1ec3c8afef4d7ac6c614a1f6baf6cc7743b"

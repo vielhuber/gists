@@ -1,0 +1,25 @@
+.video-js-container {
+	width:100%;
+	max-width:800px;
+	margin:0 auto;
+}
+.video-js-container .video {
+	border: 1px solid #EAEAEA;
+}
+.video-js-container .video .video-js {
+	padding-top: 56.25%;
+}
+.video-js-container .video .vjs-fullscreen {
+	padding-top: 0px;
+}
+.video-js-container .vjs-default-skin .vjs-play-progress,
+.video-js-container .vjs-default-skin .vjs-volume-level {
+	background-color: #F36F27;
+}
+.video-js-container .vjs-default-skin .vjs-big-play-button {
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin:auto;
+}

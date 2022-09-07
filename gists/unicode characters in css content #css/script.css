@@ -1,0 +1,4 @@
+.foo {
+	content: '„'; /* does not work properly */
+	content: '\201E '; /* converted with https://r12a.github.io/app-conversion/ > css)
+}

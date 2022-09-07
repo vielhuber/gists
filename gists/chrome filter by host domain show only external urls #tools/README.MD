@@ -1,0 +1,1 @@
+```-domain:tld.com -domain:www.tld.com```

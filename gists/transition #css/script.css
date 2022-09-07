@@ -1,0 +1,18 @@
+div
+{
+    transition-property: color; /* all|none */
+    transition-duration: 2s; /* default: 0s */
+    transition-timing-function: ease-in-out; /* linear|ease|ease-in|ease-out|ease-in-out */
+  	transition-delay: 2s; /* default: 0s */
+  
+  	/* shorthand */
+	transition: all 0s ease 0s; /* transition-property transition-duration transition-timing-function transition-delay */
+      
+    /* multiple transitions */
+    transition: color 0s ease 0s, width 0s ease-in-out 0s;
+  	/* or use the properties directly (advantage: you only have to additionaly specify those properties that differ!) */
+    transition-property: color, width;
+  	transition-duration: 0s;
+    transition-timing-function: ease, ease-in-out;
+  	transition-delay: 0s;
+}

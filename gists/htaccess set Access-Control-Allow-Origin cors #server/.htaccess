@@ -1,0 +1,6 @@
+# warning: this does not work on some servers (then use php version instead)
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Authorization"    
+</IfModule>

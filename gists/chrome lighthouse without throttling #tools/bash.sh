@@ -1,0 +1,1 @@
+lighthouse http://tld.local --emulated-form-factor=none --throttling-method=provided --only-categories=performance --view

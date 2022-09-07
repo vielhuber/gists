@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>.</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.52/wavesurfer.min.js"></script>
+    <script type="text/javascript">
+    <!--
+    $(document).ready(function() {
+        var wavesurfers = [];
+        $('.waveform').each(function() {
+            var self = this;
+            var wavesurfer = WaveSurfer.create({
+                container: $(self).find('.waveform__waves').get(0),
+                cursorWidth: 0,
+                waveColor: '#e5e5e5',
+                progressColor: '#7adfa9',
+                height: $(self).find('.waveform__waves').height(),
+                normalize: false
+            });
+            var wavesurfer_index = wavesurfers.length;
+            wavesurfer.load($(self).attr('data-url'));
+            wavesurfers.push(wavesurfer); 
+            $(self).find('.waveform__play').click(function() {
+                if( !wavesurfer.isPlaying() ) {
+                    // stop all other wavesurfers
+                    $('.waveform__play--playing').removeClass('waveform__play--playing');
+                    $.each(wavesurfers, function(index, value) {
+                        if( value.isPlaying() ) { value.stop(); }
+                        else if( index != wavesurfer_index ) { value.seekTo(0); }
+                    });
+                    wavesurfer.play();
+                    $(self).find('.waveform__play').addClass('waveform__play--playing');
+                }
+                else {
+                    wavesurfer.pause();
+                    $(self).find('.waveform__play').removeClass('waveform__play--playing');
+                }
+                return false;
+            });
+            $(self).find('.waveform__stop').click(function() {
+                $(self).find('.waveform__play').removeClass('waveform__play--playing');
+                if( wavesurfer.isPlaying() ) { wavesurfer.stop(); }
+                else { wavesurfer.seekTo(0); }
+                return false;
+            });
+            window.setInterval(function() {
+                var status = "";
+                var time = wavesurfer.getCurrentTime();
+                time = Math.round(time);
+                time = ('0'+Math.floor(time/60)).slice(-2)+":"+('0'+(time % 60)).slice(-2)
+                status += time;
+                if( wavesurfer.isPlaying() ) { status += ' (playing)'; }
+                $(self).find('.waveform__status').text(status);
+            },1000);
+
+        });
+    });
+    -->
+    </script>
+    <style type='text/css'>
+    <!--
+	* {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing:    border-box;
+		box-sizing:         border-box;
+	}
+    .waveform__waves {
+        width:50%;
+        height:200px;
+    }
+    .waveform__play--playing {
+        color:red;
+    }
+    -->
+    </style>
+</head>
+<body>
+
+    <div class="waveform" data-url="https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3">
+        <div class="waveform__waves"></div>
+        <div class="waveform__play">Play/Pause</div>
+        <div class="waveform__stop">Stop</div>
+        <div class="waveform__status"></div>
+    </div>
+
+    <div class="waveform" data-url="https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3">
+        <div class="waveform__waves"></div>
+        <div class="waveform__play">Play/Pause</div>
+        <div class="waveform__stop">Stop</div>
+        <div class="waveform__status"></div>
+    </div>
+
+</body>
+</html>

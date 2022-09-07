@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>.</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                if (document.querySelector('.tooltip') !== null) {
+                    document.querySelectorAll('.tooltip').forEach((el) => {
+                      	// wrap all text nodes
+                        Array.from(el.childNodes)
+                            .filter(node => node.nodeType === 3 && node.textContent.trim().length > 1)
+                            .forEach(node => {
+                                const p = document.createElement('p');
+                                node.after(p);
+                                p.appendChild(node);
+                            });
+                        el.innerHTML = `
+                            <div class="tooltip__icon">❓</div>
+                            <div class="tooltip__inner">${el.innerHTML}</div>
+                        `;
+                        el.style.display = 'inline-block';
+                        el.addEventListener('mouseenter', () => {
+                            let inner = el.querySelector('.tooltip__inner');
+                            inner.style = '';
+                            inner.style.width = '500px';
+                            inner.style.height = 'auto';
+                            inner.classList.add('tooltip__inner--visible');
+                            let windowWidthWithoutScrollbar =
+                                    document.documentElement.clientWidth || document.body.clientWidth,
+                                windowHeightWithoutScrollbar =
+                                    document.documentElement.clientHeight || document.body.clientHeight,
+                                scrollTop =
+                                    (window.pageYOffset || document.documentElement.scrollTop) -
+                                    (document.documentElement.clientTop || 0),
+                                scrollBottom = scrollTop + window.innerHeight;
+
+                            if (inner.offsetWidth > windowWidthWithoutScrollbar) {
+                                inner.style.width = windowWidthWithoutScrollbar + 'px';
+                            }
+                            if (inner.offsetHeight > windowHeightWithoutScrollbar) {
+                                inner.style.height = windowHeightWithoutScrollbar + 'px';
+                            }
+
+                            let offsetTop = Math.ceil(
+                                    inner.getBoundingClientRect().top +
+                                        window.pageYOffset -
+                                        document.documentElement.clientTop
+                                ),
+                                offsetLeft = Math.ceil(
+                                    inner.getBoundingClientRect().left +
+                                        window.pageXOffset -
+                                        document.documentElement.clientLeft
+                                ),
+                                offsetRight = Math.ceil(
+                                    inner.getBoundingClientRect().left +
+                                        window.pageXOffset -
+                                        document.documentElement.clientLeft +
+                                        inner.offsetWidth
+                                ),
+                                offsetBottom = Math.ceil(
+                                    inner.getBoundingClientRect().top +
+                                        window.pageYOffset -
+                                        document.documentElement.clientTop +
+                                        inner.offsetHeight
+                                ),
+                                max = Math.max(windowWidthWithoutScrollbar, windowHeightWithoutScrollbar);
+                            while (
+                                max > 0 &&
+                                (offsetRight > windowWidthWithoutScrollbar ||
+                                    offsetBottom > scrollBottom ||
+                                    offsetLeft < 0 ||
+                                    offsetTop < 0)
+                            ) {
+                                if (offsetRight > windowWidthWithoutScrollbar) {
+                                    inner.style.left = parseInt(window.getComputedStyle(inner).left) - 1 + 'px';
+                                    offsetLeft--;
+                                    offsetRight--;
+                                }
+                                if (offsetBottom > scrollBottom) {
+                                    inner.style.top = parseInt(window.getComputedStyle(inner).top) - 1 + 'px';
+                                    offsetTop--;
+                                    offsetBottom--;
+                                }
+                                if (offsetLeft < 0) {
+                                    inner.style.left = parseInt(window.getComputedStyle(inner).left) + 1 + 'px';
+                                    offsetLeft++;
+                                    offsetRight++;
+                                }
+                                if (offsetTop < 0) {
+                                    inner.style.top = parseInt(window.getComputedStyle(inner).top) + 1 + 'px';
+                                    offsetTop++;
+                                    offsetBottom++;
+                                }
+                                max--;
+                            }
+                        });
+                        el.addEventListener('mouseleave', () => {
+                          let inner = el.querySelector('.tooltip__inner');
+                          inner.classList.remove('tooltip__inner--visible');
+                          // clear custom position
+                          setTimeout(() => {
+                              if (!inner.classList.contains('tooltip__inner--visible')) {
+                                  inner.style = '';
+                              }
+                          }, 300);
+                        });
+                    });
+                }
+            });
+        </script>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            .tooltip {
+                display: none;
+                position: relative;
+                cursor: help;
+            }          
+            .tooltip__icon {
+                padding: 0 2px;
+            }
+            .tooltip__inner {
+                opacity: 0;
+                height: 0;
+                width: 0;
+                pointer-events: none;
+                position: absolute;
+                z-index: 2147483647;
+                left: 0;
+                top: 100%;
+                background-color: #eee;
+                box-shadow: 2px 4px 6px 1px #6f6f6f;
+                padding: 15px 15px;
+                transition: opacity 0.25s ease-in-out;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            .tooltip__inner--visible {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .tooltip__inner img {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .tooltip__inner p {
+                font-size: 12px;
+                line-height: 1.5;
+                margin: 0 0 10px;
+              	font-weight:normal;
+            }
+            .tooltip__inner *:last-child {
+                margin-bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>
+            Dies ist eine Überschrift
+            <div class="tooltip">
+                <img src="https://picsum.photos/200/100" alt="" />
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br />Aenean commodo ligula eget dolor. Aenean
+                massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
+                felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede
+                justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
+                venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
+                Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+            </div>
+        </h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+            ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+            fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+            justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper
+            nisi. Aenean vulputate eleifend tellus.
+        </p>
+
+        <h2>
+            Dies ist eine noch Überschrift Dies ist eine noch Überschrift Dies ist eine noch Überschrift Dies ist eine
+            noch Überschrift Dies ist eine noch Überschrift Dies ist eine noch Überschrift
+            <div class="tooltip">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br />Aenean commodo ligula eget dolor. Aenean
+                massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
+                felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede
+                justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
+                venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
+                Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+            </div>
+        </h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+            ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+            fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+            justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper
+            nisi. Aenean vulputate eleifend tellus.
+        </p>
+    </body>
+</html>

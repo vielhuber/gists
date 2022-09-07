@@ -1,0 +1,7 @@
+- Code-Verhalten: wp-includes/load.php: Zeile 309
+- WP_DEBUG = false: Es werden alle Fehler außer Notices ausgegeben, aber es hängt an der Servereinstellung ini_set('display_errors', ?) ob sie wirklich angezeigt werden
+- WP_DEBUG = true: Es werden alle Fehler, samt Notices ausgegeben. Nur dann haben WP_DEBUG_DISPLAY und WP_DEBUG_LOG Auswirkungen
+- WP_DEBUG_DISPLAY: true: erzwingt ini_set('display_errors', 1)
+- WP_DEBUG_LOG: steuert das (ggfs. zusätzliche) Logging.
+- Auf Development sollte man WP_DEBUG auf true setzen
+- Auf Production sollte WP_DEBUG false> und Serverweit ini_set('display_errors', 0) aktiv sein.

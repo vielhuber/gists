@@ -1,0 +1,11 @@
+<input type="checkbox" name="group[]" value="val1" id="group_val1" /> <label for="group_val1">This is value 1</label><br/>
+<input type="checkbox" name="group[]" value="val2" id="group_val2" checked="checked" /> <label for="group_val2">This is value 2</label>
+
+<!-- cleaner -->
+<label>
+  <input type="checkbox" name="foo" value="1" />
+  I accept
+</label>
+
+<!-- if you don't provide a value, the value "on" is posted! -->
+<input type="checkbox" name="foo" />
