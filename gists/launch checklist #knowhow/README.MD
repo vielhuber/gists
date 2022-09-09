@@ -69,6 +69,7 @@
 - Alle Inputfelder, (im Themes Ordner nach $_GET suchen) mit Hilfe von esc_attr() escapen(!)
 - Seite im Dark Mode testen (Chrome ist dort eh drin und testen, ob Seite kaputt geht)
 - WPML > Translation Management > Translators > Alle Editoren als "Translators" hinzufügen (von Ausgangssprache in alle Zielsprachen)
+- Telefonnummernlinks (tel:+ ...) testen (dürfen nicht "(0)" enthalten)
 
 ## POST-LAUNCH
 - BackWPup Basic Auth entfernen und überprüfen ob lokales Backup läuft
