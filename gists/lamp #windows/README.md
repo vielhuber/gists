@@ -425,11 +425,11 @@ xdebug.var_display_max_depth = -1
   - install/upgrade new/specific node versions
   - ```nvm install node```
   - ```nvm install --lts```
-  - ```nvm install 16.5.0```
+  - ```nvm install 16.17.0```
   - ```nvm install 14.18.0```
   - ```nvm install 12.10.0```
   - ```nvm install 10.16.3```
-  - ```nvm alias default 14.18.0```
+  - ```nvm alias default 16.17.0```
   - Version wechseln: ```nvm use 10.16.3```
   - Cache leeren (falls sich package-lock.json ändert: `npm cache verify` bzw `npm cache clean -f`)
 - nativ (obsolet)
