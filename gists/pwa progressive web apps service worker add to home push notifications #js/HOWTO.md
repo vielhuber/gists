@@ -320,6 +320,24 @@ self.addEventListener('message', (event) => {
 Header add Service-Worker-Allowed /
 ```
 
+## .htaccess
+
+- this disables http caching, but not service worker caching (e.g. for style.css and script.js)
+
+```
+# disable http caching
+Header set Cache-Control "no-cache, no-store, must-revalidate"
+Header set Pragma "no-cache"
+Header set Expires 0
+
+# add this if you request from a specific subfolder
+<If "%{HTTP_REFERER} =~ m#app#">
+Header set Cache-Control "no-cache, no-store, must-revalidate"
+Header set Pragma "no-cache"
+Header set Expires 0
+</If>
+```
+
 ## debug in web developer tools
 
 - Application > Service Workers > Offline

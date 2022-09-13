@@ -443,6 +443,8 @@ xdebug.var_display_max_depth = -1
   - ```nano ~/.bash_profile```
   - ```nvm_auto_switch() { if [[ $PWD == $PREV_PWD ]]; then return; fi; PREV_PWD=$PWD; [[ -f ".nvmrc" ]] && nvm use; }; export PROMPT_COMMAND=nvm_auto_switch;```
   - now place `.nvmrc` with the version (e.g. `12.10.0`) in the folder, where your `package.json` lays
+- install ncu
+  - ```npm install -g npm-check-updates```
 
 #### yarn
 - ```curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -```

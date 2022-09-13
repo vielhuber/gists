@@ -1,10 +1,13 @@
-- `npm audit` reads your package.json and checks the version of its dependencies against a security vulnerability database.
-- `npm audit fix` upgrades unsafe dependencies and only modifies those that shouldn't cause problems based on semver rules. other developers also get this change, if `package-lock.json` is checked in git.
-- `npm audit fix --force` can be dangerious option because it upgrades the dependencies regardless of any rules. This can cause a dependency to go from version 1.2.0 to version 2.3.0, for example.
+- `npm audit` reads your `package.json` and checks the version of its dependencies against a security vulnerability database.
+- `npm audit fix` upgrades unsafe dependencies and only modifies those that shouldn't cause problems based on semver rules.\
+other developers also get this change, because `package-lock.json` is modified (the file must be checked in git).
+- `npm audit fix --force` can be dangerous because it upgrades the dependencies regardless of any rules. this can cause e.g. a dependency to go from version 1.2.0 to version 2.3.0.
 
-#### main command
+#### main commands
 ```sh
 npm audit
+npm audit fix
+npm audit fix --force
 ```
 
 #### show all subpackages that are unsafe 
