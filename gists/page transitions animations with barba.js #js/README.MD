@@ -143,6 +143,10 @@ window.addEventListener('load', e => {
                         let langPrev = data.current.html.indexOf('<html lang="de"') > -1 ? 'de' : 'en',
                             langCur = data.next.html.indexOf('<html lang="de"') > -1 ? 'de' : 'en';
                         document.documentElement.setAttribute('lang', langCur);
+                        // update dynamic div outside of barba container
+                        if (document.querySelector('.dynamic-div') !== null && data.next.html.indexOf('dynamic-div') > -1) {
+                            document.querySelector('.dynamic-div').innerHTML = new DOMParser().parseFromString(data.next.html, 'text/html').body.querySelector('.dynamic-div').innerHTML;
+                        }
                         // run on subsequent load
                         console.log('subsequent load');
                         // important: manually call analytics scripts
