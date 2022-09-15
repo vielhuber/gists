@@ -22,6 +22,9 @@ npm list some-subpackage
 
 #### if a dependency cannot be upgraded through npm run fix
 
+##### option 0
+- open an issue and/or write the developer directly via email that he has to update
+
 ##### option 1
 - fork the repository on github (only master)
 - create a new branch called `BRANCH-WITH-FIX`
