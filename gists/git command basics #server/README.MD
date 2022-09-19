@@ -645,7 +645,7 @@ Usage: git acp
 #### other developers / testing / production
 - for all distributed copies of the repo, you will need to request they do a pull with rebasing
 - if a user with their own local copy of the repository did a simple `git pull && git push`, this would result in the big files being reintroduced into the central repository
-- `rm -rf .git && git clone git@git.close2dev.de:c2nm/close2note.git temp && mv temp/.git ./.git && rm -rf temp && git add -A .`: poor man's fresh clone
+- `rm -rf .git && git clone git@git.close2dev.de:c2nm/close2note.git temp && mv temp/.git ./.git && rm -rf temp && git add -A . && git commit -m "Push obscure file changes (only if needed)." && git push`: poor man's fresh clone
 - `rm -rf repo && git clone xxx .`: the user has the reduced repo size
 - `git pull -r`: the user still has the big repo size locally, but does not reintroduce the wrong history
 

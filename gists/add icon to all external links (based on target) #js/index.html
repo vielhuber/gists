@@ -109,6 +109,10 @@
                     if( el.children.length === 1 ) {
                         target = el.children[0];
                     }
+            		// bugfix on flex elements
+            		if( window.getComputedStyle(target).display.indexOf('inline-flex') > -1 ) {
+                		target.style.display = 'inline-block';
+            		}
                     // split last word
                     let last_word = '';
                     let words = target.innerText.split(' ');
