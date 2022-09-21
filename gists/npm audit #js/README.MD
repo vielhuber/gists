@@ -20,6 +20,12 @@ npm audit | grep Package
 npm list some-subpackage
 ```
 
+#### first update all of your dependencies
+```sh
+ncu -u
+npm install && npm update
+```
+
 #### if a dependency cannot be upgraded through npm run fix
 
 ##### option 0
