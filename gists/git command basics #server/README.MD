@@ -664,6 +664,10 @@ Usage: git acp
 - `cd ..`
 - `rm -rf tmp-repo`
 
+#### gitea
+- do exactly the steps as on `github`
+- login on the remote command line and run `sudo -u git git gc --aggressive --prune=now` in the repo-folder
+
 #### gitlab
 - https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
 - `mkdir tmp-repo`

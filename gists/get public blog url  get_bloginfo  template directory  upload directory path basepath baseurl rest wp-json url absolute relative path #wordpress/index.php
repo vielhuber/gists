@@ -10,6 +10,7 @@ rest_url('v1/foo/bar') // rest url
 rest_url('v1/foo/bar?lang='.ICL_LANGUAGE_CODE) // rest url with wpml
 wp_lostpassword_url() // reset password url
 content_url() // wp-content
+get_admin_url() // wp-admin
 
 // public urls without language
 site_url()
