@@ -667,6 +667,10 @@ Usage: git acp
 #### gitea
 - do exactly the steps as on `github`
 - login on the remote command line and run `sudo -u git git gc --aggressive --prune=now` in the repo-folder
+- if you face memory limit issues, add this
+  - `sudo -u git git config --global pack.windowMemory "100m"`
+  - `sudo -u git git config --global pack.packSizeLimit "100m"`
+  - `sudo -u git git config --global pack.threads "1"`
 
 #### gitlab
 - https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
