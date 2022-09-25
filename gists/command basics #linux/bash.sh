@@ -218,8 +218,9 @@ find . -name ".git"
 find . -name ".*" -print
 
 # recursively files that contain text
-grep --include=*.php -rnw "/full/path/" -e "your text"
-grep --include=*.php -rnwl "/full/path/" -e "your text" # only show filenames
+grep --include=*.php -rn "/full/path/" -e "your text"
+grep --include=*.php -rnl "/full/path/" -e "your text" # only show filenames
+grep --include=*.php -rnlw "/full/path/" -e "your text" # match only whole word
 grep --include=*.php --exclude-dir="node_modules" -rnw "/full/path/" -e "your text" # exclude folder
 
 # find files (and exclude specific folder)
