@@ -6,7 +6,7 @@
 ```php
 add_filter( 'the_content', function($content) {
     $content = str_replace(['&#8222;', '&bdquo;', '„'], '»', $content);
-    $content = str_replace(['&#8220;', '&ldquo;', '“'], '«', $content);
+    $content = str_replace(['&#8220;', '&ldquo;', '“', '&#8221;', '&rdquo;', '”'], '«', $content);
     $content = str_replace(['&#8218;', '&sbquo;', '‚'], '›', $content);
     $content = str_replace(['&#8216;', '&lsquo;', '‘'], '‹', $content);
     return $content;

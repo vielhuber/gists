@@ -60,7 +60,7 @@
 - socialfoo: Facebook Developers App Id eintragen
 - WordPress Admin E-Mail-Adresse auf support@close2.de setzen (oder alternativ bewusst auf Kunden-E-Mail setzen)
 - Passwortschutz: htaccess/htpasswd im Einsatz (für Testing aktiv, für Production inaktiv)
-- Silbentrennung auf allen Browsern testen (force hyphenopoly)
+- Silbentrennung auf allen Browsern testen (nun nur noch, Hyphenopoly ist nicht mehr notwendig)
 - Backend (und ggf. auch Frontend) auf Testing komplett abriegeln, damit sich Kunde nicht mehr einloggt
 - Vom Hauptuser (ID: 1) ggf. E-Mail-Adresse ändern und Website löschen
 - WordPress-Zugänge (personengebunden) für Teammitglieder (Rolle: Administrator) sowie Kunden angelegt (Rolle: Redakteur) und Zugangsdaten zugesandt
