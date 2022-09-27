@@ -319,7 +319,19 @@ Usage: git acp
 - `git branch --merged | grep -q "other-branch$\|and-another-branch$" && echo "yes" || echo "no"` # multiple other branches
 
 ### checkout all branches locally
-- `git branch -a | grep -v HEAD | perl -ne 'chomp($_); s|^\*?\s*||; if (m|(.+)/(.+)| && not $d{$2}) {print qq(git branch --track $2 $1/$2\n)} else {$d{$_}=1}' | csh -xfs`
+
+#### option 1
+- `git config --global alias.clone-branches '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t'`
+- `git clone-branches` (or main)
+- `git checkout master`
+
+#### option 2
+- `git clone --mirror git@github.com:foo/bar.git ./.git`
+- `git config --bool core.bare false`
+- `git checkout master` (or main)
+
+
+
 
 ## pull request
 #### make a pull request on github (for an external project), go to github.com to the repository you want to make a pull request, click "Fork"
@@ -626,6 +638,12 @@ Usage: git acp
 - backup: `git bundle create repo.bundle --all`
 - restore: `git clone repo.bundle`
 
+## migrate / copy git repository
+- `git clone --mirror git@gitlab.com:c2nm/old.git .`
+- `git remote set-url origin git@gitlab.com:c2nm/new.git`
+- set default branch by pushing this single branch first `git push origin master` (or main)
+- `git push --mirror`
+
 ## cleanup history
 
 ### solutions
@@ -650,12 +668,14 @@ Usage: git acp
 - `git pull -r`: the user still has the big repo size locally, but does not reintroduce the wrong history
 
 #### github
-- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository (modified, since we want to rewrite history in all branches)
 - `mkdir tmp-repo`
 - `cd tmp-repo`
 - `git clone git@github.com:foo/bar.git .`
+- pull all branches: `git config --global alias.clone-branches '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t' && git clone-branches`
+- `git checkout master`
 - `cp .git/config /tmp/config-backup`
-- `git filter-repo --invert-paths --path path/to/exclude/`
+- `git filter-repo --force --invert-paths --path path/to/exclude/`
 - `mv /tmp/config-backup .git/config`
 - `git push origin --force --all`
 - `git push origin --force --tags`
