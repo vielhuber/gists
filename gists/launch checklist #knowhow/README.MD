@@ -51,7 +51,7 @@
 - Prüfen, ob Seite mit WordPress Admin Bar gut funktioniert (padding)
 - Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
 - Cross-Browser-Check (inkl. Responsive) durchgeführt: BackstopJS + Screaming Frog kombiniert einsetzen(!)
-- Seite auf Auflöungen >1920x1080 getestet (4k Support!)
+- Seite auf Auflöungen >1920x1080 getestet (4k Support!); Wenn KEINE spezielle Optimierung gemacht wurde, dann wenigstens die Seitenbreite auf 1920px begrenzen
 - browser-update.org integriert
 - Kontaktformulare durch Captcha (reCAPTCHA) oder alternativ Honeypot schützen
 - reCAPTCHA registrieren

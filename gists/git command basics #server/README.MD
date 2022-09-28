@@ -322,8 +322,8 @@ Usage: git acp
 
 #### option 1
 - `git config --global alias.clone-branches '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t'`
-- `git clone-branches` (or main)
-- `git checkout master`
+- `git clone-branches`
+- `git checkout master` (or main)
 
 #### option 2
 - `git clone --mirror git@github.com:foo/bar.git ./.git`
@@ -638,11 +638,11 @@ Usage: git acp
 - backup: `git bundle create repo.bundle --all`
 - restore: `git clone repo.bundle`
 
-## migrate / copy git repository
+## migrate / copy whole git repository
 - `git clone --mirror git@gitlab.com:c2nm/old.git .`
 - `git remote set-url origin git@gitlab.com:c2nm/new.git`
-- set default branch by pushing this single branch first `git push origin master` (or main)
 - `git push --mirror`
+- set the default branch if necessary (e.g. gitea only detects `main` as a default branch but not `master`)
 
 ## cleanup history
 
@@ -673,7 +673,7 @@ Usage: git acp
 - `cd tmp-repo`
 - `git clone git@github.com:foo/bar.git .`
 - pull all branches: `git config --global alias.clone-branches '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t' && git clone-branches`
-- `git checkout master`
+- `git checkout master` (or main)
 - `cp .git/config /tmp/config-backup`
 - `git filter-repo --force --invert-paths --path path/to/exclude/`
 - `mv /tmp/config-backup .git/config`
