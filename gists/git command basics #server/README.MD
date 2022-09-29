@@ -642,7 +642,7 @@ Usage: git acp
 - `git clone --mirror git@gitlab.com:c2nm/old.git .`
 - `git remote set-url origin git@gitlab.com:c2nm/new.git`
 - `git push --mirror`
-- set the default branch if necessary (e.g. gitea only detects `main` as a default branch but not `master`)
+- set the default branch via web interface if necessary (e.g. gitea only detects `main` as a default branch but not `master`)
 
 ## cleanup history
 
@@ -653,6 +653,7 @@ Usage: git acp
 
 ### analyze
 - `git filter-repo --analyze && cat .git/filter-repo/analysis/directories-all-sizes.txt`
+- `git-sizer --verbose`
   
 ### remove data
 
@@ -663,12 +664,13 @@ Usage: git acp
 #### other developers / testing / production
 - for all distributed copies of the repo, you will need to request they do a pull with rebasing
 - if a user with their own local copy of the repository did a simple `git pull && git push`, this would result in the big files being reintroduced into the central repository
-- `rm -rf .git && git clone git@git.close2dev.de:c2nm/close2note.git temp && mv temp/.git ./.git && rm -rf temp && git add -A . && git commit -m "Push obscure file changes (only if needed)." && git push`: poor man's fresh clone
+- `rm -rf .git && git clone git@git.close2dev.de:c2nm/foo.git temp && mv temp/.git ./.git && rm -rf temp && git add -A . && git commit -m "Push obscure file changes (only if needed)." && git push`: poor man's fresh clone
 - `rm -rf repo && git clone xxx .`: the user has the reduced repo size
 - `git pull -r`: the user still has the big repo size locally, but does not reintroduce the wrong history
 
 #### github
 - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository (modified, since we want to rewrite history in all branches)
+- https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#DISCUSSION (read this; we push to the same repo and know the caveats)
 - `mkdir tmp-repo`
 - `cd tmp-repo`
 - `git clone git@github.com:foo/bar.git .`
@@ -677,8 +679,7 @@ Usage: git acp
 - `cp .git/config /tmp/config-backup`
 - `git filter-repo --force --invert-paths --path path/to/exclude/`
 - `mv /tmp/config-backup .git/config`
-- `git push origin --force --all`
-- `git push origin --force --tags`
+- `git push origin --mirror`
 - check size locally: `git gc && git count-objects -vH`
 - check size remotely: after ~24 hours at https://github.com/settings/repositories (if it is a repo of an organization, first add your private account to https://github.com/foo/bar/settings/access)
 - `cd ..`
