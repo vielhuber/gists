@@ -659,61 +659,99 @@ Usage: git acp
 
 #### requirements
 - the files that should be removed from history need to be already removed from `HEAD` and ignored in `.gitignore`
-- you have backuped your local working repo with `git bundle create repo.bundle --all`
+- you should have backuped your local working repo with `git bundle create repo.bundle --all`
+
+#### same vs. new repo
+- pushing the reduced size to the same repo can be difficult
+- `git filter-repo` therefore removes remotes and recommends adding a new fresh repository
+- read more for the reasons here: https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#DISCUSSION
+- however, it's possible to push to the same repo
 
 #### other developers / testing / production
 - for all distributed copies of the repo, you will need to request they do a pull with rebasing
 - if a user with their own local copy of the repository did a simple `git pull && git push`, this would result in the big files being reintroduced into the central repository
-- `rm -rf .git && git clone git@git.close2dev.de:c2nm/foo.git temp && mv temp/.git ./.git && rm -rf temp && git add -A . && git commit -m "Push obscure file changes (only if needed)." && git push`: poor man's fresh clone
-- `rm -rf repo && git clone xxx .`: the user has the reduced repo size
-- `git pull -r`: the user still has the big repo size locally, but does not reintroduce the wrong history
+- options:
+  - `rm -rf .git && git clone git@git.tld.com:c2nm/foo.git temp && mv temp/.git ./.git && rm -rf temp && git add -A . && git commit -m "Push obscure file changes (only if needed)." && git push`: poor man's fresh clone
+  - `rm -rf repo && git clone xxx .`: full fresh clone
+  - `git pull -r`: the user still has the big repo size locally, but count potentially reintroduce the wrong (bigger) history
 
-#### github
-- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository (modified, since we want to rewrite history in all branches)
-- https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#DISCUSSION (read this; we push to the same repo and know the caveats)
+#### gitea (same/new repo)
+- `mkdir tmp-repo`
+- `cd tmp-repo`
+- `git clone git@git.tld.com:foo/bar.git .`
+- `cp .git/config /tmp/config-backup`
+- `git filter-repo --invert-paths --path path/to/exclude/`
+- option 1: same repo
+  - `mv /tmp/config-backup .git/config`
+  - `git push origin --mirror`
+  - login on the remote command line and run in the repo-folder
+    - `sudo -u git git reflog expire --expire=now --all`
+    - `sudo -u git git gc --aggressive --prune=now` 
+  - if you face memory limit issues, modify the git configuration
+    - `sudo -u git git config --global pack.windowMemory "100m"`
+    - `sudo -u git git config --global pack.packSizeLimit "100m"`
+    - `sudo -u git git config --global pack.threads "1"`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: https://git.tld.com/foo/bar (if in web ui the size does not change, make a slight modification to a file and push again normally)
+- option 2: new repo
+  - `git remote set-url origin git@git.tld.com:foo/bar-new.git`
+  - `git push origin --force --all`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: https://git.tld.com/foo/bar
+- `cd ..`
+- `rm -rf tmp-repo`
+  
+#### github (same/new repo)
+- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
 - `mkdir tmp-repo`
 - `cd tmp-repo`
 - `git clone git@github.com:foo/bar.git .`
-- pull all branches: `git config --global alias.clone-branches '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t' && git clone-branches`
-- `git checkout master` (or main)
 - `cp .git/config /tmp/config-backup`
-- `git filter-repo --force --invert-paths --path path/to/exclude/`
-- `mv /tmp/config-backup .git/config`
-- `git push origin --mirror`
-- check size locally: `git gc && git count-objects -vH`
-- check size remotely: after ~24 hours at https://github.com/settings/repositories (if it is a repo of an organization, first add your private account to https://github.com/foo/bar/settings/access)
+- `git filter-repo --invert-paths --path path/to/exclude/`
+- option 1: same repo
+  - `mv /tmp/config-backup .git/config`
+  - `git push origin --force --all`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: latest after ~24 hours at https://github.com/settings/repositories (if it is a repo of an organization, first add your private account to https://github.com/foo/bar/settings/access)
+- option 2: new repo
+  - `git remote set-url origin git@git.tld.com:foo/bar-new.git`
+  - `git push origin --force --all`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: https://github.com/settings/repositories
 - `cd ..`
 - `rm -rf tmp-repo`
 
-#### gitea
-- do exactly the steps as on `github`
-- login on the remote command line and run `sudo -u git git reflog expire --expire=now --all && sudo -u git git gc --aggressive --prune=now` in the repo-folder
-- if you face memory limit issues, add this
-  - `sudo -u git git config --global pack.windowMemory "100m"`
-  - `sudo -u git git config --global pack.packSizeLimit "100m"`
-  - `sudo -u git git config --global pack.threads "1"`
-
-#### gitlab
+#### gitlab (same repo)
 - https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
 - `mkdir tmp-repo`
 - `cd tmp-repo`
-- `Settings` > `General` > `Advanced` > `Export project` > download `tar.gz` file into `tmp-repo`
-- `tar xzf 20*.tar.gz`
-- `git clone --bare --mirror project.bundle`
-- `cd project.git`
-- `git filter-repo --invert-paths --path path/to/exclude/`
-- `cp ./filter-repo/commit-map /tmp/commit-map-1`
-- copying the commit-map has to be done after *every* single command from git filter-repo (you need the `commit-map` files later)
-- `git remote remove origin`
-- `git remote add origin git@gitlab.com:foo/bar.git`
-- `Settings` > `Repository` > `Protected branches`/`Protected branches` > enable `Allowed to force push` to `main`/`master`
-- `git push origin --force 'refs/heads/*'`
-- `git push origin --force 'refs/tags/*'`
-- `git push origin --force 'refs/replace/*'`
-- `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` on `main`/`master`
-- `cd ./../../`
+- option 1: same repo
+  - `Settings` > `General` > `Advanced` > `Export project` > download `tar.gz` file into `tmp-repo`
+  - `tar xzf 20*.tar.gz`
+  - `git clone --bare --mirror project.bundle`
+  - `cd project.git`
+  - `git filter-repo --invert-paths --path path/to/exclude/`
+  - `cp ./filter-repo/commit-map /tmp/commit-map-1`
+  - copying the commit-map has to be done after *every* single command from git filter-repo (you need the `commit-map` files later)
+  - `git remote remove origin`
+  - `git remote add origin git@gitlab.com:foo/bar.git`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > enable `Allowed to force push` to `main`/`master`
+  - `git push origin --force 'refs/heads/*'`
+  - `git push origin --force 'refs/tags/*'`
+  - `git push origin --force 'refs/replace/*'`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` on `main`/`master`
+  - `date` – wait 30 minutes (😱) – `date`
+  - `Settings` > `Repository` > upload `/tmp/commit-map-X`
+  - `date` – wait 5 minutes (😱) – `date`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: `Settings` > `Usage Quotas`
+- option 2: new repo
+  - `git clone git@gitlab.com:foo/bar.git .`
+  - `cp .git/config /tmp/config-backup`
+  - `git filter-repo --invert-paths --path path/to/exclude/`
+  - `git remote set-url origin git@@gitlab.com:foo/bar-new.git`
+  - `git push origin --force --all`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: `Settings` > `Usage Quotas`
+- `cd ..`
 - `rm -rf tmp-repo`
-- `date` – wait 30 minutes (😱) – `date`
-- `Settings` > `Repository` > upload `/tmp/commit-map-X`
-- `date` – wait 5 minutes (😱) – `date`
-- `Settings` > `Usage Quotas`
