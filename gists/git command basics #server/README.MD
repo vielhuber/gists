@@ -694,7 +694,7 @@ Usage: git acp
   - check size locally: `git gc && git count-objects -vH`
   - check size remotely: https://git.tld.com/foo/bar (if in web ui the size does not change, make a slight modification to a file and push again normally)
 - option 2: new repo
-  - `git remote set-url origin git@git.tld.com:foo/bar-new.git`
+  - `git remote add origin git@git.tld.com:foo/bar-new.git`
   - `git push origin --force --all`
   - check size locally: `git gc && git count-objects -vH`
   - check size remotely: https://git.tld.com/foo/bar
@@ -714,7 +714,7 @@ Usage: git acp
   - check size locally: `git gc && git count-objects -vH`
   - check size remotely: latest after ~24 hours at https://github.com/settings/repositories (if it is a repo of an organization, first add your private account to https://github.com/foo/bar/settings/access)
 - option 2: new repo
-  - `git remote set-url origin git@git.tld.com:foo/bar-new.git`
+  - `git remote add origin git@git.tld.com:foo/bar-new.git`
   - `git push origin --force --all`
   - check size locally: `git gc && git count-objects -vH`
   - check size remotely: https://github.com/settings/repositories
@@ -747,10 +747,11 @@ Usage: git acp
   - check size remotely: `Settings` > `Usage Quotas`
 - option 2: new repo
   - `git clone git@gitlab.com:foo/bar.git .`
-  - `cp .git/config /tmp/config-backup`
   - `git filter-repo --invert-paths --path path/to/exclude/`
-  - `git remote set-url origin git@@gitlab.com:foo/bar-new.git`
+  - `git remote add origin git@gitlab.com:foo/bar-new.git`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > enable `Allowed to force push` to `main`/`master` 
   - `git push origin --force --all`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` on `main`/`master`
   - check size locally: `git gc && git count-objects -vH`
   - check size remotely: `Settings` > `Usage Quotas`
 - `cd ..`

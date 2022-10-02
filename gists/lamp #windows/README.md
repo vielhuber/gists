@@ -499,6 +499,7 @@ xdebug.var_display_max_depth = -1
 - ```git config --global pull.ff only```
 - ```git config --global merge.ff false```
 - ```git config --global core.mergeoptions --no-edit```
+- ```git config --global init.defaultBranch main```
 - further do this (--no-edit does sometimes not work):
   - ```sudo nano ~/.bash_profile```
   - ```export GIT_MERGE_AUTOEDIT=no```
