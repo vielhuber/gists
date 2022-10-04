@@ -714,7 +714,7 @@ Usage: git acp
   - check size locally: `git gc && git count-objects -vH`
   - check size remotely: latest after ~24 hours at https://github.com/settings/repositories (if it is a repo of an organization, first add your private account to https://github.com/foo/bar/settings/access)
 - option 2: new repo
-  - `git remote add origin git@git.tld.com:foo/bar-new.git`
+  - `git remote add origin git@github.com:foo/bar-new.git`
   - `git push origin --force --all`
   - check size locally: `git gc && git count-objects -vH`
   - check size remotely: https://github.com/settings/repositories
@@ -739,7 +739,7 @@ Usage: git acp
   - `git push origin --force 'refs/heads/*'`
   - `git push origin --force 'refs/tags/*'`
   - `git push origin --force 'refs/replace/*'`
-  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` on `main`/`master`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` to `main`/`master`
   - `date` – wait 30 minutes (😱) – `date`
   - `Settings` > `Repository` > upload `/tmp/commit-map-X`
   - `date` – wait 5 minutes (😱) – `date`
@@ -751,7 +751,7 @@ Usage: git acp
   - `git remote add origin git@gitlab.com:foo/bar-new.git`
   - `Settings` > `Repository` > `Protected branches`/`Protected branches` > enable `Allowed to force push` to `main`/`master` 
   - `git push origin --force --all`
-  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` on `main`/`master`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` to `main`/`master`
   - check size locally: `git gc && git count-objects -vH`
   - check size remotely: `Settings` > `Usage Quotas`
 - `cd ..`
