@@ -407,6 +407,8 @@ Usage: git acp
 #### discard single file (undo changes)
 - git checkout specific-file
 - git checkout -- specific-file
+- git checkout -- . # discard all modified files
+- git checkout -- # preview of the command above
 - git checkout folder/*/*.json
 - git checkout folder/ # resets all files within that folder
 - git restore specific-file
@@ -671,9 +673,15 @@ Usage: git acp
 - for all distributed copies of the repo, you will need to request they do a pull with rebasing
 - if a user with their own local copy of the repository did a simple `git pull && git push`, this would result in the big files being reintroduced into the central repository
 - options:
-  - `rm -rf .git && git clone git@git.tld.com:c2nm/foo.git temp && mv temp/.git ./.git && rm -rf temp && git add -A . && git commit -m "Push obscure file changes (only if needed)." && git push`: poor man's fresh clone
-  - `rm -rf repo && git clone xxx .`: full fresh clone
-  - `git pull -r`: the user still has the big repo size locally, but count potentially reintroduce the wrong (bigger) history
+  - poor man's fresh clone
+    - `rm -rf .git && git clone ... temp && mv temp/.git ./.git && rm -rf temp`
+    - if modified files are present now, discard or push them
+      - `git checkout -- .` or `git add -A . && git commit -m "Push obscure file changes." && git push`
+  - start from scratch
+    - `rm -rf repo && git clone xxx .`
+  - ugly pull with rebase
+    - `git pull -r`: 
+    - the user still has the big repo size locally, but count potentially reintroduce the wrong (bigger) history
 
 #### gitea (same/new repo)
 - `mkdir tmp-repo`
