@@ -40,6 +40,18 @@ class TestClass
    {
      
    }
+   
+   // examples of static/non static
+   public static function fnstat1() {
+        echo self::$var2; // works
+        //self::fndyn1(); // does not work
+        //echo self::$var0; // does not work
+   }
+   public function fndyn1() {
+        $this->fnstat1(); // works
+        echo $this->var0; // works
+        //echo $this->var2; // does not work
+   }
 
 }
 
