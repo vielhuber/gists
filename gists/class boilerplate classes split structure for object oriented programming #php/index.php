@@ -51,6 +51,7 @@ class TestClass
         $this->fnstat1(); // works
         echo $this->var0; // works
         //echo $this->var2; // does not work
+     	//echo self::fnstat1(); // does not work
    }
 
 }
