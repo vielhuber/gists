@@ -117,8 +117,9 @@ let scenarios = [];
 urls.forEach(urls__value => {
     scenarios.push({
       "label": urls__value,
-      "url": urls__value
-          //.replace('https://','https://username:password@'),
+      "url": urls__value,
+      //"url": urls__value.replace('https://','https://username:password@'),
+      //"delay": 3000 // wait after load for x seconds (good to be sure everything is loaded)
     });
 });
 
