@@ -22,6 +22,8 @@ add_action('admin_head', function () {
         ?>
         <style>
             #wp-admin-bar-WPML_ALS-default { display:none !important; }
+            .wpml-dialog-translate__actions { display:none !important; }
+            .wpml-col-languages i:not([id$="<?php echo $languages_allowed[0]; ?>"]) { display:none !important; }
         </style>
         <?php if (!in_array($language_current, $languages_allowed)) { ?>
             <script>
