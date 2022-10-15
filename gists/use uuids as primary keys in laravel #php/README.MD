@@ -109,6 +109,11 @@ SELECT * FROM (
   
 ) as t UNION ALL SELECT * FROM (
 
+  	/* special rules */
+  	SELECT 'ALTER TABLE oauth_access_tokens ALTER COLUMN user_id SET DATA TYPE UUID USING LPAD(TO_HEX(user_id), 32, ''0'')::UUID;'
+
+) as t UNION ALL SELECT * FROM (
+
 	/* restore constraints (run this before and execute after!) */
 	SELECT 'ALTER TABLE "'||nspname||'"."'||relname||'" ADD CONSTRAINT "'||conname||'" '||pg_get_constraintdef(pg_constraint.oid)||';'
 			 FROM pg_constraint
