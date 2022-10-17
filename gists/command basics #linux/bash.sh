@@ -217,7 +217,7 @@ find . -name ".git"
 # find all hidden files in current directory
 find . -name ".*" -print
 
-# recursively files that contain text
+# find recursively files that contain text
 grep --include=*.php -rn "/full/path/" -e "your text"
 grep --include=*.php -rnl "/full/path/" -e "your text" # only show filenames
 grep --include=*.php -rnlw "/full/path/" -e "your text" # match only whole word

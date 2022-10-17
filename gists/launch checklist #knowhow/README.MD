@@ -39,6 +39,7 @@
 - Alle Formulare: Empfänger und Absender prüfen, Versand nochmal prüfen, scharf schalten an Kunden
 - Copyright für alle Bilder vorhanden (am Bild oder im Impressum)
 - Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
+- Öffentlicher Name bei allen close2-Mitarbeitern anonymisieren (kleine Klarnamen)
 - Passwortschutz und Entwurf testen, ob das funktioniert
 - Google Maps JS API Key hinterlegen
 - Alle Bilder komprimiert, EXIF-Daten überall entfernt, Upload eines Bildes strippt alle EXIF-Daten sauber heraus, Löschen von Bildern löscht auch physische Datei
