@@ -40,7 +40,7 @@ add_action('admin_head', function () {
                     window.location.href = url_current;
                 }
                 else {
-                    window.location.href = '<?php echo get_admin_url(); ?>';
+                    window.location.href = '<?php echo get_admin_url(); ?>?lang='+language_allowed;
                 }
             </script>
         <?php die();}
