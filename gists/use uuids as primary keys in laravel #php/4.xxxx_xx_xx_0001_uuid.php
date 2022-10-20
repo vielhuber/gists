@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
+
 class Uuid extends Migration
 {
     public function up()
@@ -17,9 +18,5 @@ class Uuid extends Migration
             DB::statement(current((array) $queries__value));
             echo round((++$count_cur * 100) / $count) . '%' . PHP_EOL;
         }
-    }
-
-    public function down()
-    {
     }
 }

@@ -8,6 +8,9 @@ function getCitiesForZip($zip) {
   $content = explode(PHP_EOL, $content);
   foreach($content as $content__value) {
     $parts = explode(',',$content__value);
+    if (count($parts) < 3) {
+      continue;
+    }
     if( $parts[2] != $zip ) {
       continue;
     }

@@ -118,5 +118,6 @@ function getGeocodingDataFromAddress($address)
 }
 print_r(getGeocodingDataFromAddress('Deutschland'));
 print_r(getGeocodingDataFromAddress('Baumannstraße 23, 94036 Passau, Deutschland')); // use this ordering if possible
+print_r(getGeocodingDataFromAddress('94036')); // this is currently NOT easily possible!
 print_r(getGeocodingDataFromAddress('Passau'));
 print_r(getGeocodingDataFromAddress('Irland'));
