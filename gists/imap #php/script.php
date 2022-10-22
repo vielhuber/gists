@@ -1,3 +1,5 @@
+// composer require php-imap/php-imap
+require_once(__DIR__ . '/vendor/autoload.php');
 $settings = [
     'host' => 'outlook.office365.com',
     'port' => 993,
