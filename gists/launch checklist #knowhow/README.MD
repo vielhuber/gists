@@ -12,6 +12,7 @@
 - git auf Production, Testing und Local auf demselben Stand
 - Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
 - Erweiterte Cookie-Leiste und/oder Zwei-Klick-Lösungen für Google Maps implementiert
+- Google Fonts lokal eingebettet und mit https://www.e-recht24.de/google-fonts-scanner geprüft
 - YouTube-/Vimeo-Links GDPR tauglich gemacht
 - Alle CMS Updates (WordPress Core+Plugins) installiert
 - Inaktive Plugins gelöscht (außer WPML und ggf. Caching)
