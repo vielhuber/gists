@@ -15,6 +15,7 @@
             if( $el.hasAttribute('data-checked') ) {
                 $el.removeAttribute('data-checked');
                 $el.checked = false;
+              	$el.dispatchEvent(new Event('change', { 'bubbles': true }));
             }
             else {
                 $el.checked = true;
