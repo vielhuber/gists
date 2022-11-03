@@ -144,8 +144,13 @@
                     else {
                         src = icon.src;
                     }
+                    // bugfix for firefox not underlining last word
+                    let underline = '';
+                    if( window.getComputedStyle(target).textDecoration.indexOf('underline') > -1 ) {
+                        underline = ' text-decoration: '+window.getComputedStyle(target).textDecoration+';';
+                    }
                     target.innerHTML +=
-                        '<span style="white-space:nowrap; display: inline-flex; align-items: center; color:inherit;">' +
+                        '<span style="white-space:nowrap; display: inline-flex; align-items: center; color:inherit;'+underline+'">' +
                         last_word +
                         '<span style="position:relative; padding-left:4px; width: '+icon.width+'px; height: '+ icon.height +'px; display: inline-block; color:inherit;">' +
                         '<img style="width: ' +

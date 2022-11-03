@@ -110,7 +110,7 @@
 
 ## picture
 
-### example 1
+### example
 
 - the source parts only show, if the condition in media is fulfilled
 - you can also provide srcset and sizes on a source element (e.g. for 1x, 2x cases!)
@@ -126,6 +126,7 @@
 </style></head>
 <body>
     <picture>
+      <source media="(max-width: 400px)" srcset="https://via.placeholder.com/400x400.png?text=smallest 1x, https://via.placeholder.com/800x800.png?text=RETINA 2x">
       <source media="(max-width: 800px)" srcset="https://via.placeholder.com/800x800.png?text=small">
       <source media="(max-width: 1200px)" srcset="https://via.placeholder.com/1200x400.png?text=medium">
       <img src="https://via.placeholder.com/1920x200.png?text=large" alt="" />

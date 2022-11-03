@@ -39,7 +39,7 @@ SENTRY_ENVIRONMENT=null
     // add channel
     'sentry' => [
         'driver' => 'sentry',
-      	'level' => 'debug'
+      	'level' => 'debug' // use "warning" if you don't want to get "info" and "debug"
     ],
 ],
 ```

@@ -22,9 +22,10 @@ date_default_timezone_set('UTC'); // default timezone
 ## wordpress
 
 - tl;dr: ~~`date()`~~ => `wp_date()` and ~~`strtotime()`~~ => `strtotime(get_gmt_from_date())`
+- tl;dr: if you access via js and create Date objects, use this format: `echo wp_date('Y-m-d\TH:i:sP', strtotime(get_gmt_from_date('2022-06-01 15:00:00')));`
 - wordpress always sets the timezone to "UTC" (regardless what the server timezone is set to), which is the same as "GMT"
 - if you have to take care of timezones, save all dates in the database in UTC-time
-- if you don't take care of timezones, only work with local times use `wp_date()`/`strtotime(get_gmt_from_date())`
+- if you don't take care of timezones, only work with local times and use `wp_date()`/`strtotime(get_gmt_from_date())`
 - don't use `date_i18n()`, since it is deprecated
 - never overwrite the timezone with `date_default_timezone_set()`, because WordPress assumes UTC everywhere
 

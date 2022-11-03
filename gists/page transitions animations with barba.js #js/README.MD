@@ -95,12 +95,22 @@ window.addEventListener('load', e => {
             }
         });
 
-        // scroll top on new page
+        // scroll top on new page but restore proper on back
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
         }
+        let scrollPosY = 0;
         barba.hooks.enter(data => {
-            window.scrollTo(0, 0);
+            if (data.trigger !== 'back') {
+                scrollPosY = barba.history.current.scroll.y;
+            }
+        });
+        barba.hooks.after(data => {
+            if (data.trigger !== 'back') {
+                window.scrollTo(0, 0);
+            } else {
+                window.scrollTo(0, scrollPosY);
+            }
         });
 
         // main transition
