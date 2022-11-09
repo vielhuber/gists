@@ -1,5 +1,6 @@
 <?php
 $url = 'https://vielhuber.de';
+$url = 'http'.((isset($_SERVER['HTTPS'])&&$_SERVER['HTTPS']!=='off')?'s':'').'://'.$_SERVER['HTTP_HOST'].parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $title = 'David Vielhuber';
 $image = 'https://vielhuber.de/wp-content/themes/vielhuber/_assets/about.jpg';
 echo '<ul>';
