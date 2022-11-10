@@ -429,6 +429,7 @@ ncdu --exclude /mnt
 
 # count
 find . -type f | wc -l # count number of files in current folder
+find . -name '*.php' -type f | wc -l # count number of files with extension in current folder
 find . -type d | wc -l # count number of folders in current folder
 find . -type d -empty | wc -l # count number of empty folders in current folder
 find . -type f | egrep -v ".git|node_modules" | wc -l # count number of files in current folder and exclude some subfolders
