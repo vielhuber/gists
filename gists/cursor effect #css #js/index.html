@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="utf-8" />
@@ -49,7 +49,7 @@
     }
 
     :root {
-        --cursor-size: 2rem;
+        --cursor-size: 6rem;
     }
     .smooth-cursor {
         height: var(--cursor-size);
@@ -60,7 +60,7 @@
         mix-blend-mode: exclusion;
         pointer-events: none;
         position: fixed;
-        transform: translate(calc( -1 * var(--cursor-size) / 2), calc( -1 * var(--cursor-size) / 2)) scale(1);
+        transform: translate(calc( -1 * var(--cursor-size) / 2), calc( -1 * var(--cursor-size) / 2)) scale(0.33) rotate(90deg);
         transition: transform 0.30s cubic-bezier(.47,1.64,.41,.8);
         z-index:2147483647;
         opacity:0;
@@ -71,7 +71,7 @@
         opacity:1;
     }
     html.smooth-cursor-big .smooth-cursor {
-        transform: translate(calc( -1 * var(--cursor-size) / 2), calc( -1 * var(--cursor-size) / 2)) scale(3);
+        transform: translate(calc( -1 * var(--cursor-size) / 2), calc( -1 * var(--cursor-size) / 2)) scale(1) rotate(90deg);
     }
     </style>
 </head>
