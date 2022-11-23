@@ -75,7 +75,13 @@ foreach ($folders as $folder) {
             ->getDate()
             ->toDate()
             ->format('Y-m-d H:i:s');
-        $mail['subject'] = $messages__value->getSubject()[0];
+      
+        $subject = @$messages__value->getSubject()[0];
+        $subject = trim($subject);
+        $subject = preg_replace("/\r\n|\r|\n/", '', trim(@$messages__value->getSubject()[0]));
+        if (mb_detect_encoding($subject, 'UTF-8, ISO-8859-1') !== 'UTF-8') { $subject = utf8_encode($subject); }
+        $mail['subject'] = $subject;
+      
         $mail['eml'] =
             json_decode(json_encode($messages__value->getHeader()), true)['raw'] . $messages__value->getRawBody();
         $mail['attachments'] = $messages__value->getAttachments()->count();

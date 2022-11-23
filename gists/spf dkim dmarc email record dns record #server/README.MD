@@ -30,6 +30,7 @@
 - DKIM beteht aus zwei Hauptbestandteilen: einem DNS-Eintrag sowie dem DKIM-Header, der an alle E-Mails von der Domain angehängt werden muss
 - DKIM verwendet digitale Signaturverfahren auf der Grundlage der Public Key-Kryptographie
 - Deshalb ist eine Implementierung / Verwendung in E-Mail-Clients eher schwierig
+- Newsletteranbieter jedoch fügen den DKIM-Header (bei korrekter Konfiguration) automatisch hinzu
 
 ## LINKS
 
