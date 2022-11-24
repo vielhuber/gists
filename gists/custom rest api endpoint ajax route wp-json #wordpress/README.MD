@@ -11,14 +11,14 @@ add_action('rest_api_init', function () {
           	// public route
           	return true;
           
-          	// only allow logged in users (via browser)
-        	return current_user_can( 'edit_others_posts' );
-          
           	// check for manual token
           	return $request->get_param('token') === 'abcde';
           
-          	// for authentication via cookie / api
+          	// for user / authentication via cookie / api
           	// see https://gist.github.com/vielhuber/b1647427ddb32c87a9f56e92ed1fd371
+            // this does not work!
+            //return is_user_logged_in();
+        	//return current_user_can( 'edit_others_posts' );
           
           	// simple basic auth
             $username = @$_SERVER['PHP_AUTH_USER'];
