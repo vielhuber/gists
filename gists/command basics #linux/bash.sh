@@ -234,8 +234,9 @@ find /source/folder -name '.otf' -o -name '.ttf' -exec cp {} /target/folder/ \;
 # find files that changed in the last hour
 find . -newermt '1 hour ago' -type f -print
 
-# find last changed files
+# find newest/oldest files (change date)
 find . -type f -printf '%TY-%Tm-%Td %TH:%TM: %Tz %p\n'| sort -n | tail -n10
+find . -type f -printf '%TY-%Tm-%Td %TH:%TM: %Tz %p\n'| sort -n | head -n10
 
 # zip current directory
 zip -r file.zip .
