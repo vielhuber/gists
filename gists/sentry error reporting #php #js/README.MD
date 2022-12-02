@@ -7,6 +7,34 @@ define( 'WP_SENTRY_PHP_DSN', 'https://********************************@********.
 define( 'WP_SENTRY_BROWSER_DSN', 'https://********************************@********.ingest.sentry.io/*******' );
 define( 'WP_SENTRY_ENV', str_replace('www.','',$_SERVER['HTTP_HOST']) );
 define( 'WP_SENTRY_ERROR_TYPES', E_ALL & ~E_WARNING & ~E_NOTICE ); // add this to hide warnings/notices
+define( 'WP_SENTRY_ERROR_TYPES', E_ALL & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED ); // add this to hide also deprecations
+```
+
+- ignore errors from specific paths
+```php
+add_filter( 'wp_sentry_options', function ( \Sentry\Options $options ) {
+    $options->setBeforeSendCallback( function ( \Sentry\Event $event ) {
+        $ignored = [
+            'plugins/'
+        ];
+        $exceptions = $event->getExceptions();
+        if ( empty( $exceptions ) ) { return $event; }
+        $stacktrace = $exceptions[0]->getStacktrace();
+        if ( $stacktrace === null ) { return $event; }
+        $ignore = false;
+        foreach ( $stacktrace->getFrames() as $frame ) {
+            foreach($ignored as $ignored__value) {
+                if( mb_strpos( $frame->getFile(), $ignored__value ) !== false ) {
+                    $ignore = true;
+                    break 2;
+                }            
+            }
+        }
+        if( $ignore === true ) { return null; }
+        return $event;
+    } );
+    return $options;
+} );
 ```
 
 ## Laravel

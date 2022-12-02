@@ -35,22 +35,14 @@ public function send(Request $request)
     Mail::send([], [], function($message) use ($data)
     {
       /* ... */
-      $message->setBody($data['message'], 'text/plain');
+      $message->text($data['message']);
     });
     // html (plain text automatically)
     Mail::send([], [], function($message) use ($data)
     {
 	  /* ... */
-      $message->setBody($data['message'], 'text/html');
-    });
-    // html + plain (custom)
-    Mail::send([], [], function($message) use ($data)
-    {
-      /* ... */
-      $message->setBody($data['message'], 'text/html');
-      $message->addPart(strip_tags($data['message']), 'text/plain');
-    });
-    
+      $message->html($data['message']);
+    });    
     return response()->json(['success' => true], 200);
   }
   catch(\Exception $e)
