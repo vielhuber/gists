@@ -217,8 +217,8 @@ find . -name ".git"
 # find all hidden files in current directory
 find . -name ".*" -print
 
-# find recursively files that contain text (case sensitive!)
-grep --include=*.php -rn "." -e "your text"
+# find recursively files that contain text
+grep --include=*.php -rn "." -e "your text" # case sensitive
 grep --include=*.php -rnl "." -e "your text" # only show filenames
 grep --include=*.php --ignore-case -rn "." -e "your text" # case insensitive
 grep --include=*.php -rnlw "." -e "your text" # match only whole word
