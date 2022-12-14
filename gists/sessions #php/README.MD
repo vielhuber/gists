@@ -8,6 +8,16 @@
 session_start();
 ```
 
+### additional config of session cookie
+```php
+ini_set('session.use_strict_mode', 1); // prevent user-supplied session-id
+session_set_cookie_params([
+   'secure' => (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'),
+   'httponly' => 1, // prevent javascript-access to session-id
+   'samesite' => 'Lax'
+]);
+```
+
 ### extend session (at least in minimum, not accurate!)
 ```php
 $session_time = 60 * 60 * 24 * 30; // 30 days
