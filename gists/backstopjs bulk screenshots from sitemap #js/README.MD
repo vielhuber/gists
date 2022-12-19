@@ -113,6 +113,11 @@ urls = [
 ];
 */
 
+// generate with command line
+/*
+curl -N -s https://www.tld.com/sitemap_index.xml | grep -oP '<loc>\K[^<]*' | xargs -n1 curl -N -s | grep -oP '<loc>\K[^<]*' > urls.txt
+*/
+
 let scenarios = [];
 urls.forEach(urls__value => {
     scenarios.push({
