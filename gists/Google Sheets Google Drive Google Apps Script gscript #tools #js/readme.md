@@ -254,3 +254,8 @@ ARRAYFORMULA(SVERWEIS(B2:B;'_LOGIC'!A1:B;{2}*VORZEICHEN(ZEILE(E2:E));FALSCH))
 ```
 =IMAGE("https://vielhuber.de/wp-content/themes/vielhuber/_assets/about.jpg";1)
 ```
+
+#### visualization of hex color
+```
+SPARKLINE(1;{"charttype"\"bar";"color1"\A1})
+```
