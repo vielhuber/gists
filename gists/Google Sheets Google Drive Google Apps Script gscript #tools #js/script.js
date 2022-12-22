@@ -69,6 +69,12 @@ SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setFo
 /* set background color of specific sell */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setBackground('#efefef');
 
+/* auto expand rows */
+// in the past this has worked in the normal ui (set height manually to 2, then change the option to "auto fit"); now it does not work anymore!
+// the following script still works
+var s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('TEST');
+s.setRowHeights(1, s.getMaxRows(), 3);
+
 /* protect specific cell */
 var protection = e.source.getActiveSheet().getRange(1, 1, 1, 6).protect().setDescription('Nicht mehr änderbar');
 var me = Session.getEffectiveUser();
