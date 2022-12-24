@@ -169,6 +169,9 @@ function onEdit(e)
    console.log(e.range.getValue());
    // also helpful: do something with all selected cells (warning, this does not work for splitted cells like in filter)
    console.log(e.range.getValues());
+   // prevent multi cell editing trigger
+   if( e.range.columnStart !== e.range.columnEnd || e.range.rowStart !== e.range.rowEnd ) { return; }
+  
    for(var col = e.range.columnStart; col <= e.range.columnEnd; col++) {
    	for(var row = e.range.rowStart; row <= e.range.rowEnd; row++) {
       if( col != 2 || row < 2 ) { continue; } // check
