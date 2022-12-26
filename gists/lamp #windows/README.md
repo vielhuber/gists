@@ -45,18 +45,13 @@
 - open PowerShell as admin
 - ```Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux```
 - reboot
-- Windows Store > "Ubuntu 18.04 LTS"
+- Windows Store > "Ubuntu"
   - available versions: https://blogs.msdn.microsoft.com/commandline/2018/07/09/upgrading-ubuntu/
-  - i had problems in using the version "Ubuntu" (it was not 18, but 16), so just always use the last direct version
+  - we use the plain "Ubuntu" version and upgrade it inplace with `sudo do-release-upgrade`
 - UNIX username: root (cancel when prompting for a new default username)
 - Change password with ```passwd```: "root"
 - ```sudo apt-get update && sudo apt-get upgrade```
 - Netzlaufwerk "\\wsl$\Ubuntu" auf W: mappen und umbenennen: "WSL"
-
-#### prevent password prompt for sudo commands
-- ```sudo visudo```
-- comment out ```%sudo ALL=(ALL:ALL) ALL```
-- ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
 #### wsl2
 - open PowerShell as admin
@@ -66,6 +61,7 @@
 - `wsl --list --verbose`
 - `wsl --set-default-version 2`
 - `wsl --set-version Ubuntu 2`
+- `wsl --setdefault Ubuntu`
 - `wsl --list --verbose`
 
 #### backup/restore wsl2
@@ -74,6 +70,25 @@
 - `wsl --list`
 - `wsl --export "Ubuntu" D:\Ubuntu.tar`
 - `wsl --import "Ubuntu" D:\ D:\Ubuntu.tar`
+
+#### upgrade to latest ubuntu
+- `sudo apt update -y`
+- `sudo apt dist-upgrade -y`
+- `sudo do-release-upgrade`
+- `lsb_release -a`
+
+#### move to another drive
+- `mkdir D:\backup`
+- `wsl --export Ubuntu D:\backup\ubuntu.tar`
+- `wsl --unregister Ubuntu`
+- `mkdir D:\wsl`
+- `wsl --import Ubuntu D:\wsl\ D:\backup\ubuntu-new.tar`
+- `wsl --setdefault Ubuntu`
+
+#### use multiple wsl instances
+- `wsl --import Ubuntu-old-1 D:\wsl\ubuntu-old\ D:\backup\ubuntu-old-1.tar`
+- `wsl --import Ubuntu-old-2 D:\wsl\ubuntu-old\ D:\backup\ubuntu-old-2.tar`
+- ...
 
 #### increase disk size
 - https://docs.microsoft.com/en-us/windows/wsl/vhd-size
@@ -92,6 +107,11 @@
   - `mount | grep ext4`
   - `sudo resize2fs /dev/sdb 316000M`
   - `df -h`
+
+#### prevent password prompt for sudo commands
+- ```sudo visudo```
+- comment out ```%sudo ALL=(ALL:ALL) ALL```
+- ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
 #### docker
 -	Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
