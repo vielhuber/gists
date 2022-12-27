@@ -104,8 +104,8 @@
   - `exit`
 - WSL
   - `sudo mount -t devtmpfs none /dev`
-  - `mount | grep ext4`
-  - `sudo resize2fs /dev/sdb 316000M`
+  - `mount | grep ext4` # note sdX (where X = a|b|c)
+  - `sudo resize2fs /dev/sdc 316000M`
   - `df -h`
 
 #### prevent password prompt for sudo commands
@@ -114,14 +114,14 @@
 - ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
 #### docker
--	Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
--	Installation: "Install required Windows components for WSL 2"
--	Settings > General > "Use the WSL 2 based engine"
+-   Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
+-   Installation: "Install required Windows components for WSL 2"
+-   Settings > General > "Use the WSL 2 based engine"
 - Login with account
 - ```docker version```
 - ```docker-compose version```
 
-#### xserver
+#### OBSOLET: xserver
 
 - download vcxsrv (https://sourceforge.net/projects/vcxsrv/files/latest/download)
 - Installation: Full
@@ -160,20 +160,20 @@
 #### smartgit
 
 - `cd /usr/local`
-- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-20_1_4.tar.gz`
-- `tar xzf smartgit-linux-20_1_4.tar.gz`
-- `rm smartgit-linux-20_1_4.tar.gz`
-- `nano usr/local/bin/sgit`
+- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-22_1_2.tar.gz`
+- `tar xzf smartgit-linux-*.tar.gz`
+- `rm smartgit-linux-*.tar.gz`
+- `nano /usr/local/bin/sgit`
 - `( /usr/local/smartgit/bin/smartgit.sh & ) > /dev/null 2>&1`
-- `chmod +x usr/local/bin/sgit`
+- `chmod +x /usr/local/bin/sgit`
 - `sgit`
 - Non-commercial use only
 - User Name: David Vielhuber
 - Email: david@vielhuber.de
 - Use SmartGit as SSH client
-- Style: Working Tree
+- Style: Working tree (file oriented)
 - Edit > Preferences > User Interface > Dark (independent of system)
-- Edit > Preferences > User Interface > On start-up: Open the last used repositories AUS
+- Edit > Preferences > User Interface > On start-up: Don't reopen the last used repositories
 - Edit > Preferences > User Interface > Built-in Text Editors > Font Size: 9
 - Repository > Search for Repositories > /var/www
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
@@ -200,13 +200,21 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo apt-get install apache2 mysql-server```
 - ```sudo service apache2 start```
 - ```sudo service mysql start```
-- ```sudo mysql_secure_installation```
-  - Validate password plugin: n
-  - mysql-root-Passwort: root
-  - Remove anonymous users: y
-  - Disable root login remotely: n
-  - Remove test database: y
-  - Reload privilege tables: y
+- run mysql_secure_installation
+  - the following steps fixes this error: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04#step-2-configuring-mysql
+  - ```sudo mysql```
+  - ```ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';```
+  - ```exit```
+  - ```sudo mysql_secure_installation```
+    - Validate password plugin: n
+    - mysql-root-Passwort: root
+    - Remove anonymous users: y
+    - Disallow root login remotely: n
+    - Remove test database: y
+    - Reload privilege tables: y
+  - ```mysql -u root -p```
+  - ```ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;```
+  - ```exit```
 - allow login to root user without sudo
   - ```sudo mysql -u root```
   - ```DROP USER 'root'@'localhost';```
@@ -230,6 +238,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo apt-get install -y php7.3 php7.3-fpm libapache2-mod-php7.3 php7.3-mysql php7.3-cli php7.3-common php7.3-xdebug php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-intl php7.3-xml php7.3-mysql php7.3-zip php7.3-soap php7.3-curl php7.3-bcmath php7.3-xml php7.3-sqlite php7.3-imap php7.3-opcache php7.3-pgsql php7.3-pdo php7.3-gd php7.3-imagick```
 - ```sudo apt-get install -y php7.4 php7.4-fpm libapache2-mod-php7.4 php7.4-mysql php7.4-cli php7.4-common php7.4-xdebug php7.4-mbstring php7.4-xmlrpc php7.4-gd php7.4-intl php7.4-xml php7.4-mysql php7.4-zip php7.4-soap php7.4-curl php7.4-bcmath php7.4-xml php7.4-sqlite php7.4-imap php7.4-opcache php7.4-pgsql php7.4-pdo php7.4-gd php7.4-imagick```
 - ```sudo apt-get install -y php8.0 php8.0-fpm libapache2-mod-php8.0 php8.0-mysql php8.0-cli php8.0-common php8.0-xdebug php8.0-mbstring php8.0-xmlrpc php8.0-gd php8.0-intl php8.0-xml php8.0-mysql php8.0-zip php8.0-soap php8.0-curl php8.0-bcmath php8.0-xml php8.0-sqlite php8.0-imap php8.0-opcache php8.0-pgsql php8.0-pdo php8.0-gd php8.0-imagick```
+- ```sudo apt-get install -y php8.1 php8.1-fpm libapache2-mod-php8.1 php8.1-mysql php8.1-cli php8.1-common php8.1-xdebug php8.1-mbstring php8.1-xmlrpc php8.1-gd php8.1-intl php8.1-xml php8.1-mysql php8.1-zip php8.1-soap php8.1-curl php8.1-bcmath php8.1-xml php8.1-sqlite php8.1-imap php8.1-opcache php8.1-pgsql php8.1-pdo php8.1-gd php8.1-imagick```
+- ```sudo apt-get install -y php8.2 php8.2-fpm libapache2-mod-php8.2 php8.2-mysql php8.2-cli php8.2-common php8.2-xdebug php8.2-mbstring php8.2-xmlrpc php8.2-gd php8.2-intl php8.2-xml php8.2-mysql php8.2-zip php8.2-soap php8.2-curl php8.2-bcmath php8.2-xml php8.2-sqlite php8.2-imap php8.2-opcache php8.2-pgsql php8.2-pdo php8.2-gd php8.2-imagick```
 - note: extensions must not be uncommented in php.ini but installed on the command line
 
 #### apache extensions
@@ -269,6 +279,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 
 #### postfix
 - ```sudo apt-get install postfix```
+   - General type: "Internet Site"
+   - System mail name: "vielhuber.de"
 - ```sudo apt install mailutils```
 - ```sudo dpkg-reconfigure postfix```
    - General type: "Internet Site"
@@ -333,7 +345,7 @@ opcache.max_accelerated_files=32531
 opcache.save_comments=1
 opcache.fast_shutdown=0
 opcache.max_file_size=0
-#we set this to 1 (so that we can set revalidate_freq on a project basis to a higher value)
+#we set this to 1 so that we can set revalidate_freq on a project basis to a higher value
 opcache.validate_timestamps=1
 opcache.revalidate_freq=2
 
@@ -351,6 +363,8 @@ xdebug.var_display_max_depth = -1
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.4/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.0/apache2/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.1/apache2/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.2/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.1/fpm/conf.d/custom.ini```
@@ -358,6 +372,8 @@ xdebug.var_display_max_depth = -1
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.4/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.0/fpm/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.1/fpm/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.2/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.1/cli/conf.d/custom.ini```
@@ -365,6 +381,8 @@ xdebug.var_display_max_depth = -1
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.4/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.0/cli/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.1/cli/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.2/cli/conf.d/custom.ini```
 
 #### local environment permissions
 - reset
@@ -431,13 +449,15 @@ xdebug.var_display_max_depth = -1
 - ```sudo mv composer.phar /usr/local/bin/composer```
 - hide sudo message:
   - ```sudo nano ~/.bash_profile```
+  - ```# hide composer sudo message```
   - ```export COMPOSER_ALLOW_SUPERUSER=1```
+  - ```source ~/.bash_profile```
 - ```composer self-update```
 - ```composer --version``` # 2
 
 #### node / npm
 - nvm
-  - ```sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash```
+  - ```sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash```
   - copy 3 new lines of ```~/.bashrc``` to ```~/.bash_profile``` (because .bashrc is not loaded on wsl)
   - restart terminal
   - ```nvm --version```
@@ -753,7 +773,7 @@ host    all   all        ::1/128        md5
 - ```mkdir /var/www/phpmyadmin```
 - ```cd /var/www/phpmyadmin```
 - ```composer create-project phpmyadmin/phpmyadmin .```
-- ```lamp add phpmyadmin php8.0```
+- ```lamp add phpmyadmin php8.1```
 - ```cp config.sample.inc.php config.inc.php```
 - ```nano config.inc.php```
   - ```$cfg['Servers'][$i]['user'] = 'root';```
@@ -842,7 +862,7 @@ host    all   all        ::1/128        md5
 - https://medium.com/@leandrw/speeding-up-wsl-i-o-up-than-5x-fast-saving-a-lot-of-battery-life-cpu-usage-c3537dd03c74
 - Windows Defender Security Center > Viren- & Bedrohungsschutz > Einstellungen für Viren- & Bedrohungsschutz > Ausschlüsse hinzufügen oder entfernen
   - Ordner: C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc
-  - Prozesse: git, node, dpkg, php5.6, php7.0, php7.1, php7.2, php7.3, php7.4, php8.0, php-fpm5.6, php-fpm7.0, php-fpm7.1, php-fpm7.2, php-fpm7.3, php-fpm7.4, php-fpm8.0, mysql, mysqld, apache2, bash, postgres, wkhtmltopdf
+  - Prozesse: git, node, dpkg, php5.6, php7.0, php7.1, php7.2, php7.3, php7.4, php8.0, php8.1, php8.2, php-fpm5.6, php-fpm7.0, php-fpm7.1, php-fpm7.2, php-fpm7.3, php-fpm7.4, php-fpm8.0, php-fpm8.1, php-fpm8.2, mysql, mysqld, apache2, bash, postgres, wkhtmltopdf
 
 #### switch cli php version
 - ```sudo update-alternatives --config php```
@@ -872,9 +892,9 @@ host    all   all        ::1/128        md5
 
 #### create project
 - ```lamp add project```
-- ```lamp add project php8.0```
-- ```lamp add project php8.0 custom/subfolder/public```
-- ```lamp add project php8.0 custom/subfolder/public 3000```
+- ```lamp add project php8.1```
+- ```lamp add project php8.1 custom/subfolder/public```
+- ```lamp add project php8.1 custom/subfolder/public 3000```
 
 #### remove project
 - ```lamp remove project```
