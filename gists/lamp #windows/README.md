@@ -1,5 +1,6 @@
 ## features
 
+- wsl2 + ubuntu 22
 - simple installation
 - simple usage via command line
 - full control over configuration
@@ -41,23 +42,15 @@
 - ~~Windows Defender Firewall mit erweiterter Sicherheit~~
 - ~~Eingehende Regeln > Neue Regel > Port > TCP > 80, 443~~
 
-#### wsl
+#### wsl2
 - open PowerShell as admin
-- ```Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux```
-- reboot
+- wsl --install
 - Windows Store > "Ubuntu"
   - available versions: https://blogs.msdn.microsoft.com/commandline/2018/07/09/upgrading-ubuntu/
   - we use the plain "Ubuntu" version and upgrade it inplace with `sudo do-release-upgrade`
 - UNIX username: root (cancel when prompting for a new default username)
 - Change password with ```passwd```: "root"
-- ```sudo apt-get update && sudo apt-get upgrade```
 - Netzlaufwerk "\\wsl$\Ubuntu" auf W: mappen und umbenennen: "WSL"
-
-#### wsl2
-- open PowerShell as admin
-- `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
-- `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
-- reboot
 - `wsl --list --verbose`
 - `wsl --set-default-version 2`
 - `wsl --set-version Ubuntu 2`
@@ -72,6 +65,9 @@
 - `wsl --import "Ubuntu" D:\ D:\Ubuntu.tar`
 
 #### upgrade to latest ubuntu
+- `wsl --update` # kernel upgrade
+- `sudo apt-get update`
+- `sudo apt-get upgrade`
 - `sudo apt update -y`
 - `sudo apt dist-upgrade -y`
 - `sudo do-release-upgrade`
@@ -82,12 +78,13 @@
 - `wsl --export Ubuntu D:\backup\ubuntu.tar`
 - `wsl --unregister Ubuntu`
 - `mkdir D:\wsl`
-- `wsl --import Ubuntu D:\wsl\ D:\backup\ubuntu-new.tar`
+- `mkdir D:\wsl\ubuntu-latest`
+- `wsl --import Ubuntu D:\wsl\ubuntu-latest\ D:\backup\ubuntu.tar`
 - `wsl --setdefault Ubuntu`
 
-#### use multiple wsl instances
-- `wsl --import Ubuntu-old-1 D:\wsl\ubuntu-old\ D:\backup\ubuntu-old-1.tar`
-- `wsl --import Ubuntu-old-2 D:\wsl\ubuntu-old\ D:\backup\ubuntu-old-2.tar`
+#### optional: use multiple wsl instances
+- `wsl --import Ubuntu-1 D:\wsl\ubuntu-1\ D:\backup\ubuntu-1.tar`
+- `wsl --import Ubuntu-2 D:\wsl\ubuntu-2\ D:\backup\ubuntu-2.tar`
 - ...
 
 #### increase disk size
@@ -95,17 +92,18 @@
 - Powershell (Admin)
   - `wsl --shutdown`
   - `Get-AppxPackage -Name "*Ubuntu*" | Select PackageFamilyName`
-  - `C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\ext4.vhdx`
+  - if default: `C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\ext4.vhdx`
+  - if moved: `D:\wsl\ubuntu-latest\ext4.vhdx`
 - CMD (Admin)
   - `diskpart`
-  - `Select vdisk file="C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\ext4.vhdx"`
+  - `Select vdisk file="D:\wsl\ubuntu-latest\ext4.vhdx"`
   - `detail vdisk`
-  - `expand vdisk maximum=316000`
+  - `expand vdisk maximum=416000`
   - `exit`
 - WSL
   - `sudo mount -t devtmpfs none /dev`
   - `mount | grep ext4` # note sdX (where X = a|b|c)
-  - `sudo resize2fs /dev/sdc 316000M`
+  - `sudo resize2fs /dev/sdc 416000M`
   - `df -h`
 
 #### prevent password prompt for sudo commands
@@ -114,15 +112,14 @@
 - ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
 #### docker
--   Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
--   Installation: "Install required Windows components for WSL 2"
--   Settings > General > "Use the WSL 2 based engine"
+- Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
+- Installation: "Install required Windows components for WSL 2"
+- Settings > General > "Use the WSL 2 based engine"
 - Login with account
 - ```docker version```
 - ```docker-compose version```
 
-#### OBSOLET: xserver
-
+#### xserver (deprecated; not included in wsl!)
 - download vcxsrv (https://sourceforge.net/projects/vcxsrv/files/latest/download)
 - Installation: Full
 - `nano ~/.bash_profile`
@@ -152,13 +149,11 @@
     - Applications > Settings > Screensaver > Mode: Disable Screensaver
 
 #### vscode
-
 - install Remote - WSL Installieren
 - Erweiterungen > Wolke: Lokale Erweiterungen in WSL - Ubuntu installieren > Alle markieren
 - Innerhalb von WSL ausführen: `code .`
 
 #### smartgit
-
 - `cd /usr/local`
 - `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-22_1_2.tar.gz`
 - `tar xzf smartgit-linux-*.tar.gz`
@@ -320,6 +315,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 #### shared php.ini configuration
 - ```sudo nano /etc/php/custom.ini```
 ```
+user_ini.filename =
+
 max_execution_time = 2400
 max_input_time = 900
 post_max_size = 800M
@@ -470,7 +467,7 @@ xdebug.var_display_max_depth = -1
   - ```nvm install 12.10.0```
   - ```nvm install 10.16.3```
   - ```nvm alias default 16.17.0```
-  - Version wechseln: ```nvm use 10.16.3```
+  - ```nvm use 16.17.0```
   - Cache leeren (falls sich package-lock.json ändert: `npm cache verify` bzw `npm cache clean -f`)
 - nativ (obsolet)
   - https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
@@ -487,38 +484,34 @@ xdebug.var_display_max_depth = -1
   - ```npm install -g npm-check-updates```
 
 #### yarn
-- ```curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -```
-- ```echo "deb https://nightly.yarnpkg.com/debian/ nightly main" | sudo tee /etc/apt/sources.list.d/yarn.list```
-- ```sudo apt-get update && sudo apt-get install yarn```
+- ```corepack enable```
+- ```corepack prepare yarn@stable --activate```
+- ```yarn --version```
 
 #### python
-- install python 2
-  - ```sudo apt-get update```
-  - ```sudo apt-get install python python-pip```
-  - ```python --version```
-  - ```pip --version```
-- install python 3.5
+- install python 3.X
   - ```sudo apt-get update```
   - ```sudo apt-get install python3 python3-pip```
   - ```python3 --version```
   - ```pip3 --version```
-- install python 3.6
+- OBSOLETE: install python 3.6
   - ```sudo add-apt-repository ppa:deadsnakes/ppa```
   - ```sudo apt-get update```
   - ```sudo apt-get install python3.6```
   - ```python3.6 --version```
   - ```python3.6 -m pip --version```
-- change default version (currently not done)
-  - ```cd /usr/bin && sudo rm python && ln -s ./python3 ./python```
+- change default version
+  - ```cd /usr/bin```
+  - ```sudo rm python```
+  - ```ln -s ./python3 ./python```
 
 #### blackfire.io php debugger
-
-- ```wget -q -O - https://packages.blackfire.io/gpg.key | sudo apt-key add -```
-- ```echo "deb http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list```
+- ```wget -q -O - https://packages.blackfire.io/gpg.key | sudo dd of=/usr/share/keyrings/blackfire-archive-keyring.asc```
+- ```echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/blackfire-archive-keyring.asc] http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list```
 - ```sudo apt update```
-- ```sudo apt install blackfire-agent```
-- ```sudo blackfire-agent --register --server-id=xxx --server-token=xxx``` (see blackfire.io)
-- ```sudo /etc/init.d/blackfire-agent restart```
+- ```sudo apt install blackfire```
+- ```sudo blackfire agent:config --server-id=xxx --server-token=xxx``` (see blackfire.io)
+- ```sudo systemctl restart blackfire-agent```
 - ```sudo apt install blackfire-php```
 - ```blackfire config --client-id=xxx --client-token=xxx``` (see blackfire.io)
 - ```blackfire run ./vendor/bin/phpunit```
@@ -600,16 +593,15 @@ xdebug.var_display_max_depth = -1
 - ```source ~/.bash_profile ```
 
 #### postgres
-- ```nano /etc/apt/sources.list.d/pgdg.list```
-- ```deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main```
-- ```wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -```
-- ```sudo apt-get update```
+- ```sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'```
+- ```wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/pgdg.asc &>/dev/null```
+- ```sudo apt update```
 - ```sudo apt-get install postgresql postgresql-contrib```
-- sudo nano /etc/postgresql/11/main/postgresql.conf
+- sudo nano /etc/postgresql/15/main/postgresql.conf
   - listen_addresses = '*'
   - port = 5432
 - PANIC: could not flush dirty data
-  - sudo nano /etc/postgresql/11/main/postgresql.conf
+  - sudo nano /etc/postgresql/15/main/postgresql.conf
   - data_sync_retry = on
 - ```sudo service postgresql start```
 - ```sudo -u postgres psql```
@@ -619,7 +611,7 @@ xdebug.var_display_max_depth = -1
 - ```nano ~/.pgpass```
 - ```*:5432:*:postgres:root```
 - ```chmod 0600 ~/.pgpass```
-- sudo nano /etc/postgresql/11/main/pg_hba.conf
+- sudo nano /etc/postgresql/15/main/pg_hba.conf
 ```
 # comment out all other lines and append this
 local   all   postgres                  md5
@@ -629,7 +621,6 @@ host    all   all        ::1/128        md5
 ```
 
 #### oraclesql
-
 - sign in https://container-registry.oracle.com and accept TOS
 - installation
   - ```docker login container-registry.oracle.com```
@@ -668,7 +659,6 @@ host    all   all        ::1/128        md5
   - add ```<policy domain="coder" rights="read|write" pattern="LABEL" />```
 
 #### pdftk
-- ```sudo add-apt-repository ppa:malteworld/ppa```
 - ```sudo apt update```
 - ```sudo apt install pdftk```
 - ```pdftk --version```
@@ -678,8 +668,8 @@ host    all   all        ::1/128        md5
 - ```cd /tmp/```
 - ```mkdir dl```
 - ```cd dl```
-- ```wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb```
-- ```sudo dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb```
+- ```wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb```
+- ```sudo dpkg -i wkhtmltox_0.12.6.1-2.jammy_amd64.deb```
 - ```cd /tmp/```
 - ```rm -rf dl```
 - ```wkhtmltopdf --version```
@@ -700,20 +690,20 @@ host    all   all        ::1/128        md5
 
 #### jpegoptim
 - ```sudo apt-get install jpegoptim```
+- ```jpegoptim --version```
 
 #### mozjpeg
 - ```sudo apt-get update```
-- ```sudo apt-get install -y autoconf automake libtool nasm make pkg-config```
+- ```sudo apt-get install -y cmake autoconf automake libtool nasm make pkg-config git libpng-dev```
 - ```cd /tmp/```
 - ```mkdir mozjpeg```
 - ```cd mozjpeg```
-- ```wget https://github.com/mozilla/mozjpeg/archive/v3.3.1.tar.gz```
-- ```tar -xzvf v3.3.1.tar.gz```
-- ```cd mozjpeg-3.3.1/```
-- ```autoreconf -fiv```
+- ```wget https://github.com/mozilla/mozjpeg/archive/refs/tags/v4.1.1.tar.gz```
+- ```tar -xzvf v*.tar.gz```
+- ```cd mozjpeg-*/```
 - ```mkdir build && cd build```
-- ```sh ../configure```
-- ```make install```
+- ```sudo cmake -G"Unix Makefiles" ../```
+- ```sudo make install```
 - ```ln -s /opt/mozjpeg/bin/jpegtran /usr/bin/mozjpeg```
 - ```cd ..```
 - ```cd ..```
@@ -722,20 +712,7 @@ host    all   all        ::1/128        md5
 - ```mozjpeg --version```
 
 #### pngquant
-- ```sudo apt-get update```
-- ```sudo apt-get install -y git gcc cmake libpng-dev pkg-config```
-- ```cd /tmp/```
-- ```mkdir pngquant```
-- ```cd pngquant```
-- ```wget http://pngquant.org/pngquant-2.12.5-src.tar.gz```
-- ```tar -xzvf pngquant-2.12.5-src.tar.gz```
-- ```cd pngquant-2.12.5/```
-- ```./configure```
-- ```make```
-- ```sudo make install```
-- ```cd ..```
-- ```cd ..```
-- ```rm -rf pngquant```
+- ```sudo apt-get install pngquant```
 - ```pngquant --version```
 
 #### svgo
@@ -748,9 +725,9 @@ host    all   all        ::1/128        md5
 - ```cd /tmp/```
 - ```mkdir gifsicle```
 - ```cd gifsicle```
-- ```wget https://github.com/kohler/gifsicle/archive/v1.92.tar.gz```
-- ```tar -xzvf v1.92.tar.gz```
-- ```cd gifsicle-1.92/```
+- ```wget https://www.lcdf.org/gifsicle/gifsicle-1.93.tar.gz```
+- ```tar -xzvf gifsicle*.tar.gz```
+- ```cd gifsicle*/```
 - ```autoreconf -i```
 - ```./configure```
 - ```make```
@@ -773,7 +750,7 @@ host    all   all        ::1/128        md5
 - ```mkdir /var/www/phpmyadmin```
 - ```cd /var/www/phpmyadmin```
 - ```composer create-project phpmyadmin/phpmyadmin .```
-- ```lamp add phpmyadmin php8.1```
+- ```lamp add phpmyadmin php8.0```
 - ```cp config.sample.inc.php config.inc.php```
 - ```nano config.inc.php```
   - ```$cfg['Servers'][$i]['user'] = 'root';```
@@ -787,8 +764,9 @@ host    all   all        ::1/128        md5
   - "Der phpMyAdmin-Konfigurationsspeicher ist nicht vollständig konfiguriert," => operations > create table
 
 #### speedtest cli
-- ```curl -s https://install.speedtest.net/app/cli/install.deb.sh | sudo bash```
+- ```curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash```
 - ```sudo apt-get install speedtest```
+- ```speedtest```
 
 #### include windows fonts in linux
 - ```ln -s /mnt/c/Windows/Fonts /usr/share/fonts/WindowsFonts```
@@ -804,8 +782,12 @@ host    all   all        ::1/128        md5
 - ```sudo apt install httrack webhttrack```
 
 #### ruby (via rvm)
-- ```gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB```
-- ```curl -sSL https://get.rvm.io | bash -s stable --ruby```
+- ```gpg --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB```
+- ```echo 'export rvm_prefix="$HOME"' > /root/.rvmrc```
+- ```echo 'export rvm_path="$HOME/.rvm"' >> /root/.rvmrc```
+- ```curl -sSL https://get.rvm.io | bash -s stable```
+- ```source ~/.rvm/scripts/rvm```
+- ```rvm install ruby-3.1.2```
 - ```ruby --version```
 
 #### wpscan
@@ -824,7 +806,8 @@ host    all   all        ::1/128        md5
 - ```wp --info```
 
 #### ffmpeg
-- ```sudo add-apt-repository ppa:jonathonf/ffmpeg-4```
+- ```sudo add-apt-repository ppa:savoury1/ffmpeg4 -y```
+- ```sudo add-apt-repository ppa:savoury1/ffmpeg5 -y```
 - ```sudo apt-get update```
 - ```sudo apt install ffmpeg```
 - ```ffmpeg -version```
@@ -860,13 +843,13 @@ host    all   all        ::1/128        md5
 
 #### wsl improve i/o performance
 - https://medium.com/@leandrw/speeding-up-wsl-i-o-up-than-5x-fast-saving-a-lot-of-battery-life-cpu-usage-c3537dd03c74
-- Windows Defender Security Center > Viren- & Bedrohungsschutz > Einstellungen für Viren- & Bedrohungsschutz > Ausschlüsse hinzufügen oder entfernen
-  - Ordner: C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc
+- Windows-Sicherheit > Viren- & Bedrohungsschutz > Einstellungen für Viren- & Bedrohungsschutz > Ausschlüsse hinzufügen oder entfernen
+  - Ordner: D:\wsl\ubuntu-latest
   - Prozesse: git, node, dpkg, php5.6, php7.0, php7.1, php7.2, php7.3, php7.4, php8.0, php8.1, php8.2, php-fpm5.6, php-fpm7.0, php-fpm7.1, php-fpm7.2, php-fpm7.3, php-fpm7.4, php-fpm8.0, php-fpm8.1, php-fpm8.2, mysql, mysqld, apache2, bash, postgres, wkhtmltopdf
 
 #### switch cli php version
 - ```sudo update-alternatives --config php```
-- ```sudo update-alternatives --set php /usr/bin/php7.4``` (directly set)
+- ```sudo update-alternatives --set php /usr/bin/php8.1``` (directly set)
 - always choose manual mode (so newer installed versions do not get taken automatically)
 - ```php -v```
 

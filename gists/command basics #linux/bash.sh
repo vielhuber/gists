@@ -316,6 +316,10 @@ tar -xzvf output.tar.gz -C /path/to/target
 tar -xvjf output.tar.bz2
 tar -xf output.tar.xz
 
+# untar only specific folder inside tar
+tar -tvf output.tar.gz # see subfolder structure
+tar -xvf output.tar ./folder/in/archive
+
 # show permissions
 ls -l file
 stat -c "%a %n" file
