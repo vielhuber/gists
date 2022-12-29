@@ -55,7 +55,7 @@
 - Cross-Browser-Check (inkl. Responsive) durchgeführt: BackstopJS + Screaming Frog kombiniert einsetzen(!)
 - Seite auf Auflöungen >1920x1080 getestet (4k Support!); Wenn KEINE spezielle Optimierung gemacht wurde, dann wenigstens die Seitenbreite auf 1920px begrenzen
 - browser-update.org integriert
-- Kontaktformulare durch Captcha (reCAPTCHA) oder alternativ Honeypot schützen
+- Kontaktformulare durch **hCaptcha** oder **Honeypots** schützen
 - reCAPTCHA registrieren
 - Siegel wie Jameda etc. prüfen, ob live eingebunden
 - E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)

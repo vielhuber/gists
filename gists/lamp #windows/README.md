@@ -176,6 +176,9 @@
 - Wenn es Probleme mit GTK gibt: ```nano ~/.config/smartgit/smartgit.vmoptions```, ```swtver=4932``` hinzufügen
 - Falls Updateprozess innerhalb des Programms scheitert: Einfach neue tar.gz downloaden, entzippen (und bestehende Dateien überschreiben)
 
+#### hide intro text
+- ```touch ~/.hushlogin```
+
 #### pimp command line
 - ```sudo nano ~/.bash_profile```
 ```
@@ -351,7 +354,7 @@ xdebug.profiler_enable = off
 xdebug.max_nesting_level = 10000
 xdebug.var_display_max_children= -1
 xdebug.var_display_max_data = -1
-xdebug.var_display_max_depth = -1
+xdebug.var_display_max_depth = 10
 ```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/apache2/conf.d/custom.ini```
