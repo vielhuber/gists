@@ -48,6 +48,13 @@
                             document.head.appendChild(script);
                         });
                     }
+                    if (document.querySelector('[data-hcaptcha-css]') === null) {
+                        let style = document.createElement('style');
+                      	// hide small rectangle
+                        style.innerHTML = 'body > div:last-child[style*="2147483647"] > div[style*="11px"] { display:none; }';
+                        style.setAttribute('data-hcaptcha-css', '');
+                        document.head.appendChild(style);
+                    }
                     if ($form.querySelector('.hcaptcha-container') === null) {
                         let randId = null;
                         while (randId === null || document.querySelector(randId) !== null) {

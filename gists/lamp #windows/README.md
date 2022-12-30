@@ -105,7 +105,7 @@
   - `mount | grep ext4` # note sdX (where X = a|b|c)
   - `sudo resize2fs /dev/sdc 416000M`
   - `df -h`
-
+  
 #### prevent password prompt for sudo commands
 - ```sudo visudo```
 - comment out ```%sudo ALL=(ALL:ALL) ALL```
@@ -148,6 +148,13 @@
   - startxfce4
     - Applications > Settings > Screensaver > Mode: Disable Screensaver
 
+#### wslg (wsl gui) theme
+- `sudo apt install gnome-tweaks`
+- `gnome-tweaks`
+  - Appearance > Applications: HighContrastInverse
+  - Window Titlebars > Maximize / Minimize
+  - Fonts > Scaling Factor > 0.75
+
 #### vscode
 - install Remote - WSL Installieren
 - Erweiterungen > Wolke: Lokale Erweiterungen in WSL - Ubuntu installieren > Alle markieren
@@ -171,6 +178,7 @@
 - Edit > Preferences > User Interface > On start-up: Don't reopen the last used repositories
 - Edit > Preferences > User Interface > Built-in Text Editors > Font Size: 9
 - Repository > Search for Repositories > /var/www
+- Manuelles Umbenennen falscher Namen ("www - ...")
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
 - Wenn non-commercial Lizenz abläuft: rm -rf ~/.config/smartgit/
 - Wenn es Probleme mit GTK gibt: ```nano ~/.config/smartgit/smartgit.vmoptions```, ```swtver=4932``` hinzufügen
@@ -309,6 +317,12 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```echo "Das ist ein Test" | mail -s "Test bestanden" -a "From: smtp@vielhuber.de" david@vielhuber.de```
 - ```sudo nano /etc/php/custom.ini```
   - ```sendmail_path = "/usr/sbin/sendmail -t -i"```
+
+#### node + php auto version switching on cd
+- ```nano ~/.bash_profile```
+- ```auto_switch() { if [[ $PWD == $PREV_PWD ]]; then return; fi; PREV_PWD=$PWD; [[ -f ".nvmrc" ]] && nvm use --silent && echo "switch to node "$(cat .nvmrc); [[ -f ".phprc" ]] && sudo update-alternatives --set php /usr/bin/php$(cat .phprc) && echo "switch to php "$(cat .phprc); }; export PROMPT_COMMAND=auto_switch;```
+- ```source ~/.bash_profile```
+- now place `.nvmrc` / `.phprc` with the version (e.g. `12.10.0` / `8.1`) in the folder, where your `package.json` / `composer.json` lays
 
 #### php error logging
 - ```touch /var/log/php-error.log```
@@ -479,10 +493,6 @@ xdebug.var_display_max_depth = 10
   - ```sudo apt-get install -y build-essential```
 - prevent permission errors
   - ```npm set unsafe-perm true```
-- auto version switching on cd
-  - ```nano ~/.bash_profile```
-  - ```nvm_auto_switch() { if [[ $PWD == $PREV_PWD ]]; then return; fi; PREV_PWD=$PWD; [[ -f ".nvmrc" ]] && nvm use; }; export PROMPT_COMMAND=nvm_auto_switch;```
-  - now place `.nvmrc` with the version (e.g. `12.10.0`) in the folder, where your `package.json` lays
 - install ncu
   - ```npm install -g npm-check-updates```
 
