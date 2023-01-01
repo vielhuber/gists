@@ -318,6 +318,11 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo nano /etc/php/custom.ini```
   - ```sendmail_path = "/usr/sbin/sendmail -t -i"```
 
+#### ncdu
+- ```sudo apt-get install ncdu```
+- ```cd /```
+- ```ncdu --exclude /mnt```
+
 #### node + php auto version switching on cd
 - ```nano ~/.bash_profile```
 - ```auto_switch() { if [[ $PWD == $PREV_PWD ]]; then return; fi; PREV_PWD=$PWD; [[ -f ".nvmrc" ]] && nvm use --silent && echo "switch to node "$(cat .nvmrc); [[ -f ".phprc" ]] && sudo update-alternatives --set php /usr/bin/php$(cat .phprc) && echo "switch to php "$(cat .phprc); }; export PROMPT_COMMAND=auto_switch;```
