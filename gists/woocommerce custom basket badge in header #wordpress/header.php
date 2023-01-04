@@ -1,1 +1,0 @@
-<?php do_action('custom_basket_badge'); ?>

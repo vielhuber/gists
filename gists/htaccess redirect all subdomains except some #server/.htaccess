@@ -1,4 +1,0 @@
-RewriteCond %{HTTP_HOST} !^tld\.org$ [NC]
-RewriteCond %{HTTP_HOST} !^sub1\.tld\.org$ [NC]
-RewriteCond %{HTTP_HOST} !^sub2\.tld\.org$ [NC]
-RewriteRule ^(.*)$ https://tld.org/$1 [L,R=301]

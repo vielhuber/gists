@@ -1,1 +1,0 @@
-$db->setQuery($db->getQuery(true)->select("*")->from($db->quoteName('#__js_table'))->where($db->quoteName('ID').' = '.$db->quote(1)))->loadObject();

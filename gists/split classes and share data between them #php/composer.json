@@ -1,8 +1,0 @@
-// run composer dump-autoload afterwards
-{
-	"autoload": {
-        "psr-4": {
-            "Example\\": "src/"
-        }
-    }
-}
