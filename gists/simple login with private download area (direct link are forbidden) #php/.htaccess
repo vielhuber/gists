@@ -1,0 +1,3 @@
+# files/.htaccess
+Order Deny,Allow
+Deny from all

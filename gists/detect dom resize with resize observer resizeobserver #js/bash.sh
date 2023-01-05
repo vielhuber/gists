@@ -1,0 +1,1 @@
+npm install resize-observer-polyfill --save-dev

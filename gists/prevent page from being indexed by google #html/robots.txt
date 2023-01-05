@@ -1,0 +1,4 @@
+# the following pages don't get crawled
+# if a link is found to the following pages on another page, the link is added to the index!
+# so robots.txt is not a good way to prevent urls from being crawled
+Disallow: /login/

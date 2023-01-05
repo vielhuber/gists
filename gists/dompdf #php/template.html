@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1"
+        />
+        <title></title>
+        <style>
+            #header {
+                background-color: red;
+            }
+            #content {
+                background-color: blue;
+            }
+            #footer {
+                background-color: yellow;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+            #footer:after {
+                content: counter(page, upper-roman);
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .avoid-break {
+                page-break-inside: avoid;
+            }
+        </style>
+    </head>
+    <body>
+				<script type="text/php">
+                    if (isset($pdf)) {
+                        $pdf->page_text(
+                            500, // x
+                            50, // y
+                            "{PAGE_NUM}/{PAGE_COUNT}", // text
+                            $fontMetrics->getFont("custom-font", "normal"), // custom font (embedded via font-family!)
+                            8, // size
+                            array(0,0,0), // color
+                            0.0, // word_space
+                            0.0, // char_space
+                            0.0 // angle
+                        );
+                        /* to align page_num/page_count to right, we can use $PAGE_NUM/$PAGE_COUNT as variables (and not as {PAGE_NUM} AND {PAGE_COUNT}) and can determine the width and align it right */
+                        $pdf->page_script('
+                            $font = $fontMetrics->getFont("custom-font", "normal"), // custom font (embedded via font-family!)
+                            $size = 12;
+                            $text = $PAGE_NUM . " of " . $PAGE_COUNT;
+                            $x = $pdf->get_width() - 50 - $fontMetrics->getTextWidth($text, $font, $size);
+                            $y = 15;
+                            $color = array(95/255,95/255,95/255); // divide rgb by 255 in text()
+                            $pdf->text(
+                                $x,
+                                $y,
+                                $text,
+                                $font,
+                                $size
+                            );
+                        ');
+                    }
+                </script>
+        <div id="header">
+            Header
+        </div>
+        <div id="footer">
+            Footer
+        </div>
+        <div id="content">
+            Content on page 1
+            <div class="page-break"></div>
+            Content on page 2
+            <div class="avoid-break">
+                This div is never split up.
+            </div>
+        </div>
+    </body>
+</html>
