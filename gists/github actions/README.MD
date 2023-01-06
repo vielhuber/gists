@@ -20,22 +20,25 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout code
+            - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Install libraries
+            - name: Libraries
               run: sudo apt-get install -y diffutils exiftool
 
-            - name: Install composer
-              uses: php-actions/composer@v6
+            - name: PHP
+              uses: shivammathur/setup-php@v2
               with:
-                  php_version: '8.1'
-                  version: 2.x
+                  php-version: '8.1'
+                  extensions: gd
+                  tools: composer, phpunit
 
-            - name: PHPUnit tests
-              uses: php-actions/phpunit@v3
-              with:
-                  php_extensions: gd
+            - name: Composer
+              run: composer install --no-interaction
+
+            - name: PHPUnit
+              run: ./vendor/bin/phpunit
+
 ```
 
 #### advanced
@@ -57,31 +60,38 @@ jobs:
 
         strategy:
             matrix:
-                operating-system: [ubuntu-latest]
+                operating-system: ['ubuntu-latest']
                 php-versions: ['7.4', '8.0', '8.1']
 
         name: ${{ matrix.operating-system }} (PHP ${{ matrix.php-versions }})
 
         steps:
-            - name: Checkout code
+            - name: Checkout
               uses: actions/checkout@v3
               
-            - name: Install libraries
-              run: sudo apt-get install -y diffutils exiftool
-
-            - name: Install composer
-              uses: php-actions/composer@v6
+            - name: Libraries
+              run:   |
+                     if [ "$RUNNER_OS" == "Linux" ]; then
+                          sudo apt-get install coreutils
+                     elif [ "$RUNNER_OS" == "macOS" ]; then
+                          brew install coreutils
+                     elif [ "$RUNNER_OS" == "Windows" ]; then
+                          choco install important_windows_software
+                     fi
+              shell: bash
+              
+            - name: PHP
+              uses: shivammathur/setup-php@v2
               with:
-                  version: latest
-                  php_version: '${{ matrix.php-versions }}'
-                  php_extensions: mysqli xdebug mbstring xmlrpc gd intl xml zip soap bcmath imap opcache pgsql pdo imagick
+                  php-version: '${{ matrix.php-versions }}'
+                  extensions: mysqli, xdebug, mbstring, xmlrpc, gd, intl, xml, zip, soap, bcmath, imap, opcache, pgsql, pdo, imagick
+                  tools: composer, phpunit
 
-            - name: PHPUnit tests
-              uses: php-actions/phpunit@v3
-              with:
-                  version: latest
-                  php_version: '${{ matrix.php-versions }}'
-                  php_extensions: mysqli xdebug mbstring xmlrpc gd intl xml zip soap bcmath imap opcache pgsql pdo imagick
+            - name: Composer
+              run: composer install --no-interaction
+
+            - name: PHPUnit
+              run: ./vendor/bin/phpunit
 ```
 
 - push with new version tag to github
