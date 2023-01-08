@@ -110,3 +110,9 @@ jobs:
 ### other
 
 - hotloaded functions in `composer.json` > `autoload` > `files` don't work. add them manually to your test with `include_once './src/functions.php';`
+
+### run locally
+
+- curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+- startup Docker
+- ./bin/act

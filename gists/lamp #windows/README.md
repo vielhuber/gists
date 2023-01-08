@@ -500,6 +500,8 @@ xdebug.var_display_max_depth = 10
   - ```npm set unsafe-perm true```
 - install ncu
   - ```npm install -g npm-check-updates```
+- login npm
+  - ```npm login```
 
 #### yarn
 - ```corepack enable```
