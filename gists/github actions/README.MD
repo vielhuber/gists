@@ -2,7 +2,7 @@
 
 - add ```/.github/workflows/ci.yml```
 
-#### simple
+#### php: simple
 
 ```yml
 name: CI
@@ -41,7 +41,7 @@ jobs:
 
 ```
 
-#### advanced
+#### php: advanced
 
 ```yml
 name: CI
@@ -94,6 +94,78 @@ jobs:
               run: ./vendor/bin/phpunit
 ```
 
+#### js: simple
+
+```yml
+name: CI
+
+env:
+    CI: true
+    SECRET_VARIABLE_1: ${{ secrets.SECRET_VARIABLE_1 }}
+    SECRET_VARIABLE_2: ${{ secrets.SECRET_VARIABLE_2 }}
+    SECRET_VARIABLE_3: ${{ secrets.SECRET_VARIABLE_3 }}
+
+on: [push]
+
+jobs:
+    build-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '16.17.0'
+                  cache: 'npm'
+
+            - name: NPM
+              run: npm install
+
+            - name: Test
+              run: npm run js:tests
+```
+
+#### js: advanced
+
+```yml
+name: CI
+
+env:
+    CI: true
+
+on: [push]
+
+jobs:
+    build-test:
+        runs-on: ${{ matrix.operating-system }}
+
+        strategy:
+            matrix:
+                operating-system: ['ubuntu-latest', 'macos-latest', 'windows-latest']
+                node-versions: ['14.18.0', '16.17.0', '18.12.1', '19.3.0']
+
+        name: ${{ matrix.operating-system }} (Node ${{ matrix.node-versions }})
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '${{ matrix.node-versions }}'
+                  cache: 'npm'
+
+            - name: NPM
+              run: npm install
+
+            - name: Test
+              run: npm run js:tests
+```
+
 - push with new version tag to github
 - add a badge to `README.MD`: ```[![build status](https://github.com/username/repo/actions/workflows/ci.yml/badge.svg)](https://github.com/username/repo/actions)```
 - enjoy
@@ -113,6 +185,7 @@ jobs:
 
 ### run locally
 
-- curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
-- startup Docker
-- ./bin/act
+- `curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash`
+- restart
+- startup docker
+- `./bin/act`

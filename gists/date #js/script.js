@@ -10,7 +10,7 @@ new Date(str.substring(6,10)+'-'+str.substring(3,5)+'-'+str.substring(0,2));
 
 // current date with time 00:00:00
 new Date(((new Date()).getFullYear()+'-'+('0'+((new Date()).getMonth()+1)).slice(-2)+'-'+('0'+(new Date()).getDate()).slice(-2))+' 00:00:00')
-let d = new Date(); d.setHours(0); d.setMinutes(0); d.setSeconds(0); d1.setMilliseconds(0); // alternative
+let d = new Date(); d.setHours(0); d.setMinutes(0); d.setSeconds(0); d.setMilliseconds(0); // alternative
 
 // with time (use with "T" for cross browser support; be aware: safari does not support '2000-07-28 11:32:00' and also has problems with timezones)
 new Date('2022-11-03T16:00:00+0'+Math.abs(new Date('2022-11-03').getTimezoneOffset() / 60)+':00');
