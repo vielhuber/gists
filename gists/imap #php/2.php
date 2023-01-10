@@ -56,15 +56,16 @@ $client = $cm->make([
     'authentication' => 'oauth'
 ]);
 $client->connect();
-$folders = $client->getFolders();
+$folders = $client->getFolders(); // use "false" here to speed up things by getting a non hierarchical structure
 foreach ($folders as $folder) {
     if ($folder->full_name !== 'INBOX') {
         continue;
     }
-    $messages = $folder
-        ->messages()
-        ->all()
-        ->get();
+    $messages = $folder->messages()->all()->get();
+  
+  	// alternative with paging (when lots of mails should be loaded)
+    //$messages = $folder->messages()->all()->paginate($per_page = 100, $page = null, $page_name = 'imap_page');  
+  
     foreach ($messages as $messages__value) {
         $mail = [];
         $mail['id'] = $messages__value->getMessageId()[0];
