@@ -514,12 +514,9 @@ xdebug.var_display_max_depth = 10
   - ```sudo apt-get install python3 python3-pip```
   - ```python3 --version```
   - ```pip3 --version```
-- OBSOLETE: install python 3.6
-  - ```sudo add-apt-repository ppa:deadsnakes/ppa```
-  - ```sudo apt-get update```
-  - ```sudo apt-get install python3.6```
-  - ```python3.6 --version```
-  - ```python3.6 -m pip --version```
+- install python 2.X
+  - ```sudo apt-get install python2```
+  - ```python2 --version```
 - change default version
   - ```cd /usr/bin```
   - ```sudo rm python```

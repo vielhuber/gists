@@ -56,6 +56,19 @@ if (is_wp_error($response) || @$response['response']['code'] != 200) {
     die('duplicate mail');
 }
 
+/* get recipients */
+$response = wp_remote_get($cleverreach->api_url . '/groups.json/' . $cleverreach->list_id . '/receivers?pagesize=5000', [
+    'headers' => [
+        'Authorization' => 'Bearer ' . $cleverreach->access_token
+    ]
+]);
+if (is_wp_error($response) || @$response['response']['code'] != 200) {
+    die('error');
+}
+echo '<pre>';    
+var_dump($response['headers'],json_decode($response['body']), $response['response']);
+echo '</pre>';
+
 /* send double opt in */
 $response = wp_remote_post($cleverreach->api_url . '/forms.json/' . $cleverreach->form_id . '/send/activate', [
     'body' => wp_json_encode([
