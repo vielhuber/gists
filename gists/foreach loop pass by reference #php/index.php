@@ -13,8 +13,16 @@ foreach ($bar as &$bar__value) {
 print_r($bar); // [2,3]
 
 /* BE VERY CAREFUL WHEN USING THIS! */
-$bar = [1, 2];
+$bar = [2, 7, 14];
 foreach ($bar as &$bar__value) { $bar__value++; }
-print_r($bar); // [2,3]
+print_r($bar); // [3, 8, 15]
+print_r($bar__value); // 15 (this is the reference!)
+
+$bar__value = 99;
+print_r($bar); // [3, 8, 99]
+
+$bar[2] = 0;
+print_r($bar__value); // 0
+
 foreach ($bar as $bar__value) { }
-print_r($bar); // [2,2] - array corrupted! because $bar__value is leaked outside
+print_r($bar); // [3, 8, 8] // $bar__value gets overrided on every iteration (after the 2nd it has the value of 8; on the last run, it overrides itself with 8)
