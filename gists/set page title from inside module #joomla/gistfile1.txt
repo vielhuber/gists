@@ -1,0 +1,2 @@
+$document = JFactory::getDocument();
+$document->setTitle('test');

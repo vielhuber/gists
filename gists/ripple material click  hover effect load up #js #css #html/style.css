@@ -1,0 +1,72 @@
+body {
+    background-color:red;
+    padding:100px;
+}
+ul {
+    margin:0;
+}
+ul li {
+}
+ul li:nth-child(1) a {
+    background-image:url('https://cdn2.iconfinder.com/data/icons/nasty/60/poo_shit_faeces-128.png');
+    background-size:auto 100%;
+    background-repeat:no-repeat;
+    background-color:grey;
+    background-position:center;
+}
+ul li a {
+    padding:20px 30px;
+    background-color:#fff;
+    display:block;
+}
+.submit {
+    display:block;
+    background-color:yellow;
+    color:#000;
+    margin-top:100px;
+    padding:50px 50px;
+}
+
+
+.ripple {
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+.ripple .ripple_bubble {
+    display: block;
+    position: absolute;
+    background: rgba(255, 0, 0, 0.75);
+    border-radius: 100%;
+    transform: scale(0);
+}
+.ripple .ripple_bubble + .ripple_txt {
+    position: relative;
+}
+.ripple .ripple_bubble.animate {
+    animation: ripple_bubble 0.65s ease-in-out;
+}
+@keyframes ripple_bubble {
+    100% {
+        opacity: 0;
+        -moz-transform: scale(2.5); -webkit-transform: scale(2.5); -o-transform: scale(2.5); -ms-transform: scale(2.5); transform: scale(2.5);
+    }
+}
+.ripple:before {
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background-color:brown;
+    -moz-transform: scale(0,1); -webkit-transform: scale(0,1); -o-transform: scale(0,1); -ms-transform: scale(0,1); transform: scale(0,1);
+    -webkit-transition: all 0.5s ease-in-out;-moz-transition: all 0.5s ease-in-out;-ms-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;
+    -moz-transform-origin: 0% 100%; -webkit-transform-origin: 0% 100%; -o-transform-origin: 0% 100%; -ms-transform-origin: 0% 100%; transform-origin: 0% 100%;
+}
+.ripple.upwards:before {
+    -moz-transform: scale(1,0); -webkit-transform: scale(1,0); -o-transform: scale(1,0); -ms-transform: scale(1,0); transform: scale(1,0);
+}
+.ripple:hover:before {
+    -moz-transform: scale(1,1); -webkit-transform: scale(1,1); -o-transform: scale(1,1); -ms-transform: scale(1,1); transform: scale(1,1);
+}
