@@ -1,1 +1,0 @@
-nvm_auto_switch() { if [[ $PWD == $PREV_PWD ]]; then return; fi; PREV_PWD=$PWD; [[ -f ".nvmrc" ]] && nvm use; }; export PROMPT_COMMAND=nvm_auto_switch;

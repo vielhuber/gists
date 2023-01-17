@@ -1,1 +1,0 @@
-// https://github.com/vielhuber/wordpress-blank/blob/master/wp-content/themes/blank/_php/ImageHelper.php

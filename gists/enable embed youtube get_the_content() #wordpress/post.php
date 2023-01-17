@@ -1,1 +1,0 @@
-apply_filters('the_content', get_the_content());

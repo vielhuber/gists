@@ -1,3 +1,0 @@
-composer require spatie/laravel-responsecache
-php artisan vendor:publish --provider="Spatie\ResponseCache\ResponseCacheServiceProvider"
-php artisan responsecache:clear
