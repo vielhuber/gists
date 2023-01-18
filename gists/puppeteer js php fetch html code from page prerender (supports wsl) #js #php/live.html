@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>.</title>
+        <script>
+            setInterval(() => {
+                let url = 'live.jpg?'+(	~~(Math.random()*(99999-10000+1))+10000);
+                let img = new Image();
+                img.src = url;
+                img.onload = () => {
+                    document.querySelector('.live_preview').setAttribute('style','background-image:url('+url+')');
+                };
+            }, 1000);
+        </script>
+        <style>
+            .live_preview {
+                width:100%;
+                height:100%;
+                position:absolute;
+                top:0;
+                left:0;
+                background-repeat:no-repeat;
+                background-size:contain;
+                background-color:#eee;
+                background-position:center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="live_preview"></div>
+    </body>
+</html>

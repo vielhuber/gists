@@ -1,0 +1,17 @@
+@page {
+  size: A4 portrait;
+  margin: 2cm 3cm;
+}
+html, body {
+	padding:0;
+	margin:0;
+}
+body {
+	background-color:red;
+}
+.page-break {
+    page-break-before: always;
+}
+.avoid-break {
+    page-break-inside: avoid;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html><html><head>
+    <style>
+    .overlay {
+        position:fixed;
+        right:10%;
+        top:10%;
+        bottom:10%;
+        left:10%;
+        background-color:red;
+        z-index:2;
+    }
+    .overlay ~ * {
+        filter: grayscale(50%) blur(5px);
+    }
+    </style>
+</head>
+<body>
+    <div class="overlay">I am not blurred</div>
+
+    <!-- position test -->
+    <div style="margin-top:100px;float:right;">
+        <div style="background-color:red;position:fixed;top:0;right:0;width:100px;height:100px;"></div>
+    </div>
+</body>
+</html>

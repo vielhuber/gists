@@ -1,0 +1,6 @@
+$padding: 30px;
+
+div
+{
+  width: calc( #{$padding} * 2 );
+}

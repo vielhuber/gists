@@ -1,0 +1,7 @@
+{
+    "require": {
+        "vielhuber/stringhelper": "*",
+        "box/spout": "*",
+        "swiftmailer/swiftmailer": "*"
+    }
+}

@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+.child:nth-child(1) {
+    flex: 0 0 30%;
+}
+.child:nth-child(2) {
+    flex: 0 0 20%;
+}
+.child:nth-child(3) {
+    flex: 0 0 50%;
+}

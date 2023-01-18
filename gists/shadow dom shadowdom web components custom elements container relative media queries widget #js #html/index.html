@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>.</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        /* custom component */
+        if(customElements.get('my-component') === undefined) {
+            customElements.define('my-component', class extends HTMLElement {
+                constructor() {
+                    super();
+                    this.attachShadow({ mode: 'open' });
+                    this.shadowRoot.innerHTML = `
+                        <style>
+                            :host {
+                                all: initial !important; /* prevent inheritance from top element from outside */
+                                display: block; /* by default, custom elements are inline */
+                                contain: content; /* performance optimization */
+                            }
+                            :host > *
+                            {
+                                box-sizing: border-box;
+                                margin: 0;
+                                padding: 0;
+                            }
+                            p {
+                                font-size:30px;
+                            }
+                        </style>
+                        <p>
+                            foo ${ this.getAttribute('data-foo') }
+                        </p>
+                        <slot>
+                            fallback content
+                        </slot>
+						<div class="container"></div>
+                        <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css" />
+                        <span class="mdi mdi-home"></span>
+                    `;
+                  	// if you want to use media queries relative to the component size, implement the idea from https://philipwalton.com/articles/responsive-components-a-solution-to-the-container-queries-problem/)
+                    const observer = new ResizeObserver(entries => {
+                        let breakpoints = { sm: 450, md: 768, lg: 1024 };
+                        entries.forEach(entry => {
+                            Object.keys(breakpoints).forEach(breakpoint => {
+                                let width = breakpoints[breakpoint];
+                                if (entry.contentRect.width > width) {
+                                    entry.target.classList.remove(breakpoint);
+                                } else {
+                                    entry.target.classList.add(breakpoint);
+                                }
+                            });
+                        });
+                    });
+                    observer.observe(this.shadowRoot.querySelector('.container'));
+                }
+                connectedCallback() {
+                    // font files won't load inside the shadow dom, we therefore apply the css (only @font-face)
+                    // outside of the shadow dom (in the global body or also possible in the light dom of the component)
+                    // the stylesheet itself where the families get applied must stay inside of the shadow dom
+                    this.innerHTML = `
+                        <style>
+                            @font-face {
+                                font-family: "Material Design Icons";
+                                src: url("https://cdn.materialdesignicons.com/4.9.95/fonts/materialdesignicons-webfont.woff?v=4.9.95") format("woff");
+                            }
+                        </style>
+                    `
+                }
+            });
+        }
+
+        /* example without custom component */
+        if( document.querySelector('.basic') !== null ) {
+            document.querySelectorAll('.basic').forEach(el => {
+                let shadowRoot = el.attachShadow({ mode: 'open' }); // same as el.shadowRoot
+                shadowRoot.innerHTML = `
+                    <style>
+                        :host {
+                            all: initial !important;
+                            display: block;
+                            contain: content;
+                        }
+                        :host > *
+                        {
+                            box-sizing: border-box;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        p {
+                            font-size:30px;
+                        }
+                    </style>
+                    <p>
+                        foo ${ el.getAttribute('data-foo') }
+                    </p>
+                    <slot>
+                        fallback content
+                    </slot>
+                `;
+              	// apply css (other method like the one above)
+              	let stylesheet = document.createElement('link');
+                stylesheet.href = 'bundle.css';
+                stylesheet.rel = 'stylesheet';
+                shadowRoot.appendChild(stylesheet);              
+              	// apply font face
+                let stylesheet_font = document.createElement('link');
+                stylesheet_font.href = 'font-face.css';
+                stylesheet_font.rel = 'stylesheet';
+                el.appendChild(stylesheet_font); // must be applied to light dom(!)
+            });
+        }
+
+        // access from outside
+        setTimeout(() => {
+           document.querySelector('my-component:nth-child(2)').shadowRoot.querySelector('p').innerHTML = 'outside modification';
+        }, 1000);
+    });
+    </script>
+    <style>
+    /*
+    top-level elements of a shadow tree inherit styles for special properties like background, color, font, line-height, etc. from their host element(!)
+    with "all: initial" above we circumvent this behaviour
+    */
+    my-component, .basic {
+        font-size:50px;
+        color:yellow;
+        background-color:red;
+    }
+    </style>
+</head>
+<body>
+
+    <my-component data-foo="bar1"></my-component>
+    <my-component data-foo="bar2">slot example</my-component>
+
+    <div class="basic" data-foo="bar1"></div>
+    <div class="basic" data-foo="bar2">slot example</div>
+
+</body>
+</html>

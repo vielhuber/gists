@@ -1,0 +1,10 @@
+DELIMITER $$
+CREATE FUNCTION `getScore`(`a` DECIMAL(12,4), `b` DECIMAL(12,4), `c` DECIMAL(12,4)) RETURNS DECIMAL(12,4)
+BEGIN
+	DECLARE i INT;
+    SET i = 5;
+    RETURN a + b + c + i;
+END$$
+DELIMITER ;
+
+SELECT getScore(0.3, 0.4, 0.5)

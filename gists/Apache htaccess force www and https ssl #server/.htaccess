@@ -1,0 +1,152 @@
+# force HTTPS and www.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} (?!^www\.)^(.+)$ [OR]
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://www.%1%{REQUEST_URI} [R=301,L]
+
+
+# alternative way
+RewriteCond %{HTTP_HOST} !^$
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L,NE]
+
+
+
+# without lookbehind
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^www\.domain\.de [NC]
+RewriteRule ^(.*)$ https://www.domain.de/$1 [R=301,L]
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://www.domain.de/$1 [R=301,L]
+
+# force HTTPS and www not for subdomains
+RewriteCond %{HTTP_HOST} ^domain\.de [NC]
+RewriteRule ^(.*)$ https://www.domain.de/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www\.domain\.de [NC]
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://www.domain.de/$1 [R=301,L]
+
+# for cloudflare
+RewriteEngine On
+RewriteCond %{HTTP:X-Forwarded-Proto} =http
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# not locally
+<IfModule !mod_win32.c>
+RewriteEngine on
+...
+</IfModule>
+
+# not locally #2
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !\.dev$ [NC]
+RewriteCond %{HTTP_HOST} !\.local$ [NC]
+RewriteCond %{HTTP_HOST} !^www\.domain\.de [NC]
+RewriteRule ^(.*)$ https://www.domain.de/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} !\.dev$ [NC]
+RewriteCond %{HTTP_HOST} !\.local$ [NC]
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://www.domain.de/$1 [R=301,L]
+
+# force www only
+RewriteEngine on
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# force HTTPS and non-www
+<IfModule !mod_win32.c>
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^(www\.)(.+) [OR]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^(www\.)?(.+)
+RewriteRule ^ https://%2%{REQUEST_URI} [R=301,L]
+</IfModule>
+<IfModule mod_win32.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+</IfModule>
+
+
+# Force non-www and ssl
+RewriteCond %{HTTP_HOST} !\.local\.vielhuber\.de$ [NC]
+RewriteCond %{HTTP_HOST} ^(www\.)(.+)
+RewriteCond %{HTTP_HOST} ^(www\.)?(.+)
+RewriteRule ^ https://%2%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTP_HOST} !\.local\.vielhuber\.de$ [NC]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^(www\.)?(.+)
+RewriteRule ^ https://%2%{REQUEST_URI} [R=301,L]
+
+
+
+# force ssl and www for main domain, force ssl and non www for all subdomains (except locally)
+RewriteEngine On 
+# for subdomains: force ssl and non www
+RewriteCond %{HTTP_HOST} !\.local$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} !^(www\.)?camac-harps\.com$ [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.|)(.*)$ [NC]
+RewriteRule ^.*$ https://%1%{REQUEST_URI} [R,L]
+# for main domains: force ssl and www
+RewriteCond %{HTTP_HOST} !\.local$ [NC]
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^camac-harps\.com$ [NC]
+RewriteRule ^.*$ https://www.camac-harps.com%{REQUEST_URI} [R,L]
+
+
+
+
+
+# # force https
+# RewriteCond %{HTTP_HOST} !\.xip\.io$ [NC]
+# RewriteCond %{HTTP_HOST} !\.local$ [NC]
+# RewriteCond %{HTTPS} !=on [NC]
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# force ssl and non-www for main domain and for all subdomains (except local)
+RewriteEngine On
+# main domain
+RewriteCond %{HTTP_HOST} ^(www\.)?tld\.org$ [NC]
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://tld.org%{REQUEST_URI} [R=301,L,NE]
+# subdomains
+RewriteCond %{HTTP_HOST} !^local\.tld\.org$ [NC]
+RewriteCond %{SERVER_PORT} 80
+RewriteCond %{HTTP_HOST} ^((?!www\.)[^.]+)\.tld\.org$
+RewriteRule ^ https://%1.tld.org%{REQUEST_URI} [NE,L,R]
+
+# # force www except on development machines (.local & .xip.io)
+# RewriteCond %{HTTPS} !=on
+# RewriteCond %{HTTP_HOST} !\.local$ [NC]
+# RewriteCond %{HTTP_HOST} !\.xip\.io$ [NC]
+# RewriteCond %{HTTP_HOST} !^www\..+$ [NC]
+# RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# # https
+# RewriteCond %{HTTPS} =on
+# RewriteCond %{HTTP_HOST} !\.local$ [NC]
+# RewriteCond %{HTTP_HOST} !\.xip\.io$ [NC]
+# RewriteCond %{HTTP_HOST} !^www\..+$ [NC]
+# RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# # force non-www except on development machines (.local & .xip.io)
+# RewriteCond %{HTTPS} !=on
+# RewriteCond %{HTTP_HOST} !\.local$ [NC]
+# RewriteCond %{HTTP_HOST} !\.xip\.io$ [NC]
+# RewriteCond %{HTTP_HOST} ^www\..+$ [NC]
+# RewriteRule ^ http://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# # https
+# RewriteCond %{HTTPS} =on
+# RewriteCond %{HTTP_HOST} !\.local$ [NC]
+# RewriteCond %{HTTP_HOST} !\.xip\.io$ [NC]
+# RewriteCond %{HTTP_HOST} ^www\..+$ [NC]
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+
+
+
