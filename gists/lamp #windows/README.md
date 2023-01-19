@@ -115,6 +115,7 @@
 - Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
 - Installation: "Install required Windows components for WSL 2"
 - Settings > General > "Use the WSL 2 based engine"
+- Settings > Resources -> WSL Integration -> "Enable integration with my default WSL distro", 
 - Login with account
 - ```docker version```
 - ```docker-compose version```
@@ -843,6 +844,19 @@ host    all   all        ::1/128        md5
 #### xclip (pipe to clipboard)
 - ```sudo apt-get install xclip```
 - ```echo "foo" | xclip```
+
+#### docker-osx
+- edit `%UserProfile%\.wslconfig`
+  - `nestedVirtualization=true`
+- `sudo apt-get install kvm`
+  - `kvm-ok` // KVM acceleration can be used
+- `sudo apt install x11-apps -y`
+- if port is in use
+  - show used ports in powershell: `netsh int ipv4 show excludedportrange protocol=tcp`
+  - change port in command below from 50922 to 40922
+- `docker run -it --device /dev/kvm -p 40922:10022 -v /mnt/wslg/.X11-unix:/tmp/.X11-unix -e "DISPLAY=${DISPLAY:-:0.0}" -e GENERATE_UNIQUE=true -e MASTER_PLIST_URL='https://raw.githubusercontent.com/sickcodes/osx-serial-generator/master/config-custom.plist' sickcodes/docker-osx:ventura`
+- Disk Utility > QEMU HARDDISK Media (biggest) > Erase > Name: MyDockyOSX + Scheme: Mac OS Extended (Journaled)
+- Reinstall macOS Ventura
 
 #### autostart
 - wsl
