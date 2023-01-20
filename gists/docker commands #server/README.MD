@@ -25,6 +25,7 @@
 - `docker rm ubuntu:latest` # remove container with name "ubuntu" and tag "latest"
 - `docker start test-container` # start container
 - `docker stop test-container` # stop container
+- `docker rename old-name new-name` # rename container
 
 ### docker compose
 
