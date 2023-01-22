@@ -340,7 +340,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 ```
 user_ini.filename =
 
-max_execution_time = 2400
+max_execution_time = 4800
 max_input_time = 900
 post_max_size = 800M
 memory_limit = 4096M
