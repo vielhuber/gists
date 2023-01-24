@@ -534,6 +534,9 @@ xdebug.var_display_max_depth = 10
 - ```blackfire config --client-id=xxx --client-token=xxx``` (see blackfire.io)
 - ```blackfire run ./vendor/bin/phpunit```
 
+#### gulp
+- ```npm install --global gulp-cli```
+
 #### git
 - ```sudo add-apt-repository ppa:git-core/ppa -y```
 - ```sudo apt-get update```

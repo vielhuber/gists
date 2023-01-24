@@ -67,6 +67,24 @@ add_action('rest_api_init', function () {
 });
 ```
 
+- note: if you want to use other classes of the namespace inside the callback function, you have to call a separate function from the current class
+```php
+private function routeTest() {
+    add_action('rest_api_init', function () {
+        register_rest_route('v1', '/test', [
+            'methods' => \WP_REST_Server::READABLE,
+            'permission_callback' => function () { return true; },
+            'callback' => [$this, 'routeTestCallback']
+        ]);
+    });
+}
+public function routeTestCallback(\WP_REST_Request $request) {
+    /* this works now */
+    new OtherClass();
+    /* ... */
+}
+```
+
 ### option 2: custom php file
 ```php
 // custom-ajax.php

@@ -15,6 +15,8 @@ function wp_split_more($content, $type, $more_html = null)
     // split up
     if (preg_match('/<!--more(.*?)?-->/', $content, $matches)) {
         list($return['before'], $return['after']) = explode($matches[0], $content, 2);
+    } elseif (preg_match('/<span id=".+"><\/span>/', $content, $matches)) {
+        list($return['before'], $return['after']) = explode($matches[0], $content, 2);
     } else {
         $return['before'] = $content;
         $return['after'] = '';
