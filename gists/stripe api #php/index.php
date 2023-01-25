@@ -3,10 +3,11 @@
 require_once(__DIR__ . '/vendor/autoload.php');
 
 class Stripe {
-	private $stripe;
+    private $stripe = null;
+    private $secret_key = 'sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
   
     public function init() {
-        $this->stripe = new \Stripe\StripeClient('sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+        $this->stripe = new \Stripe\StripeClient($this->secret_key);
 
         $response = $this->createSession([
             'items' => [
@@ -21,8 +22,11 @@ class Stripe {
                     'amount' => 1
                 ]
             ],
-            'success_url' => $this->getCurrentUrl(),
-            'cancel_url' => $this->getCurrentUrl(),
+            /* you should check the payment status via webhooks */
+            /* if you don't expect much payments and don't have the infrastructure */
+            /* you also can directly check the status on the success page via getPaymentStatus() */
+            'success_url' => $this->getCurrentUrl().'?success=1&session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => $this->getCurrentUrl().'?success=1&session_id={CHECKOUT_SESSION_ID}',
             'payment_methods' => ['sepa_debit', 'sofort', 'card'],
         ]);
         echo '<a href="'.$response->url.'" target="_blank">KAUFEN</a>';
