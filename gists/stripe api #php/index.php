@@ -22,6 +22,14 @@ class Stripe {
                     'amount' => 1
                 ]
             ],
+            /* customer data to retreive later on (its better to use your own database */
+          	/* but for convenience reasons you also can store it in the stripe session
+            /* and retreive it later after success/error */
+            'metadata' => [
+                'first_name' => 'Vielhuber',
+                'last_name' => 'Vielhuber',
+                'foo' => 'bar'
+            ],
             /* you should check the payment status via webhooks */
             /* if you don't expect much payments and don't have the infrastructure */
             /* you also can directly check the status on the success page via getPaymentStatus() */
