@@ -1,6 +1,6 @@
 export default class Example {
   
-    // this now is also possible but not needed (with http://babeljs.io/docs/en/babel-plugin-transform-class-properties/)
+    // this now is also possible but not standard behaviour (with http://babeljs.io/docs/en/babel-plugin-transform-class-properties/)
     dynamicVar = 'foo';
     static staticVar = 'bar';
 
