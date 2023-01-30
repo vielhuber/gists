@@ -18,6 +18,8 @@ arr.some(i => i > 7); // true
 
 arr.sort((a,b) => b-a); // [9,8,7]
 
+/* sum */
+[{amount:1},{amount:3},{amount:3},{amount:7}].reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) // 14
 
 let obj = {0: 7, 1: 8, 2: 9};
 
