@@ -15,8 +15,8 @@ class TestClass
    {
       echo __CLASS__.' was initiated';
      
-     // you don't need variables to be defined on top, but it's "good style"
-     // but you can also do:
+     // you need variables to be defined on top(!)
+     // in the past, you could also do
      $this->var4 = 'foo'; // this is the same as public $var4 = 'foo'
    }
    
