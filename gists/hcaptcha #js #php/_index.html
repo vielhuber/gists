@@ -37,10 +37,11 @@
             class hCaptcha {
                 sitekey = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
                 async check($form) {
+                  	let lng = document.documentElement.getAttribute('lang').split('-')[0].toLowerCase();
                     if (document.querySelector('[data-hcaptcha-js]') === null) {
                         await new Promise((resolve, reject) => {
                             let script = document.createElement('script');
-                            script.src = 'https://js.hcaptcha.com/1/api.js?render=explicit';
+                            script.src = 'https://js.hcaptcha.com/1/api.js?hl=' + lng + '&render=explicit';
                             script.setAttribute('data-hcaptcha-js', '');
                             script.onload = () => {
                                 resolve();
@@ -65,6 +66,7 @@
                             '<div class="hcaptcha-container" id="' + randId + '"></div>'
                         );
                         let id = hcaptcha.render(randId, {
+                          	hl: lng,
                             sitekey: this.sitekey,
                             theme: 'dark',
                             size: 'invisible',

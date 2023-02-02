@@ -163,14 +163,14 @@
 
 #### smartgit
 - `cd /usr/local`
-- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-22_1_2.tar.gz`
+- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-22_1_3.tar.gz`
 - `tar xzf smartgit-linux-*.tar.gz`
 - `rm smartgit-linux-*.tar.gz`
 - `nano /usr/local/bin/sgit`
 - `( /usr/local/smartgit/bin/smartgit.sh & ) > /dev/null 2>&1`
 - `chmod +x /usr/local/bin/sgit`
 - `sgit`
-- Non-commercial use only
+- Register existing license: /var/www/lamp/syntevo-non-commercial.lic
 - User Name: David Vielhuber
 - Email: david@vielhuber.de
 - Use SmartGit as SSH client
@@ -181,9 +181,13 @@
 - Repository > Search for Repositories > /var/www
 - Manuelles Umbenennen falscher Namen ("www - ...")
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
-- Wenn non-commercial Lizenz abläuft: rm -rf ~/.config/smartgit/
-- Wenn es Probleme mit GTK gibt: ```nano ~/.config/smartgit/smartgit.vmoptions```, ```swtver=4932``` hinzufügen
-- Falls Updateprozess innerhalb des Programms scheitert: Einfach neue tar.gz downloaden, entzippen (und bestehende Dateien überschreiben)
+- Wenn non-commercial Lizenz abläuft:
+  - https://www.syntevo.com/register-non-commercial/ > register with github
+  - alternative: rm -rf ~/.config/smartgit/ > download/install/use v21
+- Wenn es Probleme mit GTK gibt:
+  - ```nano ~/.config/smartgit/smartgit.vmoptions```, ```swtver=4932``` hinzufügen
+- Falls Updateprozess innerhalb des Programms scheitert:
+  - Einfach neue tar.gz downloaden, entzippen (und bestehende Dateien überschreiben)
 
 #### hide intro text
 - ```touch ~/.hushlogin```
