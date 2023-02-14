@@ -166,7 +166,7 @@ class GoogleDrivePhp
     {
         $this->client = new Google\Client();
         $this->client->setAuthConfig('client_secret.json');
-        $this->client->addScope(Google\Service\Drive::DRIVE_METADATA_READONLY);
+        $this->client->addScope(Google\Service\Drive::DRIVE_READONLY);
         $this->client->setRedirectUri($this->baseurl . '?login=1');
         $this->client->setAccessType('offline');
         $this->client->setPrompt('consent');
