@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="utf-8" />
@@ -6,45 +6,52 @@
     <title>.</title>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            document.body.insertAdjacentHTML('beforeend','<div class="smooth-cursor"></div>');
+            document.body.insertAdjacentHTML('beforeend', '<div class="smooth-cursor"></div>');
             let smoothCursor = document.querySelector('.smooth-cursor');
             let smoothCursorVisibility = () => {
-                if(!( ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0) )) {
-                    document.body.classList.add('smooth-cursor-active');
-                }
-                else {
-                    document.body.classList.remove('smooth-cursor-active');
+                if (!('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0)) {
+                    document.documentElement.classList.add('smooth-cursor-active');
+                } else {
+                    document.documentElement.classList.remove('smooth-cursor-active');
                 }
             };
-            window.addEventListener('resize', () => { smoothCursorVisibility(); });
+            window.addEventListener('resize', () => {
+                smoothCursorVisibility();
+            });
             smoothCursorVisibility();
-            window.addEventListener('mousemove', (e)=> {
+            window.addEventListener('mousemove', e => {
                 let mouseX = e.clientX,
                     mouseY = e.clientY;
-                smoothCursor.style.left = mouseX+'px';
-                smoothCursor.style.top = mouseY+'px';
+                smoothCursor.style.left = mouseX + 'px';
+                smoothCursor.style.top = mouseY + 'px';
             });
             let highlightSelector = '.smooth-cursor-highlight, a';
-            document.addEventListener('mouseover', (e)=> {
-                if( e.target.closest(highlightSelector) ) {
+            document.addEventListener('mouseover', e => {
+                if (e.target.closest(highlightSelector)) {
                     document.documentElement.classList.add('smooth-cursor-big');
                 }
                 if (e.target.closest('iframe')) {
-                    document.body.classList.remove('smooth-cursor-active');
+                    document.documentElement.classList.remove('smooth-cursor-active');
                 }
             });
-            document.addEventListener('mouseout', (e)=> {
-                if( e.target.closest(highlightSelector) ) {
+            document.addEventListener('mouseout', e => {
+                if (e.target.closest(highlightSelector)) {
                     document.documentElement.classList.remove('smooth-cursor-big');
                 }
                 if (e.target.closest('iframe')) {
-                    document.body.classList.add('smooth-cursor-active');
+                    document.documentElement.classList.add('smooth-cursor-active');
                 }
             });
             document.addEventListener('click', e => {
                 if (e.target.closest(highlightSelector)) {
                     document.documentElement.classList.remove('smooth-cursor-big');
                 }
+            });
+            document.documentElement.addEventListener('mouseleave', () => {
+                document.documentElement.classList.add('smooth-cursor-hidden');
+            });
+            document.documentElement.addEventListener('mouseenter', () => {
+                document.documentElement.classList.remove('smooth-cursor-hidden');
             });
         });
     </script>
@@ -71,18 +78,21 @@
         mix-blend-mode: exclusion;
         pointer-events: none;
         position: fixed;
-        transform: translate(calc( -1 * var(--cursor-size) / 2), calc( -1 * var(--cursor-size) / 2)) scale(0.33) rotate(90deg);
-        transition: transform 0.30s cubic-bezier(.47,1.64,.41,.8);
-        z-index:2147483647;
-        opacity:0;
+        transform: translate(calc(-1 * var(--cursor-size) / 2), calc(-1 * var(--cursor-size) / 2)) scale(0.33) rotate(90deg);
+        transition: transform 0.3s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+        z-index: 2147483647;
+        opacity: 0;
         top: calc(-1 * var(--cursor-size));
         left: calc(-1 * var(--cursor-size));
     }
-    .smooth-cursor-active .smooth-cursor {
-        opacity:1;
+    html.smooth-cursor-active .smooth-cursor {
+        opacity: 1;
     }
     html.smooth-cursor-big .smooth-cursor {
-        transform: translate(calc( -1 * var(--cursor-size) / 2), calc( -1 * var(--cursor-size) / 2)) scale(1) rotate(90deg);
+        transform: translate(calc(-1 * var(--cursor-size) / 2), calc(-1 * var(--cursor-size) / 2)) scale(1) rotate(90deg);
+    }
+    html.smooth-cursor-hidden .smooth-cursor {
+        transform: translate(calc(-1 * var(--cursor-size) / 2), calc(-1 * var(--cursor-size) / 2)) scale(0) rotate(90deg);
     }
     </style>
 </head>
