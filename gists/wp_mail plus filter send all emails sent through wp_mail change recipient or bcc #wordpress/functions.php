@@ -6,13 +6,14 @@ wp_mail(
     'The <strong>html</strong> content',
     ['Content-Type: text/html; charset=UTF-8'], // use ['Content-Type: text/html; charset=UTF-8', 'Bcc: foo@bar.com']  to send via bcc
   	[
-    	wp_upload_dir()['basedir'].'/uploads/file1.zip',
-        wp_upload_dir()['basedir'].'/uploads/file2.zip',
+    	'custom-filename1.zip' => wp_upload_dir()['basedir'].'/uploads/file1.zip',
+        'custom-filename2.zip' => wp_upload_dir()['basedir'].'/uploads/file2.zip',
     ]
 );
 
+// OBSOLETE:
 // change attachment names
-// currently not natively possible: https://core.trac.wordpress.org/ticket/28407
+// in the past not natively possible: https://core.trac.wordpress.org/ticket/28407
 // use this trick:
 // before
 wp_mail('...', '...', '...', ['Content-Type: /html; charset=UTF-8'], [ sys_get_temp_dir().'/'.md5(uniqid(mt_rand(), true)).'.pdf' ]);
