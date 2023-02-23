@@ -179,7 +179,7 @@
 - Edit > Preferences > User Interface > On start-up: Don't reopen the last used repositories
 - Edit > Preferences > User Interface > Built-in Text Editors > Font Size: 9
 - Repository > Search for Repositories > /var/www
-- Manuelles Umbenennen falscher Namen ("www - ...")
+- Manuelles Umbenennen falscher Namen ("www - ...", gtbabel 3x)
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
 - Wenn non-commercial Lizenz abläuft:
   - https://www.syntevo.com/register-non-commercial/ > register with github
@@ -537,6 +537,10 @@ xdebug.var_display_max_depth = 10
 - ```sudo apt install blackfire-php```
 - ```blackfire config --client-id=xxx --client-token=xxx``` (see blackfire.io)
 - ```blackfire run ./vendor/bin/phpunit```
+
+#### gettext
+- ```sudo apt-get install gettext```
+- ```msgfmt --help```
 
 #### gulp
 - ```npm install --global gulp-cli```

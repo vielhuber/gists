@@ -31,7 +31,7 @@
   if( file_exists(__DIR__ . '/vendor/scoper-autoload.php') ) { require_once __DIR__ . '/vendor/scoper-autoload.php'; }
   else { require_once __DIR__ . '/vendor/autoload.php'; }
   ```
-  - ```wget https://github.com/humbug/php-scoper/releases/download/0.13.1/php-scoper.phar```
+  - ```wget https://github.com/humbug/php-scoper/releases/download/0.18.2/php-scoper.phar```
   - with config (recommended, see below)
     - ```php php-scoper.phar add-prefix  --config scoper.inc.php```
   - without config
