@@ -16,7 +16,7 @@
   - Ist nun bei Sender #A ein SPF-Record hinterlegt, lehnt Empfänger #A die E-Mail komplett ab (bei -) oder verschiebt sie in den Spam-Ordner
   - Deshalb ist es generell zu empfehlen, das Flag "?" zu setzen
 - Bindet man Exchange Online an eine Domain an, die bei einem anderen Provider liegt, empfiehlt Microsoft den SPF-Record `v=spf1 include:spf.protection.outlook.com include:spf.crsend.com -all`
-- DomainFactory empfiehlt ```v=spf1 mx a include:ispgateway.de ~all```
+- DomainFactory empfiehlt für HostedExchange ```v=spf1 mx a include:ispgateway.de ~all```
 
 ## LINKS
 
