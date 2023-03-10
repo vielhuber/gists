@@ -64,6 +64,20 @@ sed -i '$ a\some text' file.txt # unix
 sed -i '$ a\'$'\n'' some text' file.txt # universal
 echo "some text" >> file.txt
 
+# write multiline string to file
+cat <<EOT > /some/file.txt
+foo
+bar
+baz
+EOT
+
+# append multiline string to file
+cat <<EOT >> /some/file.txt
+foo
+bar
+baz
+EOT
+
 # prepend to file
 sed -i '1s;^;some text;' file.txt
 
@@ -75,6 +89,7 @@ sed -i -e 's/foo/bar/g' target.file # unix
 sed -i'' -e 's/foo/bar/g' target.file # unix
 sed -i '' -e 's/foo/bar/g' target.file # mac os
 sed -i '' -e 's/escaped\.dot\.and\.[(]brackets[)]/bar/g' target.file # escape normally with "\", but "(" needs to be surrounded with "[]"
+sed -i -e 's/foo = '"'"'7'"'"'/bar = '"'"'42'"'"'/g' target.file # replace single quotes
 
 # sed new line (unix/mac)
 sed -e 's/ /\'$'\n/g' # universal

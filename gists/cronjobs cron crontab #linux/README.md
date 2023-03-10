@@ -30,6 +30,8 @@
 
 ```export VISUAL=nano; crontab -e```
 
+```crontab -l | { cat; echo "* * * * * some_entry"; } | crontab -```
+
 ### test cronjobs (set to every minute and log to file)
 
 - nano ```/tmp/crontab-test.sh```

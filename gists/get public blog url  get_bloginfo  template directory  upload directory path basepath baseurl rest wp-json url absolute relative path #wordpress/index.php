@@ -16,7 +16,7 @@ get_admin_url() // wp-admin
 site_url()
    
 // full paths
-get_home_path()
+ABSPATH
 get_template_directory()
 get_stylesheet_directory() // use this for child themes
 wp_upload_dir()['basedir']
