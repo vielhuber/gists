@@ -11,4 +11,12 @@
     Header always set Access-Control-Allow-Origin %{origin_is}e env=origin_is
     Header always set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
     Header always set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Authorization"
+</IfModule
+
+# multidomain support (strict version that does not allow http)
+<IfModule mod_headers.c>
+    SetEnvIf Origin "^(http://(.+\.)?(localhost|test\.local))|(https://(.+\.)?(test\.tld))$" origin_is=$0 
+    Header always set Access-Control-Allow-Origin %{origin_is}e env=origin_is
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Authorization"
 </IfModule>
