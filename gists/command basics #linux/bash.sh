@@ -49,6 +49,17 @@ su # permanently get root (su = switch user, if an username is omitted, you are 
 sudo command # do a command with root privileges (you have to enter the password of the current user which has root privileges, once for 15 minutes)
 sudo su # runs a new shell as root (first sudo asks for your password and if you have root privileges runs su as a super-user)
 
+# run command as user
+
+## option 1
+su testuser
+whoami
+exit
+
+## option 2
+su -c "whoami" testuser
+echo "password" | su -c "whoami" testuser
+
 # cd and enter folder
 mkdir ~/folder && cd "$_"
 
