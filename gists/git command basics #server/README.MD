@@ -764,3 +764,29 @@ Usage: git acp
   - check size remotely: `Settings` > `Usage Quotas`
 - `cd ..`
 - `rm -rf tmp-repo`
+
+### git lfs
+
+#### client installation
+- ```sudo apt-get install git-lfs```
+
+#### server installation
+- gitea: the following is already default! only check..
+- ```nano /etc/gitea/app.ini```
+  - ```[server]```
+  - ```LFS_START_SERVER = true```
+  - ```[lfs]```
+  - ```PATH = /home/gitea/data/lfs```
+
+#### activate lfs in existing repo (with existing files, with no lfs)
+- ```git lfs install```
+- ```git lfs track "*.blend"```
+- ```git lfs track "*.blend1"```
+- ```git add .gitattributes```
+- ```git commit -m "Added .gitattributes file/lfs."```
+- ```git push```
+
+#### working now is completely normal
+- pushing indicates, that lfs objects are stored
+- also gitea shows when clicking on the file, that this is a lfs file
+- ```git add -A . && git commit -m "." && git push origin HEAD```
