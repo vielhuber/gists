@@ -95,7 +95,7 @@
 if gitignore is not working for a specific file/folder (this does not(!) delete the folder but remove it from git):
 - git rm -rf --cached specific-file
 - git rm -rf --cached specific-folder/
-- find . -type f -name "*.*" | xargs git rm -rf --cached
+- find . -type f -name ".DS_Store" | xargs git rm -rf --cached
 
 #### if you want to delete the folder also from history (deprecated, see below for a better answer)
 - git filter-branch --tree-filter 'rm -rf custom/directory/' --prune-empty HEAD
