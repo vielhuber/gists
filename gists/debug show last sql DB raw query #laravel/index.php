@@ -2,13 +2,14 @@
 // variant 1
 DB::enableQueryLog();
 $user = User::find(42); // you can do anything here, also DB::select
-dd(DB::getQueryLog());
+dd(DB::getQueryLog()); // see all entries with times
 var_dump(
   vsprintf(
     str_replace('?', '%s', str_replace('?', "'?'", DB::getQueryLog()[0]['query'])),
     DB::getQueryLog()[0]['bindings']
   )
 );
+DB::disableQueryLog(); DB::flushQueryLog(); // clear (important)
 
 // variant 2
 $data = DB::table('foo')->where('bar','baz')->where('gnarr',5); // this is restricted to DB::table or Model calls
