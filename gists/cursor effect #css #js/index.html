@@ -39,7 +39,7 @@
                     document.documentElement.classList.remove('smooth-cursor-big');
                 }
                 if (e.target.closest('.smooth-cursor-ignore, iframe')) {
-                    document.documentElement.classList.add('smooth-cursor-active');
+                    smoothCursorVisibility();
                 }
             });
             document.addEventListener('click', e => {
