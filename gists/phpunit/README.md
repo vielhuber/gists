@@ -17,6 +17,7 @@
 #### add .phpunit.result.cache to gitignore
 - `vim .gitignore`
 - `/.phpunit.result.cache`
+- `/.phpunit.cache`
 - this file is used by phpunit to speed up tests (you can also disable the creation of the file with the flag --do-not-cache-result or cacheResult=false in phpunit.xml)
 
 #### optional: modify path environment
