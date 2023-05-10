@@ -5,6 +5,7 @@ SELECT * FROM (
     FROM pg_constraint 
     INNER JOIN pg_class ON conrelid=pg_class.oid 
     INNER JOIN pg_namespace ON pg_namespace.oid=pg_class.relnamespace 
+  	WHERE nspname = 'public' -- addition to copied query
     ORDER BY CASE WHEN contype='f' THEN 0 ELSE 1 END,contype,nspname,relname,conname
      
 ) as t UNION ALL SELECT * FROM (
@@ -18,6 +19,7 @@ SELECT * FROM (
     AND kcu.constraint_name = tco.constraint_name
     AND kcu.table_name NOT IN ('table_1', 'table_2', 'table_3') -- tables to exclude
     WHERE tco.constraint_type = 'PRIMARY KEY'
+  	AND kcu.constraint_schema = 'public' -- addition to copied query
   
 ) as t UNION ALL SELECT * FROM (
 
@@ -30,6 +32,7 @@ SELECT * FROM (
     AND kcu.constraint_name = tco.constraint_name
     AND kcu.table_name NOT IN ('table_1', 'table_2', 'table_3') -- tables to exclude
     WHERE (tco.constraint_type = 'PRIMARY KEY' OR tco.constraint_type = 'FOREIGN KEY')
+  	AND kcu.constraint_schema = 'public' -- addition to copied query
   
 ) as t UNION ALL SELECT * FROM (
 
@@ -45,6 +48,7 @@ SELECT * FROM (
     FROM pg_constraint
     INNER JOIN pg_class ON conrelid=pg_class.oid
     INNER JOIN pg_namespace ON pg_namespace.oid=pg_class.relnamespace
+  	WHERE nspname = 'public' -- addition to copied query
     ORDER BY CASE WHEN contype='f' THEN 0 ELSE 1 END DESC,contype DESC,nspname DESC,relname DESC,conname DESC
         
 ) as t
