@@ -30,6 +30,18 @@ $url = 'https://calendly.com/'.$settings['slug'].''.
 <!-- css/js (needs to be loaded once) -->
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  
+<!-- callback on finish -->
+<script>
+window.addEventListener(
+    'message',
+    (e) => {
+        if (e.data.event && e.data.event.indexOf('calendly') === 0 && e.data.event === 'calendly.event_scheduled') {
+            alert('OK');
+        }
+    }
+)
+</script>
 
 <h2>inline widget</h2>
 <div

@@ -117,6 +117,8 @@ class PayPalButtons {
                             .then(response => {
                                 console.log([response.success, response.message, response.data]);
                                 alert(response.public_message);
+                          		// remove buttons
+                          		document.querySelector(selector).remove();
                             });
                     });
                 },
