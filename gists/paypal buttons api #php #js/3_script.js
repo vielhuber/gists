@@ -8,27 +8,6 @@ class PayPalButtons {
             items = [items];
         }
 
-        fetch('backend.php', {
-            method: 'POST',
-            body: JSON.stringify({ some_additional: 'data' }),
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                let data = response.json(),
-                    status = response.status;
-                if (status == 200 || status == 304) {
-                    return data;
-                }
-                return { success: false, message: status };
-            })
-            .catch(error => {
-                return { success: false, message: error };
-            })
-            .then(response => {});
-
         if (document.querySelector('[data-paypal-js]') === null) {
             await new Promise((resolve, reject) => {
                 let script = document.createElement('script');
