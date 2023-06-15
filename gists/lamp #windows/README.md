@@ -478,7 +478,7 @@ xdebug.var_display_max_depth = 10
   - ```source ~/.bash_profile```
 - ```composer self-update```
 - ```composer --version``` # 2
-- ```composer config --global --auth github-oauth.github.com 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```
+- ```composer config --global --auth github-oauth.github.com *TOKEN*``` (siehe Zugangsdaten)
 
 #### node / npm
 - nvm
