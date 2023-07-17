@@ -17,7 +17,25 @@ define('WP_USE_THEMES', false);
 require($_SERVER['DOCUMENT_ROOT'].'/wp-blog-header.php');
 header('HTTP/1.1 200 OK');
 
-// warning: this approach does NOT WORK with the plugin All 404 Redirect to Homepage(!)
+// full with skeleton
+define('WP_USE_THEMES', false);
+require($_SERVER['DOCUMENT_ROOT'].'/wp-blog-header.php');
+header('HTTP/1.1 200 OK');
+echo '<html>';
+echo '<head>'; wp_head(); echo '</head>';
+echo '<body>';
+if( have_posts() ) {
+    while( have_posts() ) {
+        the_post();
+        the_title();
+        the_content();
+    }
+}
+wp_footer();
+echo '</body>';
+echo '</html>';
+
+// warning: some approaches do NOT WORK with the plugin All 404 Redirect to Homepage(!)
 
 // functions.php
 /* when loading wordpress externally, it sometimes happen that functions.php is included twice. we prevent this here */
