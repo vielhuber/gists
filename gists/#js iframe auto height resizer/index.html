@@ -20,7 +20,19 @@
     <script src="iframeResizer.min.js"></script>
     <script>
         window.addEventListener('load', e => {
-            iFrameResize({ log: false }, '.iframe-auto-height')
+            if (document.querySelector('.iframe-auto-height') !== null) {
+                document.querySelectorAll('.iframe-auto-height').forEach($el => {
+                    iFrameResize({
+                      heightCalculationMethod: 'bodyOffset', // you can also try 'documentElementOffset'
+                      log: false
+                    }, $el);
+                  	// if you have further problems, do this
+                    setTimeout(() => {
+                        $el.style.height = 'auto';
+                        $el.iFrameResizer.resize();
+                    }, 3000);
+                });
+            }
         });
     </script>
 </head>
