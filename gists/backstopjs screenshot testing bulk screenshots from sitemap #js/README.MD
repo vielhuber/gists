@@ -4,6 +4,14 @@
 
 - a global installation is recommended
 
+`npm update -g backstopjs`
+
+- upgrade
+
+`backstop --version`
+
+- show version
+
 `backstop init`
 
 - setup boilerpolate files
@@ -38,6 +46,8 @@
 ### dynamic urls
 
 `npm install dotenv`
+
+`.env`
 
 ```.env
 BACKSTOPJS_URL=https://tld.com
@@ -83,13 +93,46 @@ scenarios: [
 module.exports = async (page, scenario, vp) => {
     await require('./loadCookies')(page, scenario);
     if (scenario.login === true) {
-        await page.goto('https://tld.com/login');
+        await page.goto('https://tld.com/login'); // even better: process.env.BACKSTOPJS_URL
         if (await page.$('input[name="username"]') !== null) {
-          await page.type('input[name="username"]', '***'); // even better: process.env.TEST_USER
-          await page.type('input[name="password"]', '***'); // even better: process.env.TEST_PASSWORD
-          await page.click('input[type="submit"]');
+          await page.type('input[name="username"]', '***'); // even better: process.env.BACKSTOPJS_USERNAME
+          await page.type('input[name="password"]', '***'); // even better: process.env.BACKSTOPJS_PASSWORD
+          await page.click('[type="submit"]');
           await page.waitForNavigation();
         }
+    }
+};
+```
+
+### run js code before
+
+#### backstop.config.js
+
+```js
+let urls = [
+	'https://tld.com/test1',
+  	'https://tld.com/test2',
+  	['https://tld.com/test3', () => { document.querySelector('.foo').remove(); }],
+];
+let scenarios = [];
+urls.forEach(urls__value => {
+    let url = Array.isArray(urls__value) ? urls__value[0] : urls__value,
+        fn = Array.isArray(urls__value) ? urls__value[1] : null;
+    scenarios.push({
+      "label": url,
+      "url": url,
+      "fn": fn
+    });
+});
+```
+
+#### onBefore.js
+
+```
+module.exports = async (page, scenario, vp) => {
+    /* ... */
+    if (scenario.fn !== null) {
+        await page.evaluate(scenario.fn);
     }
 };
 ```
@@ -123,8 +166,10 @@ urls.forEach(urls__value => {
     scenarios.push({
       "label": urls__value,
       "url": urls__value,
-      //"url": urls__value.replace('https://','https://username:password@'),
-      //"delay": 3000 // wait after load for x seconds (good to be sure everything is loaded)
+      // url: urls__value.replace('https://','https://username:password@'),
+      // delay: 3000, // wait after load for x seconds (good to be sure everything is loaded)
+      // misMatchThreshold: 0.01, // detect also very small differences
+      // selectors: 'html', // important trick if page rendering does not work properly
     });
 });
 
