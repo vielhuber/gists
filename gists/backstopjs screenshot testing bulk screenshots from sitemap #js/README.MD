@@ -6,11 +6,11 @@
 
 `npm update -g backstopjs`
 
-- upgrade
+- be careful when upgrading: compare the folder `backstop_data/engine_scripts/puppet` with the newest version (sometimes things change there also!)
 
 `backstop --version`
 
-- show version
+- show current version
 
 `backstop init`
 
@@ -57,12 +57,12 @@ BACKSTOPJS_URL=https://tld.com
 
 ```js
 require('dotenv').config();
-const url = process.env.BACKSTOPJS_URL;
+const base_url = process.env.BACKSTOPJS_URL;
 module.exports = {
     scenarios: [
         {
             label: 'Test',
-            url: url
+            url: base_url.replace(/^\/+|\/+$/g, '') + '/' + 'test'.replace(/^\/+|\/+$/g, ''),
         }
     ]
 }
@@ -104,35 +104,117 @@ module.exports = async (page, scenario, vp) => {
 };
 ```
 
-### run js code before
+### extract urls in separate file
 
 #### backstop.config.js
 
 ```js
-let urls = [
-	'https://tld.com/test1',
-  	'https://tld.com/test2',
-  	['https://tld.com/test3', () => { document.querySelector('.foo').remove(); }],
+let backstop_tests = require('./backstop.tests');
+backstop_tests.tests.forEach(tests__value => {
+	/* ... */
+}
+```
+
+#### backstop.tests.js
+
+```js
+module.exports = {
+    tests: [
+        { url: '/' },
+        /* ... */
+    ]
+};
+```
+
+### run js code before / hide content
+
+#### backstop.config.js
+
+```js
+let tests = [
+    '/test1',
+    '/test2',
+    {
+        url: '/test3',
+      	login: true,
+        hide: ['.foo', '.bar'],
+        remove: ['.baz', '.gnarr'],
+        input: [['input[name="first_name"]', 'Test']],
+        click: ['input[type="submit"]'],
+        js: () => { document.querySelector('img').style.opacity = 0.5; }
+    }
 ];
+require('dotenv').config();
+const base_url = process.env.BACKSTOPJS_URL;
 let scenarios = [];
-urls.forEach(urls__value => {
-    let url = Array.isArray(urls__value) ? urls__value[0] : urls__value,
-        fn = Array.isArray(urls__value) ? urls__value[1] : null;
+tests.forEach((tests__value) => {
+    let target_url, login, hide, remove, input, click, js;
+    if (typeof tests__value === 'object') {
+        target_url = 'url' in tests__value ? tests__value.url : null;
+        login = 'login' in tests__value ? tests__value.login : false;
+        hide = 'hide' in tests__value ? tests__value.hide : [];
+        remove = 'remove' in tests__value ? tests__value.remove : [];
+        input = 'input' in tests__value ? tests__value.input : [];
+        click = 'click' in tests__value ? tests__value.click : [];
+        js = 'js' in tests__value ? tests__value.js : null;
+    } else {
+        target_url = tests__value;
+        login = false;
+        hide = [];
+        remove = [];
+        input = [];
+        click = [];
+        js = null;
+    }
     scenarios.push({
-      "label": url,
-      "url": url,
-      "fn": fn
+        // label must be unique but determinstic
+        label: (target_url + '_' + Buffer.from(JSON.stringify([login, input, click])).toString('base64')).substring(
+            0,
+            100
+        ),
+        url: base_url.replace(/^\/+|\/+$/g, '') + '/' + target_url.replace(/^\/+|\/+$/g, ''),
+        login: login,
+        hideSelectors: hide,
+        removeSelectors: remove,
+        /* we don't use the native helper method "keyPressSelectors" since it does not replace inputs */
+        //keyPressSelectors: [],
+        input: input,
+        /* we don't use the native helper method "clickSelectors" since it does not wait for reload */
+        //clickSelectors: [],
+        click: click,
+        js: js
     });
 });
 ```
 
-#### onBefore.js
+#### onReady.js
 
 ```
 module.exports = async (page, scenario, vp) => {
+    /* ... */    
+    await require('./clickAndHoverHelper')(page, scenario);
     /* ... */
-    if (scenario.fn !== null) {
-        await page.evaluate(scenario.fn);
+    if (scenario.input !== null) {
+        for (let input__value of scenario.input) {
+            await page.waitForSelector(input__value[0]);
+            //await page.type(input__value[0], input__value[1]);
+            // clear and type (different behaviour as in clickAndHoverHelper)
+            let input = await page.$(input__value[0]);
+            await input.click({ clickCount: 3 });
+            await input.type(input__value[1]);
+        }
+    }
+    if (scenario.click !== null) {
+        for (let click__value of scenario.click) {
+            await page.waitForSelector(click__value);
+            await page.click(click__value);
+            // wait for navigation (different behaviour as in clickAndHoverHelper)
+            await page.waitForNavigation();
+        }
+    }
+    if (scenario.js !== null) {
+        await new Promise((resolve) => setTimeout(() => resolve(), 1000));
+        await page.evaluate(scenario.js);
     }
 };
 ```
