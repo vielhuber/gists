@@ -688,7 +688,7 @@ Usage: git acp
 - `cd tmp-repo`
 - `git clone git@git.tld.com:foo/bar.git .`
 - `cp .git/config /tmp/config-backup`
-- `git filter-repo --invert-paths --path path/to/exclude/` # exclude files with `git filter-repo --invert-paths --path-glob '*.blend`
+- `git filter-repo --invert-paths --path path/to/exclude/ --path another/path/to/exclude/` # exclude files with `git filter-repo --invert-paths --path-glob '*.blend'`
 - option 1: same repo
   - `mv /tmp/config-backup .git/config`
   - `git push origin --mirror`
