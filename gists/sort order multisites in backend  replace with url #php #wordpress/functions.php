@@ -13,6 +13,10 @@ add_action(
             if (1 == 1) {
                 $wp_admin_bar->user->blogs[$blogs__key]->blogname = $blogs__value->domain;
             }
+            // domain + path
+            if (1 == 0) {
+                $wp_admin_bar->user->blogs[$blogs__key]->blogname = trim($blogs__value->domain.$blogs__value->path,'/');
+            }
             // uppercase
             if (1 == 0) {
                 $wp_admin_bar->user->blogs[$blogs__key]->blogname = mb_strtoupper($blogs__value->blogname);

@@ -1,5 +1,8 @@
 <?php
 function iban_test($iban) {
+    if (mb_strlen($iban) < 2) {
+      return false;
+    }
     $iban = str_replace( ' ', '', $iban );
     $iban1 = substr( $iban,4 ).strval( ord( $iban{0} )-55 ).strval( ord( $iban{1} )-55 ).substr( $iban, 2, 2 );
     for( $i = 0; $i < strlen($iban1); $i++) {

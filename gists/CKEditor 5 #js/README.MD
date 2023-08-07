@@ -46,5 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
   - run the generator on https://ckeditor.com/ckeditor-5/online-builder/
   - download and import in js via `import ClassicEditor from './../_libs/ckeditor/build/ckeditor.js';`
 - a faster way is to find an existing build
-  - e.g. https://www.npmjs.com/package/ckeditor5-build-classic-base64-upload-adapter or https://www.npmjs.com/package/@aavenel/ckeditor5-build-classic-source-editing)
+  - e.g.
+    - https://www.npmjs.com/package/ckeditor5-build-classic-base64-upload-adapter
+    - https://www.npmjs.com/package/@aavenel/ckeditor5-build-classic-source-editing
+    - https://www.npmjs.com/package/@jackhuynh1995/ckeditor5-build-classic-plus
   - install and import with `import ClassicEditor from 'ckeditor5-build-classic-base64-upload-adapter';`

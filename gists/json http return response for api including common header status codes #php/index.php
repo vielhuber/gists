@@ -11,6 +11,7 @@
 404: Not found
 405: Method not allowed (GET/POST, ...)
 408: Timeout
+410: Gone (forever, 404 means could perhaps appear again, sometimes better for seo)
 500: Internal server error (some server side exception is thrown)
 */
 

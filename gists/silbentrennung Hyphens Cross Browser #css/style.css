@@ -10,3 +10,13 @@ html {
   /* the actual hyphenation property */
   hyphens: auto;
 }
+
+/* exclude big headlines */
+h1 {
+	overflow-wrap: normal;
+	word-wrap: normal;
+    -webkit-hyphens: manual;
+    -ms-hyphens: manual;
+    -moz-hyphens: manual;
+	hyphens: manual;
+}

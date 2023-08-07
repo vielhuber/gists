@@ -24,6 +24,12 @@
 - mv tmp/.git .git
 - rmdir tmp
 
+#### always accept authenticity
+
+- if you get the warning `The authenticity of host 'github.com' can't be established.`, you can:
+  - option 1: `ssh-keyscan github.com >> ~/.ssh/known_hosts`
+  - option 2: `GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git pull`
+
 #### change host / remote url
 
 ##### check
@@ -95,7 +101,7 @@
 if gitignore is not working for a specific file/folder (this does not(!) delete the folder but remove it from git):
 - git rm -rf --cached specific-file
 - git rm -rf --cached specific-folder/
-- find . -type f -name "*.*" | xargs git rm -rf --cached
+- find . -type f -name ".DS_Store" | xargs git rm -rf --cached
 
 #### if you want to delete the folder also from history (deprecated, see below for a better answer)
 - git filter-branch --tree-filter 'rm -rf custom/directory/' --prune-empty HEAD
@@ -688,7 +694,7 @@ Usage: git acp
 - `cd tmp-repo`
 - `git clone git@git.tld.com:foo/bar.git .`
 - `cp .git/config /tmp/config-backup`
-- `git filter-repo --invert-paths --path path/to/exclude/`
+- `git filter-repo --invert-paths --path path/to/exclude/ --path another/path/to/exclude/` # exclude files with `git filter-repo --invert-paths --path-glob '*.blend'`
 - option 1: same repo
   - `mv /tmp/config-backup .git/config`
   - `git push origin --mirror`
