@@ -5,7 +5,7 @@ $dotenv->load();
 $headers = ['Authorization' => 'token ' . getenv('TOKEN'), 'User-Agent' => 'gists'];
 $count = ['public' => 0, 'private' => 0];
 __rrmdir('gists');
-mkdir('gists');
+@mkdir('gists');
 $url = 'https://api.github.com/gists?page=1&per_page=100';
 while ($url !== null) {
     echo $url . PHP_EOL;
@@ -25,7 +25,7 @@ while ($url !== null) {
         $count['public']++;
         $gist = __curl('https://api.github.com/gists/' . $result__value->id, null, 'GET', $headers)->result;
         $folder = 'gists/' . str_replace(['/', '<', '>', ':', '"', '\\', '|', '?', '*'], '', $gist->description);
-        mkdir($folder);
+        @mkdir($folder);
         foreach ($gist->files as $files__value) {
             file_put_contents($folder . '/' . $files__value->filename, $files__value->content);
         }
