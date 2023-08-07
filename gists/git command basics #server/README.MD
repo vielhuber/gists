@@ -24,6 +24,12 @@
 - mv tmp/.git .git
 - rmdir tmp
 
+#### always accept authenticity
+
+- if you get the warning `The authenticity of host 'github.com' can't be established.`, you can:
+  - option 1: `ssh-keyscan github.com >> ~/.ssh/known_hosts`
+  - option 2: `GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git pull`
+
 #### change host / remote url
 
 ##### check
