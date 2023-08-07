@@ -1,7 +1,21 @@
-## setup
+## native
+
+```js
+try {
+  await navigator.clipboard.writeText(textToCopy);
+  console.log('copied to clipboard')
+} catch (error) {
+  console.log('failed to copy to clipboard. error=' + error);
+}
+```
+
+## library
+
+
+### setup
 npm install clipboard --save
 
-## js
+### js
 ```js
 document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('[data-clipboard]') !== null) {
@@ -20,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## html
+### html
 ```html
 <a href="#" data-clipboard="foo" title="foo">X</a>
 ```

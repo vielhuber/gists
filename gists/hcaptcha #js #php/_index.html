@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>hcaptcha</title>
+        <script>
+            class App {
+                init() {
+                    window.addEventListener('load', (e) => {
+                        document.querySelectorAll('form').forEach(($el) => {
+                            $el.addEventListener('submit', async (e) => {
+                                e.preventDefault();
+
+                                // hcaptcha specific
+                                let h = new hCaptcha();
+                                await h.check(e.target);
+
+                                // basic call
+                                let $form = e.target;
+                                fetch($form.getAttribute('action'), {
+                                    method: $form.getAttribute('method'),
+                                    body: new URLSearchParams(new FormData($form)),
+                                })
+                                    .then((v) => v.json())
+                                    .catch((v) => v)
+                                    .then((data) => {
+                                        console.log(data);
+                                        $form.reset();
+                                        alert('OK');
+                                    });
+                            });
+                        });
+                    });
+                }
+            }
+            class hCaptcha {
+                sitekey = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
+                async check($form) {
+                  	let lng = document.documentElement.getAttribute('lang').split('-')[0].toLowerCase();
+                    if (document.querySelector('[data-hcaptcha-js]') === null) {
+                        await new Promise((resolve, reject) => {
+                            let script = document.createElement('script');
+                            script.src = 'https://js.hcaptcha.com/1/api.js?hl=' + lng + '&render=explicit';
+                            script.setAttribute('data-hcaptcha-js', '');
+                            script.onload = () => {
+                                resolve();
+                            };
+                            document.head.appendChild(script);
+                        });
+                    }
+                    if (document.querySelector('[data-hcaptcha-css]') === null) {
+                        let style = document.createElement('style');
+                      	// hide small rectangle
+                        style.innerHTML = 'body > div:last-child[style*="2147483647"] > div[style*="11px"] { display:none; }';
+                        style.setAttribute('data-hcaptcha-css', '');
+                        document.head.appendChild(style);
+                    }
+                    if ($form.querySelector('.hcaptcha-container') === null) {
+                        let randId = null;
+                        while (randId === null || document.querySelector(randId) !== null) {
+                            randId = 'hcaptcha-' + (~~(Math.random() * (999 - 100 + 1)) + 100);
+                        }
+                        $form.insertAdjacentHTML(
+                            'beforeend',
+                            '<div class="hcaptcha-container" id="' + randId + '"></div>'
+                        );
+                        let id = hcaptcha.render(randId, {
+                          	hl: lng,
+                            sitekey: this.sitekey,
+                            theme: 'dark',
+                            size: 'invisible',
+                        });
+                        $form.querySelector('.hcaptcha-container').setAttribute('data-id', id);
+                    }
+                    let id = $form.querySelector('.hcaptcha-container').getAttribute('data-id'),
+                        result = await hcaptcha.execute(id, { async: true });
+                    return result;
+                }
+            }
+            let a = new App();
+            a.init();
+        </script>
+    </head>
+    <body>
+        <h2>Form #1</h2>
+        <form action="backend.php" method="post">
+            <input type="text" value="" placeholder="Name" required="required" name="name" />
+            <input type="submit" name="submit" value="Absenden" />
+        </form>
+
+        <h2>Form #2</h2>
+        <form action="backend.php" method="post">
+            <input type="text" value="" placeholder="Name" required="required" name="name" />
+            <input type="submit" name="submit" value="Absenden" />
+        </form>
+
+        <h2>Form #3</h2>
+        <form action="backend.php" method="post">
+            <input type="text" value="" placeholder="Name" required="required" name="name" />
+            <input type="submit" name="submit" value="Absenden" />
+        </form>
+    </body>
+</html>

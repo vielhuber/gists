@@ -26,10 +26,11 @@ do sanitization when accepting input and storing it to the database.
 
 ## escaping
 
-do escaping when you want to secure your output and prevent this data from being seen as code in the frontend.
+do escaping when you want to secure your output and prevent this data from being seen as code in the frontend.\
+example: html search input field
 
 #### most common functions
-- `esc_attr()`
+- `esc_attr()` (better: `esc_attr(strip_tags())`)
 - `esc_html()`
 - `esc_textarea()`
 - `esc_url()`

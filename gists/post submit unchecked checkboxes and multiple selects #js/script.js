@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // single checkbox
             $els = $form.querySelectorAll(
-                'input[type="checkbox"]:not(:checked)[name]:not([name$=\'[]\']):not([disabled="disabled"])'
+                'input[type="checkbox"]:not(:checked)[name]:not([name$=\'[]\']):not([disabled])'
             );
             if ($els.length > 0) {
                 $els.forEach($el => {
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // multiple checkbox
-            $els = $form.querySelectorAll('input[type="checkbox"][name$=\'[]\']:not([disabled="disabled"])');
+            $els = $form.querySelectorAll('input[type="checkbox"][name$=\'[]\']:not([disabled])');
             if ($els.length > 0) {
                 $els.forEach($el => {
                     if (
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // multiple select
-            $els = $form.querySelectorAll('select[name$=\'[]\']:not([disabled="disabled"])');
+            $els = $form.querySelectorAll('select[name$=\'[]\']:not([disabled])');
             if ($els.length > 0) {
                 $els.forEach($el => {
                     if (

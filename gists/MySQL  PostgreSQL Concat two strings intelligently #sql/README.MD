@@ -20,5 +20,10 @@ SELECT CONCAT_WS(
 
 # postgres
 ```sql
-SELECT array_to_string(array_remove(array_remove(ARRAY[null,'foo',null,'bar',''], null), ''), ', ')
+# concat all existing strings
+SELECT trim(array_to_string(array_remove(array_remove(ARRAY[null,'foo',null,'bar',''], null), ''), ', '));
+
+# concat all strings only if every string exists
+SELECT 'THIS LINE ONLY SHOWS IF ANY PART IS NOT EMPTY OR NULL' || ' (' || NULLIF(COALESCE('A SUBQUERY THAT COULD BE EMPTY OR NULL',''),'') || ')';
+
 ```

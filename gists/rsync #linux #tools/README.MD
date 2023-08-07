@@ -27,6 +27,8 @@ rsync --delete -ahvzP --stats -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_r
 - `--no-perms --no-owner --no-group`: don't sync file permissions (this is quite important)
 - `--verbose`: be verbose
 - `--dry-run`: don't copy in reality
-- `--progess`: shows progress
+- `--progress`: shows progress (per file)
+- `--info=progress2 --no-inc-recursive`: shows overall progress
 - `--stats`: shows stats
 - `--delete`: deletes files in target that do not exist in source
+- `--exclude '*.jpg' --exclude '*.mp4'`: exclude (multiple) filetypes

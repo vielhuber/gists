@@ -1,9 +1,9 @@
 ## PWAs (Progressive Web Apps)
-- mutation of existing pages to apps
-- can be installed via add to home, android app store or even cross platform on windows/linux
-- important for google pagespeed lighthouse
-- can also be used for normal php cms sites to cache static assets
-- tools: https://www.pwabuilder.com, https://serviceworke.rs, https://developers.google.com/web/tools/workbox
+- Mutation of existing pages to apps
+- Can be installed via add to home, android app store or even cross platform on windows/linux
+- Important for google pagespeed lighthouse
+- Can also be used for normal php cms sites to cache static assets
+- Tools: https://www.pwabuilder.com, https://serviceworke.rs, https://developers.google.com/web/tools/workbox
 
 #### Service Worker
 - Installs itself for the first time
@@ -31,9 +31,17 @@
 - here some manual work is necessary: is the app currently open or not etc.
 - in the main app only one line of code is necessary: show the push notification in the ui
 
+#### Cached data
+- IndexedDB is a very good fit for storing client side data in a service worker
+- The npm package `idb` is a convenient wrapper for interacting with the database
+- See: https://gist.github.com/vielhuber/2a56f14400b0031ee0c2a146e5123ee9
+
 #### Links
 - https://www.youtube.com/watch?v=baSiSIyTGSk
 - https://maskable.app/
 - https://www.pwabuilder.com/
 - https://mobiforge.com/design-development/pwa-minimus-a-minimal-pwa-checklist
 - https://web.dev/offline-fallback-page/
+- https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers
+- https://jakearchibald.com/2014/offline-cookbook/#network-falling-back-to-cache
+- https://css-tricks.com/serviceworker-for-offline/

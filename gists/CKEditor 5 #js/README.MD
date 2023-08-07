@@ -8,10 +8,13 @@ npm install --save @ckeditor/ckeditor5-build-classic
 
 ```js
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '@ckeditor/ckeditor5-build-classic/build/translations/de.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.wysiwyg') !== null) {
     document.querySelectorAll('.wysiwyg').forEach(el => {
       ClassicEditor.create(el, {
+        language: 'de',
         toolbar: ['bold', 'italic', '|', 'bulletedList', 'numberedList'],
         width: '100%',
         height: 400,
@@ -20,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // always update textarea on changes (not only on submit)
         editor.model.document.on('change:data', () => {
           editor.updateSourceElement();
+          editor.sourceElement.dispatchEvent(new Event('change', { bubbles: true }));
         });
       });;
     });
@@ -42,5 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
   - run the generator on https://ckeditor.com/ckeditor-5/online-builder/
   - download and import in js via `import ClassicEditor from './../_libs/ckeditor/build/ckeditor.js';`
 - a faster way is to find an existing build
-  - e.g. https://www.npmjs.com/package/ckeditor5-build-classic-base64-upload-adapter)
+  - e.g. https://www.npmjs.com/package/ckeditor5-build-classic-base64-upload-adapter or https://www.npmjs.com/package/@aavenel/ckeditor5-build-classic-source-editing)
   - install and import with `import ClassicEditor from 'ckeditor5-build-classic-base64-upload-adapter';`

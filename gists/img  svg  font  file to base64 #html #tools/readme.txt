@@ -1,5 +1,5 @@
 # file to base64
-base64 -w 0 input.file
+base64 -w 0 input.file > input.txt
 
 # base64 to file
 base64 -d input.txt > input.file

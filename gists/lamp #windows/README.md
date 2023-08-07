@@ -1,15 +1,17 @@
 ## features
 
+- wsl2 + ubuntu 22
 - simple installation
 - simple usage via command line
 - full control over configuration
 - default remote smtp relay for all mailings
-- includes mysql with phpmyadmin and postgresql
+- databases included: mysql (+phpmyadmin), postgresql, oraclesql
 - shared php.ini configuration for all versions
 - switch php/cli version (globally and host based)
 - access via all devices in your local network
 - support for different networks
 - real ssl certificates for all hosts and all devices
+- supports reverse proxy configuration
 - native linux performance (can handle node_modules and vendor) with wsl2
 
 ## installation
@@ -40,42 +42,85 @@
 - ~~Windows Defender Firewall mit erweiterter Sicherheit~~
 - ~~Eingehende Regeln > Neue Regel > Port > TCP > 80, 443~~
 
-#### wsl
+#### wsl2
 - open PowerShell as admin
-- ```Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux```
-- reboot
-- Windows Store > "Ubuntu 18.04 LTS"
+- wsl --install
+- Windows Store > "Ubuntu"
   - available versions: https://blogs.msdn.microsoft.com/commandline/2018/07/09/upgrading-ubuntu/
-  - i had problems in using the version "Ubuntu" (it was not 18, but 16), so just always use the last direct version
+  - we use the plain "Ubuntu" version and upgrade it inplace with `sudo do-release-upgrade`
 - UNIX username: root (cancel when prompting for a new default username)
 - Change password with ```passwd```: "root"
-- ```sudo apt-get update && sudo apt-get upgrade```
 - Netzlaufwerk "\\wsl$\Ubuntu" auf W: mappen und umbenennen: "WSL"
+- `wsl --list --verbose`
+- `wsl --set-default-version 2`
+- `wsl --set-version Ubuntu 2`
+- `wsl --setdefault Ubuntu`
+- `wsl --list --verbose`
 
+#### backup/restore wsl2
+- Run PowerShell as admin
+- `wsl --shutdown`
+- `wsl --list`
+- `wsl --export "Ubuntu" D:\Ubuntu.tar`
+- `wsl --import "Ubuntu" D:\ D:\Ubuntu.tar`
+
+#### upgrade to latest ubuntu
+- `wsl --update` # kernel upgrade
+- `sudo apt-get update`
+- `sudo apt-get upgrade`
+- `sudo apt update -y`
+- `sudo apt dist-upgrade -y`
+- `sudo do-release-upgrade`
+- `lsb_release -a`
+
+#### move to another drive
+- `mkdir D:\backup`
+- `wsl --export Ubuntu D:\backup\ubuntu.tar`
+- `wsl --unregister Ubuntu`
+- `mkdir D:\wsl`
+- `mkdir D:\wsl\ubuntu-latest`
+- `wsl --import Ubuntu D:\wsl\ubuntu-latest\ D:\backup\ubuntu.tar`
+- `wsl --setdefault Ubuntu`
+
+#### optional: use multiple wsl instances
+- `wsl --import Ubuntu-1 D:\wsl\ubuntu-1\ D:\backup\ubuntu-1.tar`
+- `wsl --import Ubuntu-2 D:\wsl\ubuntu-2\ D:\backup\ubuntu-2.tar`
+- ...
+
+#### increase disk size
+- https://docs.microsoft.com/en-us/windows/wsl/vhd-size
+- Powershell (Admin)
+  - `wsl --shutdown`
+  - `Get-AppxPackage -Name "*Ubuntu*" | Select PackageFamilyName`
+  - if default: `C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\ext4.vhdx`
+  - if moved: `D:\wsl\ubuntu-latest\ext4.vhdx`
+- CMD (Admin)
+  - `diskpart`
+  - `Select vdisk file="D:\wsl\ubuntu-latest\ext4.vhdx"`
+  - `detail vdisk`
+  - `expand vdisk maximum=416000`
+  - `exit`
+- WSL
+  - `sudo mount -t devtmpfs none /dev`
+  - `mount | grep ext4` # note sdX (where X = a|b|c)
+  - `sudo resize2fs /dev/sdc 416000M`
+  - `df -h`
+  
 #### prevent password prompt for sudo commands
 - ```sudo visudo```
 - comment out ```%sudo ALL=(ALL:ALL) ALL```
 - ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
-#### wsl2
-- open PowerShell as admin
-- `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
-- `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
-- reboot
-- `wsl --list --verbose`
-- `wsl --set-default-version 2`
-- `wsl --set-version Ubuntu 2`
-- `wsl --list --verbose`
-
 #### docker
--	Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
--	Installation: "Install required Windows components for WSL 2"
--	Settings > General > "Use the WSL 2 based engine"
+- Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
+- Installation: "Install required Windows components for WSL 2"
+- Settings > General > "Use the WSL 2 based engine"
+- Settings > Resources -> WSL Integration -> "Enable integration with my default WSL distro", 
+- Login with account
 - ```docker version```
 - ```docker-compose version```
 
-#### xserver
-
+#### xserver (deprecated; not included in wsl!)
 - download vcxsrv (https://sourceforge.net/projects/vcxsrv/files/latest/download)
 - Installation: Full
 - `nano ~/.bash_profile`
@@ -104,35 +149,48 @@
   - startxfce4
     - Applications > Settings > Screensaver > Mode: Disable Screensaver
 
-#### vscode
+#### wslg (wsl gui) theme
+- `sudo apt install gnome-tweaks`
+- `gnome-tweaks`
+  - Appearance > Applications: HighContrastInverse
+  - Window Titlebars > Maximize / Minimize
+  - Fonts > Scaling Factor > 0.75
 
+#### vscode
 - install Remote - WSL Installieren
 - Erweiterungen > Wolke: Lokale Erweiterungen in WSL - Ubuntu installieren > Alle markieren
 - Innerhalb von WSL ausführen: `code .`
 
 #### smartgit
-
 - `cd /usr/local`
-- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-20_1_4.tar.gz`
-- `tar xzf smartgit-linux-20_1_4.tar.gz`
-- `rm smartgit-linux-20_1_4.tar.gz`
-- `nano usr/local/bin/sgit`
+- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-22_1_3.tar.gz`
+- `tar xzf smartgit-linux-*.tar.gz`
+- `rm smartgit-linux-*.tar.gz`
+- `nano /usr/local/bin/sgit`
 - `( /usr/local/smartgit/bin/smartgit.sh & ) > /dev/null 2>&1`
-- `chmod +x usr/local/bin/sgit`
+- `chmod +x /usr/local/bin/sgit`
 - `sgit`
-- Non-commercial use only
+- Register existing license: /var/www/lamp/syntevo-non-commercial.lic
 - User Name: David Vielhuber
 - Email: david@vielhuber.de
 - Use SmartGit as SSH client
-- Style: Working Tree
+- Style: Working tree (file oriented)
 - Edit > Preferences > User Interface > Dark (independent of system)
-- Edit > Preferences > User Interface > On start-up: Open the last used repositories AUS
+- Edit > Preferences > User Interface > On start-up: Don't reopen the last used repositories
 - Edit > Preferences > User Interface > Built-in Text Editors > Font Size: 9
 - Repository > Search for Repositories > /var/www
+- Manuelles Umbenennen falscher Namen ("www - ...", gtbabel 3x)
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
-- Wenn non-commercial Lizenz abläuft: rm -rf ~/.config/smartgit/
-- Wenn es Probleme mit GTK gibt: ```nano ~/.config/smartgit/```, ```swtver=4932``` hinzufügen
-- Falls Updateprozess innerhalb des Programms scheitert: Einfach neue tar.gz downloaden, entzippen (und bestehende Dateien überschreiben)
+- Wenn non-commercial Lizenz abläuft:
+  - https://www.syntevo.com/register-non-commercial/ > register with github
+  - alternative: rm -rf ~/.config/smartgit/ > download/install/use v21
+- Wenn es Probleme mit GTK gibt:
+  - ```nano ~/.config/smartgit/smartgit.vmoptions```, ```swtver=4932``` hinzufügen
+- Falls Updateprozess innerhalb des Programms scheitert:
+  - Einfach neue tar.gz downloaden, entzippen (und bestehende Dateien überschreiben)
+
+#### hide intro text
+- ```touch ~/.hushlogin```
 
 #### pimp command line
 - ```sudo nano ~/.bash_profile```
@@ -147,19 +205,27 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```source ~/.bash_profile```
 
 #### install basic linux packages
-- ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin net-tools pv```
+- ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin net-tools pv csh```
 
 #### apache/php/mysql
 - ```sudo apt-get install apache2 mysql-server```
 - ```sudo service apache2 start```
 - ```sudo service mysql start```
-- ```sudo mysql_secure_installation```
-  - Validate password plugin: n
-  - mysql-root-Passwort: root
-  - Remove anonymous users: y
-  - Disable root login remotely: n
-  - Remove test database: y
-  - Reload privilege tables: y
+- run mysql_secure_installation
+  - the following steps fixes this error: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04#step-2-configuring-mysql
+  - ```sudo mysql```
+  - ```ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';```
+  - ```exit```
+  - ```sudo mysql_secure_installation```
+    - Validate password plugin: n
+    - mysql-root-Passwort: root
+    - Remove anonymous users: y
+    - Disallow root login remotely: n
+    - Remove test database: y
+    - Reload privilege tables: y
+  - ```mysql -u root -p```
+  - ```ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;```
+  - ```exit```
 - allow login to root user without sudo
   - ```sudo mysql -u root```
   - ```DROP USER 'root'@'localhost';```
@@ -183,6 +249,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo apt-get install -y php7.3 php7.3-fpm libapache2-mod-php7.3 php7.3-mysql php7.3-cli php7.3-common php7.3-xdebug php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-intl php7.3-xml php7.3-mysql php7.3-zip php7.3-soap php7.3-curl php7.3-bcmath php7.3-xml php7.3-sqlite php7.3-imap php7.3-opcache php7.3-pgsql php7.3-pdo php7.3-gd php7.3-imagick```
 - ```sudo apt-get install -y php7.4 php7.4-fpm libapache2-mod-php7.4 php7.4-mysql php7.4-cli php7.4-common php7.4-xdebug php7.4-mbstring php7.4-xmlrpc php7.4-gd php7.4-intl php7.4-xml php7.4-mysql php7.4-zip php7.4-soap php7.4-curl php7.4-bcmath php7.4-xml php7.4-sqlite php7.4-imap php7.4-opcache php7.4-pgsql php7.4-pdo php7.4-gd php7.4-imagick```
 - ```sudo apt-get install -y php8.0 php8.0-fpm libapache2-mod-php8.0 php8.0-mysql php8.0-cli php8.0-common php8.0-xdebug php8.0-mbstring php8.0-xmlrpc php8.0-gd php8.0-intl php8.0-xml php8.0-mysql php8.0-zip php8.0-soap php8.0-curl php8.0-bcmath php8.0-xml php8.0-sqlite php8.0-imap php8.0-opcache php8.0-pgsql php8.0-pdo php8.0-gd php8.0-imagick```
+- ```sudo apt-get install -y php8.1 php8.1-fpm libapache2-mod-php8.1 php8.1-mysql php8.1-cli php8.1-common php8.1-xdebug php8.1-mbstring php8.1-xmlrpc php8.1-gd php8.1-intl php8.1-xml php8.1-mysql php8.1-zip php8.1-soap php8.1-curl php8.1-bcmath php8.1-xml php8.1-sqlite php8.1-imap php8.1-opcache php8.1-pgsql php8.1-pdo php8.1-gd php8.1-imagick```
+- ```sudo apt-get install -y php8.2 php8.2-fpm libapache2-mod-php8.2 php8.2-mysql php8.2-cli php8.2-common php8.2-xdebug php8.2-mbstring php8.2-xmlrpc php8.2-gd php8.2-intl php8.2-xml php8.2-mysql php8.2-zip php8.2-soap php8.2-curl php8.2-bcmath php8.2-xml php8.2-sqlite php8.2-imap php8.2-opcache php8.2-pgsql php8.2-pdo php8.2-gd php8.2-imagick```
 - note: extensions must not be uncommented in php.ini but installed on the command line
 
 #### apache extensions
@@ -199,6 +267,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo a2enmod proxy```
 - ```sudo a2enmod proxy_html```
 - ```sudo a2enmod proxy_http```
+- ```sudo a2enmod xml2enc```
 - ```sudo service apache2 restart```
 
 #### configs
@@ -216,11 +285,13 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - create a real let's encrypt certificate via https://punchsalad.com/ssl-certificate-generator/
 - Domain: *.local.vielhuber.de
 - DNS-verification via txt-record over DomainFactory
-- domain.key => \\wsl$\Ubuntu\var\www\lamp\ssl.key
-- domain.cert => \\wsl$\Ubuntu\var\www\lamp\ssl.cert
+- private-key.txt => \\wsl$\Ubuntu\var\www\lamp\ssl.key
+- ca-bundle.txt => \\wsl$\Ubuntu\var\www\lamp\ssl.cert
 
 #### postfix
 - ```sudo apt-get install postfix```
+   - General type: "Internet Site"
+   - System mail name: "vielhuber.de"
 - ```sudo apt install mailutils```
 - ```sudo dpkg-reconfigure postfix```
    - General type: "Internet Site"
@@ -252,6 +323,17 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 - ```sudo nano /etc/php/custom.ini```
   - ```sendmail_path = "/usr/sbin/sendmail -t -i"```
 
+#### ncdu
+- ```sudo apt-get install ncdu```
+- ```cd /```
+- ```ncdu --exclude /mnt```
+
+#### node + php auto version switching on cd
+- ```nano ~/.bash_profile```
+- ```auto_switch() { if [[ $PWD == $PREV_PWD ]]; then return; fi; PREV_PWD=$PWD; [[ -f ".nvmrc" ]] && nvm use --silent && echo "switch to node "$(cat .nvmrc); [[ -f ".phprc" ]] && sudo update-alternatives --set php /usr/bin/php$(cat .phprc) && echo "switch to php "$(cat .phprc); }; export PROMPT_COMMAND=auto_switch;```
+- ```source ~/.bash_profile```
+- now place `.nvmrc` / `.phprc` with the version (e.g. `12.10.0` / `8.1`) in the folder, where your `package.json` / `composer.json` lays
+
 #### php error logging
 - ```touch /var/log/php-error.log```
 - ```chmod +x /var/log/php-error.log```
@@ -260,15 +342,18 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]~\[\e[0;3
 #### shared php.ini configuration
 - ```sudo nano /etc/php/custom.ini```
 ```
-max_execution_time = 2400
+user_ini.filename =
+
+max_execution_time = 4800
 max_input_time = 900
 post_max_size = 800M
-memory_limit = 4048M
+memory_limit = 4096M
 upload_max_filesize = 800M
 max_input_vars = 100000
 max_file_uploads = 5000
 realpath_cache_size = 4M
 #allow_url_include = On
+#allow_url_fopen = On
 date.timezone = 'Europe/Berlin'
 display_errors = On
 error_log = /var/log/php-error.log
@@ -284,7 +369,7 @@ opcache.max_accelerated_files=32531
 opcache.save_comments=1
 opcache.fast_shutdown=0
 opcache.max_file_size=0
-#we set this to 1 (so that we can set revalidate_freq on a project basis to a higher value)
+#we set this to 1 so that we can set revalidate_freq on a project basis to a higher value
 opcache.validate_timestamps=1
 opcache.revalidate_freq=2
 
@@ -293,7 +378,7 @@ xdebug.profiler_enable = off
 xdebug.max_nesting_level = 10000
 xdebug.var_display_max_children= -1
 xdebug.var_display_max_data = -1
-xdebug.var_display_max_depth = -1
+xdebug.var_display_max_depth = 10
 ```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/apache2/conf.d/custom.ini```
@@ -302,6 +387,8 @@ xdebug.var_display_max_depth = -1
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.4/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.0/apache2/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.1/apache2/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.2/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.1/fpm/conf.d/custom.ini```
@@ -309,6 +396,8 @@ xdebug.var_display_max_depth = -1
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.4/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.0/fpm/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.1/fpm/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.2/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.1/cli/conf.d/custom.ini```
@@ -316,6 +405,8 @@ xdebug.var_display_max_depth = -1
 - ```ln -s /etc/php/custom.ini /etc/php/7.3/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.4/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.0/cli/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.1/cli/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.2/cli/conf.d/custom.ini```
 
 #### local environment permissions
 - reset
@@ -340,9 +431,13 @@ xdebug.var_display_max_depth = -1
 - ```sudo service mysql stop```
 - ```sudo usermod -d /var/lib/mysql/ mysql```
 
+#### fix font errors
+- if fonts are garbled: ```sudo fc-cache -f -v```
+
 #### fix wsl2 errors
 - apache not reachable
   - \\wsl$\Ubuntu\var\www\lamp\firewall.ps1 anlegen mit Inhalt von https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723
+  - Ports in Datei erweitern: ```$ports=@(80,443,10000,3000,3009,5000,8080,9090,3306);```
   - Aufgabenplanung
   - wsl2 Firewall
   - Bei Anmeldung
@@ -363,7 +458,7 @@ xdebug.var_display_max_depth = -1
   - create `%UserProfile%\.wslconfig`
   ```
   [wsl2]
-  memory=4GB
+  memory=8GB
   swap=16GB
   localhostForwarding=true
   ```
@@ -378,13 +473,15 @@ xdebug.var_display_max_depth = -1
 - ```sudo mv composer.phar /usr/local/bin/composer```
 - hide sudo message:
   - ```sudo nano ~/.bash_profile```
+  - ```# hide composer sudo message```
   - ```export COMPOSER_ALLOW_SUPERUSER=1```
+  - ```source ~/.bash_profile```
 - ```composer self-update```
 - ```composer --version``` # 2
 
 #### node / npm
 - nvm
-  - ```sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash```
+  - ```sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash```
   - copy 3 new lines of ```~/.bashrc``` to ```~/.bash_profile``` (because .bashrc is not loaded on wsl)
   - restart terminal
   - ```nvm --version```
@@ -392,13 +489,13 @@ xdebug.var_display_max_depth = -1
   - install/upgrade new/specific node versions
   - ```nvm install node```
   - ```nvm install --lts```
-  - ```nvm install 16.5.0```
+  - ```nvm install 16.17.0```
   - ```nvm install 14.18.0```
   - ```nvm install 12.10.0```
   - ```nvm install 10.16.3```
-  - ```nvm alias default 14.18.0```
-  - Version wechseln: ```nvm use 10.16.3```
-  - Bei manchen Kundenprojekten: ```nvm use --lts```
+  - ```nvm alias default 16.17.0```
+  - ```nvm use 16.17.0```
+  - Cache leeren (falls sich package-lock.json ändert: `npm cache verify` bzw `npm cache clean -f`)
 - nativ (obsolet)
   - https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
   - ```curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -```
@@ -406,47 +503,47 @@ xdebug.var_display_max_depth = -1
   - ```sudo apt-get install -y build-essential```
 - prevent permission errors
   - ```npm set unsafe-perm true```
-- auto version switching on cd
-  - ```nano ~/.bash_profile```
-  - ```nvm_auto_switch() { if [[ $PWD == $PREV_PWD ]]; then return; fi; PREV_PWD=$PWD; [[ -f ".nvmrc" ]] && nvm use; }; export PROMPT_COMMAND=nvm_auto_switch;```
-  - now place `.nvmrc` with the version (e.g. `12.10.0`) in the folder, where your `package.json` lays
+- install ncu
+  - ```npm install -g npm-check-updates```
+- login npm
+  - ```npm login```
 
 #### yarn
-- ```curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -```
-- ```echo "deb https://nightly.yarnpkg.com/debian/ nightly main" | sudo tee /etc/apt/sources.list.d/yarn.list```
-- ```sudo apt-get update && sudo apt-get install yarn```
+- ```corepack enable```
+- ```corepack prepare yarn@stable --activate```
+- ```yarn --version```
 
 #### python
-- install python 2
-  - ```sudo apt-get update```
-  - ```sudo apt-get install python python-pip```
-  - ```python --version```
-  - ```pip --version```
-- install python 3.5
+- install python 3.X
   - ```sudo apt-get update```
   - ```sudo apt-get install python3 python3-pip```
   - ```python3 --version```
   - ```pip3 --version```
-- install python 3.6
-  - ```sudo add-apt-repository ppa:deadsnakes/ppa```
-  - ```sudo apt-get update```
-  - ```sudo apt-get install python3.6```
-  - ```python3.6 --version```
-  - ```python3.6 -m pip --version```
-- change default version (currently not done)
-  - ```cd /usr/bin && sudo rm python && ln -s ./python3 ./python```
+- install python 2.X
+  - ```sudo apt-get install python2```
+  - ```python2 --version```
+- change default version
+  - ```cd /usr/bin```
+  - ```sudo rm python```
+  - ```ln -s ./python3 ./python```
 
 #### blackfire.io php debugger
-
-- ```wget -q -O - https://packages.blackfire.io/gpg.key | sudo apt-key add -```
-- ```echo "deb http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list```
+- ```wget -q -O - https://packages.blackfire.io/gpg.key | sudo dd of=/usr/share/keyrings/blackfire-archive-keyring.asc```
+- ```echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/blackfire-archive-keyring.asc] http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list```
 - ```sudo apt update```
-- ```sudo apt install blackfire-agent```
-- ```sudo blackfire-agent --register --server-id=xxx --server-token=xxx``` (see blackfire.io)
-- ```sudo /etc/init.d/blackfire-agent restart```
+- ```sudo apt install blackfire```
+- ```sudo blackfire agent:config --server-id=xxx --server-token=xxx``` (see blackfire.io)
+- ```sudo systemctl restart blackfire-agent```
 - ```sudo apt install blackfire-php```
 - ```blackfire config --client-id=xxx --client-token=xxx``` (see blackfire.io)
 - ```blackfire run ./vendor/bin/phpunit```
+
+#### gettext
+- ```sudo apt-get install gettext```
+- ```msgfmt --help```
+
+#### gulp
+- ```npm install --global gulp-cli```
 
 #### git
 - ```sudo add-apt-repository ppa:git-core/ppa -y```
@@ -456,7 +553,7 @@ xdebug.var_display_max_depth = -1
 - ```git config --global core.ignorecase false```
 - ```git config --global pull.rebase false```
 - ```git config --global core.filemode false```
-- ```git config --global core.autocrlf input``` # this converts everything to lf, which is ok when using wsl2 (use true if you need to convert everything to crlf)
+- ```git config --global core.autocrlf input``` # this converts everything to lf on commit, which is ok when using wsl2 (however, there are projects where you want it to be the default value of `false`, set that with `git config core.autocrlf false`)
 - ```git config --global core.safecrlf false```
 - ```git config --global push.default simple```
 - ```git config --global user.name "David Vielhuber"```
@@ -464,9 +561,28 @@ xdebug.var_display_max_depth = -1
 - ```git config --global pull.ff only```
 - ```git config --global merge.ff false```
 - ```git config --global core.mergeoptions --no-edit```
+- ```git config --global init.defaultBranch main```
 - further do this (--no-edit does sometimes not work):
   - ```sudo nano ~/.bash_profile```
   - ```export GIT_MERGE_AUTOEDIT=no```
+- node 10 hangs (https://stackoverflow.com/questions/45433130/npm-install-gets-stuck-at-fetchmetadata/72391698#72391698)
+  - ```sudo nano ~/.gitconfig```
+  - ```[url "https://"]```
+  - ```   insteadOf = git://```
+
+#### gh (github command line)
+- ```curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg```
+- ```echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null```
+- ```sudo apt update```
+- ```sudo apt install gh```
+
+#### git-filter-repo
+- `sudo nano ~/.bash_profile`
+- `export PATH="$PATH:${HOME}/.git-filter-repo"`
+- `source ~/.bash_profile`
+- `mkdir -p ~/.git-filter-repo`
+- `wget -O ~/.git-filter-repo/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo`
+- `chmod +x ~/.git-filter-repo/git-filter-repo`
 
 #### subversion (svn)
 - ```sudo apt-get install subversion```
@@ -488,8 +604,12 @@ xdebug.var_display_max_depth = -1
 - ```mkdir ~/.ssh```
 - ```cp /var/www/lamp/id_rsa ~/.ssh/id_rsa```
 - ```cp /var/www/lamp/id_rsa.pub ~/.ssh/id_rsa.pub```
+- ```cp /var/www/lamp/id_rsa_4096 ~/.ssh/id_rsa_4096```
+- ```cp /var/www/lamp/id_rsa_4096.pub ~/.ssh/id_rsa_4096.pub```
 - ```chmod 600 ~/.ssh/id_rsa```
 - ```chmod 600 ~/.ssh/id_rsa.pub```
+- ```chmod 600 ~/.ssh/id_rsa_4096```
+- ```chmod 600 ~/.ssh/id_rsa_4096.pub```
 
 #### syncdb
 - ```mkdir ~/.syncdb```
@@ -502,16 +622,15 @@ xdebug.var_display_max_depth = -1
 - ```source ~/.bash_profile ```
 
 #### postgres
-- ```nano /etc/apt/sources.list.d/pgdg.list```
-- ```deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main```
-- ```wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -```
-- ```sudo apt-get update```
+- ```sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'```
+- ```wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/pgdg.asc &>/dev/null```
+- ```sudo apt update```
 - ```sudo apt-get install postgresql postgresql-contrib```
-- sudo nano /etc/postgresql/11/main/postgresql.conf
+- sudo nano /etc/postgresql/15/main/postgresql.conf
   - listen_addresses = '*'
   - port = 5432
 - PANIC: could not flush dirty data
-  - sudo nano /etc/postgresql/11/main/postgresql.conf
+  - sudo nano /etc/postgresql/15/main/postgresql.conf
   - data_sync_retry = on
 - ```sudo service postgresql start```
 - ```sudo -u postgres psql```
@@ -521,7 +640,7 @@ xdebug.var_display_max_depth = -1
 - ```nano ~/.pgpass```
 - ```*:5432:*:postgres:root```
 - ```chmod 0600 ~/.pgpass```
-- sudo nano /etc/postgresql/11/main/pg_hba.conf
+- sudo nano /etc/postgresql/15/main/pg_hba.conf
 ```
 # comment out all other lines and append this
 local   all   postgres                  md5
@@ -529,6 +648,32 @@ local   all   all                       md5
 host    all   all        127.0.0.1/32   md5
 host    all   all        ::1/128        md5
 ```
+
+#### oraclesql
+- sign in https://container-registry.oracle.com and accept TOS
+- installation
+  - ```docker login container-registry.oracle.com```
+  - ```docker pull container-registry.oracle.com/database/enterprise:12.2.0.1```
+  - ```docker run -dit -p 1521:1521 --name oracle_db container-registry.oracle.com/database/enterprise:12.2.0.1```
+  - ```docker logs -f oracle_db``` # wait for "Done !" in logs
+  - ```docker exec -it oracle_db bash -c "source /home/oracle/.bashrc; sqlplus /nolog"```
+  - ```connect sys as sysdba;```
+  - ```Oradoc_db1```
+  - ```alter session set "_ORACLE_SCRIPT"=true;```
+- create new user (=schema!)
+  - ```create user root identified by root;```
+  - ```GRANT ALL PRIVILEGES TO root;```
+- start/stop:
+  - Docker Desktop
+- credentials:
+  - ip: localhost
+  - port: 1521
+  - service name: ORCLCDB.localdomain
+  - username: root
+  - password: root
+- tablespaces
+  - view: ```SELECT tablespace_name, file_name, bytes / 1024/ 1024  MB FROM dba_data_files;```
+  - create: ```CREATE TABLESPACE DATA1 DATAFILE 'DATA1.dbf' SIZE 10M AUTOEXTEND ON;```
 
 #### ghostscript
 - ```sudo apt-get install ghostscript```
@@ -543,7 +688,6 @@ host    all   all        ::1/128        md5
   - add ```<policy domain="coder" rights="read|write" pattern="LABEL" />```
 
 #### pdftk
-- ```sudo add-apt-repository ppa:malteworld/ppa```
 - ```sudo apt update```
 - ```sudo apt install pdftk```
 - ```pdftk --version```
@@ -553,8 +697,8 @@ host    all   all        ::1/128        md5
 - ```cd /tmp/```
 - ```mkdir dl```
 - ```cd dl```
-- ```wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb```
-- ```sudo dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb```
+- ```wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb```
+- ```sudo dpkg -i wkhtmltox_0.12.6.1-2.jammy_amd64.deb```
 - ```cd /tmp/```
 - ```rm -rf dl```
 - ```wkhtmltopdf --version```
@@ -575,20 +719,20 @@ host    all   all        ::1/128        md5
 
 #### jpegoptim
 - ```sudo apt-get install jpegoptim```
+- ```jpegoptim --version```
 
 #### mozjpeg
 - ```sudo apt-get update```
-- ```sudo apt-get install -y autoconf automake libtool nasm make pkg-config```
+- ```sudo apt-get install -y cmake autoconf automake libtool nasm make pkg-config git libpng-dev```
 - ```cd /tmp/```
 - ```mkdir mozjpeg```
 - ```cd mozjpeg```
-- ```wget https://github.com/mozilla/mozjpeg/archive/v3.3.1.tar.gz```
-- ```tar -xzvf v3.3.1.tar.gz```
-- ```cd mozjpeg-3.3.1/```
-- ```autoreconf -fiv```
+- ```wget https://github.com/mozilla/mozjpeg/archive/refs/tags/v4.1.1.tar.gz```
+- ```tar -xzvf v*.tar.gz```
+- ```cd mozjpeg-*/```
 - ```mkdir build && cd build```
-- ```sh ../configure```
-- ```make install```
+- ```sudo cmake -G"Unix Makefiles" ../```
+- ```sudo make install```
 - ```ln -s /opt/mozjpeg/bin/jpegtran /usr/bin/mozjpeg```
 - ```cd ..```
 - ```cd ..```
@@ -597,20 +741,7 @@ host    all   all        ::1/128        md5
 - ```mozjpeg --version```
 
 #### pngquant
-- ```sudo apt-get update```
-- ```sudo apt-get install -y git gcc cmake libpng-dev pkg-config```
-- ```cd /tmp/```
-- ```mkdir pngquant```
-- ```cd pngquant```
-- ```wget http://pngquant.org/pngquant-2.12.5-src.tar.gz```
-- ```tar -xzvf pngquant-2.12.5-src.tar.gz```
-- ```cd pngquant-2.12.5/```
-- ```./configure```
-- ```make```
-- ```sudo make install```
-- ```cd ..```
-- ```cd ..```
-- ```rm -rf pngquant```
+- ```sudo apt-get install pngquant```
 - ```pngquant --version```
 
 #### svgo
@@ -623,9 +754,9 @@ host    all   all        ::1/128        md5
 - ```cd /tmp/```
 - ```mkdir gifsicle```
 - ```cd gifsicle```
-- ```wget https://github.com/kohler/gifsicle/archive/v1.92.tar.gz```
-- ```tar -xzvf v1.92.tar.gz```
-- ```cd gifsicle-1.92/```
+- ```wget https://www.lcdf.org/gifsicle/gifsicle-1.93.tar.gz```
+- ```tar -xzvf gifsicle*.tar.gz```
+- ```cd gifsicle*/```
 - ```autoreconf -i```
 - ```./configure```
 - ```make```
@@ -662,8 +793,9 @@ host    all   all        ::1/128        md5
   - "Der phpMyAdmin-Konfigurationsspeicher ist nicht vollständig konfiguriert," => operations > create table
 
 #### speedtest cli
-- ```curl -s https://install.speedtest.net/app/cli/install.deb.sh | sudo bash```
+- ```curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash```
 - ```sudo apt-get install speedtest```
+- ```speedtest```
 
 #### include windows fonts in linux
 - ```ln -s /mnt/c/Windows/Fonts /usr/share/fonts/WindowsFonts```
@@ -675,9 +807,16 @@ host    all   all        ::1/128        md5
 - ```npm i -S @types/google-apps-script```
 - ```clasp login```
 
+#### httrack
+- ```sudo apt install httrack webhttrack```
+
 #### ruby (via rvm)
-- ```gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB```
-- ```curl -sSL https://get.rvm.io | bash -s stable --ruby```
+- ```gpg --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB```
+- ```echo 'export rvm_prefix="$HOME"' > /root/.rvmrc```
+- ```echo 'export rvm_path="$HOME/.rvm"' >> /root/.rvmrc```
+- ```curl -sSL https://get.rvm.io | bash -s stable```
+- ```source ~/.rvm/scripts/rvm```
+- ```rvm install ruby-3.1.2```
 - ```ruby --version```
 
 #### wpscan
@@ -696,7 +835,8 @@ host    all   all        ::1/128        md5
 - ```wp --info```
 
 #### ffmpeg
-- ```sudo add-apt-repository ppa:jonathonf/ffmpeg-4```
+- ```sudo add-apt-repository ppa:savoury1/ffmpeg4 -y```
+- ```sudo add-apt-repository ppa:savoury1/ffmpeg5 -y```
 - ```sudo apt-get update```
 - ```sudo apt install ffmpeg```
 - ```ffmpeg -version```
@@ -716,6 +856,22 @@ host    all   all        ::1/128        md5
 - ```sudo apt-get install xclip```
 - ```echo "foo" | xclip```
 
+#### docker-osx
+- installation
+  - edit `%UserProfile%\.wslconfig`
+    - `nestedVirtualization=true`
+  - `sudo apt-get install kvm`
+    - `kvm-ok` // KVM acceleration can be used
+  - `sudo apt install x11-apps -y`
+  - if port is in use
+    - show used ports in powershell: `netsh int ipv4 show excludedportrange protocol=tcp`
+    - change port in command below from 50922 to 40922
+  - `docker run -it --name docker-osx --device /dev/kvm -p 40922:10022 -v /mnt/wslg/.X11-unix:/tmp/.X11-unix -e "DISPLAY=${DISPLAY:-:0.0}" -e GENERATE_UNIQUE=true -e MASTER_PLIST_URL='https://raw.githubusercontent.com/sickcodes/osx-serial-generator/master/config-custom.plist' sickcodes/docker-osx:ventura`
+  - Disk Utility > QEMU HARDDISK Media (biggest) > Erase > Name: MyDockyOSX + Scheme: Mac OS Extended (Journaled)
+  - Reinstall macOS Ventura
+- run
+  - `docker start docker-osx`
+
 #### autostart
 - wsl
   - Aufgabenplanung
@@ -732,12 +888,13 @@ host    all   all        ::1/128        md5
 
 #### wsl improve i/o performance
 - https://medium.com/@leandrw/speeding-up-wsl-i-o-up-than-5x-fast-saving-a-lot-of-battery-life-cpu-usage-c3537dd03c74
-- Windows Defender Security Center > Viren- & Bedrohungsschutz > Einstellungen für Viren- & Bedrohungsschutz > Ausschlüsse hinzufügen oder entfernen
-  - Ordner: C:\Users\David\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc
-  - Prozesse: git, node, dpkg, php5.6, php7.0, php7.1, php7.2, php7.3, php7.4, php8.0, php-fpm5.6, php-fpm7.0, php-fpm7.1, php-fpm7.2, php-fpm7.3, php-fpm7.4, php-fpm8.0, mysql, mysqld, apache2, bash, postgres, wkhtmltopdf
+- Windows-Sicherheit > Viren- & Bedrohungsschutz > Einstellungen für Viren- & Bedrohungsschutz > Ausschlüsse hinzufügen oder entfernen
+  - Ordner: D:\wsl\ubuntu-latest
+  - Prozesse: git, node, dpkg, php5.6, php7.0, php7.1, php7.2, php7.3, php7.4, php8.0, php8.1, php8.2, php-fpm5.6, php-fpm7.0, php-fpm7.1, php-fpm7.2, php-fpm7.3, php-fpm7.4, php-fpm8.0, php-fpm8.1, php-fpm8.2, mysql, mysqld, apache2, bash, postgres, wkhtmltopdf
 
 #### switch cli php version
 - ```sudo update-alternatives --config php```
+- ```sudo update-alternatives --set php /usr/bin/php8.1``` (directly set)
 - always choose manual mode (so newer installed versions do not get taken automatically)
 - ```php -v```
 
@@ -763,8 +920,9 @@ host    all   all        ::1/128        md5
 
 #### create project
 - ```lamp add project```
-- ```lamp add project php8.0```
-- ```lamp add project php8.0 custom/subfolder/public```
+- ```lamp add project php8.1```
+- ```lamp add project php8.1 custom/subfolder/public```
+- ```lamp add project php8.1 custom/subfolder/public 3000```
 
 #### remove project
 - ```lamp remove project```

@@ -6,16 +6,19 @@ add_action('rest_api_init', function () {
     // url: https://tld.com/wp-json/v1/custom/path/1337
     // for strings use '/custom/path/(?P<id>[a-zA-Z0-9]+)'
     register_rest_route('v1', '/custom/path/(?P<id>\d+)', [
-        'methods' => \WP_REST_Server::READABLE, // 'GET', for 'POST use WP_REST_Server::CREATABLE
-        'permission_callback' => function () {
+        'methods' => \WP_REST_Server::READABLE, // 'GET', for 'POST' use WP_REST_Server::CREATABLE
+        'permission_callback' => function (\WP_REST_Request $request) {
           	// public route
           	return true;
           
-          	// only allow logged in users (via browser)
-        	return current_user_can( 'edit_others_posts' );
+          	// check for manual token
+          	return $request->get_param('token') === 'abcde';
           
-          	// for authentication via cookie / api
+          	// for user / authentication via cookie / api
           	// see https://gist.github.com/vielhuber/b1647427ddb32c87a9f56e92ed1fd371
+            // this does not work!
+            //return is_user_logged_in();
+        	//return current_user_can( 'edit_others_posts' );
           
           	// simple basic auth
             $username = @$_SERVER['PHP_AUTH_USER'];
@@ -62,6 +65,24 @@ add_action('rest_api_init', function () {
         },
     ]);
 });
+```
+
+- note: if you want to use other classes of the namespace inside the callback function, you have to call a separate function from the current class
+```php
+private function routeTest() {
+    add_action('rest_api_init', function () {
+        register_rest_route('v1', '/test', [
+            'methods' => \WP_REST_Server::READABLE,
+            'permission_callback' => function () { return true; },
+            'callback' => [$this, 'routeTestCallback']
+        ]);
+    });
+}
+public function routeTestCallback(\WP_REST_Request $request) {
+    /* this works now */
+    new OtherClass();
+    /* ... */
+}
 ```
 
 ### option 2: custom php file

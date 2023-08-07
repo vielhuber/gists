@@ -1,4 +1,8 @@
 <?php
+// this must be outside
+require_once __DIR__ . '/vendor/autoload.php';
+use Foo\Bar;
+  
 class TestClass
 {
 
@@ -11,8 +15,8 @@ class TestClass
    {
       echo __CLASS__.' was initiated';
      
-     // you don't need variables to be defined on top, but it's "good style"
-     // but you can also do:
+     // you need variables to be defined on top(!)
+     // in the past, you could also do
      $this->var4 = 'foo'; // this is the same as public $var4 = 'foo'
    }
    
@@ -35,6 +39,20 @@ class TestClass
    private function thisIsAPrivateFunction()
    {
      
+   }
+   
+   // examples of static/non static
+   public static function fnstat1() {
+        echo self::$var2; // works
+        //self::fndyn1(); // does not work
+        //echo self::$var0; // does not work
+   }
+   public function fndyn1() {
+        $this->fnstat1(); // works
+        echo $this->var0; // works
+     	TestClass::$var2; // works
+        //echo $this->var2; // does not work
+     	//echo self::fnstat1(); // does not work
    }
 
 }

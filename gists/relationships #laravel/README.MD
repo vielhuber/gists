@@ -11,15 +11,24 @@ bars
 ```php
 Foo:
 public function bar() {
-	return $this->belongsTo('App\Models\Bar', 'bar_id');
+	return $this->belongsTo('App\Models\Bar', 'bar_id', 'id');
 }
 ```
 ```php
 Bar:
 public function foos() {
-	return $this->hasMany('App\Models\Foo', 'bar_id');
+	return $this->hasMany('App\Models\Foo', 'bar_id', 'id');
 }
 ```
+
+```php
+Bar (only first):
+public function foos() {
+	return $this->hasOne('App\Models\Foo', 'bar_id')->latest(); // ->oldest()
+}
+```
+
+
 
 ### with intermediate table
 
@@ -39,7 +48,7 @@ Foo:
 public function bars() {
   return $this->belongsToMany(
       'App\Models\Bar',
-      'foo_bar',
+      'foos_bars',
       'foo_id',
       'bar_id'
   );
@@ -51,7 +60,7 @@ Bar:
 public function foos() {
   return $this->belongsToMany(
       'App\Models\Foo',
-      'foo_bar',
+      'foos_bars',
       'bar_id',
       'foo_id'
   );

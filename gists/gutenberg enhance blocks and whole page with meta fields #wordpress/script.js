@@ -1,6 +1,12 @@
 /* script.js should be compiled to bundle.js with babel or https://babeljs.io/en/repl */
-// this has to be left out (because of https://github.com/WordPress/gutenberg/issues/9757)
-//wp.domReady(() => {
+// this has to be done this way (because of https://github.com/WordPress/gutenberg/issues/9757)
+var alreadyRun = false;
+run();
+wp.domReady(() => { run(); });
+
+function run() {
+    if (this.alreadyRun === true || wp === undefined || wp.hooks === undefined || wp.plugins === undefined) { return; }
+    alreadyRun = true;  
 
 	/* add meta field to block */
     wp.hooks.addFilter('blocks.registerBlockType', 'custom/attrs', settings => {
@@ -242,4 +248,4 @@
         });
     }
 
-//});
+}

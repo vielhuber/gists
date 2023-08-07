@@ -4,7 +4,7 @@ $('.el').each(function() {
 });
 
 // with
-$('.el').each((index,el) =>
+$('.el').each((el__key, el__value) =>
 {
-	$(el).remove();  
+	$(el__value).remove();  
 });

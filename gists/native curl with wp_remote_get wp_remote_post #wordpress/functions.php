@@ -1,5 +1,9 @@
 // GET
-$response = wp_remote_get('http://httpbin.org/get');
+$response = wp_remote_get('http://httpbin.org/get', [
+    'headers' => [
+        'foo' => 'bar'
+    ]                       
+]);
 if (is_wp_error($response)) {
     echo $response->get_error_message();
     die();

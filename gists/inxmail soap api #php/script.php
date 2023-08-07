@@ -36,6 +36,7 @@ function inxmailAddRecipient($data) {
             $inxAttr['anrede'] = $data['salutation'] == 'Herr' ? 'Herr' : 'Frau';
             $inxAttr['vorname'] = $data['first_name'];
             $inxAttr['nachname'] = $data['last_name'];
+            $inxAttr['boolean_test'] = true; // true or false
 
             // get subscription manager
             $inxSubManager = $inxSession->getSubscriptionManager();

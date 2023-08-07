@@ -1,4 +1,4 @@
-"C:\Program Files\Google\Chrome\Application\chrome.exe"
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
   --user-data-dir=C:\temp
   --kiosk "file:///C:/Users/David/Desktop/folderindex.html"
   --incognito
@@ -7,4 +7,4 @@
   --no-first-run
   --disable-java
   --disable-plugins
-  --force-device-scale-factor=1
+  --force-device-scale-factor=1 # change this to e.g. 1.5 if you want to adjust the zoom

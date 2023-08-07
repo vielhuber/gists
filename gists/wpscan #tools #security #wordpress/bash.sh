@@ -9,3 +9,6 @@ wpscan --api-token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --url https://www
 
 # diable ssl certificate warnings
 wpscan --disable-tls-checks --url https://www.domain.tld
+
+# bypass waf
+wpscan --random-user-agent --url https://www.domain.tld

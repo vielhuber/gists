@@ -10,6 +10,10 @@
 - zip the folder "pluginname" (the folder must be a subfolder inside the zip directory)
 - submit via https://de.wordpress.org/plugins/developers/add/
 - wait for manual verification (correspondence is done via email, the plugin is initially checked by humans, but when doing updates, this is not done)
+- translation of ```readme.txt```:
+  - translate via https://translate.wordpress.org (choose language, go to plugin, choose "Stable Readme (latest release)", export as po, translate, import)
+  - get yourself a translation editor (PTE) (https://make.wordpress.org/polyglots/handbook/plugin-theme-authors-guide/pte-request/#plugin-theme-author-translation-review-pte-request)
+  - approve your own translations you submitted
 
 ## release
 
@@ -27,7 +31,7 @@
   if( file_exists(__DIR__ . '/vendor/scoper-autoload.php') ) { require_once __DIR__ . '/vendor/scoper-autoload.php'; }
   else { require_once __DIR__ . '/vendor/autoload.php'; }
   ```
-  - ```wget https://github.com/humbug/php-scoper/releases/download/0.13.1/php-scoper.phar```
+  - ```wget https://github.com/humbug/php-scoper/releases/download/0.18.2/php-scoper.phar```
   - with config (recommended, see below)
     - ```php php-scoper.phar add-prefix  --config scoper.inc.php```
   - without config

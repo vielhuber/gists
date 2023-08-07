@@ -64,6 +64,22 @@ SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').getFo
 
 /* set formula of specific cell */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setFormula('1+2');
+SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setFormula('IF(1=1;2;3)'); // this is a little bit weird: use english function names, but german separators (;)
+
+/* set background color of specific sell */
+SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getRange('A1').setBackground('#efefef');
+
+/* auto expand rows */
+// in the past this has worked in the normal ui (set height manually to 2, then change the option to "auto fit"); now it does not work anymore!
+// the following script still works
+var s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('TEST');
+s.setRowHeights(1, s.getMaxRows(), 3);
+
+/* protect specific cell */
+var protection = e.source.getActiveSheet().getRange(1, 1, 1, 6).protect().setDescription('Nicht mehr änderbar');
+var me = Session.getEffectiveUser();
+protection.addEditor(me);
+protection.removeEditors(protection.getEditors());
 
 /* get all values from sheet */
 SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getDataRange().getValues()
@@ -79,10 +95,10 @@ SpreadsheetApp.openById('1UmhbdLw1OmEmSxjtT2hKsmsDgExOxMZmeOAL_ChVs_Q').getSheet
 
 /* loop through all cells in specific sheet */
 var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('FOO').getDataRange().getValues();
-for ( x = 0; x < data.length; x++ ) {
-  for ( y = 0 ; y < data[x].length; y++ ) {
-    if( data[x][y] != '' ) {
-      data[x][y] += 'foo';
+for ( y = 0; y < data.length; y++ ) {
+  for ( x = 0; x < data[y].length; x++ ) {
+    if( data[y][x] != '' ) {
+      data[y][x] += 'foo';
     }
   }
 }
@@ -111,6 +127,11 @@ if( response == ui.Button.YES )
 
 /* show alert */
 SpreadsheetApp.getUi().alert('Hello, world!');
+
+/* get sheet url */
+var spreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
+	sheet = spreadsheet.getActiveSheet(),
+    link = spreadsheet.getUrl() + '#gid=' + sheet.getSheetId();
 
 /* show modal with print link */
 var url = 'https://docs.google.com/spreadsheets/d/1TM0kugtYxAoGxS-zqGwTQQ2Oi54czahfKhcCA7_aVDw/export?exportFormat=pdf&amp;format=pdf&amp;format=pdf&amp;size=7&amp;fzr=true&amp;fzc=true&amp;portrait=true&amp;scale=2&amp;spct=1&amp;gridlines=false&amp;printnotes=false&amp;printtitle=false&amp;printdate=false&amp;printtime=false&amp;sheetnames=false&amp;pagenum=undefined&amp;pageorder=2&amp;attachment=true&amp;top_margin=0.39370078740157477&amp;bottom_margin=0&amp;left_margin=0.5905511811023622&amp;right_margin=0.5905511811023622&amp;timestamp=42973.87412068287&amp;horizontal_alignment=CENTER&amp;vertical_alignment=TOP&amp;gridFiltersProto=[]&amp;gid='+SpreadsheetApp.getActiveSpreadsheet().getSheetId();
@@ -148,6 +169,9 @@ function onEdit(e)
    console.log(e.range.getValue());
    // also helpful: do something with all selected cells (warning, this does not work for splitted cells like in filter)
    console.log(e.range.getValues());
+   // prevent multi cell editing trigger
+   if( e.range.columnStart !== e.range.columnEnd || e.range.rowStart !== e.range.rowEnd ) { return; }
+  
    for(var col = e.range.columnStart; col <= e.range.columnEnd; col++) {
    	for(var row = e.range.rowStart; row <= e.range.rowEnd; row++) {
       if( col != 2 || row < 2 ) { continue; } // check
@@ -159,6 +183,8 @@ function onEdit(e)
        if( col != 2 || row < 2 ) { continue; } // check
      }
    }
+   // set formula in current cell
+  	e.source.getActiveSheet().getRange(e.range.rowStart, e.range.columnStart).setFormula('1+2');
 }
 
 /* popup with link */
@@ -194,4 +220,10 @@ function get(args)
 	return JSON.parse(UrlFetchApp.fetch('https://www.tld.com/api.php?token='+ScriptApp.getOAuthToken()+'&sheet='+DocumentApp.getActiveDocument().getName()+'&user='+Session.getActiveUser()+'&'+encodeURI(args), {'method': 'get', 'muteHttpExceptions': true}));
 }
 
-
+/* send email */
+MailApp.sendEmail({
+    to: "foo@tld.com",
+    subject: "The subject",
+    htmlBody: "Lorem ipsum dolor sit amet."
+});
+Logger.log("remaining email quota: " + MailApp.getRemainingDailyQuota());

@@ -9,6 +9,8 @@ arr = arr.map((i) => { i.content = i.content+'foo'; return i; });
 arr.map((v,i) => v+i); // [7,9,11]
 
 arr.filter(i => i > 7); // [8,9]
+arr.filter(i => i > 7)[0] || null; // 8
+arr.filter(i => i > 9)[0] || null; // null
 
 arr.find(i => i > 7); // 8
 
@@ -16,6 +18,8 @@ arr.some(i => i > 7); // true
 
 arr.sort((a,b) => b-a); // [9,8,7]
 
+/* sum */
+[{amount:1},{amount:3},{amount:3},{amount:7}].reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) // 14
 
 let obj = {0: 7, 1: 8, 2: 9};
 

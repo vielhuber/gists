@@ -20,13 +20,15 @@ class ConvenienceCollection extends Collection
                 $value = null;
             }
             return $value;
-        })
-            ->flatten()
-            ->unique()
-            ->filter(function ($value, $key) {
-                return __x($value) || $value === false;
-            })
-            ->values(); // set consecutive keys;
+        });
+        if ($collection->count() > 0 && !is_subclass_of($collection->first(), 'App\Model')) {
+            $collection = $collection->flatten();
+        }
+        $collection = $collection->unique();
+        $collection = $collection->filter(function ($value, $key) {
+            return __x($value) || $value === false;
+        });
+        $collection = $collection->values(); // set consecutive keys
         /*
         here it get's tricky:
         the ConvenienceCollection is a Database\Eloquent\Collection (which extends Support\Collection)

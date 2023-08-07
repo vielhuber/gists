@@ -5,7 +5,9 @@ fetch(
     body: JSON.stringify({ foo: 'bar' }),
     cache: 'no-cache',
     headers: {
-       'content-type': 'application/json'
+       'Content-Type': 'application/json',
+       //'X-Requested-With': 'XMLHttpRequest', // this should be set e.g. on laravel applications if you don't send any json (otherwise it is not detected that this is a js call)
+       //'Authorization': 'Basic ' + btoa(username + ':' + password)
     }
   }
 ).then((response) =>
@@ -18,7 +20,10 @@ fetch(
       status = response.status,
       headers = Object.fromEntries(response.headers.entries()),
       specificHeader = response.headers.get('foo');
+  // if you want to preserve thes status later, save it in a global variable (declared outside of fetch!)
+  // fetchStatus = response.status;
   if (status == 200 || status == 304) {
+    // we assume that the result of the promise "data" has the format { success: ???, message: ???, data: ??? }; if not, modify it (below in the second "then")
    	return data; 
   }
   return { success: false, message: status };
@@ -26,9 +31,10 @@ fetch(
 {
 	// this does not fire on 404 or other status codes but on all js errors AND network outage
    return { success: false, message: error }; // this format makes sense to match the apis format
-}).then((data) =>
+}).then((response) =>
 {
-	// this is the actual data emitted by response.json() OR the data returned by catch
+	// this is the actual data emitted by response.json() OR the object returned by catch
+  	console.log([ response.success, response.message, response.data ]);
 });
 
 /* shorthand */
@@ -70,6 +76,6 @@ fetch(
   })
   .then(v=>v).catch(v=>v).then(data => { console.log(data); }); 
 
-/* if you need html/text instead of json, do this */
+/* if you EXPECT html/text in the ressponse instead of json, do this */
 ... .then(v=>v.text()). ...
 ... .then((response) => { return response.text() }). ...

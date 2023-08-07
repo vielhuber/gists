@@ -10,10 +10,22 @@ new Date(str.substring(6,10)+'-'+str.substring(3,5)+'-'+str.substring(0,2));
 
 // current date with time 00:00:00
 new Date(((new Date()).getFullYear()+'-'+('0'+((new Date()).getMonth()+1)).slice(-2)+'-'+('0'+(new Date()).getDate()).slice(-2))+' 00:00:00')
-let d = new Date(); d.setHours(0); d.setMinutes(0); d.setSeconds(0); d1.setMilliseconds(0); // alternative
+let d = new Date(); d.setHours(0); d.setMinutes(0); d.setSeconds(0); d.setMilliseconds(0); // alternative
 
-// with time (use with "T" for cross browser support; be aware: safari does not support '2000-07-28 11:32:00')
-new Date('2000-07-28T11:32:00');
+// with time (use with "T" for cross browser support; be aware: safari does not support '2000-07-28 11:32:00' and also has problems with timezones)
+new Date('2022-11-03T16:00:00+0'+Math.abs(new Date('2022-11-03').getTimezoneOffset() / 60)+':00');
+new Date('<?php echo wp_date('Y-m-d\TH:i:sP', strtotime(get_gmt_from_date('2022-06-01 15:00:00'))); ?>'); // wordpress/php example
+
+// convert time from Europe/Berlin to users local timezone
+let datetime_from_db_in_europe_berlin = '2022-02-07 00:23:10';
+let d = new Date(datetime_from_db_in_europe_berlin.replace(' ', 'T')+'+0'+Math.abs(new Date(datetime_from_db_in_europe_berlin.split(' ')[0]).getTimezoneOffset() / 60)+':00');
+console.log(d); // test that by temporarily changing the timezone in the windows settings!
+
+// convert time from users local timezone to Europe/Berlin
+let datetime_in_users_timezone = '2022-02-07 00:23:10';
+let d = new Date(datetime_in_users_timezone.replace(' ', 'T'));
+d = d.toLocaleString('en-GB', { timeZone: 'Europe/Berlin' }).replace(',','');
+d = new Date(d.substring(6,10)+'-'+d.substring(3,5)+'-'+d.substring(0,2)+'T'+d.substring(11,13)+':'+d.substring(14,16)+':'+d.substring(17,19));
 
 // date from timestamp
 new Date(1515107594 * 1000);

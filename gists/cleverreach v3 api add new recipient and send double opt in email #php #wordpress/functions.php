@@ -28,13 +28,13 @@ $response = wp_remote_post($cleverreach->api_url . '/oauth/token.php', [
         'Authorization' => 'Basic ' . base64_encode($cleverreach->client_id . ':' . $cleverreach->client_secret)
     ]
 ]);
-if (is_wp_error($response)) {
+if (is_wp_error($response) || @$response['response']['code'] != 200) {
     die('error');
 }
 $cleverreach->access_token = json_decode($response['body'])->access_token;
 
 /* add recipient (unverified) */
-$response = wp_remote_post($cleverreach->api_url . '/groups.json/' . $cleverreach->list_id . '/receivers', [
+$response = wp_remote_post($cleverreach->api_url . '/v3/groups.json/' . $cleverreach->list_id . '/receivers', [
     'body' => wp_json_encode([
         'email' => $cleverreach->email,
         'registered' => time(),
@@ -52,12 +52,46 @@ $response = wp_remote_post($cleverreach->api_url . '/groups.json/' . $cleverreac
         'Authorization' => 'Bearer ' . $cleverreach->access_token
     ]
 ]);
-if (is_wp_error($response)) {
-    die('error');
+if (is_wp_error($response) || @$response['response']['code'] != 200) {
+    die('duplicate mail');
 }
 
+/* get recipients */
+$response = wp_remote_get($cleverreach->api_url . '/v3/groups.json/' . $cleverreach->list_id . '/receivers?pagesize=5000', [
+    'headers' => [
+        'Authorization' => 'Bearer ' . $cleverreach->access_token
+    ]
+]);
+if (is_wp_error($response) || @$response['response']['code'] != 200) {
+    die('error');
+}
+echo '<pre>';    
+var_dump($response['headers'],json_decode($response['body']), $response['response']);
+echo '</pre>';
+
+/* modify recipients */
+$response = wp_remote_request($cleverreach->api_url . '/v3/groups.json/' . $cleverreach->list_id . '/receivers/1337', [
+  	'method' => 'PUT',
+    'body' => wp_json_encode([
+      	'global_attributes' => [
+           'vorname' => 'foo',
+           'anrede' => 'bar',
+           'name' => 'baz'
+         ]
+    ]),
+    'headers' => [
+        'Authorization' => 'Bearer ' . $cleverreach->access_token
+    ]
+]);
+if (is_wp_error($response) || @$response['response']['code'] != 200) {
+    die('error');
+}
+echo '<pre>';    
+var_dump($response['headers'],json_decode($response['body']), $response['response']);
+echo '</pre>';
+
 /* send double opt in */
-$response = wp_remote_post($cleverreach->api_url . '/forms.json/' . $cleverreach->form_id . '/send/activate', [
+$response = wp_remote_post($cleverreach->api_url . '/v3/forms.json/' . $cleverreach->form_id . '/send/activate', [
     'body' => wp_json_encode([
         'email' => $cleverreach->email,
         'doidata' => [
@@ -71,7 +105,7 @@ $response = wp_remote_post($cleverreach->api_url . '/forms.json/' . $cleverreach
         'Authorization' => 'Bearer ' . $cleverreach->access_token
     ]
 ]);
-if (is_wp_error($response)) {
+if (is_wp_error($response) || @$response['response']['code'] != 200) {
     die('error');
 }
 

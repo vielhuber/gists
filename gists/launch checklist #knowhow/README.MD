@@ -7,22 +7,23 @@
 - XML-Sitemap vorhanden und aktiv und Einträge geprüft
 - robots.txt prüfen (am besten löschen, da Yoast automatisch generiert); falls manuell erstellt, prüfen ob vollständig (mit WP default vergleichen, siehe separates Gist)
 - Manuelles Backup der alten Seite sowie vom Testserver erstellt
-- Scroll-Animations-Plugin (lanimate) aktiv
+- Scroll-Animations-Plugin (Lanimate) aktiviert
 - WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
 - git auf Production, Testing und Local auf demselben Stand
 - Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
 - Erweiterte Cookie-Leiste und/oder Zwei-Klick-Lösungen für Google Maps implementiert
+- Google Fonts lokal eingebettet und mit https://www.e-recht24.de/google-fonts-scanner geprüft
 - YouTube-/Vimeo-Links GDPR tauglich gemacht
 - Alle CMS Updates (WordPress Core+Plugins) installiert
 - Inaktive Plugins gelöscht (außer WPML und ggf. Caching)
 - Benennung der Labels im Backend (ACF-Felder) geprüft
 - Für Bilder ausschließlich <img> Tags oder noch besser <picture>-Tags (mit div. Thumbnails) eingesetzt
-- Alt-Tags für Bilder werden überall ausgespielt
+- Alt-Tags für Bilder werden überall ausgespielt (prüfen!)
 - WP-Login-Screen modifiziert mit Kundenlogo: Colorlib Login Customizer
 - Bilder in Medienverwaltung in Unterordnern sortiert und ungenutzte Bilder manuell ausgemistet
 - RSS-Feed vorhanden und funktional
 - Impressum + Datenschutzseite vorhanden und gepflegt; ggf. eRecht24 (+ Plugin) einsetzen
-- Einstellungen > Datenschutz > Seite nicht zugeordnet (sonst ist diese nicht editierbar für Editoren)
+- Einstellungen > Datenschutz > Seite nicht zugeordnet (sonst ist diese nicht editierbar für Editoren); Die Funktion get_privacy_policy_url() darf dann nicht verwendet werden!
 - Link zu close2 im Impressum hinterlegt:
   - Verantwortlich für Programmierung: close2 new media GmbH, Webagentur München, www.close2.de
 - Google Analytics Opt Out Link gesetzt und funktional (am besten Link zum Consent-Manager setzen)
@@ -39,6 +40,7 @@
 - Alle Formulare: Empfänger und Absender prüfen, Versand nochmal prüfen, scharf schalten an Kunden
 - Copyright für alle Bilder vorhanden (am Bild oder im Impressum)
 - Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
+- Öffentlicher Name bei allen close2-Mitarbeitern anonymisieren (kleine Klarnamen)
 - Passwortschutz und Entwurf testen, ob das funktioniert
 - Google Maps JS API Key hinterlegen
 - Alle Bilder komprimiert, EXIF-Daten überall entfernt, Upload eines Bildes strippt alle EXIF-Daten sauber heraus, Löschen von Bildern löscht auch physische Datei
@@ -51,21 +53,28 @@
 - Prüfen, ob Seite mit WordPress Admin Bar gut funktioniert (padding)
 - Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
 - Cross-Browser-Check (inkl. Responsive) durchgeführt: BackstopJS + Screaming Frog kombiniert einsetzen(!)
-- Seite auf Auflöungen >1920x1080 getestet (4k Support!)
+- Seite auf Auflöungen >1920x1080 getestet (4k Support!); Wenn KEINE spezielle Optimierung gemacht wurde, dann wenigstens die Seitenbreite auf 1920px begrenzen
 - browser-update.org integriert
-- Kontaktformulare durch Captcha (reCAPTCHA) oder alternativ Honeypot schützen
+- Kontaktformulare durch **hCaptcha** oder **Honeypots** schützen
 - reCAPTCHA registrieren
+- Siegel wie Jameda etc. prüfen, ob live eingebunden
 - E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
 - socialfoo: Facebook Developers App Id eintragen
 - WordPress Admin E-Mail-Adresse auf support@close2.de setzen (oder alternativ bewusst auf Kunden-E-Mail setzen)
 - Passwortschutz: htaccess/htpasswd im Einsatz (für Testing aktiv, für Production inaktiv)
-- Silbentrennung auf allen Browsern testen (force hyphenopoly)
+- Silbentrennung auf allen Browsern testen (nun nur noch, Hyphenopoly ist nicht mehr notwendig)
 - Backend (und ggf. auch Frontend) auf Testing komplett abriegeln, damit sich Kunde nicht mehr einloggt
 - Vom Hauptuser (ID: 1) ggf. E-Mail-Adresse ändern und Website löschen
 - WordPress-Zugänge (personengebunden) für Teammitglieder (Rolle: Administrator) sowie Kunden angelegt (Rolle: Redakteur) und Zugangsdaten zugesandt
 - Schulungstermin vereinbart und Schulung im besten Fall vor Launch durchgeführt
+- Burp Suite Professional: Gesamte Webseite nach XSS-Vulnerabilities scannen
+- Alle Inputfelder, (im Themes Ordner nach $_GET suchen) mit Hilfe von esc_attr() escapen(!)
+- Seite im Dark Mode testen (Chrome ist dort eh drin und testen, ob Seite kaputt geht)
+- WPML > Translation Management > Translators > Alle Editoren als "Translators" hinzufügen (von Ausgangssprache in alle Zielsprachen)
+- Telefonnummernlinks (tel:+ ...) testen (dürfen nicht "(0)" enthalten)
 
 ## POST-LAUNCH
+- BackWPup Basic Auth entfernen und überprüfen ob lokales Backup läuft
 - Advanced Cron Manager installieren, Enable Server Scheduler aktivieren, wp-cron.php ansteuern lassen von Hoster
 - Login-Zugangsdaten in Chrome gespeichert
 - 301 Redirects nochmal final testen, v.a. anhand der Google Suchergebnisse (site:)
@@ -75,12 +84,12 @@
 - WordPress: Werkzeuge > Website-Zustand prüfen
 - 404-Fehlerseite vorhanden / Status-Code geprüft
 - Pro Plugins registriert (WPML, ACF)
-- htaccess Rewrite Rules: Force https und force www oder non-www
+- htaccess Rewrite Rules: Force https und force www oder non-www; Forced htaccess Umleitung von nicht-www auf www (oder umgekehrt)
+- Auch wichtig bei non-www: Prüfen, ob https://www.tld.com/liesmich.html korrekt umleitet auf https://tld.com/liesmich.html (manchmal geht das auf https://tld.comliesmich.html, weil "/" bei der Hoster-Redirect-Regel fehlt)
 - Open Graph Social Sharing funktionsfähig (wichtigste Seiten mit dem Facebook Sharing Debugger testen)
 - syncdb für Production -> Local und Testing -> Local vorhanden und 1x durchgeführt
 - flimsy lauffähig für Production und Testing
 - SSL-Zertifikat aktiv (forced)
-- Forced htaccess Umleitung von nicht-www auf www (oder umgekehrt)
 - Kein Mixed SSL Content vorhanden
 - Production-Links prüfen, ob diese auf local/testing führen!
 - Caching aktiviert

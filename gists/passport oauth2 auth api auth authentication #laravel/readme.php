@@ -46,11 +46,11 @@ use Carbon\Carbon;
 // ...
 public function boot()
 {
-	$this->registerPolicies();
-	
-	Passport::routes();
-	Passport::tokensExpireIn(Carbon::now()->addMinutes(10));
-	Passport::refreshTokensExpireIn(Carbon::now()->addDays(10)); // should be the same or more than in config/session.php 'lifetime'
+    $this->registerPolicies();
+    
+    Passport::routes();
+    Passport::tokensExpireIn(Carbon::now()->addMinutes(10)); // access token lifetime
+    Passport::refreshTokensExpireIn(Carbon::now()->addDays(10)); // refresh token lifetime; should be the same or more than in config/session.php 'lifetime'
 }
 ?>
 
@@ -91,7 +91,7 @@ public function findForPassport($identifier) {
 <?php
 public function validateForPassportPasswordGrant($password) {
   if (Input::get('login_on_behalf_of_access_token') !== null) {
-    $http = new \GuzzleHttp\Client();
+    $http = new \GuzzleHttp\Client(['verify' => false]);
     $response = $http->get(url('/') . '/api/user', ['headers' => ['Authorization' => Input::get('login_on_behalf_of_access_token')], 'http_errors' => false]);
     if ($response->getStatusCode() != 200) { return false; }
     $user_id = json_decode((string) $response->getBody())->data->id;
@@ -120,12 +120,12 @@ protected $dontReport = [
 // - adding the possibility to generate new access tokens through refresh tokens
 // we do not use Implicit Grant (because that breaks the user flow)
 // we simply introduce a proxy that adds the client id and secret to the request
-		   
+           
 // we first add three routes in routes/api.php
 Route::post('login', 'ApiController@login');
 Route::post('login/refresh', 'ApiController@refresh');
 Route::post('logout', 'ApiController@logout')->middleware('auth:api');
-		   
+           
 // and then we add the ApiController.php:
 <?php
 
@@ -146,7 +146,7 @@ class ApiController extends Controller
             'grant_type' => 'password',
             'username' => $request->input('username'),
             'password' => $request->input('password'),
-          	'login_on_behalf_of_access_token' => $request->header('Authorization') // only needed if you want to enable "login on behalf of"
+            'login_on_behalf_of_access_token' => $request->header('Authorization') // only needed if you want to enable "login on behalf of"
         ]);
     }
     public function refresh(Request $request)
@@ -158,7 +158,7 @@ class ApiController extends Controller
     }
     public function proxy($params)
     {
-        $http = new Client();
+        $http = new Client(['verify' => false]);
         $client = DB::table('oauth_clients')->where('name', 'LIKE', '%Password Grant Client')->first();
     
         if ($client === null)
@@ -190,12 +190,15 @@ class ApiController extends Controller
 
         // attach a refresh token to the response via HttpOnly cookie
         return response([
-            'access_token' => $data->access_token,
-            'expires_in' => $data->expires_in
+            'success' => true,
+            'data' => [
+                'access_token' => $data->access_token,
+                'expires_in' => $data->expires_in
+            ]
         ])->cookie(
             'refreshToken',
             $data->refresh_token,
-            (24*60*60*10), // 10 days (should be the same as in AuthServiceProvider.php)
+            (60 * 24 * 10), // 10 days (should be the same as in AuthServiceProvider.php)
             null,
             null,
             false,
@@ -207,7 +210,9 @@ class ApiController extends Controller
         $accessToken = Auth::user()->token();
         DB::table('oauth_refresh_tokens')->where('access_token_id', $accessToken->id)->update(['revoked' => true]);
         $accessToken->revoke();
-        return response(null, 204)->cookie(Cookie::forget('refreshToken'));
+        return response([
+            'success' => true
+        ])->cookie(Cookie::forget('refreshToken'));
     }
 }
 
@@ -254,7 +259,7 @@ Route::get('/test', function() {
     // example call
     $response = $http->get('http://laravel.local/api/user', [
         'headers' => [
-            'Authorization' => 'Bearer '.$auth->access_token,
+            'Authorization' => 'Bearer '.$auth->data->access_token,
         ]
     ]);
     // result
@@ -262,209 +267,274 @@ Route::get('/test', function() {
     // logout
     $response = $http->post('http://laravel.local/api/logout', [
         'headers' => [
-            'Authorization' => 'Bearer '.$auth->access_token,
+            'Authorization' => 'Bearer '.$auth->data->access_token,
         ]
     ]);
 });
-		   
+           
 // and here is a full javascript implementation with auto refresh cookie mechanism
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="utf-8" />
-    <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function()
-    {
-        // login
-        document.querySelector('#login').addEventListener('click', function(e)
-        {
-            apiLogin(
-                document.querySelector('#username').value,
-                document.querySelector('#password').value,
-                function()
-                {
-                    alert('successfully logged in');
-                },
-                function()
-                {
-                    alert('an error occured');
+    <head>
+        <meta charset="utf-8" />
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', () => {
+                // login
+                document.querySelector('#login').addEventListener('click', (e) => {
+                    login(
+                        document.querySelector('#username').value,
+                        document.querySelector('#password').value,
+                        () => {
+                            alert('successfully logged in');
+                        },
+                        () => {
+                            alert('an error occured');
+                        }
+                    );
+                    e.preventDefault();
+                });
+                // logout
+                document.querySelector('#logout').addEventListener('click', (e) => {
+                    logout(() => {
+                        alert('successfully logged out');
+                    });
+                    e.preventDefault();
+                });
+                // fetch
+                document.querySelector('#fetch').addEventListener('click', (e) => {
+                    call(
+                        document.querySelector('#fetch').getAttribute('data-route'),
+                        'GET',
+                        null,
+                        (response) => {
+                            console.log(response);
+                        },
+                        (error) => {
+                            console.log(error);
+                        }
+                    );
+                    e.preventDefault();
+                });
+
+                function call(route, method, data, complete = null, error = null) {
+                    method = method.toUpperCase();
+                    var url = null;
+                    if (route.indexOf('http') > -1) {
+                        url = route;
+                    } else {
+                        url =
+                            window.location.protocol +
+                            '//' +
+                            window.location.host +
+                            '/' +
+                            (route.indexOf('api/') === -1 ? 'api/' : '') +
+                            route;
+                    }
+
+                    let headers = {};
+                    headers['Authorization'] = 'Bearer ' + localStorage.getItem('accessToken');
+                    let body = null;
+                    if (method !== 'GET') {
+                        body = data;
+                        // also accept FormData
+                        if (data === null || !(data instanceof FormData)) {
+                            headers['Content-Type'] = 'application/json';
+                            body = JSON.stringify(data);
+                        }
+                    }
+
+                    let status = null;
+                    fetch(url, {
+                        method: method,
+                        body: body,
+                        cache: 'no-cache',
+                        headers: headers
+                    })
+                        .then((response) => {
+                            let data = response.json();
+                            status = response.status;
+                            if (status == 200 || status == 304) {
+                                return data;
+                            }
+                            return { success: false, message: status };
+                        })
+                        .catch((error) => {
+                            return { success: false, message: error };
+                        })
+                        .then((response) => {
+                            console.log(JSON.stringify(response));
+                            if (status == 401 || localStorage.getItem('accessToken') === null) {
+                                // OK, the auth seems to be have expired
+                                // rerequest new auth with request token saved as httponly
+                                fetch(window.location.protocol + '//' + window.location.host + '/api/login/refresh', {
+                                    method: 'POST',
+                                    body: null,
+                                    cache: 'no-cache',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+                                    .then((response) => {
+                                        console.log(JSON.stringify(response));
+                                        let data = response.json(),
+                                            status = response.status;
+                                        if (status == 200 || status == 304) {
+                                            return data;
+                                        }
+                                        return { success: false, message: status };
+                                    })
+                                    .catch((error) => {
+                                        return { success: false, message: error };
+                                    })
+                                    .then((response) => {
+                                        if (response.success !== true) {
+                                            localStorage.removeItem('accessToken');
+                                            window.location.href =
+                                                window.location.protocol +
+                                                '//' +
+                                                window.location.host +
+                                                '/' +
+                                                'logout';
+                                        } else {
+                                            localStorage.setItem('accessToken', response.data.access_token);
+                                            // redo the request from outside(!)
+                                            call(url, method, data, complete, error);
+                                        }
+                                    });
+                            } else if (status == 200) {
+                                if (complete !== null) {
+                                    complete(response);
+                                }
+                            } else {
+                                if (error !== null) {
+                                    error(response);
+                                } else {
+                                    window.location.href =
+                                        window.location.protocol +
+                                        '//' +
+                                        window.location.host +
+                                        '/' +
+                                        'logout';
+                                }
+                            }
+                        });
                 }
-            );
-            e.preventDefault();            
-        });
-        // logout
-        document.querySelector('#logout').addEventListener('click', function(e)
-        {
-            apiLogout(function()
-            {
-                alert('successfully logged out');
+
+                function logout(complete = null) {
+                    fetch(window.location.protocol + '//' + window.location.host + '/api/logout', {
+                        method: 'POST',
+                        body: null,
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+                        }
+                    })
+                        .then((response) => {
+                            let data = response.json(),
+                                status = response.status;
+                            if (status == 200 || status == 304) {
+                                return data;
+                            }
+                            return { success: false, message: status };
+                        })
+                        .catch((error) => {
+                            return { success: false, message: error };
+                        })
+                        .then((response) => {
+                            console.log(JSON.stringify(response));
+                            localStorage.removeItem('accessToken');
+                            if (complete !== null) {
+                                complete();
+                            }
+                        });
+                }
+
+                function login(username, password, complete = null, error = null) {
+                    fetch(window.location.protocol + '//' + window.location.host + '/api/login', {
+                        method: 'POST',
+                        body: JSON.stringify({ username: username, password: password }),
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then((response) => {
+                            let data = response.json(),
+                                status = response.status;
+                            if (status == 200 || status == 304) {
+                                return data;
+                            }
+                            return { success: false, message: status };
+                        })
+                        .catch((error) => {
+                            return { success: false, message: error };
+                        })
+                        .then((response) => {
+                            console.log(JSON.stringify(response));
+                            if (response.success === true) {
+                                localStorage.setItem('accessToken', response.data.access_token);
+                                if (complete !== null) {
+                                    complete();
+                                }
+                            } else {
+                                if (error !== null) {
+                                    error();
+                                }
+                            }
+                        });
+                }
+
+                function loginAs(username, complete = null, error = null) {
+                    fetch(window.location.protocol + '//' + window.location.host + '/api/login', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            username: username,
+                            password: ''
+                        }),
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+                        }
+                    })
+                        .then((response) => {
+                            let data = response.json(),
+                                status = response.status;
+                            if (status == 200 || status == 304) {
+                                return data;
+                            }
+                            return { success: false, message: status };
+                        })
+                        .catch((error) => {
+                            return { success: false, message: error };
+                        })
+                        .then((response) => {
+                            console.log(JSON.stringify(response));
+                            if (response.success === true) {
+                                localStorage.setItem('accessToken', response.data.access_token);
+                                if (complete !== null) {
+                                    complete();
+                                }
+                            } else {
+                                if (error !== null) {
+                                    error();
+                                }
+                            }
+                        });
+                }
             });
-            e.preventDefault();
-        });
-        // fetch
-        document.querySelector('#fetch').addEventListener('click', function(e)
-        {
-            apiCall(
-                this.getAttribute('data-route'),
-                'GET',
-		null,
-                function(response)
-                {
-                    console.log(response);
-                },
-                function(error)
-                {
-                    console.log(error);
-                }
-            );
-            e.preventDefault();
-        });
+        </script>
+    </head>
+    <body>
+        <div>
+            <input type="text" id="username" />
+            <input type="password" id="password" />
+            <a id="login" href="#">Anmelden</a>
+        </div>
 
-        function apiCall(route, method, data, complete = null, error = null)
-        {
-            var request = new XMLHttpRequest();
-	    if( route.indexOf('http') > -1 )
-	    {
-		var url = route;
-	    }
-	    else
-	    {
-		var url = (window.location.protocol+'//'+window.location.host)+'/api/'+route;
-	    }
-	    request.open(method, url, true);
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            request.setRequestHeader('Authorization', 'Bearer '+localStorage.getItem('accessToken'));
-            request.onreadystatechange = function()
-            {
-                if( request.readyState < 4 ) { return; }
-                else if( request.status == 401 )
-                {
-                    // OK, the auth seems to be have expired
-                    // rerequest new auth with request token saved as httponly
-                    var rerequest = new XMLHttpRequest();
-                    rerequest.open('POST', (window.location.protocol+'//'+window.location.host)+'/api/login/refresh', true);
-                    rerequest.setRequestHeader('Content-Type', 'application/json');
-                    rerequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                    rerequest.onreadystatechange = function()
-                    {
-                        if( rerequest.readyState < 4 ) { return; }
-                        else if( rerequest.status != 200 )
-                        {
-                            alert('your refresh token also is corrupt. login completely');
-                        }
-                        else
-                        {
-                            localStorage.setItem('accessToken',JSON.parse(rerequest.responseText)['access_token']);
-                            // redo the request from outside(!)
-                            apiCall( url, method, data, complete, error );
-                        }
-                    }
-                    rerequest.send();
-                }
-                else if( request.status == 200 )
-                {
-		    if( complete !== null ) {
-                    	complete(JSON.parse(request.responseText));
-		    }
-                }
-                else {
-		    if( error !== null ) {
-                    	error(request);
-		    }
-                }
-            }
-            request.send(JSON.stringify(data));
-        }
-        function apiLogout(complete = null)
-        {
-            var request = new XMLHttpRequest();
-            request.open('POST', (window.location.protocol+'//'+window.location.host)+'/api/logout', true);
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            request.setRequestHeader('Authorization', 'Bearer '+localStorage.getItem('accessToken'));
-            request.onreadystatechange = function()
-            {
-                if( request.readyState < 4 ) {
-                    return;
-                }
-		if( complete !== null ) {
-                	complete();
-		}
-            }
-            request.send();
-            localStorage.removeItem('accessToken');
-        }
-        function apiLogin(username, password, complete = null, error = null)
-        {
-            var request = new XMLHttpRequest();
-            request.open( 'POST', (window.location.protocol+'//'+window.location.host)+'/api/login', true);
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            request.onreadystatechange = function()
-            {
-                if( request.readyState < 4 ) {
-                    return;
-                }
-                else if( request.status != 200 )
-                {
-		    if( error !== null ) {
-                    	error(request);
-		    }
-                }
-                else
-                {
-                    localStorage.setItem('accessToken',JSON.parse(request.responseText)['access_token']);
-		    if( complete !== null ) {
-                    	complete();
-		    }
-                }
-            }
-            request.send(JSON.stringify({ 'username': username, 'password': password }));
-        }
-        function apiLoginAs(username, complete = null, error = null) {
-            var request = new XMLHttpRequest();
-            request.open('POST', window.location.protocol + '//' + window.location.host + '/api/login', true);
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            request.setRequestHeader('Authorization', 'Bearer ' + hlp.cookieGet('accessToken'));
-            request.onreadystatechange = function() {
-                if (request.readyState < 4) {
-                    return;
-                } else if (request.status != 200) {
-                    if (error !== null) {
-                        error(request);
-                    }
-                } else {
-                    hlp.cookieSet('accessToken', JSON.parse(request.responseText)['access_token']);
-                    if (complete !== null) {
-                        complete();
-                    }
-                }
-            };
-            request.send(
-                JSON.stringify({
-                    username: username,
-                    password: ''
-                })
-            );
-        }
+        <a id="fetch" href="#" data-route="user">Geschützte Daten abrufen</a><br />
 
-
-    });
-    </script>
-</head>
-<body>
-
-    <div>
-        <input type="text" id="username" />
-        <input type="password" id="password" />
-        <a id="login" href="#">Anmelden</a>
-    </div>
-
-    <a id="fetch" href="#" data-route="user">Geschützte Daten abrufen</a><br/>
-
-    <a id="logout" href="#">Abmelden</a>
-
-</body>
+        <a id="logout" href="#">Abmelden</a>
+    </body>
 </html>

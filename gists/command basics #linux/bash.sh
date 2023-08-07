@@ -49,6 +49,17 @@ su # permanently get root (su = switch user, if an username is omitted, you are 
 sudo command # do a command with root privileges (you have to enter the password of the current user which has root privileges, once for 15 minutes)
 sudo su # runs a new shell as root (first sudo asks for your password and if you have root privileges runs su as a super-user)
 
+# run command as user
+
+## option 1
+su testuser
+whoami
+exit
+
+## option 2
+su -c "whoami" testuser
+echo "password" | su -c "whoami" testuser
+
 # cd and enter folder
 mkdir ~/folder && cd "$_"
 
@@ -64,6 +75,20 @@ sed -i '$ a\some text' file.txt # unix
 sed -i '$ a\'$'\n'' some text' file.txt # universal
 echo "some text" >> file.txt
 
+# write multiline string to file
+cat <<EOT > /some/file.txt
+foo
+bar
+baz
+EOT
+
+# append multiline string to file
+cat <<EOT >> /some/file.txt
+foo
+bar
+baz
+EOT
+
 # prepend to file
 sed -i '1s;^;some text;' file.txt
 
@@ -74,6 +99,8 @@ sed -i -e 's/foo/bar/g' -e 's/gna/gnarr/g' -e 's/abc/cde/g' file.txt
 sed -i -e 's/foo/bar/g' target.file # unix
 sed -i'' -e 's/foo/bar/g' target.file # unix
 sed -i '' -e 's/foo/bar/g' target.file # mac os
+sed -i '' -e 's/escaped\.dot\.and\.[(]brackets[)]/bar/g' target.file # escape normally with "\", but "(" needs to be surrounded with "[]"
+sed -i -e 's/foo = '"'"'7'"'"'/bar = '"'"'42'"'"'/g' target.file # replace single quotes
 
 # sed new line (unix/mac)
 sed -e 's/ /\'$'\n/g' # universal
@@ -113,8 +140,8 @@ cp file1 file2
 # copy contents of one folder to another folder (recursively)
 cp -r /folder1/. folder2/
 
-# copy folder1 to folder2
-cp -r folder1 folder2/
+# copy folder1 to folder2 (-T is needed, if folder2 exists already)
+cp -r -T ./folder1 ./folder2/
 
 # copy contents of subfolder in current folder
 cp -r ./subfolder/. .
@@ -216,9 +243,12 @@ find . -name ".git"
 # find all hidden files in current directory
 find . -name ".*" -print
 
-# recursively files that contain text
-grep --include=*.php -rnw "/full/path/" -e "your text"
-grep --include=*.php -rnwl "/full/path/" -e "your text" # only show filenames
+# find recursively files that contain text
+grep --include=*.php -rn "." -e "your text" # case sensitive
+grep --include=*.php -rnl "." -e "your text" # only show filenames
+grep --include=*.php --ignore-case -rn "." -e "your text" # case insensitive
+grep --include=*.php -rnlw "." -e "your text" # match only whole word
+grep --include=*.php --exclude-dir="node_modules" -rnw "." -e "your text" # exclude folder
 
 # find files (and exclude specific folder)
 find . -name '*.js' -not -path './node_modules/*'
@@ -226,6 +256,13 @@ find . -type f | egrep -v "folder1|folder2"
 
 # find files with extensions and copy to folder
 find /source/folder -name '.otf' -o -name '.ttf' -exec cp {} /target/folder/ \;
+
+# find files that changed in the last hour
+find . -newermt '1 hour ago' -type f -print
+
+# find newest/oldest files (change date)
+find . -type f -printf '%TY-%Tm-%Td %TH:%TM: %Tz %p\n'| sort -n | tail -n10
+find . -type f -printf '%TY-%Tm-%Td %TH:%TM: %Tz %p\n'| sort -n | head -n10
 
 # zip current directory
 zip -r file.zip .
@@ -256,6 +293,9 @@ zip --password SECRET output.zip input.txt
 
 # zip file with date
 zip -r "backup-$(date +"%Y-%m-%d").zip"
+
+# zip folder with max file size limit
+zip -r -s 1000m file.zip .
 
 # zip file and exclude folders and files
 zip -r file.zip . -x \*"vendor/"\* -x \*"node_modules/"\* -x \*".git/"\* -x \*"wp-content/uploads/"\* -x \*"wp-content/cache/"\*
@@ -300,6 +340,11 @@ tar -xf output.tar
 tar -xzvf output.tar.gz
 tar -xzvf output.tar.gz -C /path/to/target
 tar -xvjf output.tar.bz2
+tar -xf output.tar.xz
+
+# untar only specific folder inside tar
+tar -tvf output.tar.gz # see subfolder structure
+tar -xvf output.tar ./folder/in/archive
 
 # show permissions
 ls -l file
@@ -381,6 +426,11 @@ ln -sf /path/to/folder /path/to/symlink
 # remove a symlink (used without trailing slash!)
 rm /path/to/symlink
 
+# create empty file
+touch file.txt
+
+# create file with random data of size x
+head -c 100M </dev/urandom >file.txt
 
 # append to file
 echo 'string to append' >> path/to/file.txt
@@ -392,6 +442,8 @@ echo -e "string to prepend\n$(cat path/to/file.txt)" > path/to/file.txt
 sudo fc-cache -f -v
 
 # disk space
+du -sh folder/ # show size of folder in human readable format
+du -sh . --exclude .git --exclude node_modules # exclude some subfolders
 df . # show in which device a folder is located
 df -h # in total
 df -k . # for current folder
@@ -400,13 +452,15 @@ du -d 1 -xh /folder 2>/dev/null | sort -h -r | head -10 # show all big folders
 find . -type f -printf "%s\t%p\n" | sort -n | tail -10 # show all big files
 du -d 1 -xh . 2>/dev/null | sort -h -r | head -10 # same as above only for current folder
 ls -haltrS # show contents of folder sorted by size
-du -sh folder/ # show size of folder in human readable format
 find . -type f -newermt '1 month ago' -exec du -ch {} + | grep total$ # sum of filesize found with find (files newer than 1 month)
 find . -type f -newermt '1 month ago' -exec du -cb {} + | grep total$ | cut -f1 | paste -sd+ - | bc # more accurate
-find . -name "node_modules" -type d -prune -exec du -ch {} + | grep total$
+find . -name "node_modules" -type d -prune -exec du -ch {} + | grep total$ # find all node_modules folders sorted by size
+ncdu # install before with "sudo apt-get install ncdu"
+ncdu --exclude /mnt
 
 # count
 find . -type f | wc -l # count number of files in current folder
+find . -name '*.php' -type f | wc -l # count number of files with extension in current folder
 find . -type d | wc -l # count number of folders in current folder
 find . -type d -empty | wc -l # count number of empty folders in current folder
 find . -type f | egrep -v ".git|node_modules" | wc -l # count number of files in current folder and exclude some subfolders
@@ -435,6 +489,7 @@ find . -type f -name "*" -print0 | xargs -0 rename 's/foo/bar/g' {} # this after
 # show last entries (10 lines) of file
 tail -10 path/to/file.log
 tail -f path/to/file.log # live updates
+tail -f -n 30 path/to/file.log # live updates (with last 30 lines)
 tail -f path/to/file.log | grep "string to match" # live updates and filtering
 
 # ip / networking

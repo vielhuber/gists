@@ -8,9 +8,13 @@
     background-color:red; 
     color:#fff;
     display: inline-block;
-    color:#fff;
     text-decoration:none;
     padding:5px 10px;
     font-weight:bold;
     margin:0 5px;
+}
+
+/* if you want to add styles, but don't want them added to the menu, prefix them with .mceContentBody.wp-editor */
+.mceContentBody.wp-editor .foo {
+ 	/* ... */ 
 }

@@ -19,6 +19,11 @@
 - In cell: ```=FOO()```
 - Datei > Tabelleneinstellungen > Berechnung > Neuberechnung: Bei Änderung und minütlich
 
+#### current unix timestamp (for a unique number)
+```
+=((JETZT()-DATUM(1970;1;1)+ZEIT(6;0;0))*86400))
+```
+
 #### current month
 ```
 =WENN(LÄNGE(MONAT(HEUTE()))<2;"0";"")&MONAT(HEUTE())&"/"&JAHR(HEUTE())
@@ -248,4 +253,9 @@ ARRAYFORMULA(SVERWEIS(B2:B;'_LOGIC'!A1:B;{2}*VORZEICHEN(ZEILE(E2:E));FALSCH))
 #### image in cell
 ```
 =IMAGE("https://vielhuber.de/wp-content/themes/vielhuber/_assets/about.jpg";1)
+```
+
+#### visualization of hex color
+```
+SPARKLINE(1;{"charttype"\"bar";"color1"\A1})
 ```

@@ -34,6 +34,11 @@ for(var item of ["a", "b", "c"]) {
     console.log(item);
 }
 
+let arr = ["a", "b", "c"];
+for(let key in arr) {
+  console.log(arr[key]);
+}
+
 // cool alternative way
 for(let i=0, item; item = ["a", "b", "c"][i]; i++) {
   console.log(item);
@@ -83,3 +88,7 @@ $.each({ a: 'foo', b: 'bar' }, function(key, value)
 {
   console.log(key, value);
 });
+
+// dom elements
+document.querySelectorAll('.foo').forEach($el => { });
+for (let $el of document.querySelectorAll('.foo')) { /* use break, continue, async await here! */ }

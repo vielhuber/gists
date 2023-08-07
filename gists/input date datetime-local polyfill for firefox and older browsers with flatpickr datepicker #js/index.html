@@ -13,7 +13,7 @@
         flatpickr('input[type="datetime-local"]', {
             enableTime: true,
             altInput: true,
-            allowInput: false,
+            allowInput: false, // bugfix: https://github.com/flatpickr/flatpickr/issues/2568
             altFormat: 'd.m.Y H:i',
             dateFormat: 'Y-m-dTH:i:S',
             locale: 'de',
@@ -24,12 +24,21 @@
                 if (dateStr === '') {
                     instance.close();
                 }
+            },
+          	/* this is needed for datetime instances */
+            onReady: (selectedDates, dateStr, instance) => {
+                $input.nextElementSibling.addEventListener('keyup', (e) => {
+                    let val = e.currentTarget.value;
+                    if (val === '') {
+                        instance.close();
+                    }
+                });
             }
         });
         flatpickr('input[type="date"]', {
             enableTime: false,
             altInput: true,
-            allowInput: false,
+            allowInput: true,
             altFormat: 'd.m.Y',
             dateFormat: 'Y-m-d',
             locale: 'de',

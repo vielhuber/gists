@@ -1,6 +1,6 @@
 add_action('init', function () {
     $task = 'my_cronjob';
-    $frequency = 'hourly';
+    $frequency = 'hourly'; // hourly|twicedaily|daily
     $scheduled = wp_next_scheduled($task);
     // actual function
     add_action($task, function () {

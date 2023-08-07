@@ -29,16 +29,31 @@
 ##### check
 - git remote -v
 
-##### set
+##### set (change origin url)
 - git remote set-url origin ssh://username@vielhuber.de:22/~/vielhuber.git
 - git remote set-url origin git@gitlab.com:c2nm/vielhuber.git
 - git remote set-url origin https://gitlab.com/c2nm/vielhuber.git
 - git remote set-url origin https://username:password@gitlab.com/c2nm/vielhuber.git
 - git remote set-url origin https://david%40close2.de@gitlab.com/c2nm/vielhuber.git
 
-##### check
-- git remote -v
+##### add another remote
+- git remote add customname git@github.com:organization/repo.git
+- git remote remove customname
 
+##### push to specific remote
+- `git push`: push current branch to remote `origin` (`origin` ist connected to all branches by default)
+- `git push origin`: push current branch to remote `origin` (same as `git push` in a normal scenario)
+- `git push origin master`: push branch `master` to remote `origin` (same as `git push` in a normal scenario)
+- `git push --all`: pushes all branches instead of the current one
+- `git push --mirror`: pushes all branches, tags, notes, ...
+
+##### push to all remotes
+- `git remote | xargs -L1 git push --all`: push all branches to all remotes
+- `git remote | xargs -L1 -I R git push R master`: only push master to all remotes
+- another option is to add a new remote with multiple endpoints
+  - `git remote add all git@gitlab.com:xxx/A.git`
+  - `git remote set-url --add all git@github.com:xxx/B.git``
+  - `git push all --all`
 
 #### settings
 
@@ -77,12 +92,12 @@
 ```  
 
 #### remove cached files
-if gitignore is not working for a specific file/folder (this does not delete the folder but remove it from git):
+if gitignore is not working for a specific file/folder (this does not(!) delete the folder but remove it from git):
 - git rm -rf --cached specific-file
 - git rm -rf --cached specific-folder/
 - find . -type f -name "*.*" | xargs git rm -rf --cached
 
-#### if you want to delete the folder also from history
+#### if you want to delete the folder also from history (deprecated, see below for a better answer)
 - git filter-branch --tree-filter 'rm -rf custom/directory/' --prune-empty HEAD
 - git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d
 - echo /custom/directory/ >> .gitignore
@@ -91,7 +106,7 @@ if gitignore is not working for a specific file/folder (this does not delete the
 - git gc
 - git push origin master --force
 
-#### if you have further problems, reinitialize everything:
+#### if you have further problems, reinitialize everything
 - git pull; git add -A .; git commit -m "commit everything first"; git push origin master;
 - git rm -rf --cached .
 - git add .
@@ -303,6 +318,21 @@ Usage: git acp
 - `git branch --merged | grep -q "other-branch$" && echo "yes" || echo "no"`
 - `git branch --merged | grep -q "other-branch$\|and-another-branch$" && echo "yes" || echo "no"` # multiple other branches
 
+### checkout all branches locally
+
+#### option 1
+- `git config --global alias.clone-branches '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t'`
+- `git clone-branches`
+- `git checkout master` (or main)
+
+#### option 2
+- `git clone --mirror git@github.com:foo/bar.git ./.git`
+- `git config --bool core.bare false`
+- `git checkout master` (or main)
+
+
+
+
 ## pull request
 #### make a pull request on github (for an external project), go to github.com to the repository you want to make a pull request, click "Fork"
 - git clone https://github.com/vielhuber/MSYS2-packages .
@@ -377,6 +407,8 @@ Usage: git acp
 #### discard single file (undo changes)
 - git checkout specific-file
 - git checkout -- specific-file
+- git checkout -- . # discard all modified files
+- git checkout -- # preview of the command above
 - git checkout folder/*/*.json
 - git checkout folder/ # resets all files within that folder
 - git restore specific-file
@@ -439,13 +471,16 @@ Usage: git acp
 - git commit --amend -CHEAD
 - git push origin HEAD
 
+### pull with merge conflicts that result from different line endings
+- git pull -Xignore-space-at-eol
+
 ### change commit message of last pushed commit
 - git commit --amend -m "New commit message"
 - git push --force
 
 #### undo commit that has been pushed
 - replace a0d3fe6 with the ID of the commit you want to undo: `git log --oneline -n 10`
-- option 1 (with rewriting history, recommended way)
+- option 1 (without rewriting history, recommended way)
   - locally
     - git revert --no-commit a0d3fe6
         - if the commit was a merge, do: git revert --no-commit -m 1 a0d3fe6
@@ -454,7 +489,7 @@ Usage: git acp
     - git push origin HEAD
   - remotely (on all clients)
     - git pull
-- option 2 (without rewriting history, this resets master to specific commit (forget all changes up until now))
+- option 2 (with rewriting history, this resets master to specific commit (forget all changes up until now))
   - locally
     - git reset --hard a0d3fe6
     - git push -f origin master
@@ -545,13 +580,15 @@ Usage: git acp
 
 ## stash
 
+- tl;dr: ```git stash -u; git stash pop```
 - stashes are for code changes you don't want to commit but save for later usage (for example to quickly change to another branch or to pull first)
 - stashes are ONLY local and not transmitted to remote
 - `git stash`: stash everything, that has not yet been committed
 - `git stash push`: equivalent to `git stash`
 - `git stash save`: deprecated
 - `git stash push -m "note about this stash"`
-- `git stash --include-untracked` / `git stash -u`: also new files, that are not yet in index
+- `git stash --include-untracked` / `git stash -u`: stashes also untracked files
+- `git stash --all` / `git stash -a`: stashes both untracked and ignored files (warning, this stashes full node_modules folder)
 - `git stash list`: show current stashes
 - `git stash show`: show stash
 - `git stash apply`: take out stash, but leave it in stash list
@@ -598,3 +635,158 @@ Usage: git acp
     - git mv main-folder new-main-folder
     - git add -A . && git commit -m “.” && git push origin HEAD
 
+## backup git repository
+
+- backup: `git bundle create repo.bundle --all`
+- restore: `git clone repo.bundle`
+
+## migrate / copy whole git repository
+- `git clone --mirror git@gitlab.com:c2nm/old.git .`
+- `git remote set-url origin git@gitlab.com:c2nm/new.git`
+- `git push --mirror`
+- set the default branch via web interface if necessary (e.g. gitea only detects `main` as a default branch but not `master`)
+
+## cleanup history
+
+### solutions
+- `git filter-repo` (does delete remotes: https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#INTERNALS)
+- `bfg` (has problems with paths: https://github.com/rtyley/bfg-repo-cleaner/issues/187)
+- `git filter-branch` (is officially not recommended: https://git-scm.com/docs/git-filter-branch#SAFETY)
+
+### analyze
+- `git filter-repo --analyze && cat .git/filter-repo/analysis/directories-all-sizes.txt`
+- `git-sizer --verbose`
+  
+### remove data
+
+#### requirements
+- the files that should be removed from history need to be already removed from `HEAD` and ignored in `.gitignore`
+- you should have backuped your local working repo with `git bundle create repo.bundle --all`
+
+#### same vs. new repo
+- pushing the reduced size to the same repo can be difficult
+- `git filter-repo` therefore removes remotes and recommends adding a new fresh repository
+- read more for the reasons here: https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#DISCUSSION
+- however, it's possible to push to the same repo
+
+#### other developers / testing / production
+- for all distributed copies of the repo, you will need to request they do a pull with rebasing
+- if a user with their own local copy of the repository did a simple `git pull && git push`, this would result in the big files being reintroduced into the central repository
+- options:
+  - poor man's fresh clone
+    - `rm -rf .git && git clone ... temp && mv temp/.git ./.git && rm -rf temp`
+    - if modified files are present now, discard or push them
+      - `git checkout -- .` or `git add -A . && git commit -m "Push obscure file changes." && git push`
+  - start from scratch
+    - `rm -rf repo && git clone xxx .`
+  - ugly pull with rebase
+    - `git pull -r`: 
+    - the user still has the big repo size locally, but count potentially reintroduce the wrong (bigger) history
+
+#### gitea (same/new repo)
+- `mkdir tmp-repo`
+- `cd tmp-repo`
+- `git clone git@git.tld.com:foo/bar.git .`
+- `cp .git/config /tmp/config-backup`
+- `git filter-repo --invert-paths --path path/to/exclude/`
+- option 1: same repo
+  - `mv /tmp/config-backup .git/config`
+  - `git push origin --mirror`
+  - login on the remote command line and run in the repo-folder
+    - `sudo -u git git reflog expire --expire=now --all`
+    - `sudo -u git git gc --aggressive --prune=now` 
+  - if you face memory limit issues, modify the git configuration
+    - `sudo -u git git config --global pack.windowMemory "100m"`
+    - `sudo -u git git config --global pack.packSizeLimit "100m"`
+    - `sudo -u git git config --global pack.threads "1"`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: https://git.tld.com/foo/bar (if in web ui the size does not change, make a slight modification to a file and push again normally)
+- option 2: new repo
+  - `git remote add origin git@git.tld.com:foo/bar-new.git`
+  - `git push origin --force --all`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: https://git.tld.com/foo/bar
+- `cd ..`
+- `rm -rf tmp-repo`
+  
+#### github (same/new repo)
+- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+- `mkdir tmp-repo`
+- `cd tmp-repo`
+- `git clone git@github.com:foo/bar.git .`
+- `cp .git/config /tmp/config-backup`
+- `git filter-repo --invert-paths --path path/to/exclude/`
+- option 1: same repo
+  - `mv /tmp/config-backup .git/config`
+  - `git push origin --force --all`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: latest after ~24 hours at https://github.com/settings/repositories (if it is a repo of an organization, first add your private account to https://github.com/foo/bar/settings/access)
+- option 2: new repo
+  - `git remote add origin git@github.com:foo/bar-new.git`
+  - `git push origin --force --all`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: https://github.com/settings/repositories
+- `cd ..`
+- `rm -rf tmp-repo`
+
+#### gitlab (same repo)
+- https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
+- `mkdir tmp-repo`
+- `cd tmp-repo`
+- option 1: same repo
+  - `Settings` > `General` > `Advanced` > `Export project` > download `tar.gz` file into `tmp-repo`
+  - `tar xzf 20*.tar.gz`
+  - `git clone --bare --mirror project.bundle`
+  - `cd project.git`
+  - `git filter-repo --invert-paths --path path/to/exclude/`
+  - `cp ./filter-repo/commit-map /tmp/commit-map-1`
+  - copying the commit-map has to be done after *every* single command from git filter-repo (you need the `commit-map` files later)
+  - `git remote remove origin`
+  - `git remote add origin git@gitlab.com:foo/bar.git`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > enable `Allowed to force push` to `main`/`master`
+  - `git push origin --force 'refs/heads/*'`
+  - `git push origin --force 'refs/tags/*'`
+  - `git push origin --force 'refs/replace/*'`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` to `main`/`master`
+  - `date` – wait 30 minutes (😱) – `date`
+  - `Settings` > `Repository` > upload `/tmp/commit-map-X`
+  - `date` – wait 5 minutes (😱) – `date`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: `Settings` > `Usage Quotas`
+- option 2: new repo
+  - `git clone git@gitlab.com:foo/bar.git .`
+  - `git filter-repo --invert-paths --path path/to/exclude/`
+  - `git remote add origin git@gitlab.com:foo/bar-new.git`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > enable `Allowed to force push` to `main`/`master` 
+  - `git push origin --force --all`
+  - `Settings` > `Repository` > `Protected branches`/`Protected branches` > disable `Allowed to force push` to `main`/`master`
+  - check size locally: `git gc && git count-objects -vH`
+  - check size remotely: `Settings` > `Usage Quotas`
+- `cd ..`
+- `rm -rf tmp-repo`
+
+### git lfs
+
+#### client installation
+- ```sudo apt-get install git-lfs```
+
+#### server installation
+- gitea: the following is already default! only check..
+- ```nano /etc/gitea/app.ini```
+  - ```[server]```
+  - ```LFS_START_SERVER = true```
+  - ```[lfs]```
+  - ```PATH = /home/gitea/data/lfs```
+
+#### activate lfs in existing repo (with existing files, with no lfs)
+- ```git lfs install```
+- ```git lfs track "*.blend"```
+- ```git lfs track "*.blend1"```
+- ```git add .gitattributes```
+- ```git commit -m "Added .gitattributes file/lfs."```
+- ```git push```
+
+#### working now is completely normal
+- pushing indicates, that lfs objects are stored
+- also gitea shows when clicking on the file, that this is a lfs file
+- ```git add -A . && git commit -m "." && git push origin HEAD```

@@ -7,4 +7,4 @@ if(localStorage.getItem('foo') !== null) {
 
 // store objects
 localStorage.setItem('foo', JSON.stringify({'foo': 'bar'}));
-JSON.parse(localStorage.getItem('foo'));
+try { JSON.parse(localStorage.getItem('foo')) } catch (e) { }
