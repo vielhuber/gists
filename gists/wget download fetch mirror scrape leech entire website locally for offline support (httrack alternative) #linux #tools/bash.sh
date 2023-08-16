@@ -7,6 +7,12 @@ wget -r --no-parent http://www.test.de
 # advanced
 wget --page-requisites --span-hosts --convert-links --adjust-extension --wait 1 --recursive --level 1 https://www.test.de
 
+# recursively download ftp contents (only changes)
+wget -m ftp://username:password@host/path/subpath/* -P /local/path
+
+# download full website
+wget -r --no-parent -l inf --follow-tags=a -N --reject '*.js,*.css,*.ico,*.txt,*.gif,*.jpg,*.jpeg,*.png,*.mp3,*.pdf,*.tgz,*.flv,*.avi,*.mpeg,*.iso,*.woff,*.woff2' -e robots=off http://www.tld.com
+
 # alternative
 httrack "https://www.test.de" --path "." --verbose "+*.test.de/*" 
 
