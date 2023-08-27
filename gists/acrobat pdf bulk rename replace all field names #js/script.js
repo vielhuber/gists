@@ -34,13 +34,12 @@ var props = [
 for (var i = 0; i < this.numFields; i++) {
     fields.push(this.getNthFieldName(i));
 }
+loop:
 for (var i = 0; i < fields.length; i++) {
     var source_name = fields[i];
 
     // skip some names if needed
-    if (source_name.indexOf('.') === -1) {
-        continue;
-    }
+    if (source_name.indexOf('.') === -1) { continue; }
 
     // modifications to name (various examples)
     var target_name = source_name;
@@ -50,6 +49,11 @@ for (var i = 0; i < fields.length; i++) {
     //target_name = target_name.replace(/\ß/g, 'ss');
     //target_name = target_name.replace(/\-|\/|\*|\.|\;|\:/g, '_');
     //target_name = target_name+'-S1';
+    //target_name = target_name+'_'+(i+1);
+    
+    if( source_name === target_name ) {
+        continue;
+    }
 
     var source_field = this.getField(source_name);
 
@@ -60,9 +64,13 @@ for (var i = 0; i < fields.length; i++) {
         var page = source_field.page;
         if( !Array.isArray(page) ) { page = [page]; }
         for(var pages__value = 0; pages__value < page.length; pages__value++) {
+            var rename = target_name;
+            // completely unique name (if needed)
+            //rename = target_name + '_' + pages__value;
+            if( source_name === rename ) { continue loop; }
             var rect = this.getField(source_name+'.'+pages__value).rect;
             var target_field = this.addField(
-                target_name,
+                rename,
                 source_field.type,
                 page[pages__value],
                 rect
