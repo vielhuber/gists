@@ -1,5 +1,7 @@
 // GET
 $response = wp_remote_get('http://httpbin.org/get', [
+  	'timeout' => 60,
+  	'sslverify' => false,
     'headers' => [
         'foo' => 'bar'
     ]                       
@@ -8,6 +10,9 @@ if (is_wp_error($response)) {
     echo $response->get_error_message();
     die();
 }
+if( @$response['response']['code'] != 200 ) { // be careful: not all response codes (like 400) throw wp error
+  die();  
+}
 echo '<pre>';    
 var_dump($response['headers'],json_decode($response['body']), $response['response']);
 echo '</pre>';
@@ -15,6 +20,7 @@ echo '</pre>';
 // POST
 $response = wp_remote_post('http://httpbin.org/post', [
     'method' => 'POST',
+    'timeout' => 60,
   	'body' => wp_json_encode([
         'foo' => 'bar',
         'bar' => 'baz'
@@ -22,7 +28,6 @@ $response = wp_remote_post('http://httpbin.org/post', [
     'headers' => [
         'Content-Type' => 'application/json'
     ],
-    'timeout' => 60,
     'redirection' => 5,
     'blocking' => true,
     'httpversion' => '1.0',
@@ -34,6 +39,9 @@ if (is_wp_error($response)) {
     echo $response->get_error_message();
     die();
 }
+if( @$response['response']['code'] != 200 ) { // be careful: not all response codes (like 400) throw wp error
+  die();  
+}
 echo '<pre>';    
 var_dump($response['headers'],json_decode($response['body']), $response['response']);
 echo '</pre>';
@@ -41,5 +49,6 @@ echo '</pre>';
 // PUT
 $response = wp_remote_request('http://httpbin.org/post', [
     'method' => 'PUT',
+    'timeout' => 60,
     /* ... */
 ]);
