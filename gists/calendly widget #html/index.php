@@ -28,19 +28,37 @@ $url = 'https://calendly.com/'.$settings['slug'].''.
 ?>
 
 <!-- css/js (needs to be loaded once) -->
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<!--<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">-->
+<!--<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>-->
+<script>
+if( document.querySelector('.calendly-script') === null ) {
+    let $el = document.createElement('script');
+    $el.classList.add('calendly-script');
+    $el.src = 'https://assets.calendly.com/assets/external/widget.js';
+    document.head.appendChild($el);
+}
+if( document.querySelector('.calendly-style') === null ) {
+    let $el = document.createElement('link');    
+    $el.classList.add('calendly-style');
+    $el.rel = 'stylesheet';
+    $el.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild($el);
+}
+</script>
   
 <!-- callback on finish -->
 <script>
-window.addEventListener(
-    'message',
-    (e) => {
-        if (e.data.event && e.data.event.indexOf('calendly') === 0 && e.data.event === 'calendly.event_scheduled') {
-            alert('OK');
+if (window.calendly_event_listener === undefined) {
+    window.calendly_event_listener = true;
+    window.addEventListener(
+        'message',
+        (e) => {
+            if (e.data.event && e.data.event.indexOf('calendly') === 0 && e.data.event === 'calendly.event_scheduled') {
+                alert('OK');
+            }
         }
-    }
-)
+    );
+}
 </script>
 
 <h2>inline widget</h2>
