@@ -1,5 +1,5 @@
 /* applies to all dom elements, even to pseudo selectors */
-html {
+html, .hyphenate {
   /* handles very long words, that are not in a dictionary */
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -9,10 +9,15 @@ html {
   -moz-hyphens: auto;
   /* the actual hyphenation property */
   hyphens: auto;
+  /* minimum word lengths */
+  hyphenate-limit-chars: 10 3 4;
+  -ms-hyphenate-limit-chars: 10 3 4;
+  -webkit-hyphenate-limit-before: 3;
+  -webkit-hyphenate-limit-after: 4;
 }
 
-/* exclude big headlines */
-h1 {
+/* exclude */
+h1, .no-hyphenate {
 	overflow-wrap: normal;
 	word-wrap: normal;
     -webkit-hyphens: manual;
