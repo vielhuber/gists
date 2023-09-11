@@ -72,6 +72,7 @@
 - Seite im Dark Mode testen (Chrome ist dort eh drin und testen, ob Seite kaputt geht)
 - WPML > Translation Management > Translators > Alle Editoren als "Translators" hinzufügen (von Ausgangssprache in alle Zielsprachen)
 - Telefonnummernlinks (tel:+ ...) testen (dürfen nicht "(0)" enthalten)
+- Jira-Ticket zusammen mit dem Kunden anlegen bzw. mit dem Kunden offen über alles kommunizieren (Handynummern, Kontaktmöglichkeiten, Ablauf, Rückfragen, ...)
 
 ## POST-LAUNCH
 - BackWPup Basic Auth entfernen und überprüfen ob lokales Backup läuft
