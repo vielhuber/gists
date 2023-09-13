@@ -1,8 +1,13 @@
 ## installation
-- ```npm i @google/clasp -g```
+- ```nvm use 14.18.0```
+- ```npm install @google/clasp -g```
 - https://script.google.com/home/usersettings => enable
-- ```npm i -S @types/google-apps-script```
+- ```npm install @types/google-apps-script -g```
 - ```clasp login```
+
+## update
+
+- `npm update @google/clasp -g`
 
 ## setup
 - ```clasp clone 1rQUd0avboM0vYHIpWCY8aRKhSPhZaCybK7P0yv_LE6HUWtYxHprhRI0J``` (you can get the script id from Datei > Projekteigenschaften)
