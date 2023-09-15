@@ -198,6 +198,12 @@ if gitignore is not working for a specific file/folder (this does not(!) delete 
 ### see changed files and also untracked files
 - git status -u
 
+### show status in pretty/short format
+- git status -sbu
+
+### show changed files in absolute path
+- git -C /var/www/html/foo/bar/ status
+
 ### see changed content locally
 - git diff
 
