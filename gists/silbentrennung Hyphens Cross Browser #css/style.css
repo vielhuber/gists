@@ -16,7 +16,7 @@ html, .hyphenate {
   -webkit-hyphenate-limit-after: 4;
 }
 
-/* exclude */
+/* exclude (except &shy;) */
 h1, .no-hyphenate {
 	overflow-wrap: normal;
 	word-wrap: normal;
@@ -25,3 +25,19 @@ h1, .no-hyphenate {
     -moz-hyphens: manual;
 	hyphens: manual;
 }
+/* exclude (including &shy;) */
+h1, .no-hyphenate {
+	overflow-wrap: normal;
+	word-wrap: normal;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    -moz-hyphens: none;
+	hyphens: none;
+}
+
+/* you can combine the above rules to a complex rule set that differs in screen size and/or headline/texts */
+
+/* exclude only on mobile */
+@media screen and (max-width: 700px) { h1, .no-hyphenate { /* ... */ } }
+/* exclude only on desktop */
+@media screen and (min-width: 700px) { html, .hyphenate { /* ... */ } }
