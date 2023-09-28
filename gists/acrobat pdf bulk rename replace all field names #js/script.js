@@ -39,17 +39,17 @@ for (var i = 0; i < fields.length; i++) {
     var source_name = fields[i];
 
     // skip some names if needed
-    if (source_name.indexOf('.') === -1) { continue; }
+    //if (source_name.indexOf('.') === -1) { continue; }
 
     // modifications to name (various examples)
     var target_name = source_name;
-    target_name = source_name.replace(/\./g, '#');
+    target_name = target_name+'_'+(i+1);
+    //target_name = source_name.replace(/\./g, '#');
     //target_name = target_name.toLowerCase();
     //target_name = target_name.replace(/\s/g, '');
     //target_name = target_name.replace(/\ß/g, 'ss');
     //target_name = target_name.replace(/\-|\/|\*|\.|\;|\:/g, '_');
     //target_name = target_name+'-S1';
-    //target_name = target_name+'_'+(i+1);
     
     if( source_name === target_name ) {
         continue;
@@ -66,7 +66,9 @@ for (var i = 0; i < fields.length; i++) {
         for(var pages__value = 0; pages__value < page.length; pages__value++) {
             var rename = target_name;
             // completely unique name (if needed)
-            //rename = target_name + '_' + pages__value;
+            if( 1===1 ) {
+                rename = target_name + '_' + pages__value;
+            }
             if( source_name === rename ) { continue loop; }
             var rect = this.getField(source_name+'.'+pages__value).rect;
             var target_field = this.addField(
@@ -79,6 +81,12 @@ for (var i = 0; i < fields.length; i++) {
         for (var p = 0; p < props.length; p++) {
             if (testField(source_field, props[p])) {
                 target_field[props[p]] = source_field[props[p]];
+            }
+        }
+        // support dropdowns
+        if( testField(source_field, 'numItems') ) {
+            for(var dd = source_field.numItems-1; dd >= 0; dd--) {
+                target_field.insertItemAt(source_field.getItemAt(dd), -1);
             }
         }
         this.removeField(source_name);
