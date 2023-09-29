@@ -164,6 +164,11 @@ self.addEventListener('fetch', (event) => {
         return false;
     }
   
+    // skip chrome extensions
+    if (!(event.request.url.indexOf('http') === 0)) {
+        return;
+    }
+  
     // SPA strategy: always serve shell index when offline (ignoring GET URL parameters)
     if (event.request.mode === 'navigate' && event.request.headers.get('accept').includes('text/html')) {
         event.respondWith(
