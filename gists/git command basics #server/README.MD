@@ -671,8 +671,8 @@ Usage: git acp
   
 ### remove data
 
-#### requirements
-- the files that should be removed from history need to be already removed from `HEAD` and ignored in `.gitignore`
+#### prerequisites / requirements
+- all files that should be removed from history need to be already removed from `HEAD` (`git rm -rf --cached ...`) and ignored in `.gitignore`
 - you should have backuped your local working repo with `git bundle create repo.bundle --all`
 
 #### same vs. new repo
