@@ -2,7 +2,7 @@
 - Exakten Zeitpunkt planen: Softlaunch oder Hardlaunch? Kunden informieren, dass es zu Verzögerungen wegen DNS kommen kann
 - 301-Redirects bei Relaunch vorhanden
   - Redirects interner Seiten über Screaming Frog exportieren
-  - Redirects im Google Index über Search Console exportieren, per CURL Status Codes prüfen und 404er manuell redirecten
+  - Redirects im Google Index über Search Console (Indexierung > Seiten > Daten zu indexierten Seiten ansehen > 500 anzeigen > Exportieren) exportieren, per CURL Status Codes prüfen und 404er manuell redirecten
 - HTML-Validierung erfolgreich geprüft
 - XML-Sitemap vorhanden und aktiv und Einträge geprüft
 - robots.txt prüfen (am besten löschen, da Yoast automatisch generiert); falls manuell erstellt, prüfen ob vollständig (mit WP default vergleichen, siehe separates Gist)

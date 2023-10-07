@@ -1,6 +1,6 @@
 #### in.txt
 
-- you can export e.g. a list of all indexed urls via google search console ("Abdeckung")
+- you can export e.g. a list of all indexed urls via google search console (Indexierung > Seiten > Daten zu indexierten Seiten ansehen > 500 anzeigen > Exportieren)
 - make sure the following file uses \n as line breaks (no \r\n)
 
 ```txt
