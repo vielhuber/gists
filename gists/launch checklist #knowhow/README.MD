@@ -10,7 +10,7 @@
 - Scroll-Animations-Plugin (Lanimate) aktiviert
 - WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
 - git auf Production, Testing und Local auf demselben Stand
-- Revisionen aktiviert für ALLE Post Typen (post und page sind Standard, aber auch alle anderen prüfen)
+- Revisionen aktiviert und LIMITIERT für ALLE Post Typen (post und page sind Standard, aber auch alle anderen durch CPT Register prüfen)
 - Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
 - Erweiterte Cookie-Leiste und/oder Zwei-Klick-Lösungen für Google Maps implementiert
 - Google Fonts lokal eingebettet und mit https://www.e-recht24.de/google-fonts-scanner geprüft
