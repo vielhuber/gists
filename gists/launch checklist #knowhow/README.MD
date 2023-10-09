@@ -42,7 +42,7 @@
 - Copyright für alle Bilder vorhanden (am Bild oder im Impressum)
 - Autoren aller Beiträge / Seiten im Backend geändert auf Kunden
 - Öffentlicher Name bei allen close2-Mitarbeitern anonymisieren (kleine Klarnamen)
-- Passwortschutz und Entwurf testen, ob das funktioniert
+- Speichern+Vorschau (Entwurf) sowie Passwortschutz testen, ob das bei verschiedenen Post-Typen funktioniert
 - Google Maps JS API Key hinterlegen
 - Alle Bilder komprimiert, EXIF-Daten überall entfernt, Upload eines Bildes strippt alle EXIF-Daten sauber heraus, Löschen von Bildern löscht auch physische Datei
 - Grundlegende Meta-Tags gesetzt (Titel+Description) (prüfen, ob Startseite diese ausspielt)
@@ -107,4 +107,6 @@
 - Offizielles Angebot durchgeschaut, ob irgendetwas fehlt
 - Abrechnung geprüft und durchgeführt
 - Wartungsvertrag (Backup+Monitoring) einrichten oder Kunden verkaufen
+- Launch-Meldung in Slack posten, damit sich jeder die Seite nochmal ansieht, ob alles passt
+- Projekt in Projektübersicht auf close2.de aufnehmen, damit das Ganze als Referenz publiziert wird
 - Kunde auf positive Bewertung auf https://bewertung.close2.de hingewiesen
