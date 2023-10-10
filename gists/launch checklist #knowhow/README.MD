@@ -62,6 +62,7 @@
 - Siegel wie Jameda etc. prüfen, ob live eingebunden
 - E-Mail-Versand SMTP-Server aktivieren (WP Mail SMTP)
 - socialfoo: Facebook Developers App Id eintragen
+- Aufräumen: Code grob durchschauen und unbenötigte Dateien/Funktionen entfernen
 - WordPress Admin E-Mail-Adresse auf support@close2.de setzen (oder alternativ bewusst auf Kunden-E-Mail setzen)
 - Passwortschutz: htaccess/htpasswd im Einsatz (für Testing aktiv, für Production inaktiv)
 - Silbentrennung auf allen Browsern testen (nun nur noch, Hyphenopoly ist nicht mehr notwendig)
