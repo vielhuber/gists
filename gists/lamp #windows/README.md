@@ -282,6 +282,11 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```sudo a2dissite 000-default.conf```
 
 #### ssl
+- we use the following technique, because:
+  - domainfactory does not support api access
+  - let's encrypt does not support http validation for wildcards
+  - we must use a wildcard certificate (single certificates don't work because domainfactory has no api)
+  - we cannot create a dns record
 - create a real let's encrypt certificate via https://punchsalad.com/ssl-certificate-generator/
 - Domain: *.local.vielhuber.de
 - DNS-verification via txt-record over DomainFactory
