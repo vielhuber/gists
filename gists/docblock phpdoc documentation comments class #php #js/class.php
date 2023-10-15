@@ -9,6 +9,7 @@ use Baz;
  *
  * This is a multiline
  * description of the class.
+ * Can also be used to define usage examples.
  *
  * @author David Vielhuber <david@vielhuber.de>
  * @author Max Mustermann <max@mustermann.de>
