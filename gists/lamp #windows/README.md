@@ -460,11 +460,12 @@ xdebug.var_display_max_depth = 10
 - remove zone identifier files
   - `find . -name "*:Zone.Identifier" -type f -delete`
 - ram overload
+  - you need a lot of ram on your machine
   - create `%UserProfile%\.wslconfig`
   ```
   [wsl2]
-  memory=8GB
-  swap=16GB
+  memory=24GB # choose a reasonable amount of ram (over 10GB), which your local machine has free all the time
+  #swap=16GB # not needed
   localhostForwarding=true
   ```
 - wsl hangs after a while / vscode hangs
@@ -914,6 +915,12 @@ host    all   all        ::1/128        md5
 - option 2: setup a more dynamic approach like 01.project-name.local.vielhuber.de, 02.project-name.local.vielhuber.de, ...
 
 ## usage
+
+#### restart wsl
+
+- open cmd / ps as admin
+- `wsl.exe -l -v`
+- `wsl.exe`
 
 #### start
 - ```lamp start```
