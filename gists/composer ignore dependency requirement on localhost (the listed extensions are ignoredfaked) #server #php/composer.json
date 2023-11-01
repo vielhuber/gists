@@ -1,7 +1,0 @@
-{
-    "config": {
-        "platform": {
-            "ext-oci8": "2.0.0"
-        },
-    },
-}

@@ -1,1 +1,0 @@
-$_SERVER['DOCUMENT_ROOT'].'/wp-content/...'
