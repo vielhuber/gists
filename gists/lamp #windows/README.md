@@ -111,6 +111,13 @@
 - comment out ```%sudo ALL=(ALL:ALL) ALL```
 - ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
+#### redis
+- ```sudo apt-get -y install redis-server```
+- ```sudo service redis-server start```
+- ```redis-cli```
+- ```sudo systemctl restart redis.service```
+- ```redis-cli ping```
+
 #### docker
 - Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
 - Installation: "Install required Windows components for WSL 2"

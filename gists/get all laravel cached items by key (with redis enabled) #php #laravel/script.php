@@ -1,0 +1,1 @@
+dd( \Illuminate\Support\Facades\Redis::connection('default')->keys('*') );
