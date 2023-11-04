@@ -1,4 +1,10 @@
-## installation
+## native search/replace of corrupt �
+
+```find . -exec rename 's/�/x/g' "{}" \;```
+
+## alternative with detox
+
+### installation
 
 - `sudo apt-get install detox`
 
@@ -17,9 +23,9 @@ sequence "custom" {
 };
 ```
 
-## configuration
+### configuration
 
-- `nano /etc/detox/custom.tbl`
+- `nano /etc/detox/safe.tbl`
 
 *replace the following existing rules. in this example, we keep spaces and brackets:*
 
@@ -29,7 +35,7 @@ sequence "custom" {
 0x29	)	# )
 ```
 
-## usage
+### usage
 
 - `detox -s custom -r -v --dry-run ./`
 - `detox -s custom -r -v ./`
