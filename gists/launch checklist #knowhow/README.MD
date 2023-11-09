@@ -50,7 +50,7 @@
 - Alle Notices in der Console ebenfalls gekillt: Console muss komplett leer sein. Ebenfalls in Firefox testen, da hier oft andere Meldungen kommen.
 - console.log Ausgaben deaktiviert
 - git dev-/feature-Branch in master gemergt
-- Favicon vorhanden
+- Favicon vorhanden mit 48x48px ICO+PNG (auch funktional bei Static Assets)
 - Prüfen, ob Seite mit WordPress Admin Bar gut funktioniert (padding)
 - Google Indexierung aktiviert (robots.txt, noindex/nofollow Meta-Tags)
 - Cross-Browser-Check (inkl. Responsive) durchgeführt: BackstopJS + Screaming Frog kombiniert einsetzen(!)
