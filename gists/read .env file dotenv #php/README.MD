@@ -9,6 +9,7 @@ composer require vlucas/phpdotenv
 ```.env
 FOO=bar
 BAR="baz"
+BAZ=true
 ```
 
 #### read
@@ -21,4 +22,6 @@ $dotenv->load();
 // don't use getenv or $_ENV (since this is not working reliably, e.g. in ci build pipelines)
 echo @$_SERVER['FOO'];
 echo @$_SERVER['BAR'];
+// get boolean values
+!!($_SERVER['BAZ'] ?? false)
 ```
