@@ -9,7 +9,7 @@
 - Manuelles Backup der alten Seite sowie vom Testserver erstellt
 - Scroll-Animations-Plugin (Lanimate) aktiviert
 - WP Migrate DB für Search / Replace verwenden; Achtung bei Page Buildern und base64 encoding
-- git auf Production, Testing und Local auf demselben Stand
+- git auf Production, Testing und Local auf demselben Stand, alles im main-Branch ausgecheckt
 - Revisionen aktiviert und LIMITIERT für ALLE Post Typen (post und page sind Standard, aber auch alle anderen durch CPT Register prüfen)
 - Cookie-Leiste aktiv und Link zur Datenschutzseite funktioniert
 - Erweiterte Cookie-Leiste und/oder Zwei-Klick-Lösungen für Google Maps implementiert
