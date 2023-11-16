@@ -85,7 +85,7 @@
 - 301 Redirects nochmal final testen, v.a. anhand der Google Suchergebnisse (site:)
 - Kunde kontaktieren, damit er prüft, dass Kontaktformular alle bei ihm ankommen
 - Seite 1x komplett mit Screaming Frog durchprüfen: Passen Permalinks generell? Gibt es kaputte Seiten? Gibt es Broken Links? Gibt es Seiten, die auf noindex laufen?
-- Google Analytics / Google Tag Manager aktiviert und IP Anonymisierung aktiviert (Echtzeitdaten prüfen)
+- Google Analytics / Google Tag Manager aktiviert (Echtzeitdaten prüfen), Zugriffe für Team sowie Kunden erteilt
 - WordPress: Werkzeuge > Website-Zustand prüfen
 - 404-Fehlerseite vorhanden / Status-Code geprüft
 - Pro Plugins registriert (WPML, ACF)
