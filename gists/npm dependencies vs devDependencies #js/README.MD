@@ -1,3 +1,6 @@
+### tl;dr
+- frontend modules like `swiper` in `dependencies`, all others in `devDependencies`
+
 ### notes
 - `devDependencies` should contain packages which are used during development and/or which are used to build your bundle
 - all other packages should/must go into `dependencies`
