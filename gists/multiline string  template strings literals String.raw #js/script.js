@@ -23,6 +23,9 @@ variable
 ${new Date()}
 inside.`;
 
+// use String.raw when you want to convert regex patterns with backslashes
+new RegExp(String.raw`\p{RI}\p{RI}`, 'gu')
+
 // if else
 var bazz = `This
 is
