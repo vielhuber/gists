@@ -127,7 +127,7 @@
 - ```docker version```
 - ```docker-compose version```
 
-#### xserver (deprecated; not included in wsl!)
+#### xserver (deprecated and therefore not needed anymore; now included in wslg!)
 - download vcxsrv (https://sourceforge.net/projects/vcxsrv/files/latest/download)
 - Installation: Full
 - `nano ~/.bash_profile`
@@ -156,12 +156,18 @@
   - startxfce4
     - Applications > Settings > Screensaver > Mode: Disable Screensaver
 
-#### wslg (wsl gui) theme
-- `sudo apt install gnome-tweaks`
-- `gnome-tweaks`
-  - Appearance > Applications: HighContrastInverse
-  - Window Titlebars > Maximize / Minimize
-  - Fonts > Scaling Factor > 0.75
+#### wslg (wsl gui)
+- change theme
+  - `sudo apt install gnome-tweaks`
+  - `gnome-tweaks`
+    - Appearance > Applications: HighContrastInverse
+    - Window Titlebars > Maximize / Minimize
+    - Fonts > Scaling Factor > 0.75
+- fix glitches
+  - updated nvidia drivers (via "GeForce Experience")
+  - ```sudo apt update```
+  - ```sudo apt upgrade```
+  - ```wsl --shutdown```
 
 #### vscode
 - install Remote - WSL Installieren
