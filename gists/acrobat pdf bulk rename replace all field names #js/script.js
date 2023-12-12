@@ -50,6 +50,7 @@ for (var i = 0; i < fields.length; i++) {
     //target_name = target_name.replace(/\ß/g, 'ss');
     //target_name = target_name.replace(/\-|\/|\*|\.|\;|\:/g, '_');
     //target_name = target_name+'-S1';
+  	//target_name = source_name+'_'+(~~(Math.random()*(999-100+1))+100);
     
     if( source_name === target_name ) {
         continue;
@@ -86,7 +87,7 @@ for (var i = 0; i < fields.length; i++) {
         // support dropdowns
         if( testField(source_field, 'numItems') ) {
             for(var dd = source_field.numItems-1; dd >= 0; dd--) {
-                target_field.insertItemAt(source_field.getItemAt(dd), -1);
+                target_field.insertItemAt(source_field.getItemAt(dd, false), source_field.getItemAt(dd, true));
             }
         }
         this.removeField(source_name);
