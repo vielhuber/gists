@@ -153,6 +153,11 @@
 =FILTER( SHEET!A2:A; SHEET!B2:B="foo" )
 ```
 
+#### if string is in array
+```
+=WENN(NICHT(ISTFEHLER(VERGLEICH("val42";{"val41";"val42";"val43"};0)));"foo";"bar")
+```
+
 #### hide #NV or #NA 
 ```
 =WENNFEHLER( ..., "" );
