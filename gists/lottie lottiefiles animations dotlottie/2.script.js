@@ -1,3 +1,4 @@
+// npm install @dotlottie/player-component
 import '@dotlottie/player-component';
 
 export default class Page {
