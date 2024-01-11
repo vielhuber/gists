@@ -50,11 +50,13 @@ export default class Page {
                         }
                     });
 
-                    $player.addEventListener('loopComplete', () => {
-                        //console.log('loopComplete');
-                        $player.pause();
-                        this.playing = false;
-                        $player.closest('.player-container').classList.remove('player-container--playing');
+                    // stop animation on last frame
+                    $player.addEventListener('frame', animation => {
+                        if (this.playing === true && animation.detail.frame > $player.getLottie().totalFrames - 1) {
+                            $player.pause();
+                            this.playing = false;
+                            $player.closest('.player-container').classList.remove('player-container--playing');
+                        }
                     });
 
                     // this timeout is needed, otherwise the eventlisteners won't work
