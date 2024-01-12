@@ -31,6 +31,18 @@
             navigator.serviceWorker.addEventListener('message', fn);
         });
     }
+  
+  	// get data from manifest
+  	async fetchManifest() {
+        return new Promise((resolve) => {
+            fetch(window.location.protocol + '//' + window.location.host + '/app/_pwa/manifest.json')
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    resolve(json);
+                });
+        });
+    }  
 </script>
 <!-- end of pwa -->
 ```
@@ -56,6 +68,7 @@
     "lang": "de",
     "name": "appname",
     "short_name": "appname",
+  	"environment": "production",
     "description": "appname",
     "orientation": "portrait",
     "icons": [
