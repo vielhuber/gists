@@ -1,6 +1,17 @@
 // composer require eluceo/ical
 require_once(__DIR__ . '/vendor/autoload.php');
 
+$date_begin = '2023-01-01 20:00:00';
+$date_end = '2023-01-01 21:00:00';
+
+$d = new \DateTime($date_end, new \DateTimeZone('Europe/Berlin'));
+$d->setTimeZone(new \DateTimeZone('UTC'));
+$date_begin = $d->format('Y-m-d H:i:s');
+
+$d = new \DateTime($date_end, new \DateTimeZone('Europe/Berlin'));
+$d->setTimeZone(new \DateTimeZone('UTC'));
+$date_end = $d->format('Y-m-d H:i:s');
+
 $event = (new \Eluceo\iCal\Domain\Entity\Event())
         ->setSummary('This is the title')
         ->setDescription('This is the description')
@@ -15,14 +26,14 @@ $event = (new \Eluceo\iCal\Domain\Entity\Event())
                 new \Eluceo\iCal\Domain\ValueObject\DateTime(
                     \DateTimeImmutable::createFromFormat(
                         'Y-m-d H:i:s',
-                        '2023-01-01 20:00:00'
+                        $date_begin
                     ),
                     true
                 ),
                 new \Eluceo\iCal\Domain\ValueObject\DateTime(
                     \DateTimeImmutable::createFromFormat(
                         'Y-m-d H:i:s',
-                        '2023-01-01 21:00:00'
+                        $date_end
                     ),
                     true
                 )

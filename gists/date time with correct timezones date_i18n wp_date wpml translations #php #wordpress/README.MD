@@ -36,8 +36,10 @@ date_default_timezone_set('UTC'); // default timezone
 wp_date()
 // convert europe/berlin to utc
 get_gmt_from_date('2021-06-23 12:00:00') // 2021-06-23 10:00:00
+$d = new \DateTime('2021-06-23 12:00:00', new \DateTimeZone('Europe/Berlin')); $d->setTimeZone(new \DateTimeZone('UTC')); echo $d->format('Y-m-d H:i:s');
 // utc to europe/berlin
 get_date_from_gmt('2021-06-23 12:00:00') // 2021-06-23 14:00:00
+$d = new \DateTime('2021-06-23 12:00:00' new \DateTimeZone('UTC')); $d->setTimeZone(new \DateTimeZone('Europe/Berlin')); echo $d->format('Y-m-d H:i:s');
 // get timezone from settings
 get_option('timezone_string') // Europe/Berlin
 ```
