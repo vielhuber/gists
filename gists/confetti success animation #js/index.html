@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>.</title>
+        <script>
+            class Confetti {
+                constructor() {
+                    this.confettiConfig = {
+                        particleCount: 500, // set max confetti count
+                        particleSpeed: 3, //set the particle animation speed
+                        particleColors: [
+                            'DodgerBlue',
+                            'OliveDrab',
+                            'Gold',
+                            'Pink',
+                            'SlateBlue',
+                            'LightBlue',
+                            'Violet',
+                            'PaleGreen',
+                            'SteelBlue',
+                            'SandyBrown',
+                            'Chocolate',
+                            'Crimson'
+                        ],
+                        streamingConfetti: false,
+                        animationTimer: null,
+                        particles: [],
+                        waveAngle: 0
+                    };
+                }
+
+                init() {
+                    document.addEventListener('DOMContentLoaded', () => {
+                        document.querySelector('.start').addEventListener('click', e => {
+                            this.startConfetti();
+                            e.preventDefault();
+                        });
+                        document.querySelector('.stop').addEventListener('click', e => {
+                            this.stopConfetti();
+                            e.preventDefault();
+                        });
+                    });
+                }
+
+                resetParticle(particle, width, height) {
+                    particle.color =
+                        this.confettiConfig.particleColors[
+                            (Math.random() * this.confettiConfig.particleColors.length) | 0
+                        ];
+                    particle.x = Math.random() * width;
+                    particle.y = Math.random() * height - height;
+                    particle.diameter = Math.random() * 10 + 5;
+                    particle.tilt = Math.random() * 10 - 10;
+                    particle.tiltAngleIncrement = Math.random() * 0.07 + 0.05;
+                    particle.tiltAngle = 0;
+                    return particle;
+                }
+
+                startConfetti() {
+                    let width = window.innerWidth;
+                    let height = window.innerHeight;
+                    window.requestAnimFrame = (function () {
+                        return (
+                            window.requestAnimationFrame ||
+                            window.webkitRequestAnimationFrame ||
+                            window.mozRequestAnimationFrame ||
+                            window.oRequestAnimationFrame ||
+                            window.msRequestAnimationFrame ||
+                            function (callback) {
+                                return window.setTimeout(callback, 16.6666667);
+                            }
+                        );
+                    })();
+                    let canvas = document.getElementById('confetti-canvas');
+                    if (canvas === null) {
+                        canvas = document.createElement('canvas');
+                        canvas.setAttribute('id', 'confetti-canvas');
+                        canvas.setAttribute(
+                            'style',
+                            'display:block;z-index:999999;pointer-events:none;position:fixed;top:0;left:0;'
+                        );
+                        document.body.appendChild(canvas);
+                        canvas.width = width;
+                        canvas.height = height;
+                        window.addEventListener(
+                            'resize',
+                            () => {
+                                canvas.width = window.innerWidth;
+                                canvas.height = window.innerHeight;
+                            },
+                            true
+                        );
+                    }
+                    let context = canvas.getContext('2d');
+                    while (this.confettiConfig.particles.length < this.confettiConfig.particleCount)
+                        this.confettiConfig.particles.push(this.resetParticle({}, width, height));
+                    this.confettiConfig.streamingConfetti = true;
+                    if (this.confettiConfig.animationTimer === null) {
+                        let runAnimation = () => {
+                            context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                            if (this.confettiConfig.particles.length === 0) this.confettiConfig.animationTimer = null;
+                            else {
+                                this.updateParticles();
+                                this.drawParticles(context);
+                                this.confettiConfig.animationTimer = requestAnimFrame(runAnimation);
+                            }
+                        };
+                        runAnimation();
+                    }
+                }
+
+                stopConfetti() {
+                    this.confettiConfig.streamingConfetti = false;
+                }
+
+                removeConfetti() {
+                    this.stopConfetti();
+                    this.confettiConfig.particles = [];
+                }
+
+                toggleConfetti() {
+                    if (this.confettiConfig.streamingConfetti) this.stopConfetti();
+                    else this.startConfetti();
+                }
+
+                drawParticles(context) {
+                    let particle;
+                    let x;
+                    for (let i = 0; i < this.confettiConfig.particles.length; i++) {
+                        particle = this.confettiConfig.particles[i];
+                        context.beginPath();
+                        context.lineWidth = particle.diameter;
+                        context.strokeStyle = particle.color;
+                        x = particle.x + particle.tilt;
+                        context.moveTo(x + particle.diameter / 2, particle.y);
+                        context.lineTo(x, particle.y + particle.tilt + particle.diameter / 2);
+                        context.stroke();
+                    }
+                }
+
+                updateParticles() {
+                    let width = window.innerWidth;
+                    let height = window.innerHeight;
+                    let particle;
+                    this.confettiConfig.waveAngle += 0.01;
+                    for (let i = 0; i < this.confettiConfig.particles.length; i++) {
+                        particle = this.confettiConfig.particles[i];
+                        if (!this.confettiConfig.streamingConfetti && particle.y < -15) particle.y = height + 100;
+                        else {
+                            particle.tiltAngle += particle.tiltAngleIncrement;
+                            particle.x += Math.sin(this.confettiConfig.waveAngle);
+                            particle.y +=
+                                (Math.cos(this.confettiConfig.waveAngle) +
+                                    particle.diameter +
+                                    this.confettiConfig.particleSpeed) *
+                                0.5;
+                            particle.tilt = Math.sin(particle.tiltAngle) * 15;
+                        }
+                        if (particle.x > width + 20 || particle.x < -20 || particle.y > height) {
+                            if (
+                                this.confettiConfig.streamingConfetti &&
+                                this.confettiConfig.particles.length <= this.confettiConfig.particleCount
+                            )
+                                this.resetParticle(particle, width, height);
+                            else {
+                                this.confettiConfig.particles.splice(i, 1);
+                                i--;
+                            }
+                        }
+                    }
+                }
+            }
+            let e = new Confetti();
+            e.init();
+        </script>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="start">START🎉</button>
+        <button class="stop">STOP🎉</button>
+    </body>
+</html>
