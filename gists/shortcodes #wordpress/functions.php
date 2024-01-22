@@ -11,3 +11,6 @@ add_shortcode('barbaz', function($atts) {
     ], $atts);
     return 'foo: '.$parsed['foo'].' - bar: '.$parsed['bar'];
 });
+
+// run
+echo do_shortcode('[barbaz foo="bar"]');
