@@ -124,6 +124,7 @@ if gitignore is not working for a specific file/folder (this does not(!) delete 
 
 #### get current commit hash (outputs: 6e559cb)
 - git rev-parse --short HEAD
+- git log --pretty=format:'%h' -n 1
 
 #### go to specific commit
 - git log --oneline -n 10 # show last commits and fetch commit hash
