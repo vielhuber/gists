@@ -12,7 +12,16 @@ div {
 }
 ```
 
-### solution with css variables and js
+### solution
+
+```css
+div {
+ 	height:100vh; /* fallback */
+  	height:100svh;
+}
+```
+
+### deprecated: solution with css variables and js
 ```js
 let fn = () => {
   let vh = window.innerHeight * 0.01;
@@ -29,7 +38,7 @@ div {
 }
 ```
 
-### solution with hlp
+### deprecated: solution with hlp
 ```js
 hlp.real100vh('div')
 hlp.real100vh('div', 60)
