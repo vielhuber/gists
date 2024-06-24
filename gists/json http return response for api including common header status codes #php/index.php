@@ -49,7 +49,7 @@ response(
     'foo' => 'bar',
     'bar' => 'baz',
   ]
-
+);
   
 // response with data (variant 2)
 response(
