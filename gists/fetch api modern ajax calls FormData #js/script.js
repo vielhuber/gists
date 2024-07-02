@@ -55,14 +55,19 @@ formData = new FormData(document.querySelector('form'));
 formData.forEach((value, key) => { body[key] = value; });
 body = JSON.stringify(body);
 
-/* how to send manually a x-www-form-urlencoded with fetch */
+/* $_POST in PHP will recognize the only the form data (application/x-www-form-urlencoded or multipart/form-data) with a specified content type header. */
+/* you can read it with php://input */
+/* alternative: how to send manually a x-www-form-urlencoded with fetch */
 let data = new URLSearchParams();
 data.append('foo','bar');
 data.append('bar','baz');
 fetch(
   'https://tld.com/foo', {
     method: 'POST',
-    body: data
+    body: data,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
   })
   .then(v=>v).catch(v=>v).then(data => { console.log(data); }); 
 
@@ -76,6 +81,6 @@ fetch(
   })
   .then(v=>v).catch(v=>v).then(data => { console.log(data); }); 
 
-/* if you EXPECT html/text in the ressponse instead of json, do this */
+/* if you EXPECT html/text in the response instead of json, do this */
 ... .then(v=>v.text()). ...
 ... .then((response) => { return response.text() }). ...
