@@ -1,5 +1,5 @@
 // export
-mysqldump -h localhost --port 3306 -u username -p"password" database > dump.sql
+mysqldump -h localhost --port 3306 -u username -p"password" --routines database > dump.sql
 
 // import
 mysql -h localhost --port 3306 -u username -p"XXX" --default-character-set=utf8 database < dump.sql
@@ -55,6 +55,8 @@ unlink('my.cnf');
 // Error: 'Access denied; you need (at least one of) the PROCESS privilege(s) for this operation' when trying to dump tablespaces
 // to prevent that, add
 --no-tablespaces
+
+// if errors with "NO_AUTO_CREATE_USER" appears, simply replace all occurences of that string with "" and reimport
 
 // speed up even more
 https://serverfault.com/a/568465/442998
