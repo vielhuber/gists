@@ -700,12 +700,18 @@ host    all   all        ::1/128        md5
 - ```ghostscript -v```
 
 #### imagemagick
-- ```sudo apt-get install imagemagick imagemagick-doc```
-- ```convert --version```
-- ```sudo nano /etc/ImageMagick-6/policy.xml```
-  - uncomment line ```<!-- <policy domain="coder" rights="none" pattern="MVG" /> -->```
-  - change ```<policy domain="coder" rights="none" pattern="PDF" />``` to ```<policy domain="coder" rights="read|write" pattern="PDF" />```
-  - add ```<policy domain="coder" rights="read|write" pattern="LABEL" />```
+```
+t=$(mktemp) && \
+wget 'https://dist.1-2.dev/imei.sh' -qO "$t" && \
+bash "$t" && \
+rm "$t"
+```
+- ```convert -version```
+- ```sudo nano /usr/local/etc/ImageMagick-7/policy.xml```
+- add/edit
+  - ```<policy domain="coder" rights="none" pattern="MVG" />```
+  - ```<policy domain="coder" rights="read|write" pattern="PDF" />```
+  - ```<policy domain="coder" rights="read|write" pattern="LABEL" />```
 
 #### pdftk
 - ```sudo apt update```
