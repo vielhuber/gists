@@ -26,8 +26,10 @@ class Test extends \PHPUnit\Framework\TestCase
     }
   
   	// functions that start with the keyword "test" in the name run sequentially
-    public function testSomeFunction()
+  	// always use snake case and "test_that_..."
+    public function test_that_something_works()
     {
+      	// general rule: the expected value should come first as an argument      
       
         $this->assertTrue(true);
       	$this->assertEquals('1',1); // passes
@@ -44,6 +46,7 @@ class Test extends \PHPUnit\Framework\TestCase
                 $this->stringContains('baz', $response)
             )
         );
+        $this->assertCount(10, 1+2+3+4);
       
       	// live log to console while running
       	fwrite(STDERR, print_r('foo'.PHP_EOL, true));
