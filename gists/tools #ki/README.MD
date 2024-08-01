@@ -1,0 +1,26 @@
+- Universal
+	- https://chatgpt.com
+    - https://claude.ai
+    - https://perplexety.ai
+    - https://gemini.google.com
+    - https://copilot.microsoft.com
+    - https://x.ai
+- Bilder generieren
+    - https://openai.com/index/dall-e-3
+    - https://www.midjourney.com
+- Videos generieren
+	- https://runwayml.com
+- Animationsvideos generieren
+	- https://www.steve.ai
+- Sprechervideos generieren
+	- https://www.heygen.com
+- Social Ads erstellen
+	- https://www.captions.ai
+- Präsentationen + Websites erstellen
+	- https://gamma.app
+- Musik erstellen
+	- https://suno.com
+- Sound verbessern
+    - https://podcast.adobe.com/enhance
+- Stimme klonen
+	- https://elevenlabs.io
