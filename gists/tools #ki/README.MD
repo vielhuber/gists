@@ -1,26 +1,29 @@
 - Universal
-	- https://chatgpt.com
-    - https://claude.ai
-    - https://perplexety.ai
-    - https://gemini.google.com
-    - https://copilot.microsoft.com
-    - https://x.ai
+	- ChatGPT: https://chatgpt.com
+    - Claude: https://claude.ai
+    - Gemini: https://gemini.google.com
+    - Perplexity: https://perplexety.ai
+    - CoPilot: https://copilot.microsoft.com
+    - Grok: https://x.ai
 - Bilder generieren
-    - https://openai.com/index/dall-e-3
-    - https://www.midjourney.com
+    - DALL-E: https://openai.com/index/dall-e-3
+    - Midjourney: https://www.midjourney.com
+    - Stable Diffusion: https://beta.dreamstudio.ai/generate
 - Videos generieren
-	- https://runwayml.com
+	- RunWay ML: https://runwayml.com
 - Animationsvideos generieren
-	- https://www.steve.ai
+	- SteveAI: https://www.steve.ai
 - Sprechervideos generieren
-	- https://www.heygen.com
+	- HeyGen: https://www.heygen.com
+    - synthesia: https://www.synthesia.io
 - Social Ads erstellen
-	- https://www.captions.ai
+	- Captions: https://www.captions.ai
 - Präsentationen + Websites erstellen
-	- https://gamma.app
+	- Gamma: https://gamma.app
 - Musik erstellen
-	- https://suno.com
+	- suno: https://suno.com
+    - udio: https://www.udio.com
 - Sound verbessern
-    - https://podcast.adobe.com/enhance
+    - Adobe: https://podcast.adobe.com/enhance
 - Stimme klonen
-	- https://elevenlabs.io
+	- ElevenLabs: https://elevenlabs.io
