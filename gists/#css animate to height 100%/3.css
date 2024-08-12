@@ -1,0 +1,17 @@
+:root {
+  interpolate-size: allow-keywords;
+}
+div {
+  display: none;
+  height: 0;
+  transition-property: all;
+  transition-duration: 0.42s;
+  transition-timing-function: ease-out;
+  transition-behavior: allow-discrete; 
+  overflow: hidden;
+}
+div.open {
+  @starting-style { height: 0; }
+  display: block;
+  height: auto;
+}
