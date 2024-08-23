@@ -40,7 +40,9 @@ Ich brauche jemanden, der sehr innovative Content-Ideen für Social Media erstel
 Erstelle basierend auf deinem letzten Output nun eine System Persona. Starte mit "Du bist...".
 ```
 
-### Bildgenerierungs-Prompts mit Platzhaltern erstellen
+### Bildgenerierungs-Prompts
+
+#### Beispiel 1 (Prompt generieren lassen)
 
 ```md
 Here is a text-to-image prompt formula.
@@ -48,11 +50,42 @@ Here is a text-to-image prompt formula.
 Create 3 prompts where subject is a yellow jeep driving, medium is a photo, and location is a foggy forest.
 ```
 
+#### Beispiel 2 (Prompt manuell zusammenbauen)
+```md
+[SCENE SUMMARY] [STYLE] (kurze Beschreibung der Szene + Stil/Medium)
+[COMPOSITION] (Schlüsselelemente, was im Mittelpunkt steht)
+[MOTIVE] (Position, Aussehen, Handlung, Aktivität)
+[ENVIRONMENT] (Beschreibung der Umgebung)
+[MOOD] (Stimmung und Atmosphäre)
+```
+
+**Beispiel:**
+
+```md
+[A relaxed fisherman in the early morning on a quiet lake in the Scottish Highlands.] [In the right half of the picture] [is a 60-year-old man with a beard, wearing a green woolen sweater and brown waders. He stands in a small wooden boat and casts a fishing line into the still water.] [The lake is surrounded by rolling hills and dense, misty forests. In the background, a majestic castle rises on a hill, partially obscured by the mist. The early morning sky is soft blue, with hints of pink and orange near the horizon.] [The general mood is peaceful and idyllic.]
+```
+
+#### Beispiel 3 (Midjourney)
+
+**Vorgabe eines Stils durch ein vorgegebenes Bild**
+
+```md
+A photo of a relaxed fisherman in the early morning. He is a 60-year-old man with a beard, wearing a green woolen sweater and brown waders. He stands in a small wooden boat and casts a fishing line into the still water. The lake is surrounded by rolling hills and dense, misty forests. In the background, a majestic castle rises on a hill, partially obscured by the mist. --sref https://s.mj.run/8FuvZBeb-Ss
+```
+
+**Vorgabe der Person durch ein vorgegebenes Bild**
+
+```md
+A photo of a relaxed fisherman in the early morning. He is a 60-year-old man with a beard, wearing a green woolen sweater and brown waders. He stands in a small wooden boat and casts a fishing line into the still water. The lake is surrounded by rolling hills and dense, misty forests. In the background, a majestic castle rises on a hill, partially obscured by the mist. --cref https://s.mj.run/8h-sZr67zac
+```
+
 ### Frameworks nutzen
 
 ### Vorab:
 ```md
-In deinen Trainingsdaten befinden sich viele Marketing-Frameworks. Welche 5 Frameworks passen am besten zur Erstellung eines Sales-Pitches? Stelle die Frameworks in einer Tabelle dar (Spalte 1: Name, Spalte 2: Stärken, Spalte 3: Schwächen)
+In deinen Trainingsdaten befinden sich viele Marketing-Frameworks.
+Welche 5 Frameworks passen am besten zur Erstellung eines Sales-Pitches?
+Stelle die Frameworks in einer Tabelle dar (Spalte 1: Name, Spalte 2: Stärken, Spalte 3: Schwächen)
 ```
 
 ### Prompt:

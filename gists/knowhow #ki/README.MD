@@ -33,3 +33,11 @@
 ## AGI
 
 - Artificial General Intelligence: Eine Maschine, die alle kognitiven Dinge, die Menschen tun, besser kann als sie.
+
+## Bildgenerierung
+
+- 4 Typen
+  - Text to Image (Input: Text)
+  - Image to Image (Input: Bild, z.B. Skizze)
+  - Inpainting (Teile eines vorhandenen Bildes wird markiert und verändert)
+  - Outpainting (Erweiterung eines vorhandenen Bildes außerhalb des Randes)

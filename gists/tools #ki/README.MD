@@ -8,7 +8,10 @@
 - Bilder generieren
     - DALL-E: https://openai.com/index/dall-e-3
     - Midjourney: https://www.midjourney.com
-    - Stable Diffusion: https://beta.dreamstudio.ai/generate
+    - Adobe Firefly: https://firefly.adobe.com
+    - FLUX: https://fal.ai/models/fal-ai/flux-realism / https://fal.ai/models/fal-ai/flux/dev
+    - Stable Diffusion: https://beta.dreamstudio.ai/generate / https://leonardo.ai
+    - Ideogram: https://ideogram.ai
 - Videos generieren
 	- RunWay ML: https://runwayml.com
 - Animationsvideos generieren
