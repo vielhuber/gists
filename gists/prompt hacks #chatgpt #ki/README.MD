@@ -50,7 +50,27 @@ Here is a text-to-image prompt formula.
 Create 3 prompts where subject is a yellow jeep driving, medium is a photo, and location is a foggy forest.
 ```
 
-#### Beispiel 2 (Prompt manuell zusammenbauen)
+#### Beispiel 2 (Prompt generieren lassen)
+
+```md
+Here is a prompt formula:
+
+[SCENE SUMMARY] [STYLE] (short description of the scene + style/medium)
+[COMPOSITION] (key elements, what is the focus)
+[MOTIVE] (position, appearance, action, activity)
+[ENVIRONMENT] (description of the environment)
+[MOOD] (mood and atmosphere)
+
+Create a prompt according to the above formula based on the following briefing:
+
+...
+
+ALTERNATIV
+
+Create a prompt according to the above formula based on the attached picture.
+```
+
+#### Beispiel 3 (Prompt manuell zusammenbauen)
 ```md
 [SCENE SUMMARY] [STYLE] (kurze Beschreibung der Szene + Stil/Medium)
 [COMPOSITION] (Schlüsselelemente, was im Mittelpunkt steht)
@@ -77,6 +97,36 @@ A photo of a relaxed fisherman in the early morning. He is a 60-year-old man wit
 
 ```md
 A photo of a relaxed fisherman in the early morning. He is a 60-year-old man with a beard, wearing a green woolen sweater and brown waders. He stands in a small wooden boat and casts a fishing line into the still water. The lake is surrounded by rolling hills and dense, misty forests. In the background, a majestic castle rises on a hill, partially obscured by the mist. --cref https://s.mj.run/8h-sZr67zac
+```
+
+**Ausgabe realistischer machen**
+
+```md
+--style raw --s 50
+```
+
+**Seitenverhältnis angeben**
+
+```md
+--ar 3:1
+```
+
+**5x4 Bilder erstellen**
+
+```md
+--repeat 5
+```
+
+**Mit Seeds statt URLs arbeiten (https://weirdwonderfulai.art/midjourney-sref-style-reference-seed-gallery/)**
+
+```md
+--sref 2321602411
+```
+
+**Mehrere Kombinationen erstellen (6 Bilder)**
+
+```md
+a pattern of {roses, lemons} --sref {123, 456, 789}
 ```
 
 ### Frameworks nutzen
