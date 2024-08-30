@@ -1,5 +1,7 @@
-### dispatch job
+### on every code change, don't forget to restart
 - `php artisan queue:restart`
+
+### dispatch job
 - `php artisan job:dispatch --env=production TestQueue argument1`
 
 ### test queue
