@@ -14,6 +14,8 @@
     - Ideogram: https://ideogram.ai
 - Videos generieren
 	- RunWay ML: https://runwayml.com
+    - Luma Dream Maschine: https://lumalabs.ai/dream-machine
+    - Haiper: https://haiper.ai
 - Animationsvideos generieren
 	- SteveAI: https://www.steve.ai
 - Sprechervideos generieren
