@@ -60,6 +60,35 @@
   - `git remote add all git@gitlab.com:xxx/A.git`
   - `git remote set-url --add all git@github.com:xxx/B.git``
   - `git push all --all`
+  
+##### modify git message
+
+###### install
+- `mkdir /var/www/git-hooks`
+- `git config --global core.hooksPath /var/www/git-hooks`
+- `nano /var/www/git-hooks/prepare-commit-msg`
+```sh
+#/bin/bash
+commitMsgFile=$1
+commitMode=$2
+# $2 is the commit mode
+# if $2 == 'commit'  => user used `git commit`
+# if $2 == 'message' => user used `git commit -m '…'`
+existingMsg=`cat $commitMsgFile`
+if [ "$commitMode" = "message" ]; then
+else
+  firstline=`head -n1 $commitMsgFile`
+  # We check the fist line of the commit message file.
+  # If it’s an empty string then user didn’t use `git commit --amend` so we can fill the commit msg file
+  if [ -z "$firstline" ]; then
+    echo "FICKEN " > $commitMsgFile
+  fi
+fi
+```
+- `chmod +x /var/www/git-hooks/prepare-commit-msg`
+
+###### uninstall
+- `git config --global --unset core.hooksPath`
 
 #### settings
 
