@@ -8,6 +8,28 @@ Example::calculate($obj)
 (new Example($obj))->calculate()
 ```
 
+### prevent static arguments
+
+```php
+// bad
+public static int $foo;
+
+// good
+public int $foo;
+```
+
+### loops
+
+```php
+$countries = ['Europe' => 'Germany'];
+
+// bad
+foreach($countries as $countries__key => $countries__value) { }
+
+// good
+foreach($countries as $continent => $country) { }
+```
+
 ### cases
 
 ```php
@@ -41,6 +63,12 @@ $value = $foo->calc(save: true);
 
 // good
 $foo->save()->calc()->getValue();
+
+// bad
+(new Foo(data: 'bar'))->calc()
+  
+// good
+(new Foo())->setData(data: 'bar')->calc()
 ```
 
 ### use framework functions
@@ -150,10 +178,16 @@ Carbon::now()->subYears(10)->year
 
 ```php
 // bad
-public static function foo($a, $b, $c = false) {}
+public static function foo($a, $b = null, $c = false) {}
 
 // good
-public function foo(int $a, ?string $b, bool $c = false): void {}
+protected function foo(int $a, ?string $b = null, bool $c = false): void {}
+
+// bad
+public $foo;
+
+// good
+protected int $foo;
 ```
 
 ### use jobs to dispatch long running tasks
@@ -164,6 +198,29 @@ longRunningTask();
 
 // good
 CalculateLongRunningTaskQueue::dispatch();
+```
+
+### multiline comments
+
+```php
+// bad
+// this is
+// a multiline
+// comment
+
+// bad
+/*
+this is
+a multiline
+comment
+*/
+
+// good
+/**
+ * this is
+ * a multiline
+ * comment
+ */
 ```
 
 ### comment functions (e.g. using copilot)
