@@ -64,28 +64,32 @@
 ##### modify git message
 
 ###### install
-- `mkdir /var/www/git-hooks`
-- `git config --global core.hooksPath /var/www/git-hooks`
-- `nano /var/www/git-hooks/prepare-commit-msg`
+- `mkdir -p ~/git-template/hooks`
+- `git config --global core.hooksPath ~/git-template/hooks`
+- `nano ~/git-template/hooks/prepare-commit-msg`
 ```sh
-#/bin/bash
-commitMsgFile=$1
-commitMode=$2
+#!/bin/bash
+commit_msg_file=$1
+commit_mode=$2
+branch_name=`git rev-parse --abbrev-ref HEAD`
+existing_msg=`cat $commit_msg_file`
 # $2 is the commit mode
 # if $2 == 'commit'  => user used `git commit`
 # if $2 == 'message' => user used `git commit -m '…'`
-existingMsg=`cat $commitMsgFile`
-if [ "$commitMode" = "message" ]; then
+if [ "$commit_mode" = "message" ]; then
+    # example: add branch name
+    echo -n "[$branch_name] " > $commit_msg_file
+    echo $existing_msg >> $commit_msg_file
 else
-  firstline=`head -n1 $commitMsgFile`
-  # We check the fist line of the commit message file.
-  # If it’s an empty string then user didn’t use `git commit --amend` so we can fill the commit msg file
+  firstline=`head -n1 $commit_msg_file`
+  # we check the fist line of the commit message file.
+  # if it’s an empty string then user didn’t use `git commit --amend` so we can fill the commit msg file
   if [ -z "$firstline" ]; then
-    echo "FICKEN " > $commitMsgFile
+    echo "[$branch_name] " > $commit_msg_file
   fi
 fi
 ```
-- `chmod +x /var/www/git-hooks/prepare-commit-msg`
+- `chmod +x ~/git-template/hooks/prepare-commit-msg`
 
 ###### uninstall
 - `git config --global --unset core.hooksPath`
