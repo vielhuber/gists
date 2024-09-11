@@ -1,3 +1,15 @@
+## Rollen bei ChatGPT
+
+- `system`
+  - Die Systemrolle wird verwendet, um Setup-Informationen oder Kontext in Form von Anweisungen und Richtlinien bereitzustellen, die das Verhalten des Modells bestimmen.
+  - Beispiel: "Du bist ein professioneller Stand-Up-Comedian. Dein Ton ist stets frech und spitzfindig."
+- `user`
+  - Diese Rolle vertritt den menschlichen Benutzer im Gespräch. Eingaben des Benutzers leiten das Gespräch und führen zu Antworten des Assistenten.
+  - Beispiel: "Erzähle mir einen Witz!"
+- `assistant`
+  - Dies ist die Rolle des Modells selbst, das auf Benutzereingaben basierend auf dem vom System festgelegten Kontext reagiert.
+  - Beispiel: "Treffen sich 2 Päpste"
+
 ## SPEAR-Framework
 
 - S ~ Start with a problem: "Ich benötige eine überzeugende Meta-Description für einen Blogartikel über KI-Automatisierung in der Suchmaschinenoptimierung."
