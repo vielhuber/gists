@@ -18,7 +18,7 @@ public static int $foo;
 public int $foo;
 ```
 
-### loops
+### loop namings
 
 ```php
 $countries = ['Europe' => 'Germany'];
@@ -28,6 +28,24 @@ foreach($countries as $countries__key => $countries__value) { }
 
 // good
 foreach($countries as $continent => $country) { }
+
+$dataToTest = [7, 42];
+
+// bad
+foreach($dataToTest as $dataToTest__value) { }
+
+// good
+foreach($dataToTest as $testValue) { }
+```
+
+### prevent abbreviations
+
+```php
+// bad
+$model->calc()
+  
+// good
+$model->calculate()
 ```
 
 ### cases
@@ -53,6 +71,41 @@ exampleFunction(['foo' => 'bar', 'bar' => 'baz'])
   
 // good
 exampleFunction(foo: 'bar', bar: 'baz')
+```
+
+### prevent arrays (2)
+
+```php
+// bad
+$foo = (object) ['foo' => 'bar', 'bar' => 'baz']; // anonymous object with properties 'foo' and 'bar'
+
+// good
+$foo = (new Foo())->foo('bar')->bar('baz')->get(); // Foo object with properties 'foo' and 'bar'
+```
+
+### use classes / use getters / prevent arrays
+
+```php
+// bad
+$mapping = getMapping('test'); // ['foo' => 42, 'bar' => 7]
+
+// good
+$mapping = (new MappingGetter())->value('test')->get(); // Mapping object
+class Mapping {
+ 	public ?int $foo; 
+  	public ?int $bar;
+}
+class MappingGetter {
+  	public string $value;
+ 	public function value($value) { $this->value = $value; return $this; }
+  	public function get() {
+      $mapping = (new Mapping());
+      $mapping->foo = 42;
+      $mapping->bar = 7;
+      /* ... more logic ... */
+      return $mapping;
+    }
+}
 ```
 
 ### function chaining
@@ -81,6 +134,40 @@ $str = str_replace(' ', '', $str);
 
 // good
 $str = Str::of($str)->trim()->upper()->replace(' ', '')->toString();
+```
+
+### prevent duplicate database calls
+
+```php
+// bad
+$model = Model::orderBy('id');
+$count = $model->count(); // counts in db
+$model = $model->get();
+
+// good
+$model = Model::orderBy('id');
+$model = $model->get();
+$count = $model->count(); // counts in collection
+```
+
+### output console commands
+
+```php
+// bad
+echo $msg . PHP_EOL; // with newline in command
+echo $msg . ' '; // without newline in command
+echo str_pad($msg, 99, ' ', STR_PAD_RIGHT) . "\r"; // with overwrite in command
+(new \Symfony\Component\Console\Output\ConsoleOutput())->writeln($msg); // with newline in controller
+(new \Symfony\Component\Console\Output\ConsoleOutput())->info($msg); // without newline in controller
+(new \Symfony\Component\Console\Output\ConsoleOutput())->write(str_pad($msg, 99, ' ', STR_PAD_RIGHT) . "\r"); // with overwrite in controller
+
+// good
+$this->info($msg); // with newline in command
+$this->output->write($msg); // without newline in command
+$this->output->write(str_pad($msg, 99, ' ', STR_PAD_RIGHT) . "\r"); // with overwrite in command
+ConsoleOutputHelper::info($msg); // with newline in controller
+ConsoleOutputHelper::write($msg); // without newline in controller
+ConsoleOutputHelper::overwrite($msg); // with overwrite in controller
 ```
 
 ### prevent too much nesting
@@ -142,6 +229,17 @@ if($bar && !$foo) {
 }
 ```
 
+### prevent too much function calls
+
+```php
+// bad
+foo($value, true, true, false, 42)
+  
+// good
+foo(value: $value, save: true, cache: true, force: false, amount: 42)
+$foo->withSave()->withCache()->withoutForce()->withAmount(42)->calculate($value);
+```
+
 ### outsource long code parts
 
 ```php
@@ -187,7 +285,7 @@ protected function foo(int $a, ?string $b = null, bool $c = false): void {}
 public $foo;
 
 // good
-protected int $foo;
+protected ?int $foo;
 ```
 
 ### use jobs to dispatch long running tasks

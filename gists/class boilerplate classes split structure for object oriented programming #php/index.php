@@ -1,4 +1,7 @@
 <?php
+// if inside namespace
+namespace Foo\Bar;
+  
 // this must be outside
 require_once __DIR__ . '/vendor/autoload.php';
 use Foo\Bar;
