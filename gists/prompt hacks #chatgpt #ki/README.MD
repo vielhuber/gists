@@ -19,7 +19,7 @@
 - R ~ Rinse & Repeat: Falls die Antwort nicht optimal ist, benötigt die KI Feedback zur Verbesserung
 
 
-## Guter Prompt
+## Prompt-Aufbau (1)
 
 ```md
 # Instruktion (Rolle und Aufgabe)
@@ -42,6 +42,23 @@ Als kreativer Vermarkter musst du sicherstellen, dass der Inhalt ansprechend und
 - Alle Inhalte sollten deutlich machen, wie sie das identifizierte Problem lösen oder lindern.
 - Der Ton sollte inspirierend, lehrreich und inklusiv sein.
 ```
+
+## Prompt-Aufbau (2)
+
+```md
+# Identity
+- "You are a very enthusiastic Laravel-Expert who loves to help people!"
+
+# Instruction
+. "Please answer..."
+
+# Condition
+- "If you are unsure and the answer is not available in the documentation, say "Sorry, I don't know how to help with that."
+
+# Output
+- "Provide an accurate title in a H3 and answer as markdown".
+```
+
 
 ## Tipps
 
@@ -232,3 +249,26 @@ Es ist wichtig, dass du die folgenden Schritte befolgst:
 - "Stelle sicher, dass deine Antwort unvoreingenommen ist und nicht auf Stereotypen basiert."
 
 - "Stelle sicher, dass der Text natürlich klingt. Ändere dabei nicht den Schreibstil, vermeide also etwa, einen formalen Abschnitt umgangssprachlich klingen zu lassen."
+
+## Vector Embeddings / RAG (Retrieval Augmented Generation)
+
+- Vector Embeddings: Große Arrays aus Zahlen, die die semantische Bedeutung des Inputs darstellt
+- RAG: Pattern, um neue Daten an die KI zu senden
+- Ein einfacher Satz wird umgewandelt in einen Vektor
+- Nutzbar, um ähnliche Sätze zu erkennen (ähnliche Vektoren liegen näher beieinander, deren Abstand über einen Schwellenwert festgelegt werden)
+- Nützlich in Empfehlungsalgorithmen, Klassifizierungsalgorithmen, semantische Suchen
+- Abspeicherbar z.B. in Postgres im Datentyp PG Vector
+- Beispielhafter Workflow
+  - Wandle vorab z.B. Dokumentations-Sektionen (jeweils einzeln) in Vector Embeddings um und speichere diese in Datenbank
+  - Wandle Input in Vector Embedding um
+  - Frage aus Datenbank relevante, ähnliche Vector Embeddings zum Input ab (mit dem inneren Produkt <#>)
+    ```php
+    $sections = $this->doc->sections()
+        ->selectRaw('*,(sections.embedding <# ? ) * -1 AS similarity', [$embedding])
+        ->whereRaw('length(sections.body) >= ?', [$options->minLength])
+        ->whereRaw('(sections.embedding <# ?) * -1 > ?', [$embedding, $options->minThreshold])
+        ->orderByRaw('sections.embedding <# ?', [$embedding])
+        ->take($options->maxCount)
+        ->get();
+    ```
+  - Sende Input (als `user`) sowie relevante Dokumentationsteile (als `system`) an die KI, die dann die Antwort generiert

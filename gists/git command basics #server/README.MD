@@ -61,39 +61,6 @@
   - `git remote set-url --add all git@github.com:xxx/B.git``
   - `git push all --all`
   
-##### modify git message
-
-###### install
-- `mkdir -p ~/git-template/hooks`
-- `git config --global core.hooksPath ~/git-template/hooks`
-- `nano ~/git-template/hooks/prepare-commit-msg`
-```sh
-#!/bin/bash
-commit_msg_file=$1
-commit_mode=$2
-branch_name=`git rev-parse --abbrev-ref HEAD`
-existing_msg=`cat $commit_msg_file`
-# $2 is the commit mode
-# if $2 == 'commit'  => user used `git commit`
-# if $2 == 'message' => user used `git commit -m '…'`
-if [ "$commit_mode" = "message" ]; then
-    # example: add branch name
-    echo -n "[$branch_name] " > $commit_msg_file
-    echo $existing_msg >> $commit_msg_file
-else
-  firstline=`head -n1 $commit_msg_file`
-  # we check the fist line of the commit message file.
-  # if it’s an empty string then user didn’t use `git commit --amend` so we can fill the commit msg file
-  if [ -z "$firstline" ]; then
-    echo "[$branch_name] " > $commit_msg_file
-  fi
-fi
-```
-- `chmod +x ~/git-template/hooks/prepare-commit-msg`
-
-###### uninstall
-- `git config --global --unset core.hooksPath`
-
 #### settings
 
 ##### git config locations (down to up)
