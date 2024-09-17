@@ -335,3 +335,13 @@ public function foo(): ?float {}
  */
 public function foo(): ?float {}
 ```
+
+### phpunit tests: the expected value should come first as an argument      
+
+```php
+// bad
+$this->assertSame($foo, 'bar');
+
+// good
+$this->assertSame('bar', $foo);
+```

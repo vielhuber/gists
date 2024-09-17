@@ -47,6 +47,9 @@ class Test extends \PHPUnit\Framework\TestCase
             )
         );
         $this->assertCount(10, 1+2+3+4);
+        
+      	// assert with fail message (helpful for debugging)
+      	$this->assertTrue(false, 'some additional information');
       
       	// live log to console while running
       	fwrite(STDERR, print_r('foo'.PHP_EOL, true));
