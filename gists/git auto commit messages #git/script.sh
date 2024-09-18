@@ -4,7 +4,7 @@
 chatgpt_api_key="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 chatgpt_model="gpt-4o"
 
-debug=true
+debug=false
 declare -A prompts=(
     ["system"]="
         You are a professional code reviewer.
