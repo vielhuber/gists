@@ -122,6 +122,9 @@ if gitignore is not working for a specific file/folder (this does not(!) delete 
 #### see latest diffs / changes
 - git diff
 
+#### see latest diffs / changes (ignoring prettier changes!)
+git diff -w --word-diff-regex=[^[:space:]] --color | grep --color=never -P '\e\[3[12]m'
+
 #### get current commit hash (outputs: 6e559cb)
 - git rev-parse --short HEAD
 - git log --pretty=format:'%h' -n 1
