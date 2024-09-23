@@ -44,5 +44,10 @@ parameters:
 ```sh
 ./vendor/bin/phpstan analyse
 ./vendor/bin/phpstan analyse --memory-limit=2G
-./vendor/bin/phpstan analyse --memory-limit=2G --clear-result-cache
+./vendor/bin/phpstan clear-result-cache # sometimes (especially when using wsl, the cache gets stale and changes don't reflext)
 ```
+
+## vscode extension
+
+- https://marketplace.visualstudio.com/items?itemName=SanderRonde.phpstan-vscode
+- runs on every file change and shows errors in tab "Problems"

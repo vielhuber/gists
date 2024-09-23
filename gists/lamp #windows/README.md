@@ -13,6 +13,7 @@
 - real ssl certificates for all hosts and all devices
 - supports reverse proxy configuration
 - native linux performance (can handle node_modules and vendor) with wsl2
+- php debugging and profiling with xdebug
 
 ## installation
 
@@ -357,6 +358,9 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```chmod +x /var/log/php-error.log```
 - in combination with ```error_log``` in php.ini logging now works for both php fpm (this is always the case for specific versions) and php as an apache module (this is always the case for general version)
 
+#### create xdebug profile output dir
+- ```mkdir -p /tmp/xdebug```
+
 #### shared php.ini configuration
 - ```sudo nano /etc/php/custom.ini```
 ```
@@ -391,12 +395,16 @@ opcache.max_file_size=0
 opcache.validate_timestamps=1
 opcache.revalidate_freq=2
 
-[XDebug]
-xdebug.profiler_enable = off
-xdebug.max_nesting_level = 10000
-xdebug.var_display_max_children= -1
-xdebug.var_display_max_data = -1
-xdebug.var_display_max_depth = 10
+[xdebug]
+# see: https://xdebug.org/docs/all_settings#mode
+#xdebug.mode=off   
+xdebug.mode=debug,profile,trace
+# needed by vscode extension
+xdebug.start_with_request=yes
+# folder for analyzing profile dumps
+xdebug.output_dir="/tmp/xdebug"
+# not needed, since it is already in /etc/php/7.4/fpm/conf.d/20-xdebug.ini
+#zend_extension=xdebug.so
 ```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/apache2/conf.d/custom.ini```
