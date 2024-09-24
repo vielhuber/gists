@@ -29,10 +29,10 @@ try {
         // save as eml
         $mail->embedImageAttachments();
         $eml_filename = tempnam(sys_get_temp_dir(), 'mail_') . '.eml';
-        $unseen = in_array($mails_id__value, $mailbox->searchMailbox('UNSEEN', true));
+        $unseen = !$mail->isSeen;
         $mailbox->saveMail($mails_id__value, $eml_filename);
         if ($unseen) {
-            $mailbox->markMailAsUnread($mail_id); // undo saveMail setting mail as read
+            $mailbox->markMailAsUnread($mails_id__value); // undo saveMail setting mail as read
         }
 
         $mails[] = [

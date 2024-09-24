@@ -1,22 +1,24 @@
-## plain
+## installation
 
-### installation
+### plain
 
 ```sh
 composer require --dev phpstan/phpstan
 ```
 
-### usage
+`phpstan.neon`:
 
-```sh
-./vendor/bin/phpstan analyse src tests
-./vendor/bin/phpstan analyse --level 5 src tests
-./vendor/bin/phpstan analyse --generate-baseline src tests
+```neon
+parameters:
+
+    paths:
+        - path/to/subfolder/
+
+    level: 0
 ```
 
-## laravel
+### laravel
 
-### installation
 ```sh
 composer require --dev "larastan/larastan:^2.0"
 ```
@@ -39,9 +41,35 @@ parameters:
     level: 0
 ```
 
-### usage
+### wordpress
 
 ```sh
+composer require --dev szepeviktor/phpstan-wordpress
+```
+
+`phpstan.neon`:
+
+```neon
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+
+    paths:
+        - wp-config/themes/blank/
+
+    level: 0
+```
+
+## usage
+
+```sh
+# without config
+./vendor/bin/phpstan analyse src tests
+./vendor/bin/phpstan analyse --level 5 src tests
+./vendor/bin/phpstan analyse --generate-baseline src tests
+
+# with config
 ./vendor/bin/phpstan analyse
 ./vendor/bin/phpstan analyse --memory-limit=2G
 ./vendor/bin/phpstan clear-result-cache # sometimes (especially when using wsl, the cache gets stale and changes don't reflext)
@@ -51,3 +79,5 @@ parameters:
 
 - https://marketplace.visualstudio.com/items?itemName=SanderRonde.phpstan-vscode
 - runs on every file change and shows errors in tab "Problems"
+- useful plugin setting:
+	- enable "single file mode"
