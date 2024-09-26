@@ -114,7 +114,7 @@ Create a prompt according to the above formula based on the attached picture.
 [A relaxed fisherman in the early morning on a quiet lake in the Scottish Highlands.] [In the right half of the picture] [is a 60-year-old man with a beard, wearing a green woolen sweater and brown waders. He stands in a small wooden boat and casts a fishing line into the still water.] [The lake is surrounded by rolling hills and dense, misty forests. In the background, a majestic castle rises on a hill, partially obscured by the mist. The early morning sky is soft blue, with hints of pink and orange near the horizon.] [The general mood is peaceful and idyllic.]
 ```
 
-#### Beispiel 3 (Midjourney)
+#### Beispiel 4 (Midjourney)
 
 **Vorgabe eines Stils durch ein vorgegebenes Bild**
 
