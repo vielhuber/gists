@@ -24,8 +24,8 @@
 - we abuse our own public domain as a dns that maps to a local ip in order to prevent setting local hosts AND having the ability to access via smartphones/tablets from the same network
 - DomainFactory
 - A-Records
-- local.vielhuber.de => 192.168.188.22
-- *.local.vielhuber.de => 192.168.188.22
+- local.vielhuber.de => 192.168.0.2
+- *.local.vielhuber.de => 192.168.0.2
 - fritz.box > Heimnetz > Netzwerk > Netzwerkeinstellungen > DNS-Rebind-Schutz:
   - vielhuber.de
   - local.vielhuber.de
@@ -472,7 +472,7 @@ xdebug.output_dir="/tmp/xdebug"
   - PowerShell.exe -File \\wsl$\Ubuntu\var\www\lamp\firewall.ps1
   - Mit höchsten Privilegien ausführen
   - OBSOLET: etc/hosts: 172.31.142.215 ***.vielhuber.de
-  - OBSOLET: Oder alternativ bei DF von 192.168.188.22 auf 172.31.142.215 setzen (muss ich später wieder rückgängig machen!)
+  - OBSOLET: Oder alternativ bei DF von 192.168.0.2 auf 172.31.142.215 setzen (muss ich später wieder rückgängig machen!)
   - OBSOLET: etc/hosts: #127.0.0.1      localhost und #::1             localhost einkommentieren
 - php error
   - `mkdir -p /run/php/`
