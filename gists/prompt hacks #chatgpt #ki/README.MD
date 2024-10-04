@@ -60,26 +60,21 @@ Als kreativer Vermarkter musst du sicherstellen, dass der Inhalt ansprechend und
 ```
 
 
-## Tipps
+## Bildgenerierung
 
-### Rollenbeschreibung generieren lassen
+### Beispiel 1 (Prompt generieren lassen)
 
-```md
-Ich brauche jemanden, der sehr innovative Content-Ideen für Social Media erstellt. Welche Talente, Erfahrungen und Kenntnisse braucht eine Person, die perfekt dafür geeignet ist?
-Erstelle basierend auf deinem letzten Output nun eine System Persona. Starte mit "Du bist...".
-```
-
-### Bildgenerierungs-Prompts
-
-#### Beispiel 1 (Prompt generieren lassen)
+**Variante 1**
 
 ```md
-Here is a text-to-image prompt formula.
+Here is a text-to-image prompt formula:
+
 [Perspective] [Medium] [Subject] [Description of Subject] [Style] [Location] [Description of Location] [Lighting] [Mood]
+
 Create 3 prompts where subject is a yellow jeep driving, medium is a photo, and location is a foggy forest.
 ```
 
-#### Beispiel 2 (Prompt generieren lassen)
+**Variante 2**
 
 ```md
 Here is a prompt formula:
@@ -91,15 +86,16 @@ Here is a prompt formula:
 [MOOD] (mood and atmosphere)
 
 Create a prompt according to the above formula based on the following briefing:
+Photo of a yellow jeep driving in a foggy forest.
+```
 
-...
+**Variante 3**
 
-ALTERNATIV
-
+```md
 Create a prompt according to the above formula based on the attached picture.
 ```
 
-#### Beispiel 3 (Prompt manuell zusammenbauen)
+### Beispiel 2 (Prompt manuell zusammenbauen)
 ```md
 [SCENE SUMMARY] [STYLE] (kurze Beschreibung der Szene + Stil/Medium)
 [COMPOSITION] (Schlüsselelemente, was im Mittelpunkt steht)
@@ -108,13 +104,13 @@ Create a prompt according to the above formula based on the attached picture.
 [MOOD] (Stimmung und Atmosphäre)
 ```
 
-**Beispiel:**
+**Beispiel (ohne Klammern verwenden)**
 
 ```md
 [A relaxed fisherman in the early morning on a quiet lake in the Scottish Highlands.] [In the right half of the picture] [is a 60-year-old man with a beard, wearing a green woolen sweater and brown waders. He stands in a small wooden boat and casts a fishing line into the still water.] [The lake is surrounded by rolling hills and dense, misty forests. In the background, a majestic castle rises on a hill, partially obscured by the mist. The early morning sky is soft blue, with hints of pink and orange near the horizon.] [The general mood is peaceful and idyllic.]
 ```
 
-#### Beispiel 4 (Midjourney)
+### Beispiel 3 (Midjourney)
 
 **Vorgabe eines Stils durch ein vorgegebenes Bild**
 
@@ -156,6 +152,16 @@ A photo of a relaxed fisherman in the early morning. He is a 60-year-old man wit
 
 ```md
 a pattern of {roses, lemons} --sref {123, 456, 789}
+```
+
+
+## Tipps
+
+### Rollenbeschreibung generieren lassen
+
+```md
+Ich brauche jemanden, der sehr innovative Content-Ideen für Social Media erstellt. Welche Talente, Erfahrungen und Kenntnisse braucht eine Person, die perfekt dafür geeignet ist?
+Erstelle basierend auf deinem letzten Output nun eine System Persona. Starte mit "Du bist...".
 ```
 
 ### Frameworks nutzen

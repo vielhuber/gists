@@ -41,3 +41,31 @@
   - Image to Image (Input: Bild, z.B. Skizze)
   - Inpainting (Teile eines vorhandenen Bildes wird markiert und verändert)
   - Outpainting (Erweiterung eines vorhandenen Bildes außerhalb des Randes)
+  
+## Text-To-Speech / Speech-To-Text
+  - Spracherkennung: Speech-To-Text
+    - 1. Akustische Analyse
+    - 2. Merkmalsextraktion
+    - 3. Akustisches Modell
+    - 4. Sprachmodell
+    - 5. Dekodierung
+  - Sprachsynthese: Text-To-Speech
+    - 1. Textanalyse
+    - 2. Phonegenerierung
+    - 3. Prosodie Generierung
+    - 4. Signalverarbeitung
+  - Herausforderungen
+    - Akzentvielfalt und Dialekte
+    - Hintergrundgeräusche
+    - Homophone
+    - Natürliche Intonation
+    - Kontextverständnis
+    - Multilingualität
+  - Anwendungsfälle
+    - Barrierefreiheit
+    - E-Learning
+    - Kundenservice
+    - Navigation
+    - Content-Erstellung
+    - Marketing
+    - Gaming
