@@ -22,6 +22,11 @@ rsync --delete -azh --stats -e "ssh" user@tld.com:/remote/folder/ /local/folder
 rsync --delete -ahvzP --stats -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" user@tld.com:/remote/folder/ /local/folder
 ```
 
+## local => local
+```
+rsync -ah --progress /local/source/ /local/target
+```
+
 ## more options
 
 - `--no-perms --no-owner --no-group`: don't sync file permissions (this is quite important)
