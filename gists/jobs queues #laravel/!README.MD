@@ -12,6 +12,11 @@
 ```php
 \Illuminate\Support\Facades\Queue::size();
 ```
+
+```php
+DB::table('jobs')->where('queue', 'default')->where('payload', 'like', '%CustomNameQueue%')->count()
+```
+
 ```sql
 SELECT COUNT(*) FROM jobs
 ```
