@@ -47,3 +47,6 @@
 ### Musik erstellen
 - suno: https://suno.com
 - udio: https://www.udio.com
+
+### Podcasts erstellen
+- Google NotebookLM: https://notebooklm.google
