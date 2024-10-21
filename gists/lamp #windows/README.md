@@ -374,12 +374,12 @@ upload_max_filesize = 800M
 max_input_vars = 100000
 max_file_uploads = 5000
 realpath_cache_size = 4M
-#allow_url_include = On
-#allow_url_fopen = On
+;allow_url_include = On
+;allow_url_fopen = On
 date.timezone = 'Europe/Berlin'
 display_errors = On
 error_log = /var/log/php-error.log
-#error_reporting = E_ALL & ~E_NOTICE
+;error_reporting = E_ALL & ~E_NOTICE
 error_reporting = E_ALL
 phar.readonly = 0
 
@@ -391,20 +391,32 @@ opcache.max_accelerated_files=32531
 opcache.save_comments=1
 opcache.fast_shutdown=0
 opcache.max_file_size=0
-#we set this to 1 so that we can set revalidate_freq on a project basis to a higher value
+; we set this to 1 so that we can set revalidate_freq on a project basis to a higher value
 opcache.validate_timestamps=1
 opcache.revalidate_freq=2
 
 [xdebug]
-# see: https://xdebug.org/docs/all_settings#mode
-#xdebug.mode=off   
-xdebug.mode=debug,profile,trace
-# needed by vscode extension
+; mode (see: https://xdebug.org/docs/all_settings#mode)
+;   reasonable default
+xdebug.mode=debug
+;   disabled
+;xdebug.mode=off
+;   step debugging
+;xdebug.mode=debug
+;   performance profiling (be aware of load/space)
+;xdebug.mode=profile
+;   trace profiling (record args)
+;xdebug.mode=trace
+
+; starting mode
+;   always
 xdebug.start_with_request=yes
-# folder for analyzing profile dumps
+;   only on get request (?XDEBUG_TRIGGER=1, ?XDEBUG_PROFILE=1, ?XDEBUG_TRACE=1, ?XDEBUG_SESSION=1)
+;xdebug.start_with_request=trigger
+;   folder for analyzing profile dumps
 xdebug.output_dir="/tmp/xdebug"
-# not needed, since it is already in /etc/php/7.4/fpm/conf.d/20-xdebug.ini
-#zend_extension=xdebug.so
+;   not needed, since it is already in /etc/php/7.4/fpm/conf.d/20-xdebug.ini
+;zend_extension=xdebug.so
 ```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/apache2/conf.d/custom.ini```
@@ -676,6 +688,13 @@ local   all   all                       md5
 host    all   all        127.0.0.1/32   md5
 host    all   all        ::1/128        md5
 ```
+
+#### postgres: upgrade to newest version (example from 15 to 17)
+- `sudo apt-get install postgresql postgresql-contrib`
+- `pg_lsclusters`
+- `sudo pg_dropcluster 15 main --stop`
+- `sudo pg_upgradecluster -v 17 15 main`
+# redo the config settings mentionned above (with folder `/17/`)
 
 #### oraclesql
 - sign in https://container-registry.oracle.com and accept TOS

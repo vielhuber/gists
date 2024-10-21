@@ -14,7 +14,7 @@
 ```
 
 ```php
-DB::table('jobs')->where('queue', 'default')->where('payload', 'like', '%CustomNameQueue%')->count()
+DB::table('jobs')->where('queue', 'default')->where('payload', 'LIKE', '%CustomNameQueue%')->count()
 ```
 
 ```sql
@@ -23,6 +23,10 @@ SELECT COUNT(*) FROM jobs
 
 ### clear queue
 - `php artisan queue:clear`
+
+```php
+DB::table('jobs')->where('queue', 'default')->where('payload', 'LIKE', '%CustomNameQueue%')->delete();
+```
 
 ### use named queues
 - `ExampleQueue::dispatch()->onQueue('queue_name');`
