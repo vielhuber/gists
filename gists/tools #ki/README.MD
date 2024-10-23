@@ -5,7 +5,10 @@
 - Perplexity: https://perplexety.ai
 - CoPilot: https://copilot.microsoft.com
 - Grok: https://x.ai
-    
+
+### Recherche / Podcasts erstellen
+- Google NotebookLM: https://notebooklm.google
+
 ### Bilder generieren
 - DALL-E: https://openai.com/index/dall-e-3
 - Adobe Firefly: https://firefly.adobe.com
@@ -47,6 +50,3 @@
 ### Musik erstellen
 - suno: https://suno.com
 - udio: https://www.udio.com
-
-### Podcasts erstellen
-- Google NotebookLM: https://notebooklm.google
