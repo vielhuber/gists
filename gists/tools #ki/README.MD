@@ -5,9 +5,15 @@
 - Perplexity: https://perplexety.ai
 - CoPilot: https://copilot.microsoft.com
 - Grok: https://x.ai
+- Meta Llama: https://www.llama.com
+- Mistral: https://mistral.ai
+- DeutschlandGPT: https://www.deutschlandgpt.de
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
+
+### Selbsthosting
+- Ollama: https://ollama.com
 
 ### Bilder generieren
 - DALL-E: https://openai.com/index/dall-e-3
