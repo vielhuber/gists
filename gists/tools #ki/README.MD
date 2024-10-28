@@ -1,7 +1,7 @@
 ### Universal
-- ChatGPT: https://chatgpt.com
-- Claude: https://claude.ai
-- Gemini: https://gemini.google.com
+- OpenAI ChatGPT: https://chatgpt.com
+- Anthropic Claude: https://claude.ai
+- Google Gemini: https://gemini.google.com
 - Perplexity: https://perplexety.ai
 - CoPilot: https://copilot.microsoft.com
 - Grok: https://x.ai
@@ -14,6 +14,9 @@
 
 ### Selbsthosting
 - Ollama: https://ollama.com
+
+### Computer steuern
+- Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
 
 ### Bilder generieren
 - DALL-E: https://openai.com/index/dall-e-3

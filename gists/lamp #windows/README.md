@@ -398,7 +398,7 @@ opcache.revalidate_freq=2
 [xdebug]
 ; mode (see: https://xdebug.org/docs/all_settings#mode)
 ;   reasonable default
-xdebug.mode=debug
+xdebug.mode=debug,profile
 ;   disabled
 ;xdebug.mode=off
 ;   step debugging
@@ -409,10 +409,12 @@ xdebug.mode=debug
 ;xdebug.mode=trace
 
 ; starting mode
-;   always
-xdebug.start_with_request=yes
-;   only on get request (?XDEBUG_TRIGGER=1, ?XDEBUG_PROFILE=1, ?XDEBUG_TRACE=1, ?XDEBUG_SESSION=1)
-;xdebug.start_with_request=trigger
+;   always (not recommended)
+;xdebug.start_with_request=yes
+;   only when specific get parameters / cookies are set
+;   (?XDEBUG_TRIGGER=1, ?XDEBUG_PROFILE=1, ?XDEBUG_TRACE=1, ?XDEBUG_SESSION=1)
+;   this is best in conjunction with Chrome extension "Xdebug helper"
+xdebug.start_with_request=trigger
 ;   folder for analyzing profile dumps
 xdebug.output_dir="/tmp/xdebug"
 ;   not needed, since it is already in /etc/php/7.4/fpm/conf.d/20-xdebug.ini
