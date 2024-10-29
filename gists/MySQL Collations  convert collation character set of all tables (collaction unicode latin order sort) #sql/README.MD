@@ -3,6 +3,7 @@
 - Ein Character Set ist der Zeichenvorrat für alle Daten in der Datenbank.
   - utf8: Entspricht utf8mb3 (später wird utf8mb3 auf mb4 gemappt)
   - utf8mb4: Für jeden Charakter werden 4 Bytes reserviert. Nur dann passen auch Emojis rein.
+- Es gibt komplexere Emojis, die manchmal nicht gehen (😀 vs. ❤️)
 - Eine Kollation regelt die Sortierregeln dieses Zeichenvorrats bei der Benutzung von ORDER BY
 - Es gibt Kollations für die Datenbank, Tabelle und Spalten (die Collation für die Spalten sind entscheidend, alles andere hat nur Auswirkung auf die Neuanlegung von Spalten bzw. Tabellen)
 - Eine sehr weit verbreitete und übliche Kombination ist utf8_unicode_ci, utf8 und utf_general_ci (das verwenden wir bei allen Projekten)
@@ -40,5 +41,10 @@ AND TABLE_TYPE="BASE TABLE"
 SELECT CONCAT("ALTER TABLE ", TABLE_NAME," CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;") AS ExecuteTheString
 FROM INFORMATION_SCHEMA.TABLES
 WHERE TABLE_SCHEMA="dbname"
-AND TABLE_TYPE="BASE TABLE"
+AND TABLE_TYPE="BASE TABLE";
+
+# disable NO_ZERO_IN_DATE / NO_ZERO_DATE that produces errors (gets reset after restart)
+SET sql_mode = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+# run the above commands
+# ...
 ```

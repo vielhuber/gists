@@ -768,6 +768,12 @@ rm "$t"
 - ```rm master.zip```
 - ```cpdf --help```
 
+#### tesseract
+- ```sudo apt install tesseract-ocr```
+- ```sudo apt install libtesseract-dev```
+- ```sudo apt-get install tesseract-ocr-deu```
+- ```tesseract --version```
+
 #### msgconvert
 - ```sudo apt-get install libemail-outlook-message-perl```
 - ```msgconvert --version```
