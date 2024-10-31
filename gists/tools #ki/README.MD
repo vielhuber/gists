@@ -59,3 +59,6 @@
 ### Musik erstellen
 - suno: https://suno.com
 - udio: https://www.udio.com
+
+### Chatbots
+- LoyJoy: https://www.loyjoy.com
