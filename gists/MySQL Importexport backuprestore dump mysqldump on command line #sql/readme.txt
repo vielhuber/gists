@@ -34,15 +34,16 @@ cd C:\Program Files\MySQL\MySQL Server 5.6\bin
 --single-transaction: set this, if you don't have full access to lock tables
 --routines: export procedures and functions (this is false by default)
 --triggers: export triggers (this is true by default)
+--skip-triggers: don't include triggers
 --default-character-set: always choose "utf8mb4"
 
 // exclude data from specific table (but get schema)
-  // option 1
+  // option 1 (preferred)
+  mysqldump --no-data --skip-triggers dbname > dump.sql
+  mysqldump --no-create-info --ignore-table=dbname.tblname dbname >> dump.sql
+  // option 2 (not good)
   mysqldump --ignore-table=dbname.tblname dbname > dump.sql
   mysqldump --no-data dbname tblname >> dump.sql
-  // option 2
-  mysqldump --no-data dbname > dump.sql
-  mysqldump --no-create-info --skip-triggers --ignore-table=dbname.tblname dbname >> dump.sql
 
 // restore single database from big file dumped with --all-databases
 // download https://github.com/kedarvj/mysqldumpsplitter
