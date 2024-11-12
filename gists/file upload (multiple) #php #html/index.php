@@ -14,8 +14,9 @@ if(isset($_POST["upload_files"]) && $_POST["upload_files"] != "") {
 				'docx' => ['application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
 				'xls' => ['application/vnd.ms-excel'],
 				'xlsx' => ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
-				'zip' => ['application/zip','application/x-compressed-zip','application/octet-stream'],
-				'pdf' => ['application/pdf']
+				'zip' => ['application/zip','application/x-compressed-zip','application/octet-stream','application/x-zip-compressed'],
+				'pdf' => ['application/pdf'],
+                'msg' => ['application/vnd.ms-outlook','application/octet-stream']
 			];
 			if(
 				array_key_exists($extension, $allowed_extension)
