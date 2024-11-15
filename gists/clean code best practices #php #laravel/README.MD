@@ -108,6 +108,17 @@ class MappingGetter {
 }
 ```
 
+### prevent monster classes / outsource in separate classes
+
+```php
+// bad
+$objectInBigModel->calculateSpecialValue();
+
+
+// good
+(new SpecialValueCalculator($objectInBigModel))->calculate()
+```
+
 ### function chaining
 
 ```php
@@ -344,4 +355,16 @@ $this->assertSame($foo, 'bar');
 
 // good
 $this->assertSame('bar', $foo);
+```
+
+### always write tests (tdd), use factories
+
+```php
+// good
+Model::factory()->count(10)->create(['birth_date' => '1980-01-01']);
+Model::factory()->count(10)->create(['birth_date' => '1990-01-01']);
+Model::factory()->count(10)->create(['birth_date' => '2000-01-01']);
+$this->assertEquals(30, Model::whereBornAfter(1970)->count());
+$this->assertEquals(30, Model::whereBornAfter(1980)->count());
+$this->assertEquals(20, Model::whereBornAfter(1990)->count());
 ```
