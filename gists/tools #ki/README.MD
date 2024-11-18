@@ -24,7 +24,7 @@
 - FLUX: https://fal.ai/models/fal-ai/flux-realism / https://fal.ai/models/fal-ai/flux/dev
 - Stable Diffusion: https://beta.dreamstudio.ai/generate / https://leonardo.ai
 - Midjourney: https://www.midjourney.com
-- Ideogram: https://ideogram.ai
+- Ideogram (Schriften): https://ideogram.ai
     
 ### Text-To-Speech, Speech-To-Speech, Soundeffekte erzeugen
 - ElevenLabs: https://elevenlabs.io
@@ -42,6 +42,7 @@
 - RunWay ML: https://runwayml.com
 - Luma Dream Maschine: https://lumalabs.ai/dream-machine
 - Haiper: https://haiper.ai
+- JoggAI (Produktvideos): https://www.jogg.ai
     
 ### Animationsvideos generieren
 - SteveAI: https://www.steve.ai
