@@ -25,11 +25,11 @@
 - Stable Diffusion: https://beta.dreamstudio.ai/generate / https://leonardo.ai
 - Midjourney: https://www.midjourney.com
 - Ideogram (Schriften): https://ideogram.ai
+- Google: https://cloud.google.com/use-cases/text-to-image-ai
     
 ### Text-To-Speech, Speech-To-Speech, Soundeffekte erzeugen
 - ElevenLabs: https://elevenlabs.io
-
-### Speech to text
+- Google: https://cloud.google.com/speech-to-text / https://cloud.google.com/text-to-speech
 - Deepgram: https://deepgram.com
   
 ### Meetings transkribieren / zusammenfassen
