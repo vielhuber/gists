@@ -21,7 +21,7 @@
 ### Bilder generieren
 - DALL-E: https://openai.com/index/dall-e-3
 - Adobe Firefly: https://firefly.adobe.com
-- FLUX: https://fal.ai/models/fal-ai/flux-realism / https://fal.ai/models/fal-ai/flux/dev
+- FLUX: https://fal.ai/models/fal-ai/flux-realism / https://fal.ai/models/fal-ai/flux/dev / https://blackforestlabs.ai
 - Stable Diffusion: https://beta.dreamstudio.ai/generate / https://leonardo.ai
 - Midjourney: https://www.midjourney.com
 - Ideogram (Schriften): https://ideogram.ai
@@ -63,3 +63,6 @@
 
 ### Chatbots
 - LoyJoy: https://www.loyjoy.com
+
+### LLM Vergleich
+- Chatbot Arena (LMSYS) - https://lmarena.ai
