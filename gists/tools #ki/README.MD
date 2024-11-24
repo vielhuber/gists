@@ -66,3 +66,6 @@
 
 ### LLM Vergleich
 - Chatbot Arena (LMSYS) - https://lmarena.ai
+
+### Kostenloser API-Zugriff
+- GPT4free - https://gpt4free.io

@@ -53,6 +53,7 @@ if you want to use traits / class inheritance in phpunit, simply do the followin
 
 - phpunit does not show `echo` statements
 - instead, use this:
+  - `fwrite(STDERR, var_export($msg, true));`
   - `fwrite(STDERR, print_r($msg . PHP_EOL, true));`
   - `fwrite(STDERR, serialize($msg));`
 
