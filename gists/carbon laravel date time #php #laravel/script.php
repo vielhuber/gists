@@ -35,6 +35,7 @@ $dt->toFormattedDateString();
 $dt->toFormattedDayDateString();
 $dt->toDayDateTimeString();
 $dt->format('l jS \\of F Y h:i:s A');
+$dt->setTimezone('Europe/Berlin')->toDateTimeString(); // if is UTC time
 
 // diff
 $dt1 = Carbon::now();
