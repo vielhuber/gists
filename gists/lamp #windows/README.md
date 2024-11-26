@@ -642,6 +642,11 @@ xdebug.output_dir="/tmp/xdebug"
   - ```sudo nano ~/.gitconfig```
   - ```[url "https://"]```
   - ```   insteadOf = git://```
+- ki commit hooks
+  - `nano ~/git-template/hooks/prepare-commit-msg`
+  - Script von https://vielhuber.de/blog/git-commit-messages-mit-chatgpt/
+  - `chmod +x ~/git-template/hooks/prepare-commit-msg`
+  - `git config --global core.hooksPath ~/git-template/hooks`
 
 #### gh (github command line)
 - ```curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg```
