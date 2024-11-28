@@ -804,6 +804,10 @@ rm "$t"
 - ```rm master.zip```
 - ```cpdf --help```
 
+#### pdfinfo
+- ```sudo apt-get install poppler-utils```
+- ```pdfinfo```
+
 #### tesseract
 - ```sudo apt install tesseract-ocr```
 - ```sudo apt install libtesseract-dev```
