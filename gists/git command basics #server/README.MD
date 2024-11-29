@@ -37,10 +37,10 @@
 
 ##### set (change origin url)
 - git remote set-url origin ssh://username@vielhuber.de:22/~/vielhuber.git
-- git remote set-url origin git@gitlab.com:c2nm/vielhuber.git
-- git remote set-url origin https://gitlab.com/c2nm/vielhuber.git
-- git remote set-url origin https://username:password@gitlab.com/c2nm/vielhuber.git
-- git remote set-url origin https://david%40close2.de@gitlab.com/c2nm/vielhuber.git
+- git remote set-url origin git@gitlab.com:vielhuber/vielhuber.git
+- git remote set-url origin https://gitlab.com/vielhuber/vielhuber.git
+- git remote set-url origin https://username:password@gitlab.com/vielhuber/vielhuber.git
+- git remote set-url origin https://david%40close2.de@gitlab.com/vielhuber/vielhuber.git
 
 ##### add another remote
 - git remote add customname git@github.com:organization/repo.git
@@ -586,7 +586,7 @@ Usage: git acp
 #### show all features
 - git flow feature
 #### start a new feature
-- gimkdir -p "testcd testvue clicvcvfileztecpa@vueopfalsenpm run buildnpm incnpmcccd helnpm run builduglifyjsuinuglifyjs-webpack-pluginuglifyjs-webpack-plugincvccdf .cd ..cd ..cd uglcgit clone v . . git command# create new branch and change to it in one commandgit checkout -b branch-namegit checkout -b chroot-bugfixccPfolder" && cd "testcd testvue clicvcvfileztecpa@vueopfalsenpm run buildnpm incnpmcccd helnpm run builduglifyjsuinuglifyjs-webpack-pluginuglifyjs-webpack-plugincvccdf .cd ..cd ..cgit@gitlab.com:c2nm/elobau.git
+- git flow feature start
 
 ## interesting note
 
@@ -657,8 +657,8 @@ Usage: git acp
 - restore: `git clone repo.bundle`
 
 ## migrate / copy whole git repository
-- `git clone --mirror git@gitlab.com:c2nm/old.git .`
-- `git remote set-url origin git@gitlab.com:c2nm/new.git`
+- `git clone --mirror git@gitlab.com:vielhuber/old.git .`
+- `git remote set-url origin git@gitlab.com:vielhuber/new.git`
 - `git push --mirror`
 - set the default branch via web interface if necessary (e.g. gitea only detects `main` as a default branch but not `master`)
 

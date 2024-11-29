@@ -119,6 +119,74 @@ $objectInBigModel->calculateSpecialValue();
 (new SpecialValueCalculator($objectInBigModel))->calculate()
 ```
 
+### use dtos
+
+- DTOs (Data Transfer Objects) are little "packages" that hold data meant to be moved around
+- the data is consistent, structured and typed
+- they improve IDE support
+
+```php
+// bad
+$userData = [
+    'id' => 42,
+    'name' => 'David',
+    'email' => 'david@vielhuber.de'
+];
+print_r($userData['id']); // 42
+
+// best (php >= 8.1)
+$userData = UserDTO::create(
+    42,
+    'David',
+    'david@vielhuber.de'
+);
+print_r($userData->id); // 42
+class UserDTO {
+    private function __construct(
+        public readonly int $id,
+        public readonly string $name,
+        public readonly string $email
+    ) {}
+
+    public static function create(int $id, string $name, string $email): UserDTO {
+        // potentially modify data before storing
+        // ...
+        return new self($id, $name, $email);
+    }
+}
+
+// good (php <8.1)
+$userData = UserDTO::create(
+    42,
+    'David',
+    'david@vielhuber.de'
+);
+print_r($userData->id()); // 42
+class UserDTO {
+    private int $id;
+    private string $name;
+    private string $email;
+    private function __construct(int $id, string $name, string $email) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->email = $email;
+    }
+    public static function create(int $id, string $name, string $email): UserDTO {
+        // potentially modify data before storing
+        // ...
+        return new self($id, $name, $email);
+    }
+    public function id(): int {
+        return $this->id;
+    }
+    public function name(): string {
+        return $this->name;
+    }
+    public function email(): string {
+        return $this->email;
+    }
+}
+
 ### function chaining
 
 ```php
