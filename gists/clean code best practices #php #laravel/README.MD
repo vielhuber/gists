@@ -92,13 +92,13 @@ $mapping = getMapping('test'); // ['foo' => 42, 'bar' => 7]
 // good
 $mapping = (new MappingGetter())->value('test')->get(); // Mapping object
 class Mapping {
- 	public ?int $foo; 
-  	public ?int $bar;
+    public ?int $foo; 
+    public ?int $bar;
 }
 class MappingGetter {
-  	public string $value;
- 	public function value($value) { $this->value = $value; return $this; }
-  	public function get() {
+    public string $value;
+    public function value($value) { $this->value = $value; return $this; }
+    public function get() {
       $mapping = (new Mapping());
       $mapping->foo = 42;
       $mapping->bar = 7;
@@ -186,6 +186,50 @@ class UserDTO {
         return $this->email;
     }
 }
+```
+
+### use vos
+
+- VOs (value objects) represent one or multiple values
+- Cannot be changed once instantiated
+- Validate the value when instantiating
+- Have methods that convert, compare or format the value
+- DTOs and VOs serve different purposes and actually complement each other very well
+  - DTOs transfer data (carry data between layers or systems, without holding much logic or responsibility)
+  - VOs ensure the integrity of data (focus on modeling concepts within your domain)
+
+```php
+// bad
+$price = (float) 42;
+$price = '$'.number_format($price/100, 2);
+echo $price;
+
+// good
+$price = Price::fromInteger(42);
+$price->formattedWithSymbol();
+$price->value();
+final readonly class Price
+{
+  public function __construct(private int $value) {
+    if ($value < 0) {
+      throw new PriceCannotBeBelowZero();
+    }
+  } 
+  public static fromInteger(int $value): self {
+    return self($value);
+  } 
+  private function convertToDollars(): float {
+    return $this->value / 100;
+  } 
+  public function formattedWithSymbol(): string {
+    return '$' . number_format($this->convertToDollars(), 2);
+  } 
+  public function value(): int {
+    return $this->value;
+  }
+}
+```
+
 
 ### function chaining
 
@@ -255,14 +299,14 @@ ConsoleOutputHelper::overwrite($msg); // with overwrite in controller
 // bad
 function log($msg) : void {
   if(...) {
-	echo $msg;
+    echo $msg;
   }
 }
 
 // good
 function log($msg) {
   if(!...) {
-   	return; 
+    return; 
   }
   echo $msg;
 }
@@ -273,9 +317,9 @@ function log($msg) {
 ```php
 // bad
 if($a === true) {
-	if($b === true) {
-    	if($c === true) {
-        	return 42;
+    if($b === true) {
+        if($c === true) {
+            return 42;
         }
     }
 }
