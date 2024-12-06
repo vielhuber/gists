@@ -43,7 +43,8 @@
 - Luma Dream Maschine: https://lumalabs.ai/dream-machine
 - Haiper: https://haiper.ai
 - JoggAI (Produktvideos): https://www.jogg.ai
-- Google: https://deepmind.google/technologies/veo
+- Google: https://deepmind.google/technologies/
+- Pollo: https://pollo.ai
     
 ### Animationsvideos generieren
 - SteveAI: https://www.steve.ai
@@ -54,6 +55,9 @@
     
 ### Social Ads erstellen
 - Captions: https://www.captions.ai
+
+### Social Media
+- XBeast: https://pollo.ai
     
 ### Präsentationen + Websites erstellen
 - Gamma: https://gamma.app
