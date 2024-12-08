@@ -31,6 +31,7 @@
 - ElevenLabs: https://elevenlabs.io
 - Google: https://cloud.google.com/speech-to-text / https://cloud.google.com/text-to-speech
 - Deepgram: https://deepgram.com
+- Fish Audio: https://fish.audio
   
 ### Meetings transkribieren / zusammenfassen
 - tl;dv: https://tldv.io
