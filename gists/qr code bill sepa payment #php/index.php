@@ -19,7 +19,12 @@ use Endroid\QrCode\Label\LabelAlignment;
 
 $builder = new Builder(
     writer: new PngWriter(),
-    data: Data::create()->setName('Max Mustermann')->setIban('DE42424242424242424242')->setAmount(1337.42),
+    data: Data::create()
+  		->setName('Max Mustermann')
+  		->setIban('DE42424242424242424242')
+        ->setBic('XXXXXXXXXXX')
+        ->setRemittanceText('RE 8237626173')
+  		->setAmount(1337.42),
     size: 300,
     margin: 10,
     errorCorrectionLevel: ErrorCorrectionLevel::Medium,

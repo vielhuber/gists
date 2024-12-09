@@ -76,7 +76,7 @@ foreach ($folders as $folder) {
             ->getDate()
             ->toDate()
             ->setTimezone(date_default_timezone_get())
-            ->format('Y-m-d H:i:s'),;
+            ->format('Y-m-d H:i:s');
       
         $subject = @$messages__value->getSubject()[0];
         $subject = trim($subject);

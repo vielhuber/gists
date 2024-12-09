@@ -5,7 +5,8 @@ if(isset($_POST["upload_file"]) && $_POST["upload_file"] != "") {
 		$allowed_extension = array(
 			"gif" => array("image/gif"),
 			"jpg" => array("image/jpeg", "image/jpg", "image/pjpeg"),
-			"png" => array("image/x-png", "image/png")
+			"png" => array("image/x-png", "image/png"),
+          	"pdf" => array("application/pdf")
 		);
 		if(
 			array_key_exists($extension, $allowed_extension)
