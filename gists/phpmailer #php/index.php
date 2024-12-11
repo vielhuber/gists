@@ -5,9 +5,9 @@ file_put_contents(__DIR__.'/test1.jpg', 'https://picsum.photos/200/300');
 file_put_contents(__DIR__.'/test2.jpg', 'https://picsum.photos/200/300');
 
 mailSend('david@vielhuber.de', 'Test1', 'Test <strong>bestanden</strong>!');
-mailSend(['david@vielhuber.de', 'david@close2.de'], 'Test2', 'Test <strong>bestanden</strong>!');
+mailSend(['david@vielhuber.de', 'david@vlhbr.de'], 'Test2', 'Test <strong>bestanden</strong>!');
 mailSend(['name' => 'David Vielhuber', 'email' => 'david@vielhuber.de'], 'Test3', 'Test <strong>bestanden</strong>!');
-mailSend([['name' => 'David Vielhuber', 'email' => 'david@vielhuber.de'], ['name' => 'David Vielhuber', 'email' => 'david@close2.de']], 'Test4', 'Test <strong>bestanden</strong>!');
+mailSend([['name' => 'David Vielhuber', 'email' => 'david@vielhuber.de'], ['name' => 'David Vielhuber', 'email' => 'david@vlhbr.de']], 'Test4', 'Test <strong>bestanden</strong>!');
 mailSend('david@vielhuber.de', 'Test5', 'Test <strong>bestanden</strong>!', __DIR__ . '/test1.jpg');
 mailSend('david@vielhuber.de', 'Test6', 'Test <strong>bestanden</strong>!', [__DIR__ . '/test1.jpg', __DIR__ . '/test2.jpg']);
 mailSend('david@vielhuber.de', 'Test7', 'Test <strong>bestanden</strong>!', ['name' => 'foo1.jpg', 'file' => __DIR__ . '/test1.jpg']);
@@ -36,7 +36,7 @@ function mailSend($recipients, $subject = '', $content = '', $attachments = null
         $mail->isHTML(true);
       
         // only send on production to real recipient
-        if (in_array(@$_SERVER['SERVER_ADMIN'], ['david@close2.de'])) {
+        if (in_array(@$_SERVER['SERVER_ADMIN'], ['david@vielhuber.de'])) {
           $recipients = $_SERVER['SERVER_ADMIN'];
         }
         if (!is_array($recipients) || isset($recipients['email'])) {

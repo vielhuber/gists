@@ -15,6 +15,15 @@
 ### Selbsthosting
 - Ollama: https://ollama.com
 
+### Programmierung
+- GitHub Copilot: https://github.com/features/copilot
+- Cursor: https://www.cursor.com
+- bolt: https://bolt.new
+- v0: https://v0.dev
+- Screenshot to Code: https://screenshottocode.com
+- Cline: https://github.com/cline/cline
+- Windsurf: https://codeium.com/windsurf
+
 ### Computer steuern
 - Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
 
@@ -40,12 +49,15 @@
 - Adobe: https://podcast.adobe.com/enhance
 
 ### Videos generieren
+- Sora: https://openai.com/sora
 - RunWay ML: https://runwayml.com
 - Luma Dream Maschine: https://lumalabs.ai/dream-machine
 - Haiper: https://haiper.ai
 - JoggAI (Produktvideos): https://www.jogg.ai
 - Google: https://deepmind.google/technologies/
 - Pollo: https://pollo.ai
+- Mochi: https://mochi1ai.com
+- LTX Studio: https://ltx.studio
     
 ### Animationsvideos generieren
 - SteveAI: https://www.steve.ai

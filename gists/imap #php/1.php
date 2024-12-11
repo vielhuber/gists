@@ -47,11 +47,11 @@ try {
             'attachments' => count($mail->getAttachments()),
             'content_html' =>
                 mb_detect_encoding($mail->textHtml, 'UTF-8, ISO-8859-1') !== 'UTF-8'
-                    ? utf8_encode($mail->textHtml)
+                    ? \UConverter::transcode($mail->textHtml, 'UTF8', 'ISO-8859-1')
                     : $mail->textHtml,
             'content_plain' =>
                 mb_detect_encoding($mail->textPlain, 'UTF-8, ISO-8859-1') !== 'UTF-8'
-                    ? utf8_encode($mail->textPlain)
+                    ? \UConverter::transcode($mail->textPlain, 'UTF8', 'ISO-8859-1')
                     : $mail->textPlain
         ];
     }
