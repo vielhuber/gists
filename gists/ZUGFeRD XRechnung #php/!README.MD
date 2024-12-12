@@ -2,7 +2,7 @@
 
 - overview: https://www.gruenderkueche.de/fachartikel/xrechnung-erstellen-so-funktioniert-es-diese-tools-gibt-es
 - generator: https://xrechnungsgenerator.nortal.com
-- validator: https://validator.invoice-portal.de
+- validator: https://erechnungsvalidator.service-bw.de, https://validator.invoice-portal.de
 - php-library: https://github.com/horstoeko/zugferd
 - php-visualizer: https://github.com/horstoeko/zugferdvisualizer
 
