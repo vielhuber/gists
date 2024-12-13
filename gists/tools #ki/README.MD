@@ -88,5 +88,11 @@
 ### Gaming
 - Google Genie 2: https://deepmind.google/discover/blog/genie-2-a-large-scale-foundation-world-model
 
+### KI-Texte humanisieren
+- WORTLIGA: https://wortliga.de/ki-text-generator
+- DeepL Write: https://www.deepl.com/de/write
+- ZeroGPT: https://www.zerogpt.com
+. GPTZero: https://gptzero.me
+
 ### Kostenloser API-Zugriff
 - GPT4free - https://gpt4free.io
