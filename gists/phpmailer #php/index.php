@@ -59,6 +59,11 @@ function mailSend($recipients, $subject = '', $content = '', $attachments = null
             }
         }
       
+        // cc
+        //$mail->addCC('test@tld.com', 'Test');
+        // bcc
+        //$mail->addBCC('test@tld.com', 'Test');
+      
         // embed images (base64 and relative urls to cid)
         $images = [];
         preg_match_all('/src="([^"]*)"/i', $content, $images);

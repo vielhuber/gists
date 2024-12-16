@@ -34,6 +34,7 @@ try {
         if ($unseen) {
             $mailbox->markMailAsUnread($mails_id__value); // undo saveMail setting mail as read
         }
+      	// $mailbox->moveMail($mails_id__value, 'INBOX/ARCHIV');
 
         $mails[] = [
             'id' => (string) $mail->id,
@@ -41,6 +42,8 @@ try {
             'from_name' => (string) (isset($mail->fromName) ? $mail->fromName : $mail->fromAddress),
             'from_email' => (string) $mail->fromAddress,
             'to' => (string) $mail->toString,
+            'cc' => !empty($mail->cc) ? (string) array_values($mail->cc)[0] : null,
+            'bcc' => !empty($mail->bcc) ? (string) array_values($mail->bcc)[0] : null,
             'date' => $mail->date,
             'subject' => (string) $mail->subject,
             'eml' => base64_encode(file_get_contents($eml_filename)),

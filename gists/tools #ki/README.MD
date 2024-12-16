@@ -1,7 +1,7 @@
 ### Universal
 - OpenAI ChatGPT: https://chatgpt.com
 - Anthropic Claude: https://claude.ai
-- Google Gemini: https://gemini.google.com
+- Google Gemini: https://gemini.google.com / https://aistudio.google.com
 - Perplexity: https://perplexety.ai
 - CoPilot: https://copilot.microsoft.com
 - Grok: https://x.ai

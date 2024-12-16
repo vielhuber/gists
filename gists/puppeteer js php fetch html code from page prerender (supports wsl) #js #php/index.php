@@ -7,11 +7,10 @@ $browser = null;
 
 try {
     $args = [];
-    if (@$_SERVER['SERVER_ADMIN'] === 'david@close2.de' || @$_SERVER['NAME'] === 'DAVID-DESKTOP') {
-      $args['executable_path'] = '/root/.nvm/versions/node/v12.10.0/bin/node'; // https://github.com/nesk/puphpeteer/issues/65
+    if (@$_SERVER['SERVER_ADMIN'] === 'david@vielhuber.de' || @$_SERVER['NAME'] === 'DAVID-DESKTOP') {
+      $args['executable_path'] = '/root/.nvm/versions/node/v16.17.0/bin/node'; // https://github.com/nesk/puphpeteer/issues/65
     }
     $puppeteer = new Puppeteer($args);
-
     $args = [
         '--disable-gpu',
         '--disable-dev-shm-usage',
@@ -21,7 +20,6 @@ try {
         '--no-zygote',
         '--single-process',
     ];
-
     $proxy = (object) [
         'ip' => 'xxx',
         'port' => 'xxx',
@@ -29,27 +27,29 @@ try {
         'password' => 'xxx',
     ];
     $proxy = null;
-
     if ($proxy !== null) {
         $args[] = '--proxy-server=' . $proxy->ip . ':' . $proxy->port;
     }
-
     $browser = $puppeteer->launch([
+        'headless' => false,
         'ignoreHTTPSErrors' => true,
-        'args' => $args,
+        'args' => $args
     ]);
     $page = $browser->newPage();
-  	$page->setDefaultTimeout(5000);
+    $page->setDefaultTimeout(10000);
     if ($proxy !== null) {
         $page->authenticate([
             'username' => $proxy->username,
             'password' => $proxy->password,
         ]);
     }
-  	disableImagesAndStylesheets();    
+    disableImagesAndStylesheets();    
     $page->setViewport(['width' => 1920, 'height' => 1080]);
   
-  	go('https://tld.com');    
+    go('https://vielhuber.de/42');
+    shot();
+
+    /*
     wait('.login-form');
     shot();
     type('.login-form__input--email', 'xxx');
@@ -66,6 +66,8 @@ try {
     wait('.baz');
     innerHTML('.baz');
     shot();
+    */
+
     $browser->close();
 } catch (\Exception $e) {
     echo $e->getMessage();
@@ -96,8 +98,8 @@ function disableImagesAndStylesheets()
 function shot()
 {
     global $page;
-    $page->waitFor(1000);
-    $page->screenshot(['path' => 'live.jpg']);
+    sleep(1);
+    $page->screenshot(['path' => 'live.png']);
 }
 function wait($selector)
 {
@@ -125,7 +127,7 @@ function html()
     return htmlentities($response['html']);
 }
 function innerHTML($selector) {
-  	global $page;
+    global $page;
     return $page->querySelectorEval(
       $selector,
       JsFunction::createWithParameters(['e'])->body('return e.innerHTML')

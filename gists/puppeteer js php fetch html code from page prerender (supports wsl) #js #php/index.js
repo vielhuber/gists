@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 (async () => {
-  	let browser = null;
-  	try {
+    let browser = null;
+    try {
       browser = await puppeteer.launch({
-          headless: true,
+          headless: false,
           ignoreHTTPSErrors: true,
           args: [
               '--disable-gpu',
@@ -15,9 +15,11 @@ const puppeteer = require('puppeteer');
               '--single-process',
           ],
       });
+
       let page = await browser.newPage();
-      await page.setDefaultTimeout(3000);      
+      await page.setDefaultTimeout(3000);
       await page.setViewport({ width: 800, height: 600 });
+
       /* block images and css */
       await page.setRequestInterception(true);
       page.on('request', (req) => {
@@ -27,19 +29,23 @@ const puppeteer = require('puppeteer');
         else {
           req.continue();
         }
-      });      
-      await page.goto('https://vielhuber.de', { waitUntil: 'networkidle2' });
+      });
+
+      await page.goto('https://vielhuber.de/42', { waitUntil: 'networkidle2' });
+      await page.screenshot({ path: 'live.png' });
+      await browser.close();
+
+      /*
       await page.waitForSelector('.text');
       await new Promise((resolve) => setTimeout(() => resolve(), 1000));
       await page.click('.foo');
       let foo = await page.$eval('.text', (e) => e.innerHTML);
-      await page.screenshot({ path: 'example.png' });
-      await browser.close();
+      */
     }
-  	catch (e) {
-     	console.log(e); 
+    catch (e) {
+        console.log(e); 
     }
-  	finally {
-      	browser.close();
+    finally {
+        browser.close();
     }
 })();

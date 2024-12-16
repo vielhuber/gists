@@ -8,5 +8,6 @@
 - ```node index.js```
 
 #### php
-- ```composer require nesk/puphpeteer```
-- ```npm install @nesk/puphpeteer```
+- ```composer require zoon/puphpeteer```
+- ```npm install https://github.com/zoonru/puphpeteer/tarball/zoon```
+- ```php index.php```
