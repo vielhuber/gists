@@ -22,7 +22,11 @@ appendZugferdXmlToPdf(
     '471102',
     '2018-03-05',
 
-    [['Trennblätter A4', 20, 9.9, 19], ['Joghurt Banane', 50, 5.5, 7]],
+    [
+      // name, amount, net price, tax
+      ['Trennblätter A4', 20, 9.9, 19],
+      ['Joghurt Banane', 50, 5.5, 7]
+    ],
 
     'Kunden AG Mitte',
     'Kundenstraße 15',
@@ -37,6 +41,7 @@ appendZugferdXmlToPdf(
     'München',
     'DE',
     'info@seller.com',
+  	'0123456789'
 
     'DE123456789',
 
@@ -59,23 +64,24 @@ function appendZugferdXmlToPdf(
     $buyer_address_zip,
     $buyer_address_location,
     $buyer_address_country,
-    $buyer_email_address = null,
+    $buyer_email_address,
 
     $seller_company_name,
     $seller_address_street_nr,
     $seller_address_zip,
     $seller_address_location,
     $seller_address_country,
-    $seller_email_address = null,
+    $seller_email_address,
+    $seller_phone_number,
 
     $vat_id,
     $payment_iban,
-    $payment_reference_nr = null,
-    $payment_mandate_id = null,
-    $payment_term = null
+    $payment_reference_nr,
+    $payment_mandate_id,
+    $payment_term
 ) {
     $document = \horstoeko\zugferd\ZugferdDocumentBuilder::CreateNew(
-        \horstoeko\zugferd\ZugferdProfiles::PROFILE_EN16931
+        \horstoeko\zugferd\ZugferdProfiles::PROFILE_XRECHNUNG_3
     );
 
     $document->setDocumentInformation(
@@ -102,9 +108,9 @@ function appendZugferdXmlToPdf(
         $seller_address_country
     );
 
-    if ($seller_email_address !== null) {
-        $document->setDocumentSellerCommunication('EM', $seller_email_address);
-    }
+    $document->setDocumentSellerCommunication('EM', $seller_email_address);
+  
+    $document->setDocumentSellerContact($seller_company_name, null, $seller_phone_number, null, $seller_email_address);
 
     $document->setDocumentBuyer($buyer_company_name);
 
@@ -117,15 +123,13 @@ function appendZugferdXmlToPdf(
         $buyer_address_country
     );
 
-    if ($buyer_email_address !== null) {
-        $document->setDocumentBuyerCommunication('EM', $buyer_email_address);
-    }
+    $document->setDocumentBuyerCommunication('EM', $buyer_email_address);
+  
+  	$document->setDocumentBuyerContact($buyer_company_name, null, null, null, $buyer_email_address);
 
     $document->addDocumentPaymentMeanToDirectDebit($payment_iban, $invoice_nr);
 
-    if ($payment_reference_nr !== null) {
-        $document->setDocumentBuyerReference($payment_reference_nr);
-    }
+    $document->setDocumentBuyerReference($payment_reference_nr);
 
     $taxes = [];
     foreach ($articles as $articles__value) {
@@ -162,9 +166,7 @@ function appendZugferdXmlToPdf(
     }
     $document->setDocumentSummation($sum_gross, $sum_gross, $sum_net, 0.0, 0.0, $sum_net, $sum_tax, null, 0.0);
 
-    if ($payment_term !== null) {
-        $document->addDocumentPaymentTerm($payment_term, null, $payment_mandate_id);
-    }
+    $document->addDocumentPaymentTerm($payment_term, null, $payment_mandate_id);
 
     foreach ($articles as $articles__key => $articles__value) {
         $document
