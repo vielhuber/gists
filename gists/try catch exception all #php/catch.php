@@ -7,4 +7,6 @@ try {
 	// executed only in php 7, will not match in php 5
 } catch (\Exception $e) {
 	// executed only in php 5, will not be reached in php 7
+} finally {
+    // always runs
 }

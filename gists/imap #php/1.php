@@ -37,13 +37,31 @@ try {
       	// $mailbox->moveMail($mails_id__value, 'INBOX/ARCHIV');
 
         $mails[] = [
-            'id' => (string) $mail->id,
+            'id' => (string) $mail->id, // this is the unique uid (not message sequence id)
             'mailbox' => $settings['username'],
             'from_name' => (string) (isset($mail->fromName) ? $mail->fromName : $mail->fromAddress),
             'from_email' => (string) $mail->fromAddress,
-            'to' => (string) $mail->toString,
-            'cc' => !empty($mail->cc) ? (string) array_values($mail->cc)[0] : null,
-            'bcc' => !empty($mail->bcc) ? (string) array_values($mail->bcc)[0] : null,
+            'to' => !empty($mail->to) ? array_map(function ($key, $value) {
+              return [
+                'email' => $key,
+                'name' => $key === $value ? null : str_replace(' ('.$key.')', '', $value)
+
+              ];
+            }, array_keys($mail->to), $mail->to) : null,
+            'cc' => !empty($mail->cc) ? array_map(function ($key, $value) {
+              return [
+                'email' => $key,
+                'name' => $key === $value ? null : str_replace(' ('.$key.')', '', $value)
+
+              ];
+            }, array_keys($mail->cc), $mail->cc) : null,
+            'bcc' => !empty($mail->bcc) ? array_map(function ($key, $value) {
+              return [
+                'email' => $key,
+                'name' => $key === $value ? null : str_replace(' ('.$key.')', '', $value)
+
+              ];
+            }, array_keys($mail->bcc), $mail->bcc) : null,
             'date' => $mail->date,
             'subject' => (string) $mail->subject,
             'eml' => base64_encode(file_get_contents($eml_filename)),

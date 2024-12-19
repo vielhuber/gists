@@ -9,17 +9,20 @@
   - before: ```0 5 * * * /foo.sh > foo.log```
   - after: ```0 5 * * * /foo.sh > foo.log 2>&1```
 - cron does not set any environment variables (like in your shell)
-  - option 0
+  - option 1
     - add on top of all tabs:
       - `SHELL=/bin/sh`
       - `PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin`
-  - option 1 (does not work always)
-    - before: ```0 5 * * * /foo.sh```
-    - after: ```0 5 * * * . $HOME/.profile; /foo.sh```
   - option 2 (does not work always)
     - before: ```0 5 * * * /foo.sh```
+    - after: ```0 5 * * * source $HOME/.profile; /foo.sh```
+  - option 3 (does not work always)
+    - before: ```0 5 * * * /foo.sh```
+    - after: ```0 5 * * * source $HOME/.bash_profile; SERVER_ADMIN=david@viuelhuber.de NAME=DAVID-DESKTOP /foo.sh```
+  - option 4 (does not work always)
+    - before: ```0 5 * * * /foo.sh```
     - after: ```0 5 * * * bash -l -c '/foo.sh'```
-  - option 3 (works always)
+  - option 5 (works always)
     - replace all relative paths in your shell scripts
 
 ### run a task on reboot

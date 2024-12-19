@@ -4,6 +4,7 @@
 - simple installation
 - simple usage via command line
 - full control over configuration
+- cronjobs enabled
 - default remote smtp relay for all mailings
 - databases included: mysql (+phpmyadmin), postgresql, oraclesql
 - shared php.ini configuration for all versions
@@ -523,6 +524,10 @@ xdebug.output_dir="/tmp/xdebug"
   - `mkdir -p /run/php/`
 - /tmp clean
   - `find /tmp -ctime +2 -exec rm -rf {} +`
+- enable cron
+  - `/etc/wsl.conf`
+  - `[boot]`
+  - `command="service cron start"`
 - remove zone identifier files
   - `find . -name "*:Zone.Identifier" -type f -delete`
 - ram overload

@@ -14,7 +14,7 @@ parameters:
     paths:
         - path/to/subfolder/
 
-    level: 0
+    level: 3
 ```
 
 ### laravel
@@ -38,7 +38,7 @@ parameters:
         - routes/
         - tests/
 
-    level: 0
+    level: 3
 ```
 
 ### wordpress
@@ -56,9 +56,10 @@ includes:
 parameters:
 
     paths:
-        - wp-config/themes/blank/
+        #- wp-config/themes/blank/
+        - ./
 
-    level: 0
+    level: 3
 ```
 
 ## usage

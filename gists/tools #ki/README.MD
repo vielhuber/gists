@@ -65,6 +65,7 @@
 ### Sprechervideos generieren
 - HeyGen: https://www.heygen.com
 - synthesia: https://www.synthesia.io
+- Tavus: https://www.tavus.io
     
 ### Social Ads erstellen
 - Captions: https://www.captions.ai
