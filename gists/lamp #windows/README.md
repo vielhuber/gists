@@ -565,14 +565,16 @@ xdebug.output_dir="/tmp/xdebug"
   - ```nvm --version```
   - ```nvm ls```
   - install/upgrade new/specific node versions
-  - ```nvm install node```
-  - ```nvm install --lts```
-  - ```nvm install 16.17.0```
-  - ```nvm install 14.18.0```
-  - ```nvm install 12.10.0```
-  - ```nvm install 10.16.3```
-  - ```nvm alias default 16.17.0```
-  - ```nvm use 16.17.0```
+    - ```nvm install node```
+    - ```nvm install --lts```
+    - ```nvm install 16.17.0```
+    - ```nvm install 14.18.0```
+    - ```nvm install 12.10.0```
+    - ```nvm install 10.16.3```
+    - ```nvm alias default 16.17.0```
+    - ```nvm use 16.17.0```
+  - install/upgrade to latest npm version (do this for every installed node version)
+    - ```nvm install-latest-npm && nvm install --latest-npm```
   - Cache leeren (falls sich package-lock.json ändert: `npm cache verify` bzw `npm cache clean -f`)
 - nativ (obsolet)
   - https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
