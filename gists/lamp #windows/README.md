@@ -524,7 +524,7 @@ xdebug.output_dir="/tmp/xdebug"
   - `mkdir -p /run/php/`
 - /tmp clean
   - `find /tmp -ctime +2 -exec rm -rf {} +`
-- enable cron
+- enable cronjobs
   - `/etc/wsl.conf`
   - `[boot]`
   - `command="service cron start"`
@@ -542,6 +542,16 @@ xdebug.output_dir="/tmp/xdebug"
 - wsl hangs after a while / vscode hangs
   - Docker > Settings > Start Docker Desktop when you log in: aus
   - NOT USED: WIN+R > SystemPropertiesAdvanced > Erweitert > Leistung > Einstellungen... > Erweitert > Virtueller Arbeitsspeicher > Ändern... > Dateigröße für alle Laufwerke automatisch verwalten: aus & C: > Benutzerdefinierte Größe: 800 MB - 1024 MB; CMD als Admin: wmic computersystem where name="%computername%" set AutomaticManagedPagefile=false
+
+#### enable auto restart router / pc
+- `export VISUAL=nano; crontab -e`
+- `0 2 * * * . $HOME/.bash_profile; /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.sh > /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.log 2>&1`
+- `cron.sh`
+```sh
+#!/usr/bin/env bash
+/root/.nvm/versions/node/v23.5.0/bin/node --env-file=/mnt/c/Users/David/OneDrive/DOCS/VODAFONE/.env /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/stagehand.js
+shutdown.exe /s /t 0
+```
 
 #### composer
 - ```sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
