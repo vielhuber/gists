@@ -545,7 +545,7 @@ xdebug.output_dir="/tmp/xdebug"
 
 #### enable auto restart router / pc
 - `export VISUAL=nano; crontab -e`
-- `0 2 * * * . $HOME/.bash_profile; /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.sh > /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.log 2>&1`
+- `0 4 * * * . $HOME/.bash_profile; /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.sh > /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.log 2>&1`
 - `cron.sh`
 ```sh
 #!/usr/bin/env bash
