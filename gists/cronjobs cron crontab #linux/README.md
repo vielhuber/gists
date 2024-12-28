@@ -18,7 +18,7 @@
     - after: ```0 5 * * * source $HOME/.profile; /foo.sh```
   - option 3 (does not work always)
     - before: ```0 5 * * * /foo.sh```
-    - after: ```0 5 * * * source $HOME/.bash_profile; SERVER_ADMIN=david@viuelhuber.de NAME=DAVID-DESKTOP /foo.sh```
+    - after: ```0 5 * * * source $HOME/.bash_profile; SERVER_ADMIN=david@vielhuber.de NAME=DAVID-DESKTOP /foo.sh```
   - option 4 (does not work always)
     - before: ```0 5 * * * /foo.sh```
     - after: ```0 5 * * * bash -l -c '/foo.sh'```
