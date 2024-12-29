@@ -3,7 +3,7 @@
 - Anthropic Claude: https://claude.ai
 - Google Gemini: https://gemini.google.com / https://aistudio.google.com
 - Perplexity: https://perplexety.ai
-- CoPilot: https://copilot.microsoft.com
+- Microsoft Copilot: https://copilot.microsoft.com
 - Grok: https://x.ai
 - Meta Llama: https://www.llama.com
 - Mistral: https://mistral.ai
@@ -51,6 +51,7 @@
 
 ### Videos generieren
 - Sora: https://openai.com/sora
+- Kling AI: https://klingai.com
 - RunWay ML: https://runwayml.com
 - Luma Dream Maschine: https://lumalabs.ai/dream-machine
 - Haiper: https://haiper.ai
@@ -74,12 +75,15 @@
 ### Social Media
 - XBeast: https://pollo.ai
     
-### Präsentationen + Websites erstellen
+### Präsentationen erstellen
+- Microsoft Copilot for PowerPoint: https://gamma.app
+
+### Websites erstellen
 - Gamma: https://gamma.app
     
 ### Musik erstellen
-- suno: https://suno.com
-- udio: https://www.udio.com
+- Suno: https://suno.com
+- Udio: https://www.udio.com
 
 ### Chatbots
 - LoyJoy: https://www.loyjoy.com
