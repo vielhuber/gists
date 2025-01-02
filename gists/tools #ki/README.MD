@@ -33,9 +33,9 @@
 - Adobe Firefly: https://firefly.adobe.com
 - FLUX: https://fal.ai/models/fal-ai/flux-realism / https://fal.ai/models/fal-ai/flux/dev / https://blackforestlabs.ai
 - Stable Diffusion: https://beta.dreamstudio.ai/generate / https://leonardo.ai
+- Google Imagegen: https://cloud.google.com/use-cases/text-to-image-ai / https://deepmind.google/technologies/imagen-3
 - Midjourney: https://www.midjourney.com
 - Ideogram (Schriften): https://ideogram.ai
-- Google: https://cloud.google.com/use-cases/text-to-image-ai / https://deepmind.google/technologies/imagen-3
     
 ### Text-To-Speech, Speech-To-Speech, Soundeffekte erzeugen
 - ElevenLabs: https://elevenlabs.io
@@ -56,7 +56,7 @@
 - Luma Dream Maschine: https://lumalabs.ai/dream-machine
 - Haiper: https://haiper.ai
 - JoggAI (Produktvideos): https://www.jogg.ai
-- Google: https://deepmind.google/technologies/
+- Google Veo: https://deepmind.google/technologies/
 - Pollo: https://pollo.ai
 - Mochi: https://mochi1ai.com
 - LTX Studio: https://ltx.studio
