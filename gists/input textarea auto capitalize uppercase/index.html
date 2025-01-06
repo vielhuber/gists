@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <title>autocaps</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          if( document.querySelectorAll('.autocaps').length > 0 ) {
+              document.querySelectorAll('.autocaps').forEach($el => {
+                  $el.addEventListener('input', (e) => {
+                      let p = $el.selectionStart;
+                      $el.value = $el.value.toUpperCase();
+                      $el.setSelectionRange(p, p);
+                  });
+              });
+          }
+      });
+    </script>
+</head>
+<body>  
+  <input class="autocaps" />
+  <textarea class="autocaps"></textarea>
+</body>
+</html>
