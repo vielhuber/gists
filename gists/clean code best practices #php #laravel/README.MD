@@ -395,6 +395,16 @@ date('Y')-10
 Carbon::now()->subYears(10)->year
 ```
 
+### use "final" keyword
+
+```php
+// bad
+class NonDerivativeClass {}
+
+// good
+final class NonDerivativeClass {}
+```
+
 ### use php type hinting
 
 ```php

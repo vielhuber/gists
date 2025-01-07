@@ -6,7 +6,7 @@ namespace Foo\Bar;
 require_once __DIR__ . '/vendor/autoload.php';
 use Foo\Bar;
   
-class TestClass
+final class TestClass
 {
 
    private $var0; // same as private $var0 = null;
