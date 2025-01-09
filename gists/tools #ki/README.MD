@@ -37,7 +37,7 @@
 - Midjourney: https://www.midjourney.com
 - Ideogram (Schriften): https://ideogram.ai
     
-### Text-To-Speech, Speech-To-Speech, Soundeffekte erzeugen
+### Text-To-Speech, Speech-To-Speech, Stimme klonen, Soundeffekte erzeugen
 - ElevenLabs: https://elevenlabs.io
 - Google: https://cloud.google.com/speech-to-text / https://cloud.google.com/text-to-speech
 - Deepgram: https://deepgram.com
@@ -50,9 +50,9 @@
 - Adobe: https://podcast.adobe.com/enhance
 
 ### Videos generieren
-- Sora: https://openai.com/sora
 - Kling AI: https://klingai.com
 - RunWay ML: https://runwayml.com
+- Sora: https://openai.com/sora
 - Luma Dream Maschine: https://lumalabs.ai/dream-machine
 - Haiper: https://haiper.ai
 - JoggAI (Produktvideos): https://www.jogg.ai
@@ -60,14 +60,16 @@
 - Pollo: https://pollo.ai
 - Mochi: https://mochi1ai.com
 - LTX Studio: https://ltx.studio
-    
-### Animationsvideos generieren
-- SteveAI: https://www.steve.ai
-    
-### Sprechervideos generieren
+- Adobe Firefly: https://www.adobe.com/de/products/firefly.html
+       
+### Avatare/Sprechervideos generieren
 - HeyGen: https://www.heygen.com
+- VEED: https://www.veed.io
 - synthesia: https://www.synthesia.io
 - Tavus: https://www.tavus.io
+
+### Animationsvideos generieren
+- SteveAI: https://www.steve.ai
     
 ### Social Ads erstellen
 - Captions: https://www.captions.ai

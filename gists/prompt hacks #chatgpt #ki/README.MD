@@ -154,6 +154,48 @@ A photo of a relaxed fisherman in the early morning. He is a 60-year-old man wit
 a pattern of {roses, lemons} --sref {123, 456, 789}
 ```
 
+## Videogenerierung
+
+### Links
+- https://docs.qingque.cn/d/home/eZQDvlYrDMyE9lOforCeWA4KP
+- https://help.runwayml.com/hc/en-us/articles/30586818553107-Gen-3-Alpha-Prompting-Guide
+
+### Text-To-Video
+
+- Prompt-Aufbau:
+```md
+Subjekt (Beschreibung) + Subjekt Bewegung + Szene (Beschreibung) + (Kamera + Belichtung + Atmosphäre)
+```
+
+- Beispiel:
+```md
+In the shot, a medium shot with a blurred background and ambient lighting captures a scene where a giant panda, adorned with black-framed glasses, is reading a book in a cafe The book rests on the table, accompanied by a cup of coffee that's steaming gently. Beside the cozy setting is the cafe's window, with a cinematic color grading applied to enhance the visual appeal.
+```
+
+- Tipps:
+  - Verwende einfache Wörter und Satzstrukturen, vermeide übermäßig komplexe Sprache.
+  - Halte den visuellen Inhalt so einfach wie möglich, mit dem Ziel, ihn innerhalb von 5 bis 10 Sekunden abzuschließen.
+  - Die Verwendung von Wortern wie "Orientalische Stimmung", "China" und "Asien" kann leichter einen chinesischen Stil erzeugen und chinesische Menschen darstellen.
+  - Aktuelle große Videomodelle sind nicht empfindlich gegenüber Zahlen, was es schwierig macht, Konsistenz bei Zählungen aufrechtzuerhalten, wie zum Beispiel "10 Welpen am Strand".
+  - Für eine geteilte Szene kannst du ein Prompt wie "4 Kamerawinkel, die Frühling, Sommer, Herbst und Winter darstellen" verwenden. · In der aktuellen Phase ist es eine Herausforderung, komplexe physische Bewegungen zu erzeugen, wie z.B. das Springen eines Balls oder die Flugbahn eines Wurfs aus großer Höhe.
+
+### Image-To-Video
+
+- Prompt-Aufbau:
+```md
+Subjekt + Bewegung, Hintergrund + Bewegung
+```
+
+- Beispiel:
+```md
+Mona Lisa puts on sunglasses with her hand, and a ray of light appears in the background
+```
+
+- Tipps
+  - Verwende einfache Wörter und Satzstrukturen, vermeide übermäßig komplexe Sprache.
+  - Bewegung sollte den physikalischen Gesetzen entsprechen, und es ist am besten, Bewegungen zu beschreiben, die wahrscheinlich im Bild vorkommen.
+  - Eine Beschreibung, die erheblich vom Bild abweicht, kann einen Kameraschnitt oder -übergang verursachen.
+  - In der aktuellen Phase ist es eine Herausforderung, komplexe physische Bewegungen zu erzeugen, wie z.B. das Springen eines Balls oder die Flugbahn eines Wurfs aus großer Höhe.
 
 ## Tipps
 
