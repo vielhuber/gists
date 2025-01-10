@@ -46,3 +46,9 @@ $wpdb->update($wpdb->prefix . 'table', ['col1' => $val], ['id' => 1337], ['%s'],
 // retrieve single col/row
 $wpdb->get_row()
 $wpdb->get_col()
+  
+// connect to external db
+global $wpdb;
+$wpdb_2 = new wpdb('USERNAME', 'PASSWORD', 'DBNAME', 'HOST:PORT');
+$results = $wpdb_2->get_results($wpdb_2->prepare('SELECT * FROM '.$wpdb_2->prefix.'tbl WHERE ID > %d', 3));
+var_dump($results);

@@ -1,0 +1,1 @@
+ssh -o UserKnownHostsFile=/dev/null -o TCPKeepAlive=yes -o StrictHostKeyChecking=no -TNL 5001:/var/lib/mysql/mysql.sock ssh-username@host # then connect via localhost:5001 to mysql db
