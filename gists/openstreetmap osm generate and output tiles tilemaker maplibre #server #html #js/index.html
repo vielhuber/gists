@@ -1,44 +1,57 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="de">
 <head>
     <meta charset="utf-8" />
-    <title>...Display a map on a webpage</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
-    <link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />
-</head>
-
-<body>
-    <div id='map' style='width: 800px; height: 800px;'></div>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>openstreetmap</title>
+    <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" />
     <script>
-        const boundingBox = {
-            LAT_MIN: 47.213052,
-            LON_MIN: 8.736355,
-            LAT_MAX: 50.667755,
-            LON_MAX: 13.735134
-        };
-        const boundingBoxArr = [
-            [
-                boundingBox.LON_MIN,
-                boundingBox.LAT_MIN,
-            ],
-            [
-                boundingBox.LON_MAX,
-                boundingBox.LAT_MAX,
-            ]
-        ];
-
-        const map = new maplibregl.Map({
-            container: 'map',
-            style: 'json.php?file=style.json',
-            center: [1, 37],
-            zoom: 1,
-            maxBounds: boundingBoxArr
+        document.addEventListener('DOMContentLoaded', () => {
+            const boundingBox = {
+                LAT_MIN: 47.27,
+                LON_MIN: 8.97,
+                LAT_MAX: 50.57,
+                LON_MAX: 13.84
+            };
+            const boundingBoxArr = [[boundingBox.LON_MIN,boundingBox.LAT_MIN],[boundingBox.LON_MAX,boundingBox.LAT_MAX]];
+            const map = new maplibregl.Map({
+                container: 'map',
+                style: 'json.php?file=style.json',
+                attributionControl: false, // remove copyright
+                maxBounds: boundingBoxArr,
+                zoom: 1, // this does not work properly with maxBounds, see https://github.com/mapbox/mapbox-gl-js/issues/6969
+            });
+            map.fitBounds(boundingBoxArr);
+            map.addControl(new maplibregl.NavigationControl({
+                showZoom: true,
+                showCompass: false
+            }));
+            const marker = new maplibregl.Marker()
+                .setLngLat([11.66, 49.05])
+                .setPopup(new maplibregl.Popup({offset: 25}).setHTML(`
+                    <h2>Hello world</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                `))
+                .addTo(map);
         });
-        map.fitBounds(boundingBoxArr);
-        map.addControl(new maplibregl.NavigationControl());
     </script>
+    <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    #map {
+        width: 100wh;
+        height: 100vh;
+    }
+    .maplibregl-marker {
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
 </body>
-
 </html>

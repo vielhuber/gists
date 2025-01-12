@@ -27,6 +27,7 @@
 ### Computer steuern
 - Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
 - Stagehand: https://github.com/browserbase/stagehand
+- RunnerH: https://runnerh.com
 
 ### Bilder generieren
 - DALL-E: https://openai.com/index/dall-e-3
@@ -104,3 +105,13 @@
 
 ### Kostenloser API-Zugriff
 - GPT4free - https://gpt4free.io
+
+### Automatisierung
+- Make: https://www.make.com
+- Zapier: https://zapier.com
+- n8n.io: https://n8n.io
+- Power Automate: https://www.microsoft.com/de-de/power-platform/products/power-automate?market=de
+
+### Telefonbots / Chatbots
+- Voiceflow: https://www.voiceflow.com
+- Twilio: https://www.twilio.com
