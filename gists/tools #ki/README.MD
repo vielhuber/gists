@@ -101,7 +101,19 @@
 - WORTLIGA: https://wortliga.de/ki-text-generator
 - DeepL Write: https://www.deepl.com/de/write
 - ZeroGPT: https://www.zerogpt.com
-. GPTZero: https://gptzero.me
+- GPTZero: https://gptzero.me
+- Undetectable: https://undetectable.ai
+
+### Buch schreiben
+- Sudowrite: https://www.sudowrite.com
+- Chapterly: https://www.chapterly.com
+- Squibler: https://www.squibler.io
+- Jenni AI: https://jenni.ai
+- NovelAI: https://novelai.net
+- Grammarly: https://www.grammarly.com/ai-writer
+- LanguageTool: https://languagetool.org
+- Neuroflash: https://neuroflash.com
+- Amazon KDP: https://kdp.amazon.com
 
 ### Kostenloser API-Zugriff
 - GPT4free - https://gpt4free.io

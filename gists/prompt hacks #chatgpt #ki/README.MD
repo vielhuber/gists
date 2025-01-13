@@ -197,6 +197,12 @@ Mona Lisa puts on sunglasses with her hand, and a ray of light appears in the ba
   - Eine Beschreibung, die erheblich vom Bild abweicht, kann einen Kameraschnitt oder -übergang verursachen.
   - In der aktuellen Phase ist es eine Herausforderung, komplexe physische Bewegungen zu erzeugen, wie z.B. das Springen eines Balls oder die Flugbahn eines Wurfs aus großer Höhe.
 
+## Bücher schreiben/vermarkten
+
+```
+Du bist Marketingexperte für Autoren. Ich habe einen Ratgeber über weniger Stress im eigenen Business geschrieben. Zielgruppe sind Frauen, die ein Online Unternehmen führen. Ich zeige ihnen, wie sie durch Automatisierung und den Einsatz von Kl wertvolle Zeit sparen, effizienter arbeiten und am statt im Unternehmen arbeiten. Ich brauche bitte einen Marketingplan, um mein Buch bekannt zu machen. Schlage mir eine Marketingstrategie vor.
+```
+
 ## Tipps
 
 ### Rollenbeschreibung generieren lassen
