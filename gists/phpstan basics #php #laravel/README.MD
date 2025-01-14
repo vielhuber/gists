@@ -14,6 +14,9 @@ parameters:
     paths:
         - path/to/subfolder/
 
+    excludePaths:
+        - ~/.vs-code-server/*
+
     level: 3
 ```
 
@@ -38,6 +41,9 @@ parameters:
         - routes/
         - tests/
 
+    excludePaths:
+        - ~/.vs-code-server/*
+
     level: 3
 ```
 
@@ -58,6 +64,9 @@ parameters:
     paths:
         #- wp-config/themes/blank/
         - ./
+
+    excludePaths:
+        - ~/.vs-code-server/*
 
     level: 3
 ```
