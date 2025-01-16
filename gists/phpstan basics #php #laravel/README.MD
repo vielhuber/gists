@@ -15,7 +15,7 @@ parameters:
         - path/to/subfolder/
 
     excludePaths:
-        - ~/.vs-code-server/*
+        - ~/.vscode-server/*
 
     level: 3
 ```
@@ -66,7 +66,7 @@ parameters:
         - ./
 
     excludePaths:
-        - ~/.vs-code-server/*
+        - ~/.vscode-server/*
 
     level: 3
 ```
