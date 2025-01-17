@@ -135,6 +135,8 @@ class Browser
 $b = new Browser();
 $b->init();
 
+$b->go('https://tld.com');
+
 $b->wait('.login-form');
 $b->type('.login-form__input--email', 'xxx');
 $b->type('.login-form__input--password', 'xxx');
