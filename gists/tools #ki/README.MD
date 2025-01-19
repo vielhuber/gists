@@ -43,6 +43,7 @@
 - Google: https://cloud.google.com/speech-to-text / https://cloud.google.com/text-to-speech
 - Deepgram: https://deepgram.com
 - Fish Audio: https://fish.audio
+- Ultravox: https://www.ultravox.ai
   
 ### Meetings transkribieren / zusammenfassen
 - tl;dv: https://tldv.io
@@ -62,6 +63,10 @@
 - Mochi: https://mochi1ai.com
 - LTX Studio: https://ltx.studio
 - Adobe Firefly: https://www.adobe.com/de/products/firefly.html
+- Luma Dream Machine: https://lumalabs.ai/dream-machine
+
+### 3d Objekte
+- KREA: https://www.krea.ai
        
 ### Avatare/Sprechervideos generieren
 - HeyGen: https://www.heygen.com
@@ -127,3 +132,8 @@
 ### Telefonbots / Chatbots
 - Voiceflow: https://www.voiceflow.com
 - Twilio: https://www.twilio.com
+
+### Jailbroken / Uncensored
+- Uncensored: https://uncensored.com
+- Pornify: https://pornify.cc
+- Pornworks: https://pornworks.ai
