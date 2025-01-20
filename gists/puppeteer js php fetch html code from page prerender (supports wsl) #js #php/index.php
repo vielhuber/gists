@@ -105,6 +105,7 @@ class Browser
 
     public function click($selector)
     {
+      	$this->wait($selector);
         try {
             $this->page->tryCatch->click($selector);
         } catch (Node\Exception $e) {
@@ -115,6 +116,7 @@ class Browser
 
     public function type($field, $value)
     {
+      	$this->wait($selector);
         $this->page->type($field, $value);
     }
 
@@ -143,7 +145,7 @@ $b->type('.login-form__input--password', 'xxx');
 $b->shot();
 $b->click('.login-form__submit');
 
-$b->wait('.foo');
+//$b->wait('.foo'); // not needed, since click waits automatically
 $b->click('.foo');
 $b->shot();
 

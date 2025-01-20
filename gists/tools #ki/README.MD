@@ -85,6 +85,8 @@
     
 ### Präsentationen erstellen
 - Microsoft Copilot for PowerPoint: https://gamma.app
+- SlidesGPT: https://slidesgpt.com
+- Plus: https://plusai.com/plus-ai-powerpoint-maker
 
 ### Websites erstellen
 - Gamma: https://gamma.app
