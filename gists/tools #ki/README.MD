@@ -8,6 +8,7 @@
 - Meta Llama: https://www.llama.com
 - Mistral: https://mistral.ai
 - DeutschlandGPT: https://www.deutschlandgpt.de
+- DeepSeek: https://github.com/deepseek-ai/DeepSeek-V3
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
@@ -122,6 +123,10 @@
 - Neuroflash: https://neuroflash.com
 - Amazon KDP: https://kdp.amazon.com
 
+### PDF Translation Übersetzung
+- ImmersiveTranslate: https://immersivetranslate.com
+- Google Translate: https://translate.google.com
+
 ### Kostenloser API-Zugriff
 - GPT4free - https://gpt4free.io
 
@@ -131,11 +136,16 @@
 - n8n.io: https://n8n.io
 - Power Automate: https://www.microsoft.com/de-de/power-platform/products/power-automate?market=de
 
+### Analyse
+- ArtificialAnalysis: https://artificialanalysis.ai
+- ARC: https://arcprize.org
+
 ### Telefonbots / Chatbots
 - Voiceflow: https://www.voiceflow.com
 - Twilio: https://www.twilio.com
 
 ### Jailbroken / Uncensored
 - Uncensored: https://uncensored.com
+- Prompts: https://github.com/elder-plinius/L1B3RT4S
 - Pornify: https://pornify.cc
 - Pornworks: https://pornworks.ai
