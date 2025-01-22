@@ -11,6 +11,7 @@ rest_url('v1/foo/bar?lang='.ICL_LANGUAGE_CODE) // rest url with wpml
 wp_lostpassword_url() // reset password url
 content_url() // wp-content
 get_admin_url() // wp-admin
+get_bloginfo('atom_url') / get_bloginfo('rss2_url') / get_bloginfo('rss_url') / get_bloginfo('rdf_url') // rss/atom
 
 // public urls without language
 site_url()
