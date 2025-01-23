@@ -38,6 +38,7 @@
 - Google Imagegen: https://cloud.google.com/use-cases/text-to-image-ai / https://deepmind.google/technologies/imagen-3
 - Midjourney: https://www.midjourney.com
 - Ideogram (Schriften): https://ideogram.ai
+- Leonardo: https://app.leonardo.ai
     
 ### Text-To-Speech, Speech-To-Speech, Stimme klonen, Soundeffekte erzeugen
 - ElevenLabs: https://elevenlabs.io
@@ -88,6 +89,7 @@
 - Microsoft Copilot for PowerPoint: https://gamma.app
 - SlidesGPT: https://slidesgpt.com
 - Plus: https://plusai.com/plus-ai-powerpoint-maker
+- Gamma: https://gamma.app
 
 ### Websites erstellen
 - Gamma: https://gamma.app
@@ -126,6 +128,10 @@
 ### PDF Translation Übersetzung
 - ImmersiveTranslate: https://immersivetranslate.com
 - Google Translate: https://translate.google.com
+- Zerox OCR: https://github.com/getomni-ai/zerox
+- Gropudocs: https://products.groupdocs.app/de/conversion/md-to-docx
+- ILovePDF: https://www.ilovepdf.com/unlock_pdf
+- => Pipeline: Unlock PDF (.pdf) => Acrobat PDF OCR (.pdf) => Zerox OCR (.md) => Groupdocs (.docx) => Google Translate (.docx)
 
 ### Kostenloser API-Zugriff
 - GPT4free - https://gpt4free.io
