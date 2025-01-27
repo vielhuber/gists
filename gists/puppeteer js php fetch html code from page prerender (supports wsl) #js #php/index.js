@@ -18,7 +18,8 @@ try {
     defaultViewport: {
       width: 1920,
       height: 1080
-    }
+    },
+    //userDataDir: '/tmp/myChromeSession', // only important for subsequent sessions where devices should be remembered    
   });
 
   let page = await browser.newPage();

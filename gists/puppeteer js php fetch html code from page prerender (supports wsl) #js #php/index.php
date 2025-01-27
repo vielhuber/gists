@@ -40,7 +40,8 @@ class Browser
             $this->browser = $puppeteer->launch([
                 'headless' => false,
                 'ignoreHTTPSErrors' => true,
-                'args' => $args
+                'args' => $args,
+              	//'userDataDir' => '/tmp/myChromeSession', // only important for subsequent sessions where devices should be remembered
             ]);
             $this->page = $this->browser->newPage();
             $this->page->setDefaultTimeout(10000);
