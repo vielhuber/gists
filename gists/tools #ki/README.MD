@@ -57,7 +57,6 @@
 - Kling AI: https://klingai.com
 - RunWay ML: https://runwayml.com
 - Sora: https://openai.com/sora
-- Luma Dream Maschine: https://lumalabs.ai/dream-machine
 - Haiper: https://haiper.ai
 - JoggAI (Produktvideos): https://www.jogg.ai
 - Google Veo: https://deepmind.google/technologies/
@@ -124,6 +123,9 @@
 - LanguageTool: https://languagetool.org
 - Neuroflash: https://neuroflash.com
 - Amazon KDP: https://kdp.amazon.com
+
+### Gedichte reimen
+- ChatGPT CustomGPT "KI Gedicht Generator": https://chatgpt.com/g/g-Ua1y139mF-ki-gedicht-generator
 
 ### PDF Translation Übersetzung
 - ImmersiveTranslate: https://immersivetranslate.com
