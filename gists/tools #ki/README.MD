@@ -9,6 +9,7 @@
 - Mistral: https://mistral.ai
 - DeutschlandGPT: https://www.deutschlandgpt.de
 - DeepSeek: https://github.com/deepseek-ai/DeepSeek-V3
+- Qwen Alibaba: https://qwen-ai.com
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
