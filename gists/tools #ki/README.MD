@@ -40,6 +40,10 @@
 - Midjourney: https://www.midjourney.com
 - Ideogram (Schriften): https://ideogram.ai
 - Leonardo: https://app.leonardo.ai
+
+### Inpainting
+- Kling AI: https://klingai.com/text-to-image
+- getimg: https://getimg.ai/image-editor
     
 ### Text-To-Speech, Speech-To-Speech, Stimme klonen, Soundeffekte erzeugen
 - ElevenLabs: https://elevenlabs.io
@@ -66,6 +70,9 @@
 - LTX Studio: https://ltx.studio
 - Adobe Firefly: https://www.adobe.com/de/products/firefly.html
 - Luma Dream Machine: https://lumalabs.ai/dream-machine
+
+### Video verlängern
+- Kling AI: https://klingai.com/image-to-video/frame-mode
 
 ### 3d Objekte
 - KREA: https://www.krea.ai
