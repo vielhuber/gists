@@ -70,6 +70,7 @@
 - LTX Studio: https://ltx.studio
 - Adobe Firefly: https://www.adobe.com/de/products/firefly.html
 - Luma Dream Machine: https://lumalabs.ai/dream-machine
+- OmniHuman: https://omnihuman-lab.github.io
 
 ### Video verlängern
 - Kling AI: https://klingai.com/image-to-video/frame-mode
@@ -93,10 +94,10 @@
 - XBeast: https://pollo.ai
     
 ### Präsentationen erstellen
-- Microsoft Copilot for PowerPoint: https://gamma.app
-- SlidesGPT: https://slidesgpt.com
-- Plus: https://plusai.com/plus-ai-powerpoint-maker
 - Gamma: https://gamma.app
+- SlidesGPT: https://slidesgpt.com
+- Microsoft Copilot for PowerPoint: https://www.microsoft.com/de-DE/microsoft-365/copilot
+- Plus: https://plusai.com/plus-ai-powerpoint-maker
 
 ### Websites erstellen
 - Gamma: https://gamma.app
