@@ -490,3 +490,41 @@ $this->assertEquals(30, Model::whereBornAfter(1970)->count());
 $this->assertEquals(30, Model::whereBornAfter(1980)->count());
 $this->assertEquals(20, Model::whereBornAfter(1990)->count());
 ```
+
+### always catch the most specific exception
+
+```php
+// bad
+catch(\Throwable $e) {
+    print_r($e->getMessage());
+}
+
+// good
+catch(\PDOException $e) {
+    print_r($e->getMessage());
+}
+```
+
+### use enums
+
+```php
+// bad
+class Environment
+{
+    static function get($str) {
+        if( $str === 'Entwicklung' ) { return 'dev'; }
+        if( $str === 'Test' ) { return 'stage'; }
+        if( $str === 'Produktion' ) { return 'prod'; }
+    }
+}
+echo Environment::get('Produktion'); // "prod"
+
+// good
+enum Environment: string
+{
+    case Entwicklung = 'dev';
+    case Test = 'stage';
+    case Produktion = 'prod';
+}
+echo Environment::Produktion->value; // "prod"
+```

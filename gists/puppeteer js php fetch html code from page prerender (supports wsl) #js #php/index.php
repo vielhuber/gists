@@ -133,6 +133,16 @@ class Browser
     {
         return $this->page->querySelectorEval($selector, (new JsFunction(['e']))->body('return e.innerHTML'));
     }
+    
+    public function runJs($js) {
+        return $this->page->evaluate(
+            new JsFunction([], $js)
+        );
+    }
+    
+    public function keyboard($key) {
+        $this->page->keyboard->press($key);
+    }
 }
 
 $b = new Browser();
@@ -159,5 +169,9 @@ $b->innerHTML('.baz');
 $b->shot();
 
 $b->html();
+$ret = $b->runJs('document.querySelector("input").checked = true; return document.querySelector("input").value;');
+
+$b->keyboard('ArrowDown');
+$b->keyboard('Enter');
 
 $b->close();

@@ -1,14 +1,12 @@
 <?php
 // example #1
-function bad_function()
-{
+function bad_function() {
     throw new \Exception('argh');
 }
-try
-{
+try {
     bad_function();
 }
-catch(\Exception $e)
+catch(\Throwable $e)
 {
     echo $e->getMessage(); // argh
 }
