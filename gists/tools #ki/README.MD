@@ -76,6 +76,10 @@
 ### Video verlängern
 - Kling AI: https://klingai.com/image-to-video/frame-mode
 
+### Slideshow / Diashow erstellen
+- CapCut: https://www.capcut.com
+- CapCut Autocut: https://www.capcut.com/editor-tools/autocut
+
 ### 3d Objekte
 - KREA: https://www.krea.ai
        
