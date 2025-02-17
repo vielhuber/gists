@@ -178,7 +178,8 @@
 
 #### smartgit
 - `cd /usr/local`
-- `wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-22_1_3.tar.gz`
+- `rm -rf ./smartgit`
+- `wget https://downloads.syntevo.com/downloads/smartgit/smartgit-linux-24_1_2.tar.gz`
 - `tar xzf smartgit-linux-*.tar.gz`
 - `rm smartgit-linux-*.tar.gz`
 - `nano /usr/local/bin/sgit`
@@ -545,8 +546,8 @@ xdebug.output_dir="/tmp/xdebug"
 
 #### enable auto restart router / pc
 - `export VISUAL=nano; crontab -e`
-- `0 4 * * * . $HOME/.bash_profile; /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.sh > /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.log 2>&1`
-- `0 3 * * * . $HOME/.bash_profile; /usr/bin/wget "http://vielhuber.local.vielhuber.de/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
+- `0 4 * * * source $HOME/.bash_profile; /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.sh > /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.log 2>&1`
+- `0 3 * * * source $HOME/.bash_profile; /usr/bin/wget "http://vielhuber.local.vielhuber.de/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
 - `cron.sh`
 ```sh
 #!/usr/bin/env bash
