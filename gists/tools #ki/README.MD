@@ -96,7 +96,7 @@
 - Captions: https://www.captions.ai
 
 ### Social Media
-- XBeast: https://pollo.ai
+- XBeast: https://xbeast.io
     
 ### Präsentationen erstellen
 - Gamma: https://gamma.app
