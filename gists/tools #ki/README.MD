@@ -100,6 +100,7 @@
     
 ### Präsentationen erstellen
 - Gamma: https://gamma.app
+- Vidwud: https://www.vidwud.com
 - SlidesGPT: https://slidesgpt.com
 - Microsoft Copilot for PowerPoint: https://www.microsoft.com/de-DE/microsoft-365/copilot
 - Plus: https://plusai.com/plus-ai-powerpoint-maker

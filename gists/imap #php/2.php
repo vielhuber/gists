@@ -89,6 +89,19 @@ foreach ($folders as $folder) {
         $mail['attachments'] = $messages__value->getAttachments()->count();
         $mail['content_html'] = $messages__value->getHTMLBody();
         $mail['content_plain'] = $messages__value->getTextBody();
+      
+        // embed images
+        $attachments = $messages__value->getAttachments();
+        foreach ($attachments as $attachments__value) {
+            $mail['content_html'] = str_replace(
+                'cid:' . $attachments__value->getId(),
+                'data:' .
+                    $attachments__value->getMimeType() .
+                    ';base64,' .
+                    base64_encode($attachments__value->getContent()),
+                $mail['content_html']
+            );
+        }
 
         // methods
         //$messages__value->setFlag('Seen');
