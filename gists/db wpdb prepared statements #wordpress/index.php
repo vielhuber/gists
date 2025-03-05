@@ -47,6 +47,9 @@ $wpdb->update($wpdb->prefix . 'table', ['col1' => $val], ['id' => 1337], ['%s'],
 $wpdb->get_row()
 $wpdb->get_col()
   
+// delete rows
+$wpdb->delete($wpdb->prefix . 'table', ['ID' => 42]);
+  
 // connect to external db
 global $wpdb;
 $wpdb_2 = new wpdb('USERNAME', 'PASSWORD', 'DBNAME', 'HOST:PORT');
