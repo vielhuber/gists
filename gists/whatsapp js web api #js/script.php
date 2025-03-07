@@ -1,0 +1,1 @@
+$output = shell_exec('cd /path/to/script && /root/.nvm/versions/node/v23.5.0/bin/node --no-deprecation script.js 2>&1');
