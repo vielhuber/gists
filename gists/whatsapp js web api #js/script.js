@@ -16,33 +16,67 @@ const client = new Client({
             '--no-sandbox',
             '--no-zygote',
             '--single-process'
-        ]
+        ],
+        defaultViewport: {
+            width: 1920,
+            height: 1080
+        }
     }
 });
 
-client.on('qr', qr => {
-    console.log('QR-Code scannen, um Zugriff zu erhalten!');
-    qrcode.generate(qr, { small: true });
-    process.exit();
+client.on('qr', async qr => {
+    console.log('QR-Code erhalten!');
+    qrcode.generate(qr, { small: true }, function (qrcode) {
+      	console.log(qrcode);
+        console.log('Schreibe Datei...');
+        fs.writeFileSync(
+            'qr.json',
+            JSON.stringify({
+                success: true,
+                data: { img: qrcode }
+            })
+        );
+        fs.writeFileSync(
+            'status.json',
+            JSON.stringify({
+                success: true,
+                message: 'finished'
+            })
+        );
+    });
 });
 
 client.on('ready', async () => {
-    //console.log('Client ist bereit!');
+    console.log('Client ist bereit!');
     let data = [];
     let chats = await client.getChats();
-    //console.log(chats);
     for (let chat of chats) {
-        if (chat.name === 'David Vielhuber') {
-            //console.log(`📨 Letzte 50 Nachrichten von ${chat.name || chat.id.user}:`);
-            let messages = await chat.fetchMessages({ limit: 50 });
-            messages.forEach(messages__value => {
-                data.push(messages__value);
-                //console.log(`[${msg.timestamp}] ${msg.from}: ${msg.body}`);
-            });
-        }
+        let messages = await chat.fetchMessages({ limit: 50 });
+        messages.forEach(messages__value => {
+          data.push(messages__value);
+        });
     }
-    fs.writeFileSync('data.json', JSON.stringify(data));
+    fs.writeFileSync('data.json', JSON.stringify({ success: true, data: data }));
+    fs.writeFileSync(
+        'status.json',
+        JSON.stringify({
+            success: true,
+            message: 'finished'
+        })
+    );
     process.exit();
 });
 
+fs.writeFileSync(
+    'status.json',
+    JSON.stringify({
+        success: true,
+        message: 'initializing'
+    })
+);
 client.initialize();
+
+// limit timeout
+setTimeout(() => {
+    process.exit();
+}, 120000);
