@@ -72,6 +72,7 @@
 - Luma Dream Machine: https://lumalabs.ai/dream-machine
 - OmniHuman: https://omnihuman-lab.github.io
 - Pika: https://pika.art
+- Adobe Firefly: https://firefly.adobe.com
 
 ### Video verlängern
 - Kling AI: https://klingai.com/image-to-video/frame-mode
