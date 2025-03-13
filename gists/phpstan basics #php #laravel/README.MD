@@ -16,6 +16,7 @@ parameters:
 
     excludePaths:
         - ~/.vscode-server/*
+        - '/root/.vscode-server/extensions/*'
 
     level: 3
 ```
@@ -43,6 +44,7 @@ parameters:
 
     excludePaths:
         - ~/.vs-code-server/*
+        - '/root/.vscode-server/extensions/*'
 
     level: 3
 ```
@@ -67,6 +69,7 @@ parameters:
 
     excludePaths:
         - ~/.vscode-server/*
+        - '/root/.vscode-server/extensions/*'
 
     level: 3
 ```
