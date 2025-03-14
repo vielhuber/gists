@@ -48,7 +48,15 @@ client.on('qr', async qr => {
 
 client.on('ready', async () => {
     console.log('Client ist bereit!');
-    let data = [];
+
+  	// send message
+    let recipient = 'xxx@g.us';
+    await client.sendMessage(recipient, '🤖 test 🤖');
+    let media = MessageMedia.fromFilePath('dummy.pdf');
+    let response = await client.sendMessage(recipient, media, { caption: '🤖 media file 🤖' });
+  
+    // fetch messages
+  	let data = [];
     let chats = await client.getChats();
     for (let chat of chats) {
         let messages = await chat.fetchMessages({ limit: 50 });
@@ -64,6 +72,7 @@ client.on('ready', async () => {
             message: 'finished'
         })
     );
+  	await client.destroy();
     process.exit();
 });
 
@@ -77,6 +86,7 @@ fs.writeFileSync(
 client.initialize();
 
 // limit timeout
-setTimeout(() => {
+setTimeout(async () => {
+  	await client.destroy();
     process.exit();
 }, 120000);
