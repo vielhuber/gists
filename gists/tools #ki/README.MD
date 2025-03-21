@@ -10,6 +10,7 @@
 - DeutschlandGPT: https://www.deutschlandgpt.de
 - DeepSeek: https://github.com/deepseek-ai/DeepSeek-V3
 - Qwen Alibaba: https://qwen-ai.com
+- Manus AI: https://manus.im
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
