@@ -561,16 +561,19 @@ xdebug.output_dir="/tmp/xdebug"
   - Docker > Settings > Start Docker Desktop when you log in: aus
   - NOT USED: WIN+R > SystemPropertiesAdvanced > Erweitert > Leistung > Einstellungen... > Erweitert > Virtueller Arbeitsspeicher > Ändern... > Dateigröße für alle Laufwerke automatisch verwalten: aus & C: > Benutzerdefinierte Größe: 800 MB - 1024 MB; CMD als Admin: wmic computersystem where name="%computername%" set AutomaticManagedPagefile=false
 
-#### enable auto restart router / pc
+#### restart router / pc
 - `export VISUAL=nano; crontab -e`
 - `0 4 * * * source $HOME/.bash_profile; /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.sh > /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.log 2>&1`
-- `0 3 * * * source $HOME/.bash_profile; /usr/bin/wget "http://vielhuber.local.vielhuber.de/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
 - `cron.sh`
 ```sh
 #!/usr/bin/env bash
 /root/.nvm/versions/node/v23.5.0/bin/node --env-file=/mnt/c/Users/David/OneDrive/DOCS/VODAFONE/.env /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/stagehand.js
 shutdown.exe /s /t 0
 ```
+
+#### sync bills
+- `export VISUAL=nano; crontab -e`
+- `0 3 * * * source $HOME/.bash_profile; /usr/bin/wget "http://vielhuber.local.vielhuber.de/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
 
 #### composer
 - ```sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```

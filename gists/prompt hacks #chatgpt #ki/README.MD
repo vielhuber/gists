@@ -212,6 +212,27 @@ Ich brauche jemanden, der sehr innovative Content-Ideen für Social Media erstel
 Erstelle basierend auf deinem letzten Output nun eine System Persona. Starte mit "Du bist...".
 ```
 
+### Role-Framework
+
+#### 1.
+
+```md
+What's a list of 20 words that would describe a [specific specialist]?
+[example: "lawyer who specializes in drafting up legal documents"]
+```
+
+#### 2.
+
+```md
+Using as many of these words as possible, write a 4-sentence prompt that would summon this specialist in an LLM. It should sound like the user is asking to speak to a specific character like picking up a phone and saying, “I’d like to talk to…”. Make sure the tone matches the personality and style of the archetype.
+```
+
+#### 3.
+
+```md
+Start *new chat* and enter generated prompt.
+```
+
 ### Frameworks nutzen
 
 ### Vorab:
