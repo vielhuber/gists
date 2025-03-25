@@ -22,6 +22,12 @@ try {
         sys_get_temp_dir(),
         'UTF-8'
     );
+  
+  	/*
+    $mailbox->setConnectionArgs(0, 0, ['DISABLE_AUTHENTICATOR' => 'GSSAPI']);
+    $mailbox->setTimeouts(5);
+    */
+  
     $mails_ids = $mailbox->searchMailbox('ALL');
     foreach ($mails_ids as $mails_id__value) {
         $mail = $mailbox->getMail($mails_id__value, false); // don't mark as unread

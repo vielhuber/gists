@@ -18,6 +18,14 @@
 - A ~ Ask: "Könntest Du eine passende Meta-Description formulieren?"
 - R ~ Rinse & Repeat: Falls die Antwort nicht optimal ist, benötigt die KI Feedback zur Verbesserung
 
+## Rückgabewerte
+
+- Achtung: Manchmal liefert ChatGPT *\`\`\`{ ... }\`\`\`* oder *\`\`\`json ... \`\`\`* etc. zurück!
+
+```
+Wenn Du einen Wert nicht findest, liefere einen leeren String zurück.
+Bitte antworte ausschließlich im JSON-Format OHNE Anmerkungen und OHNE Quellenangaben.
+```
 
 ## Prompt-Aufbau (1)
 
