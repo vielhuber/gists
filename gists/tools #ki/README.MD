@@ -39,6 +39,7 @@
 - Stable Diffusion: https://beta.dreamstudio.ai/generate / https://leonardo.ai
 - Google Imagegen: https://cloud.google.com/use-cases/text-to-image-ai / https://deepmind.google/technologies/imagen-3
 - Midjourney: https://www.midjourney.com
+- Sora: https://www.sora.com
 - Ideogram (Schriften): https://ideogram.ai
 - Leonardo: https://app.leonardo.ai
 
@@ -61,8 +62,8 @@
 
 ### Videos generieren
 - Kling AI: https://klingai.com
+- Sora: https://www.sora.com
 - RunWay ML: https://runwayml.com
-- Sora: https://openai.com/sora
 - Haiper: https://haiper.ai
 - JoggAI (Produktvideos): https://www.jogg.ai
 - Google Veo: https://deepmind.google/technologies/
