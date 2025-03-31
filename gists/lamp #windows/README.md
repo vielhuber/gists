@@ -709,7 +709,7 @@ shutdown.exe /s /t 0
 - in this repo we store our ssl certificate, our ssh keys and all current active symlinks
 - ```mkdir /var/www/lamp```
 - ```cd /var/www/lamp```
-- ```git clone git@bitbucket.org:vielhuber/lamp.git . --config core.autocrlf=false```
+- ```git clone git@bitbucket.org:lamp-xyz-git/lamp.git . --config core.autocrlf=false```
 - ```chmod +x /var/www/lamp/lamp```
 - ```sudo visudo```
   - add ```/var/www/lamp``` to ```Defaults  secure_path```
