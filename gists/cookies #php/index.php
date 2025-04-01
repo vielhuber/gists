@@ -8,13 +8,13 @@ $_COOKIE['cookie'] = $value; // immediately set it for current request
 
 // get
 $_COOKIE['cookie']
-
+urldecode($_COOKIE['meinCookie']) // use this with umlauts when stored in js via encodeURIComponent
+  
 // check
 if(isset($_COOKIE['cookie'])){ /* ... */ }
 
 // set cookies without urlencode
 setrawcookie(...)
-
   
 /* store arrays in a cookie */
 // set
