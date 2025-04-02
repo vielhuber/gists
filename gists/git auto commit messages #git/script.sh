@@ -51,7 +51,7 @@ if [[ "$commit_mode" == "message" && "$existing_msg" != "." ]]; then
 fi
 
 # Output log file
-echo "Automatically generating git commit message..."
+echo "⚡ Automatically generating git commit message... ⚡"
 
 # Fetch the staged git diff with unified context of 10 lines, no color and strip out all lines longer than 1000 chars
 diff=$(git diff --unified=10 --staged --no-color | sed '/.\{1000\}./d')
@@ -112,6 +112,7 @@ fi
 # Extract the content from the response (handles potential formatting issues)
 response=$(sed -nr 's/.+content": "(.+?)".+/\1/p' <<< "$response")
 response=$(sed -r 's/\\n/\n/g' <<< "$response")
+response=$(sed -r 's/\\"/"/g' <<< "$response")
 
 # Delete debug files
 if [[ "$debug" = false ]]; then
