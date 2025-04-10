@@ -6,6 +6,7 @@
 - Microsoft Copilot: https://copilot.microsoft.com
 - Grok: https://x.ai
 - Meta Llama: https://www.llama.com
+- OLMo: https://allenai.org/olmo
 - Mistral: https://mistral.ai
 - DeutschlandGPT: https://www.deutschlandgpt.de
 - DeepSeek: https://github.com/deepseek-ai/DeepSeek-V3

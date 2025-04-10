@@ -2,6 +2,7 @@
 ```
 -domain:*tld.com
 ```
++ More filters > Hide extension URLs
 
 ### current / last nth active dom element
 ```js
