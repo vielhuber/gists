@@ -27,6 +27,7 @@
 - Screenshot to Code: https://screenshottocode.com
 - Cline: https://github.com/cline/cline
 - Windsurf: https://codeium.com/windsurf
+- Google Firebase Studio: https://studio.firebase.google.com
 
 ### Computer steuern
 - Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
