@@ -35,6 +35,7 @@
 - RunnerH: https://runnerh.com
 
 ### Bilder generieren
+- OpenAI ChatGPT: https://chatgpt.com
 - DALL-E: https://openai.com/index/dall-e-3
 - Adobe Firefly: https://firefly.adobe.com
 - FLUX: https://fal.ai/models/fal-ai/flux-realism / https://fal.ai/models/fal-ai/flux/dev / https://blackforestlabs.ai
