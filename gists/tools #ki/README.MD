@@ -28,6 +28,7 @@
 - Cline: https://github.com/cline/cline
 - Windsurf: https://codeium.com/windsurf
 - Google Firebase Studio: https://studio.firebase.google.com
+- OpenAI Codex CLI: https://github.com/openai/codex
 
 ### Computer steuern
 - Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
@@ -58,6 +59,8 @@
 - Ultravox: https://www.ultravox.ai
   
 ### Meetings transkribieren / zusammenfassen
+- Fathom: https://fathom.video/home
+- Meetily: https://github.com/Zackriya-Solutions/meeting-minutes
 - tl;dv: https://tldv.io
 
 ### Sound verbessern
