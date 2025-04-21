@@ -83,8 +83,8 @@ fi
 
 if [ -n "$5" ]; then
 PROXY_LINE="ProxyPreserveHost On
-ProxyPass / http://$PROJECT.local.vielhuber.de:$5/
-ProxyPassReverse / http://$PROJECT.local.vielhuber.de:$5/"
+ProxyPass / http://$PROJECT.vielhuber.dev:$5/
+ProxyPassReverse / http://$PROJECT.vielhuber.dev:$5/"
 else
 PROXY_LINE=""
 fi
@@ -92,7 +92,7 @@ fi
 cat > $FILE << EOF
 <VirtualHost *:80>
   ServerAdmin david@vielhuber.de
-  ServerName $PROJECT.local.vielhuber.de
+  ServerName $PROJECT.vielhuber.dev
   DocumentRoot /var/www/$FOLDER
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -106,7 +106,7 @@ cat > $FILE << EOF
 </VirtualHost>
 <VirtualHost *:443>
   ServerAdmin david@vielhuber.de
-  ServerName $PROJECT.local.vielhuber.de
+  ServerName $PROJECT.vielhuber.dev
   DocumentRoot /var/www/$FOLDER
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -117,13 +117,13 @@ cat > $FILE << EOF
   </Directory>
   $PHP_LINE
   SSLEngine on
-  SSLCertificateFile /var/www/lamp/ssl.cert
-  SSLCertificateKeyFile /var/www/lamp/ssl.key
+  SSLCertificateFile /etc/letsencrypt/live/vielhuber.dev/fullchain.pem
+  SSLCertificateKeyFile /etc/letsencrypt/live/vielhuber.dev/privkey.pem
 </VirtualHost>
 EOF
 sudo a2ensite $PROJECT.conf
 sudo service apache2 reload
-#"/mnt/c/Users/David/apps/gsudo/gsudo.exe" -d "echo 127.0.0.1 $PROJECT.local.vielhuber.de >> %windir%\System32\drivers\etc\hosts"
+#"/mnt/c/Users/David/apps/gsudo/gsudo.exe" -d "echo 127.0.0.1 $PROJECT.vielhuber.dev >> %windir%\System32\drivers\etc\hosts"
 fi
 
 # remove

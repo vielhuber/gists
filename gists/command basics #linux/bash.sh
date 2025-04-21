@@ -249,6 +249,7 @@ grep --include=*.php -rnl "." -e "your text" # only show filenames
 grep --include=*.php --ignore-case -rn "." -e "your text" # case insensitive
 grep --include=*.php -rnlw "." -e "your text" # match only whole word
 grep --include=*.php --exclude-dir="node_modules" -rnw "." -e "your text" # exclude folder
+grep --include=*.php --exclude="Test.php" -rnw "." -e "your text" # exclude file
 
 # find files (and exclude specific folder)
 find . -name '*.js' -not -path './node_modules/*'

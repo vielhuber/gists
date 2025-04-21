@@ -23,21 +23,21 @@
 ##### dns based
 
 - we abuse our own public domain as a dns that maps to a local ip in order to prevent setting local hosts AND having the ability to access via smartphones/tablets from the same network
-- DomainFactory
-- A-Records
-- local.vielhuber.de => 192.168.0.2
-- *.local.vielhuber.de => 192.168.0.2
-- fritz.box > Heimnetz > Netzwerk > Netzwerkeinstellungen > DNS-Rebind-Schutz:
-  - vielhuber.de
-  - local.vielhuber.de
-  - *.local.vielhuber.de
-- restart FRITZ!Box
+- dns a-records
+  - vielhuber.dev => 192.168.0.2
+  - *.vielhuber.dev => 192.168.0.2
+- fritzbox (if needed)
+  - fritz.box > Heimnetz > Netzwerk > Netzwerkeinstellungen > DNS-Rebind-Schutz:
+    - vielhuber.de
+    - vielhuber.dev
+    - *.vielhuber.dev
+  - restart
 
 ##### local based
 
 - run powershell as adminstrator
 - `PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex"`
-- uncomment `"/mnt/c/Users/David/apps/gsudo/gsudo.exe" -d "echo 127.0.0.1 $PROJECT.local.vielhuber.de >> %windir%\System32\drivers\etc\hosts"` from `lamp`
+- uncomment `"/mnt/c/Users/David/apps/gsudo/gsudo.exe" -d "echo 127.0.0.1 $PROJECT.vielhuber.dev >> %windir%\System32\drivers\etc\hosts"` from `lamp`
 
 #### open firewall
 - not used, because we use firewall.ps1 (see below)
@@ -316,16 +316,17 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```sudo a2dissite 000-default.conf```
 
 #### ssl
-- we use the following technique, because:
-  - domainfactory does not support api access
-  - let's encrypt does not support http validation for wildcards
-  - we must use a wildcard certificate (single certificates don't work because domainfactory has no api)
-  - we cannot create a dns record
-- create a real let's encrypt certificate via https://punchsalad.com/ssl-certificate-generator/
-- Domain: *.local.vielhuber.de
-- DNS-verification via txt-record over DomainFactory
-- private-key.txt => \\wsl$\Ubuntu\var\www\lamp\ssl.key
-- ca-bundle.txt => \\wsl$\Ubuntu\var\www\lamp\ssl.cert
+- `sudo apt install certbot python3-certbot-dns-cloudflare`
+- `pip install --upgrade pyOpenSSL cryptography certbot certbot-dns-cloudflare`
+- `mkdir -p ~/.secrets/certbot`
+- `nano ~/.secrets/certbot/cloudflare.ini`
+- `dns_cloudflare_api_token = YOUR_CLOUDFLARE_API_TOKEN_WITH_EDIT_ZONE_DNS_PERMISSIONS`
+- `chmod 600 ~/.secrets/certbot/cloudflare.ini`
+- `certbot certonly --dns-cloudflare --dns-cloudflare-credentials ~/.secrets/certbot/cloudflare.ini -d '*.vielhuber.dev' -d vielhuber.dev --agree-tos --email david@vielhuber.de --dns-cloudflare-propagation-seconds 60 --non-interactive`
+- `certbot renew --dry-run`
+- `sudo mv /etc/cron.d/certbot /etc/cron.d/certbot.disabled`
+- `export VISUAL=nano; crontab -e`
+- `0 12 * * * certbot renew --quiet`
 
 #### postfix
 - ```sudo apt-get install postfix```
@@ -573,7 +574,7 @@ shutdown.exe /s /t 0
 
 #### sync bills
 - `export VISUAL=nano; crontab -e`
-- `0 3 * * * source $HOME/.bash_profile; /usr/bin/wget "http://vielhuber.local.vielhuber.de/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
+- `0 3 * * * source $HOME/.bash_profile; /usr/bin/wget "https://vielhuber.dev/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
 
 #### composer
 - ```sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
@@ -929,7 +930,7 @@ rm "$t"
   - ```$cfg['Servers'][$i]['auth_type'] = 'config';```
   - ```$cfg['ExecTimeLimit'] = 6000;```
   - ```$cfg['blowfish_secret'] = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';``` (generate secret with: https://phpsolved.com/phpmyadmin-blowfish-secret-generator/?g=[insert_php]echo%20$code;[/insert_php])
-- https://phpmyadmin.local.vielhuber.de
+- https://phpmyadmin.vielhuber.dev
   - "Der phpMyAdmin-Konfigurationsspeicher ist nicht vollständig konfiguriert," => operations > create table
 
 #### speedtest cli
@@ -1045,7 +1046,7 @@ rm "$t"
 #### switch clients
 - you can setup lamp on multiple clients
 - option 1: point the dns record to the current active client (currently used)
-- option 2: setup a more dynamic approach like 01.project-name.local.vielhuber.de, 02.project-name.local.vielhuber.de, ...
+- option 2: setup a more dynamic approach like 01.project-name.vielhuber.dev, 02.project-name.vielhuber.dev, ...
 
 ## usage
 
