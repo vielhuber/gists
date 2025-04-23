@@ -81,10 +81,16 @@ else
 FOLDER=$PROJECT
 fi
 
+DOMAIN="${PROJECT}.vielhuber.dev"
+# special case for mail domain
+if [ "$PROJECT" = "vielhuber" ]; then
+    DOMAIN="vielhuber.dev"
+fi
+
 if [ -n "$5" ]; then
 PROXY_LINE="ProxyPreserveHost On
-ProxyPass / http://$PROJECT.vielhuber.dev:$5/
-ProxyPassReverse / http://$PROJECT.vielhuber.dev:$5/"
+ProxyPass / http://$DOMAIN:$5/
+ProxyPassReverse / http://$DOMAIN:$5/"
 else
 PROXY_LINE=""
 fi
@@ -92,7 +98,7 @@ fi
 cat > $FILE << EOF
 <VirtualHost *:80>
   ServerAdmin david@vielhuber.de
-  ServerName $PROJECT.vielhuber.dev
+  ServerName $DOMAIN
   DocumentRoot /var/www/$FOLDER
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -106,7 +112,7 @@ cat > $FILE << EOF
 </VirtualHost>
 <VirtualHost *:443>
   ServerAdmin david@vielhuber.de
-  ServerName $PROJECT.vielhuber.dev
+  ServerName $DOMAIN
   DocumentRoot /var/www/$FOLDER
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -123,7 +129,7 @@ cat > $FILE << EOF
 EOF
 sudo a2ensite $PROJECT.conf
 sudo service apache2 reload
-#"/mnt/c/Users/David/apps/gsudo/gsudo.exe" -d "echo 127.0.0.1 $PROJECT.vielhuber.dev >> %windir%\System32\drivers\etc\hosts"
+#"/mnt/c/Users/David/apps/gsudo/gsudo.exe" -d "echo 127.0.0.1 $DOMAIN >> %windir%\System32\drivers\etc\hosts"
 fi
 
 # remove
