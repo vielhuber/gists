@@ -29,6 +29,8 @@
 - Windsurf: https://codeium.com/windsurf
 - Google Firebase Studio: https://studio.firebase.google.com
 - OpenAI Codex CLI: https://github.com/openai/codex
+- OpenRouter: https://openrouter.ai
+- Plandex: https://plandex.ai
 
 ### Computer steuern
 - Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
