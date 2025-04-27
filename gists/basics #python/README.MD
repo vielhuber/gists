@@ -10,6 +10,29 @@
 ### deactivate
 - `deactivate`
 
+## package management
+
+### install package
+
+- `pip install <paket>`
+- `echo "<paketname>" >> requirements.txt`
+
+### install all packages
+
+- `pip install -r requirements.txt`
+
+### create requirements
+
+#### option 1
+
+- `pip install pipreqs`
+- `pipreqs . --force --ignore venv`
+
+
+#### option 2
+
+- `pip freeze > requirements.txt`
+
 ## watchers
 
 - `watcher.py`
