@@ -59,6 +59,8 @@
 - Deepgram: https://deepgram.com
 - Fish Audio: https://fish.audio
 - Ultravox: https://www.ultravox.ai
+- Sesame: https://www.sesame.com
+- Dia: https://github.com/nari-labs/dia
   
 ### Meetings transkribieren / zusammenfassen
 - Fathom: https://fathom.video/home
