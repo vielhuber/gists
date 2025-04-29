@@ -28,6 +28,7 @@ date_default_timezone_set('UTC'); // default timezone
 - if you don't take care of timezones, only work with local times and use `wp_date()`/`strtotime(get_gmt_from_date())`
 - don't use `date_i18n()`, since it is deprecated (use `wp_date()` instead)
 - never overwrite the timezone with `date_default_timezone_set()`, because WordPress assumes UTC everywhere
+- exception: you want to use primarily native php functions and don't use or rely on the WordPress' ones
 
 #### important functions
 

@@ -26,6 +26,9 @@ try {
   	/*
     $mailbox->setConnectionArgs(0, 0, ['DISABLE_AUTHENTICATOR' => 'GSSAPI']);
     $mailbox->setTimeouts(5);
+    $mailbox->setAttachmentsIgnore(true);
+    $mailbox->switchMailbox('INBOX.Foo');
+    $folders = $mailbox->getMailboxes('*');
     */
   
     $mails_ids = $mailbox->searchMailbox('ALL');
