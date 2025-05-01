@@ -40,7 +40,18 @@ for FOLDERS__VALUE in $FOLDERS; do
       D_CUR=$(date -I -d "$D_CUR + 1 day")
     done
 
-    # run single command (for performance reasons)
-    ssh -o StrictHostKeyChecking=no -p $SSH_PORT -l $SSH_USERNAME $SSH_HOST rm$FILELIST
+    # run single command (not possible, because too long!)
+    #ssh -o StrictHostKeyChecking=no -p $SSH_PORT -l $SSH_USERNAME $SSH_HOST rm$FILELIST
+    
+    # split in chunks
+    TMPFILE="/tmp/deletelist.txt"
+    echo "$FILELIST" | tr ' ' '\n' > "$TMPFILE"
+    BLOCKSIZE=50
+    split -l $BLOCKSIZE "$TMPFILE" "$TMPFILE.part"
+    for PART in "$TMPFILE.part"*; do
+      FILES=$(paste -sd' ' "$PART")
+      ssh -o StrictHostKeyChecking=no -p $SSH_PORT -l $SSH_USERNAME $SSH_HOST rm $FILES
+    done
+    rm "$TMPFILE" "$TMPFILE.part"*
 
 done
