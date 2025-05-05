@@ -12,6 +12,7 @@
 - DeepSeek: https://github.com/deepseek-ai/DeepSeek-V3
 - Qwen Alibaba: https://qwen-ai.com
 - Manus AI: https://manus.im
+- Jasper: https://www.jasper.ai
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
@@ -93,7 +94,7 @@
 - CapCut: https://www.capcut.com
 - CapCut Autocut: https://www.capcut.com/editor-tools/autocut
 
-### 3d Objekte
+### 3D-Objekte
 - KREA: https://www.krea.ai
        
 ### Avatare/Sprechervideos generieren
@@ -171,6 +172,9 @@
 - Zapier: https://zapier.com
 - n8n.io: https://n8n.io
 - Power Automate: https://www.microsoft.com/de-de/power-platform/products/power-automate?market=de
+
+### Toolsammlung
+- AI Center: https://aicenter.ai
 
 ### Analyse
 - ArtificialAnalysis: https://artificialanalysis.ai

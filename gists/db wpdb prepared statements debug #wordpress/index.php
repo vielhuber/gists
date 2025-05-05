@@ -40,8 +40,16 @@ $wpdb->get_var($wpdb->prepare('SELECT * FROM table WHERE partner_id = %i AND nam
 // null values only work with db_insert / db_update
 $val = null;
 $wpdb->query($wpdb->prepare('INSERT INTO table(col1) VALUES(%s)',$val)); // does not work
+$wpdb->query($wpdb->prepare('SELECT * FROM table WHERE col1 = %s AND col2 = %s', $val, 'bar')); // does not work
+$wpdb->query($wpdb->prepare('SELECT * FROM table WHERE (col1 = %s'.($val === null ? ' OR col1 IS NULL' : '').') AND col2 = %s', $val, 'bar')); // does work
 $wpdb->insert($wpdb->prefix . 'table', ['col1' => $val], ['%s']); // does work
+$wpdb->insert_id // get id of last insert
 $wpdb->update($wpdb->prefix . 'table', ['col1' => $val], ['id' => 1337], ['%s'], ['%d']); // does work
+
+// IN query
+$ids = [1,2,3];
+$wpdb->get_results($wpdb->prepare('SELECT * FROM '.$wpdb->prefix.'table WHERE ID IN (%d)', $ids)); // does not work
+$wpdb->get_results($wpdb->prepare('SELECT * FROM '.$wpdb->prefix.'table WHERE ID IN ('.implode(',', array_fill(0, count($ids), '%d')).')', ...$ids)); // works
 
 // retrieve single col/row
 $wpdb->get_row()
