@@ -107,6 +107,7 @@
 - SteveAI: https://www.steve.ai
     
 ### Social Ads erstellen
+- OpusClip: https://www.opus.pro
 - Captions: https://www.captions.ai
 
 ### Social Media
