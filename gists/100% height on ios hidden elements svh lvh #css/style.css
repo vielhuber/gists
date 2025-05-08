@@ -1,0 +1,4 @@
+div {
+  height:100svh; /* fixed, no jumps */
+  margin-bottom: calc(100lvh - 100svh); /* nice margin below, if nav is hidden */
+}
