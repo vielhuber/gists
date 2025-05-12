@@ -21,13 +21,13 @@
 - Ollama: https://ollama.com
 
 ### Programmierung
-- GitHub Copilot: https://github.com/features/copilot
 - Cursor: https://www.cursor.com
+- VSCode + GitHub Copilot: https://github.com/features/copilot
+- Windsurf: https://codeium.com/windsurf
 - bolt: https://bolt.new
 - v0: https://v0.dev
 - Screenshot to Code: https://screenshottocode.com
 - Cline: https://github.com/cline/cline
-- Windsurf: https://codeium.com/windsurf
 - Google Firebase Studio: https://studio.firebase.google.com
 - OpenAI Codex CLI: https://github.com/openai/codex
 - OpenRouter: https://openrouter.ai
