@@ -44,6 +44,17 @@ try {
             $mailbox->markMailAsUnread($mails_id__value); // undo saveMail setting mail as read
         }
       	// $mailbox->moveMail($mails_id__value, 'INBOX/ARCHIV');
+      
+      	// attachments
+        $attachments = $mail->getAttachments();
+        if (!empty($attachments)) {
+        	foreach ($attachments as $attachments__value) {
+      			$unique_id = $mail->id . '_' . md5($attachments__value->getContents()); // $attachments__value->id is not unique!
+              	print_r($attachments__value->getContents());
+                $attachments__value->setFilePath($_SERVER['DOCUMENT_ROOT'] . '...' . '.pdf');
+                $attachments__value->saveToDisk();
+            }
+        }      	
 
         $mails[] = [
             'id' => (string) $mail->id, // this is the unique uid (not message sequence id)
