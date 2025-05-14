@@ -37,6 +37,7 @@
 - Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
 - Stagehand: https://github.com/browserbase/stagehand
 - RunnerH: https://runnerh.com
+- Manus AI: https://manus.im
 
 ### Bilder generieren
 - OpenAI ChatGPT: https://chatgpt.com

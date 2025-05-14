@@ -1,0 +1,11 @@
+- `sudo mv /etc/apt/preferences.d/nosnap.pref ~/Dokumente/nosnap.backup`
+- `sudo apt update`
+- `sudo apt install snapd`
+- Terminal neustarten
+- `sudo snap install snap-store`
+- Linux neustarten
+- Snap Store > NextCloud
+- `sudo snap set nextcloud ports.http=8081`
+- `sudo snap set nextcloud ports.https=8443`
+- `sudo snap restart nextcloud`
+- http://localhost:8081

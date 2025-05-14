@@ -1,0 +1,6 @@
+- `git clone https://github.com/hakimel/reveal.js.git`
+- `cd reveal.js`
+- `ln -s ./../index.md ./index.md`
+- `ln -s ./../index.html ./index.html`
+- `npm install`
+- `npm start`

@@ -312,8 +312,35 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```sudo nano /etc/php/X.X/apache2/php.ini``` (not needed, see below)
 - ```sudo nano /etc/php/X.X/cli/php.ini``` (not needed, see below)
 
-#### disable default host
+#### setup default page
 - ```sudo a2dissite 000-default.conf```
+- ```nano /etc/apache2/sites-available/000-blank.conf```
+
+```
+<VirtualHost *:80>
+  DocumentRoot /var/www
+  <Directory /var/www>
+    Options +Indexes
+    AllowOverride None
+    Require all granted
+  </Directory>
+</VirtualHost>
+<VirtualHost *:443>
+  DocumentRoot /var/www
+  <Directory /var/www>
+    Options +Indexes
+    AllowOverride None
+    Require all granted
+  </Directory>
+  SSLEngine on
+  SSLCertificateFile /etc/letsencrypt/live/vielhuber.dev/fullchain.pem
+  SSLCertificateKeyFile /etc/letsencrypt/live/vielhuber.dev/privkey.pem
+</VirtualHost>
+```
+
+- ```sudo a2ensite 000-blank.conf```
+- ```sudo service apache2 reload```
+- test https://foo.vielhuber.dev / http://192.168.0.2
 
 #### ssl
 - `sudo apt install certbot python3-certbot-dns-cloudflare`
