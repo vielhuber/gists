@@ -40,12 +40,43 @@ try {
   await page.screenshot({ path: 'live.png' });
   await browser.close();
 
-  /*
-      await page.waitForSelector('.text');
-      await new Promise((resolve) => setTimeout(() => resolve(), 1000));
-      await page.click('.foo');
-      let foo = await page.$eval('.text', (e) => e.innerHTML);
-      */
+  // more examples
+  
+  await page.waitForSelector('.text');
+  
+  try {
+    await page.waitForSelector('.text', { timeout: 60000 });
+  } catch () {
+    console.log('not found!');
+    /* ... */
+  }
+    
+  await page.goto('...', { waitUntil: 'domcontentloaded' });
+
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  
+  await page.click('.foo');
+  
+  await page.type('input[type="password"]', 'xxx');
+  
+  let foo = await page.$eval('.text', (e) => e.innerHTML);
+  
+  let links = await page.$$eval('a.special-link', $els => {
+    let data = [];
+    $els.forEach($el => {
+    	data.push($el.getAttribute('href'));
+    });
+    return data;
+  });
+  
+  if (await page.$('.link-that-exists') !== null) {
+    await page.$$eval('.link-that-exists', $els => {
+      $els.forEach($el => {
+        $el.click();
+      });
+    });
+  }
+  
 }
 catch (e) {
   console.log(e); 
