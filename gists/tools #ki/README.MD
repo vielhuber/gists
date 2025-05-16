@@ -107,11 +107,10 @@
 ### Animationsvideos generieren
 - SteveAI: https://www.steve.ai
     
-### Social Ads erstellen
+### Social Media
 - OpusClip: https://www.opus.pro
 - Captions: https://www.captions.ai
-
-### Social Media
+- arcards: https://www.arcads.ai/
 - XBeast: https://xbeast.io
     
 ### Präsentationen erstellen
