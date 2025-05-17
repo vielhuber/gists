@@ -14,30 +14,19 @@
 - Manus AI: https://manus.im
 - Jasper: https://www.jasper.ai
 
-### Recherche / Podcasts erstellen
-- Google NotebookLM: https://notebooklm.google
-
-### Selbsthosting
-- Ollama: https://ollama.com
-
 ### Programmierung
 - Cursor: https://www.cursor.com
 - VSCode + GitHub Copilot: https://github.com/features/copilot
+- OpenAI Codex CLI: https://github.com/openai/codex
 - Windsurf: https://codeium.com/windsurf
 - bolt: https://bolt.new
 - v0: https://v0.dev
 - Screenshot to Code: https://screenshottocode.com
 - Cline: https://github.com/cline/cline
 - Google Firebase Studio: https://studio.firebase.google.com
-- OpenAI Codex CLI: https://github.com/openai/codex
 - OpenRouter: https://openrouter.ai
 - Plandex: https://plandex.ai
-
-### Computer steuern
-- Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
-- Stagehand: https://github.com/browserbase/stagehand
-- RunnerH: https://runnerh.com
-- Manus AI: https://manus.im
+- Rork: https://rork.com
 
 ### Bilder generieren
 - OpenAI ChatGPT: https://chatgpt.com
@@ -54,7 +43,19 @@
 ### Inpainting
 - Kling AI: https://klingai.com/text-to-image
 - getimg: https://getimg.ai/image-editor
-    
+
+### Computer steuern
+- Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
+- Stagehand: https://github.com/browserbase/stagehand
+- RunnerH: https://runnerh.com
+- Manus AI: https://manus.im
+
+### Recherche / Podcasts erstellen
+- Google NotebookLM: https://notebooklm.google
+
+### Selbsthosting
+- Ollama: https://ollama.com
+  
 ### Text-To-Speech, Speech-To-Speech, Stimme klonen, Soundeffekte erzeugen
 - ElevenLabs: https://elevenlabs.io
 - Google: https://cloud.google.com/speech-to-text / https://cloud.google.com/text-to-speech
