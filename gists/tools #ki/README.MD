@@ -28,6 +28,9 @@
 - OpenRouter: https://openrouter.ai
 - Plandex: https://plandex.ai
 - Rork: https://rork.com
+- Devin: https://www.devin.ai
+- Lovable: https://lovable.dev
+- replit: https://replit.com
 
 ### Bilder generieren
 - OpenAI ChatGPT: https://chatgpt.com
