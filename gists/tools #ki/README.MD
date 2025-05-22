@@ -48,7 +48,7 @@
 - Kling AI: https://klingai.com/text-to-image
 - getimg: https://getimg.ai/image-editor
 
-### Computer steuern
+### Agents / Computer steuern
 - Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
 - Stagehand: https://github.com/browserbase/stagehand
 - RunnerH: https://runnerh.com
