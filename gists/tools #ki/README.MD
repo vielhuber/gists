@@ -147,6 +147,7 @@
 - ZeroGPT: https://www.zerogpt.com
 - GPTZero: https://gptzero.me
 - Undetectable: https://undetectable.ai
+- Scribbr: https://www.scribbr.de
 
 ### Buch schreiben
 - Sudowrite: https://www.sudowrite.com

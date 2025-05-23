@@ -68,10 +68,10 @@
 
 #### upgrade to latest ubuntu
 - `wsl --update` # kernel upgrade
-- `sudo apt-get update`
+- `sudo apt-get update --allow-releaseinfo-change`
 - `sudo apt-get upgrade`
-- `sudo apt update -y`
-- `sudo apt dist-upgrade -y`
+- `sudo apt dist-upgrade`
+- `sudo apt autoremove`
 - `sudo do-release-upgrade`
 - `lsb_release -a`
 
