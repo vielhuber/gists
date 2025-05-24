@@ -31,6 +31,7 @@
 - Devin: https://www.devin.ai
 - Lovable: https://lovable.dev
 - replit: https://replit.com
+- Firebase Studio: https://firebase.studio
 
 ### Bilder generieren
 - OpenAI ChatGPT: https://chatgpt.com
