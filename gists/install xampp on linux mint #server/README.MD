@@ -1,0 +1,9 @@
+- https://www.apachefriends.org/de/index.html
+- `chmod 755 xampp-linux-*-installer.run`
+- `sudo ./xampp-linux-*-installer.run`
+- `sudo /opt/lampp/lampp start`
+- `sudo /opt/lampp/lampp stop`
+- optional
+  - `sudo /opt/lampp/manager-linux-x64.run`
+  - `sudo /opt/lampp/lampp restart`
+  - `sudo nano /opt/lampp/etc/php.ini`
