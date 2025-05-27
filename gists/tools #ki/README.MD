@@ -135,6 +135,7 @@
 
 ### Chatbots
 - LoyJoy: https://www.loyjoy.com
+- Homie: https://yourhomie.ai
 
 ### LLM Vergleich
 - Chatbot Arena (LMSYS): https://lmarena.ai
