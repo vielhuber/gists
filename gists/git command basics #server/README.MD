@@ -165,6 +165,10 @@ if gitignore is not working for a specific file/folder (this does not(!) delete 
 #### revise commit history
 - git rebase --interactive
 
+#### pull interactive rebased history on production / other server
+- git fetch origin
+- git reset --hard origin/main # replace main with branch
+
 #### disable rebase on pull (remove the following lines of config files)
 ```
 [pull]

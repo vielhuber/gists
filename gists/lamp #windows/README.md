@@ -208,6 +208,7 @@
 - Email: david@vielhuber.de
 - Use SmartGit as SSH client
 - Style: Working tree (file oriented)
+- Edit > Preferences > Allow modifying pushed commits (e.g. forced-push)
 - Edit > Preferences > User Interface > Dark (independent of system)
 - Edit > Preferences > User Interface > On start-up: Don't reopen the last used repositories
 - Edit > Preferences > User Interface > Built-in Text Editors > Font Size: 9
