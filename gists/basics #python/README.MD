@@ -33,6 +33,15 @@
 
 - `pip freeze > requirements.txt`
 
+## .gitignore
+
+```
+/venv
+/.env
+__pycache__
+*.pyc
+```
+
 ## watchers
 
 - `watcher.py`
