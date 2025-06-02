@@ -14,6 +14,7 @@
 - Manus AI: https://manus.im
 - Jasper: https://www.jasper.ai
 - Tencent HunYuan: https://huggingface.co/spaces/tencent/Hunyuan-T1
+- T3.chat: https://t3.chat
 
 ### Programmierung
 - Cursor: https://www.cursor.com
@@ -54,6 +55,7 @@
 - Stagehand: https://github.com/browserbase/stagehand
 - RunnerH: https://runnerh.com
 - Manus AI: https://manus.im
+- AgenticSeek: https://github.com/Fosowl/agenticSeek
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
