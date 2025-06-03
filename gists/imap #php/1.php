@@ -16,7 +16,7 @@ $settings = [
 $mails = [];
 try {
     $mailbox = new Mailbox(
-        '{' . $settings['host'] . ':' . $settings['port'] . '/imap/ssl}' . $settings['folder_inbox'],
+        '{' . $settings['host'] . ':' . $settings['port'] . '/imap/ssl/novalidate-cert}' . $settings['folder_inbox'],
         $settings['username'],
         $settings['password'],
         sys_get_temp_dir(),
