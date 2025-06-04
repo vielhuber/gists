@@ -19,7 +19,7 @@
 ### Programmierung
 - Cursor: https://www.cursor.com
 - VSCode + GitHub Copilot: https://github.com/features/copilot
-- OpenAI Codex CLI: https://github.com/openai/codex
+- OpenAI Codex: https://chatgpt.com/codex / https://github.com/openai/codex
 - Windsurf: https://codeium.com/windsurf
 - bolt: https://bolt.new
 - v0: https://v0.dev
