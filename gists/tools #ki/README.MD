@@ -89,7 +89,7 @@
 - Google Veo: https://deepmind.google/technologies/
 - Pollo: https://pollo.ai
 - Mochi: https://mochi1ai.com
-- LTX Studio: https://ltx.studio
+- Lightricks / LTXV / LTX Studio: https://www.lightricks.com / https://ltx.studio
 - Adobe Firefly: https://www.adobe.com/de/products/firefly.html
 - Luma Dream Machine: https://lumalabs.ai/dream-machine
 - OmniHuman: https://omnihuman-lab.github.io
