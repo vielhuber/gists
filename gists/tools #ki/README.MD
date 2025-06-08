@@ -19,7 +19,9 @@
 ### Programmierung
 - Cursor: https://www.cursor.com
 - VSCode + GitHub Copilot: https://github.com/features/copilot
+- Void: https://voideditor.com
 - OpenAI Codex: https://chatgpt.com/codex / https://github.com/openai/codex
+- Claude Code: https://www.anthropic.com/claude-code
 - Windsurf: https://codeium.com/windsurf
 - bolt: https://bolt.new
 - v0: https://v0.dev
@@ -130,6 +132,7 @@
 
 ### Websites erstellen
 - Gamma: https://gamma.app
+- Onlook: https://onlook.com
     
 ### Musik erstellen
 - Suno: https://suno.com
