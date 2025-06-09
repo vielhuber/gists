@@ -1,9 +1,4 @@
-<?php
 // prettier-ignore
 {
-echo           "This is";
-
-echo        "a lot of ugly code";
+   console.log(            'foo'     ); 
 }
-
-echo 'a lot of ugly code';

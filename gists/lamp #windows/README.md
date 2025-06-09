@@ -1005,10 +1005,15 @@ rm "$t"
 - ```wp --info```
 
 #### ffmpeg
-- ```sudo add-apt-repository ppa:savoury1/ffmpeg4 -y```
-- ```sudo add-apt-repository ppa:savoury1/ffmpeg5 -y```
-- ```sudo apt-get update```
-- ```sudo apt install ffmpeg```
+- ```cd /tmp```
+- ```wget https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl-shared.tar.xz```
+- ```tar -xf ffmpeg-*-shared.tar.xz```
+- ```cd ffmpeg-*-shared```
+- ```sudo cp bin/ffmpeg bin/ffprobe /usr/local/bin/```
+- ```sudo cp -r lib/* /usr/local/lib/```
+- ```sudo ldconfig```
+- ```cd ..```
+- ```rm -rf ffmpeg-*-shared*```
 - ```ffmpeg -version```
 
 #### youtube-dl
