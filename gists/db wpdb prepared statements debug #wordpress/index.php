@@ -64,5 +64,6 @@ $wpdb_2 = new wpdb('USERNAME', 'PASSWORD', 'DBNAME', 'HOST:PORT');
 $results = $wpdb_2->get_results($wpdb_2->prepare('SELECT * FROM '.$wpdb_2->prefix.'tbl WHERE ID > %d', 3));
 var_dump($results);
 
-// debug
+// debug / info
 print_r($wpdb->last_query);
+print_r($wpdb->rows_affected);
