@@ -584,6 +584,10 @@ Usage: git acp
 ### show commit count by author name
 - git shortlog -sn --all --no-merges
 
+### show all commits by author and branch
+- git fetch --all
+- git log --all --author="foo@bar.com" --pretty=format:"%h %ad %d" --date=iso
+
 ### git flow
 #### init once (accept all defaults with -d)
 - git flow init -d
