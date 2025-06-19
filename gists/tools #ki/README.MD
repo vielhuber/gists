@@ -58,6 +58,9 @@
 - RunnerH: https://runnerh.com
 - Manus AI: https://manus.im
 - AgenticSeek: https://github.com/Fosowl/agenticSeek
+- Agent S: https://github.com/simular-ai/Agent-S
+- UI-TARS: https://github.com/bytedance/UI-TARS / https://agent-tars.com
+- Benchmark: https://os-world.github.io
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
@@ -197,6 +200,12 @@
 ### Telefonbots / Chatbots
 - Voiceflow: https://www.voiceflow.com
 - Twilio: https://www.twilio.com
+
+# Prompt generation
+- AI-27: https://ai-27.com/prompt
+
+# Remote Hosting
+- HuggingFace: https://huggingface.co
 
 ### Jailbroken / Uncensored
 - Uncensored: https://uncensored.com
