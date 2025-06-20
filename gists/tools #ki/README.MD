@@ -100,6 +100,7 @@
 - OmniHuman: https://omnihuman-lab.github.io
 - Pika: https://pika.art
 - Adobe Firefly: https://firefly.adobe.com
+- Midjourney Video: https://www.midjourney.com
 
 ### Video verlängern
 - Kling AI: https://klingai.com/image-to-video/frame-mode
