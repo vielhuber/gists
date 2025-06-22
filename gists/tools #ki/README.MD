@@ -62,6 +62,10 @@
 - UI-TARS: https://github.com/bytedance/UI-TARS / https://agent-tars.com
 - Benchmark: https://os-world.github.io
 
+# MCP
+- PHP-MCP: https://github.com/php-mcp/server
+- Claude Desktop: https://claude.ai/download
+
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
 
