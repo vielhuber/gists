@@ -21,15 +21,21 @@
 
 - `pip install -r requirements.txt`
 
+### update all packages
+
+- `pip install pip-review`
+- `pip-review`
+- `pip-review --auto`
+
 ### create requirements
 
-#### option 1
+#### option 1 (only installed, based on code)
 
 - `pip install pipreqs`
 - `pipreqs . --force --ignore venv`
 
 
-#### option 2
+#### option 2 (including submodules)
 
 - `pip freeze > requirements.txt`
 
@@ -41,6 +47,13 @@
 __pycache__
 *.pyc
 ```
+
+## performance testing
+
+- `pip install snakeviz`
+- `python -m cProfile -o perf.prof script.py`
+- `snakeviz perf.prof --hostname 0.0.0.0 --port 8080`
+- `http://192.168.0.2:8080/...`
 
 ## watchers
 
