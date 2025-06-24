@@ -4,6 +4,12 @@
 ```
 + More filters > Hide extension URLs
 
+### freeze page (for inspecting hover etc.)
+
+```js
+setTimeout(function(){debugger;}, 5000)
+```
+
 ### current / last nth active dom element
 ```js
 $0
