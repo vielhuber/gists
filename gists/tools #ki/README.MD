@@ -22,6 +22,7 @@
 - Void: https://voideditor.com
 - OpenAI Codex: https://chatgpt.com/codex / https://github.com/openai/codex
 - Claude Code: https://www.anthropic.com/claude-code
+- Gemini CLI / Gemini Code Assist: https://github.com/google-gemini/gemini-cli / https://codeassist.google
 - Windsurf: https://codeium.com/windsurf
 - bolt: https://bolt.new
 - v0: https://v0.dev
