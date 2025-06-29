@@ -1,4 +1,4 @@
-### /classes/__init__.py
+### /classes/\_\_init\_\_.py
 ```py
 from .foo import Foo
 from .bar import Bar
