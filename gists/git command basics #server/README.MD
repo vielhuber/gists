@@ -134,6 +134,10 @@ if gitignore is not working for a specific file/folder (this does not(!) delete 
 - git checkout 6e559cb # go to that commit
 - git checkout master # go back to current head
 
+#### show all commits in all branches with date and author
+- `git fetch --all`
+- `git log --all --decorate --pretty=format:"%C(yellow)%h%Creset %C(blue)%an%Creset %C(cyan)%ad%Creset %C(green)%s%Creset %C(red)%d%Creset" --date=format:"%Y-%m-%d %H:%M:%S"`
+
 #### go to specific commit (create a branch from it)
 - git checkout -b some_new_test_branch 6e559cb
 
