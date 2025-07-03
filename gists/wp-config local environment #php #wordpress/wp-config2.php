@@ -1,5 +1,5 @@
 <?php
-if( $_SERVER["SERVER_ADMIN"] == "david.vielhuber@close2.de" ) {
+if( $_SERVER["SERVER_ADMIN"] == "david@vielhuber.de" ) {
 //if( strpos(realpath(dirname(__FILE__)),"MAMP\htdocs") !== false) {
 //if(in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', "::1"])) {
 //if(strpos($_SERVER['HTTP_HOST'], ".dev") !== false) {
