@@ -50,10 +50,20 @@ __pycache__
 
 ## performance testing
 
+### detail
+
 - `pip install snakeviz`
 - `python -m cProfile -o perf.prof script.py`
 - `snakeviz perf.prof --hostname 0.0.0.0 --port 8080`
 - `http://192.168.0.2:8080/...`
+
+### basic
+
+```py
+performance_start = time.time()
+fun()
+print(f"Runtime: {(time.time()-performance_start):.4f}s
+```
 
 ## watchers
 

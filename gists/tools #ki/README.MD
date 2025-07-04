@@ -62,6 +62,7 @@
 - Agent S: https://github.com/simular-ai/Agent-S
 - UI-TARS: https://github.com/bytedance/UI-TARS / https://agent-tars.com
 - Benchmark: https://os-world.github.io
+- Warmwind OS: https://warmwind.space
 
 # MCP
 - PHP-MCP: https://github.com/php-mcp/server
