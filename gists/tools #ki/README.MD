@@ -27,7 +27,6 @@
 - bolt: https://bolt.new
 - v0: https://v0.dev
 - Screenshot to Code: https://screenshottocode.com
-- Cline: https://github.com/cline/cline
 - Google Firebase Studio: https://studio.firebase.google.com
 - OpenRouter: https://openrouter.ai
 - Plandex: https://plandex.ai
@@ -36,6 +35,9 @@
 - Lovable: https://lovable.dev
 - replit: https://replit.com
 - Firebase Studio: https://firebase.studio
+- Factory: https://www.factory.ai
+- AugmentCode: https://www.augmentcode.com
+- Cline: https://cline.bot
 
 ### Bilder generieren
 - OpenAI ChatGPT: https://chatgpt.com
