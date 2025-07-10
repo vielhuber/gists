@@ -240,7 +240,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```source ~/.bash_profile```
 
 #### install basic linux packages
-- ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin net-tools pv csh```
+- ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils```
 
 #### apache/php/mysql
 - ```sudo apt-get install apache2 mysql-server```
