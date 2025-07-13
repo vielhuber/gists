@@ -15,6 +15,7 @@
 - Jasper: https://www.jasper.ai
 - Tencent HunYuan: https://huggingface.co/spaces/tencent/Hunyuan-T1
 - T3.chat: https://t3.chat
+- Kimi K2: https://www.kimi.com
 
 ### Programmierung
 - Cursor: https://www.cursor.com
@@ -142,6 +143,7 @@
 - SlidesGPT: https://slidesgpt.com
 - Microsoft Copilot for PowerPoint: https://www.microsoft.com/de-DE/microsoft-365/copilot
 - Plus: https://plusai.com/plus-ai-powerpoint-maker
+- chroniqle: https://chroniclehq.com
 
 ### Websites erstellen
 - Gamma: https://gamma.app
