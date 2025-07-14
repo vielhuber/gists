@@ -338,6 +338,14 @@ Es ist wichtig, dass du die folgenden Schritte befolgst:
 
 - "Stelle sicher, dass der Text natürlich klingt. Ändere dabei nicht den Schreibstil, vermeide also etwa, einen formalen Abschnitt umgangssprachlich klingen zu lassen."
 
+## Grundregeln
+
+- **Few-Shot-Prompting**: Konkrete Beispiele geben
+- **Decomposition**: Welche Unterprobleme musst Du lösen, bevor Du das Ganze Problem löst?
+- **Self-Criticism**: Prüfe kritisch Diene Anwort und verbessere Dich
+- **Additional information**: Mehr Kontext geben
+- **Ensemble**: Verschiedene Modelle verwenden und Anworten kombinieren
+
 ## Vector Embeddings / RAG (Retrieval Augmented Generation)
 
 - Vector Embeddings: Große Arrays aus Zahlen, die die semantische Bedeutung des Inputs darstellt

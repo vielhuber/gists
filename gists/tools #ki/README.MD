@@ -39,6 +39,7 @@
 - Factory: https://www.factory.ai
 - AugmentCode: https://www.augmentcode.com
 - Cline: https://cline.bot
+- Repomix: https://repomix.com
 
 ### Bilder generieren
 - OpenAI ChatGPT: https://chatgpt.com
