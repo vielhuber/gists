@@ -21,9 +21,6 @@ Ctrl+L
 cls
 clear
 
-# show history of commands
-history
-
 # show path of program
 which node
 
@@ -38,8 +35,14 @@ ps aux | grep 1337 | grep -v grep | wc -l # see if process is running
 # kill all processes of type / name
 killall -KILL php
 
+# show history of commands
+history
+
 # search history of commands
 history | grep command-name
+
+# search history of commands
+CTRL+R
 
 # show lines in nano
 nano -c file
