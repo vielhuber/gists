@@ -14,6 +14,7 @@
   - Apply fixes: [pull/3](https://github.com/tsaost/autoload-temporary-addon/pull/3) & [pull/7](https://github.com/tsaost/autoload-temporary-addon/pull/7)
   - Modify code: `function installUnpackedExtensions() { installExtension("C:\\path\\to\\extension", true); }`
   - Debug `userChrome.js`: CTRL+Shift+I > Settings > "Enable browser chrome and add-on debugging toolboxes" and "Enable remote debugging" => CTRL+Alt+Shift+I
+  - Debug `background.js`: `about:debugging` > Inspect
 - Reload local addon: `about:debugging`
 
 ## Files
