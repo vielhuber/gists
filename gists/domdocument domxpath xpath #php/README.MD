@@ -189,6 +189,16 @@ $DOMXPath->query('.//node()', $node);
 $DOMXPath->evaluate('count(./node())', $node);
 ```
 
+### get children of node
+```php
+$DOMXPath->query('.//h4', $node);
+```
+
+### get direct children of node
+```php
+$DOMXPath->query('./h4', $node);
+```
+
 ### get text siblings (including oneself if text node) node
 ```php
 $DOMXPath->query('./../text()[normalize-space()]', $node);

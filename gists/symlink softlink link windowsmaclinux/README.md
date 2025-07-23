@@ -1,7 +1,7 @@
 ## windows
 - run cmd as administrator
 - ```mklink /D c:\path\to\symlinkfolder c:\path\to\origfolder```
-- ```mklink /D c:\path\to\symlinkfile c:\path\to\origfile```
+- ```mklink c:\path\to\symlinkfile c:\path\to\origfile```
 - ```rmdir c:\path\to\symlinkfolder```
 - ```del c:\path\to\symlinkfile```
 
