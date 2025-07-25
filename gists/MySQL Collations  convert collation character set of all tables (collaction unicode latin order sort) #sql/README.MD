@@ -13,35 +13,60 @@
   - Man modifiziert an den gewünschten Stellen das SQL Query auf ```SELECT * FROM table ORDER BY CONVERT(col USING latin1) COLLATE latin1_german2_ci ASC```.
   - Um Sch und Sz nach S zu sortieren, nutzt man beispielsweise ```SELECT * FROM table ORDER BY CONVERT(REPLACE(REPLACE(col, 'Sch','Szzzch'), 'St','Szzzt') USING latin1) COLLATE latin1_german2_ci ASC```.
 
-### to convert a database (without tables and columns)
+### show all charsets and collations
+```sql
+SELECT
+    S.SCHEMA_NAME AS "Database name",
+    S.DEFAULT_CHARACTER_SET_NAME AS "Database charset",
+    S.DEFAULT_COLLATION_NAME AS "Database collation",
+    T.TABLE_NAME AS "Table name",
+    CCSA.CHARACTER_SET_NAME AS "Table charset",
+    T.TABLE_COLLATION AS "Table collation"
+FROM
+    INFORMATION_SCHEMA.SCHEMATA S
+JOIN
+    INFORMATION_SCHEMA.TABLES T ON S.SCHEMA_NAME = T.TABLE_SCHEMA
+JOIN
+    INFORMATION_SCHEMA.COLLATION_CHARACTER_SET_APPLICABILITY CCSA
+    ON T.TABLE_COLLATION = CCSA.COLLATION_NAME
+WHERE
+    S.SCHEMA_NAME = 'db_name'
+ORDER BY
+    T.TABLE_NAME;
+```
+
+### convert a database (without tables and columns)
 ```sql
 ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 ```
 
-### to convert a table (not columns)
+### convert a table (not columns)
 ```sql
-ALTER TABLE tablename COLLATE utf8mb4_unicode_ci
+ALTER TABLE table_name COLLATE utf8mb4_unicode_ci;
 ```
 
-### to convert a table and columns
+### convert a table and columns
 ```sql
-ALTER TABLE tablename CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+ALTER TABLE table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-### to convert all tables (without columns)
+### convert all tables (without columns)
 ```sql
 SELECT CONCAT("ALTER TABLE ", TABLE_NAME," COLLATE utf8mb4_unicode_ci;") AS ExecuteTheString
 FROM INFORMATION_SCHEMA.TABLES
-WHERE TABLE_SCHEMA="dbname"
-AND TABLE_TYPE="BASE TABLE"
+WHERE TABLE_SCHEMA="database_name"
+AND TABLE_TYPE="BASE TABLE";
 ```
 
-### to convert all tables and columns
+### convert all (database, tables and columns)
 ```sql
-SELECT CONCAT("ALTER TABLE ", TABLE_NAME," CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;") AS ExecuteTheString
+ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+SELECT CONCAT("ALTER TABLE ", TABLE_NAME," CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;") AS `Execute these strings!`
 FROM INFORMATION_SCHEMA.TABLES
-WHERE TABLE_SCHEMA="dbname"
-AND TABLE_TYPE="BASE TABLE";
+WHERE TABLE_SCHEMA="database_name"
+AND TABLE_TYPE="BASE TABLE"
+ORDER BY TABLE_NAME ASC;
 
 # disable NO_ZERO_IN_DATE / NO_ZERO_DATE that produces errors (gets reset after restart)
 SET sql_mode = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
