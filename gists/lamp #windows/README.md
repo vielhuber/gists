@@ -213,6 +213,7 @@
 - Edit > Preferences > User Interface > Dark (independent of system)
 - Edit > Preferences > User Interface > On start-up: Don't reopen the last used repositories
 - Edit > Preferences > User Interface > Built-in Text Editors > Font Size: 9
+- Edit > Preferences > Git Config > Fetch and Pull > Rebase local branch onto fetched changes
 - Repository > Search for Repositories > /var/www
 - Manuelles Umbenennen falscher Namen ("www - ...", gtbabel 3x)
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
@@ -693,16 +694,14 @@ shutdown.exe /s /t 0
 - ```sudo apt-get install git -y```
 - ```git --version```
 - ```git config --global core.ignorecase false```
-- ```git config --global pull.rebase false```
 - ```git config --global core.filemode false```
 - ```git config --global core.autocrlf input``` # this converts everything to lf on commit, which is ok when using wsl2 (however, there are projects where you want it to be the default value of `false`, set that with `git config core.autocrlf false`)
 - ```git config --global core.safecrlf false```
 - ```git config --global push.default simple```
 - ```git config --global user.name "David Vielhuber"```
 - ```git config --global user.email "david@vielhuber.de"```
-- ```git config --global pull.ff only```
-- ```git config --global merge.ff false```
-- ```git config --global core.mergeoptions --no-edit```
+- ```git config --global pull.rebase true``` # this means `git pull` does always `git pull --rebase`!
+- ```git config --global core.mergeoptions --no-edit``` # prevent editor on merge
 - ```git config --global init.defaultBranch main```
 - further do this (--no-edit does sometimes not work):
   - ```sudo nano ~/.bash_profile```

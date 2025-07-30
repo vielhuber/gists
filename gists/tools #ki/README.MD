@@ -41,7 +41,7 @@
 - Cline: https://cline.bot
 - Repomix: https://repomix.com
 
-### Bilder generieren
+### Bilder
 - OpenAI ChatGPT: https://chatgpt.com
 - DALL-E: https://openai.com/index/dall-e-3
 - Adobe Firefly: https://firefly.adobe.com
@@ -50,7 +50,7 @@
 - Google Imagegen: https://cloud.google.com/use-cases/text-to-image-ai / https://deepmind.google/technologies/imagen-3
 - Midjourney: https://www.midjourney.com
 - Sora: https://www.sora.com
-- Ideogram (Schriften): https://ideogram.ai
+- Ideogram (Characters, Schriften): https://ideogram.ai
 - Leonardo: https://app.leonardo.ai
 
 ### Inpainting
@@ -96,7 +96,7 @@
 ### Sound verbessern
 - Adobe: https://podcast.adobe.com/enhance
 
-### Videos generieren
+### Videos
 - Kling AI: https://klingai.com
 - Sora: https://www.sora.com
 - RunWay ML: https://runwayml.com
