@@ -230,6 +230,19 @@ final readonly class Price
 }
 ```
 
+### use constants
+
+```php
+// bad
+$threshold = 42;
+$anther_val = $threshold + 7;
+
+// good
+class ExampleModel {
+    public const THRESHOLD_VALUE = 40;
+}
+$another_val = ExampleModel::THRESHOLD_VALUE + 7;
+```
 
 ### function chaining
 
@@ -257,6 +270,12 @@ $str = str_replace(' ', '', $str);
 
 // good
 $str = Str::of($str)->trim()->upper()->replace(' ', '')->toString();
+
+// bad
+$num = number_format($num, ',', '.', 4)
+  
+// good
+$num = Number::format($num, precision: 4, locale: 'de')
 ```
 
 ### prevent duplicate database calls
