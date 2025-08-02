@@ -52,6 +52,7 @@
 - Sora: https://www.sora.com
 - Ideogram (Characters, Schriften): https://ideogram.ai
 - Leonardo: https://app.leonardo.ai
+- MagnificAI (Upscaler): https://magnific.ai
 
 ### Inpainting
 - Kling AI: https://klingai.com/text-to-image

@@ -604,7 +604,7 @@ shutdown.exe /s /t 0
 
 #### sync bills
 - `export VISUAL=nano; crontab -e`
-- `0 3 * * * source $HOME/.bash_profile; /usr/bin/wget "https://vielhuber.dev/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
+- `0 3 */2 * 1-5 source $HOME/.bash_profile; /usr/bin/wget "https://vielhuber.dev/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
 
 #### composer
 - ```sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
