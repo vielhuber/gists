@@ -70,7 +70,7 @@
 - Warmwind OS: https://warmwind.space
 - 12-Factor Agents: https://github.com/humanlayer/12-factor-agents
 
-# MCP
+### MCP
 - PHP-MCP: https://github.com/php-mcp/server
 - Claude Desktop: https://claude.ai/download
 
