@@ -22,8 +22,14 @@ rsync --delete -ahvzP --stats -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_r
 ```sh
 mkdir /path/to/local/mount
 mount -t cifs //192.168.0.2/subfolder /path/to/local/mount -o username='FOO',password='BAR',domain='DOMAIN'
-rsync --delete -ahvzP --stats /path/to/local/mount/some/path/on/remote/ /some//path/on/local
-umount /path/to/local/mount
+rsync --delete -ahvzP --stats /path/to/local/mount/some/path/on/remote/ /some/path/on/local
+if mountpoint -q /path/to/local/mount; then
+    umount /path/to/local/mount || umount -l /path/to/local/mount
+fi
+if mountpoint -q /path/to/local/mount; then
+    exit
+fi
+rmdir /path/to/local/mount
 ```
 
 ## local => remote
