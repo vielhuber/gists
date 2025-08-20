@@ -172,6 +172,7 @@
 - GPTZero: https://gptzero.me
 - Undetectable: https://undetectable.ai
 - Scribbr: https://www.scribbr.de
+- aihumaize.io: https://aihumanize.io
 
 ### Buch schreiben
 - Sudowrite: https://www.sudowrite.com
