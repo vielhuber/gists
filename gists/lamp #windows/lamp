@@ -100,8 +100,8 @@ cat > $FILE << EOF
   ServerAdmin david@vielhuber.de
   ServerName $DOMAIN
   DocumentRoot /var/www/$FOLDER
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
+  ErrorLog \${APACHE_LOG_DIR}/error.log
+  CustomLog \${APACHE_LOG_DIR}/access.log combined
   <Directory /var/www>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
@@ -114,8 +114,8 @@ cat > $FILE << EOF
   ServerAdmin david@vielhuber.de
   ServerName $DOMAIN
   DocumentRoot /var/www/$FOLDER
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
+  ErrorLog \${APACHE_LOG_DIR}/error.log
+  CustomLog \${APACHE_LOG_DIR}/access.log combined
   <Directory /var/www>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
