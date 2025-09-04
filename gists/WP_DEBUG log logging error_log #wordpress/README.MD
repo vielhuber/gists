@@ -15,5 +15,6 @@
 
 ```php
 error_log('foo');
+error_log(json_encode(['foo' => 'bar', 'bar' => 'baz']));
 error_log(serialize(['foo' => 'bar', 'bar' => 'baz']));
 ```
