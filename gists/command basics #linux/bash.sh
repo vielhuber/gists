@@ -447,7 +447,7 @@ sudo fc-cache -f -v
 
 # disk space
 du -sh folder/ # show size of folder in human readable format
- du -sh ./* # filesize of all folders in current folder
+du -sh ./* # filesize of all folders in current folder
 du -sh . --exclude .git --exclude node_modules # exclude some subfolders
 df . # show in which device a folder is located
 df -h # in total
