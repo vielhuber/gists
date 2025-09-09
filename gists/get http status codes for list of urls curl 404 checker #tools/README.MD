@@ -4,10 +4,10 @@
 - make sure the following file uses \n as line breaks (no \r\n)
 
 ```txt
-https://close2.de/
-https://close2.de/projekte/
-https://close2.de/leistungen/
-https://close2.de/foo/
+https://vielhuber.de/
+https://vielhuber.de/projekte/
+https://vielhuber.de/leistungen/
+https://vielhuber.de/foo/
 ```
 
 #### script.sh
@@ -33,8 +33,8 @@ chmod +x script.sh
 #### out.txt
 
 ```txt
-200 https://close2.de/
-200 https://close2.de/projekte/
-200 https://close2.de/leistungen/
-404 https://close2.de/foo/
+200 https://vielhuber.de/
+200 https://vielhuber.de/projekte/
+200 https://vielhuber.de/leistungen/
+404 https://vielhuber.de/foo/
 ```
