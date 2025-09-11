@@ -64,21 +64,21 @@ try {
             'to' => !empty($mail->to) ? array_map(function ($key, $value) {
               return [
                 'email' => $key,
-                'name' => $key === $value ? null : str_replace(' ('.$key.')', '', $value)
+                'name' => $value === null || $key === $value ? null : str_replace(' ('.$key.')', '', $value)
 
               ];
             }, array_keys($mail->to), $mail->to) : null,
             'cc' => !empty($mail->cc) ? array_map(function ($key, $value) {
               return [
                 'email' => $key,
-                'name' => $key === $value ? null : str_replace(' ('.$key.')', '', $value)
+                'name' => $value === null || $key === $value ? null : str_replace(' ('.$key.')', '', $value)
 
               ];
             }, array_keys($mail->cc), $mail->cc) : null,
             'bcc' => !empty($mail->bcc) ? array_map(function ($key, $value) {
               return [
                 'email' => $key,
-                'name' => $key === $value ? null : str_replace(' ('.$key.')', '', $value)
+                'name' => $value === null || $key === $value ? null : str_replace(' ('.$key.')', '', $value)
 
               ];
             }, array_keys($mail->bcc), $mail->bcc) : null,

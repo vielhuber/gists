@@ -577,6 +577,10 @@ xdebug.output_dir="/tmp/xdebug"
   - `/etc/wsl.conf`
   - `[boot]`
   - `command="service cron start"`
+- disable PATH import on WSL
+  - `/etc/wsl.conf`
+  - `[interop]`
+  - `appendWindowsPath=false`
 - remove zone identifier files
   - `find . -name "*:Zone.Identifier" -type f -delete`
 - ram overload
