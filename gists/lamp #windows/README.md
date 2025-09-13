@@ -1,6 +1,6 @@
 ## features
 
-- wsl2 + ubuntu 22
+- wsl2 + ubuntu 24
 - simple installation
 - simple usage via command line
 - full control over configuration
@@ -72,7 +72,9 @@
 - `sudo apt-get upgrade`
 - `sudo apt dist-upgrade`
 - `sudo apt autoremove`
+- `sudo apt clean`
 - `sudo do-release-upgrade`
+  - If this hangs: `sudo apt remove snapd`
 - `lsb_release -a`
 
 #### move to another drive
