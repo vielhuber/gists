@@ -56,6 +56,16 @@ if you want to use traits / class inheritance in phpunit, simply do the followin
   - `fwrite(STDERR, var_export($msg, true));`
   - `fwrite(STDERR, print_r($msg . PHP_EOL, true));`
   - `fwrite(STDERR, serialize($msg));`
+- helper function
+```
+function log($msg) {
+  if (!is_string($msg)) {
+    $msg = serialize($msg);
+  }
+  fwrite(STDERR, print_r($msg . PHP_EOL, true));
+}
+$this->log('...');
+```
 
 #### variables
 
