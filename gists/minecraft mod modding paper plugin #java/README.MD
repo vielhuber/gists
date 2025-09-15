@@ -38,6 +38,19 @@
   - Gradle > Tasks > build > build
   - /test/build/libs/\*.jar kopieren in /plugins
   - Server sauber neustarten (nicht `/reload`)
+  
+## Server-Label
+
+- Name: Server properties > motd (Generator: https://minecraft.tools/de/motd.php)
+- Icon: `/server-icon.png` (64x64) in Root-Verzeichnis legen
+- Domain: A-Record auf IP-Adresse zeigen
+
+## Resource Pack
+
+- `cd ./resourcepack/data`
+- `zip ./../data.zip -r .`
+- `sha1sum ./../data.zip`
+- Uploaden und `server.properties` editieren (siehe git)
 
 ## Links
 
