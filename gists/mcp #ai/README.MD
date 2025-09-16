@@ -1,4 +1,80 @@
-## Claude Desktop
+## php-mcp
+
+- `composer require php-mcp/server`
+
+### example/test.php
+
+```php
+...
+```
+
+### mcp.php
+
+```php
+...
+```
+
+- `php mcp.php`
+
+### authentication
+
+- simple auth via GET argument (works with all clients)
+- `/mcp?auth_token=XXX`
+
+## playwright
+
+- `npx @playwright/mcp@latest --port 8931 --no-sandbox --timeout-action 10000 --output-dir=./mcp-out --save-session --save-trace`
+
+## access
+
+- local test url
+  - http://127.0.0.1:8080/mcp
+- test with remote tunnel
+  - https://***.ngrok-free.dev/mcp
+  - `ngrok http 8080 --url DEV_DOMAIN`
+- public apache reverse proxy
+  - https://my-mcp-server.dev/mcp
+  - `nano /etc/apache2/sites-available/mcp.conf`
+
+```
+<VirtualHost *:443>
+    ServerName my-mcp-server.dev
+
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-XSS-Protection "1; mode=block"
+    RequestHeader set X-Real-IP "%{REMOTE_ADDR}s"
+    RequestHeader set X-Forwarded-Proto "https"
+
+    ProxyPreserveHost On
+    ProxyRequests Off
+    ProxyAddHeaders On
+    ProxyTimeout 3600
+    RequestReadTimeout header=60,MinRate=1 body=60,MinRate=1
+
+    ProxyPass / http://127.0.0.1:8080/ keepalive=On retry=0 flushpackets=on
+    ProxyPassReverse / http://127.0.0.1:8080/
+
+    <Location />
+        Require all granted
+        Header unset Connection
+    </Location>
+
+    SSLEngine on
+    SSLCertificateFile ...
+    SSLCertificateKeyFile ...
+</VirtualHost>
+```
+
+- `sudo a2ensite mcp.conf`
+- `sudo service apache2 reload`
+
+## chatgpt/claude.ai
+
+- add mcp server through connectors
+- enable mcp server in chat
+
+## claude desktop
 
 - Einstellungen > Entwickler > Config bearbeiten > `claude_desktop_config.json`
 - Siehe unten
@@ -48,45 +124,6 @@
 
 - `npx @modelcontextprotocol/inspector`
 
-## apache reverse proxy
-
-- `nano /etc/apache2/sites-available/mcp.conf`
-
-```
-<VirtualHost *:443>
-    ServerName my-mcp-server.dev
-
-    Header always set X-Frame-Options "SAMEORIGIN"
-    Header always set X-Content-Type-Options "nosniff"
-    Header always set X-XSS-Protection "1; mode=block"
-    RequestHeader set X-Real-IP "%{REMOTE_ADDR}s"
-    RequestHeader set X-Forwarded-Proto "https"
-
-    ProxyPreserveHost On
-    ProxyRequests Off
-    ProxyAddHeaders On
-    ProxyTimeout 3600
-    RequestReadTimeout header=60,MinRate=1 body=60,MinRate=1
-
-    ProxyPass / http://127.0.0.1:8080/ keepalive=On retry=0 flushpackets=on
-    ProxyPassReverse / http://127.0.0.1:8080/
-
-    <Location />
-        Require all granted
-        Header unset Connection
-    </Location>
-
-    SSLEngine on
-    SSLCertificateFile ...
-    SSLCertificateKeyFile ...
-</VirtualHost>
-```
-
-- `sudo a2ensite mcp.conf`
-- `sudo service apache2 reload`
-- Test-URL: http://127.0.0.1:8080/mcp
-- Prod-URL: https://my-mcp-server.dev/mcp
-
 ## links
 
 - Video (c't): https://www.youtube.com/watch?v=S_4VUJ-x8hE
@@ -97,3 +134,4 @@
 - PHP Library: https://github.com/php-mcp/server
 - MCP SuperAssistant: https://mcpsuperassistant.ai
 - Claude Tutorial: https://www.reddit.com/r/ClaudeAI/comments/1ji8ruv/my_claude_workflow_guide_advanced_setup_with_mcp/
+- Playwright MCP: https://github.com/microsoft/playwright-mcp

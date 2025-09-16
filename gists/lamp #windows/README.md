@@ -173,6 +173,43 @@
   - ```sudo apt upgrade```
   - ```wsl --shutdown```
 
+#### ngrok
+
+```
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+  && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+  | sudo tee /etc/apt/sources.list.d/ngrok.list \
+  && sudo apt update \
+  && sudo apt install ngrok
+```
+
+- `ngrok help`
+
+- single domain:
+  - `ngrok config add-authtoken AUTH_TOKEN`
+  - `ngrok http 8080 --url DEV_DOMAIN`
+- multiple domains/ports:
+  - `ngrok config edit`
+
+```
+- tunnels:
+  api1:
+    addr: 8080
+    schemes:
+      - https
+    proto: http
+  api2:
+    addr: 8931
+    schemes:
+      - https
+    proto: http
+```
+
+  - `ngrok start --all`
+
+- open the dev domains once and accept the button once
+
 #### nvidia cuda
 
 - https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
