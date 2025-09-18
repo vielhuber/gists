@@ -25,13 +25,24 @@
 
 - `npx @playwright/mcp@latest --port 8931 --no-sandbox --timeout-action 10000 --output-dir=./mcp-out --save-session --save-trace`
 
+## chrome-mcp
+
+- add fresh chrome profile
+- download + unzip chrome extension from https://github.com/hangwin/mcp-chrome
+- `chrome://extensions/`
+- Entpackte Erweiterung laden
+- Ordner auswählen
+- In Windows (nicht WSL)
+  - `npm install -g mcp-chrome-bridge`
+  - `mcp-chrome-bridge register`
+
 ## access
 
 - local test url
   - http://127.0.0.1:8080/mcp
 - test with remote tunnel
   - https://***.ngrok-free.dev/mcp
-  - `ngrok http 8080 --url DEV_DOMAIN`
+  - `ngrok http 8080`
 - public apache reverse proxy
   - https://my-mcp-server.dev/mcp
   - `nano /etc/apache2/sites-available/mcp.conf`
@@ -126,6 +137,7 @@
 
 ## links
 
+- MCP Repository: https://mcpservers.org/
 - Video (c't): https://www.youtube.com/watch?v=S_4VUJ-x8hE
 - MCP Inspector: https://modelcontextprotocol.io/legacy/tools/inspector
 - Claude Desktop: https://claude.ai/download
