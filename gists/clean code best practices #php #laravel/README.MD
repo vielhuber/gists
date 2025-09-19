@@ -1,3 +1,16 @@
+### prevent stfu operator
+```
+// bad
+if(@$foo) {}
+if(@$_GET['foo']) {}
+if(__x($foo)) {}
+if(__x($foo->bar()->baz)) {}
+
+// good
+if(($foo??'') === '') {}
+if(($foo?->bar()?->baz??'') === '') {}
+```
+
 ### prevent static classes
 
 ```php
@@ -448,6 +461,19 @@ longRunningTask();
 
 // good
 CalculateLongRunningTaskQueue::dispatch();
+```
+
+### single line comments
+
+```php
+// bad
+/* this migration should not run */
+  
+// bad
+// this migration should not run
+  
+// good
+// This migration should not run.
 ```
 
 ### multiline comments

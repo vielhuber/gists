@@ -616,7 +616,8 @@ xdebug.output_dir="/tmp/xdebug"
   - `/etc/wsl.conf`
   - `[boot]`
   - `command="service cron start"`
-- disable PATH import on WSL
+- DISABLED: disable PATH import on WSL
+  - Don't do this, since `code .` etc. does not work anymore
   - `/etc/wsl.conf`
   - `[interop]`
   - `appendWindowsPath=false`
@@ -665,7 +666,7 @@ shutdown.exe /s /t 0
 
 #### node / npm
 - nvm
-  - ```sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash```
+  - ```sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash```
   - copy 3 new lines of ```~/.bashrc``` to ```~/.bash_profile``` (because .bashrc is not loaded on wsl)
   - restart terminal
   - ```nvm --version```
