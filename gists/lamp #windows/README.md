@@ -703,7 +703,7 @@ shutdown.exe /s /t 0
 #### python
 - install python 3.X
   - ```sudo apt-get update```
-  - ```sudo apt-get install python3 python3-pip```
+  - ```sudo apt-get install python3 python3-pip python3-venv```
   - ```python3 --version```
   - ```pip3 --version```
 - install python 2.X

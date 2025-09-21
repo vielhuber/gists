@@ -2,7 +2,6 @@
 
 ### setup
 - `python -m venv venv`
-- `pip install ...`
 
 ### activate
 - `source venv/bin/activate`
