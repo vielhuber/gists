@@ -37,6 +37,7 @@
 - Build (lokal + production)
   - Gradle > Tasks > build > build
   - /test/build/libs/\*.jar kopieren in /plugins
+    - `cp '/mnt/c/Users/David/Minecraft/test/build/libs/test-1.0-SNAPSHOT.jar' '/mnt/c/Users/David/Minecraft/paper/plugins/test-1.0-SNAPSHOT.jar'`
   - Server sauber neustarten (nicht `/reload`)
   
 ## Server-Label
@@ -48,9 +49,12 @@
 ## Resource Pack
 
 - `cd ./resourcepack/data`
-- `zip ./../data.zip -r .`
-- `sha1sum ./../data.zip`
+- `rm ./../data.zip && zip ./../data.zip -r . && sha1sum ./../data.zip`
 - Uploaden und `server.properties` editieren (siehe git)
+- Lokaler Ordner: `%APPDATA%\Roaming\.minecraft\downloads\`
+- Logs: `%APPDATA%\Roaming\.minecraft\logs\latest.log`
+- Resource Pack Refresh: F3+T
+- Gerenderte Texturen: F3+S: .minecraft/screenshots/debug
 
 ## Links
 
