@@ -147,7 +147,7 @@
 - Windows Defender Firwall mit erweiterter Sicherheit > Eingehende Regeln > "VcXsrv windows xserver" 2x rot Doppelklick > Verbindung zulassen
 - Autostart
   - Aufgabenplanung
-  - "vcxsrv"
+  - "_VCXSRV"
   - Nur ausführen, wenn der Benutzer angemeldet ist
   - Trigger: Bei Anmeldung
   - Aktion: Programm starten
@@ -599,9 +599,9 @@ xdebug.output_dir="/tmp/xdebug"
   - \\wsl$\Ubuntu\var\www\lamp\firewall.ps1 anlegen mit Inhalt von https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723
   - Ports in Datei erweitern: ```$ports=@(80,443,10000,3000,3009,5000,8080,9090,3306);```
   - Aufgabenplanung
-  - wsl2 Firewall
+  - "_WSL FIREWALL"
   - Bei Anmeldung
-  - Verzögern für 30 Sekunden
+  - Verzögern für 90 Sekunden
   - Programm starten
   - PowerShell.exe -File \\wsl$\Ubuntu\var\www\lamp\firewall.ps1
   - Mit höchsten Privilegien ausführen
@@ -1093,13 +1093,13 @@ rm "$t"
 #### autostart
 - wsl
   - Aufgabenplanung
-  - "wsl"
+  - "_WSL"
   - Nur ausführen, wenn der Benutzer angemeldet ist
   - Trigger: Bei Anmeldung
   - Aktion: Programm starten (C:\Windows\System32\bash.exe -c "")
 - services
   - Aufgabenplanung
-  - "lamp"
+  - "_LAMP"
   - Nur ausführen, wenn der Benutzer angemeldet ist
   - Trigger: Bei Anmeldung, verzögern für: 90 Sekunden
   - Aktion: Programm starten (\\wsl$\Ubuntu\var\www\lamp\start.bat)

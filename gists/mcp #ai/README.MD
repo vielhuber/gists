@@ -162,6 +162,7 @@
 - `nvm use 23.5.0`
 - `npx @modelcontextprotocol/inspector`
 - `DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector`
+- usage with ngrok: install chrome extension `ModHeader` and set `ngrok-skip-browser-warning = 69420`
 
 ## links
 
