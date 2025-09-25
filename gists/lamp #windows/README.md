@@ -682,6 +682,10 @@ shutdown.exe /s /t 0
     - ```nvm use 16.17.0```
   - install/upgrade to latest npm version (do this for every installed node version)
     - ```nvm install-latest-npm && nvm install --latest-npm```
+  - upgrade lts
+    - ```nvm uninstall --lts```
+    - ```nvm install --lts```
+    - ```nvm use --lts```
   - Cache leeren (falls sich package-lock.json ändert: `npm cache verify` bzw `npm cache clean -f`)
 - nativ (obsolet)
   - https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions

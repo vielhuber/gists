@@ -56,6 +56,12 @@
 - Resource Pack Refresh: F3+T
 - Gerenderte Texturen: F3+S: .minecraft/screenshots/debug
 
+## Simple Voice Chat
+
+- Serverseitig in `/plugins` instalieren
+- https://modrinth.com/plugin/simple-voice-chat/versions?g=1.21.8&l=paper
+- Clientseitig z.B. mit `CurseForge` installieren
+
 ## Links
 
 - https://www.youtube.com/watch?v=ZzdIm5uuHCk

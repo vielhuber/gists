@@ -19,11 +19,18 @@
 - `fastmcp version`
 - `uvicorn app:app --host 0.0.0.0 --port 8000`
 
-#### /app.py
+### cloudflare
 
-```py
-...
-```
+- `curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null`
+- `echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list`
+- `sudo apt-get update`
+- `sudo apt-get install cloudflared`
+- `cloudflared tunnel login`
+- `cloudflared tunnel create my-mcp-server`
+- // if existing, delete all dns records for domain in dashboard`
+- `cloudflared tunnel route dns my-mcp-server custom-domain.xyz`
+- `cloudflared tunnel run --url http://localhost:8000 my-mcp-server`
+- `uvicorn app:app --host 0.0.0.0 --port 8000`
 
 ### apache
 
@@ -63,6 +70,16 @@
 - `sudo a2ensite mcp.conf`
 - `sudo service apache2 reload`
 
+## authentication / oauth2
+
+- Register on https://auth0.com
+- Applications > Applications > Create Application
+  - Allowed Callback URLs: `https://*.ngrok-free.app/auth/auth/callback,https://your-custom-domain.com/auth/auth/callback`
+  - Copy `Client ID` and `Client Secret`
+- Applications > APIs
+  - Copy `API Audience`
+- User Management > Create User
+
 ## mcps
 
 ### php
@@ -83,6 +100,19 @@
 
 - `php mcp.php`
 
+### js
+
+- `nvm use --lts`
+- `npm install @modelcontextprotocol/sdk`
+- `printf '{ "type": "module" }\n' > package.json`
+- `node mcp.js`
+
+### filesystem
+
+- `nvm use --lts`
+- `npx -y @modelcontextprotocol/server-filesystem /var/www`
+- note: wsl paths are not possible without mounting beforehand
+
 ### chrome
 
 - add fresh chrome profile
@@ -95,13 +125,16 @@
   - `mcp-chrome-bridge register`
 - start server in chrome extension
 - wsl
-  - cmd (admin): `netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=12306 connectaddress=127.0.0.1 connectport=12306`
+  - cmd (admin):
+    - `netsh interface portproxy show v4tov4`
+    - `netsh interface portproxy delete v4tov4 listenaddress=0.0.0.0 listenport=12306`
+    - `netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=12306 connectaddress=127.0.0.1 connectport=12306`
   - powershell (admin): `New-NetFirewallRule -DisplayName "chrome-mcp" -Direction Inbound -LocalPort 12306 -Action Allow -Protocol TCP`
   - connect to: http://172.24.160.1:12306/mcp (`ip route show | grep -i default | awk '{ print $3}'`)
 
-
 ### playwright
 
+- `nvm use --lts`
 - `npx @playwright/mcp@latest --port 8931 --no-sandbox --timeout-action 10000 --output-dir=./mcp-out --save-session --save-trace`
 
 ## clients
@@ -159,7 +192,7 @@
 
 ## mcp inspector
 
-- `nvm use 23.5.0`
+- `nvm use --lts`
 - `npx @modelcontextprotocol/inspector`
 - `DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector`
 - usage with ngrok: install chrome extension `ModHeader` and set `ngrok-skip-browser-warning = 69420`
