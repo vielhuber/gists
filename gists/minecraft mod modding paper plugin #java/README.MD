@@ -54,7 +54,9 @@
 - Lokaler Ordner: `%APPDATA%\Roaming\.minecraft\downloads\`
 - Logs: `%APPDATA%\Roaming\.minecraft\logs\latest.log`
 - Resource Pack Refresh: F3+T
-- Gerenderte Texturen: F3+S: .minecraft/screenshots/debug
+- Gerenderte Texturen: F3+S: `.minecraft/screenshots/debug/minecraft_textures_atlas_blocks.png_0.png`
+- Logs: `.minecraft/logs/latest.log`
+- Es geht immer nur ein Resourcepack parallel
 
 ## Simple Voice Chat
 
