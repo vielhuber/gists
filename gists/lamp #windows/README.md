@@ -20,7 +20,7 @@
 
 #### hosts
 
-##### dns based
+##### internal wifi (e.g. cloudflare)
 
 - we abuse our own public domain as a dns that maps to a local ip in order to prevent setting local hosts AND having the ability to access via smartphones/tablets from the same network
 - dns a-records
@@ -32,6 +32,18 @@
     - vielhuber.dev
     - *.vielhuber.dev
   - restart
+
+##### public (cloudflare)
+
+- `curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list`
+- `sudo apt-get update`
+- `sudo apt-get install cloudflared`
+- `cloudflared tunnel login`
+- `cloudflared tunnel create TUNNEL`
+- `cloudflared tunnel route dns --overwrite-dns TUNNEL rebuhleiv.xyz`
+// admin interface is on cloudflare.com > Zero Trust > Networks > Tunnels
+- `cloudflared tunnel run --url http://localhost:8000 TUNNEL`
 
 ##### local based
 
@@ -848,7 +860,7 @@ host    all   all        ::1/128        md5
 - `pg_lsclusters`
 - `sudo pg_dropcluster 15 main --stop`
 - `sudo pg_upgradecluster -v 17 15 main`
-# redo the config settings mentionned above (with folder `/17/`)
+- redo the config settings mentionned above (with folder `/17/`)
 
 #### oraclesql
 - sign in https://container-registry.oracle.com and accept TOS
@@ -1134,7 +1146,7 @@ rm "$t"
 #### restart wsl
 
 - open cmd / ps as admin
-- `wsl.exe -l -v`
+- `wsl.exe --shutdown`
 - `wsl.exe`
 
 #### start
@@ -1147,10 +1159,11 @@ rm "$t"
 - ```lamp stop```
 
 #### create project
-- ```lamp add project```
-- ```lamp add project php8.1```
-- ```lamp add project php8.1 custom/subfolder/public```
-- ```lamp add project php8.1 custom/subfolder/public 3000```
+- ```lamp add project-name``` # uses default php version
+- ```lamp add project-name php8.1``` # uses specific php version
+- ```lamp add project-name php8.1 custom/subfolder/public``` # uses specific folder
+- ```lamp add project-name php8.1 custom/subfolder/public --port=3000``` # uses specific port
+- ```lamp add project-name php8.1 custom/subfolder/public --alias=rebuhleiv.xyz``` # sets alias for public usage (e.g. via cloudflare tunnel)
 
 #### remove project
 - ```lamp remove project```

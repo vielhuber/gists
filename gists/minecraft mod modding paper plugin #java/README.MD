@@ -23,7 +23,7 @@
 - Lokalen Server aufsetzen
   - Paper downloaden auf https://papermc.io/downloads/paper
   - *.jar kopieren in ~\Minecraft\paper\paper.jar
-  - java -Xms4G -Xmx4G -jar paper.jar --nogui
+  - `java -Xms4G -Xmx4G -jar paper.jar --nogui`
   - eula.txt: eula=true
   - In Vanilla Minecraft connecten zu "localhost"
 - Production-Server aufsetzen
@@ -50,7 +50,16 @@
 
 - `cd ./resourcepack/data`
 - `rm ./../data.zip && zip ./../data.zip -r . && sha1sum ./../data.zip`
-- Uploaden und `server.properties` editieren (siehe git)
+- Uploaden und `server.properties` editieren
+
+```
+require-resource-pack=true
+resource-pack=https\://tl.com/path/to/data.zip
+resource-pack-id=
+resource-pack-prompt={"text"\:"Server-Pack für deine Waffen","color"\:"gold"}
+resource-pack-sha1=0086e2294ef390c7fddfde527927423fae2075f9
+```
+
 - Lokaler Ordner: `%APPDATA%\Roaming\.minecraft\downloads\`
 - Logs: `%APPDATA%\Roaming\.minecraft\logs\latest.log`
 - Resource Pack Refresh: F3+T

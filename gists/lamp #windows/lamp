@@ -82,23 +82,32 @@ FOLDER=$PROJECT
 fi
 
 DOMAIN="${PROJECT}.vielhuber.dev"
-# special case for mail domain
+# special case for main domain
 if [ "$PROJECT" = "vielhuber" ]; then
     DOMAIN="vielhuber.dev"
 fi
 
-if [ -n "$5" ]; then
-PROXY_LINE="ProxyPreserveHost On
-ProxyPass / http://$DOMAIN:$5/
-ProxyPassReverse / http://$DOMAIN:$5/"
+if [[ "$5" == --port=* ]]; then
+    PORT="${5#--port=}"
+    PROXY_LINE="ProxyPreserveHost On
+ProxyPass / http://$DOMAIN:$PORT/
+ProxyPassReverse / http://$DOMAIN:$PORT/"
 else
-PROXY_LINE=""
+    PROXY_LINE=""
+fi
+
+if [[ "$5" == --alias=* ]]; then
+    ALIAS="${5#--alias=}"
+    ALIAS_LINE="ServerAlias $ALIAS www.$ALIAS"
+else
+    PROXY_LINE=""
 fi
 
 cat > $FILE << EOF
 <VirtualHost *:80>
   ServerAdmin david@vielhuber.de
   ServerName $DOMAIN
+  $ALIAS_LINE
   DocumentRoot /var/www/$FOLDER
   ErrorLog \${APACHE_LOG_DIR}/error.log
   CustomLog \${APACHE_LOG_DIR}/access.log combined
@@ -113,6 +122,7 @@ cat > $FILE << EOF
 <VirtualHost *:443>
   ServerAdmin david@vielhuber.de
   ServerName $DOMAIN
+  $ALIAS_LINE
   DocumentRoot /var/www/$FOLDER
   ErrorLog \${APACHE_LOG_DIR}/error.log
   CustomLog \${APACHE_LOG_DIR}/access.log combined
