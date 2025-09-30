@@ -145,12 +145,11 @@
 - wsl
   - cmd (admin):
     - `netsh interface portproxy show v4tov4`
-    - `netsh interface portproxy delete v4tov4 listenaddress=0.0.0.0 listenport=12306`
-    - `netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=12306 connectaddress=127.0.0.1 connectport=12306`
+    - `netsh interface portproxy delete v4tov4 listenaddress=192.168.0.2 listenport=12306`
+    - `netsh interface portproxy add v4tov4 listenaddress=192.168.0.2 listenport=12306 connectaddress=127.0.0.1 connectport=12306`
   - powershell (admin): `New-NetFirewallRule -DisplayName "chrome-mcp" -Direction Inbound -LocalPort 12306 -Action Allow -Protocol TCP`
   - test via: http://127.0.0.1:12306/mcp
-  - connect inside fastmcp to: http://172.24.160.1:12306/mcp (`ip route show | grep -i default | awk '{ print $3}'`)
-  - if it does not work, change port to 12307, start/stop and change back to 12306
+  - connect inside fastmcp to: http://127.0.0.1:12306/mcp (`ipconfig`)
 
 # playwright
 
@@ -216,7 +215,7 @@
 
 - `nvm use --lts`
 - `npx @modelcontextprotocol/inspector`
-- `DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector`
+- `DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector` (disable security token from inspector, has nothing to do with oauth of mcps)
 - usage with ngrok: install chrome extension `ModHeader` and set `ngrok-skip-browser-warning = 69420`
 
 # links
