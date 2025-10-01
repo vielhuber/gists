@@ -493,9 +493,9 @@ comment
 
 // good
 /**
- * this is
+ * This is
  * a multiline
- * comment
+ * comment.
  */
 ```
 
@@ -572,4 +572,20 @@ enum Environment: string
     case Produktion = 'prod';
 }
 echo Environment::Produktion->value; // "prod"
+```
+
+### use progress bars in commands
+
+```php
+// bad
+$data = getBigDataSet();
+foreach($data as $dataValue) {
+  /* ... */
+}
+
+// good
+$data = getBigDataSet();
+$this->withProgressBar($data, function ($dataValue) {
+  /* ... */
+});
 ```

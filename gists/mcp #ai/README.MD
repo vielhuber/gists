@@ -231,3 +231,4 @@
 - claude tutorial: https://www.reddit.com/r/ClaudeAI/comments/1ji8ruv/my_claude_workflow_guide_advanced_setup_with_mcp/
 - playwright mcp: https://github.com/microsoft/playwright-mcp
 - fastmcp: https://gofastmcp.com
+- mcp-cli: https://github.com/chrishayuk/mcp-cli

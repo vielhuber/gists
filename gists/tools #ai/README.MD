@@ -71,8 +71,7 @@
 - 12-Factor Agents: https://github.com/humanlayer/12-factor-agents
 
 ### MCP
-- PHP-MCP: https://github.com/php-mcp/server
-- Claude Desktop: https://claude.ai/download
+- Siehe separates Gist
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
@@ -90,6 +89,7 @@
 - Dia: https://github.com/nari-labs/dia
   
 ### Meetings transkribieren / zusammenfassen
+- Granola: https://www.granola.ai
 - Fathom: https://fathom.video/home
 - Meetily: https://github.com/Zackriya-Solutions/meeting-minutes
 - tl;dv: https://tldv.io
@@ -148,6 +148,8 @@
 - chroniqle: https://chroniclehq.com
 
 ### Websites erstellen
+- Vercel v0: https://v0.app
+- Lovable: https://lovable.dev
 - Gamma: https://gamma.app
 - Onlook: https://onlook.com
     
