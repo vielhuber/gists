@@ -262,9 +262,9 @@ Usage: git acp
 
 ### change to branch locally
 - git checkout branch-name
-- git checkout master
+- git checkout main
 - git switch branch-name
-- git switch master
+- git switch main
 
 ### change to last active branch
 - git checkout -
