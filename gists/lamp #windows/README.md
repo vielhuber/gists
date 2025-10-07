@@ -893,6 +893,20 @@ host    all   all        ::1/128        md5
 - ```ghostscript -v```
 
 #### imagemagick
+
+- do this beforehand
+  - remove old installations
+    - `sudo rm -f /usr/local/bin/magick /usr/local/bin/convert`
+    - `sudo rm -rf /usr/local/lib/ImageMagick-* /usr/local/etc/ImageMagick-7`
+    - `apt remove "*imagemagick*" --purge -y && apt autoremove --purge -y`
+  - fix cmake
+    - `sudo rm /usr/local/bin/cmake`
+    - `sudo apt-get remove cmake`
+    - `sudo apt-get update`
+    - `cmake --version`
+    - `sudo apt-get install cmake`
+  - install opencl headers
+    - `sudo apt-get install -y ocl-icd-opencl-dev opencl-headers`
 ```
 t=$(mktemp) && \
 wget 'https://dist.1-2.dev/imei.sh' -qO "$t" && \
