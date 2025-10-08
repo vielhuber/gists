@@ -613,7 +613,7 @@ xdebug.output_dir="/tmp/xdebug"
   - Aufgabenplanung
   - "_WSL FIREWALL"
   - Bei Anmeldung
-  - Verzögern für 90 Sekunden
+  - Verzögern für 10 Minuten
   - Programm starten
   - PowerShell.exe -File \\wsl$\Ubuntu\var\www\lamp\firewall.ps1
   - Mit höchsten Privilegien ausführen
@@ -1131,7 +1131,7 @@ rm "$t"
   - Aufgabenplanung
   - "_LAMP"
   - Nur ausführen, wenn der Benutzer angemeldet ist
-  - Trigger: Bei Anmeldung, verzögern für: 90 Sekunden
+  - Trigger: Bei Anmeldung, verzögern für: 10 Minuten
   - Aktion: Programm starten (\\wsl$\Ubuntu\var\www\lamp\start.bat)
 
 #### wsl improve i/o performance
