@@ -7,7 +7,7 @@ npm install ckeditor5 --save
 ### js
 
 ```js
-import { ClassicEditor, Essentials, Bold, Italic, Underline, Strikethrough, Link, Font, Paragraph, List, SourceEditing, GeneralHtmlSupport, Clipboard, PasteFromOffice } from 'ckeditor5';
+import { ClassicEditor, Essentials, Bold, Italic, Underline, Strikethrough, Link, Font, Paragraph, List, SourceEditing, GeneralHtmlSupport, Clipboard, PasteFromOffice, FullPage } from 'ckeditor5';
 import coreTranslations from 'ckeditor5/translations/de.js';
 import 'ckeditor5/ckeditor5.css';
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ClassicEditor.create($el, {
         licenseKey: 'GPL',
         translations: [coreTranslations],
-        plugins: [ Essentials, Bold, Italic, Underline, Strikethrough, Link, Font, Paragraph, List, SourceEditing, GeneralHtmlSupport, Clipboard, PasteFromOffice ],
+        plugins: [ Essentials, Bold, Italic, Underline, Strikethrough, Link, Font, Paragraph, List, SourceEditing, GeneralHtmlSupport, Clipboard, PasteFromOffice, FullPage ],
         toolbar: {
           items: [
             'sourceEditing',
@@ -50,7 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
               classes: true,
               styles: true
             }
-          ]
+          ],
+          fullPage: {
+            allowRenderStylesFromHead: true
+          }
         }
       }).then(editor => {
         // always update textarea on changes (not only on submit)
@@ -73,18 +76,40 @@ document.addEventListener('DOMContentLoaded', () => {
 ### css
 
 ```css
-.ck-editor__editable_inline:not(.ck-comment__input *) {
-    height: 350px;
-    overflow-y: auto;
-}
 :root {
-    --ck-content-font-size: 13px !important;
-}
-.ck-powered-by-balloon {
-    display: none !important;
-}
-.ck.ck-voice-label {
-    display: none !important;
+    /* fixed height */
+    .ck-editor__editable_inline:not(.ck-comment__input *) {
+        height: 350px;
+        overflow-y: auto;
+    }
+    .ck-source-editing-area {
+        height: 350px;
+    }
+    .ck-source-editing-area textarea {
+        overflow-y: auto;
+    }
+    /* remove sponsor */
+    .ck-powered-by-balloon {
+        display: none !important;
+    }
+    /* remove headline */
+    .ck.ck-voice-label {
+        display: none !important;
+    }
+    /* smaller font size */
+    &:root {
+        --ck-content-font-size: 12px;
+    }
+    .ck-editor {
+        font-size: 12px;
+    }
+    /* custom colors */
+    &:root {
+        --ck-color-base-background: #eeeeee;
+    }
+    .ck.ck-toolbar {
+        background-color: #d1d1d1;
+    }
 }
 ```
 
