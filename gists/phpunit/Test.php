@@ -61,5 +61,12 @@ class Test extends \PHPUnit\Framework\TestCase
         }
       
     }
+    /**
+     * @medium
+     */
+    function test_with_time_limit()
+    {
+      	/* see https://docs.phpunit.de/en/12.4/risky-tests.html#test-execution-timeout */
+    }
   
 }
