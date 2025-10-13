@@ -4,7 +4,7 @@
 # fetch media from production
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{HTTP_HOST} \.local|close2dev\.de$ [NC]
+RewriteCond %{HTTP_HOST} \.local|vielhuber\.dev$ [NC]
 RewriteRule ^wp-content\/uploads\/(.*)$ https://www.tld.com/wp-content/uploads/$1 [R=302,L]
 ```
 

@@ -54,19 +54,13 @@ class Test extends \PHPUnit\Framework\TestCase
       	// live log to console while running
       	fwrite(STDERR, print_r('foo'.PHP_EOL, true));
       
-      	// run test n times
+      	// run test n times and with time limit
+      	set_time_limit(5); // note: @large etc. are not working
       	for($test_iteration = 0; $test_iteration < 10; $test_iteration++)
         {
          	 // your test code
         }
       
-    }
-    /**
-     * @medium
-     */
-    function test_with_time_limit()
-    {
-      	/* see https://docs.phpunit.de/en/12.4/risky-tests.html#test-execution-timeout */
     }
   
 }
