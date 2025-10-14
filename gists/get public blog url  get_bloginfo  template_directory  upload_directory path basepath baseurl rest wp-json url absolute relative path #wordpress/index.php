@@ -17,6 +17,7 @@ get_bloginfo('atom_url') / get_bloginfo('rss2_url') / get_bloginfo('rss_url') / 
 site_url()
    
 // full paths
+$_SERVER['DOCUMENT_ROOT']
 ABSPATH
 get_template_directory()
 get_stylesheet_directory() // use this for child themes
