@@ -73,6 +73,11 @@
 ### MCP
 - Siehe separates Gist
 
+### Developer Tools
+- Claude Console: https://console.anthropic.com
+- Google AI Studio: https://aistudio.google.com
+- OpenAI Playground: https://platform.openai.com/chat
+
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
 
