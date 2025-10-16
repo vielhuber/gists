@@ -92,11 +92,20 @@
 
 - Register on https://auth0.com
 - Applications > Applications > Create Application
-  - Allowed Callback URLs: `https://*.ngrok-free.app/auth/auth/callback,https://your-custom-domain.com/auth/auth/callback`
-  - Copy `Client ID` and `Client Secret`
+  - For browser login
+    - Type: `Single Page Web Applications`
+    - Allowed Callback URLs: `https://*.ngrok-free.app/auth/auth/callback,https://your-custom-domain.com/auth/auth/callback`
+    - Copy `Client ID` and `Client Secret`
+  - For api calls
+    - Type: `Machine to Machine Applications`
+    - API: Auth0 Management API > Permissions: All    
+    - Copy `Client ID` and `Client Secret`
 - Applications > APIs
   - Copy `API Audience`
 - User Management > Create User
+- mcp inspector: ...
+- chatgpt.com/claude.ai: Login via Browser
+- 
 
 # MCP SERVERS
 
@@ -143,13 +152,16 @@
   - `mcp-chrome-bridge register`
 - start server in chrome extension
 - wsl
-  - cmd (admin):
-    - `netsh interface portproxy show v4tov4`
-    - `netsh interface portproxy delete v4tov4 listenaddress=192.168.0.2 listenport=12306`
-    - `netsh interface portproxy add v4tov4 listenaddress=192.168.0.2 listenport=12306 connectaddress=127.0.0.1 connectport=12306`
-  - powershell (admin): `New-NetFirewallRule -DisplayName "chrome-mcp" -Direction Inbound -LocalPort 12306 -Action Allow -Protocol TCP`
-  - test via: http://127.0.0.1:12306/mcp
-  - connect inside fastmcp to: http://127.0.0.1:12306/mcp (`ipconfig`)
+  - setup
+    - cmd (admin):
+      - `netsh interface portproxy show v4tov4`
+      - `netsh interface portproxy delete v4tov4 listenaddress=192.168.0.2 listenport=12306`
+      - `netsh interface portproxy add v4tov4 listenaddress=192.168.0.2 listenport=12306 connectaddress=127.0.0.1 connectport=12306`
+    - powershell (admin):
+      - `New-NetFirewallRule -DisplayName "chrome-mcp" -Direction Inbound -LocalPort 12306 -Action Allow -Protocol TCP`
+    - test:
+      - windows: http://127.0.0.1:12306/mcp
+      - wsl: http://127.0.0.1:12306/mcp (local ip from `ipconfig`)
 
 # playwright
 
