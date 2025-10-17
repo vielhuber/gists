@@ -90,22 +90,31 @@
 
 # AUTH
 
-- Register on https://auth0.com
-- Applications > Applications > Create Application
-  - For browser login
-    - Type: `Single Page Web Applications`
-    - Allowed Callback URLs: `https://*.ngrok-free.app/auth/auth/callback,https://your-custom-domain.com/auth/auth/callback`
-    - Copy `Client ID` and `Client Secret`
-  - For api calls
-    - Type: `Machine to Machine Applications`
-    - API: Auth0 Management API > Permissions: All    
-    - Copy `Client ID` and `Client Secret`
+- Register/login on https://auth0.com
 - Applications > APIs
   - Copy `API Audience`
 - User Management > Create User
-- mcp inspector: ...
-- chatgpt.com/claude.ai: Login via Browser
-- 
+
+## browser
+
+- Applications > Applications > Create Application
+  - Type: `Single Page Web Applications`
+  - Allowed Callback URLs: `https://*.ngrok-free.app/auth/auth/callback,https://your-custom-domain.com/auth/auth/callback`
+  - Copy `Client ID` and `Client Secret`
+- Test
+  - chatgpt.com / claude.ai / ChatGPT Playground: Login via Browser
+  - MCP Inspector: Start oAuth Flow or simply click "Connect" (the browser redirects); Remove "Add custom headers"!
+
+## api
+
+- Applications > Applications > Create Application
+  - Type: `Machine to Machine Applications`
+  - API: Auth0 Management API > Permissions: All    
+  - Copy `Client ID` and `Client Secret`
+- Test
+  - Create token `xxx` (e.g. via curl) to authorize with bearer token
+  - MCP Inspector: Add Custom Headers: `Authorization: Bearer xxx`
+  - Claude API / ChatGPT API: `"authorization_token": "xxx"`
 
 # MCP SERVERS
 
@@ -161,7 +170,7 @@
       - `New-NetFirewallRule -DisplayName "chrome-mcp" -Direction Inbound -LocalPort 12306 -Action Allow -Protocol TCP`
     - test:
       - windows: http://127.0.0.1:12306/mcp
-      - wsl: http://127.0.0.1:12306/mcp (local ip from `ipconfig`)
+      - wsl: http://192.168.0.2:12306/mcp (local ip from `ipconfig`)
 
 # playwright
 

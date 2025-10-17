@@ -1145,6 +1145,8 @@ rm "$t"
 - ```sudo update-alternatives --set php /usr/bin/php8.1``` (directly set)
 - always choose manual mode (so newer installed versions do not get taken automatically)
 - ```php -v```
+- ```/usr/bin/php --version```
+- ```/usr/bin/php8.2 --version``` (call specific cli version)
 
 #### switch global php version
 - ```sudo a2dismod phpY.Y```
