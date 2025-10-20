@@ -704,8 +704,13 @@ shutdown.exe /s /t 0
   - ```curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -```
   - ```sudo apt-get install -y nodejs```
   - ```sudo apt-get install -y build-essential```
-- prevent permission errors
-  - ```npm set unsafe-perm true```
+- prevent permission errors / download errors
+  - `nano ~/.npmrc`
+```
+registry=http://registry.npmjs.org/
+unsafe-perm=true
+strict-ssl=false
+```
 - install ncu
   - ```npm install -g npm-check-updates```
 - login npm
