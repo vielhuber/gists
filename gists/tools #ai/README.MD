@@ -58,6 +58,16 @@
 - Kling AI: https://klingai.com/text-to-image
 - getimg: https://getimg.ai/image-editor
 
+### Browser
+
+- ChatGPT Atlas: https://openai.com/index/introducing-chatgpt-atlas
+- Dia: https://www.diabrowser.com
+- Opera: https://www.opera.com/de/features/browser-ai
+- Arc: https://arc.net/max
+- Brave Leo: https://brave.com/leo
+- Perplexity Comet: https://www.perplexity.ai/comet/de
+
+
 ### Agents / Computer steuern
 - Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
 - Stagehand: https://github.com/browserbase/stagehand
@@ -206,11 +216,13 @@
 ### Kostenloser API-Zugriff
 - GPT4free - https://gpt4free.io
 
-### Automatisierung
+### Automatisierung / Workflows
+- n8n.io: https://n8n.io
+- ChatGPT AgentKit: https://openai.com/index/introducing-agentkit
 - Make: https://www.make.com
 - Zapier: https://zapier.com
-- n8n.io: https://n8n.io
 - Power Automate: https://www.microsoft.com/de-de/power-platform/products/power-automate?market=de
+- Emma: https://www.emmarobot.io
 
 ### Toolsammlung
 - AI Center: https://aicenter.ai

@@ -29,6 +29,12 @@
     "version": "42",
     "permissions": ["storage"],
     "host_permissions": ["<all_urls>"],
+    "web_accessible_resources": [
+        {
+            "resources": ["*"],
+            "matches": ["<all_urls>"]
+        }
+    ],
     "background": {
         "service_worker": "background.js",
         "scripts": ["background.js"]
@@ -57,6 +63,17 @@
 .foo {
     box-shadow: 10px 10px 10px red;
 }
+/* always target pages where the extension should be active */
+.custom-extension {
+  	.foo {
+      	box-shadow: 10px 10px 10px red;
+  	}
+  
+  	/* use dynamic variables for relative urls */
+  	.bar {
+ 		background-image: var(--extension-bg-image);
+  	}
+}
 ```
 
 #### `/script.js`
@@ -64,6 +81,22 @@
 ```js
 (async () => {
   
+  	/* check if extension should be active */
+  	if( !(window.location.host.indexOf('custom.com') === -1) ) {
+      	return;
+    }
+
+    // set active class
+    document.body.classList.add('custom-extension');
+  
+    // inject images
+    document.documentElement.style.setProperty(
+      '--extension-bg-image',
+      `url("${(typeof browser !== 'undefined' && browser.runtime ? browser.runtime : chrome.runtime).getURL(
+        'bg.gif'
+      )}")`
+    );
+    
   	/* basic examples */
   	alert('foo');  
   	document.body.style.opacity = '0.5';  
