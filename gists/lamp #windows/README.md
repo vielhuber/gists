@@ -11,7 +11,7 @@
 - switch php/cli version (globally and host based)
 - access via all devices in your local network
 - support for different networks
-- real ssl certificates for all hosts and all devices
+- real ssl certificates for all hosts and all registry.npmjs.orgdevices
 - supports reverse proxy configuration
 - native linux performance (can handle node_modules and vendor) with wsl2
 - php debugging and profiling with xdebug
@@ -287,7 +287,8 @@ alias ls='ls --color'
 LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
 export LS_COLORS
 parse_git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'; }
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;31m\]\h\[\033[00m\]~\[\e[0;36m\]\t\[\033[00m\]~\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+parse_git_tag() { git describe --exact-match --tags 2> /dev/null | sed -e 's/\(.*\)/[\1]/'; }
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;31m\]\h\[\033[00m\]~\[\e[0;36m\]\t\[\033[00m\]~\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[01;33m\]$(parse_git_tag)\[\033[00m\]\$ '
 ```
 - ```source ~/.bash_profile```
 
@@ -704,17 +705,17 @@ shutdown.exe /s /t 0
   - ```curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -```
   - ```sudo apt-get install -y nodejs```
   - ```sudo apt-get install -y build-essential```
-- prevent permission errors / download errors
+- prevent permission errors / download errors (currently disabled)
   - `nano ~/.npmrc`
 ```
-registry=http://registry.npmjs.org/
-unsafe-perm=true
-strict-ssl=false
+#registry=http://registry.npmjs.org/
+#strict-ssl=false
+#unsafe-perm=true
 ```
 - install ncu
   - ```npm install -g npm-check-updates```
 - login npm
-  - ```npm login```
+  - ```export BROWSER=none && npm login```
 
 #### yarn
 - ```corepack enable```
