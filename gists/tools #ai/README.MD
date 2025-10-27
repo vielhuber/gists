@@ -66,7 +66,9 @@
 - Arc: https://arc.net/max
 - Brave Leo: https://brave.com/leo
 - Perplexity Comet: https://www.perplexity.ai/comet/de
-
+- Edge: https://www.microsoft.com/de-de/edge
+- Firefox https://www.firefox.com/de
+- BrowserOS: https://www.browseros.com
 
 ### Agents / Computer steuern
 - Antrophic Claude Computer Use: https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/README.md#accessing-the-demo-app
@@ -235,10 +237,10 @@
 - Voiceflow: https://www.voiceflow.com
 - Twilio: https://www.twilio.com
 
-# Prompt generation
+## Prompt generation
 - AI-27: https://ai-27.com/prompt
 
-# Remote Hosting
+## Remote Hosting
 - HuggingFace: https://huggingface.co
 
 ### Jailbroken / Uncensored
