@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     .ck-source-editing-area {
         height: 350px;
+        border: 1px solid #000;
     }
     .ck-source-editing-area textarea {
         overflow-y: auto;

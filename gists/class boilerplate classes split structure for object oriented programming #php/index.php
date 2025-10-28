@@ -14,6 +14,7 @@ final class TestClass
    public static $var2 = 'im a static property';
    private $var3 = 'im a private property';
    public const VAR_4 = 'im a constant';
+   $var = 'foo'; // same as public $var = 'foo'
       
    public function __construct() // must be public
    {

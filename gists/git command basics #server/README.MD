@@ -818,3 +818,17 @@ Usage: git acp
 - pushing indicates, that lfs objects are stored
 - also gitea shows when clicking on the file, that this is a lfs file
 - ```git add -A . && git commit -m "." && git push origin HEAD```
+
+### git inside git
+
+#### git subtree
+- clone a git reposiory inside a git repository
+- initial clone: `git subtree add --prefix path/to/subfolder git@github.com:vielhuber/xxx.git main --squash`
+- pull: `git subtree pull --prefix path/to/subfolder git@github.com:vielhuber/xxx.git main --squash && git push`
+- push: `git subtree push --prefix path/to/subfolder git@github.com:vielhuber/xxx.git main`
+
+#### symlink
+- ```cd ~/external-lib```
+- ```git clone git@github.com:vielhuber/xxx.git```
+- ```cd ~/main-repo```
+- ```ln -s ~/external-lib ./path/to/subfolder/external-lib```
