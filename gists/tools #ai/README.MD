@@ -85,6 +85,10 @@
 ### MCP
 - Siehe separates Gist
 
+### Lokal / Selbsthosting
+- LM Studio: https://lmstudio.ai
+- Ollama: https://ollama.com
+
 ### Developer Tools
 - Claude Console: https://console.anthropic.com
 - Google AI Studio: https://aistudio.google.com
@@ -92,9 +96,6 @@
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
-
-### Selbsthosting
-- Ollama: https://ollama.com
   
 ### Text-To-Speech, Speech-To-Speech, Stimme klonen, Soundeffekte erzeugen
 - ElevenLabs: https://elevenlabs.io

@@ -455,6 +455,7 @@ df -k . # for current folder
 df -k /folder # for specific folder
 du -d 1 -xh /folder 2>/dev/null | sort -h -r | head -10 # show all big folders
 find . -type f -printf "%s\t%p\n" | sort -n | tail -10 # show all big files
+find ./path1 ./path2 ./path3 -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/vendor/*" -printf "%s\t%p\n" | sort -rn | head -50 | numfmt --field=1 --to=iec-i --suffix=B # show all big files (in specific folders excluding some subfolders)
 du -d 1 -xh . 2>/dev/null | sort -h -r | head -10 # same as above only for current folder
 ls -haltrS # show contents of folder sorted by size
 find . -type f -newermt '1 month ago' -exec du -ch {} + | grep total$ # sum of filesize found with find (files newer than 1 month)
