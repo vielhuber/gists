@@ -782,11 +782,30 @@ shutdown.exe /s /t 0
   - ```sudo nano ~/.gitconfig```
   - ```[url "https://"]```
   - ```   insteadOf = git://```
-- ki commit hooks
-  - `nano ~/git-template/hooks/prepare-commit-msg`
-  - Script von https://vielhuber.de/blog/git-commit-messages-mit-chatgpt/
-  - `chmod +x ~/git-template/hooks/prepare-commit-msg`
+- commit hooks
   - `git config --global core.hooksPath ~/git-template/hooks`
+  - ai
+    - `nano ~/git-template/hooks/prepare-commit-msg`
+    - Script von https://vielhuber.de/blog/git-commit-messages-mit-chatgpt/
+    - `chmod +x ~/git-template/hooks/prepare-commit-msg`
+  - filesize
+    - `nano ~/git-template/hooks/pre-commit`
+    - `chmod +x ~/git-template/hooks/pre-commit`
+
+```
+#!/usr/bin/env bash
+set -euo pipefail
+LIMIT_BYTES=$((100 * 1024 * 1024)) # 100 mb
+failed=0
+while IFS= read -r -d '' path; do
+  size_bytes="$(git cat-file -s ":$path" 2>/dev/null || echo 0)"
+  if (( size_bytes >= LIMIT_BYTES )); then
+    echo "⛔: '$path' ist $((size_bytes / 1024 / 1024)) MiB (Limit: 100 MiB). git restore --staged \"$path\"" >&2
+    failed=1
+  fi
+done < <(git diff --cached --diff-filter=AM --name-only -z)
+exit "$failed"
+```
 
 #### gh (github command line)
 - ```curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg```

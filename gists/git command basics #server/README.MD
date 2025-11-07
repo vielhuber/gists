@@ -670,7 +670,7 @@ Usage: git acp
 
 ## migrate / copy whole git repository
 - `git clone --mirror git@gitlab.com:vielhuber/old.git .`
-- `git remote set-url origin git@gitlab.com:vielhuber/new.git`
+- `git remote set-url --push origin git@gitlab.com:vielhuber/new.git`
 - `git push --mirror`
 - set the default branch via web interface if necessary (e.g. gitea only detects `main` as a default branch but not `master`)
 
@@ -682,6 +682,7 @@ Usage: git acp
 - `git filter-branch` (is officially not recommended: https://git-scm.com/docs/git-filter-branch#SAFETY)
 
 ### analyze
+- `git ls-tree -r --long HEAD | sort -k 4 -n -r | less`
 - `git filter-repo --analyze && cat .git/filter-repo/analysis/directories-all-sizes.txt`
 - `git-sizer --verbose`
   
@@ -819,7 +820,7 @@ Usage: git acp
 - also gitea shows when clicking on the file, that this is a lfs file
 - ```git add -A . && git commit -m "." && git push origin HEAD```
 
-### git inside git
+## git inside git
 
 #### git subtree
 - clone a git reposiory inside a git repository

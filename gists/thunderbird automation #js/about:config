@@ -1,0 +1,14 @@
+// Check all IMAP folders for new messages
+mail.server.default.check_all_folders_for_new = true
+
+// Automatic compaction without confirmation
+mail.purge.ask = false
+
+// Minimum delay between compactions (minutes)
+mail.purge.min_delay = 1
+
+// Check interval for compaction (minutes)
+mail.purge.timer_interval = 5
+
+// Threshold value for compaction (MB of wasted storage)
+mail.purge_threshold_mb = 1
