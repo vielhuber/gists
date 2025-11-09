@@ -1,5 +1,5 @@
 ### prevent stfu operator
-```
+```php
 // bad
 if(@$foo) {}
 if(@$_GET['foo']) {}
@@ -588,4 +588,161 @@ $data = getBigDataSet();
 $this->withProgressBar($data, function ($dataValue) {
   /* ... */
 });
+```
+
+### extract exceptions
+
+```php
+// bad
+throw new\Exception('Zeitraum ungültig.');
+
+// good
+throw ExampleException::partNotFound();
+// Exceptions/ExampleException.php
+namespace App\Exceptions;
+use Exception;
+class StudbookException extends Exception {
+    public static function invalidDateRange(): self {
+        return new self('Zeitraum ungültig.');
+    }
+}
+```
+
+### move logic from controller to services
+
+```php
+// bad
+class ExampleController {
+    test() {
+        $this->fun1();
+        $this->fun2();
+        $this->fun3();
+        $this->fun4();
+    }
+}
+
+// good
+class ExampleController {
+    public function __construct(ExampleService1 $exampleService1, ExampleService2 $exampleService2)
+    {
+        $this->exampleService1 = $exampleService1;
+        $this->exampleService2 = $exampleService2;
+    }
+    test() {
+        $this->exampleService1->fun1();
+        $this->exampleService1->fun2();
+        $this->exampleService2->fun3();
+        $this->exampleService2->fun4();
+    }
+}
+class ExampleService1 {
+    fun1() {}
+    fun2() {}
+}
+class ExampleService2 {
+    fun3() {}
+    fun4() {}
+}
+```
+
+### uppercase immutable variables
+```js
+// bad
+export default class ExampleClass {
+    static foo = 'bar';
+}
+
+// good
+export default class ExampleClass {
+    static FOO = 'bar';
+}
+```
+
+### extract selectors & split up functions
+
+```js
+// bad
+export default class Example {
+    load() {
+        document.querySelectorAll('.foo').forEach($el => {
+            $el.setAttribute('data-href', $el.getAttribute('href'));
+            $el.addEventListener('click', e => {
+                if (document.querySelector('.bar').value === '') { alert('Falscher Wert.'); }
+                $el.setAttribute('href','bar');
+            });
+        });
+    }
+}
+
+export default class Example {
+    static SELECTOR_1 = '.foo';
+    static SELECTOR_2 = '.bar';
+    load() {
+        this.bindSelectors();
+        this.setupExportLinks();
+    }
+    bindSelectors() {
+        this.$selector1 = document.querySelectorAll(getStudbook.DATE_SELECTORS.BEGIN);
+        this.$selector2 = document.querySelector(getStudbook.DATE_SELECTORS.END);
+    }
+    setupExportLinks() {
+        this.$selector1.forEach($link => this.setupLink($link));
+    }
+    setupLink($link) {
+        const origUrl = $link.getAttribute('href');
+        $link.setAttribute('data-href', origUrl);
+        $link.addEventListener('click', e => this.handleClick(e, $link));
+    }
+    handleClick(e, $link) {
+        if (!this.validateDateInputs()) { $this.showValidationError(); }
+        this.updateExportUrl($link);
+    }
+    validateDateInputs() {
+        return this.$selector2.value !== '';
+    }
+    showValidationError() {
+        alert('Falscher Wert.');
+    }
+    updateUrl($link) {
+        $link.setAttribute('href','bar');
+    }
+}
+```
+
+### prefix dom elements with dollar sign
+
+```js
+// bad
+let el = document.querySelector('.foo');
+
+// good
+let $el = document.querySelector('.foo');
+```
+
+### move logic (ids/labels) from view to controller
+
+```php
+// bad
+return view('example.view');
+<ul>
+    <li><a href="{{ URL::route('getExample',[1]) }}">Item 1</a></li>
+    <li><a href="{{ URL::route('getExample',[2]) }}">Item 2</a></li>
+    <li><a href="{{ URL::route('getExample',[3]) }}">Item 3</a></li>
+</ul>
+
+// good
+private const PARTS = [
+    ['id' => 1, 'label' => 'Item 1'],
+    ['id' => 2, 'label' => 'Item 2']
+    ['id' => 3, 'label' => 'Item 3']
+];
+/* ... */
+return view('example.view', [
+    'parts' => self::PARTS
+]);
+<ul>
+    @foreach($parts as $part)
+        <li><a href="{{ URL::route('getExample',[$part['id']]) }}">{{ $part['label'] }}</a></li>
+    @endforeach
+</ul>
 ```
