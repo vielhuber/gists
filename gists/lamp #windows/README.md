@@ -265,6 +265,7 @@ curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 - Edit > Preferences > User Interface > On start-up: Don't reopen the last used repositories
 - Edit > Preferences > User Interface > Built-in Text Editors > Font Size: 9
 - Edit > Preferences > Git Config > Fetch and Pull > Rebase local branch onto fetched changes
+- Pro Repository: AI Button > ChatGPT API Key hinterlegen
 - Repository > Search for Repositories > /var/www
 - Manuelles Umbenennen falscher Namen ("www - ...", gtbabel 3x)
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)

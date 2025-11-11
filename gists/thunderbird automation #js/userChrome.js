@@ -88,6 +88,15 @@ class MailMaintenanceService {
         try {
             this.logger.info('Starting maintenance cycle');
             
+            for (let account of MailServices.accounts.accounts) {
+                if (account.incomingServer.type !== 'imap') { continue; }
+                let imapServer = account.incomingServer.QueryInterface(Ci.nsIImapIncomingServer);       
+                await new Promise((resolve) => {
+                    imapServer.performExpand(null);
+                    resolve();            
+                });
+            }
+            
             const folders = this.getEligibleFolders();
             await this.processFolders(folders);
             

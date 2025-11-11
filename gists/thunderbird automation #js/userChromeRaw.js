@@ -1,4 +1,13 @@
 async function purge() {
+    for (let account of MailServices.accounts.accounts) {
+        if (account.incomingServer.type !== 'imap') { continue; }
+        let imapServer = account.incomingServer.QueryInterface(Ci.nsIImapIncomingServer);       
+        await new Promise((resolve) => {
+            imapServer.performExpand(null);
+            resolve();            
+        });
+    }
+    
     for(let folder of MailServices.accounts.allFolders) {
         //if(folder.URI.indexOf('foo') === -1) { continue; }
         console.log(folder.URI);
