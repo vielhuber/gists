@@ -44,7 +44,7 @@ function promiseUpdate(folder) {
                     resolve('Update OK');
                 } else {
                     //console.warn('Update fehlgeschlagen (' + exitCode + '): ' + folder.URI);
-                    reject('Update fehlgeschlagen');
+                    resolve('Update fehlgeschlagen');
                 }
             }
         }, null);
@@ -66,7 +66,7 @@ function promiseCompact(folder) {
                     resolve('Kompaktieren OK');
                 } else {
                     //console.warn('Kompaktieren fehlgeschlagen (' + exitCode + '): ' + folder.URI);
-                    reject('Kompaktieren fehlgeschlagen');
+                    resolve('Kompaktieren fehlgeschlagen');
                 }
             }
         }, null);

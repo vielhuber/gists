@@ -783,6 +783,13 @@ shutdown.exe /s /t 0
   - ```sudo nano ~/.gitconfig```
   - ```[url "https://"]```
   - ```   insteadOf = git://```
+- sign commits/tags with ssh key
+  - `git config --global gpg.format ssh`
+  - `git config --global user.signingkey ~/.ssh/id_rsa.pub`
+  - `git config --global commit.gpgsign true`
+  - `git config --global tag.gpgsign true`
+  - `git config --global push.gpgsign true`
+  - GitHub > Settings > SSH and GPG keys > New SSH key > Key type: Signing Key + id_rsa.pub
 - commit hooks
   - `git config --global core.hooksPath ~/git-template/hooks`
   - ai

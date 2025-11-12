@@ -15,7 +15,13 @@ declare -A prompts=(
 
         Instructions:
         - Review the given output of \"git diff\" for the pull request
+        - Describe only the specific code change that was made, not the code above/below it
         - If you cannot identify any changes in the diff, return that no changes have been made
+        - Lines beginning with ‘-’ have been DELETED.
+        - Lines beginning with ‘+’ have been ADDED.
+        - Lines without ‘-’ or ‘+’ are just CONTEXT and have NOT been changed.
+        - Create a concise commit message that describes ONLY the actual changes.
+        - Describe only the actual changes (deleted and added lines). Ignore context lines that remain unchanged.
         - If only a slight change has been made, don't miss that change
         - Use the imperative mood in every bullet list item
         - Return always a single bullet list
@@ -26,10 +32,11 @@ declare -A prompts=(
         - Create a bullet list of different items
         - The response sentences are no longer than 16 words each
         - Keep the response sentences as short as possible
-        - Don't wrike any headlines and start with the bullet list
+        - Don't write any headlines and start with the bullet list
 
         If you have prepared the list and it has more than 3 entries,
         then merge the entries so that they add up to exactly 3 entries.
+        If fewer than 3 items were found, list only 1 or 2.
     "
     ["user.pre"]="
         This is the output of \"git diff\":
@@ -54,7 +61,17 @@ fi
 echo "⚡ Automatically generating git commit message... ⚡"
 
 # Fetch the staged git diff with unified context of 10 lines, no color and strip out all lines longer than 1000 chars
-diff=$(git diff --unified=10 --staged --no-color | sed '/.\{1000\}./d')
+diff=$(
+    git diff \
+        --unified=10 \
+        --staged \
+        --no-color | \
+        sed \
+            -e '/^diff --git.*node_modules/,/^diff --git/d' \
+            -e '/^diff --git.*vendor/,/^diff --git/d' \
+            -e '/^diff --git.*bundle\.\(js\|css\)/,/^diff --git/d' \
+            -e '/.\{1000\}./d'
+)
 
 # Log the diff for reference
 echo "$diff" > "$diff_log"
