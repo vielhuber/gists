@@ -4,6 +4,9 @@ div[class] { }
 /* is attribute */
 div[class="foo"] { }
 
+/* is not attribute */
+div:not([class="foo"]) { }
+
 /* contains single word */
 div[class~="foo"] { }
 

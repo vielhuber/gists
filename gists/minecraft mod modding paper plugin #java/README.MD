@@ -5,6 +5,7 @@
   - Version: 21
   - Set JAVA_HOME environment variable: Ja
   - Test: `java -version`
+  - Falls das nicht geht: PATH prüfen und alte Einträge entfernen (`which java`)
 - Intellij IDEA Community
   - Einstellungen
     - Plugins > "Deutsch (German) Language Localization" (kostenlose Version)
@@ -15,17 +16,22 @@
     - Werkzeuge > Aktionen beim Speichern > Code neu formatieren + Importe optimieren
   - Neues Projekt
     - Projektname: "test"
-    - Speicherort: ~\Minecraft
+    - Speicherort: %userprofile%/Minecraft
     - Plugin + Paper + Gradle + Java
     - Minecraft Version: 1.21.8
     - Group ID: me.david
     - JDK: 21 (nochmal danach ggf: "SDK einrichten:")
+  - Build (lokal + production)
+    - Gradle > Tasks > build > build
+    - /test/build/libs/\*.jar kopieren in /plugins
+    - Server sauber neustarten (nicht `/reload`)
 - Lokalen Server aufsetzen
   - Paper downloaden auf https://papermc.io/downloads/paper
-  - *.jar kopieren in ~\Minecraft\paper\paper.jar
+  - *.jar kopieren in %userprofile%/Minecraft/paper/paper.jar
   - `java -Xms4G -Xmx4G -jar paper.jar --nogui`
-  - eula.txt: eula=true
+  - eula.txt bearbeiten: eula=true
   - In Vanilla Minecraft connecten zu "localhost"
+  - Upgrade: Einfach neues *.jar downloaden und paper.jar ersetzen
 - Production-Server aufsetzen
   - Server bei https://mine-hoster.de buchen
   - Administration: https://gamepanel.mine-hoster.de
@@ -34,19 +40,21 @@
   - `/op rebuhleiv` in der Server-Konsole
   - Schreibt auch gleich die `ops.json` richtig
   - Test mit `/time set day`
-- Build (lokal + production)
-  - Gradle > Tasks > build > build
-  - /test/build/libs/\*.jar kopieren in /plugins
-    - `cp '/mnt/c/Users/David/Minecraft/test/build/libs/test-1.0-SNAPSHOT.jar' '/mnt/c/Users/David/Minecraft/paper/plugins/test-1.0-SNAPSHOT.jar'`
-  - Server sauber neustarten (nicht `/reload`)
-  
-## Server-Label
+
+## Usage
+
+- VSCode zum Editieren öffnen
+- Shortcode für Builden, Kopieren, Server starten (in cmd ohne Admin)
+    - `cd %userprofile%/Minecraft/test && gradlew.bat build && copy /Y %userprofile%\Minecraft\test\build\libs\*.jar %userprofile%\Minecraft\paper\plugins\ && cd %userprofile%/Minecraft/paper && java -Xms4G -Xmx4G -jar paper.jar --nogui`
+- Minecraft Launcher starten und zu `localhost` verbinden
+
+### Server-Konfiguration
 
 - Name: Server properties > motd (Generator: https://minecraft.tools/de/motd.php)
 - Icon: `/server-icon.png` (64x64) in Root-Verzeichnis legen
 - Domain: A-Record auf IP-Adresse zeigen
 
-## Resource Pack
+### Resource Packs
 
 - `cd ./resourcepack/data`
 - `rm ./../data.zip && zip ./../data.zip -r . && sha1sum ./../data.zip`
@@ -67,9 +75,9 @@ resource-pack-sha1=0086e2294ef390c7fddfde527927423fae2075f9
 - Logs: `.minecraft/logs/latest.log`
 - Es geht immer nur ein Resourcepack parallel
 
-## Simple Voice Chat
+### Simple Voice Chat
 
-- Serverseitig in `/plugins` instalieren
+- Serverseitig in `/plugins` installieren
 - https://modrinth.com/plugin/simple-voice-chat/versions?g=1.21.8&l=paper
 - Clientseitig z.B. mit `CurseForge` installieren
 
