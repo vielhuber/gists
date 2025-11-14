@@ -626,10 +626,10 @@ xdebug.output_dir="/tmp/xdebug"
   - `mkdir -p /run/php/`
 - /tmp clean
   - `find /tmp -ctime +2 -exec rm -rf {} +`
-- enable cronjobs
+- run startup scripts
   - `/etc/wsl.conf`
   - `[boot]`
-  - `command="service cron start"`
+  - `command="/var/www/lamp/start.sh >> /var/www/lamp/start.log 2>&1"`
 - DISABLED: disable PATH import on WSL
   - Don't do this, since `code .` etc. does not work anymore
   - `/etc/wsl.conf`
@@ -1159,14 +1159,14 @@ rm "$t"
 - run
   - `docker start docker-osx`
 
-#### autostart
+#### autostart (beides deaktiviert)
 - wsl (deaktiviert)
   - Aufgabenplanung
   - "_WSL"
   - Nur ausführen, wenn der Benutzer angemeldet ist
   - Trigger: Bei Anmeldung
   - Aktion: Programm starten (C:\Windows\System32\bash.exe -c "")
-- services
+- services (deaktiviert)
   - Aufgabenplanung
   - "_LAMP"
   - Nur ausführen, wenn der Benutzer angemeldet ist
