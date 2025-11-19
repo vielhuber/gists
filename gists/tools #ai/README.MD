@@ -59,7 +59,6 @@
 - getimg: https://getimg.ai/image-editor
 
 ### Browser
-
 - ChatGPT Atlas: https://openai.com/index/introducing-chatgpt-atlas
 - Dia: https://www.diabrowser.com
 - Opera: https://www.opera.com/de/features/browser-ai
@@ -120,7 +119,6 @@
 - Sora: https://www.sora.com
 - RunWay ML: https://runwayml.com
 - Haiper: https://haiper.ai
-- JoggAI (Produktvideos): https://www.jogg.ai
 - Google Veo: https://deepmind.google/technologies/
 - Pollo: https://pollo.ai
 - Mochi: https://mochi1ai.com
@@ -132,8 +130,28 @@
 - Adobe Firefly: https://firefly.adobe.com
 - Midjourney Video: https://www.midjourney.com
 
-### Video verlängern
+#### Produkte
+- SellerPic: https://www.sellerpic.ai
+- Pippit: https://www.pippit.ai
+- JoggAI: https://www.jogg.ai
+
+#### Videos verlängern
 - Kling AI: https://klingai.com/image-to-video/frame-mode
+
+#### Animationsvideos generieren
+- SteveAI: https://www.steve.ai
+
+#### Avatare/Sprechervideos generieren
+- HeyGen: https://www.heygen.com
+- VEED: https://www.veed.io
+- synthesia: https://www.synthesia.io
+- Tavus: https://www.tavus.io
+
+#### Social Media
+- OpusClip: https://www.opus.pro
+- Captions: https://www.captions.ai
+- arcards: https://www.arcads.ai/
+- XBeast: https://xbeast.io
 
 ### Slideshow / Diashow erstellen
 - CapCut: https://www.capcut.com
@@ -141,21 +159,6 @@
 
 ### 3D-Objekte
 - KREA: https://www.krea.ai
-       
-### Avatare/Sprechervideos generieren
-- HeyGen: https://www.heygen.com
-- VEED: https://www.veed.io
-- synthesia: https://www.synthesia.io
-- Tavus: https://www.tavus.io
-
-### Animationsvideos generieren
-- SteveAI: https://www.steve.ai
-    
-### Social Media
-- OpusClip: https://www.opus.pro
-- Captions: https://www.captions.ai
-- arcards: https://www.arcads.ai/
-- XBeast: https://xbeast.io
     
 ### Präsentationen erstellen
 - Gamma: https://gamma.app
@@ -182,8 +185,9 @@
 ### LLM Vergleich
 - Chatbot Arena (LMSYS): https://lmarena.ai
 
-### Gaming
-- Google Genie 2: https://deepmind.google/discover/blog/genie-2-a-large-scale-foundation-world-model
+### Gaming / Design
+- Google Genie: https://deepmind.google/discover/blog/genie-2-a-large-scale-foundation-world-model
+- World Labs Marble: https://www.worldlabs.ai
 
 ### KI-Texte humanisieren
 - WORTLIGA: https://wortliga.de/ki-text-generator
@@ -193,6 +197,7 @@
 - Undetectable: https://undetectable.ai
 - Scribbr: https://www.scribbr.de
 - aihumaize.io: https://aihumanize.io
+- HIX Bypass: https://bypass.hix.ai
 
 ### Buch schreiben
 - Sudowrite: https://www.sudowrite.com
@@ -238,10 +243,10 @@
 - Voiceflow: https://www.voiceflow.com
 - Twilio: https://www.twilio.com
 
-## Prompt generation
+### Prompt generation
 - AI-27: https://ai-27.com/prompt
 
-## Remote Hosting
+### Remote Hosting
 - HuggingFace: https://huggingface.co
 
 ### Jailbroken / Uncensored

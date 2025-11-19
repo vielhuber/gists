@@ -11,7 +11,20 @@
 - can be defined in the yml file; if you want to use secret variables, define them additionally in Settings > Secrets > Actions > Repository secrets
 - note that `$_ENV` is not available, so use `$_SERVER` instead (in case of https://github.com/vlucas/phpdotenv)
 
-### check for travis CI inside php
+### trigger
+
+**run on every push**
+```
+on: [push]
+```
+
+**run only manually**
+```
+on:
+    workflow_dispatch:
+```
+
+### check for ci inside php
 
 - ```if( @$_SERVER['CI'] == 'true' ) { }```
 
