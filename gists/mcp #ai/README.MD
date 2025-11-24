@@ -190,7 +190,8 @@
 
 # links
 
-- mcp repo: https://mcpservers.org/
+- mcp repo: https://mcpservers.org
+- mcp repo: https://dxt.so
 - video (c't): https://www.youtube.com/watch?v=S_4VUJ-x8hE
 - mcp inspector: https://modelcontextprotocol.io/legacy/tools/inspector
 - claude desktop: https://claude.ai/download

@@ -13,6 +13,18 @@ class Browser
     public function init()
     {
         try {
+          
+            // optional: kill if running
+            $pids = shell_exec("pgrep -f '/tmp/myChromeSession'");
+            if ($pids) {
+                foreach (explode("\n", trim($pids)) as $pid) {
+                    if ($pid) {
+                        posix_kill((int) $pid, 9);
+                    }
+                }
+                sleep(1);
+            }
+          
             $args = [];
             if (@$_SERVER['SERVER_ADMIN'] === 'david@vielhuber.de' || @$_SERVER['NAME'] === 'DAVID-DESKTOP') {
                 $args['executable_path'] = '/root/.nvm/versions/node/v16.17.0/bin/node'; // https://github.com/nesk/puphpeteer/issues/65

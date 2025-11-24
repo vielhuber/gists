@@ -87,6 +87,7 @@
 ### Lokal / Selbsthosting
 - LM Studio: https://lmstudio.ai
 - Ollama: https://ollama.com
+- Transformers.js: https://huggingface.co/docs/transformers.js
 
 ### Developer Tools
 - Claude Console: https://console.anthropic.com
@@ -250,6 +251,7 @@
 - HuggingFace: https://huggingface.co
 
 ### Jailbroken / Uncensored
+- Heretic: https://github.com/p-e-w/heretic
 - Uncensored: https://uncensored.com
 - Prompts: https://github.com/elder-plinius/L1B3RT4S
 - Pornify: https://pornify.cc
