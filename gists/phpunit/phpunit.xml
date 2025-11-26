@@ -2,7 +2,7 @@
 <phpunit
     bootstrap="vendor/autoload.php"
     colors="true"
-    verbose="true"
+    testdox="true"
     stopOnFailure="false"
     displayDetailsOnTestsThatTriggerWarnings="true"
     displayDetailsOnTestsThatTriggerDeprecations="true"

@@ -33,6 +33,7 @@ phpunit --filter "/::testUpdateFailure$/" # run a specific method (in all tests)
 phpunit --filter testUpdateFailure # run a specific method (in all tests) beginning with testUpdateFailure
 phpunit --filter "/::testUpdateFailure$/" tests/Feature/MenuTest # run a specific method (in specific test)
 phpunit --testdox # show detailed test names and run times
+phpunit --debug # show intermediate states
 ```
 
 #### psr4

@@ -142,8 +142,9 @@
 #### Animationsvideos generieren
 - SteveAI: https://www.steve.ai
 
-#### Avatare/Sprechervideos generieren
+#### Avatare / Sprechervideos generieren
 - HeyGen: https://www.heygen.com
+- HeyGen Interactive Avatar: https://labs.heygen.com/interactive-avatar
 - VEED: https://www.veed.io
 - synthesia: https://www.synthesia.io
 - Tavus: https://www.tavus.io

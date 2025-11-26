@@ -55,11 +55,12 @@ class Test extends \PHPUnit\Framework\TestCase
       	fwrite(STDERR, print_r('foo'.PHP_EOL, true));
       
       	// run test n times and with time limit
+      	$previous_time_limit = ini_get('max_execution_time');
       	set_time_limit(5); // note: @large etc. are not working
-      	for($test_iteration = 0; $test_iteration < 10; $test_iteration++)
-        {
+      	for($test_iteration = 0; $test_iteration < 10; $test_iteration++) {
          	 // your test code
         }
+      	set_time_limit($previous_time_limit);      	
       
     }
   

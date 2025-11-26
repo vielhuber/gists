@@ -6,29 +6,34 @@
   - Set JAVA_HOME environment variable: Ja
   - Test: `java -version`
   - Falls das nicht geht: PATH prüfen und alte Einträge entfernen (`which java`)
-- Intellij IDEA Community
-  - Einstellungen
-    - Plugins > "Deutsch (German) Language Localization" (kostenlose Version)
-    - Appearance > Languages > German > Restart
-    - Plugins > "Minecraft Development"
-    - Editor > Inspektionen > Korrekturlesen > Deaktivieren
-    - Editor > Unambiguous Imports währenddessen hinzufügen: an
-    - Werkzeuge > Aktionen beim Speichern > Code neu formatieren + Importe optimieren
-  - Neues Projekt
-    - Projektname: "test"
-    - Speicherort: %userprofile%/Minecraft
-    - Plugin + Paper + Gradle + Java
-    - Minecraft Version: 1.21.8
-    - Group ID: me.david
-    - JDK: 21 (nochmal danach ggf: "SDK einrichten:")
-  - Build (lokal + production)
-    - Gradle > Tasks > build > build
-    - /test/build/libs/\*.jar kopieren in /plugins
-    - Server sauber neustarten (nicht `/reload`)
+- Bestehendes Projekt klonen
+  - mkdir /mnt/c/Users/David/Minecraft/test
+  - cd /mnt/c/Users/David/Minecraft/
+  - git clone git@github.com:vielhuber/minecraft.git .
+- Neues Projekt anlegen
+  - Intellij IDEA Community
+    - Einstellungen
+      - Plugins > "Deutsch (German) Language Localization" (kostenlose Version)
+      - Appearance > Languages > German > Restart
+      - Plugins > "Minecraft Development"
+      - Editor > Inspektionen > Korrekturlesen > Deaktivieren
+      - Editor > Unambiguous Imports währenddessen hinzufügen: an
+      - Werkzeuge > Aktionen beim Speichern > Code neu formatieren + Importe optimieren
+    - Neues Projekt
+      - Projektname: "test"
+      - Speicherort: %userprofile%/Minecraft
+      - Plugin + Paper + Gradle + Java
+      - Minecraft Version: 1.21.8
+      - Group ID: me.david
+      - JDK: 21 (nochmal danach ggf: "SDK einrichten:")
+    - Build (lokal + production)
+      - Gradle > Tasks > build > build
+      - /test/build/libs/\*.jar kopieren in /plugins
+      - Server sauber neustarten (nicht `/reload`)
 - Lokalen Server aufsetzen
   - Paper downloaden auf https://papermc.io/downloads/paper
   - *.jar kopieren in %userprofile%/Minecraft/paper/paper.jar
-  - `java -Xms4G -Xmx4G -jar paper.jar --nogui`
+  - Start mit `java -Xms4G -Xmx4G -jar paper.jar --nogui`
   - eula.txt bearbeiten: eula=true
   - In Vanilla Minecraft connecten zu "localhost"
   - Upgrade: Einfach neues *.jar downloaden und paper.jar ersetzen
@@ -57,7 +62,9 @@
 ### Resource Packs
 
 - `cd ./resourcepack/data`
-- `rm ./../data.zip && zip ./../data.zip -r . && sha1sum ./../data.zip`
+- `rm ./../data.zip`
+- `zip ./../data.zip -r .`
+- `sha1sum ./../data.zip`
 - Uploaden und `server.properties` editieren
 
 ```
@@ -74,6 +81,9 @@ resource-pack-sha1=0086e2294ef390c7fddfde527927423fae2075f9
 - Gerenderte Texturen: F3+S: `.minecraft/screenshots/debug/minecraft_textures_atlas_blocks.png_0.png`
 - Logs: `.minecraft/logs/latest.log`
 - Es geht immer nur ein Resourcepack parallel
+- Update-Script:
+  - `./resourcepack/data/.env`
+  - `./resourcepack/data/update.sh`
 
 ### Simple Voice Chat
 
@@ -88,4 +98,4 @@ resource-pack-sha1=0086e2294ef390c7fddfde527927423fae2075f9
 
 ## Code
 
-- Link auf Boilerplate
+- https://github.com/vielhuber/minecraft
