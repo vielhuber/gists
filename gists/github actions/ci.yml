@@ -6,15 +6,24 @@ env:
     SECRET_VARIABLE_2: ${{ secrets.SECRET_VARIABLE_2 }}
     SECRET_VARIABLE_3: ${{ secrets.SECRET_VARIABLE_3 }}
 
-on: [push]
+on:
+    # on manual push
+    workflow_dispatch:
+    # on push general
+    #push:
+    # on push to tags
+    push:
+        tags:
+            - 'v*'
+            - '[0-9]*'
 
 jobs:
     build-test:
         strategy:
             matrix:
                 operating-system: ['ubuntu-latest', 'macos-latest', 'windows-latest']
-                php-versions: ['7.4', '8.0', '8.1']
-                node-versions: ['14.18.0', '16.17.0', '18.12.1', '19.3.0']
+                php-versions: ['7.4', '8.0', '8.1', '8.2', '8.3']
+                node-versions: ['lts/*']
 
         runs-on: ${{ matrix.operating-system }}
 
