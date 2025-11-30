@@ -45,19 +45,29 @@
   - `/op rebuhleiv` in der Server-Konsole
   - Schreibt auch gleich die `ops.json` richtig
   - Test mit `/time set day`
+- Minecraft Launcher starten und zu `localhost` verbinden
 
 ## Usage
 
 - VSCode zum Editieren öffnen
-- Shortcode für Builden, Kopieren, Server starten (in cmd ohne Admin)
-    - `cd %userprofile%/Minecraft/test && gradlew.bat build && copy /Y %userprofile%\Minecraft\test\build\libs\*.jar %userprofile%\Minecraft\paper\plugins\ && cd %userprofile%/Minecraft/paper && java -Xms4G -Xmx4G -jar paper.jar --nogui`
-- Minecraft Launcher starten und zu `localhost` verbinden
+- Scripte
+  - `cd scripts`
+  - `script.bat local`
+  - `script.bat prod`
 
 ### Server-Konfiguration
 
 - Name: Server properties > motd (Generator: https://minecraft.tools/de/motd.php)
 - Icon: `/server-icon.png` (64x64) in Root-Verzeichnis legen
-- Domain: A-Record auf IP-Adresse zeigen
+- Domain: A-Record von externer Domain auf IP-Adresse zeigen
+
+### Fernzugriff
+
+- server.properties
+  - `enable-rcon=true`
+  - `rcon.password=foo`
+  - `rcon.port=25575`
+- mcrcon-0.7.2-windows-x86-64.zip
 
 ### Resource Packs
 
@@ -75,15 +85,11 @@ resource-pack-prompt={"text"\:"Server-Pack für deine Waffen","color"\:"gold"}
 resource-pack-sha1=0086e2294ef390c7fddfde527927423fae2075f9
 ```
 
-- Lokaler Ordner: `%APPDATA%\Roaming\.minecraft\downloads\`
-- Logs: `%APPDATA%\Roaming\.minecraft\logs\latest.log`
+- Lokaler Ordner: `%APPDATA%\.minecraft\downloads\`
+- Logs: `%APPDATA%\.minecraft\logs\latest.log`
 - Resource Pack Refresh: F3+T
-- Gerenderte Texturen: F3+S: `.minecraft/screenshots/debug/minecraft_textures_atlas_blocks.png_0.png`
-- Logs: `.minecraft/logs/latest.log`
+- Gerenderte Texturen: F3+S: `%APPDATA%\.minecraft\screenshots\debug\minecraft_textures_atlas_blocks.png_0.png`
 - Es geht immer nur ein Resourcepack parallel
-- Update-Script:
-  - `./resourcepack/data/.env`
-  - `./resourcepack/data/update.sh`
 
 ### Simple Voice Chat
 
