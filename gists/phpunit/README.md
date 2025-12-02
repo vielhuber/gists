@@ -6,13 +6,30 @@
 - `composer require --dev phpunit/phpunit`
 - `./vendor/bin/phpunit --version`
 
+#### use version
+
+**specific version**
+
+```json
+    "require-dev": {
+        "phpunit/phpunit": "^12"
+    }
+```
+
+**good for different php versions in ci**
+```json
+    "require-dev": {
+        "phpunit/phpunit": ">=6.5"
+    }
+```
+
 #### setup configuration file
 - create `phpunit.xml` in root folder (see content below)
 
 #### setup tests in /tests/ folder
-- warning: class name must be the same as filename AND must end with "Test"
-- function names must start with "test"
-- the return types :void must be existent on the inherited methods setUp etc. (otherwise phpunit >=8 throws an error)
+- warning: class name must be the same as filename AND must end with `Test`
+- function names must start with `test`
+- the return types `: void` must be existent on the inherited methods setUp etc. (otherwise phpunit >=8 throws an error)
 
 #### add .phpunit.result.cache to gitignore
 - `vim .gitignore`

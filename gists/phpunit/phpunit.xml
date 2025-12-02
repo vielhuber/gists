@@ -10,7 +10,7 @@
     displayDetailsOnTestsThatTriggerNotices="true"
     displayDetailsOnPhpunitDeprecations="true"
     backupGlobals="false"
-    enforceTimeLimit="true"
+    enforceTimeLimit="false"
 >
     <testsuites>
         <testsuite
