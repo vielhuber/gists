@@ -754,6 +754,10 @@ shutdown.exe /s /t 0
 - ```blackfire config --client-id=xxx --client-token=xxx``` (see blackfire.io)
 - ```blackfire run ./vendor/bin/phpunit```
 
+#### go
+- `sudo apt-get install golang`
+- `go version`
+
 #### gettext
 - ```sudo apt-get install gettext```
 - ```msgfmt --help```

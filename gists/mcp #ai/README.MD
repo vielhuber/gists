@@ -1,25 +1,27 @@
-# SERVER
+## SERVER
+
+### NOTES
 
 - local: use `fastmcp` directly
 - production: use `fastmcp` as a gateway and `cloudflare` for ssl/dns
 
-## ngrok
+### NGROK
 
 - `https://***.ngrok-free.dev/mcp`
 
-### installation
+#### installation
 
 - `curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update  && sudo apt install ngrok`
 
-### usage
+#### usage
 
 - `ngrok http 8000`
 
-## fastmcp
+### FASTMCP
 
 - `http://127.0.0.1:8080/mcp`
 
-### installation
+#### installation
 
 - `python -m venv venv`
 - `source venv/bin/activate`
@@ -28,13 +30,13 @@
 - `pip install "fastapi[standard]"`
 - `fastmcp version`
 
-### usage
+#### usage
 
 - `uvicorn app:app --host 0.0.0.0 --port 8000`
 
-## cloudflare
+### CLOUDFLARE
 
-### installation
+#### installation
 
 - `curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null`
 - `echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list`
@@ -49,9 +51,9 @@
 
 - `cloudflared tunnel run --url http://localhost:8000 TUNNEL`
 
-## apache
+### APACHE
 
-### installation
+#### installation
 
 - `https://my-mcp-server.dev/mcp`
 - `nano /etc/apache2/sites-available/mcp.conf`
@@ -88,60 +90,41 @@
 </VirtualHost>
 ```
 
-# MCP SERVERS
+## MCP CLIENTS
 
-## php
-
-- `composer require php-mcp/server`
-
-### /example/test.php
-
-```php
-...
-```
-
-### /mcp.php
-
-```php
-...
-```
-
-- `php mcp.php`
-
-## js
+### mcp-inspector
 
 - `nvm use --lts`
-- `npm install @modelcontextprotocol/sdk`
-- `printf '{ "type": "module" }\n' > package.json`
-- `node mcp.js`
+- `npx @modelcontextprotocol/inspector`
+- `DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector` (disable security token from inspector, has nothing to do with oauth of mcps)
+- usage with ngrok: install chrome extension `ModHeader` and set `ngrok-skip-browser-warning = 69420`
 
-## filesystem
+### chatgpt.com
 
-- `nvm use --lts`
-- `npx -y @modelcontextprotocol/server-filesystem /var/www`
-- note: wsl paths are not possible without mounting beforehand
-
-# playwright
-
-- `nvm use --lts`
-- `npx @playwright/mcp@latest --port 8931 --no-sandbox --timeout-action 10000 --output-dir=./mcp-out --save-session --save-trace`
-
-# MCP CLIENTS
-
-## chatgpt web / claude web
-
+- https://chatgpt.com
 - add mcp server through connectors
 - enable mcp server in chat
 
-## claude desktop
+### openai playground
+
+- https://platform.openai.com/chat/edit
+- Tools > Add > MCP server > + Server
+
+### claude.ai
+
+- https://claude.ai
+- add mcp server through connectors
+- enable mcp server in chat
+
+### claude desktop
 
 - Einstellungen > Entwickler > Config bearbeiten > `claude_desktop_config.json`
 - Siehe unten
 - Neu öffnen mit: Datei > Beenden (Fenster schließen reicht nicht!)
 
-### `claude_desktop_config.json`
+#### `claude_desktop_config.json`
 
-#### stdio
+##### stdio
 
 ```json
 {
@@ -154,7 +137,7 @@
 }
 ```
 
-#### http
+##### http
 
 ```json
 {
@@ -167,9 +150,9 @@
 }
 ```
 
-# MISC
+## MISC
 
-# wsl
+### WSL
 
 - if available remove from PATH in windows
   - `.\node_modules\.bin\`
@@ -181,14 +164,7 @@
       "args": ["php", "/var/www/path/to/_mcp/mcp.php"],
 ```
 
-# mcp inspector
-
-- `nvm use --lts`
-- `npx @modelcontextprotocol/inspector`
-- `DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector` (disable security token from inspector, has nothing to do with oauth of mcps)
-- usage with ngrok: install chrome extension `ModHeader` and set `ngrok-skip-browser-warning = 69420`
-
-# links
+### LINKS
 
 - mcp repo: https://mcpservers.org
 - mcp repo: https://dxt.so
