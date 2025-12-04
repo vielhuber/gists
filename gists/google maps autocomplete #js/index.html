@@ -16,6 +16,12 @@
                     for (let $el of document.querySelectorAll('.autocomplete')) {
                         let $dom = new google.maps.places.PlaceAutocompleteElement();
                         $el.parentNode.replaceChild($dom, $el);
+                        // prevent chrome "Go Back With Backspace" extension from navigating back
+                        $dom.addEventListener('keydown', e => {
+                            if (e.key === 'Backspace') {
+                                e.stopPropagation();
+                            }
+                        });
                         $dom.addEventListener('gmp-select', async ({ placePrediction }) => {
                             let place = placePrediction.toPlace(),
                                 preset = [
