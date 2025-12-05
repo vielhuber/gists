@@ -146,14 +146,18 @@ fi
 elif [ $1 = "remove" ]; then
 
 PROJECT=$2
-FILE="/etc/apache2/sites-available/$PROJECT.conf"
+FILE="/etc/apache2/sites-enabled/$PROJECT.conf"
 if [ -f $FILE ]; then
 rm $FILE
 sudo a2dissite $PROJECT.conf
-sudo service apache2 reload
 else
 echo "Project $PROJECT does not exist."
 fi
+FILE="/etc/apache2/sites-available/$PROJECT.conf"
+if [ -f $FILE ]; then
+rm $FILE
+fi
+sudo service apache2 reload
 
 else
 

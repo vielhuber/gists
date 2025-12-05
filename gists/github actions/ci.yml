@@ -48,6 +48,7 @@ jobs:
             - name: Install libraries
               run: |
                   if [ "$RUNNER_OS" == "Linux" ]; then
+                  	   sudo apt-get update
                        sudo apt-get install -y coreutils
                   elif [ "$RUNNER_OS" == "macOS" ]; then
                        brew install coreutils
