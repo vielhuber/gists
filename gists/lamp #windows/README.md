@@ -411,6 +411,18 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - `export VISUAL=nano; crontab -e`
 - `0 12 * * * certbot renew --quiet`
 
+#### powershell
+
+- `sudo apt-get update`
+- `sudo apt-get install -y wget apt-transport-https software-properties-common`
+- `source /etc/os-release`
+- `wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb`
+- `sudo dpkg -i packages-microsoft-prod.deb`
+- `rm packages-microsoft-prod.deb`
+- `sudo apt-get update`
+- `sudo apt-get install -y powershell`
+- `pwsh`
+
 #### postfix
 - ```sudo apt-get install postfix```
    - General type: "Internet Site"
