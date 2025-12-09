@@ -61,13 +61,16 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: '${{ matrix.php-versions }}'
-                  extensions: fileinfo, mysqli, xdebug, mbstring, xmlrpc, gd, intl, xml, zip, soap, bcmath, imap, opcache, pgsql, pdo, imagick
+                  extensions: fileinfo, mysqli, pdo_mysql, xdebug, mbstring, xmlrpc, gd, intl, xml, zip, soap, bcmath, imap, opcache, pgsql, pdo, imagick
                   tools: composer, phpunit
 
+            # use 127.0.0.1 as host
             - name: Install MySQL
-              run: |
-                  sudo systemctl start mysql.service
-
+              uses: shogo82148/actions-setup-mysql@v1
+              with:
+                  mysql-version: '8.0'
+                  root-password: 'root'
+                  
             - name: Install Composer
               run: composer install --no-interaction
 
@@ -78,6 +81,19 @@ jobs:
 
             - name: Install NPM
               run: npm install
+
+            - name: Create .env file if needed
+              run: |
+                  cat > .env << EOF
+                  SECRET_VARIABLE_1=${{ secrets.SECRET_VARIABLE_1 }}
+                  SECRET_VARIABLE_2=${{ secrets.SECRET_VARIABLE_2 }}
+                  SECRET_VARIABLE_3=${{ secrets.SECRET_VARIABLE_3 }}
+                  EOF
+              shell: bash
+
+            - name: Start PHP Server
+              run: php -S localhost:8000 -t path/to/vhost > /tmp/php-server.log 2>&1 &
+              shell: bash
 
             - name: PHP Tests
               run: ./vendor/bin/phpunit

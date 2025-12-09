@@ -11,7 +11,8 @@
 - `.env`
   - can be defined in the yml file
   - if you want to use secret variables, define them additionally in Settings > Secrets > Actions > Repository secrets > `SECRET_VARIABLE_1`
-  - note that `$_ENV` is not available, so use `$_SERVER` instead (in case of https://github.com/vlucas/phpdotenv)
+  - note that `$_ENV` is not available, so use `$_SERVER` instead (in case of https://github.com/vlucas/phpdotenv, also replace `$dotenv->load();` with `$dotenv->safeLoad();`)
+  - alternatively create an .env file from the secrets (see action below)
 - `config.json`
   - `cat config.json | base64`
   - store the json file as base64 in Settings > Secrets > Actions > Repository secrets > `CONFIG_JSON_BASE64`
