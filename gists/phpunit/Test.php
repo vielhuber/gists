@@ -54,6 +54,10 @@ class Test extends \PHPUnit\Framework\TestCase
       	// live log to console while running
       	fwrite(STDERR, print_r('foo'.PHP_EOL, true));
       
+        // test exceptions
+        $this->expectException(Throwable::class);
+      	throw new \Exception('foo');
+      
       	// run test n times and with time limit
       	$previous_time_limit = ini_get('max_execution_time');
       	set_time_limit(5); // note: @large etc. are not working
