@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>Web Speech API</title>
+
+        <script>
+            class STT {
+                labels = {
+                    RECORDING_STARTED: '🎤 Aufnahme läuft...',
+                    RECORDING_STOPPED: '⏸ Aufnahme gestoppt',
+                    TALK_NOW: 'Sprechen Sie jetzt',
+                    BUTTON_START: '▶️ Start',
+                    BUTTON_STOP: '⏸ Stop',
+                    ERROR: '❌ Fehler',
+                    MESSAGE_SENT: '✅ Nachricht gesendet.',
+                    NOT_SUPPORTED: '⛔ Browser unterstützt keine Spracheingabe!'
+                };
+
+                init() {
+                    this.setupSpeech();
+                    this.bindEvents();
+                    this.startListening();
+                }
+
+                setupSpeech() {
+                    this.textarea = document.querySelector('.message');
+                    this.status = document.querySelector('.status');
+                    this.toggleButton = document.querySelector('.toggle');
+                    this.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    this.isListening = false;
+                    this.shouldRestart = false;
+
+                    if (!this.SpeechRecognition) {
+                        this.status.textContent = this.labels.NOT_SUPPORTED;
+                        this.toggleButton.disabled = true;
+                        return;
+                    }
+
+                    this.recognition = new this.SpeechRecognition();
+                    this.recognition.lang = 'de-DE';
+                    this.recognition.continuous = true;
+                    this.recognition.interimResults = true;
+                }
+
+                bindEvents() {
+                    this.recognition.onresult = event => {
+                        let interimTranscript = '';
+                        let hasFinal = false;
+                        for (let i = event.resultIndex; i < event.results.length; i++) {
+                            let transcript = event.results[i][0].transcript;
+                            if (event.results[i].isFinal) {
+                                hasFinal = true;
+                            } else {
+                                interimTranscript += transcript;
+                            }
+                        }
+                        if (interimTranscript) {
+                            let text = interimTranscript.trim();
+                            this.textarea.value = text;
+                        }
+                        if (hasFinal) {
+                            this.status.textContent = this.labels.MESSAGE_SENT;
+                            setTimeout(() => {
+                                this.status.textContent = this.labels.RECORDING_STARTED + ' ' + this.labels.TALK_NOW;
+                            }, 1000);
+                            this.textarea.value = '';
+                        }
+                        if (!hasFinal && interimTranscript) {
+                            this.status.textContent = this.labels.RECORDING_STARTED;
+                        }
+                    };
+
+                    this.recognition.onerror = event => {
+                        this.status.textContent = this.labels.ERROR + ': ' + event.error;
+                    };
+
+                    this.recognition.onend = () => {
+                        if (this.shouldRestart && this.isListening) {
+                            this.recognition.start();
+                        }
+                    };
+
+                    this.toggleButton.addEventListener('click', () => {
+                        if (this.isListening) {
+                            this.stopListening();
+                        } else {
+                            this.startListening();
+                        }
+                    });
+                }
+
+                startListening() {
+                    this.shouldRestart = true;
+                    this.isListening = true;
+                    this.recognition.start();
+                    this.toggleButton.textContent = this.labels.BUTTON_STOP;
+                    this.status.textContent = this.labels.RECORDING_STARTED + ' ' + this.labels.TALK_NOW;
+                }
+
+                stopListening() {
+                    this.shouldRestart = false;
+                    this.isListening = false;
+                    this.recognition.stop();
+                    this.toggleButton.textContent = this.labels.BUTTON_START;
+                    this.status.textContent = this.labels.RECORDING_STOPPED;
+                }
+            }
+
+            window.addEventListener('load', e => {
+                let stt = new STT();
+                stt.init();
+            });
+        </script>
+        <style>
+            textarea {
+                width: 100%;
+                height: 300px;
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <textarea class="message"></textarea>
+        <button class="toggle">⏸ Stop</button>
+        <div class="status">...</div>
+    </body>
+</html>
