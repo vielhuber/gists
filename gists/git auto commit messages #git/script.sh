@@ -130,6 +130,7 @@ fi
 response=$(sed -nr 's/.+content": "(.+?)".+/\1/p' <<< "$response")
 response=$(sed -r 's/\\n/\n/g' <<< "$response")
 response=$(sed -r 's/\\"/"/g' <<< "$response")
+response=$(sed -r 's/\\\\/\\/g' <<< "$response")
 
 # Delete debug files
 if [[ "$debug" = false ]]; then
