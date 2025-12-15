@@ -40,6 +40,7 @@
 - AugmentCode: https://www.augmentcode.com
 - Cline: https://cline.bot
 - Repomix: https://repomix.com
+- AGENTS.md: https://agents.md
 
 ### Bilder
 - OpenAI ChatGPT: https://chatgpt.com

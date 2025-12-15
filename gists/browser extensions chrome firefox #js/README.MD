@@ -47,6 +47,7 @@
             "matches": ["<all_urls>"],
             "js": ["script.js"],
             "css": ["style.css"]
+          	//"run_at": "document_start" // immediately run before dom is ready
         }
     ]
 }

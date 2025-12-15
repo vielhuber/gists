@@ -7,6 +7,8 @@
 
         <script>
             class STT {
+                static instances = [];
+
                 labels = {
                     RECORDING_STARTED: '🎤 Aufnahme läuft...',
                     RECORDING_STOPPED: '⏸ Aufnahme gestoppt',
@@ -18,23 +20,44 @@
                     NOT_SUPPORTED: '⛔ Browser unterstützt keine Spracheingabe!'
                 };
 
-                init() {
+                init($el) {
+                    STT.instances.push(this);
+
+                    // outer wrap textarea
+                    this.$wrapper = new DOMParser().parseFromString(
+                        '<div class="stt-wrapper"></div>',
+                        'text/html'
+                    ).body.childNodes[0];
+                    $el.parentNode.insertBefore(this.$wrapper, $el.nextSibling);
+                    this.$wrapper.appendChild($el);
+
+                    this.autostart = $el.hasAttribute('data-autostart');
                     this.setupSpeech();
                     this.bindEvents();
-                    this.startListening();
+
+                    if (this.autostart) {
+                        this.startListening();
+                    }
                 }
 
                 setupSpeech() {
-                    this.textarea = document.querySelector('.message');
-                    this.status = document.querySelector('.status');
-                    this.toggleButton = document.querySelector('.toggle');
+                    this.$wrapper.insertAdjacentHTML(
+                        'beforeend',
+                        `
+                            <button class="toggle">${this.autostart ? this.labels.BUTTON_STOP : this.labels.BUTTON_START}</button>
+                            <div class="status">...</div>
+                        `
+                    );
+                    this.$textarea = this.$wrapper.querySelector('textarea');
+                    this.$status = this.$wrapper.querySelector('.status');
+                    this.$toggleButton = this.$wrapper.querySelector('.toggle');
                     this.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
                     this.isListening = false;
                     this.shouldRestart = false;
 
                     if (!this.SpeechRecognition) {
-                        this.status.textContent = this.labels.NOT_SUPPORTED;
-                        this.toggleButton.disabled = true;
+                        this.$status.textContent = this.labels.NOT_SUPPORTED;
+                        this.$toggleButton.disabled = true;
                         return;
                     }
 
@@ -58,22 +81,30 @@
                         }
                         if (interimTranscript) {
                             let text = interimTranscript.trim();
-                            this.textarea.value = text;
+                            this.$textarea.value = text;
                         }
                         if (hasFinal) {
-                            this.status.textContent = this.labels.MESSAGE_SENT;
+                            this.$status.textContent = this.labels.MESSAGE_SENT;
                             setTimeout(() => {
-                                this.status.textContent = this.labels.RECORDING_STARTED + ' ' + this.labels.TALK_NOW;
+                              	this.$textarea.value = '';
+                                if (this.isListening) {
+                                    this.$status.textContent =
+                                        this.labels.RECORDING_STARTED + ' ' + this.labels.TALK_NOW;
+                                } else {
+                                    this.$status.textContent = this.labels.RECORDING_STOPPED;
+                                }
                             }, 1000);
-                            this.textarea.value = '';
+                            if (this.$wrapper.closest('form')) {
+                                this.$wrapper.closest('form').dispatchEvent(new Event('submit', { bubbles: true }));
+                            }
                         }
                         if (!hasFinal && interimTranscript) {
-                            this.status.textContent = this.labels.RECORDING_STARTED;
+                            this.$status.textContent = this.labels.RECORDING_STARTED;
                         }
                     };
 
                     this.recognition.onerror = event => {
-                        this.status.textContent = this.labels.ERROR + ': ' + event.error;
+                        this.$status.textContent = this.labels.ERROR + ': ' + event.error;
                     };
 
                     this.recognition.onend = () => {
@@ -82,7 +113,8 @@
                         }
                     };
 
-                    this.toggleButton.addEventListener('click', () => {
+                    this.$toggleButton.addEventListener('click', e => {
+                        e.preventDefault();
                         if (this.isListening) {
                             this.stopListening();
                         } else {
@@ -92,25 +124,35 @@
                 }
 
                 startListening() {
+                    STT.instances.forEach(instances__value => {
+                        if (instances__value !== this && instances__value.isListening) {
+                            instances__value.stopListening();
+                        }
+                    });
+
                     this.shouldRestart = true;
                     this.isListening = true;
                     this.recognition.start();
-                    this.toggleButton.textContent = this.labels.BUTTON_STOP;
-                    this.status.textContent = this.labels.RECORDING_STARTED + ' ' + this.labels.TALK_NOW;
+                    this.$toggleButton.textContent = this.labels.BUTTON_STOP;
+                    this.$status.textContent = this.labels.RECORDING_STARTED + ' ' + this.labels.TALK_NOW;
                 }
 
                 stopListening() {
                     this.shouldRestart = false;
                     this.isListening = false;
                     this.recognition.stop();
-                    this.toggleButton.textContent = this.labels.BUTTON_START;
-                    this.status.textContent = this.labels.RECORDING_STOPPED;
+                    this.$toggleButton.textContent = this.labels.BUTTON_START;
+                    this.$status.textContent = this.labels.RECORDING_STOPPED;
                 }
             }
 
             window.addEventListener('load', e => {
-                let stt = new STT();
-                stt.init();
+                if (document.querySelector('.sst') !== null) {
+                    document.querySelectorAll('.sst').forEach($el => {
+                        let stt = new STT();
+                        stt.init($el);
+                    });
+                }
             });
         </script>
         <style>
@@ -122,8 +164,11 @@
         </style>
     </head>
     <body>
-        <textarea class="message"></textarea>
-        <button class="toggle">⏸ Stop</button>
-        <div class="status">...</div>
+        <form>
+            <textarea class="sst" data-autostart></textarea>
+        </form>
+        <form>
+            <textarea class="sst"></textarea>
+        </form>
     </body>
 </html>
