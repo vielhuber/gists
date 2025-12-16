@@ -361,12 +361,12 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```sudo service apache2 restart```
 
 #### configs
-- setup with presets from gist.github.com
+- setup with presets from [dbf3d6844b3e6159d6b7](https://gist.github.com/vielhuber/dbf3d6844b3e6159d6b7)
 - ```sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf```
 - ```sudo nano /etc/apache2/apache2.conf```
-- ```sudo nano /etc/php/X.X/fpm/pool.d/www.conf``` (important!)
-- ```sudo nano /etc/php/X.X/apache2/php.ini``` (not needed, see below)
-- ```sudo nano /etc/php/X.X/cli/php.ini``` (not needed, see below)
+- ```sudo nano /etc/php/X.X/fpm/pool.d/www.conf``` (important❗)
+- ~```sudo nano /etc/php/X.X/apache2/php.ini```~ (not needed, see below)
+- ~```sudo nano /etc/php/X.X/cli/php.ini```~ (not needed, see below)
 
 #### setup default page
 - ```sudo a2dissite 000-default.conf```

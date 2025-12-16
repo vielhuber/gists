@@ -147,8 +147,8 @@
             }
 
             window.addEventListener('load', e => {
-                if (document.querySelector('.sst') !== null) {
-                    document.querySelectorAll('.sst').forEach($el => {
+                if (document.querySelector('.stt') !== null) {
+                    document.querySelectorAll('.stt').forEach($el => {
                         let stt = new STT();
                         stt.init($el);
                     });
@@ -165,10 +165,10 @@
     </head>
     <body>
         <form>
-            <textarea class="sst" data-autostart></textarea>
+            <textarea class="stt" data-autostart></textarea>
         </form>
         <form>
-            <textarea class="sst"></textarea>
+            <textarea class="stt"></textarea>
         </form>
     </body>
 </html>

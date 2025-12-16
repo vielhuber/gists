@@ -68,9 +68,20 @@ echo "Project $PROJECT already exists."
 else  
 
 if [ -n "$3" ]; then
-PHP_LINE="<FilesMatch \.php$>
-    SetHandler \"proxy:unix:/var/run/php/$3-fpm.sock|fcgi://localhost/\"
-</FilesMatch>"
+PHP_LINE="
+  <Proxy \"fcgi://localhost-stream/\" enablereuse=on flushpackets=on>
+  </Proxy>
+  <FilesMatch \.php$>
+    <If \"%{HTTP:Accept} -strmatch '*text/event-stream*'\">
+      SetHandler \"proxy:unix:/var/run/php/$3-fpm.sock|fcgi://localhost-stream/\"
+      SetEnv no-gzip 1
+      RequestHeader unset Accept-Encoding
+    </If>
+    <Else>
+      SetHandler \"proxy:unix:/var/run/php/$3-fpm.sock|fcgi://localhost/\"
+    </Else>
+  </FilesMatch>
+"
 else
 PHP_LINE=""
 fi
