@@ -252,6 +252,9 @@
 ### Remote Hosting
 - HuggingFace: https://huggingface.co
 
+### Open Source / Open Weights
+- European Open Source AI Index: https://osai-index.eu/the-index
+
 ### Jailbroken / Uncensored
 - Heretic: https://github.com/p-e-w/heretic
 - Uncensored: https://uncensored.com

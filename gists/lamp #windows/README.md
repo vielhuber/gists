@@ -1159,6 +1159,22 @@ rm "$t"
 - ```sudo apt-get install xclip```
 - ```echo "foo" | xclip```
 
+#### whatweb
+
+- `mkdir whatweb`
+- `cd whatweb`
+- `git clone https://github.com/urbanadventurer/WhatWeb.git .`
+- `sudo apt install -y ruby ruby-dev ruby-bundler build-essential make libssl-dev zlib1g-dev libyaml-dev`
+- `sudo make install`
+
+```
+whatweb \
+    --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" \
+    -a 3 \
+    -v \
+    https://vielhuber.de
+```
+
 #### docker-osx
 - installation
   - edit `%UserProfile%\.wslconfig`
