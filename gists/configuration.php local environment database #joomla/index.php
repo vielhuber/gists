@@ -10,15 +10,8 @@ class JConfig {
   ...
 
   public function __construct() {
-    if( @$_SERVER['SERVER_ADMIN'] === 'david@close2.de' || @$_SERVER['NAME'] === 'DAVID-DESKTOP' ) {
-        $this->host = '...';
-        $this->user = '...';
-        $this->password = '...';
-        $this->db = '...';
-        $this->log_path = __DIR__.'/logs';
-        $this->tmp_path = __DIR__.'/tmp';
-    }
-    elseif( strpos(@$_SERVER['HTTP_HOST'], 'close2dev') !== false ) {
+    if( @$_SERVER['SERVER_ADMIN'] === 'david@vielhuber.de' || @$_SERVER['NAME'] === 'DAVID-DESKTOP' ) {
+        $this->debug = true;
         $this->host = '...';
         $this->user = '...';
         $this->password = '...';
@@ -27,6 +20,7 @@ class JConfig {
         $this->tmp_path = __DIR__.'/tmp';
     }
     else {
+      	$this->debug = false;
         $this->host = '...';
         $this->user = '...';
         $this->password = '...';

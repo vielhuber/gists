@@ -1077,7 +1077,7 @@ rm "$t"
 - ```mkdir /var/www/phpmyadmin```
 - ```cd /var/www/phpmyadmin```
 - ```composer create-project phpmyadmin/phpmyadmin .```
-- ```lamp add phpmyadmin php8.0```
+- ```lamp add phpmyadmin php8.3```
 - ```cp config.sample.inc.php config.inc.php```
 - ```nano config.inc.php```
   - ```$cfg['Servers'][$i]['user'] = 'root';```
@@ -1086,9 +1086,9 @@ rm "$t"
   - ```$cfg['Servers'][$i]['password'] = 'root';```
   - ```$cfg['Servers'][$i]['auth_type'] = 'config';```
   - ```$cfg['ExecTimeLimit'] = 6000;```
-  - ```$cfg['blowfish_secret'] = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';``` (generate secret with: https://phpsolved.com/phpmyadmin-blowfish-secret-generator/?g=[insert_php]echo%20$code;[/insert_php])
+  - ```$cfg['blowfish_secret'] = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';``` (generate secret with: `openssl rand -base64 22`)
 - https://phpmyadmin.vielhuber.dev
-  - "Der phpMyAdmin-Konfigurationsspeicher ist nicht vollständig konfiguriert," => operations > create table
+  - "Der phpMyAdmin-Konfigurationsspeicher ist nicht vollständig konfiguriert," => Anklicken + Erzeugen
 
 #### speedtest cli
 - ```curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash```
