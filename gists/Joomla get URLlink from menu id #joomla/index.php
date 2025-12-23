@@ -1,1 +1,0 @@
-JRoute::_('index.php?Itemid=106')

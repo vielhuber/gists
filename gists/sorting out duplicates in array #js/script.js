@@ -1,1 +1,0 @@
-array = $.grep(array, function(v, k){ return $.inArray(v ,array) === k; });
