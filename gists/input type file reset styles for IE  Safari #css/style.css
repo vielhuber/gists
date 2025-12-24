@@ -1,0 +1,15 @@
+input {
+    -webkit-appearance: none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;
+    border-radius: 0;
+}
+#container .items .item.contact .inner form input[type="file"],
+#container .items .item.contact .inner form input[type="file"]::-ms-value,
+#container .items .item.contact .inner form input[type="file"]::-ms-browse {
+    background-color:#fff;
+}
+#container .items .item.contact .inner form input[type="file"]::-webkit-file-upload-button {
+    margin: 15px 0 0 0;
+}

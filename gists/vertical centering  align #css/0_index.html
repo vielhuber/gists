@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>.</title>
+    <style>
+    *
+    {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    .parent {
+        background-color: red;
+        margin: 0 auto;
+        width: 400px;
+        height: 200px;
+    }
+      
+    /*
+    method 1: align-content
+    - best new method
+    */
+    [data-mode="1"] .parent {
+      align-content: center;
+    }
+
+    /*
+    method 2: flexbox
+    - you don't special rules for the child here
+    - height of parent should be defined via min-height
+    */
+    [data-mode="2"] .parent {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* if you want to center horizontally */
+      /*align-items:center;*/
+      min-height: 200px; /* change this */
+    }
+    /* ie11 fix */
+    [data-mode="2"] .parent,
+    [data-mode="2"] .parent > * {
+        max-width:100%;
+    }
+
+    /*
+    method 3: position
+    - height of parent must not be explicitly defined (except it has no other childs)
+    - bad when the child element is bigger than the screen height
+    */
+    [data-mode="3"] .parent {
+      position: relative;
+    }
+    [data-mode="3"] .child {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /*
+    method 4: legacy
+    - height of parent must be explicitly defined
+    */
+    [data-mode="4"] .parent {
+      white-space: nowrap;
+      font-size:0;
+    } 
+    [data-mode="4"] .parent:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+    [data-mode="4"] .parent > * {
+      display: inline-block;
+      vertical-align: middle;
+      width: 100%;
+      font-size:16px;
+      white-space:normal;
+    }
+    </style>
+</head>
+<body data-mode="1">
+  
+  <div class="parent">
+    <div class="child">Lorem ipsum dolor sit amet.</div>
+  </div>
+
+</body>
+</html>

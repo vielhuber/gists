@@ -1,0 +1,10 @@
+$a = '4';
+$b = '2';
+bcadd($a,$b) // '6'
+bccomp($a,$b) // 1
+bcdiv($a,$b) // '2'
+bcmod($a,$b) // '0'
+bcmul($a,$b) // '8'
+bcpow($a,$b) // '16'
+bcsqrt($a) // '2'
+bcsub($a,$b) // '2'

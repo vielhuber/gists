@@ -1,0 +1,1 @@
+apply_filers('wpml_permalink', $current_url, 'en');

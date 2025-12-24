@@ -1,0 +1,14 @@
+SetEnvIf Request_URI "^/wp-json/" allow_path
+Order Deny,Allow
+AuthType Basic
+AuthName "Interner Bereich"
+AuthUserFile /path/to/.htpasswd
+AuthGroupFile /dev/null
+require valid-user
+Deny from all
+Allow from env=allow_path
+Satisfy any
+
+# BEGIN WordPress
+...
+# END WordPress

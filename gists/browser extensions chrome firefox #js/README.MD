@@ -17,6 +17,14 @@
   - Debug `background.js`: `about:debugging` > Inspect
 - Reload local addon: `about:debugging`
 
+## Publish
+
+- Chrome: https://chrome.google.com/webstore/devconsole
+  - Icon: 128x128
+  - Screenshot: 1280x800
+  - 
+- Firefox: https://addons.mozilla.org/de/developers/
+
 ## Files
 
 #### `/manifest.json`
@@ -27,6 +35,26 @@
     "name": "🚀My custom extension🚀",
     "description": "Lorem ipsum dolor sit amet.",
     "version": "42",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "custom-extension@vielhuber.de",
+          	"data_collection_permissions": {
+                "required": ["none"]
+            }
+        }
+    },
+    "data_collection_permissions": {
+        "uses_cookies": false,
+        "uses_analytics": false,
+        "collects_personal_data": false,
+        "collects_financial_data": false,
+        "collects_health_data": false,
+        "collects_authentication_data": false,
+        "collects_website_content": false,
+        "collects_browser_activity": false,
+        "collects_location": false,
+        "shares_data_with_third_parties": false
+    },
     "permissions": ["storage"],
     "host_permissions": ["<all_urls>"],
     "web_accessible_resources": [
@@ -88,7 +116,7 @@
     }
 
     // set active class
-    document.body.classList.add('custom-extension');
+    document.documentElement.classList.add('custom-extension');
   
     // inject images
     document.documentElement.style.setProperty(

@@ -1,0 +1,10 @@
+- E-Mail-Adressen sind nicht immer personenbezogen (david@close2.de schon, info@close2.de nicht)
+- IP-Adressen sind persoenbezogen und dürfen in Logfiles lt. BGH nur 7 Tage gespeichert werden
+- Newsletter-Anmeldung: E-Mail-Adresse muss Pflicht sein, alles andere (beliebige Felder wie religiöse Orientierung darf aber optional abgefragt werden), es muss ein manuelles Häkchen gesetzt werden
+- Nach 7-10 Jahren müssen Kundendaten nach Steuerrecht wenn möglich automatisch gelöscht werden
+- Kundendaten müssen auch nach manueller Aufforderung gelöscht werden; Aber auch nur, wenn sie nicht (nach Steuerrecht) aufgehoben werden müssen
+- ADV-Verträge: Mit allen Beteiligten muss ADV-Vertrag geschlossen werden
+- Cookieleiste: Warten auf Rechtsklarheit; 3 Möglichkeiten zukünftig denkbar: Zwingender Opt-In, nur Third-Party-Cookies, kein Opt-In
+- Meldepflicht: Binnen 72 Stunden muss alles gemeldet werden, wo personenbezogene Daten geknackt werden oder abhanden kommen
+- Abmahnungen: Von Mitbewerbern ist das sehr umstritten, ob diese überhaupt abmahnen können. Was sicher ist: Bußgelder von Landesbehörden
+- Ausblick: 5-10 Jahre Rechtsunsicherheit

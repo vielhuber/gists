@@ -1,0 +1,1 @@
+new XMLSerializer().serializeToString(document)

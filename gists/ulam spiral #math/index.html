@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>spiral</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding:0;
+            margin:0;
+        }
+        html, body {
+            width:100%;
+            height:100%;
+            overflow:hidden;
+        }
+        #svg svg {
+            width:100%;
+            height:100%;
+        }
+    </style>
+    <script>
+        function spiral(n)
+        {
+            let a = Math.floor((Math.floor(Math.sqrt(n))+1)/2)*2-1, // top number in group
+                b = Math.floor((n-(a*a))/(Math.abs(a)+1)),          // direction number (0,1,2,3)
+                c = (a*a) + (b * (a+1)),                            // top number in package
+                x_1 = (n-c-((a+1)/2)+1),
+                y_1 = (a+1)/2,
+                x_2 = (a+1)/2,
+                y_2 = (-1)*(n-c-((a+1)/2)+1),
+                x_3 = (-1)*(n-c-((a+1)/2)+1),
+                y_3 = (-1)*(a+1)/2,
+                x_4 = (-1)*(a+1)/2,
+                y_4 = (n-c-((a+1)/2)+1);
+            return [
+                Math.pow(Math.sign(b-1),2)*Math.pow(Math.sign(b-2),2)*Math.pow(Math.sign(b-3),2)*x_1 +
+                Math.pow(Math.sign(b-2),2)*Math.pow(Math.sign(b-3),2)*Math.pow(Math.sign(b-0),2)*x_2 +
+                Math.pow(Math.sign(b-3),2)*Math.pow(Math.sign(b-0),2)*Math.pow(Math.sign(b-1),2)*x_3 +
+                Math.pow(Math.sign(b-0),2)*Math.pow(Math.sign(b-1),2)*Math.pow(Math.sign(b-2),2)*x_4,
+                Math.pow(Math.sign(b-1),2)*Math.pow(Math.sign(b-2),2)*Math.pow(Math.sign(b-3),2)*y_1 +
+                Math.pow(Math.sign(b-2),2)*Math.pow(Math.sign(b-3),2)*Math.pow(Math.sign(b-0),2)*y_2 +
+                Math.pow(Math.sign(b-3),2)*Math.pow(Math.sign(b-0),2)*Math.pow(Math.sign(b-1),2)*y_3 +
+                Math.pow(Math.sign(b-0),2)*Math.pow(Math.sign(b-1),2)*Math.pow(Math.sign(b-2),2)*y_4
+            ];
+        }
+
+        let draw = null,
+            timeouts = [];
+        SVG.on(document, 'DOMContentLoaded', () => {
+            redraw();        
+        });
+        window.addEventListener('resize', () => {
+            if( draw !== null ) { draw.clear(); }
+            redraw();
+        })
+        function redraw() {
+            document.body.innerHTML = '<div id="svg"></div>';
+            if( timeouts.length > 0 )
+            {
+                timeouts.forEach((timeouts__value) => {
+                    clearTimeout(timeouts__value);
+                });
+            }
+            let width = window.innerWidth,
+                height = window.innerHeight,
+                prev_x = null,
+                prev_y = null;
+            draw = SVG('svg').size(width, height);
+            draw.attr('preserveAspectRatio','xMinYMin meet');
+            draw.attr('viewBox','0 0 '+width+' '+height);
+            for(let n = 0; n < 4000; n++) {
+                let timeout = setTimeout(function() {
+                    let result = spiral(n),
+                        x = (width/2)+(40)*result[0],
+                        y = (height/2)-(40)*result[1];
+                    draw.text(n.toString())
+                        .font({ family: 'Helvetica', size: 11, anchor: 'right', leading: '1.1em' })
+                        .attr({ x:x+3, y:y, fill: '#00838f', opacity: 0 })
+                        .animate({ ease: '<>', duration: 500 })
+                        .attr({ x:x+3, y:y, fill: '#00838f', opacity: 1 });
+                    draw.circle(0)
+                        .attr({ cx:x, cy:y, fill: '#00838f' })
+                        .animate({ ease: '<>', duration: 500 })
+                        .attr({ r: 2 });
+                    if( prev_x !== null && prev_y !== null ) {
+                        draw.line(prev_x, prev_y, prev_x, prev_y)
+                            .stroke({ width: 1, color: '#00838f' })
+                            .animate({ ease: '<>', duration: 500 })
+                            .attr({ x1: prev_x, y1: prev_y, x2: x, y2: y });
+                    }
+                    prev_x = x;
+                    prev_y = y;
+                }, (500 * (n+1)));
+                timeouts.push(timeout);
+            } 
+        };  
+    </script>
+</head>
+<body>
+</body>
+</html>
+
+<!--
+
+\documentclass[a4paper,landscape,5pt,margin=0in]{article}
+\usepackage[legalpaper, landscape, margin=0in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[latin1]{inputenc}
+\pagestyle{empty}
+
+\begin{document}
+
+\newcommand{\vara}{\left \lfloor \left( \frac{\left \lfloor \sqrt{n} \right \rfloor + 1}{2} \right) \right \rfloor \cdot 2 - 1} 
+\newcommand{\varb}{\left \lfloor \frac{ n - \left( \left( \vara \right)^2 \right) }{ \text{abs}\left( \vara \right) + 1 } \right \rfloor} 
+\newcommand{\varc}{\left( \left(\vara^2\right) + \left( \varb \cdot \left( \vara + 1 \right) \right) \right)} 
+\newcommand{\varxone}{\left(n - \varc - \frac{ \vara + 1 }{2}+1\right)} 
+\newcommand{\varyone}{\left(\frac{ \vara + 1 }{2}\right)} 
+\newcommand{\varxtwo}{\left(\frac{ \vara + 1 }{2}\right)} 
+\newcommand{\varytwo}{\left((-1) \cdot n - \varc - \frac{ \vara + 1 }{2}+1\right)} 
+\newcommand{\varxthree}{\left((-1) \cdot n - \varc - \frac{ \vara + 1 }{2}+1\right)} 
+\newcommand{\varythree}{\left((-1) \cdot \frac{ \vara + 1 }{2}\right)} 
+\newcommand{\varxfour}{\left((-1) \cdot \frac{ \vara + 1 }{2}\right)} 
+\newcommand{\varyfour}{\left( n - \varc - \frac{ \vara + 1 }{2}+1\right)} 
+
+$$
+\begin{equation}
+\begin{split}
+f(n)_x = & \text{sgn}\left(\varb - 1\right)^2 \cdot \text{sgn}\left(\varb - 2\right)^2 \cdot \text{sgn}\left(\varb - 3\right)^2 \cdot\\
+& \varxone +\\
+& \text{sgn}\left(\varb - 2\right)^2 \cdot \text{sgn}\left(\varb - 3\right)^2 \cdot \text{sgn}\left(\varb - 0\right)^2 \cdot\\
+& \varxtwo +\\
+& \text{sgn}\left(\varb - 3\right)^2 \cdot \text{sgn}\left(\varb - 0\right)^2 \cdot \text{sgn}\left(\varb - 1\right)^2 \cdot\\
+& \varxthree +\\
+& \text{sgn}\left(\varb - 0\right)^2 \cdot \text{sgn}\left(\varb - 1\right)^2 \cdot \text{sgn}\left(\varb - 2\right)^2 \cdot\\
+& \varxfour
+\end{split}
+\end{equation}
+$$
+
+\newpage
+
+$$
+\begin{equation}
+\begin{split}
+f(n)_y = & \text{sgn}\left(\varb - 1\right)^2 \cdot \text{sgn}\left(\varb - 2\right)^2 \cdot \text{sgn}\left(\varb - 3\right)^2 \cdot\\
+& \varyone +\\
+& \text{sgn}\left(\varb - 2\right)^2 \cdot \text{sgn}\left(\varb - 3\right)^2 \cdot \text{sgn}\left(\varb - 0\right)^2 \cdot\\
+& \varytwo +\\
+& \text{sgn}\left(\varb - 3\right)^2 \cdot \text{sgn}\left(\varb - 0\right)^2 \cdot \text{sgn}\left(\varb - 1\right)^2 \cdot\\
+& \varythree +\\
+& \text{sgn}\left(\varb - 0\right)^2 \cdot \text{sgn}\left(\varb - 1\right)^2 \cdot \text{sgn}\left(\varb - 2\right)^2 \cdot\\
+& \varyfour
+\end{split}
+\end{equation}
+$$
+
+\end{document}
+
+-->

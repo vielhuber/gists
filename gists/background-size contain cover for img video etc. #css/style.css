@@ -1,0 +1,6 @@
+img {
+  object-fit: contain;
+}
+video {
+  object-fit: cover;
+}

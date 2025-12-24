@@ -1,0 +1,5 @@
+# not exists
+SELECT * FROM tableA WHERE NOT EXISTS(SELECT * FROM tableb WHERE tableB.name = tableA.name)
+
+# left outer join
+SELECT * FROM tableA LEFT JOIN tableB ON tableB.name = tableA.name WHERE tableB.name IS NULL

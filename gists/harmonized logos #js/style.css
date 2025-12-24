@@ -1,0 +1,17 @@
+ul {
+  width:90%;
+  font-size:0;
+  margin:0 auto;
+  text-align:center;
+}
+ul li {
+  display:inline-block;
+  vertical-align:middle;
+  padding:0;
+  margin:10px 20px;
+}
+ul li img {
+  width:100%;
+  height:auto;
+  display:block;
+}

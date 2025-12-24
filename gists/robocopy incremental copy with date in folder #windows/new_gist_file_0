@@ -1,0 +1,4 @@
+robocopy "X:\Source" "Y:\Target\%date:~0,2%.%date:~3,2%.%date:~6,4%" /MIR /S /FFT /MT:8 /R:3
+
+# do not delete old files
+robocopy "X:\Source" "Y:\Target" /E /FFT /R:3 /W:10 /Z /NP /NDL
