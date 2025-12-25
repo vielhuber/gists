@@ -29,6 +29,12 @@
 
 ### docker compose
 
+#### purpose
+
+- puts all parameters in a yaml file
+- reduces number of command line options
+- does the same as docker run
+
 #### legacy
 - `docker-compose` is a deprecated old project, which is replaced with `docker compose`
 - the arguments are (now) mainly compatible
