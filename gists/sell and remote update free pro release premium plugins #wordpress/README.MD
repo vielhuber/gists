@@ -18,6 +18,7 @@
 
 - update plugin code
 - zip `test/test.php` to `test.zip`
+  - optional step: strip out pro code (marked via comments and also release free plugin separately)
 - make an api call to
   - https://tld.com/wp-json/v1/release
   - Basic Auth: username and password of an administrator
