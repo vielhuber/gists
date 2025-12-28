@@ -38,7 +38,8 @@ class Test extends \PHPUnit\Framework\TestCase
 		$this->assertSame((object)['foo'],(object)['foo']); // fails
       	$this->assertContains('foo',['foo','bar']); // passes
         $this->assertStringContainsString('foo', 'foobar'); // passes
-      	$this->assertMatchesRegularExpression('/PATTERN/', 'foo');
+      	$this->assertMatchesRegularExpression('/foo/', 'foobar'); // passes
+      $this->assertMatchesRegularExpression('/foo/i', 'FoObar'); // passes
         $response = 'foobar'; $this->assertThat(
             $response,
             $this->logicalOr(

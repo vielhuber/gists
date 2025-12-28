@@ -27,6 +27,8 @@ jobs:
                 php-versions: ['7.4', '8.0', '8.1', '8.2', '8.3']
                 node-versions: ['lts/*']
 
+		timeout-minutes: 15
+
         runs-on: ${{ matrix.operating-system }}
 
         name: ${{ matrix.operating-system }} (PHP ${{ matrix.php-versions }}, Node ${{ matrix.node-versions }})
