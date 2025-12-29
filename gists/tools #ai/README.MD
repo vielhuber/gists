@@ -16,6 +16,7 @@
 - Tencent HunYuan: https://huggingface.co/spaces/tencent/Hunyuan-T1
 - T3.chat: https://t3.chat
 - Kimi K2: https://www.kimi.com
+- z.ai: https://z.ai
 
 ### Programmierung
 - Cursor: https://www.cursor.com

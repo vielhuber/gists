@@ -19,11 +19,20 @@
 
 ## Publish
 
-- Chrome: https://chrome.google.com/webstore/devconsole
-  - Icon: 128x128
-  - Screenshot: 1280x800
-  - 
-- Firefox: https://addons.mozilla.org/de/developers/
+- Graphics:
+  - Icon: `128x128`
+  - Screenshot: `1280x800`
+- Increase version in `manifest.json`:
+  - `"version": "1.0.1"`
+- Zip:
+  - `zip -r extension.zip . -x \*".git/"\* -x \*"node_modules/"\*`
+- Permissions in `manifest.json`:
+    - Remove unneeded persmissions (`"permissions": ["storage"]`)
+    - Replace `["<all_urls>"]` with `["https://tld.com/*", "https://*.tld.com/*"]` 
+- Chrome:
+  - https://chrome.google.com/webstore/devconsole
+- Firefox:
+  - https://addons.mozilla.org/de/developers/
 
 ## Files
 
@@ -34,7 +43,7 @@
     "manifest_version": 3,
     "name": "🚀My custom extension🚀",
     "description": "Lorem ipsum dolor sit amet.",
-    "version": "42",
+    "version": "1.0.0",
     "browser_specific_settings": {
         "gecko": {
             "id": "custom-extension@vielhuber.de",

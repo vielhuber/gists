@@ -676,6 +676,10 @@ shutdown.exe /s /t 0
 - `export VISUAL=nano; crontab -e`
 - `0 3 * * 1 source $HOME/.bash_profile; /usr/bin/wget "https://vielhuber.dev/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
 
+#### make backups
+- `export VISUAL=nano; crontab -e`
+- `0 2 * * 0 /mnt/c/Users/David/OneDrive/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.sh > /mnt/c/Users/David/OneDrive/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.log`
+
 #### composer
 - ```sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
 - ```sudo php composer-setup.php```
