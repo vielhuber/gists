@@ -14,6 +14,7 @@
   - translate via https://translate.wordpress.org (choose language, go to plugin, choose "Stable Readme (latest release)", export as po, translate, import)
   - get yourself a translation editor (PTE) (https://make.wordpress.org/polyglots/handbook/plugin-theme-authors-guide/pte-request/#plugin-theme-author-translation-review-pte-request)
   - approve your own translations you submitted
+  - note: any changes to ``readme.txt`` take some time time to show up as "Untranslated"
 
 ## release
 
