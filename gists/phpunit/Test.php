@@ -39,7 +39,7 @@ class Test extends \PHPUnit\Framework\TestCase
       	$this->assertContains('foo',['foo','bar']); // passes
         $this->assertStringContainsString('foo', 'foobar'); // passes
       	$this->assertMatchesRegularExpression('/foo/', 'foobar'); // passes
-      $this->assertMatchesRegularExpression('/foo/i', 'FoObar'); // passes
+        $this->assertMatchesRegularExpression('/foo/i', 'FoObar'); // passes
         $response = 'foobar'; $this->assertThat(
             $response,
             $this->logicalOr(

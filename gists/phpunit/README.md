@@ -89,3 +89,11 @@ $this->log('...');
 
 - if you make changes to globals like ```$_SERVER```, these changes are not resetted after a test has finished
 - do reach some form of isolation, use the option ```backupGlobals="true"``` (now all global variables are reset before each test)
+
+#### check if phpunit
+
+```php
+if( php_sapi_name() === 'cli' & strpos($_SERVER['argv'][0], 'phpunit') !== false ) {
+   echo 'inside phpunit';
+}
+```
