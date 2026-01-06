@@ -19,20 +19,16 @@
 
 ## Publish
 
-- Graphics:
-  - Icon: `128x128`
-  - Screenshot: `1280x800`
+- Change permissions in `manifest.json`:
+  - Remove unneeded persmissions (`"permissions": ["storage"]`)
+  - Replace `["<all_urls>"]` with `["https://tld.com/*", "https://*.tld.com/*"]` 
 - Increase version in `manifest.json`:
   - `"version": "1.0.1"`
 - Zip:
-  - `zip -r extension.zip . -x \*".git/"\* -x \*"node_modules/"\*`
-- Permissions in `manifest.json`:
-    - Remove unneeded persmissions (`"permissions": ["storage"]`)
-    - Replace `["<all_urls>"]` with `["https://tld.com/*", "https://*.tld.com/*"]` 
-- Chrome:
-  - https://chrome.google.com/webstore/devconsole
-- Firefox:
-  - https://addons.mozilla.org/de/developers/
+  - `rm extension.zip; zip -r extension.zip . -x \*".git/"\* -x \*"node_modules/"\*`
+- Upload:
+  - Chrome: https://chrome.google.com/webstore/devconsole
+  - Firefox: https://addons.mozilla.org/de/developers/
 
 ## Files
 
@@ -92,7 +88,11 @@
 
 #### `/icon.png`
 
-- 128px x 128px
+- `128x128`px
+
+#### `/screenshot.png`
+
+- `1280x800`px
 
 #### `/style.css`
 
