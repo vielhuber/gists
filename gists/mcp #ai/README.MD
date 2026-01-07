@@ -42,6 +42,9 @@
 - `echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list`
 - `sudo apt-get update`
 - `sudo apt-get install cloudflared`
+- remove warnings
+  - `echo "net.ipv4.ping_group_range = 0 2147483647" | sudo tee -a /etc/sysctl.conf`
+  - `sudo sysctl -p`
 - `cloudflared tunnel login`
 - `cloudflared tunnel create TUNNEL`
 - `cloudflared tunnel route dns --overwrite-dns TUNNEL custom-domain.xyz`
