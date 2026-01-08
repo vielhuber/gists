@@ -3,59 +3,62 @@
 # start
 if [ $1 = "start" ]; then
 
-sudo service apache2 start
-sudo service mysql start
-sudo service postgresql start
+sudo systemctl start apache2
+sudo systemctl start mysql
+sudo systemctl start postgresql
 mkdir -p /run/php/
-sudo service php5.6-fpm start
-sudo service php7.0-fpm start
-sudo service php7.1-fpm start
-sudo service php7.2-fpm start
-sudo service php7.3-fpm start
-sudo service php7.4-fpm start
-sudo service php8.0-fpm start
-sudo service php8.1-fpm start
-sudo service php8.2-fpm start
-sudo service php8.3-fpm start
+sudo systemctl start php5.6-fpm
+sudo systemctl start php7.0-fpm
+sudo systemctl start php7.1-fpm
+sudo systemctl start php7.2-fpm
+sudo systemctl start php7.3-fpm
+sudo systemctl start php7.4-fpm
+sudo systemctl start php8.0-fpm
+sudo systemctl start php8.1-fpm
+sudo systemctl start php8.2-fpm
+sudo systemctl start php8.3-fpm
+echo "✅ successfully started lamp environment."
 
 # restart
 elif [ $1 = "restart" ]; then
 
-sudo service apache2 restart
-sudo service mysql restart
-sudo service postgresql restart
+sudo systemctl restart apache2
+sudo systemctl restart mysql
+sudo systemctl restart postgresql
 mkdir -p /run/php/
-sudo service php5.6-fpm restart
-sudo service php7.0-fpm restart
-sudo service php7.1-fpm restart
-sudo service php7.2-fpm restart
-sudo service php7.3-fpm restart
-sudo service php7.4-fpm restart
-sudo service php8.0-fpm restart
-sudo service php8.1-fpm restart
-sudo service php8.2-fpm restart
-sudo service php8.3-fpm restart
+sudo systemctl restart php5.6-fpm
+sudo systemctl restart php7.0-fpm
+sudo systemctl restart php7.1-fpm
+sudo systemctl restart php7.2-fpm
+sudo systemctl restart php7.3-fpm
+sudo systemctl restart php7.4-fpm
+sudo systemctl restart php8.0-fpm
+sudo systemctl restart php8.1-fpm
+sudo systemctl restart php8.2-fpm
+sudo systemctl restart php8.3-fpm
+echo "✅ successfully restarted lamp environment."
 
 # stop
 elif [ $1 = "stop" ]; then
 
-sudo service apache2 stop
-sudo service mysql stop
-killall -KILL mysqld
-killall -KILL mysqld
-killall -KILL mysqld
-killall -KILL mysqld
-sudo service postgresql stop
-sudo service php5.6-fpm stop
-sudo service php7.0-fpm stop
-sudo service php7.1-fpm stop
-sudo service php7.2-fpm stop
-sudo service php7.3-fpm stop
-sudo service php7.4-fpm stop
-sudo service php8.0-fpm stop
-sudo service php8.1-fpm stop
-sudo service php8.2-fpm stop
-sudo service php8.3-fpm stop
+sudo systemctl stop apache2
+sudo systemctl stop mysql
+killall -KILL mysqld >/dev/null 2>&1
+killall -KILL mysqld >/dev/null 2>&1
+killall -KILL mysqld >/dev/null 2>&1
+killall -KILL mysqld >/dev/null 2>&1
+sudo systemctl stop postgresql
+sudo systemctl stop php5.6-fpm
+sudo systemctl stop php7.0-fpm
+sudo systemctl stop php7.1-fpm
+sudo systemctl stop php7.2-fpm
+sudo systemctl stop php7.3-fpm
+sudo systemctl stop php7.4-fpm
+sudo systemctl stop php8.0-fpm
+sudo systemctl stop php8.1-fpm
+sudo systemctl stop php8.2-fpm
+sudo systemctl stop php8.3-fpm
+echo "✅ successfully stopped lamp environment."
 
 # add
 elif [ $1 = "add" ]; then
@@ -64,7 +67,7 @@ PROJECT=$2
 FILE="/etc/apache2/sites-available/$PROJECT.conf"
 
 if [ -f $FILE ]; then
-echo "Project $PROJECT already exists."
+echo "⚠️ project $PROJECT already exists."
 else  
 
 if [ -n "$3" ]; then
@@ -149,7 +152,7 @@ cat > $FILE << EOF
 </VirtualHost>
 EOF
 sudo a2ensite $PROJECT.conf
-sudo service apache2 reload
+sudo systemctl reload apache2
 #"/mnt/c/Users/David/apps/gsudo/gsudo.exe" -d "echo 127.0.0.1 $DOMAIN >> %windir%\System32\drivers\etc\hosts"
 fi
 
@@ -162,16 +165,16 @@ if [ -f $FILE ]; then
 rm $FILE
 sudo a2dissite $PROJECT.conf
 else
-echo "Project $PROJECT does not exist."
+echo "⚠️ project $PROJECT does not exist."
 fi
 FILE="/etc/apache2/sites-available/$PROJECT.conf"
 if [ -f $FILE ]; then
 rm $FILE
 fi
-sudo service apache2 reload
+sudo systemctl reload apache2
 
 else
 
-echo "unknown method"
+echo "⚠️ unknown method."
 
 fi

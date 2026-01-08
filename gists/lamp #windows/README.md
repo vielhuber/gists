@@ -4,6 +4,7 @@
 - simple installation
 - simple usage via command line
 - full control over configuration
+- systemd enabled
 - cronjobs enabled
 - default remote smtp relay for all mailings
 - databases included: mysql (+phpmyadmin), postgresql, oraclesql
@@ -129,7 +130,8 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 
 #### redis
 - ```sudo apt-get -y install redis-server```
-- ```sudo service redis-server start```
+- ```sudo systemctl start redis-server```
+- ```sudo systemctl enable redis-server```
 - ```redis-cli```
 - ```sudo systemctl restart redis.service```
 - ```redis-cli ping```
@@ -184,6 +186,13 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
   - ```sudo apt update```
   - ```sudo apt upgrade```
   - ```wsl --shutdown```
+
+#### systemd
+  - `nano /etc/wsl.conf`
+  - `[boot]`
+  - `systemd=true`
+  - cmd (admin): `wsl --shutdown`
+  - `systemctl status`
 
 #### ngrok
 
@@ -296,10 +305,16 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 #### install basic linux packages
 - ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils```
 
+#### disable nginx
+- `sudo systemctl disable nginx`
+- `sudo systemctl disable --now nginx`
+
 #### apache/php/mysql
 - ```sudo apt-get install apache2 mysql-server```
-- ```sudo service apache2 start```
-- ```sudo service mysql start```
+- ```sudo systemctl start apache2```
+- ```sudo systemctl start mysql```
+- ```sudo systemctl enable apache2```
+- ```sudo systemctl enable mysql```
 - run mysql_secure_installation
   - the following steps fixes this error: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04#step-2-configuring-mysql
   - ```sudo mysql```
@@ -358,7 +373,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```sudo a2enmod proxy_html```
 - ```sudo a2enmod proxy_http```
 - ```sudo a2enmod xml2enc```
-- ```sudo service apache2 restart```
+- ```sudo systemctl restart apache2```
 
 #### configs
 - setup with presets from [dbf3d6844b3e6159d6b7](https://gist.github.com/vielhuber/dbf3d6844b3e6159d6b7)
@@ -395,7 +410,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 ```
 
 - ```sudo a2ensite 000-blank.conf```
-- ```sudo service apache2 reload```
+- ```sudo systemctl reload apache2```
 - test https://foo.vielhuber.dev / http://192.168.0.2
 
 #### ssl
@@ -452,8 +467,10 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```sudo nano /etc/postfix/sasl_passwd```
   - ```[sslout.df.eu]:587 smtp@vielhuber.de:xxx```
 - ```sudo postmap /etc/postfix/sasl_passwd```
-- ```sudo service postfix restart```
-- ```sudo service rsyslog restart```
+- ```sudo systemctl restart postfix```
+- ```sudo systemctl restart rsyslog```
+- ```sudo systemctl enable postfix```
+- ```sudo systemctl enable rsyslog```
 - ```echo "Das ist ein Test" | mail -s "Test bestanden" -a "From: smtp@vielhuber.de" david@vielhuber.de```
 - ```sudo nano /etc/php/custom.ini```
   - ```sendmail_path = "/usr/sbin/sendmail -t -i"```
@@ -599,22 +616,73 @@ xdebug.output_dir="/tmp/xdebug"
   - `nano /etc/init.d/php8.2-fpm`
   - `nano /etc/init.d/php8.3-fpm`
     - `DAEMON_ARGS="-R --daemonize --fpm-config $CONFFILE"`
-  - `service php5.6-fpm restart`
-  - `service php7.0-fpm restart`
-  - `service php7.1-fpm restart`
-  - `service php7.2-fpm restart`
-  - `service php7.3-fpm restart`
-  - `service php7.4-fpm restart`
-  - `service php8.0-fpm restart`
-  - `service php8.1-fpm restart`
-  - `service php8.2-fpm restart`
-  - `service php8.3-fpm restart`
+  - `sudo systemctl edit php5.6-fpm`
+  - `sudo systemctl edit php7.0-fpm`
+  - `sudo systemctl edit php7.1-fpm`
+  - `sudo systemctl edit php7.2-fpm`
+  - `sudo systemctl edit php7.3-fpm`
+  - `sudo systemctl edit php7.4-fpm`
+  - `sudo systemctl edit php8.0-fpm`
+  - `sudo systemctl edit php8.1-fpm`
+  - `sudo systemctl edit php8.2-fpm`
+  - `sudo systemctl edit php8.3-fpm`
+    - Oberhalb einfügen:
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm5.6 -R --nodaemonize --fpm-config /etc/php/5.6/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm7.0 -R --nodaemonize --fpm-config /etc/php/7.0/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm7.1 -R --nodaemonize --fpm-config /etc/php/7.1/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm7.2 -R --nodaemonize --fpm-config /etc/php/7.2/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm7.3 -R --nodaemonize --fpm-config /etc/php/7.3/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm7.4 -R --nodaemonize --fpm-config /etc/php/7.4/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm8.0 -R --nodaemonize --fpm-config /etc/php/8.0/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm8.1 -R --nodaemonize --fpm-config /etc/php/8.1/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm8.2 -R --nodaemonize --fpm-config /etc/php/8.2/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm8.3 -R --nodaemonize --fpm-config /etc/php/8.3/fpm/php-fpm.conf`
+  - `systemctl restart php5.6-fpm`
+  - `systemctl restart php7.0-fpm`
+  - `systemctl restart php7.1-fpm`
+  - `systemctl restart php7.2-fpm`
+  - `systemctl restart php7.3-fpm`
+  - `systemctl restart php7.4-fpm`
+  - `systemctl restart php8.0-fpm`
+  - `systemctl restart php8.1-fpm`
+  - `systemctl restart php8.2-fpm`
+  - `systemctl restart php8.3-fpm`
+  - `systemctl enable php5.6-fpm`
+  - `systemctl enable php7.0-fpm`
+  - `systemctl enable php7.1-fpm`
+  - `systemctl enable php7.2-fpm`
+  - `systemctl enable php7.3-fpm`
+  - `systemctl enable php7.4-fpm`
+  - `systemctl enable php8.0-fpm`
+  - `systemctl enable php8.1-fpm`
+  - `systemctl enable php8.2-fpm`
+  - `systemctl enable php8.3-fpm`
 
 #### fix small wsl warnings
 - ```sudo nano /etc/apache2/apache2.conf```
 - AcceptFilter https none
 - AcceptFilter http none
-- ```sudo service mysql stop```
+- ```sudo systemctl stop mysql```
 - ```sudo usermod -d /var/lib/mysql/ mysql```
 
 #### fix font errors
@@ -638,7 +706,7 @@ xdebug.output_dir="/tmp/xdebug"
   - `mkdir -p /run/php/`
 - /tmp clean
   - `find /tmp -ctime +2 -exec rm -rf {} +`
-- run startup scripts
+- DISABLED: run startup scripts
   - `/etc/wsl.conf`
   - `[boot]`
   - `command="/var/www/lamp/start.sh >> /var/www/lamp/start.log 2>&1"`
@@ -661,6 +729,9 @@ xdebug.output_dir="/tmp/xdebug"
 - wsl hangs after a while / vscode hangs
   - Docker > Settings > Start Docker Desktop when you log in: aus
   - NOT USED: WIN+R > SystemPropertiesAdvanced > Erweitert > Leistung > Einstellungen... > Erweitert > Virtueller Arbeitsspeicher > Ändern... > Dateigröße für alle Laufwerke automatisch verwalten: aus & C: > Benutzerdefinierte Größe: 800 MB - 1024 MB; CMD als Admin: wmic computersystem where name="%computername%" set AutomaticManagedPagefile=false
+
+#### enable cron
+- `sudo systemctl enable cron`
 
 #### restart router / pc
 - `export VISUAL=nano; crontab -e`
@@ -766,6 +837,7 @@ shutdown.exe /s /t 0
 - ```sudo apt install blackfire```
 - ```sudo blackfire agent:config --server-id=xxx --server-token=xxx``` (see blackfire.io)
 - ```sudo systemctl restart blackfire-agent```
+- ```sudo systemctl enable blackfire-agent```
 - ```sudo apt install blackfire-php```
 - ```blackfire config --client-id=xxx --client-token=xxx``` (see blackfire.io)
 - ```blackfire run ./vendor/bin/phpunit```
@@ -897,7 +969,8 @@ exit "$failed"
 - PANIC: could not flush dirty data
   - sudo nano /etc/postgresql/15/main/postgresql.conf
   - data_sync_retry = on
-- ```sudo service postgresql start```
+- ```sudo systemctl start postgresql```
+- ```sudo systemctl enable postgresql```
 - ```sudo -u postgres psql```
 - ```\password postgres```
 - root
