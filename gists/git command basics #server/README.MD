@@ -166,6 +166,30 @@ if gitignore is not working for a specific file/folder (this does not(!) delete 
 - git blame path/to/file
 - git blame path/to/file -L 100,200 # show only specific lines
 
+#### rebase vs. merge
+
+**merge**
+
+- `git pull`
+- `git checkout feature/123 && git merge main && git push`
+
+```
+main:             A---B---C-------M
+                       \         /
+feature/123:            D---E---F
+```
+
+**rebase**
+
+- `git pull --rebase` (or `git pull` with config `git config --global pull.rebase true`)
+- `git checkout feature/123 && git rebase main && git push --force-with-lease`
+
+```
+main:          A---B---C
+                        \
+feature/123:             D'--E'--F'
+```
+
 #### revise commit history
 - git rebase --interactive
 
@@ -302,16 +326,17 @@ Usage: git acp
 
 ### delete branch locally (forced)
 - git branch -D branch-name
-- git branch --delete --force branch_name
+- git branch --delete --force branch-name
 
 ### delete branch remotely
 - git push origin --delete branch-name
 - git push origin :branch-name
 
 ### delete branch both locally and remotely
-- git push origin --delete branch-name
-- git branch --delete --force branch_name
-- git fetch --prune # update local list of branches
+- `git push origin --delete branch-name && git branch --delete --force branch-name`
+
+### update list of local branches
+- `git fetch --prune`
 
 ### make changes
 - git add -A .

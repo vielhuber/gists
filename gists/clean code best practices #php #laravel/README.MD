@@ -451,6 +451,12 @@ public $foo;
 
 // good
 protected ?int $foo;
+
+// bad
+public function foo(): void { die(); }
+
+// good
+public function foo(): never { die(); }
 ```
 
 ### use jobs to dispatch long running tasks
