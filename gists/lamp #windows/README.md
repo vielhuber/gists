@@ -482,7 +482,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 
 #### node + php + python auto version switching on cd
 - ```nano ~/.bash_profile```
-- ```auto_switch() { if [[ $PWD == $PREV_PWD ]]; then return; fi; PREV_PWD=$PWD; [[ -f ".nvmrc" ]] && nvm use --silent && echo "switch to node "$(cat .nvmrc); [[ -f ".phprc" ]] && sudo update-alternatives --set php /usr/bin/php$(cat .phprc) && echo "switch to php "$(cat .phprc); [[ -f ".envrc" ]] && source $(cat .envrc)/bin/activate && echo "switch to python "$(cat .envrc); }; export PROMPT_COMMAND=auto_switch;```
+- https://gist.github.com/vielhuber/021453a7e908f9487917835107ad6ce7
 - ```source ~/.bash_profile```
 - now place `.nvmrc` / `.phprc` with the version (e.g. `12.10.0` / `8.1`) in the folder, where your `package.json` / `composer.json` lays and `.envrc` with `venv` (or your environment name)
 
