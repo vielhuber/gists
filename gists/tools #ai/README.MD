@@ -119,7 +119,7 @@
 
 ### Videos
 - Kling AI: https://klingai.com
-- Sora: https://www.sora.com
+- OpenAI Sora: https://www.sora.com
 - RunWay ML: https://runwayml.com
 - Haiper: https://haiper.ai
 - Google Veo: https://deepmind.google/technologies/

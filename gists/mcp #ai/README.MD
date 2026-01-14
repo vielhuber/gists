@@ -42,13 +42,15 @@
 - `echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list`
 - `sudo apt-get update`
 - `sudo apt-get install cloudflared`
-- remove warnings
-  - `echo "net.ipv4.ping_group_range = 0 2147483647" | sudo tee -a /etc/sysctl.conf`
-  - `sudo sysctl -p`
 - `cloudflared tunnel login`
 - `cloudflared tunnel create TUNNEL`
 - `cloudflared tunnel route dns --overwrite-dns TUNNEL custom-domain.xyz`
-- // admin interface is on cloudflare.com > Zero Trust > Networks > Tunnels
+- notes
+  - admin interface can be found on cloudflare.com > Zero Trust > Networks > Tunnels
+  - remove warnings in log
+    - `echo "net.ipv4.ping_group_range = 0 2147483647" | sudo tee -a /etc/sysctl.conf`
+    - `sudo sysctl -p`
+  - if the connection via node is not working, restart wsl and/or put direct ip (`ping custom-domain.xyz`) inside `/etc/hosts`
 
 ### usage
 
