@@ -45,6 +45,7 @@
 - `cloudflared tunnel login`
 - `cloudflared tunnel create TUNNEL`
 - `cloudflared tunnel route dns --overwrite-dns TUNNEL custom-domain.xyz`
+- `cloudflared tunnel route dns --overwrite-dns TUNNEL '*.custom-domain.xyz'`
 - notes
   - admin interface can be found on cloudflare.com > Zero Trust > Networks > Tunnels
   - remove warnings in log
