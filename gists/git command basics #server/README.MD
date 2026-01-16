@@ -171,7 +171,10 @@ if gitignore is not working for a specific file/folder (this does not(!) delete 
 **merge**
 
 - `git pull`
-- `git checkout feature/123 && git merge main && git push`
+- `git checkout feature/123`
+- `git merge main`
+- (`git merge --abort`)
+- `git push`
 
 ```
 main:             A---B---C-------M
@@ -182,7 +185,10 @@ feature/123:            D---E---F
 **rebase**
 
 - `git pull --rebase` (or `git pull` with config `git config --global pull.rebase true`)
-- `git checkout feature/123 && git rebase main && git push --force-with-lease`
+- `git checkout feature/123`
+- `git rebase main`
+- (`git rebase --abort`)
+- `git push --force-with-lease`
 
 ```
 main:          A---B---C
