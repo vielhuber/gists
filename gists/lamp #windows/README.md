@@ -181,6 +181,7 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
     - Appearance > Applications: HighContrastInverse
     - Window Titlebars > Maximize / Minimize
     - Fonts > Scaling Factor > 0.75
+  - Falls es nicht geöffnet wird, WSL neustarten
 - fix glitches
   - updated nvidia drivers (via "GeForce Experience")
   - ```sudo apt update```
@@ -278,11 +279,6 @@ curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 - Repository > Search for Repositories > /var/www
 - Manuelles Umbenennen falscher Namen ("www - ...", gtbabel 3x)
 - Optional: Alle Repositories: Rechte Maustaste: Mark as favorite (dies erhöht Performance durch Background Refresh)
-- Schriftgröße reduzieren
-  - `nano ~/.bash_profile`
-  - `# smartgit font size`
-  - `export GDK_DPI_SCALE=0.75`
-  - `source ~/.bash_profile`
 - Wenn non-commercial Lizenz abläuft:
   - https://www.syntevo.com/register-non-commercial/ > register with github
   - alternative: rm -rf ~/.config/smartgit/ > download/install/use v21
