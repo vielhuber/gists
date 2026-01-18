@@ -869,6 +869,7 @@ shutdown.exe /s /t 0
 - ```git config --global pull.rebase true``` # this means `git pull` does always `git pull --rebase`!
 - ```git config --global core.mergeoptions --no-edit``` # prevent editor on merge
 - ```git config --global init.defaultBranch main```
+- ```git config set advice.skippedCherryPicks false```
 - further do this (--no-edit does sometimes not work):
   - ```sudo nano ~/.bash_profile```
   - ```export GIT_MERGE_AUTOEDIT=no```
