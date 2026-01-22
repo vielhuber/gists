@@ -1,9 +1,0 @@
-div {
-  height: 0;
-  transition: height 0.42s ease-out;
-  overflow: hidden;
-}
-div.open {
-  height: auto;
-  height: calc-size(auto);
-}

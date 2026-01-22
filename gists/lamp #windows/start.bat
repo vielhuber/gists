@@ -1,1 +1,0 @@
-C:\Windows\System32\bash.exe -c "/var/www/lamp/lamp start"

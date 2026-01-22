@@ -1,2 +1,0 @@
-$config = JFactory::getConfig();
-echo $config->get( 'sitename' );

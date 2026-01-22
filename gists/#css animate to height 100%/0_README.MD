@@ -1,1 +1,0 @@
-https://vielhuber.de/blog/height-0-zu-height-auto-mit-css-animieren/

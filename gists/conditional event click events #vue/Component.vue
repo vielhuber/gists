@@ -1,1 +1,0 @@
-<div v-on="condition ? { click: yourFunction } : {}"></div>

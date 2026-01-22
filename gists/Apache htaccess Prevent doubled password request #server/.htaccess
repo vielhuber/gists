@@ -1,9 +1,0 @@
-RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-<If "%{HTTPS} == 'on'">
-AuthUserFile /path/to/.htpasswd
-AuthName "Interner Bereich"
-AuthType Basic
-require valid-user
-</If>

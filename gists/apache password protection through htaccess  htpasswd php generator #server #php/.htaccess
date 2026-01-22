@@ -1,4 +1,0 @@
-AuthName "Interner Bereich"
-AuthType Basic
-AuthUserFile /path/to/.htpasswd
-require valid-user

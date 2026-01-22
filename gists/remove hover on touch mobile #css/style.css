@@ -1,7 +1,0 @@
-// before (this is problematic, because if the button is active, the hover state is kept on mobile
-a:hover { background-color:red; }
-
-// after (this only applies to devices with hover support)
-@media (hover: hover) {
-  	a:hover { background-color:red; }
-}
