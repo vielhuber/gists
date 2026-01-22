@@ -14,14 +14,14 @@ cd gists
 # make a fresh repo on github and clone it
 git clone https://github.com/foo/bar .
 # fetch the sync script
-wget https://github.com/vielhuber/gists/archive/master.zip .
-unzip master.zip -d .
-cp -r ./gists-master/* .
+wget https://github.com/vielhuber/gists/archive/main.zip .
+unzip main.zip -d .
+cp -r ./gists-main/* .
 cp .env.example .env
 # edit your personal access token with the scope "gist" which can be obtained here:
 # https://github.com/settings/tokens/new
 nano .env
-rm -rf gists-master gists README.MD master.zip .env.example
+rm -rf gists-main gists README.MD main.zip .env.example
 composer install
 ```
 
