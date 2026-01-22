@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>.</title>
+    <style>
+    *:focus, *:focus-visible {
+        outline: none;
+    }
+    .is-focus-visible {
+        outline: 4px dashed red;
+        outline-offset: 3px;
+    }
+    </style>
+    <script>
+    class TabFocus {
+        constructor() {
+            this.isKeyboardEvent = false;
+            this.focusClass = 'is-focus-visible';
+        }
+        ready() {
+            this.addEventListeners();
+        }
+        addEventListeners() {
+            document.addEventListener('mousedown', () => { this.isKeyboardEvent = false; });
+            document.addEventListener('touchstart', () => { this.isKeyboardEvent = false; });
+            document.addEventListener('pointerdown', () => { this.isKeyboardEvent = false; });
+            document.addEventListener('keydown', () => { this.isKeyboardEvent = true; });
+            document.addEventListener('focus', (e) => { this.handleFocus(e); }, true);
+            document.addEventListener('blur', (e) => { this.handleBlur(e); }, true);
+        }
+        handleFocus(event) {
+            if (!this.isKeyboardEvent) { return; }
+          	if (event.target.classList !== undefined) {
+           		event.target.classList.add(this.focusClass);
+            }
+        }
+        handleBlur(event) {
+          	if (event.target.classList !== undefined) {
+            	event.target.classList.remove(this.focusClass);
+            }
+        }
+    };
+    document.addEventListener('DOMContentLoaded', () => {
+        let tabfocus = new TabFocus();
+        tabfocus.ready();
+    });
+    </script>
+</head>
+<body>
+  	<p>Best solution.</p>
+    <input type="text" placeholder="Field 1" />
+    <input type="text" placeholder="Field 2" />
+    <input type="text" placeholder="Field 3" />
+    <a href="https://google.com">Link</a>
+</body>
+</html>

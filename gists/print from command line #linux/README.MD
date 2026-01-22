@@ -1,0 +1,6 @@
+- Bei macOS ist das "Protokoll" dafür CUPS: https://www.cups.org/doc/options.html
+- Quelle: https://apple.stackexchange.com/a/394444/
+- Existierende Drucker auslesen: `lpstat -p`
+- Alle möglichen Optionen dieses Druckers auslesen: `lpoptions -p fritz_box -l`
+- Drucken: `lpr -P fritz_box some_file.pdf`
+- Notizen: Bilder werden seitenfüllend gedruckt

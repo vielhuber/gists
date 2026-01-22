@@ -1,0 +1,17 @@
+<img src="foo.jpg" loading="lazy" alt="bar" />
+
+<iframe src="foo.html" loading="lazy"></iframe>
+
+<!-- Lazy-load images in <picture>. <img> is the one driving image loading so <picture> and srcset fall off of that -->
+<picture>
+  <source media="(min-width: 40em)" srcset="big.jpg 1x, big-hd.jpg 2x">
+  <source srcset="small.jpg 1x, small-hd.jpg 2x">
+  <img src="fallback.jpg" loading="lazy" />
+</picture>
+ 
+<!-- Lazy-load an image that has srcset specified -->
+<img src="small.jpg"
+  srcset="large.jpg 1024w, medium.jpg 640w, small.jpg 320w"
+  sizes="(min-width: 36em) 33.3vw, 100vw"
+  alt="A rad wolf" loading="lazy"
+/>

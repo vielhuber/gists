@@ -1,0 +1,2 @@
+- ```composer require box/spout```
+- create a xlsx file (from Screaming Frog internal > html) with col 1 source and col 2 target url

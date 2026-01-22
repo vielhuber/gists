@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^url/with/and/without/training/slash\/?$ https://www.tld.com/new/url/ [R=301,L]
+  RewriteRule ^url/to/static/file.pdf$ https://www.tld.com/new/static/file.pdf [R=301,L]
+</IfModule>
+
+# alternative
+# simpler and does not need mod_rewrite
+# warning: this does not work with queries like "index.html?foo=bar"!
+Redirect 301 /ueber-uns/presse/192-die-presse-ueber-uns.html https://www.dr-horch.de/ueber-uns/presse/

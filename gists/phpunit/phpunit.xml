@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    bootstrap="vendor/autoload.php"
+    colors="true"
+    testdox="true"
+    stopOnFailure="false"
+    displayDetailsOnTestsThatTriggerWarnings="true"
+    displayDetailsOnTestsThatTriggerDeprecations="true"
+    displayDetailsOnTestsThatTriggerErrors="true"
+    displayDetailsOnTestsThatTriggerNotices="true"
+    displayDetailsOnPhpunitDeprecations="true"
+    backupGlobals="false"
+    enforceTimeLimit="false"
+>
+    <testsuites>
+        <testsuite
+            name="testsuite"
+        >
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+  	<!-- optional: here you can set php init settings and environment variables, e.g. $_SERVER['HTTP_HOST'] -->
+    <php>
+        <ini name="display_errors" value="On" />
+        <ini name="display_startup_errors" value="On" />
+        <server name="HTTPS" value="on" />
+        <server name="HTTP_HOST" value="github.com" />
+        <server name="REQUEST_URI" value="/vielhuber/stringhelper" />
+    </php>
+</phpunit>

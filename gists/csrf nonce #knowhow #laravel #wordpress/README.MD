@@ -1,0 +1,4 @@
+- Cross-Site Request Forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they’re currently authenticated
+- In WordPress, [nonces](https://codex.wordpress.org/WordPress_Nonces) are used to prevent this
+- In Laravel, [@csrf/csrf_token()](https://laravel.com/docs/7.x/csrf) are used to prevent this
+- Note that on API Routes does not need any CSRF protection, since restful API do not have state, so there is no session to attack

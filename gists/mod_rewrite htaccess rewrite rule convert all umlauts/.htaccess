@@ -1,0 +1,5 @@
+# auto convert umlauts
+RewriteRule ^(.*)ä(.*)$ /$1ae$2 [L,R=301]
+RewriteRule ^(.*)ö(.*)$ /$1oe$2 [L,R=301]
+RewriteRule ^(.*)ü(.*)$ /$1ue$2 [L,R=301]
+RewriteRule ^(.*)ß(.*)$ /$1ss$2 [L,R=301]

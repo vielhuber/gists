@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>.</title>
+    <script>
+    window.addEventListener('load', () => { setEqualHeights(); });
+    window.addEventListener('resize', () => { setEqualHeights(); } );
+    function setEqualHeights()
+    {
+      let heights = {};
+      if( document.querySelectorAll('.equal-height').length >= 2 )
+      {
+        document.querySelectorAll('.equal-height').forEach((el) => {
+          el.style.height = 'auto';
+        });
+        document.querySelectorAll('.equal-height').forEach((el) => {
+          let heights__key = null;
+          if( el.hasAttribute('class') && el.getAttribute('class').indexOf('equal-height--') > -1 ) {
+            heights__key = el.getAttribute('class').substring( el.getAttribute('class').indexOf('equal-height--') ).split(' ')[0];
+          }
+          else {
+            heights__key = 'equal-height--1';
+            el.classList.add(heights__key);
+          }
+          if( !(heights__key in heights) ) {
+            heights[heights__key] = 0;
+          }
+          if( el.clientHeight > heights[heights__key] ) {
+            heights[heights__key] = el.clientHeight;
+          }
+        });
+        Object.entries(heights).forEach(([heights__key, heights__value]) => {
+          document.querySelectorAll('.'+heights__key).forEach((el) => {
+            el.style.height = heights__value+'px';
+          });
+        });
+      }
+    }
+    </script>
+    <style>
+    *
+    {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width:100%;
+        display: flex;
+        align-items: flex-start;
+        align-content: flex-start;
+    }
+    .module {
+        flex: 0 1 auto;
+        width:25%;
+        text-align:center;
+    }
+    div {
+        border:1px solid red;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="module">
+            <div class="equal-height equal-height--1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</div>
+            <div class="equal-height equal-height--2">...</div>
+            <div class="equal-height equal-height--3">...<br/>❤️</div>
+        </div>
+        <div class="module">
+            <div class="equal-height equal-height--1">...</div>
+            <div class="equal-height equal-height--2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</div>
+            <div class="equal-height equal-height--3">...</div>
+        </div>
+    </div>
+
+    <hr/>
+
+    <!-- if you have multiple modules on the page, prefix them with a random number -->
+    <?php
+    for($i = 1; $i <= 3; $i++) {
+        $rand = mt_rand(1000,9999);
+        echo '<div class="container">';
+            for($j = 1; $j <= 4; $j++) {
+                echo '<div class="module">';
+                for($k = 1; $k <= 4; $k++) {
+                    echo '<div class="equal-height equal-height--'.$rand.'-'.$k.'">';
+                        if(mt_rand(0,5)===0) {
+                            echo 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.';
+                        }
+                        else {
+                            echo '❤️';
+                        }
+                    echo '</div>';
+                }
+                echo '</div>';
+            }
+        echo '</div>';
+    }
+    ?>
+</body>
+</html>

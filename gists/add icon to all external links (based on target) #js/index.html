@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+        <title>.</title>
+        <style>
+            .container {
+                width: 50%;
+                margin: 0 auto;
+            }
+            a {
+                text-decoration: underline;
+            }
+            /* if you want to colorize the svgs, use something like svg-inject or add full svgs */
+            /* then style them with */
+            /* svg *[style*="fill:#fff"] { fill:transparent !important; } */
+            /* svg *[style*="stroke:#000"] { stroke:#fff !important; } */
+        </style>
+        <script>
+            window.addEventListener('load', function () {
+                runExternalScript();
+                setTimeout(() => {
+                    document.querySelector('.delay-test').setAttribute('href', 'https://test.de');
+                    runExternalScript();
+                }, 1000);
+            });
+
+            function runExternalScript() {
+                let external_links_config = {
+                    icons: [
+                        {
+                            pattern: null,
+                            src: {
+                                '*': 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNCAxNCI+PHJlY3Qgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiByeD0iMiIgc3R5bGU9ImZpbGw6I2ZmZiIvPjxwYXRoIGQ9Ik0xMC40LDcuNTJ2My4zNkExLjEyLDEuMTIsMCwwLDEsOS4yOCwxMkgzLjEyQTEuMTIsMS4xMiwwLDAsMSwyLDEwLjg4SDJWNC43MkExLjEyLDEuMTIsMCwwLDEsMy4xMiwzLjZINi40OCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48cGF0aCBkPSJNOC4yNCwySDEyVjUuNzYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDA7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kIi8+PHBhdGggZD0iTTUuMTEsOC44OSwxMiwyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIvPjwvc3ZnPg==',
+                                '.btn': 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNCAxNCI+PHBhdGggZD0iTTEwLjQsNy41MnYzLjM2QTEuMTIsMS4xMiwwLDAsMSw5LjI4LDEySDMuMTJBMS4xMiwxLjEyLDAsMCwxLDIsMTAuODhIMlY0LjcyQTEuMTIsMS4xMiwwLDAsMSwzLjEyLDMuNkg2LjQ4IiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIvPjxwYXRoIGQ9Ik04LjI0LDJIMTJWNS43NiIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I2ZmZjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48cGF0aCBkPSJNNS4xMSw4Ljg5LDEyLDIiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiNmZmY7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kIi8+PC9zdmc+'
+                            },
+                            width: 16,
+                            height: 16,
+                        },
+                        {
+                            pattern: /youtube\.com|youtu\.be/,
+                            src:
+                                'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOCAxNCI+PHJlY3Qgd2lkdGg9IjI4IiBoZWlnaHQ9IjE0IiByeD0iMiIgc3R5bGU9ImZpbGw6I2ZmZiIvPjxwYXRoIGQ9Ik0xMC40LDcuNTJ2My4zNkExLjEyLDEuMTIsMCwwLDEsOS4yOCwxMkgzLjEyQTEuMTIsMS4xMiwwLDAsMSwyLDEwLjg4SDJWNC43MkExLjEyLDEuMTIsMCwwLDEsMy4xMiwzLjZINi40OCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48cGF0aCBkPSJNOC4yNCwySDEyVjUuNzYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDA7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kIi8+PHBhdGggZD0iTTUuMTEsOC44OSwxMiwyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIvPjxyZWN0IHg9IjE1IiB5PSIxIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiLz48cGF0aCBkPSJNMTkuODQsNS4zMmwzLDEuNjktMywxLjY5Wk0yOCwxLjV2MTFBMS41LDEuNSwwLDAsMSwyNi41LDE0aC0xMUExLjUsMS41LDAsMCwxLDE0LDEyLjVWMS41QTEuNSwxLjUsMCwwLDEsMTUuNSwwaDExQTEuNSwxLjUsMCwwLDEsMjgsMS41Wk0yNi42OSw3YTE1LjkxLDE1LjkxLDAsMCwwLS4yNC0yLjc2LDEuNDEsMS40MSwwLDAsMC0xLTFBMzIuODYsMzIuODYsMCwwLDAsMjEsM2EzMi44NiwzMi44NiwwLDAsMC00LjQ0LjI0LDEuNDEsMS40MSwwLDAsMC0xLDEsMTUuOTMsMTUuOTMsMCwwLDAsMCw1LjUxLDEuMzcsMS4zNywwLDAsMCwxLDFBMzMsMzMsMCwwLDAsMjEsMTFhMzIuODYsMzIuODYsMCwwLDAsNC40NC0uMjQsMS40LDEuNCwwLDAsMCwxLTFBMTUuODgsMTUuODgsMCwwLDAsMjYuNjksN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJmaWxsOiNmZmYiLz48L3N2Zz4=',
+                            width: 32,
+                            height: 16,
+                        },
+                        {
+                            pattern: /facebook\.com/,
+                            src:
+                                'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOCAxNCI+PHJlY3Qgd2lkdGg9IjI4IiBoZWlnaHQ9IjE0IiByeD0iMiIgc3R5bGU9ImZpbGw6I2ZmZiIvPjxwYXRoIGQ9Ik0xMC40LDcuNTJ2My4zNkExLjEyLDEuMTIsMCwwLDEsOS4yOCwxMkgzLjEyQTEuMTIsMS4xMiwwLDAsMSwyLDEwLjg4SDJWNC43MkExLjEyLDEuMTIsMCwwLDEsMy4xMiwzLjZINi40OCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48cGF0aCBkPSJNOC4yNCwySDEyVjUuNzYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDA7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kIi8+PHBhdGggZD0iTTUuMTEsOC44OSwxMiwyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIvPjxwYXRoIGQ9Ik0yNC42MywyLjVIMTYuNGEuNjkuNjksMCwwLDAtLjY5LjY5djguMjNhLjY5LjY5LDAsMCwwLC42OS43aDQuNDVWOC40SDE5LjZWNi45NGgxLjI1VjUuODdBMS43NSwxLjc1LDAsMCwxLDIyLjcxLDQsOS40Myw5LjQzLDAsMCwxLDIzLjgzLDR2MS4zaC0uNzZjLS42MSwwLS43Mi4yOC0uNzIuN3YuOTNoMS40NEwyMy42LDguNEgyMi4zNXYzLjcyaDIuMjhhLjcuNywwLDAsMCwuNy0uN1YzLjE5QS42OS42OSwwLDAsMCwyNC42MywyLjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIi8+PC9zdmc+',
+                            width: 32,
+                            height: 16,
+                        },
+                        {
+                            pattern: /instagram\.com/,
+                            src:
+                                'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOCAxNCI+PHJlY3Qgd2lkdGg9IjI4IiBoZWlnaHQ9IjE0IiByeD0iMiIgc3R5bGU9ImZpbGw6I2ZmZiIvPjxwYXRoIGQ9Ik0xMC40LDcuNTJ2My4zNkExLjEyLDEuMTIsMCwwLDEsOS4yOCwxMkgzLjEyQTEuMTIsMS4xMiwwLDAsMSwyLDEwLjg4SDJWNC43MkExLjEyLDEuMTIsMCwwLDEsMy4xMiwzLjZINi40OCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48cGF0aCBkPSJNOC4yNCwySDEyVjUuNzYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDA7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kIi8+PHBhdGggZD0iTTUuMTEsOC44OSwxMiwyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIvPjxwYXRoIGQ9Ik0yNS4zNiw1LjNhMy43NCwzLjc0LDAsMCwwLS4yMi0xLjE3LDIuNDIsMi40MiwwLDAsMC0uNTYtLjg1LDIuNCwyLjQsMCwwLDAtLjg1LS41NSwzLjQ4LDMuNDgsMCwwLDAtMS4xNy0uMjJjLS41MSwwLS42NywwLTIsMHMtMS40NywwLTIsMGEzLjcxLDMuNzEsMCwwLDAtMS4xNy4yM0EyLjQyLDIuNDIsMCwwLDAsMTYsNC4xMywzLjcxLDMuNzEsMCwwLDAsMTUuOCw1LjNjMCwuNTEsMCwuNjgsMCwyczAsMS40NywwLDJBMy43MSwzLjcxLDAsMCwwLDE2LDEwLjQzYTIuNDIsMi40MiwwLDAsMCwxLjQsMS40LDMuNzEsMy43MSwwLDAsMCwxLjE3LjIzYy41MSwwLC42NywwLDIsMHMxLjQ3LDAsMiwwYTMuNzEsMy43MSwwLDAsMCwxLjE3LS4yMywyLjQ3LDIuNDcsMCwwLDAsMS40LTEuNCwzLjQ4LDMuNDgsMCwwLDAsLjIyLTEuMTdjMC0uNTEsMC0uNjcsMC0yUzI1LjM4LDUuODEsMjUuMzYsNS4zWm0tLjg3LDMuOTJhMi44OCwyLjg4LDAsMCwxLS4xNi45LDEuNjMsMS42MywwLDAsMS0uOTEuOTEsMi44OCwyLjg4LDAsMCwxLS45LjE2Yy0uNSwwLS42NiwwLTEuOTQsMHMtMS40MywwLTEuOTQsMGEyLjgsMi44LDAsMCwxLS44OS0uMTYsMS40NiwxLjQ2LDAsMCwxLS41NS0uMzYsMS41NCwxLjU0LDAsMCwxLS4zNi0uNTUsMi41MywyLjUzLDAsMCwxLS4xNy0uODljMC0uNTEsMC0uNjYsMC0xLjk0czAtMS40NCwwLTEuOTVhMi40NywyLjQ3LDAsMCwxLC4xNy0uODksMS40NiwxLjQ2LDAsMCwxLC4zNi0uNTUsMS41NCwxLjU0LDAsMCwxLC41NS0uMzYsMi44NiwyLjg2LDAsMCwxLC44OS0uMTZjLjUxLDAsLjY2LDAsMS45NCwwczEuNDQsMCwyLDBhMi44LDIuOCwwLDAsMSwuODkuMTZBMS40NiwxLjQ2LDAsMCwxLDI0LDMuOWExLjU0LDEuNTQsMCwwLDEsLjM2LjU1LDIuODYsMi44NiwwLDAsMSwuMTYuODljMCwuNTEsMCwuNjYsMCwyUzI0LjUyLDguNzIsMjQuNDksOS4yMloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiLz48cGF0aCBkPSJNMjAuNTgsNC44MWEyLjQ3LDIuNDcsMCwxLDAsMi40NywyLjQ3QTIuNDgsMi40OCwwLDAsMCwyMC41OCw0LjgxWm0wLDQuMDdhMS42LDEuNiwwLDEsMSwxLjYtMS42QTEuNiwxLjYsMCwwLDEsMjAuNTgsOC44OFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiLz48cGF0aCBkPSJNMjMuNzIsNC43MmEuNTcuNTcsMCwwLDEtLjU3LjU3LjU4LjU4LDAsMSwxLDAtMS4xNUEuNTcuNTcsMCwwLDEsMjMuNzIsNC43MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiLz48L3N2Zz4=',
+                            width: 32,
+                            height: 16,
+                        },
+                    ],
+                    blacklist: ['.test'],
+                };
+                external_links_config.blacklist.forEach(function (blacklist__value) {
+                    if (document.querySelector(blacklist__value) !== null) {
+                        [].forEach.call(
+                            document.querySelectorAll(blacklist__value + ', ' + blacklist__value + ' *'),
+                            function (bl) {
+                                bl.classList.add('external-link-exclude');
+                            }
+                        );
+                    }
+                });
+                [].forEach.call(document.querySelectorAll('a'), function (el) {
+                    if (el.children.length >= 2) {
+                        return;
+                    }
+                    if( el.children.length === 1 ) {
+                        if( ['STRONG','I','U'].indexOf(el.children[0].tagName) === -1 ) {
+                            return;
+                        }
+                        if( el.textContent.trim() !== el.children[0].textContent.trim() ) {
+                            return;
+                        }
+                    }
+                    if (el.classList.contains('external-link-exclude') || el.classList.contains('external-link-done')) {
+                        return;
+                    }
+                    let href = el.getAttribute('href');
+                    if (href === null || href === undefined || href === '') {
+                        return;
+                    }
+                    if (window.location.host != '' && href.indexOf(window.location.host) > -1) {
+                        return;
+                    }
+                    if (href.indexOf('http') !== 0) {
+                        return;
+                    }
+                    if (el.textContent.trim() === '') {
+                        return;
+                    }
+                    let icon = null;
+                    external_links_config.icons.forEach(function (icons__value) {
+                        if (icon === null && icons__value.pattern !== null && icons__value.pattern.test(href)) {
+                            icon = icons__value;
+                        }
+                    });
+                    if (icon === null) {
+                        external_links_config.icons.forEach(function (icons__value) {
+                            if (icon === null && icons__value.pattern === null) {
+                                icon = icons__value;
+                            }
+                        });
+                    }
+                    if (icon === null) {
+                        return;
+                    }
+                    let target = el;
+                    if( el.children.length === 1 ) {
+                        target = el.children[0];
+                    }
+                    // bugfix on flex elements
+                    if( window.getComputedStyle(target).display.indexOf('inline-flex') > -1 ) {
+                        target.style.display = 'inline-block';
+                    }
+                    // split last word
+                    let last_word = '';
+                    let words = target.textContent.split(' ');
+                    last_word = words[words.length - 1];
+                    words.splice(words.length - 1, 1);
+                    words = words.join(' ') + ' ';
+                    target.textContent = words;
+                    el.setAttribute('target', '_blank');
+                    // determine src
+                    let src = null;
+                    if( typeof icon.src === 'object' && icon.src !== null ) {
+                        for(let [src__key, src__value] of Object.entries(icon.src)) {
+                            if( el.closest(src__key) !== null ) {
+                                src = src__value;
+                            }
+                        }
+                    }
+                    else {
+                        src = icon.src;
+                    }
+                    // bugfix for firefox not underlining last word
+                    let underline = '';
+                    if( window.getComputedStyle(target).textDecoration.indexOf('underline') > -1 ) {
+                        underline = ' text-decoration: '+window.getComputedStyle(target).textDecoration+';';
+                    }
+                    target.innerHTML +=
+                        '<span style="white-space:nowrap; display: inline-flex; align-items: center; color:inherit;'+underline+'">' +
+                        last_word +
+                        '<span style="position:relative; padding-left:4px; width: '+icon.width+'px; height: '+ icon.height +'px; display: inline-block; color:inherit;">' +
+                        '<img style="width: ' +
+                        icon.width +
+                        'px;height: ' +
+                        icon.height +
+                        'px;position: absolute;top: 50%;transform: translateY(-50%);" src="' +
+                        src +
+                        '" alt="" />' +
+                        '</span>' +
+                        '</span>';
+                    // set done
+                    el.classList.add('external-link-done');
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <p>
+                Lorem ipsum dolor sit amet, <a href="https://youtube.com/foo">consectetuer</a> adipiscing elit. Aenean
+                commodo ligula eget dolor. <a href="/foo">Aenean massa</a>. Cum sociis natoque penatibus et magnis dis
+                parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
+                eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
+                mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                eleifend tellus.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+                massa.
+                <a href="https://facebook.com/bar">Cum sociis natoque penatibus et magnis dis parturient</a> montes,
+                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
+                consequat massa quis enim. Donec pede justo, fringilla vel nec, vulputate eget, arcu. In enim justo,
+                rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+                tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+            </p>
+            <p class="test">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+                massa.
+                <a href="https://facebook.com/bar">Cum sociis natoque penatibus et magnis dis parturient</a> montes,
+                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
+                consequat massa quis enim. Donec pede justo, fringilla vel nec, vulputate eget, arcu. In enim justo,
+                rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede. Integer
+                tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                <a href="https://test.de">Aenean commodo ligula</a> eget dolor. Aenean massa. Cum sociis natoque
+                penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
+                aliquet nec, vulputate eget, arcu. In enim justo, <a href="https://instagram.com/test">mollis pretium</a>, imperdiet a, venenatis vitae, justo.
+                Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper
+                nisi. Aenean vulputate eleifend tellus.
+            </p>
+            <p>
+                This is <a href="#" class="delay-test">Aenean commodo ligula</a>.
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <a href="https://test.de">
+                            foo                
+                            <img src="https://picsum.photos/200/300" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://test.de">
+                            foo
+                            <strong>bar</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://test.de">
+                            <strong>foobar</strong>
+                        </a>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                <a href="https://test.de" class="btn" style="background-color:#000;color:#fff;font-size:20px;padding:20px;">
+                    BUY!
+                </a>
+            </p>
+        </div>
+    </body>
+</html>

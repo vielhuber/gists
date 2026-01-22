@@ -1,0 +1,2 @@
+SetEnv PHP_VALUE "opcache.revalidate_freq = 86400" # php-fpm
+php_value opcache.revalidate_freq 86400 # mod_php

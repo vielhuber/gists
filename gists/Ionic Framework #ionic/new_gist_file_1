@@ -1,0 +1,76 @@
+# variables: "public" is default and not needed
+public foo: boolean;
+foo: boolean;
+
+
+# always use same design for all platforms
+# app.module.ts
+...
+imports: [
+  IonicModule.forRoot(MyApp, {
+    mode: 'md'
+  })
+],
+...
+
+# use dark theme
+# variables.scss
+//@import "ionic.theme.default";
+@import "ionic.theme.dark";
+
+
+
+
+# delete all pregenerated pages
+rm -rf src/pages/*
+
+# add new page
+ionic g page subpage
+# app.component.ts
+import { SubpagePage } from '../pages/subpage/subpage';
+# app.module.ts
+import { SubpagePage } from '../pages/subpage/subpage';
+...
+declarations: [ ... SubpagePage ... ],
+entryComponents: [ ... SubpagePage ... ]
+
+
+# set new root default page
+app.component.ts
+rootPage = IntroPage
+
+
+# navigate from one page to another
+# home.ts
+import { SubpagePage } from '../subpage/subpage';
+...
+this.navCtrl.push(Subpage1Page);
+
+
+# add a provider (for rest api)
+ionic g provider TestService
+// providers/test-service.ts
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+@Injectable()
+export class TestService {
+  constructor(public http: Http) { }
+  getFoo() { return 'baz'; }
+}
+// app.module.ts
+import { TestService } from '../providers/test-service';
+@NgModule({
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    TestService
+  ]
+})
+// subpage.ts
+import { TestService } from '../../providers/test-service';
+@Component({ ... })
+export class SubPage {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private testService: TestService) {
+    alert(testService.getFoo());
+  }
+}

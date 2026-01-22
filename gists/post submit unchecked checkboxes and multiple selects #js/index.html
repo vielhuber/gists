@@ -1,0 +1,23 @@
+<!-- fast inline method -->
+<input onchange="
+if ( this.checked === false && (this.previousElementSibling === null || this.previousElementSibling.getAttribute('type') !== 'hidden') ) {
+	this.insertAdjacentHTML('beforebegin', '<input type=\'hidden\' value=\'0\' name=\'' + this.getAttribute('name') + '\' />');
+}
+if( this.checked === true && this.previousElementSibling !== null && this.previousElementSibling.getAttribute('type') === 'hidden' ) {
+	this.previousElementSibling.remove();
+}
+" type="checkbox" name="test" value="1" />
+
+<!-- If unchecked, $_POST["empty"] = 0 -->
+<input type="checkbox" name="empty" value="1" />
+
+<!-- If unchecked, $_POST["empty_array"] = ['0'] -->
+<input type="checkbox" name="empty_array[]" value="1" />
+<input type="checkbox" name="empty_array[]" value="2" />
+<input type="checkbox" name="empty_array[]" value="3" />
+
+<!-- If unchecked, $_POST["empty_array"] = [] -->
+<select multiple="multiple" name="empty_array[]">
+  <option value="foo">Foo</option>
+  <option value="bar">Bar</option>
+</select>

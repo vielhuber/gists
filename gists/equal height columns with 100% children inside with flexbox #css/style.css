@@ -1,0 +1,69 @@
+/* variant 1 */
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+ul li {
+  flex: 0 1 25%;
+}
+@media only screen and (max-width: 700px) {
+  ul li {
+    flex-basis: 50%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  ul li {
+    flex-basis: 100%;
+  }
+}
+
+
+/* variant 2 */
+ul {
+  display: flex;
+  overflow: hidden;
+}
+ul li {
+  flex: 1;
+}
+ul li {
+  display: flex;
+  overflow: hidden;
+}
+ul li .box {
+  flex: 1;
+}
+
+
+
+/* variant 3 */
+ul {
+	display: flex;
+	overflow: hidden;
+	flex-wrap: wrap;
+ }
+ul li {
+	display: flex;
+	width: 50%;
+	padding: 20px 50px;
+}
+
+
+
+
+/* variant 4 */
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+}
+ul li {
+  width: 25%;
+  background-color:blue;
+}
+@media (max-width: 900px) {
+  ul li {
+    width:50%;
+  }
+}

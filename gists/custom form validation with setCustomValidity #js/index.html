@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <title>.</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', () =>
+    {
+        document.querySelector('input[name="foo"]').addEventListener('input', e =>
+        {
+            if( e.target.value === 'foo' )
+            {
+                e.target.setCustomValidity('');
+            }
+            else
+            {
+                e.target.setCustomValidity('bar');
+                //e.target.closest('form').reportValidity(); // immediately report (not very good ui)
+            }            
+        });
+        document.querySelector('form').addEventListener('submit', (e) =>
+        {
+            e.preventDefault();
+            alert('do some ajax calls...');
+        });
+    });
+    </script>
+    <style>
+    *
+    {
+        box-sizing: border-box;
+    }
+    input:invalid
+    {
+        background-color:red;
+    }
+    </style>
+</head>
+<body>
+    <form autocomplete="off" method="post">
+        <input type="text" name="foo" value="" required="required" />
+        <input type="submit" name="submit" value="Absenden" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,15 @@
+.accordion {
+
+}
+.accordion__item {
+
+}
+.accordion__link {
+
+}
+.accordion__item--active > .accordion__link {
+	color:red;
+}
+.accordion__content {
+	display:none;
+}

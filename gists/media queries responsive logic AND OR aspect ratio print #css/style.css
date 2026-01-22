@@ -1,0 +1,42 @@
+// common steps
+@media screen and (max-width: 1100px) {  
+  ... 
+}
+@media screen and (max-width: 700px) {
+  ...
+}
+
+// or
+@media screen and (max-width: 995px), screen and (max-height: 700px) { }
+// and
+@media screen and (max-width: 995px) and (max-height: 700px) { }
+
+// orientation
+@media screen and (orientation:portrait) {
+  
+}
+@media screen and (orientation:landscape) {
+  
+}
+@media screen and (orientation:landscape) and (max-width: 800px) {
+  
+}
+
+// aspect ratio
+@media screen and (max-aspect-ratio: 1/1) // all screens where width is smaller or equal than height
+{
+    
+}
+
+// print
+@media print
+{
+	@page {
+	  size: A4 portrait;
+	  margin: 1cm 1cm;
+	}
+  body
+  {
+    
+  }
+}
