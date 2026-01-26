@@ -1,4 +1,147 @@
-### build a custom docker image
+## basics
+
+**tl;dr**
+
+- Reset + rebuild: `docker compose down --volumes && docker-compose up --build`
+- Rebuild: `docker-compose up --build`
+
+**`Dockerfile`**
+
+- General instructions
+- Defines which base image is used (e.g., Alpine Linux)
+- Specifies which script is executed at startup (→ docker.sh)
+- Copies your code into the container
+- Can also install software (PHP, Python, Node, MariaDB, etc.)
+
+```
+FROM alpine:latest
+# copy files, not needed, since we always mount (also on production because of git clone)
+#COPY . /app
+# start script
+COPY docker.sh /docker.sh
+RUN chmod +x /docker.sh
+CMD ["/docker.sh"]
+```
+
+**`docker.sh`**
+
+- Startup script
+- Runs automatically when the container starts
+- Initializes the database (MariaDB setup, create users)
+- Starts all services (e.g., with Supervisor: web server, Python app, etc.)
+- Performs the final configuration
+  
+```
+#!/bin/sh
+cd /app
+pip install --no-cache-dir -r requirements.txt
+npm install
+...
+```  
+  
+**`docker-compose.yml`**
+
+- Orchestration script
+- Tells Docker how to build the Dockerfile
+- Defines environment variables (DB passwords, etc.)
+- Mapped ports (e.g., 8080 → 80)
+- Mounted volumes (e.g., your code, logs)
+- Can manage multiple containers (e.g., app + separate DB)
+  
+```
+services:
+    app:
+        build: .
+        volumes:
+            - ./:/app
+        ports:
+            - '8080:8080'
+```
+
+**`.dockerignore`**
+
+- These folders/files are excluded from the copy process
+- Not needed when you only mount
+
+```
+.git
+.gitignore
+node_modules/
+vendor/
+```
+
+**Sequence**
+
+`docker-compose up => docker-compose.yml => Dockerfile => docker.sh`
+
+## docker compose
+
+#### purpose
+
+- puts all parameters in a yaml file
+- reduces number of command line options
+- does the same as docker run
+
+#### start
+- ```docker compose up``` # normal start (cached)
+- ```docker compose up -d``` # start in background
+- ```docker compose up --build``` rebuild image
+- ```docker compose up --build -d``` rebuild image and start in background
+
+#### stop
+- ```docker compose stop```
+
+#### reset
+- ```docker compose down --volumes```
+
+#### login
+- ```docker compose exec app /bin/sh```
+
+#### commands
+- ```docker compose exec app php artisan migrate```
+
+#### process
+- ```Dockerfile =[docker build]=> Docker image =[docker run]=> Docker container```
+
+#### build new image
+- ```docker build -t name .```
+- ```docker build .```
+
+#### update remote image
+- ```docker compose pull```
+- ```docker compose pull nginx```
+
+#### legacy
+- `docker-compose` is a deprecated old project, which is replaced with `docker compose`
+- the arguments are (now) mainly compatible
+
+#### run command inside docker compose.yml
+ ```
+app:
+    command: sh -c 'echo "foo"'
+```
+
+#### connect to database
+- redirect port
+  - add this to ```docker compose.yml```: ```mariadb: ports: 3307:3306```
+  - connect to localhost:3307
+- connect in laravel
+  - get ip with ```docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' project_mariadb_1```
+  - change ```.env``` to ```DB_HOST=172.19.0.3``` (new ip) and ```DB_PORT=3306```
+
+#### wsl compatibility
+- networking only works, when changing ports from ```127.0.0.1:8080:80``` to ```8080:80```
+- permissions only work, when manually giving special folders write permissions:
+```
+chmod 00777 /path/to/project/storage
+chmod 00777 /path/to/project/bootstrap/cache 
+find /path/to/project/storage -type d -exec chmod 00777 {} \;
+find /path/to/project/storage -type f -exec chmod 00777 {} \;
+find /path/to/project/bootstrap/cache -type d -exec chmod 00777 {} \;
+find /path/to/project/bootstrap/cache -type f -exec chmod 00777 {} \;
+```
+
+## build a custom docker image
 
 #### build image
 
@@ -26,68 +169,3 @@
 - `docker start test-container` # start container
 - `docker stop test-container` # stop container
 - `docker rename old-name new-name` # rename container
-
-### docker compose
-
-#### purpose
-
-- puts all parameters in a yaml file
-- reduces number of command line options
-- does the same as docker run
-
-#### legacy
-- `docker-compose` is a deprecated old project, which is replaced with `docker compose`
-- the arguments are (now) mainly compatible
-
-#### start
-- ```docker compose up```
-- ```docker compose up -d```
-
-#### stop
-- ```docker compose stop```
-
-#### reset
-- ```docker compose down --volumes```
-
-#### login
-- ```docker compose exec php-fpm /bin/sh```
-
-#### commands
-- ```docker compose exec php-fpm php artisan migrate```
-
-#### process
-- ```Dockerfile =[docker build]=> Docker image =[docker run]=> Docker container```
-
-#### build new image
-- ```docker build -t name .```
-- ```docker build .```
-
-#### update remote image
-- ```docker compose pull```
-- ```docker compose pull nginx```
-
-#### run command inside docker compose.yml
- ```
-php-fpm:
-    command: sh -c 'echo "foo"'
-```
-
-#### connect to database
-- redirect port
-  - add this to ```docker compose.yml```: ```mariadb: ports: 3307:3306```
-  - connect to localhost:3307
-- connect in laravel
-  - get ip with ```docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' project_mariadb_1```
-  - change ```.env``` to ```DB_HOST=172.19.0.3``` (new ip) and ```DB_PORT=3306```
-
-#### wsl compatibility
-- networking only works, when changing ports from ```127.0.0.1:8080:80``` to ```8080:80```
-- permissions only work, when manually giving special folders write permissions:
-```
-chmod 00777 /path/to/project/storage
-chmod 00777 /path/to/project/bootstrap/cache 
-find /path/to/project/storage -type d -exec chmod 00777 {} \;
-find /path/to/project/storage -type f -exec chmod 00777 {} \;
-find /path/to/project/bootstrap/cache -type d -exec chmod 00777 {} \;
-find /path/to/project/bootstrap/cache -type f -exec chmod 00777 {} \;
-```
