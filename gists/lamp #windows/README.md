@@ -128,6 +128,13 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 - comment out ```%sudo ALL=(ALL:ALL) ALL```
 - ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
+#### install basic linux packages
+- ```sudo apt-get install nano curl sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils apt-utils software-properties-common```
+
+#### disable nginx
+- `sudo systemctl disable nginx`
+- `sudo systemctl disable --now nginx`
+
 #### redis
 - ```sudo apt-get -y install redis-server```
 - ```sudo systemctl start redis-server```
@@ -302,13 +309,6 @@ parse_git_tag() { git describe --exact-match --tags 2> /dev/null | sed -e 's/\(.
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;31m\]\h\[\033[00m\]~\[\e[0;36m\]\t\[\033[00m\]~\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[01;33m\]$(parse_git_tag)\[\033[00m\]\$ '
 ```
 - ```source ~/.bash_profile```
-
-#### install basic linux packages
-- ```sudo apt-get install nano sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils```
-
-#### disable nginx
-- `sudo systemctl disable nginx`
-- `sudo systemctl disable --now nginx`
 
 #### apache/php/mysql
 - ```sudo apt-get install apache2 mysql-server```

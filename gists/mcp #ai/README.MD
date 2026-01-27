@@ -52,6 +52,9 @@
     - `echo "net.ipv4.ping_group_range = 0 2147483647" | sudo tee -a /etc/sysctl.conf`
     - `sudo sysctl -p`
   - if the connection via node is not working, restart wsl and/or put direct ip (`ping custom-domain.xyz`) inside `/etc/hosts`
+- login without password
+  - copy `/root/.cloudflared/*.json` to other computer
+  - `cloudflared tunnel --config cloudflare.yaml --credentials-file cloudflare.json run TUNNEL`
 
 ### usage
 

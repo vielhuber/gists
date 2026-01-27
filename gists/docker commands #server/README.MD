@@ -2,8 +2,10 @@
 
 **tl;dr**
 
-- Reset + rebuild: `docker compose down --volumes && docker-compose up --build`
-- Rebuild: `docker-compose up --build`
+- Reset + rebuild: `clear && docker compose down --volumes && docker-compose up --build`
+- Rebuild: `clear && docker-compose up --build`
+- Just Start: `clear && docker-compose up`
+- Login: `docker compose exec app /bin/bash`
 
 **`Dockerfile`**
 
@@ -32,7 +34,7 @@ CMD ["/docker.sh"]
 - Performs the final configuration
   
 ```
-#!/bin/sh
+#!/usr/bin/env bash
 cd /app
 pip install --no-cache-dir -r requirements.txt
 npm install
@@ -95,7 +97,7 @@ vendor/
 - ```docker compose down --volumes```
 
 #### login
-- ```docker compose exec app /bin/sh```
+- ```docker compose exec app /bin/bash```
 
 #### commands
 - ```docker compose exec app php artisan migrate```
