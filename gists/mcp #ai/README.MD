@@ -38,8 +38,9 @@
 
 #### installation
 
-- `curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null`
-- `echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list`
+- `sudo mkdir -p --mode=0755 /usr/share/keyrings`
+- `curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg > /dev/null`
+- `echo "deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main" | sudo tee /etc/apt/sources.list.d/cloudflared.list`
 - `sudo apt-get update`
 - `sudo apt-get install cloudflared`
 - `cloudflared tunnel login`
@@ -52,9 +53,14 @@
     - `echo "net.ipv4.ping_group_range = 0 2147483647" | sudo tee -a /etc/sysctl.conf`
     - `sudo sysctl -p`
   - if the connection via node is not working, restart wsl and/or put direct ip (`ping custom-domain.xyz`) inside `/etc/hosts`
-- login without password
-  - copy `/root/.cloudflared/*.json` to other computer
-  - `cloudflared tunnel --config cloudflare.yaml --credentials-file cloudflare.json run TUNNEL`
+  - enable mixed ssl
+    - if your host does not have ssl certificates, go to SSL/TLS > Overview > Configure > Flexible
+  - login without password
+    - copy `/root/.cloudflared/*.json` to other computer
+    - `cloudflared tunnel --config cloudflare.yaml --credentials-file cloudflare.json run TUNNEL`
+  - to disable minification/caching
+    - setup caching rules in dashboard
+    - or send headers via `.htaccess`
 
 ### usage
 

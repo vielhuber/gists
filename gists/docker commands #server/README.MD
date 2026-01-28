@@ -2,44 +2,11 @@
 
 **tl;dr**
 
-- Reset + rebuild: `clear && docker compose down --volumes && docker-compose up --build`
-- Rebuild: `clear && docker-compose up --build`
-- Just Start: `clear && docker-compose up`
-- Login: `docker compose exec app /bin/bash`
-
-**`Dockerfile`**
-
-- General instructions
-- Defines which base image is used (e.g., Alpine Linux)
-- Specifies which script is executed at startup (→ docker.sh)
-- Copies your code into the container
-- Can also install software (PHP, Python, Node, MariaDB, etc.)
-
-```
-FROM alpine:latest
-# copy files, not needed, since we always mount (also on production because of git clone)
-#COPY . /app
-# start script
-COPY docker.sh /docker.sh
-RUN chmod +x /docker.sh
-CMD ["/docker.sh"]
-```
-
-**`docker.sh`**
-
-- Startup script
-- Runs automatically when the container starts
-- Initializes the database (MariaDB setup, create users)
-- Starts all services (e.g., with Supervisor: web server, Python app, etc.)
-- Performs the final configuration
-  
-```
-#!/usr/bin/env bash
-cd /app
-pip install --no-cache-dir -r requirements.txt
-npm install
-...
-```  
+- reset + rebuild: `clear && docker compose down --volumes && docker compose build --no-cache | tee build.log`
+- start: `docker compose up`
+- login: `docker compose exec app /bin/bash`
+- reset + rebuild + start: `clear && docker compose down --volumes && docker compose build --no-cache | tee build.log && docker compose up`
+- rebuild + start: `clear && docker compose build --no-cache | tee build.log && docker compose up`
   
 **`docker-compose.yml`**
 
@@ -55,15 +22,79 @@ services:
     app:
         build: .
         volumes:
+            # natively mount external applications
+            - /usr/bin/php8.3:/host/php8.3
+            - /var/www/custom:/host/custom
+            # local development (not needed on production)
             - ./:/app
+            # ignore node_modules and vendor directories to prevent overwriting container installs
+            - /app/venv
+            - /app/node_modules
+            - /app/vendor
+            - /app/_public
         ports:
-            - '8080:8080'
+            - '8000:8000'
+            - '8001:8001'
+```
+
+**`Dockerfile`**
+
+- General instructions
+- Defines which base image is used (e.g., Alpine Linux)
+- Copies your code into the container
+- Specifies which script is executed at build and startup
+
+```
+FROM alpine:latest
+
+# if you want to use ubuntu instead
+#FROM ubuntu:latest
+
+# copy
+COPY . /app
+
+# build
+COPY ./docker-build.sh /docker-build.sh
+RUN chmod +x /docker-build.sh
+RUN /docker-build.sh
+
+# start
+COPY ./docker-start.sh /docker-start.sh
+RUN chmod +x /docker-start.sh
+CMD ["/docker-start.sh"]
+```
+
+**`docker-build.sh`**
+
+- Build script
+- Runs automatically when the container builds
+- Initializes the database (MariaDB setup, create users)
+- Performs the final configuration
+  
+```
+#!/usr/bin/env bash
+cd /app
+apt-get install -y git curl
+pip install --no-cache-dir -r requirements.txt
+npm install
+...
+```
+
+**`docker-start.sh`**
+
+- Start script
+- Runs automatically when the container starts
+- Starts all services (e.g., with Supervisor: web server, Python app, etc.)
+  
+```
+#!/usr/bin/env bash
+exec /usr/bin/supervisord --nodaemon
 ```
 
 **`.dockerignore`**
 
-- These folders/files are excluded from the copy process
-- Not needed when you only mount
+- These folders/files are excluded from the copy (not mount!) process
+- If you mount files that already exist inside docker, they get overwritten
 
 ```
 .git
@@ -71,10 +102,6 @@ services:
 node_modules/
 vendor/
 ```
-
-**Sequence**
-
-`docker-compose up => docker-compose.yml => Dockerfile => docker.sh`
 
 ## docker compose
 
@@ -88,6 +115,7 @@ vendor/
 - ```docker compose up``` # normal start (cached)
 - ```docker compose up -d``` # start in background
 - ```docker compose up --build``` rebuild image
+- ```docker compose up --build --no-cache``` rebuild image without cache
 - ```docker compose up --build -d``` rebuild image and start in background
 
 #### stop

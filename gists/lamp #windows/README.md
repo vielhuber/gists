@@ -129,7 +129,7 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 - ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
 #### install basic linux packages
-- ```sudo apt-get install nano curl sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils apt-utils software-properties-common```
+- ```sudo apt-get install nano curl sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils apt-utils software-properties-common iputils-ping```
 
 #### disable nginx
 - `sudo systemctl disable nginx`
@@ -144,13 +144,17 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 - ```redis-cli ping```
 
 #### docker
-- Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
-- Installation: "Install required Windows components for WSL 2"
-- Settings > General > "Use the WSL 2 based engine"
-- Settings > Resources -> WSL Integration -> "Enable integration with my default WSL distro", 
-- Login with account
-- ```docker version```
-- ```docker-compose version```
+- Option #1 (with gui in windows)
+  - Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
+  - Installation: "Install required Windows components for WSL 2"
+  - Login with account
+  - Settings > General > "Use the WSL 2 based engine"
+  - Settings > Resources -> WSL Integration -> "Enable integration with my default WSL distro", 
+  - Test inside WSL
+    - ```docker version```
+    - ```docker compose version```
+- Option #2 (run docker natively inside wsl)
+  - Install exactly like on `https://docs.docker.com/engine/install/ubuntu/`
 
 #### xserver (deprecated and therefore not needed anymore; now included in wslg!)
 - download vcxsrv (https://sourceforge.net/projects/vcxsrv/files/latest/download)
