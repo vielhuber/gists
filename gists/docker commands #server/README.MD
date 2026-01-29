@@ -25,6 +25,8 @@ services:
             # natively mount external applications
             - /usr/bin/php8.3:/host/php8.3
             - /var/www/custom:/host/custom
+            # mount permanent data (host folder must exist)
+            - ~/.custom-app/permanent:/path/inside/host/permanent
             # local development (not needed on production)
             - ./:/app
             # ignore node_modules and vendor directories to prevent overwriting container installs
@@ -151,13 +153,24 @@ app:
     command: sh -c 'echo "foo"'
 ```
 
+#### vscode development
+
+- Extension installieren: Dev Container
+- STRG+Shift+P: Reopen in Container > `docker-compose.yml`
+- Extensions installieren: Entwicklungscontainer > Wolke > Alle markieren > Installieren
+- Workspace anpassen: `.devcontainer/devcontainer.json` > workspaceFolder ändern auf `/app`
+- Start: `code .` in WSL, dann in Container erneut öffnen (Popup rechts unten)
+
 #### connect to database
-- redirect port
-  - add this to ```docker compose.yml```: ```mariadb: ports: 3307:3306```
-  - connect to localhost:3307
-- connect in laravel
-  - get ip with ```docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' project_mariadb_1```
-  - change ```.env``` to ```DB_HOST=172.19.0.3``` (new ip) and ```DB_PORT=3306```
+- from host to docker
+  - redirect port
+    - add this to ```docker compose.yml```: ```mariadb: ports: 3307:3306```
+    - connect to localhost:3307
+  - connect in laravel
+    - get ip with ```docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' project_mariadb_1```
+    - change ```.env``` to ```DB_HOST=172.19.0.3``` (new ip) and ```DB_PORT=3306```
+- from docker to host
+  - use `host.docker.internal` with port `3306`
 
 #### wsl compatibility
 - networking only works, when changing ports from ```127.0.0.1:8080:80``` to ```8080:80```

@@ -38,16 +38,20 @@
 
 #### installation
 
-- `sudo mkdir -p --mode=0755 /usr/share/keyrings`
-- `curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg > /dev/null`
-- `echo "deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main" | sudo tee /etc/apt/sources.list.d/cloudflared.list`
-- `sudo apt-get update`
-- `sudo apt-get install cloudflared`
+- setup a domain
+- `Do not block (allow crawlers)` + `Disable robots.txt configuration`
+- Security > Settings  > Browser integrity check: off
+- Settings > Security rules > Create rule > Custom rules > Block + Edit expression: `(not starts_with(http.host, "mcp.")) and (not ip.src in {123.456.789.12 123.456.789.13 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx})`
+- set ssl mode `Flexible`
+- delete all existing dns entries
+- install cloudflared with as described [here](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/local-management/create-local-tunnel/)
+- `rm /root/.cloudflared/cert.pem`
 - `cloudflared tunnel login`
 - `cloudflared tunnel create TUNNEL`
 - `cloudflared tunnel route dns --overwrite-dns TUNNEL custom-domain.xyz`
 - `cloudflared tunnel route dns --overwrite-dns TUNNEL '*.custom-domain.xyz'`
 - notes
+  - you can always edit only one tunnel (logout and login again to edit another tunnel)
   - admin interface can be found on cloudflare.com > Zero Trust > Networks > Tunnels
   - remove warnings in log
     - `echo "net.ipv4.ping_group_range = 0 2147483647" | sudo tee -a /etc/sysctl.conf`
@@ -56,7 +60,8 @@
   - enable mixed ssl
     - if your host does not have ssl certificates, go to SSL/TLS > Overview > Configure > Flexible
   - login without password
-    - copy `/root/.cloudflared/*.json` to other computer
+    - `cloudflared tunnel list`
+    - copy `/root/.cloudflared/<TUNNEL_ID>.json` to other computer
     - `cloudflared tunnel --config cloudflare.yaml --credentials-file cloudflare.json run TUNNEL`
   - to disable minification/caching
     - setup caching rules in dashboard
