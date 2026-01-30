@@ -25,7 +25,7 @@ services:
             # natively mount external applications
             - /usr/bin/php8.3:/host/php8.3
             - /var/www/custom:/host/custom
-            # mount permanent data (host folder must exist)
+            # mount permanent data (folder on host must exist)
             - ~/.custom-app/permanent:/path/inside/host/permanent
             # local development (not needed on production)
             - ./:/app
@@ -86,10 +86,16 @@ npm install
 
 - Start script
 - Runs automatically when the container starts
+- Repopulates config files
 - Starts all services (e.g., with Supervisor: web server, Python app, etc.)
   
 ```
 #!/usr/bin/env bash
+
+# clear tmp/pids/logs/...
+rm -rf /tmp/*
+
+# run supervisor
 exec /usr/bin/supervisord --nodaemon
 ```
 

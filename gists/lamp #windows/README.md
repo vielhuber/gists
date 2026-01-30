@@ -129,7 +129,7 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 - ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
 #### install basic linux packages
-- ```sudo apt-get install nano curl sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils apt-utils software-properties-common iputils-ping```
+- ```sudo apt-get install nano curl sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils apt-utils software-properties-common iputils-ping gettext```
 
 #### disable nginx
 - `sudo systemctl disable nginx`

@@ -84,7 +84,19 @@
 - 12-Factor Agents: https://github.com/humanlayer/12-factor-agents
 
 ### MCP
-- Siehe separates Gist
+- Repos: https://mcpservers.org
+- Repos: https://dxt.so
+- video (c't): https://www.youtube.com/watch?v=S_4VUJ-x8hE
+- MCP Inspector: https://modelcontextprotocol.io/legacy/tools/inspector
+- Claude Desktop: https://claude.ai/download
+- VScode Cline: https://cline.bot
+- Video (Laravel): https://www.youtube.com/watch?v=T22_rXew72M
+- PHP Library: https://github.com/php-mcp/server
+- MCP SuperAssistant: https://mcpsuperassistant.ai
+- Claude Tutorial: https://www.reddit.com/r/ClaudeAI/comments/1ji8ruv/my_claude_workflow_guide_advanced_setup_with_mcp/
+- Playwright MCP: https://github.com/microsoft/playwright-mcp
+- FastMCP: https://gofastmcp.com
+- mcp-cli: https://github.com/chrishayuk/mcp-cli
 
 ### Lokal / Selbsthosting
 - LM Studio: https://lmstudio.ai
