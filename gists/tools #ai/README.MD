@@ -215,6 +215,7 @@
 - Scribbr: https://www.scribbr.de
 - aihumaize.io: https://aihumanize.io
 - HIX Bypass: https://bypass.hix.ai
+- Prompt Hacks: https://x.com/HeyNayeem/status/2017251056003215866
 
 ### Buch schreiben
 - Sudowrite: https://www.sudowrite.com
@@ -248,6 +249,8 @@
 - Zapier: https://zapier.com
 - Power Automate: https://www.microsoft.com/de-de/power-platform/products/power-automate?market=de
 - Emma: https://www.emmarobot.io
+- OpenClaw: https://openclaw.ai
+- MoltBook: https://www.moltbook.com
 
 ### Toolsammlung
 - AI Center: https://aicenter.ai
@@ -270,6 +273,7 @@
 - European Open Source AI Index: https://osai-index.eu/the-index
 
 ### Jailbroken / Uncensored
+- GPT4Free: https://github.com/xtekky/gpt4free
 - Heretic: https://github.com/p-e-w/heretic
 - Uncensored: https://uncensored.com
 - Prompts: https://github.com/elder-plinius/L1B3RT4S

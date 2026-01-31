@@ -65,4 +65,5 @@ stderr_logfile=/var/log/supervisor/worker_err.log
 priority=999
 startretries=3
 startsecs=5
+numprocs=10
 ```

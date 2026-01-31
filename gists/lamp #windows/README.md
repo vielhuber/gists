@@ -148,6 +148,8 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
   - Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
   - Installation: "Install required Windows components for WSL 2"
   - Login with account
+  - Settings > General > Start Docker Desktop when you sign in to your computer: anb
+  - Settings > General > Open Docker Dashboard when Docker Desktop starts: aus
   - Settings > General > "Use the WSL 2 based engine"
   - Settings > Resources -> WSL Integration -> "Enable integration with my default WSL distro", 
   - Test inside WSL
