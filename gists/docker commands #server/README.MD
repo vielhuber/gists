@@ -2,11 +2,11 @@
 
 **tl;dr**
 
-- reset + rebuild: `clear && docker compose down --volumes && docker compose build --no-cache | tee build.log`
+- reset + rebuild: `clear && docker compose down --volumes && docker compose build --no-cache | tee logs/build.log`
 - start: `docker compose up`
 - login: `docker compose exec app /bin/bash`
-- reset + rebuild + start: `clear && docker compose down --volumes && docker compose build --no-cache | tee build.log && docker compose up`
-- rebuild + start: `clear && docker compose build --no-cache | tee build.log && docker compose up`
+- reset + rebuild + start: `clear && docker compose down --volumes && docker compose build --no-cache | tee logs/build.log && docker compose up`
+- rebuild + start: `clear && docker compose build --no-cache | tee logs/build.log && docker compose up`
   
 **`docker-compose.yml`**
 
@@ -27,6 +27,8 @@ services:
             - /var/www/custom:/host/custom
             # mount permanent data (folder on host must exist)
             - ~/.custom-app/permanent:/path/inside/host/permanent
+            # permanently save vscode extensions
+            - ~/.vscode-server-docker:/root/.vscode-server
             # local development (not needed on production)
             - ./:/app
             # ignore node_modules and vendor directories to prevent overwriting container installs
@@ -163,9 +165,20 @@ app:
 
 - Extension installieren: Dev Container
 - STRG+Shift+P: Reopen in Container > `docker-compose.yml`
-- Extensions installieren: Entwicklungscontainer > Wolke > Alle markieren > Installieren
-- Workspace anpassen: `.devcontainer/devcontainer.json` > workspaceFolder ändern auf `/app`
+- Extensions installieren: Entwicklungscontainer > Wolke > Alle markieren > Installieren + `~/.vscode-server-docker:/root/.vscode-server` in `docker-compose.yml`
 - Start: `code .` in WSL, dann in Container erneut öffnen (Popup rechts unten)
+- Einstellungen anpassen: `.devcontainer/devcontainer.json`:
+
+```
+{
+    "name": "DOCKER",
+    "dockerComposeFile": ["../docker-compose.yml"],
+    "service": "app",
+    "workspaceFolder": "/app",
+    "runServices": [],
+    "shutdownAction": "none"
+}
+```
 
 #### connect to database
 - from host to docker

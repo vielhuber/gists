@@ -15,8 +15,10 @@
 - `supervisorctl update` # start new programs
 - `supervisorctl start test` # starts test
 - `supervisorctl stop test` # stops test
-- `supervisorctl stop all` # starts all
-- `supervisorctl start all` # sops all
+- `supervisorctl start all` # starts all
+- `supervisorctl stop all` # stops all
+- `supervisorctl start php-workers:*` # starts group
+- `supervisorctl stop php-workers:*` # stops group
 
 ## run standalone inside containers
 
@@ -54,7 +56,7 @@ startretries=1
 startsecs=10
 
 [program:php-worker]
-command=/bin/bash -c 'sleep 10 && exec /usr/bin/php /path/to/worker/worker.php'
+command=/bin/bash -c 'sleep 10 && exec /usr/bin/php /path/to/worker/worker.php %(process_num)s'
 directory=/path/to/worker
 autostart=true
 autorestart=true
@@ -66,4 +68,8 @@ priority=999
 startretries=3
 startsecs=5
 numprocs=10
+process_name=%(program_name)s-%(process_num)02d
+
+[group:php-workers]
+programs=php-worker
 ```
