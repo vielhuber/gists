@@ -26,6 +26,7 @@ services:
             - /usr/bin/php8.3:/host/php8.3
             - /var/www/custom:/host/custom
             # mount permanent data (folder on host must exist)
+            - /mnt/c/Users/David/Downloads:/host/tmp
             - ~/.custom-app/permanent:/path/inside/host/permanent
             # permanently save vscode extensions
             - ~/.vscode-server-docker:/root/.vscode-server

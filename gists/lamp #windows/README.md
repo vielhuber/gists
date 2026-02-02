@@ -129,7 +129,7 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 - ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
 #### install basic linux packages
-- ```sudo apt-get install nano curl sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils apt-utils software-properties-common iputils-ping gettext```
+- ```sudo apt-get install nano curl sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils apt-utils software-properties-common iputils-ping gettext sshpass```
 
 #### disable nginx
 - `sudo systemctl disable nginx`
@@ -522,6 +522,7 @@ error_log = /var/log/php-error.log
 ;error_reporting = E_ALL & ~E_NOTICE
 error_reporting = E_ALL
 phar.readonly = 0
+upload_tmp_dir = '/tmp'
 
 opcache.enable=1
 opcache.enable_cli=0
