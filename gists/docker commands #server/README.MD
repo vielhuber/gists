@@ -37,9 +37,15 @@ services:
             - /app/node_modules
             - /app/vendor
             - /app/_public
+            # xserver
+            - /tmp/.X11-unix:/tmp/.X11-unix:rw
         ports:
             - '8000:8000'
             - '8001:8001'
+            - '5001:5001'
+        environment:
+            - IS_DOCKER=1
+            - DISPLAY=host.docker.internal:0
 ```
 
 **`Dockerfile`**
@@ -79,9 +85,18 @@ CMD ["/docker-start.sh"]
 ```
 #!/usr/bin/env bash
 cd /app
+
+# set environment variables (for build and start)
+echo 'export IS_DOCKER=1' >> /root/.bash_profile
+export IS_DOCKER=1
+echo 'export DISPLAY=host.docker.internal:0' >> /root/.bash_profile
+export DISPLAY=host.docker.internal:0
+
+# install packages
 apt-get install -y git curl
 pip install --no-cache-dir -r requirements.txt
 npm install
+
 ...
 ```
 
