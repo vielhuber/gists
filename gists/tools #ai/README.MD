@@ -82,6 +82,7 @@
 - Benchmark: https://os-world.github.io
 - Warmwind OS: https://warmwind.space
 - 12-Factor Agents: https://github.com/humanlayer/12-factor-agents
+- Dataleap: https://www.dataleap.ai
 
 ### MCP
 - Repos: https://mcpservers.org
