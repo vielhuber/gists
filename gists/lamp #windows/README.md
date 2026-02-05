@@ -148,9 +148,18 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
   - Download Docker desktop: https://hub.docker.com/editions/community/docker-ce-desktop-windows/
   - Installation: "Install required Windows components for WSL 2"
   - Login with account
-  - Settings > General > Start Docker Desktop when you sign in to your computer: anb
+  - Settings > General > Start Docker Desktop when you sign in to your computer: an
   - Settings > General > Open Docker Dashboard when Docker Desktop starts: aus
   - Settings > General > "Use the WSL 2 based engine"
+  - Image verkleinern
+    - `docker system prune -a`
+    - Shutdown docker + wsl
+    - PowerShell (Admin): `Optimize-VHD -Path "docker_data.vhdx" -Mode Full`
+  - Image verschieben
+    - Docker pausieren
+    - Umgebungsvariablen bearbeiten > User > Zu PATH `C:\Windows\System32` hinzufügen
+    - Docker > Settings > Resources > Disk image location: `E:\docker`
+    - Falls er es nicht schluckt: `C:\Users\David\AppData\Local\Docker\wsl\disk\*.vhdx` manuell löschen
   - Settings > Resources -> WSL Integration -> "Enable integration with my default WSL distro", 
   - Test inside WSL
     - ```docker version```
