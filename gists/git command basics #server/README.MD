@@ -199,6 +199,14 @@ if gitignore is not working for a specific file/folder (this does not(!) delete 
 
 #### rebase vs. merge
 
+| pull | merge |
+|---|---|
+| production | local |
+| shared branches (`main`, `develop`, ...) | Only branches where I work alone |
+| `git pull` | `git pull --rebase` |
+| `git merge foo` | `git rebase foo` |
+| `git push` | `git push --force-with-lease` |
+
 **merge**
 
 - `git pull`
