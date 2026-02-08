@@ -752,11 +752,11 @@ xdebug.output_dir="/tmp/xdebug"
 
 #### restart router / pc
 - `export VISUAL=nano; crontab -e`
-- `0 4 * * * source $HOME/.bash_profile; /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.sh > /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/cron.log 2>&1`
+- `0 4 * * * source $HOME/.bash_profile; /mnt/c/Users/David/OneDrive/DOCS/SCRIPTS/VODAFONE/cron.sh > /mnt/c/Users/David/OneDrive/DOCS/SCRIPTS/VODAFONE/cron.log 2>&1`
 - `cron.sh`
 ```sh
 #!/usr/bin/env bash
-/root/.nvm/versions/node/v23.5.0/bin/node --env-file=/mnt/c/Users/David/OneDrive/DOCS/VODAFONE/.env /mnt/c/Users/David/OneDrive/DOCS/VODAFONE/stagehand.js
+/root/.nvm/versions/node/v23.5.0/bin/node --env-file=/mnt/c/Users/David/OneDrive/DOCS/SCRIPTS/VODAFONE/.env /mnt/c/Users/David/OneDrive/DOCS/SCRIPTS/VODAFONE/stagehand.js
 shutdown.exe /s /t 0
 ```
 
