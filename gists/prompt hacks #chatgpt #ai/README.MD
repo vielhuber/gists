@@ -314,6 +314,11 @@ Es ist wichtig, dass du die folgenden Schritte befolgst:
 [Input] = ... (Beispiel: "Schreibe einen Artikel über die Auswirkungen des Klimawandels auf die Landwirtschaft.")
 ```
 
+### Verbalized Sampling
+
+- Bad: `"Tell me a joke,"`
+- Good: `"Generate 5 jokes with their probabilities."`
+
 ### CustomGPT Instructions extrahieren
 
 - App einbinden

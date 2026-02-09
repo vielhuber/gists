@@ -15,7 +15,7 @@
 - Jasper: https://www.jasper.ai
 - Tencent HunYuan: https://huggingface.co/spaces/tencent/Hunyuan-T1
 - T3.chat: https://t3.chat
-- Kimi K2: https://www.kimi.com
+- Moonshot / Kimi K2: https://www.moonshot.ai / https://www.kimi.com
 - z.ai: https://z.ai
 
 ### Programmierung
@@ -83,6 +83,7 @@
 - Warmwind OS: https://warmwind.space
 - 12-Factor Agents: https://github.com/humanlayer/12-factor-agents
 - Dataleap: https://www.dataleap.ai
+- Tachibot: https://www.tachibot.com
 
 ### MCP
 - Repos: https://mcpservers.org
