@@ -103,7 +103,8 @@
 ### Lokal / Selbsthosting
 - LM Studio: https://lmstudio.ai
 - Ollama: https://ollama.com
-- Transformers.js: https://huggingface.co/docs/transformers.js
+- Transformers.js: https://huggingface.co/docs/transformers.js###
+- HuggingFace: https://huggingface.co
 
 ### Developer Tools
 - Claude Console: https://console.anthropic.com
@@ -267,9 +268,6 @@
 
 ### Prompt generation
 - AI-27: https://ai-27.com/prompt
-
-### Remote Hosting
-- HuggingFace: https://huggingface.co
 
 ### Open Source / Open Weights
 - European Open Source AI Index: https://osai-index.eu/the-index
