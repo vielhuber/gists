@@ -25,12 +25,12 @@ services:
             # natively mount external applications
             - /usr/bin/php8.3:/host/php8.3
             - /var/www/custom:/host/custom
-            # mount permanent data (folder on host must exist)
-            - /mnt/c/Users/David/Downloads:/host/tmp
+            # mount permanent data (folder on host must exist); example reads .env file in root folder
+            - ${DOCKER_MOUNT_TMP}:/host/tmp
             - ~/.custom-app/permanent:/path/inside/host/permanent
             # permanently save vscode extensions
             - ~/.vscode-server-docker:/root/.vscode-server
-            # local development (not needed on production)
+            # local development (not needed on production, use COPY in Dockerfile there)
             - ./:/app
             # ignore node_modules and vendor directories to prevent overwriting container installs
             - /app/venv
@@ -44,6 +44,7 @@ services:
             - '8001:8001'
             - '5001:5001'
         environment:
+            # these environment variables are only available after build
             - IS_DOCKER=1
             - DISPLAY=host.docker.internal:0
 ```
@@ -54,6 +55,7 @@ services:
 - Defines which base image is used (e.g., Alpine Linux)
 - Copies your code into the container
 - Specifies which script is executed at build and startup
+- `COPY/RUN` commands only run on build, `CMD` commands only run on start
 
 ```
 FROM alpine:latest
@@ -61,18 +63,14 @@ FROM alpine:latest
 # if you want to use ubuntu instead
 #FROM ubuntu:latest
 
-# copy
-COPY . /app
+# copy (not needed, since we mount)
+#COPY . /app
 
 # build
-COPY ./docker-build.sh /docker-build.sh
-RUN chmod +x /docker-build.sh
-RUN /docker-build.sh
+RUN /app/docker-build.sh
 
 # start
-COPY ./docker-start.sh /docker-start.sh
-RUN chmod +x /docker-start.sh
-CMD ["/docker-start.sh"]
+CMD ["/app/docker-start.sh"]
 ```
 
 **`docker-build.sh`**
@@ -110,11 +108,11 @@ npm install
 ```
 #!/usr/bin/env bash
 
-# clear tmp/pids/logs/...
-rm -rf /tmp/*
+# run some other scripts
+./app/test.sh >> /app/logs/startup.log 2>&1
 
 # run supervisor
-exec /usr/bin/supervisord --nodaemon
+exec /usr/bin/supervisord --nodaemon >> /app/logs/startup.log 2>&1
 ```
 
 **`.dockerignore`**
