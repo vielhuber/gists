@@ -105,6 +105,8 @@
 - Ollama: https://ollama.com
 - Transformers.js: https://huggingface.co/docs/transformers.js###
 - HuggingFace: https://huggingface.co
+- Runpod: https://console.runpod.io
+- Vultr: https://www.vultr.com
 
 ### Developer Tools
 - Claude Console: https://console.anthropic.com
