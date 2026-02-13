@@ -1,3 +1,6 @@
+REM comments
+:: comments
+
 REM disable commands
 @ECHO OFF
 

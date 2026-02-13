@@ -197,6 +197,32 @@ if gitignore is not working for a specific file/folder (this does not(!) delete 
 - `git blame path/to/file`
 - `git blame path/to/file -L 100,200` # show only specific lines
 
+#### git worktree llm workflow
+
+```
+# setup
+cd /project
+git worktree add ./main-worker-1 -b feature/main-worker-1 main
+git worktree add ./main-worker-2 -b feature/main-worker-2 main
+git worktree add ./main-worker-3 -b feature/main-worker-3 main
+
+# code
+cd ./main-worker-1 && code . && cd ..
+cd ./main-worker-2 && code . && cd ..
+cd ./main-worker-3 && code . && cd ..
+
+# merge
+git merge feature/main-worker-1
+git merge feature/main-worker-2
+git merge feature/main-worker-3
+
+# cleanup
+git worktree remove ./main-worker-1
+git worktree remove ./main-worker-2
+git worktree remove ./main-worker-3
+git branch -d feature/main-worker-1 feature/main-worker-2 feature/main-worker-3
+```
+
 #### rebase vs. merge
 
 | pull | merge |
