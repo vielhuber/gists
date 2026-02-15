@@ -372,6 +372,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```sudo apt-get install -y php8.1 php8.1-fpm libapache2-mod-php8.1 php8.1-mysql php8.1-cli php8.1-common php8.1-xdebug php8.1-mbstring php8.1-xmlrpc php8.1-gd php8.1-intl php8.1-xml php8.1-mysql php8.1-zip php8.1-soap php8.1-curl php8.1-bcmath php8.1-xml php8.1-sqlite php8.1-imap php8.1-opcache php8.1-pgsql php8.1-pdo php8.1-gd php8.1-imagick```
 - ```sudo apt-get install -y php8.2 php8.2-fpm libapache2-mod-php8.2 php8.2-mysql php8.2-cli php8.2-common php8.2-xdebug php8.2-mbstring php8.2-xmlrpc php8.2-gd php8.2-intl php8.2-xml php8.2-mysql php8.2-zip php8.2-soap php8.2-curl php8.2-bcmath php8.2-xml php8.2-sqlite php8.2-imap php8.2-opcache php8.2-pgsql php8.2-pdo php8.2-gd php8.2-imagick```
 - ```sudo apt-get install -y php8.3 php8.3-fpm libapache2-mod-php8.3 php8.3-mysql php8.3-cli php8.3-common php8.3-xdebug php8.3-mbstring php8.3-xmlrpc php8.3-gd php8.3-intl php8.3-xml php8.3-mysql php8.3-zip php8.3-soap php8.3-curl php8.3-bcmath php8.3-xml php8.3-sqlite php8.3-imap php8.3-opcache php8.3-pgsql php8.3-pdo php8.3-gd php8.3-imagick```
+- ```sudo apt-get install -y php8.4 php8.4-fpm libapache2-mod-php8.4 php8.4-mysql php8.4-cli php8.4-common php8.4-xdebug php8.4-mbstring php8.4-xmlrpc php8.4-gd php8.4-intl php8.4-xml php8.4-mysql php8.4-zip php8.4-soap php8.4-curl php8.4-bcmath php8.4-xml php8.4-sqlite php8.4-imap php8.4-opcache php8.4-pgsql php8.4-pdo php8.4-gd php8.4-imagick```
+- ```sudo apt-get install -y php8.5 php8.5-fpm libapache2-mod-php8.5 php8.5-mysql php8.5-cli php8.5-common php8.5-xdebug php8.5-mbstring php8.5-xmlrpc php8.5-gd php8.5-intl php8.5-xml php8.5-mysql php8.5-zip php8.5-soap php8.5-curl php8.5-bcmath php8.5-xml php8.5-sqlite php8.5-imap php8.5-pgsql php8.5-pdo php8.5-gd php8.5-imagick```
 - note: extensions must not be uncommented in php.ini but installed on the command line
 
 #### apache extensions
@@ -580,6 +582,8 @@ xdebug.output_dir="/tmp/xdebug"
 - ```ln -s /etc/php/custom.ini /etc/php/8.1/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.2/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.3/apache2/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.4/apache2/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.5/apache2/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.1/fpm/conf.d/custom.ini```
@@ -590,6 +594,8 @@ xdebug.output_dir="/tmp/xdebug"
 - ```ln -s /etc/php/custom.ini /etc/php/8.1/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.2/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.3/fpm/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.4/fpm/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.5/fpm/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/5.6/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.0/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/7.1/cli/conf.d/custom.ini```
@@ -600,6 +606,8 @@ xdebug.output_dir="/tmp/xdebug"
 - ```ln -s /etc/php/custom.ini /etc/php/8.1/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.2/cli/conf.d/custom.ini```
 - ```ln -s /etc/php/custom.ini /etc/php/8.3/cli/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.4/cli/conf.d/custom.ini```
+- ```ln -s /etc/php/custom.ini /etc/php/8.5/cli/conf.d/custom.ini```
 
 #### local environment permissions
 - reset
@@ -619,6 +627,8 @@ xdebug.output_dir="/tmp/xdebug"
   - `nano /etc/php/8.1/fpm/pool.d/www.conf`
   - `nano /etc/php/8.2/fpm/pool.d/www.conf`
   - `nano /etc/php/8.3/fpm/pool.d/www.conf`
+  - `nano /etc/php/8.4/fpm/pool.d/www.conf`
+  - `nano /etc/php/8.5/fpm/pool.d/www.conf`
     - **be aware: comment out with ";" instead of "#" :)**
       - `user = root`
       - `group = root`
@@ -632,6 +642,8 @@ xdebug.output_dir="/tmp/xdebug"
   - `nano /etc/init.d/php8.1-fpm`
   - `nano /etc/init.d/php8.2-fpm`
   - `nano /etc/init.d/php8.3-fpm`
+  - `nano /etc/init.d/php8.4-fpm`
+  - `nano /etc/init.d/php8.5-fpm`
     - `DAEMON_ARGS="-R --daemonize --fpm-config $CONFFILE"`
   - `sudo systemctl edit php5.6-fpm`
   - `sudo systemctl edit php7.0-fpm`
@@ -643,6 +655,8 @@ xdebug.output_dir="/tmp/xdebug"
   - `sudo systemctl edit php8.1-fpm`
   - `sudo systemctl edit php8.2-fpm`
   - `sudo systemctl edit php8.3-fpm`
+  - `sudo systemctl edit php8.4-fpm`
+  - `sudo systemctl edit php8.5-fpm`
     - Oberhalb einfügen:
     - `[Service]`
     - `ExecStart=`
@@ -674,6 +688,12 @@ xdebug.output_dir="/tmp/xdebug"
     - `[Service]`
     - `ExecStart=`
     - `ExecStart=/usr/sbin/php-fpm8.3 -R --nodaemonize --fpm-config /etc/php/8.3/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm8.4 -R --nodaemonize --fpm-config /etc/php/8.4/fpm/php-fpm.conf`
+    - `[Service]`
+    - `ExecStart=`
+    - `ExecStart=/usr/sbin/php-fpm8.5 -R --nodaemonize --fpm-config /etc/php/8.5/fpm/php-fpm.conf`
   - `systemctl restart php5.6-fpm`
   - `systemctl restart php7.0-fpm`
   - `systemctl restart php7.1-fpm`
@@ -684,6 +704,8 @@ xdebug.output_dir="/tmp/xdebug"
   - `systemctl restart php8.1-fpm`
   - `systemctl restart php8.2-fpm`
   - `systemctl restart php8.3-fpm`
+  - `systemctl restart php8.4-fpm`
+  - `systemctl restart php8.5-fpm`
   - `systemctl enable php5.6-fpm`
   - `systemctl enable php7.0-fpm`
   - `systemctl enable php7.1-fpm`
@@ -694,6 +716,8 @@ xdebug.output_dir="/tmp/xdebug"
   - `systemctl enable php8.1-fpm`
   - `systemctl enable php8.2-fpm`
   - `systemctl enable php8.3-fpm`
+  - `systemctl enable php8.4-fpm`
+  - `systemctl enable php8.5-fpm`
 
 #### fix small wsl warnings
 - ```sudo nano /etc/apache2/apache2.conf```
@@ -1172,7 +1196,7 @@ rm "$t"
 - ```mkdir /var/www/phpmyadmin```
 - ```cd /var/www/phpmyadmin```
 - ```composer create-project phpmyadmin/phpmyadmin .```
-- ```lamp add phpmyadmin php8.3```
+- ```lamp add phpmyadmin php8.5```
 - ```cp config.sample.inc.php config.inc.php```
 - ```nano config.inc.php```
   - ```$cfg['Servers'][$i]['user'] = 'root';```
@@ -1304,7 +1328,7 @@ whatweb \
 - https://medium.com/@leandrw/speeding-up-wsl-i-o-up-than-5x-fast-saving-a-lot-of-battery-life-cpu-usage-c3537dd03c74
 - Windows-Sicherheit > Viren- & Bedrohungsschutz > Einstellungen für Viren- & Bedrohungsschutz > Ausschlüsse hinzufügen oder entfernen
   - Ordner: D:\wsl\ubuntu-latest
-  - Prozesse: git, node, dpkg, php5.6, php7.0, php7.1, php7.2, php7.3, php7.4, php8.0, php8.1, php8.2, php8.3, php-fpm5.6, php-fpm7.0, php-fpm7.1, php-fpm7.2, php-fpm7.3, php-fpm7.4, php-fpm8.0, php-fpm8.1, php-fpm8.2, php-fpm8.3, mysql, mysqld, apache2, bash, postgres, wkhtmltopdf
+  - Prozesse: git, node, dpkg, php5.6, php7.0, php7.1, php7.2, php7.3, php7.4, php8.0, php8.1, php8.2, php8.3, php8.4, php8.5, php-fpm5.6, php-fpm7.0, php-fpm7.1, php-fpm7.2, php-fpm7.3, php-fpm7.4, php-fpm8.0, php-fpm8.1, php-fpm8.2, php-fpm8.3, php-fpm8.4, php-fpm8.5, mysql, mysqld, apache2, bash, postgres, wkhtmltopdf
 
 #### switch cli php version
 - ```sudo update-alternatives --config php```
