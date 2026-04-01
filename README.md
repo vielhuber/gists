@@ -1,3 +1,8 @@
+[![GitHub Tag](https://img.shields.io/github/v/tag/vielhuber/gists)](https://github.com/vielhuber/gists/tags)
+[![Code Style](https://img.shields.io/badge/code_style-psr--12-ff69b4.svg)](https://www.php-fig.org/psr/psr-12/)
+[![License](https://img.shields.io/github/license/vielhuber/gists)](https://github.com/vielhuber/gists/blob/main/LICENSE.md)
+[![Last Commit](https://img.shields.io/github/last-commit/vielhuber/gists)](https://github.com/vielhuber/gists/commits)
+
 # 📝 gists 📝
 
 this is a synced repo of all public github gists.
