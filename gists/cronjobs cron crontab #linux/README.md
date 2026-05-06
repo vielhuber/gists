@@ -15,10 +15,10 @@
       - `PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin`
   - option 2 (does not work always)
     - before: ```0 5 * * * /foo.sh```
-    - after: ```0 5 * * * source $HOME/.profile; /foo.sh```
+    - after: ```0 5 * * * source $HOME/.bashrc; /foo.sh```
   - option 3 (does not work always)
     - before: ```0 5 * * * /foo.sh```
-    - after: ```0 5 * * * source $HOME/.bash_profile; SERVER_ADMIN=david@vielhuber.de NAME=DAVID-DESKTOP /foo.sh```
+    - after: ```0 5 * * * source $HOME/.bashrc; SERVER_ADMIN=david@vielhuber.de NAME=DAVID-DESKTOP /foo.sh```
   - option 4 (does not work always)
     - before: ```0 5 * * * /foo.sh```
     - after: ```0 5 * * * bash -l -c '/foo.sh'```

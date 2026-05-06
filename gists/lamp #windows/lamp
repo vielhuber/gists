@@ -81,7 +81,7 @@ PHP_LINE="
   <Proxy \"fcgi://localhost-stream/\" enablereuse=on flushpackets=on>
   </Proxy>
   <FilesMatch \.php$>
-    <If \"%{HTTP:Accept} -strmatch '*text/event-stream*'\">
+    <If \"%{HTTP:Accept} -strmatch '*text/event-stream*' && %{REQUEST_URI} !~ /mcp-server\.php\$/\">
       SetHandler \"proxy:unix:/var/run/php/$3-fpm.sock|fcgi://localhost-stream/\"
       SetEnv no-gzip 1
       RequestHeader unset Accept-Encoding

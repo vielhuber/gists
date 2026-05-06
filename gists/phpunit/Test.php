@@ -59,6 +59,10 @@ class Test extends \PHPUnit\Framework\TestCase
         $this->expectException(Throwable::class);
       	throw new \Exception('foo');
       
+      	// skip tests
+      	// return; this is not good, since it causes "This test did not perform any assertions"
+      	$this->markTestSkipped('Skipped.');
+      
       	// run test n times and with time limit
       	$previous_time_limit = ini_get('max_execution_time');
       	set_time_limit(5); // note: @large etc. are not working

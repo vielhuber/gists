@@ -16,7 +16,8 @@
 - Tencent HunYuan: https://huggingface.co/spaces/tencent/Hunyuan-T1
 - T3.chat: https://t3.chat
 - Moonshot / Kimi K2: https://www.moonshot.ai / https://www.kimi.com
-- z.ai: https://z.ai
+- zAI: https://z.ai
+- Taalas: https://chatjimmy.ai
 
 ### Programmierung
 - Cursor: https://www.cursor.com
@@ -79,7 +80,6 @@
 - AgenticSeek: https://github.com/Fosowl/agenticSeek
 - Agent S: https://github.com/simular-ai/Agent-S
 - UI-TARS: https://github.com/bytedance/UI-TARS / https://agent-tars.com
-- Benchmark: https://os-world.github.io
 - Warmwind OS: https://warmwind.space
 - 12-Factor Agents: https://github.com/humanlayer/12-factor-agents
 - Dataleap: https://www.dataleap.ai
@@ -100,13 +100,16 @@
 - FastMCP: https://gofastmcp.com
 - mcp-cli: https://github.com/chrishayuk/mcp-cli
 
-### Lokal / Selbsthosting
+### Lokal / Selbsthosting/ Hosting
 - LM Studio: https://lmstudio.ai
 - Ollama: https://ollama.com
 - Transformers.js: https://huggingface.co/docs/transformers.js###
 - HuggingFace: https://huggingface.co
 - Runpod: https://console.runpod.io
 - Vultr: https://www.vultr.com
+- llmfit: https://github.com/AlexsJones/llmfit
+- Lossless Context: https://www.losslesscontext.ai
+- NVIDIA Build : https://build.nvidia.com + https://github.com/sherman-yang/nvidia-model-info
 
 ### Developer Tools
 - Claude Console: https://console.anthropic.com
@@ -115,6 +118,7 @@
 
 ### Recherche / Podcasts erstellen
 - Google NotebookLM: https://notebooklm.google
+- Mirofish: https://666ghj.github.io/mirofish-demo
   
 ### Text-To-Speech, Speech-To-Speech, Stimme klonen, Soundeffekte erzeugen
 - ElevenLabs: https://elevenlabs.io
@@ -150,26 +154,27 @@
 - Adobe Firefly: https://firefly.adobe.com
 - Midjourney Video: https://www.midjourney.com
 
-#### Produkte
+### Produkte
 - SellerPic: https://www.sellerpic.ai
 - Pippit: https://www.pippit.ai
 - JoggAI: https://www.jogg.ai
 
-#### Videos verlängern
+### Videos verlängern
 - Kling AI: https://klingai.com/image-to-video/frame-mode
 
-#### Animationsvideos generieren
+### Animationsvideos generieren
 - SteveAI: https://www.steve.ai
 
-#### Avatare / Sprechervideos generieren
+### Avatare / Sprechervideos generieren
 - HeyGen: https://www.heygen.com
 - HeyGen Interactive Avatar: https://labs.heygen.com/interactive-avatar
 - LiveAvatar: https://www.liveavatar.com
 - VEED: https://www.veed.io
 - synthesia: https://www.synthesia.io
 - Tavus: https://www.tavus.io
+- Anam: https://anam.ai
 
-#### Social Media
+### Social Media
 - OpusClip: https://www.opus.pro
 - Captions: https://www.captions.ai
 - arcards: https://www.arcads.ai/
@@ -187,6 +192,7 @@
 - Vidwud: https://www.vidwud.com
 - SlidesGPT: https://slidesgpt.com
 - Microsoft Copilot for PowerPoint: https://www.microsoft.com/de-DE/microsoft-365/copilot
+- Microsoft Stride: https://stride.microsoft.com
 - Plus: https://plusai.com/plus-ai-powerpoint-maker
 - chroniqle: https://chroniclehq.com
 
@@ -204,8 +210,14 @@
 - LoyJoy: https://www.loyjoy.com
 - Homie: https://yourhomie.ai
 
-### LLM Vergleich
+### Benchmarks
+- Artificial Analysis: https://artificialanalysis.ai
+- OpenRouter: https://openrouter.ai/rankings
+- OSWorld: https://os-world.github.io
 - Chatbot Arena (LMSYS): https://lmarena.ai
+- LiveBench: https://livebench.ai
+- LLMStats: https://llm-stats.com
+- BenchLM: https://benchlm.ai
 
 ### Gaming / Design
 - Google Genie: https://deepmind.google/discover/blog/genie-2-a-large-scale-foundation-world-model
@@ -221,6 +233,7 @@
 - aihumaize.io: https://aihumanize.io
 - HIX Bypass: https://bypass.hix.ai
 - Prompt Hacks: https://x.com/HeyNayeem/status/2017251056003215866
+- humanizer: https://github.com/blader/humanizer
 
 ### Buch schreiben
 - Sudowrite: https://www.sudowrite.com
@@ -248,14 +261,14 @@
 - GPT4free - https://gpt4free.io
 
 ### Automatisierung / Workflows
+- OpenClaw: https://openclaw.ai
+- MoltBook: https://www.moltbook.com
 - n8n.io: https://n8n.io
 - ChatGPT AgentKit: https://openai.com/index/introducing-agentkit
 - Make: https://www.make.com
 - Zapier: https://zapier.com
 - Power Automate: https://www.microsoft.com/de-de/power-platform/products/power-automate?market=de
 - Emma: https://www.emmarobot.io
-- OpenClaw: https://openclaw.ai
-- MoltBook: https://www.moltbook.com
 
 ### Toolsammlung
 - AI Center: https://aicenter.ai
@@ -275,6 +288,7 @@
 - European Open Source AI Index: https://osai-index.eu/the-index
 
 ### Jailbroken / Uncensored
+- CLIProxyAPI: https://github.com/router-for-me/CLIProxyAPI
 - GPT4Free: https://github.com/xtekky/gpt4free
 - Heretic: https://github.com/p-e-w/heretic
 - Uncensored: https://uncensored.com

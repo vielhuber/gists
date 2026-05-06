@@ -16,18 +16,13 @@
 - Mapped ports (e.g., 8080 → 80)
 - Mounted volumes (e.g., your code, logs)
 - Can manage multiple containers (e.g., app + separate DB)
+- ❗Changes in `docker-compose.yml/docker-composer.override.yml` discards all changes that have been made inside the container after the build
   
 ```
 services:
     app:
         build: .
         volumes:
-            # natively mount external applications
-            - /usr/bin/php8.3:/host/php8.3
-            - /var/www/custom:/host/custom
-            # mount permanent data (folder on host must exist); example reads .env file in root folder
-            - ${DOCKER_MOUNT_TMP}:/host/tmp
-            - ~/.custom-app/permanent:/path/inside/host/permanent
             # permanently save vscode extensions
             - ~/.vscode-server-docker:/root/.vscode-server
             # local development (not needed on production, use COPY in Dockerfile there)
@@ -44,10 +39,30 @@ services:
             - '8001:8001'
             - '5001:5001'
         environment:
-            # these environment variables are only available after build
+            # these environment variables are only available *after* build
             - IS_DOCKER=1
             - DISPLAY=host.docker.internal:0
 ```
+
+**`docker-compose.override.yml`**
+
+- Custom host specific compose file, which automatically merges with `docker-compose.yml` 
+- Can be used to mount environment specific folders
+- Should be in `.gitignore`
+
+```
+services:
+    app:
+        volumes:
+            # main storage folder
+            - ~/.project:/host/data
+            # tmp folder
+            - /mnt/c/Users/Username/Downloads/:/host/tmp
+            # external applications
+            - /var/www/app1:/host/app1
+            - /usr/bin/php8.3:/host/php8.3
+```
+
 
 **`Dockerfile`**
 
@@ -103,6 +118,7 @@ npm install
 - Start script
 - Runs automatically when the container starts
 - Repopulates config files
+- Updates and rebuilds npm/composer
 - Starts all services (e.g., with Supervisor: web server, Python app, etc.)
   
 ```
@@ -219,24 +235,27 @@ find /path/to/project/bootstrap/cache -type f -exec chmod 00777 {} \;
 
 ## build a custom docker image
 
-#### build image
+### push
+- do everything as normal
+- add `image: ghcr.io/vielhuber/custom:latest` to `docker-compose.yml`
+- create PAT: https://github.com/settings/tokens/new with `write:packages` and `delete:packages`
+- `docker login ghcr.io --username vielhuber`
+- `docker compose build` (rebuild once with cache)
+- `docker push ghcr.io/vielhuber/custom:latest`
+- view: `https://github.com/vielhuber?tab=packages`
+- run in github actions:
+  - Repository settings > Actions > General > Read and write permissions: an
+  - `https://ghcr.io/vielhuber/custom:latest` > Package settings > Add repository + Change Role: Write
+  - For `ci.yml`, see `https://gist.github.com/vielhuber/4130f4fc3ee978baafb1b24b7e623190`
 
-- `docker pull ubuntu:latest` // pull latest ubuntu image you want to build upon
-- `docker run -it --name test-container ubuntu:latest` // create and start container "test-container" of image "ubuntu:latest" with an interactive shell
-- `exit` // exit from interactive shell
-- `docker exec -it test-container bash` // reopen bash / connect to image
-- make all necessary changes
-- `exit` // exit from interactive shell
-- `docker commit test-container vielhuber/testimage:latest` # create new image from container with name "testimage" and tag "latest"
-- `docker login`
-  - if you get the error message `error storing credentials - err: exit status 1, out: Zur Verarbeitung dieses Befehls sind nicht genügend Speicherressourcen verfügbar`, clear all entries in the credential manager starting with "Adobe App" (run `rundll32.exe keymgr.dll, KRShowKeyMgr` and manually delete all entries)
-- `docker push vielhuber/testimage:latest` // push local image to dockerhub
+### pull
+- before:
+  - `docker compose build`
+- after:
+  - `echo "$GITHUB_PERSONAL_ACCESS_TOKEN" | docker login ghcr.io -u vielhuber --password-stdin`
+  - `docker pull ghcr.io/vielhuber/custom:latest`
 
-#### fetch image
-
-- `docker run -d -it --name testimage vielhuber/testimage:latest` # create and start new container from image in detached mode
-
-#### other commands
+## other commands
 
 - `docker images` # show all images
 - `docker ps -a` # show all containers

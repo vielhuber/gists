@@ -25,8 +25,8 @@
 
 - we abuse our own public domain as a dns that maps to a local ip in order to prevent setting local hosts AND having the ability to access via smartphones/tablets from the same network
 - dns a-records
-  - vielhuber.dev => 192.168.0.2
-  - *.vielhuber.dev => 192.168.0.2
+  - vielhuber.dev => 192.168.178.24
+  - *.vielhuber.dev => 192.168.178.24
 - fritzbox (if needed)
   - fritz.box > Heimnetz > Netzwerk > Netzwerkeinstellungen > DNS-Rebind-Schutz:
     - vielhuber.de
@@ -65,7 +65,12 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
   - we use the plain "Ubuntu" version and upgrade it inplace with `sudo do-release-upgrade`
 - UNIX username: root (cancel when prompting for a new default username)
 - Change password with ```passwd```: "root"
-- Netzlaufwerk "\\wsl$\Ubuntu" auf W: mappen und umbenennen: "WSL"
+- Wenn nachträglich auf "root" umgestellt werden soll
+  - `wsl -u root`
+  - `echo -e "[user]\ndefault=root" > /etc/wsl.conf`
+  - `wsl --shutdown`
+  - `wsl`
+- Netzlaufwerk `\\wsl$\Ubuntu` auf Laufwerk `W:` mappen und umbenennen: "WSL"
 - `wsl --list --verbose`
 - `wsl --set-default-version 2`
 - `wsl --set-version Ubuntu 2`
@@ -79,7 +84,7 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 - `wsl --export "Ubuntu" D:\Ubuntu.tar`
 - `wsl --import "Ubuntu" D:\ D:\Ubuntu.tar`
 
-#### upgrade to latest ubuntu
+#### upgrade to latest ubuntu + upgrade packages
 - `wsl --update` # kernel upgrade
 - `sudo apt-get update --allow-releaseinfo-change`
 - `sudo apt-get upgrade`
@@ -129,7 +134,7 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 - ```%sudo ALL=(ALL:ALL) NOPASSWD:ALL```
 
 #### install basic linux packages
-- ```sudo apt-get install nano curl sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils apt-utils software-properties-common iputils-ping gettext sshpass lsof yq```
+- ```sudo apt-get install nano curl sshpass zip unzip htop ruby libnotify-bin net-tools pv csh cifs-utils apt-utils software-properties-common iputils-ping gettext sshpass lsof yq time parallel```
 
 #### disable nginx
 - `sudo systemctl disable nginx`
@@ -151,10 +156,13 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
   - Settings > General > Start Docker Desktop when you sign in to your computer: an
   - Settings > General > Open Docker Dashboard when Docker Desktop starts: aus
   - Settings > General > "Use the WSL 2 based engine"
-  - Image verkleinern
-    - `docker system prune -a`
-    - Shutdown docker + wsl
-    - PowerShell (Admin): `Optimize-VHD -Path "docker_data.vhdx" -Mode Full`
+  - Optional: Image aufräumen
+    - PowerShell (Administrator)
+    - `docker system df -v`
+    - `docker builder prune -af`
+    - `docker image prune -f`
+    - Docker Desktop beenden
+    - `Optimize-VHD -Path "E:\docker\DockerDesktopWSL\disk\docker_data.vhdx" -Mode Full`
   - Image verschieben
     - Docker pausieren
     - Umgebungsvariablen bearbeiten > User > Zu PATH `C:\Windows\System32` hinzufügen
@@ -167,13 +175,15 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 - Option #2 (run docker natively inside wsl)
   - Install exactly like on `https://docs.docker.com/engine/install/ubuntu/`
 
-#### xserver (deprecated and therefore not needed anymore; now included in wslg!)
+#### xserver (now included in wslg, but needed for docker containers)
 - download vcxsrv (https://sourceforge.net/projects/vcxsrv/files/latest/download)
 - Installation: Full
-- `nano ~/.bash_profile`
-- `export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0`
-- `export LIBGL_ALWAYS_INDIRECT=1`
-- `source ~/.bash_profile`
+- Not needed anymore
+  - `nano ~/.bashrc`
+  - `# xserver`
+  - `export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0`
+  - `export LIBGL_ALWAYS_INDIRECT=1`
+  - `source ~/.bashrc`
 - XLaunch
 - Multiple Windows
 - Display number -1
@@ -181,13 +191,6 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 - Disable access control: an
 - Zugriff zulassen
 - Windows Defender Firwall mit erweiterter Sicherheit > Eingehende Regeln > "VcXsrv windows xserver" 2x rot Doppelklick > Verbindung zulassen
-- Autostart
-  - Aufgabenplanung
-  - "_VCXSRV"
-  - Nur ausführen, wenn der Benutzer angemeldet ist
-  - Trigger: Bei Anmeldung
-  - Aktion: Programm starten
-  - "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -ac -clipboard -wgl
 - install desktop
   - apt-get update
   - apt-get install gedit
@@ -216,6 +219,15 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
   - `systemd=true`
   - cmd (admin): `wsl --shutdown`
   - `systemctl status`
+
+#### merge .bashrc/.bash_profile
+- `nano ~/.bash_profile`
+
+```
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi
+```
 
 #### ngrok
 
@@ -256,18 +268,12 @@ curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 
 #### nvidia cuda
 
-- https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-- `wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin`
-- `sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600`
-- `wget https://developer.download.nvidia.com/compute/cuda/12.8.1/local_installers/cuda-repo-wsl-ubuntu-12-8-local_12.8.1-1_amd64.deb`
-- `sudo dpkg -i cuda-repo-wsl-ubuntu-12-8-local_12.8.1-1_amd64.deb`
-- `sudo cp /var/cuda-repo-wsl-ubuntu-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/`
-- `sudo apt-get update`
-- `sudo apt-get -y install cuda-toolkit-12-8`
-- `sudo nano ~/.bash_profile`
+- Alles von hier ausführen: https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
+- `sudo nano ~/.bashrc`
+- `# cuda`
 - `export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}`
 - `export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}`
-- `source ~/.bash_profile`
+- `source ~/.bashrc`
 - `nvidia-smi`
 - `nvcc --version`
 
@@ -283,7 +289,7 @@ curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 - `tar xzf smartgit-linux-*.tar.gz`
 - `rm smartgit-linux-*.tar.gz`
 - `nano /usr/local/bin/sgit`
-- `( /usr/local/smartgit/bin/smartgit.sh & ) > /dev/null 2>&1`
+- `( /usr/local/smartgit/bin/smartgit.sh . & ) > /dev/null 2>&1`
 - `chmod +x /usr/local/bin/sgit`
 - `sgit`
 - Register existing license: /var/www/lamp/syntevo-non-commercial.lic
@@ -313,7 +319,7 @@ curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 - ```touch ~/.hushlogin```
 
 #### pimp command line
-- ```sudo nano ~/.bash_profile```
+- ```sudo nano ~/.bashrc```
 ```
 # colorize and show git branch name
 alias ls='ls --color'
@@ -323,7 +329,7 @@ parse_git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/
 parse_git_tag() { git describe --exact-match --tags 2> /dev/null | sed -e 's/\(.*\)/[\1]/'; }
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;31m\]\h\[\033[00m\]~\[\e[0;36m\]\t\[\033[00m\]~\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[01;33m\]$(parse_git_tag)\[\033[00m\]\$ '
 ```
-- ```source ~/.bash_profile```
+- ```source ~/.bashrc```
 
 #### apache/php/mysql
 - ```sudo apt-get install apache2 mysql-server```
@@ -364,17 +370,22 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 #### php extensions
 - ```sudo apt-get install -y php5.6 php5.6-fpm libapache2-mod-php5.6 php5.6-mysql php5.6-cli php5.6-common php5.6-xdebug php5.6-mbstring php5.6-xmlrpc php5.6-gd php5.6-intl php5.6-xml php5.6-mysql php5.6-mcrypt php5.6-zip php5.6-soap php5.6-curl php5.6-bcmath php5.6-xml php5.6-sqlite php5.6-imap php5.6-opcache php5.6-pgsql php5.6-pdo php5.6-gd php5.6-imagick```
 - ```sudo apt-get install -y php7.0 php7.0-fpm libapache2-mod-php7.0 php7.0-mysql php7.0-cli php7.0-common php7.0-xdebug php7.0-mbstring php7.0-xmlrpc php7.0-gd php7.0-intl php7.0-xml php7.0-mysql php7.0-mcrypt php7.0-zip php7.0-soap php7.0-curl php7.0-bcmath php7.0-xml php7.0-sqlite php7.0-imap php7.0-opcache php7.0-pgsql php7.0-pdo php7.0-gd php7.0-imagick```
-- ```sudo apt-get install -y php7.1 php7.1-fpm libapache2-mod-php7.1 php7.1-mysql php7.1-cli php7.1-common php7.1-xdebug php7.1-mbstring php7.1-xmlrpc php7.1-gd php7.1-intl php7.1-xml php7.1-mysql php7.1-mcrypt php7.1-zip php7.1-soap php7.1-curl php7.1-bcmath php7.1-xml php7.1-sqlite php7.1-imap php7.1-opcache php7.1-pgsql php7.1-pdo php7.1-gd php7.1-imagick```
-- ```sudo apt-get install -y php7.2 php7.2-fpm libapache2-mod-php7.2 php7.2-mysql php7.2-cli php7.2-common php7.2-xdebug php7.2-mbstring php7.2-xmlrpc php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.2-zip php7.2-soap php7.2-curl php7.2-bcmath php7.2-xml php7.2-sqlite php7.2-imap php7.2-opcache php7.2-pgsql php7.2-pdo php7.2-gd php7.2-imagick```
-- ```sudo apt-get install -y php7.3 php7.3-fpm libapache2-mod-php7.3 php7.3-mysql php7.3-cli php7.3-common php7.3-xdebug php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-intl php7.3-xml php7.3-mysql php7.3-zip php7.3-soap php7.3-curl php7.3-bcmath php7.3-xml php7.3-sqlite php7.3-imap php7.3-opcache php7.3-pgsql php7.3-pdo php7.3-gd php7.3-imagick```
-- ```sudo apt-get install -y php7.4 php7.4-fpm libapache2-mod-php7.4 php7.4-mysql php7.4-cli php7.4-common php7.4-xdebug php7.4-mbstring php7.4-xmlrpc php7.4-gd php7.4-intl php7.4-xml php7.4-mysql php7.4-zip php7.4-soap php7.4-curl php7.4-bcmath php7.4-xml php7.4-sqlite php7.4-imap php7.4-opcache php7.4-pgsql php7.4-pdo php7.4-gd php7.4-imagick```
-- ```sudo apt-get install -y php8.0 php8.0-fpm libapache2-mod-php8.0 php8.0-mysql php8.0-cli php8.0-common php8.0-xdebug php8.0-mbstring php8.0-xmlrpc php8.0-gd php8.0-intl php8.0-xml php8.0-mysql php8.0-zip php8.0-soap php8.0-curl php8.0-bcmath php8.0-xml php8.0-sqlite php8.0-imap php8.0-opcache php8.0-pgsql php8.0-pdo php8.0-gd php8.0-imagick```
-- ```sudo apt-get install -y php8.1 php8.1-fpm libapache2-mod-php8.1 php8.1-mysql php8.1-cli php8.1-common php8.1-xdebug php8.1-mbstring php8.1-xmlrpc php8.1-gd php8.1-intl php8.1-xml php8.1-mysql php8.1-zip php8.1-soap php8.1-curl php8.1-bcmath php8.1-xml php8.1-sqlite php8.1-imap php8.1-opcache php8.1-pgsql php8.1-pdo php8.1-gd php8.1-imagick```
-- ```sudo apt-get install -y php8.2 php8.2-fpm libapache2-mod-php8.2 php8.2-mysql php8.2-cli php8.2-common php8.2-xdebug php8.2-mbstring php8.2-xmlrpc php8.2-gd php8.2-intl php8.2-xml php8.2-mysql php8.2-zip php8.2-soap php8.2-curl php8.2-bcmath php8.2-xml php8.2-sqlite php8.2-imap php8.2-opcache php8.2-pgsql php8.2-pdo php8.2-gd php8.2-imagick```
-- ```sudo apt-get install -y php8.3 php8.3-fpm libapache2-mod-php8.3 php8.3-mysql php8.3-cli php8.3-common php8.3-xdebug php8.3-mbstring php8.3-xmlrpc php8.3-gd php8.3-intl php8.3-xml php8.3-mysql php8.3-zip php8.3-soap php8.3-curl php8.3-bcmath php8.3-xml php8.3-sqlite php8.3-imap php8.3-opcache php8.3-pgsql php8.3-pdo php8.3-gd php8.3-imagick```
-- ```sudo apt-get install -y php8.4 php8.4-fpm libapache2-mod-php8.4 php8.4-mysql php8.4-cli php8.4-common php8.4-xdebug php8.4-mbstring php8.4-xmlrpc php8.4-gd php8.4-intl php8.4-xml php8.4-mysql php8.4-zip php8.4-soap php8.4-curl php8.4-bcmath php8.4-xml php8.4-sqlite php8.4-imap php8.4-opcache php8.4-pgsql php8.4-pdo php8.4-gd php8.4-imagick```
-- ```sudo apt-get install -y php8.5 php8.5-fpm libapache2-mod-php8.5 php8.5-mysql php8.5-cli php8.5-common php8.5-xdebug php8.5-mbstring php8.5-xmlrpc php8.5-gd php8.5-intl php8.5-xml php8.5-mysql php8.5-zip php8.5-soap php8.5-curl php8.5-bcmath php8.5-xml php8.5-sqlite php8.5-imap php8.5-pgsql php8.5-pdo php8.5-gd php8.5-imagick```
+- ```sudo apt-get install -y php7.1 php7.1-fpm libapache2-mod-php7.1 php7.1-mysql php7.1-cli php7.1-common php7.1-xdebug php7.1-mbstring php7.1-xmlrpc php7.1-gd php7.1-intl php7.1-xml php7.1-mysql php7.1-uopz php7.1-mcrypt php7.1-zip php7.1-soap php7.1-curl php7.1-bcmath php7.1-xml php7.1-sqlite php7.1-imap php7.1-opcache php7.1-pgsql php7.1-pdo php7.1-gd php7.1-imagick```
+- ```sudo apt-get install -y php7.2 php7.2-fpm libapache2-mod-php7.2 php7.2-mysql php7.2-cli php7.2-common php7.2-xdebug php7.2-mbstring php7.2-xmlrpc php7.2-gd php7.2-intl php7.2-xml php7.2-mysql php7.2-uopz php7.2-zip php7.2-soap php7.2-curl php7.2-bcmath php7.2-xml php7.2-sqlite php7.2-imap php7.2-opcache php7.2-pgsql php7.2-pdo php7.2-gd php7.2-imagick```
+- ```sudo apt-get install -y php7.3 php7.3-fpm libapache2-mod-php7.3 php7.3-mysql php7.3-cli php7.3-common php7.3-xdebug php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-intl php7.3-xml php7.3-mysql php7.3-uopz php7.3-zip php7.3-soap php7.3-curl php7.3-bcmath php7.3-xml php7.3-sqlite php7.3-imap php7.3-opcache php7.3-pgsql php7.3-pdo php7.3-gd php7.3-imagick```
+- ```sudo apt-get install -y php7.4 php7.4-fpm libapache2-mod-php7.4 php7.4-mysql php7.4-cli php7.4-common php7.4-xdebug php7.4-mbstring php7.4-xmlrpc php7.4-gd php7.4-intl php7.4-xml php7.4-mysql php7.4-uopz php7.4-zip php7.4-soap php7.4-curl php7.4-bcmath php7.4-xml php7.4-sqlite php7.4-imap php7.4-opcache php7.4-pgsql php7.4-pdo php7.4-gd php7.4-imagick```
+- ```sudo apt-get install -y php8.0 php8.0-fpm libapache2-mod-php8.0 php8.0-mysql php8.0-cli php8.0-common php8.0-xdebug php8.0-mbstring php8.0-xmlrpc php8.0-gd php8.0-intl php8.0-xml php8.0-mysql php8.0-uopz php8.0-zip php8.0-soap php8.0-curl php8.0-bcmath php8.0-xml php8.0-sqlite php8.0-imap php8.0-opcache php8.0-pgsql php8.0-pdo php8.0-gd php8.0-imagick```
+- ```sudo apt-get install -y php8.1 php8.1-fpm libapache2-mod-php8.1 php8.1-mysql php8.1-cli php8.1-common php8.1-xdebug php8.1-mbstring php8.1-xmlrpc php8.1-gd php8.1-intl php8.1-xml php8.1-mysql php8.1-uopz php8.1-zip php8.1-soap php8.1-curl php8.1-bcmath php8.1-xml php8.1-sqlite php8.1-imap php8.1-opcache php8.1-pgsql php8.1-pdo php8.1-gd php8.1-imagick```
+- ```sudo apt-get install -y php8.2 php8.2-fpm libapache2-mod-php8.2 php8.2-mysql php8.2-cli php8.2-common php8.2-xdebug php8.2-mbstring php8.2-xmlrpc php8.2-gd php8.2-intl php8.2-xml php8.2-mysql php8.2-uopz php8.2-zip php8.2-soap php8.2-curl php8.2-bcmath php8.2-xml php8.2-sqlite php8.2-imap php8.2-opcache php8.2-pgsql php8.2-pdo php8.2-gd php8.2-imagick```
+- ```sudo apt-get install -y php8.3 php8.3-fpm libapache2-mod-php8.3 php8.3-mysql php8.3-cli php8.3-common php8.3-xdebug php8.3-mbstring php8.3-xmlrpc php8.3-gd php8.3-intl php8.3-xml php8.3-mysql php8.3-uopz php8.3-zip php8.3-soap php8.3-curl php8.3-bcmath php8.3-xml php8.3-sqlite php8.3-imap php8.3-opcache php8.3-pgsql php8.3-pdo php8.3-gd php8.3-imagick```
+- ```sudo apt-get install -y php8.4 php8.4-fpm libapache2-mod-php8.4 php8.4-mysql php8.4-cli php8.4-common php8.4-xdebug php8.4-mbstring php8.4-xmlrpc php8.4-gd php8.4-intl php8.4-xml php8.4-mysql php8.4-uopz php8.4-zip php8.4-soap php8.4-curl php8.4-bcmath php8.4-xml php8.4-sqlite php8.4-imap php8.4-opcache php8.4-pgsql php8.4-pdo php8.4-gd php8.4-imagick```
+- ```sudo apt-get install -y php8.5 php8.5-fpm libapache2-mod-php8.5 php8.5-mysql php8.5-cli php8.5-common php8.5-xdebug php8.5-mbstring php8.5-xmlrpc php8.5-gd php8.5-intl php8.5-xml php8.5-mysql php8.5-uopz php8.5-zip php8.5-soap php8.5-curl php8.5-bcmath php8.5-xml php8.5-sqlite php8.5-imap php8.5-pgsql php8.5-pdo php8.5-gd php8.5-imagick```
 - note: extensions must not be uncommented in php.ini but installed on the command line
+
+#### uopz: only enable temporarily
+- `sudo phpdismod uopz`
+- start: `sudo phpenmod -v 8.X uopz && sudo systemctl restart phpXXX-fpm`
+- stop: `sudo phpdismod -v 8.X uopz && sudo systemctl restart phpXXX-fpm`
 
 #### apache extensions
 - ```sudo a2enmod rewrite```
@@ -493,15 +504,22 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 - ```sudo nano /etc/php/custom.ini```
   - ```sendmail_path = "/usr/sbin/sendmail -t -i"```
 
+#### mydumper
+
+- `wget https://github.com/mydumper/mydumper/releases/download/v0.21.3-1/mydumper_0.21.3-1.noble_amd64.deb`
+- `sudo dpkg -i mydumper_*.deb`
+- `rm mydumper_*.deb`
+- `mydumper --version`
+
 #### ncdu
 - ```sudo apt-get install ncdu```
 - ```cd /```
 - ```ncdu --exclude /mnt```
 
 #### node + php + python auto version switching on cd
-- ```nano ~/.bash_profile```
+- ```nano ~/.bashrc```
 - https://gist.github.com/vielhuber/021453a7e908f9487917835107ad6ce7
-- ```source ~/.bash_profile```
+- ```source ~/.bashrc```
 - now place `.nvmrc` / `.phprc` with the version (e.g. `12.10.0` / `8.1`) in the folder, where your `package.json` / `composer.json` lays and `.envrc` with `venv` (or your environment name)
 
 #### php error logging
@@ -733,13 +751,6 @@ xdebug.output_dir="/tmp/xdebug"
 - apache not reachable
   - \\wsl$\Ubuntu\var\www\lamp\firewall.ps1 anlegen mit Inhalt von https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723
   - Ports in Datei erweitern: ```$ports=@(80,443,10000,3000,3009,5000,8080,9090,3306);```
-  - Aufgabenplanung
-  - "_WSL FIREWALL"
-  - Bei Anmeldung
-  - Verzögern für 10 Minuten
-  - Programm starten
-  - PowerShell.exe -File \\wsl$\Ubuntu\var\www\lamp\firewall.ps1
-  - Mit höchsten Privilegien ausführen
   - OBSOLET: etc/hosts: 172.31.142.215 ***.vielhuber.de
   - OBSOLET: Oder alternativ bei DF von 192.168.0.2 auf 172.31.142.215 setzen (muss ich später wieder rückgängig machen!)
   - OBSOLET: etc/hosts: #127.0.0.1      localhost und #::1             localhost einkommentieren
@@ -774,23 +785,22 @@ xdebug.output_dir="/tmp/xdebug"
 #### enable cron
 - `sudo systemctl enable cron`
 
-#### restart router / pc
+#### DISABLED: restart router
 - `export VISUAL=nano; crontab -e`
-- `0 4 * * * source $HOME/.bash_profile; /mnt/c/Users/David/OneDrive/DOCS/SCRIPTS/VODAFONE/cron.sh > /mnt/c/Users/David/OneDrive/DOCS/SCRIPTS/VODAFONE/cron.log 2>&1`
+- `0 4 * * * source $HOME/.bashrc; /mnt/f/OneDrive/DOCS/SCRIPTS/VODAFONE/cron.sh > /mnt/f/OneDrive/DOCS/SCRIPTS/VODAFONE/cron.log 2>&1`
 - `cron.sh`
 ```sh
 #!/usr/bin/env bash
-/root/.nvm/versions/node/v23.5.0/bin/node --env-file=/mnt/c/Users/David/OneDrive/DOCS/SCRIPTS/VODAFONE/.env /mnt/c/Users/David/OneDrive/DOCS/SCRIPTS/VODAFONE/stagehand.js
-shutdown.exe /s /t 0
+/root/.nvm/versions/node/v23.5.0/bin/node --env-file=/mnt/f/OneDrive/DOCS/SCRIPTS/VODAFONE/.env /mnt/f/OneDrive/DOCS/SCRIPTS/VODAFONE/stagehand.js
 ```
 
 #### sync bills
 - `export VISUAL=nano; crontab -e`
-- `0 3 * * 1 source $HOME/.bash_profile; /usr/bin/wget "https://vielhuber.dev/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
+- `0 3 * * 1 source $HOME/.bashrc; /usr/bin/wget "https://vielhuber.dev/wp-content/themes/vielhuber/_bills/sync.php" >/dev/null 2>&1`
 
 #### make backups
 - `export VISUAL=nano; crontab -e`
-- `0 2 * * 0 /mnt/c/Users/David/OneDrive/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.sh > /mnt/c/Users/David/OneDrive/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.log`
+- `0 2 * * 0 /mnt/f/OneDrive/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.sh > /mnt/f/OneDrive/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.log`
 
 #### composer
 - ```sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
@@ -798,10 +808,10 @@ shutdown.exe /s /t 0
 - ```sudo php -r "unlink('composer-setup.php');"```
 - ```sudo mv composer.phar /usr/local/bin/composer```
 - hide sudo message:
-  - ```sudo nano ~/.bash_profile```
+  - ```sudo nano ~/.bashrc```
   - ```# hide composer sudo message```
   - ```export COMPOSER_ALLOW_SUPERUSER=1```
-  - ```source ~/.bash_profile```
+  - ```source ~/.bashrc```
 - ```composer self-update```
 - ```composer --version``` # 2
 - ```composer config --global --auth github-oauth.github.com *TOKEN*``` (siehe Zugangsdaten)
@@ -809,7 +819,6 @@ shutdown.exe /s /t 0
 #### node / npm
 - nvm
   - ```sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash```
-  - copy 3 new lines of ```~/.bashrc``` to ```~/.bash_profile``` (because .bashrc is not loaded on wsl)
   - restart terminal
   - ```nvm --version```
   - ```nvm ls```
@@ -848,7 +857,10 @@ shutdown.exe /s /t 0
 #unsafe-perm=true
 ```
 - install ncu
-  - ```npm install -g npm-check-updates```
+  - `npm install -g npm-check-updates`
+  - `sudo nano ~/.bashrc`
+  - `# npm-check-updates`
+  - `alias ncu='$(npm prefix -g)/bin/ncu'`
 - login npm
   - ```export BROWSER=none && npm login```
 
@@ -911,7 +923,8 @@ shutdown.exe /s /t 0
 - ```git config --global init.defaultBranch main```
 - ```git config set advice.skippedCherryPicks false```
 - further do this (--no-edit does sometimes not work):
-  - ```sudo nano ~/.bash_profile```
+  - ```sudo nano ~/.bashrc```
+  - ```# git```
   - ```export GIT_MERGE_AUTOEDIT=no```
 - node 10 hangs (https://stackoverflow.com/questions/45433130/npm-install-gets-stuck-at-fetchmetadata/72391698#72391698)
   - ```sudo nano ~/.gitconfig```
@@ -956,9 +969,10 @@ exit "$failed"
 - ```sudo apt install gh```
 
 #### git-filter-repo
-- `sudo nano ~/.bash_profile`
+- `sudo nano ~/.bashrc`
+- `# git-filter-repo`
 - `export PATH="$PATH:${HOME}/.git-filter-repo"`
-- `source ~/.bash_profile`
+- `source ~/.bashrc`
 - `mkdir -p ~/.git-filter-repo`
 - `wget -O ~/.git-filter-repo/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo`
 - `chmod +x ~/.git-filter-repo/git-filter-repo`
@@ -975,9 +989,10 @@ exit "$failed"
 - ```chmod +x /var/www/lamp/lamp```
 - ```sudo visudo```
   - add ```/var/www/lamp``` to ```Defaults  secure_path```
-- ```sudo nano ~/.bash_profile```
+- ```sudo nano ~/.bashrc```
+- ```# lamp```
 - ```export PATH="$PATH:/var/www/lamp"```
-- ```source ~/.bash_profile```
+- ```source ~/.bashrc```
 
 #### ssh
 - ```mkdir ~/.ssh```
@@ -996,9 +1011,10 @@ exit "$failed"
 - ```composer require vielhuber/syncdb```
 - ```chmod +x vendor/vielhuber/syncdb/src/syncdb```
 - ```ln -s /var/www/lamp/syncdb ~/.syncdb/profiles```
-- ```sudo nano ~/.bash_profile```
+- ```sudo nano ~/.bashrc```
+- ```# syncdb```
 - ```export PATH="$PATH:/root/.syncdb/vendor/vielhuber/syncdb/src"```
-- ```source ~/.bash_profile ```
+- ```source ~/.bashrc ```
 
 #### postgres
 - ```sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'```
@@ -1247,7 +1263,8 @@ rm "$t"
 - ```curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar```
 - ```chmod +x wp-cli.phar```
 - ```sudo mv wp-cli.phar /usr/local/bin/wp```
-- ```sudo nano ~/.bash_profile```
+- ```sudo nano ~/.bashrc```
+- ```# wp-cli```
 - ```alias wp='wp --allow-root'```
 - ```wp --info```
 

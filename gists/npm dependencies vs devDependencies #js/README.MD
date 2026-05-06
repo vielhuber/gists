@@ -4,7 +4,7 @@
 ### notes
 - `devDependencies` should contain packages which are used during development and/or which are used to build your bundle
 - all other packages should/must go into `dependencies`
-- this is important, when you publish your library: devDependencies of installed modules are NOT installed and cannot be used during runtime
+- this is important, when you publish your library: `devDependencies` of installed modules are NOT installed and cannot be used during runtime (e.g. `@babel/runtime` must go do `dependencies` instead of `devDependencies`)
 
 ### installation
 ```sh

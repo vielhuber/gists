@@ -41,7 +41,7 @@
 
 ## TL;DR
 
-```v=DMARC1; p=none; pct=100```
+```v=DMARC1; p=none```
 
 ## ALLGEMEIN
 

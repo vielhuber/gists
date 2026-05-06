@@ -36,8 +36,7 @@ class Browser
                 '--disable-setuid-sandbox',
                 '--no-first-run',
                 '--no-sandbox',
-                '--no-zygote',
-                '--single-process'
+                '--no-zygote'
             ];
             $proxy = (object) [
                 'ip' => 'xxx',
@@ -68,6 +67,7 @@ class Browser
             $this->page->setViewport(['width' => 1920, 'height' => 1080]);
         } catch (\Exception $e) {
             echo $e->getMessage();
+          	throw $e;
         }
     }
 

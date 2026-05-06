@@ -1030,9 +1030,9 @@ Usage: git acp
 
 - `sudo apt-get install git-lfs`
 
-#### server installation
+#### gitea: server installation
 
-- gitea: the following is already default! only check..
+- the following is already default! only check..
 - `nano /etc/gitea/app.ini`
     - `[server]`
     - `LFS_START_SERVER = true`
@@ -1042,11 +1042,10 @@ Usage: git acp
 #### activate lfs in existing repo (with existing files, with no lfs)
 
 - `git lfs install`
-- `git lfs track "*.blend"`
-- `git lfs track "*.blend1"`
-- `git add .gitattributes`
-- `git commit -m "Added .gitattributes file/lfs."`
-- `git push`
+- `git lfs track "path/to/big/file.zip"`
+- `cat .gitattributes`
+- Now `push` and `pull` as normal
+- Tip: Enable Column "LFS" in SmartGit
 
 #### working now is completely normal
 

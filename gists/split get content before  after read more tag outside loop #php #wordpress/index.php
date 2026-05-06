@@ -8,8 +8,8 @@ echo get_extended($p->post_content)['extended'];
 function wp_split_more($content, $type, $more_html = null)
 {
     $return = [
-        'before' => null,
-        'after' => null
+        'before' => '',
+        'after' => ''
     ];
 
     // split up

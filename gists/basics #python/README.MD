@@ -9,6 +9,10 @@
 ### deactivate
 - `deactivate`
 
+### direct calling without sourcing
+
+- `venv/bin/pip3 install -r requirements.txt`
+
 ## package management
 
 ### install package

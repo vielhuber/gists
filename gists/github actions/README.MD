@@ -14,7 +14,7 @@
   - note that `$_ENV` is not available, so use `$_SERVER` instead (in case of https://github.com/vlucas/phpdotenv, also replace `$dotenv->load();` with `$dotenv->safeLoad();`)
   - alternatively create an .env file from the secrets (see action below)
 - `config.json`
-  - `cat config.json | base64`
+  - `base64 -w 0 config.json | clip.exe`
   - store the json file as base64 in Settings > Secrets > Actions > Repository secrets > `CONFIG_JSON_BASE64`
   - add this to your ci.yml
 ```yml
@@ -24,7 +24,7 @@
 
 ### check for ci inside php
 
-- ```if( @$_SERVER['CI'] == 'true' ) { }```
+- ```if( @$_SERVER['CI'] == 'true' || @$_ENV['CI'] == 'true' || getenv('CI') == 'true' || getenv('ACT_TOOLSDIRECTORY') != '' ) { }```
 
 ### notes
 
@@ -32,8 +32,21 @@
 
 ### run github actions locally
 
-- `curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash`
-- restart
-- startup docker
-- `./bin/act`
-- caveat: not everything is working inside act (e.g. `systemd`)
+- installation: `curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash`
+- run: `./bin/act -P ubuntu-22.04=catthehacker/ubuntu:act-22.04 --bind --secret-file .env`
+- run + keep: `./bin/act -P ubuntu-22.04=catthehacker/ubuntu:act-22.04 --bind --secret-file .env --reuse`
+- ssh: `docker exec -it $(docker ps -q --filter "ancestor=catthehacker/ubuntu:act-latest") bash`
+
+#### `.gitignore`
+
+```
+.env
+/bin/act
+```
+
+#### `.env`
+
+```
+SECRET_VARIABLE_1=FOO
+```
+

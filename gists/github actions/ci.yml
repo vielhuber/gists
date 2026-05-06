@@ -23,15 +23,19 @@ jobs:
             max-parallel: 9
             fail-fast: true
             matrix:
-                operating-system: ['ubuntu-latest', 'macos-latest', 'windows-latest']
-                php-versions: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+                operating-system: ['ubuntu-22.04', 'macos-latest', 'windows-latest'] # don't use "ubuntu-latest" here, since act maps that to ubuntu-20
+                php-versions: ['8.3', '8.4', '8.5']
                 node-versions: ['lts/*']
 
-		timeout-minutes: 15
+        timeout-minutes: 15
 
         runs-on: ${{ matrix.operating-system }}
 
         name: ${{ matrix.operating-system }} (PHP ${{ matrix.php-versions }}, Node ${{ matrix.node-versions }})
+
+        permissions:
+            contents: read
+            packages: write
 
         services:
             postgres:
@@ -45,13 +49,16 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v6
+              with:
+                  lfs: true
 
             - name: Install libraries
               run: |
                   if [ "$RUNNER_OS" == "Linux" ]; then
                   	   sudo apt-get update
-                       sudo apt-get install -y coreutils
+                       sudo apt-get install -y coreutils nano
+                       sudo apt-get install -y libsodium23 libzip-dev libc-client-dev libkrb5-dev
                   elif [ "$RUNNER_OS" == "macOS" ]; then
                        brew install coreutils
                   elif [ "$RUNNER_OS" == "Windows" ]; then
@@ -63,28 +70,31 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: '${{ matrix.php-versions }}'
-                  extensions: fileinfo, mysqli, pdo_mysql, pdo_sqlite, xdebug, mbstring, xmlrpc, gd, intl, xml, zip, soap, bcmath, imap, opcache, pgsql, pdo, imagick
+                  extensions: fileinfo, mysqli, pdo_mysql, pdo_sqlite, xdebug, mbstring, gd, intl, xml, zip, soap, bcmath, imap, opcache, pgsql, pdo, imagick
                   tools: composer, phpunit
 
-            # use 127.0.0.1 as host
             - name: Install MySQL
               uses: shogo82148/actions-setup-mysql@v1
               with:
                   mysql-version: '8.0'
+            	  # use "127.0.0.1" as host and "root" as username
                   root-password: 'root'
                   
             - name: Install Composer
-              run: composer install --no-interaction
+              working-directory: .
+              run: composer update && composer install --no-interaction
 
             - name: Install Node
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v6
               with:
                   node-version: '${{ matrix.node-versions }}'
 
             - name: Install NPM
+              working-directory: .
               run: npm install
 
             - name: Create .env file if needed
+              if: false
               run: |
                   cat > .env << EOF
                   SECRET_VARIABLE_1=${{ secrets.SECRET_VARIABLE_1 }}
@@ -94,11 +104,30 @@ jobs:
               shell: bash
 
             - name: Start PHP Server
-              run: php -S localhost:8000 -t path/to/vhost > /tmp/php-server.log 2>&1 &
+              if: false
+              run: php -S localhost:8000 -t . > /tmp/php-server.log 2>&1 &
               shell: bash
 
             - name: PHP Tests
+              if: false
+              working-directory: .
               run: ./vendor/bin/phpunit
 
             - name: JS Tests
+              if: false
+              working-directory: .
               run: npm run js:tests
+			  
+            - name: Docker build - Login
+              uses: docker/login-action@v3
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Docker build - Push
+              uses: docker/build-push-action@v6
+              with:
+                  context: .
+                  push: true
+                  tags: ghcr.io/vielhuber/custom:latest
