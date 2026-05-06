@@ -45,7 +45,7 @@ git push origin HEAD
 create a fine-grained personal access token (scope `Contents: Read and write` for the target repo) here: https://github.com/settings/personal-access-tokens/new - then switch the remote to https and embed the token:
 
 ```bash
-git remote set-url origin https://x-access-token:github_pat_***********@github.com:vielhuber/gists.git
+git remote set-url origin https://x-access-token:github_pat_***********@github.com/vielhuber/gists.git
 ```
 
 add a cron entry, e.g. daily at 03:00:
