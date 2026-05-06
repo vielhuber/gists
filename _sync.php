@@ -24,9 +24,11 @@ while ($url !== null) {
     foreach ($response->result as $result__value) {
         if (!__true($result__value->public)) { $count['private']++; continue; }
         $count['public']++;
-        $gist = __curl('https://api.github.com/gists/' . $result__value->id, null, 'GET', $headers)->result;
+        $gistResponse = __curl('https://api.github.com/gists/' . $result__value->id, null, 'GET', $headers);
+        $gist = $gistResponse->result;
         if (__nx(@$gist->files)) {
-            echo 'ERROR: failed to fetch gist ' . $result__value->id . ', aborting' . PHP_EOL;
+            echo 'ERROR: failed to fetch gist ' . $result__value->id . ' (HTTP ' . $gistResponse->status . '), aborting' . PHP_EOL;
+            print_r($gist);
             exit(1);
         }
         $folder = 'gists/' . str_replace(['/', '<', '>', ':', '"', '\\', '|', '?', '*'], '', $gist->description);
