@@ -30,7 +30,7 @@ rm -rf gists-main gists README.MD main.zip .env.example
 composer install
 ```
 
-### usage (manually or via cron)
+### usage with cli
 
 ```bash
 git pull
@@ -38,4 +38,18 @@ php _sync.php
 git add -A .
 git commit -m "last update on `date +'%Y-%m-%d'`"
 git push origin HEAD
+```
+
+### usage with cron
+
+create a fine-grained personal access token (scope `Contents: Read and write` for the target repo) here: https://github.com/settings/personal-access-tokens/new - then switch the remote to https and embed the token:
+
+```bash
+git remote set-url origin https://x-access-token:github_pat_***********@github.com:vielhuber/gists.git
+```
+
+add a cron entry, e.g. daily at 03:00:
+
+```cron
+0 3 * * * /path/to/gists/_cron.sh >/dev/null 2>&1
 ```
