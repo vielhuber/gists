@@ -4,15 +4,16 @@ $dotenv = Dotenv\Dotenv::create(__DIR__);
 $dotenv->load();
 $headers = ['Authorization' => 'token ' . getenv('TOKEN'), 'User-Agent' => 'gists'];
 $count = ['public' => 0, 'private' => 0];
-__rrmdir('gists');
-@mkdir('gists');
+// collect all gists in memory first; only persist to disk after a fully successful run
+$collected = [];
 $url = 'https://api.github.com/gists?page=1&per_page=100';
 while ($url !== null) {
     echo $url . PHP_EOL;
     $response = __curl($url, null, 'GET', $headers);
     if (__nx(@$response->headers['link'][0])) {
         print_r($response);
-        break;
+        echo 'ERROR: missing link header, aborting' . PHP_EOL;
+        exit(1);
     }
     $url = null;
     foreach (explode(', ', $response->headers['link'][0]) as $link__value) {
@@ -24,12 +25,24 @@ while ($url !== null) {
         if (!__true($result__value->public)) { $count['private']++; continue; }
         $count['public']++;
         $gist = __curl('https://api.github.com/gists/' . $result__value->id, null, 'GET', $headers)->result;
+        if (__nx(@$gist->files)) {
+            echo 'ERROR: failed to fetch gist ' . $result__value->id . ', aborting' . PHP_EOL;
+            exit(1);
+        }
         $folder = 'gists/' . str_replace(['/', '<', '>', ':', '"', '\\', '|', '?', '*'], '', $gist->description);
-        @mkdir($folder);
         foreach ($gist->files as $files__value) {
-            file_put_contents($folder . '/' . $files__value->filename, $files__value->content);
+            $collected[$folder][$files__value->filename] = $files__value->content;
         }
     }
-    sleep(0.15);
+    usleep(150000);
 }
 print_r($count);
+// all fetches succeeded — replace the gists folder atomically from the user's perspective
+__rrmdir('gists');
+@mkdir('gists');
+foreach ($collected as $folder => $files) {
+    @mkdir($folder);
+    foreach ($files as $filename => $content) {
+        file_put_contents($folder . '/' . $filename, $content);
+    }
+}
