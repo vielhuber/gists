@@ -787,11 +787,11 @@ xdebug.output_dir="/tmp/xdebug"
 
 #### DISABLED: restart router
 - `export VISUAL=nano; crontab -e`
-- `0 4 * * * source $HOME/.bashrc; /mnt/f/OneDrive/DOCS/SCRIPTS/VODAFONE/cron.sh > /mnt/f/OneDrive/DOCS/SCRIPTS/VODAFONE/cron.log 2>&1`
+- `0 4 * * * source $HOME/.bashrc; /mnt/o/DOCS/SCRIPTS/VODAFONE/cron.sh > /mnt/o/DOCS/SCRIPTS/VODAFONE/cron.log 2>&1`
 - `cron.sh`
 ```sh
 #!/usr/bin/env bash
-/root/.nvm/versions/node/v23.5.0/bin/node --env-file=/mnt/f/OneDrive/DOCS/SCRIPTS/VODAFONE/.env /mnt/f/OneDrive/DOCS/SCRIPTS/VODAFONE/stagehand.js
+/root/.nvm/versions/node/v23.5.0/bin/node --env-file=/mnt/o/DOCS/SCRIPTS/VODAFONE/.env /mnt/o/DOCS/SCRIPTS/VODAFONE/stagehand.js
 ```
 
 #### sync bills
@@ -800,7 +800,7 @@ xdebug.output_dir="/tmp/xdebug"
 
 #### make backups
 - `export VISUAL=nano; crontab -e`
-- `0 2 * * 0 /mnt/f/OneDrive/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.sh > /mnt/f/OneDrive/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.log`
+- `0 2 * * 0 /mnt/o/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.sh > /mnt/o/DOCS/PROJEKTE/FACHLEHRER/BACKUP/script.log`
 
 #### composer
 - ```sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
