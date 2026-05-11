@@ -11,7 +11,7 @@
 
 ## usage
 
-- `IS_SANDBOX=1 claude --continue --dangerously-skip-permissions`
+- `IS_SANDBOX=1 claude --continue --dangerously-skip-permissions --effort high`
 - `claude`
 - `claude --continue`
 - `/login`

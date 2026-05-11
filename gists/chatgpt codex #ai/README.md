@@ -5,13 +5,13 @@
 
 ## load skills
 
-- `mkdir -p ~/.codex/skills`
+- `mkdir -p ~/.agents`
 - `ln -s /var/www/boilerplate/AGENTS.md ~/.codex/AGENTS.md`
-- `ln -s /var/www/boilerplate/SKILLS ~/.codex/skills`
+- `ln -s /var/www/boilerplate/_skills ~/.agents/skills`
 
 ## usage
 
-- `codex resume --last --yolo`
+- `codex resume --last --yolo -c model_reasoning_effort="high"`
 - `codex --dangerously-bypass-approvals-and-sandbox` (`codex --yolo`)
 - `codex --full-auto` (= `-a on-failure -s workspace-write`)
 - `codex`
