@@ -22,6 +22,7 @@
 - `/status`
 - `/compact`
 - `/approvals`
+- `/goal`
 - `/resume`, `/new`, `/clear`, `/diff`, `/review`, `/mcp`, `/skills`
 - `Tab`
 - `Esc Esc`
