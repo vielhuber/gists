@@ -26,3 +26,7 @@
 - `/resume`, `/new`, `/clear`, `/diff`, `/review`, `/mcp`, `/skills`
 - `Tab`
 - `Esc Esc`
+
+## chrome / playwright
+
+- `codex mcp add playwright -- npx -y @playwright/mcp@latest`

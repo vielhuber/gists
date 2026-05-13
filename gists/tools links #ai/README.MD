@@ -61,6 +61,12 @@
 - Kling AI: https://klingai.com/text-to-image
 - getimg: https://getimg.ai/image-editor
 
+### Fotos restaurieren
+- DeepImage: https://deep-image.ai
+- Let's Enhance https://letsenhance.io
+- MyHeritage Photo Enhancer: https://www.myheritage.de/photo-enhancer
+- Topaz Gigapixel AI: https://www.topazlabs.com/topaz-gigapixel
+
 ### Browser
 - ChatGPT Atlas: https://openai.com/index/introducing-chatgpt-atlas
 - Dia: https://www.diabrowser.com
