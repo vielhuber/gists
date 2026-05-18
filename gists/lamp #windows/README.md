@@ -769,14 +769,20 @@ xdebug.output_dir="/tmp/xdebug"
   - `appendWindowsPath=false`
 - remove zone identifier files
   - `find . -name "*:Zone.Identifier" -type f -delete`
-- ram overload
-  - you need a lot of ram on your machine
+- config tuning
   - create `%UserProfile%\.wslconfig`
   ```
   [wsl2]
-  memory=24GB # choose a reasonable amount of ram (over 10GB), which your local machine has free all the time
+  memory=24GB
   #swap=16GB # not needed
   localhostForwarding=true
+  nestedVirtualization=true
+  guiApplications=true
+  # Persistence: VM never shuts down on idle
+  vmIdleTimeout=-1
+  # RAM behavior: keep allocated memory inside WSL, no reclaim to host
+  autoMemoryReclaim=disabled
+  pageReporting=false
   ```
 - wsl hangs after a while / vscode hangs
   - Docker > Settings > Start Docker Desktop when you log in: aus
@@ -1313,8 +1319,6 @@ whatweb \
 
 #### docker-osx
 - installation
-  - edit `%UserProfile%\.wslconfig`
-    - `nestedVirtualization=true`
   - `sudo apt-get install kvm`
     - `kvm-ok` // KVM acceleration can be used
   - `sudo apt install x11-apps -y`
