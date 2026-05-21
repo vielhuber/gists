@@ -1,0 +1,8 @@
+// file1.scss
+$development: true;
+
+// file2.scss
+$development: false !default;
+@if ($development) {
+    .foo { }
+}

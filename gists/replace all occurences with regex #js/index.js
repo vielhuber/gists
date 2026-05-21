@@ -1,0 +1,1 @@
+'this is a foo and a bar and a foobar'.replace(new RegExp('foo', 'g'), 'baz');

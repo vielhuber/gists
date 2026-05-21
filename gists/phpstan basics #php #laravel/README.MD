@@ -15,8 +15,18 @@ parameters:
         - path/to/subfolder/
 
     excludePaths:
-        - ~/.vscode-server/*
-        - '/root/.vscode-server/extensions/*'
+        analyseAndScan:
+            - %currentWorkingDirectory%/**/vendor/**
+            - %currentWorkingDirectory%/**/node_modules/**
+            - %currentWorkingDirectory%/**/_build/**
+            - %currentWorkingDirectory%/**/_archive/**
+            - %currentWorkingDirectory%/wp-content/uploads/**
+            - /root/.vscode-server/**
+
+    bootstrapFiles:
+        - path/to/vendor/autoload.php
+        - path/to/vendor/vielhuber/stringhelper/src/functions.php
+        - path/to/vendor/dbhelper/src/static.php
 
     level: 3
 ```
@@ -68,8 +78,13 @@ parameters:
         - ./
 
     excludePaths:
-        - ~/.vscode-server/*
-        - '/root/.vscode-server/extensions/*'
+        analyseAndScan:
+            - %currentWorkingDirectory%/**/vendor/**
+            - %currentWorkingDirectory%/**/node_modules/**
+            - %currentWorkingDirectory%/**/_build/**
+            - %currentWorkingDirectory%/**/_archive/**
+            - %currentWorkingDirectory%/wp-content/uploads/**
+            - /root/.vscode-server/**
 
     level: 3
 ```
@@ -92,5 +107,9 @@ parameters:
 
 - https://marketplace.visualstudio.com/items?itemName=SanderRonde.phpstan-vscode
 - runs on every file change and shows errors in tab "Problems"
-- useful plugin setting:
-	- enable "single file mode"
+- plugin settings:
+
+```json
+"phpstan.singleFileMode": true,
+"phpstan.enabled": true,
+```

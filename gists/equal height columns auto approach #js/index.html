@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <title>.</title>
+    <script>
+    /*
+    this script automagically grabs all elements with the given selector and
+    sets only elements with the same offset to their neighbours maximum height
+    */
+    window.addEventListener('load', () => { setEqualHeights(); });
+    window.addEventListener('resize', () => { setEqualHeights(); });
+    let selectors = ['.equal-height'];
+    function setEqualHeights() {
+        selectors.forEach(selectors__value => {
+            let heights = {},
+                manipulate = [];
+            if (document.querySelectorAll(selectors__value).length >= 2) {
+                document.querySelectorAll(selectors__value).forEach($el => {
+                    $el.style.height = 'auto';
+                });
+                document.querySelectorAll(selectors__value).forEach($el => {
+                    let heights__key = Math.round(
+                        $el.getBoundingClientRect().top +
+                            window.pageYOffset -
+                            document.documentElement.clientTop
+                    );
+                    if (!(heights__key in heights)) {
+                        heights[heights__key] = 0;
+                    }
+                    if ($el.clientHeight > heights[heights__key]) {
+                        heights[heights__key] = $el.clientHeight;
+                    }
+                });
+                Object.entries(heights).forEach(([heights__key, heights__value]) => {
+                    document.querySelectorAll(selectors__value).forEach($el => {
+                        if (
+                            heights__key ==
+                            Math.round(
+                                $el.getBoundingClientRect().top +
+                                    window.pageYOffset -
+                                    document.documentElement.clientTop
+                            )
+                        ) {
+                            manipulate.push({ el: $el, height: heights__value });
+                        }
+                    });
+                });
+                manipulate.forEach(manipulate__value => {
+                    manipulate__value.el.style.height = manipulate__value.height + 'px';
+                });
+            }
+        });
+    }
+    </script>
+    <style>
+    *
+    {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex;
+        align-items: flex-start;
+        align-content: flex-start;
+    }
+    .module {
+        flex: 0 1 auto;
+        width:50%;
+        text-align:center;
+    }
+    div {
+        border:1px solid red;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="module">
+            <div>...</div>
+            <div class="equal-height">...</div>
+            <div>...</div>
+        </div>
+        <div class="module">
+            <div>...</div>
+            <div class="equal-height">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</div>
+            <div>...</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<!-- php land -->
+<?php if( $link ) { echo '<a href="'.$link.' target="_blank">'; } ?>Button-Text<?php if( $link ) { echo '</a>'; } ?>
+
+<!-- vue land -->
+<component :is="link?'a':'span'" :href="link?link:null" :target="link?'_blank':null">Button-Text</component>
