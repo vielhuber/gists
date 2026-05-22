@@ -1,7 +1,7 @@
 {
     "require": {
-        "vielhuber/stringhelper": "^2.5",
-        "vlucas/phpdotenv": "^3.6"
+        "vielhuber/stringhelper": "^7",
+        "vlucas/phpdotenv": "^5"
     },
     "license": "MIT"
 }
