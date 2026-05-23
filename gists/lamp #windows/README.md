@@ -826,6 +826,8 @@ xdebug.output_dir="/tmp/xdebug"
 - ```composer self-update```
 - ```composer --version``` # 2
 - ```composer config --global --auth github-oauth.github.com *TOKEN*``` (siehe Zugangsdaten)
+- Install `composer upgrade-all`
+  - `composer global require vildanbina/composer-upgrader`
 
 #### node / npm
 - nvm

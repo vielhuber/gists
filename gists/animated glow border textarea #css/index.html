@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>glow</title>
+    <style>
+        /* boilerplate */
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            background-color:#000;
+        }
+        .container {
+            padding:20px;
+        }
+        /* !boilerplate */
+
+        .glow {
+            position: relative;
+            z-index: 0;
+            overflow: hidden;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #404040;
+        }
+        .glow::before,
+        .glow::after {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            width: 99999px;
+            height: 99999px;
+            pointer-events: none;
+            transform: translate(-50%, -50%) rotate(0deg);
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-image: conic-gradient(rgba(0, 0, 0, 0), #1976ed, rgba(0, 0, 0, 0) 14%);
+            animation: glow-animation 3s linear infinite;
+        }
+        .glow::after {
+            filter: blur(20px);
+        }
+        .glow__textarea {
+            position: relative;
+            z-index: 10;
+            display: block;
+            width: 100%;
+            min-height: 100px;
+            padding: 20px;
+            resize: vertical;
+            border: 0;
+            border-radius: 7px;
+            outline: none;
+            color: var(--text-dark);
+            background-color: #171717;
+        }
+        @keyframes glow-animation {
+            from {
+                transform: translate(-50%, -50%) scaleY(0.33) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) scaleY(0.33) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="glow">
+            <textarea class="glow__textarea" placeholder="message"></textarea>
+        </div>
+    </div>
+</body>
+</html>
