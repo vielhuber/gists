@@ -46,13 +46,11 @@
 
 ### Bilder
 - OpenAI ChatGPT: https://chatgpt.com
-- DALL-E: https://openai.com/index/dall-e-3
 - Adobe Firefly: https://firefly.adobe.com
 - FLUX: https://fal.ai/models/fal-ai/flux-realism / https://fal.ai/models/fal-ai/flux/dev / https://blackforestlabs.ai
 - Stable Diffusion: https://beta.dreamstudio.ai/generate / https://leonardo.ai
 - Google Imagegen: https://cloud.google.com/use-cases/text-to-image-ai / https://deepmind.google/technologies/imagen-3
 - Midjourney: https://www.midjourney.com
-- Sora: https://www.sora.com
 - Ideogram (Characters, Schriften): https://ideogram.ai
 - Leonardo: https://app.leonardo.ai
 - MagnificAI (Upscaler): https://magnific.ai
