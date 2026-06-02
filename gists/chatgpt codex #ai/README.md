@@ -27,6 +27,7 @@
 - `Tab`
 - `Esc Esc`
 
-## chrome / playwright
+## mcp
 
 - `codex mcp add playwright -- npx -y @playwright/mcp@latest`
+- `codex mcp add context7 -- npx -y @upstash/context7-mcp`

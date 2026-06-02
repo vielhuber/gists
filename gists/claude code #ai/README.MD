@@ -126,7 +126,8 @@ CB_NO_PROGRESS_THRESHOLD=2
 - `claude`
 - `security-review against http://localhost:8080`
 
-## chrome / playwright
+## mcp
 
 - `claude mcp add playwright npx @playwright/mcp@latest`
 - alternative: claude code chrome (currently not supported in wsl): https://code.claude.com/docs/de/chrome
+- `claude mcp add context7 -- npx -y @upstash/context7-mcp`
