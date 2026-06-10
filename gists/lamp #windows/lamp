@@ -107,21 +107,20 @@ if [ "$PROJECT" = "vielhuber" ]; then
     DOMAIN="vielhuber.dev"
 fi
 
-if [[ "$5" == --port=* ]]; then
-    PORT="${5#--port=}"
-    PROXY_LINE="ProxyPreserveHost On
-ProxyPass / http://$DOMAIN:$PORT/
-ProxyPassReverse / http://$DOMAIN:$PORT/"
-else
-    PROXY_LINE=""
-fi
-
-if [[ "$5" == --alias=* ]]; then
-    ALIAS="${5#--alias=}"
-    ALIAS_LINE="ServerAlias $ALIAS www.$ALIAS"
-else
-    PROXY_LINE=""
-fi
+PROXY_LINE=""
+ALIAS_LINE=""
+for arg in "$5" "$6"; do
+    if [[ "$arg" == --port=* ]]; then
+        PORT="${arg#--port=}"
+        PROXY_LINE="ProxyPreserveHost On
+  ProxyPass / http://localhost:$PORT/
+  ProxyPassReverse / http://localhost:$PORT/"
+    fi
+    if [[ "$arg" == --alias=* ]]; then
+        ALIAS="${arg#--alias=}"
+        ALIAS_LINE="ServerAlias $ALIAS www.$ALIAS"
+    fi
+done
 
 cat > $FILE << EOF
 <VirtualHost *:80>
@@ -152,6 +151,7 @@ cat > $FILE << EOF
     Require all granted
   </Directory>
   $PHP_LINE
+  $PROXY_LINE
   SSLEngine on
   SSLCertificateFile /etc/letsencrypt/live/vielhuber.dev/fullchain.pem
   SSLCertificateKeyFile /etc/letsencrypt/live/vielhuber.dev/privkey.pem

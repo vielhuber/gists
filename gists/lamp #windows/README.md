@@ -40,11 +40,29 @@
 echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list`
 - `sudo apt-get update`
 - `sudo apt-get install cloudflared`
+- `rm ~/.cloudflared/cert.pem` (logout from other sessions)
 - `cloudflared tunnel login`
 - `cloudflared tunnel create TUNNEL`
 - `cloudflared tunnel route dns --overwrite-dns TUNNEL rebuhleiv.xyz`
+- `cloudflared tunnel route dns --overwrite-dns TUNNEL *.rebuhleiv.xyz`
 // admin interface is on cloudflare.com > Zero Trust > Networks > Tunnels
-- `cloudflared tunnel run --url http://localhost:8000 TUNNEL`
+- manual start
+  - `cloudflared tunnel run --url http://localhost:80 TUNNEL`
+- automatic start
+  - `cloudflared tunnel list`
+  - `sudo mkdir -p /etc/cloudflared`
+  - `sudo nano /etc/cloudflared/config.yml`
+
+```yaml
+tunnel: TUNNEL-UUID
+credentials-file: /root/.cloudflared/TUNNEL-UUID.json
+ingress:
+  - service: http://localhost:80
+```
+
+  - `sudo cloudflared service install`
+  - `sudo systemctl enable --now cloudflared`
+  - `sudo systemctl status cloudflared`
 
 ##### local based
 
@@ -224,6 +242,10 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
   - `systemd=true`
   - cmd (admin): `wsl --shutdown`
   - `systemctl status`
+
+#### fix lots of parallel wsl windows (0x8007274c)
+- `export VISUAL=nano; crontab -e`
+- `0 * * * * /usr/bin/echo 1 | /usr/bin/tee /proc/sys/vm/drop_caches > /dev/null`
 
 #### merge .bashrc/.bash_profile
 - `nano ~/.bash_profile`
@@ -424,6 +446,10 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 ```
 <VirtualHost *:80>
   DocumentRoot /var/www
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} \.rebuhleiv\.xyz$ [NC,OR]
+  RewriteCond %{HTTP_HOST} ^rebuhleiv\.xyz$ [NC]
+  RewriteRule ^ - [F,L]
   <Directory /var/www>
     Options +Indexes
     AllowOverride None
@@ -432,6 +458,10 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;3
 </VirtualHost>
 <VirtualHost *:443>
   DocumentRoot /var/www
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} \.rebuhleiv\.xyz$ [NC,OR]
+  RewriteCond %{HTTP_HOST} ^rebuhleiv\.xyz$ [NC]
+  RewriteRule ^ - [F,L]
   <Directory /var/www>
     Options +Indexes
     AllowOverride None
@@ -1240,6 +1270,21 @@ rm "$t"
 - ```curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash```
 - ```sudo apt-get install speedtest```
 - ```speedtest```
+
+#### cliproxyapi
+
+- `mkdir -p /var/www/ai`
+- `cd /var/www/ai`
+- `curl -fsSL https://raw.githubusercontent.com/router-for-me/cliproxyapi-installer/refs/heads/master/cliproxyapi-installer | bash`
+- `nano /root/cliproxyapi/config.yaml` => Remove `"your-api-key..."` and note one of the two generated api keys
+- `lamp add ai "" "" --port=8317 --alias=ai.rebuhleiv.xyz`
+- `sudo systemctl reload apache2`
+- `loginctl enable-linger root`
+- `systemctl --user enable cliproxyapi.service`
+- `systemctl --user start cliproxyapi.service`
+- `systemctl --user status cliproxyapi.service`
+- `cd /root/cliproxyapi && ./cli-proxy-api --codex-login --no-browser`
+- `systemctl --user restart cliproxyapi`
 
 #### include windows fonts in linux
 - ```ln -s /mnt/c/Windows/Fonts /usr/share/fonts/WindowsFonts```
