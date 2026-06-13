@@ -2,7 +2,7 @@
 
 set -x
 
-PASSWORD="AzaISAD9yn0LPcJU66euM4NeR1vedhU1TMT3bkj";
+PASSWORD="xxxxxxxxxxxxxxxxxxxx";
 GIT_REPO="git@gist.github.com:GIST_ID.git"
 
 # delete password from head (since bfg does not modify the current state)
