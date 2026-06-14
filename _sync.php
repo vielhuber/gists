@@ -33,7 +33,10 @@ while ($url !== null) {
         }
         $folder = 'gists/' . str_replace(['/', '<', '>', ':', '"', '\\', '|', '?', '*'], '', $gist->description);
         foreach ($gist->files as $files__value) {
-            $collected[$folder][$files__value->filename] = $files__value->content;
+            // strip path separators (and the same illegal chars as the folder) so an
+            // attacker-controlled gist filename cannot traverse out of the gists folder
+            $filename = str_replace(['/', '<', '>', ':', '"', '\\', '|', '?', '*'], '', $files__value->filename);
+            $collected[$folder][$filename] = $files__value->content;
         }
     }
     usleep(150000);
