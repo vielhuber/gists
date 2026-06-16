@@ -362,3 +362,36 @@ Header set Expires 0
 - Application > Storage > Clear site data
 - Lighthouse > Progressive Web App
 - Network > Offline
+
+## share functionality
+
+- you must reinstall the pwa to register the share tool
+- for files, use `POST` and `multipart/form-data`
+
+```json
+{
+    "share_target": {
+        "action": "/index.html",
+        "method": "GET",
+        "params": {
+            "title": "title",
+            "text": "text",
+            "url": "url"
+        }
+    }
+}
+```
+
+```js
+window.addEventListener('load', () => {
+    let params = new URLSearchParams(window.location.search),
+        sharedData = [params.get('title'), params.get('text'), params.get('url')]
+            .filter((value) => value !== null && value !== '')
+            .join('\n\n');
+    if (sharedData === '') {
+        return;
+    }
+    document.querySelector('textarea').value = sharedData;
+    window.history.replaceState({}, document.title, window.location.pathname);
+});
+```

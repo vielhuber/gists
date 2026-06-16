@@ -815,9 +815,10 @@ xdebug.output_dir="/tmp/xdebug"
   guiApplications=true
   # Persistence: VM never shuts down on idle
   vmIdleTimeout=-1
+  
+  [experimental]
   # RAM behavior: keep allocated memory inside WSL, no reclaim to host
   autoMemoryReclaim=disabled
-  pageReporting=false
   ```
 - wsl hangs after a while / vscode hangs
   - Docker > Settings > Start Docker Desktop when you log in: aus
