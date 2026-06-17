@@ -124,7 +124,7 @@
 - Google NotebookLM: https://notebooklm.google
 - Mirofish: https://666ghj.github.io/mirofish-demo
   
-### Text-To-Speech, Speech-To-Speech, Stimme klonen, Soundeffekte erzeugen
+### Text-To-Speech, Speech-To-Speech, Stimme klonen, Soundeffekte erzeugen, Sound verbessern
 - ElevenLabs: https://elevenlabs.io
 - Google: https://cloud.google.com/speech-to-text / https://cloud.google.com/text-to-speech
 - Deepgram: https://deepgram.com
@@ -132,15 +132,13 @@
 - Ultravox: https://www.ultravox.ai
 - Sesame: https://www.sesame.com
 - Dia: https://github.com/nari-labs/dia
+- Adobe: https://podcast.adobe.com/enhance
   
 ### Meetings transkribieren / zusammenfassen
 - Granola: https://www.granola.ai
 - Fathom: https://fathom.video/home
 - Meetily: https://github.com/Zackriya-Solutions/meeting-minutes
 - tl;dv: https://tldv.io
-
-### Sound verbessern
-- Adobe: https://podcast.adobe.com/enhance
 
 ### Videos
 - Kling AI: https://klingai.com
@@ -209,6 +207,7 @@
 ### Musik erstellen
 - Suno: https://suno.com
 - Udio: https://www.udio.com
+- LALAL.AI (Stimme entfernen): https://www.lalal.ai
 
 ### Chatbots
 - LoyJoy: https://www.loyjoy.com
