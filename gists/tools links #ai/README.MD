@@ -104,7 +104,7 @@
 - FastMCP: https://gofastmcp.com
 - mcp-cli: https://github.com/chrishayuk/mcp-cli
 
-### Lokal / Selbsthosting/ Hosting
+### Lokal / Selbsthosting / Hosting
 - LM Studio: https://lmstudio.ai
 - Ollama: https://ollama.com
 - Transformers.js: https://huggingface.co/docs/transformers.js###
@@ -113,7 +113,8 @@
 - Vultr: https://www.vultr.com
 - llmfit: https://github.com/AlexsJones/llmfit
 - Lossless Context: https://www.losslesscontext.ai
-- NVIDIA Build : https://build.nvidia.com + https://github.com/sherman-yang/nvidia-model-info
+- NVIDIA Build: https://build.nvidia.com + https://github.com/sherman-yang/nvidia-model-info
+- Apfel: https://apfel.franzai.com
 
 ### Developer Tools
 - Claude Console: https://console.anthropic.com
