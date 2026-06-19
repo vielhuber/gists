@@ -1268,9 +1268,11 @@ rm "$t"
   - "Der phpMyAdmin-Konfigurationsspeicher ist nicht vollständig konfiguriert," => Anklicken + Erzeugen
 
 #### speedtest cli
-- ```curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash```
-- ```sudo apt-get install speedtest```
-- ```speedtest```
+- `curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | bash`
+- `sed -i 's/noble/jammy/g' /etc/apt/sources.list.d/ookla_speedtest-cli.list`
+- `apt-get update`
+- `apt-get install -y speedtest`
+- `speedtest -f json --accept-license --accept-gdpr`
 
 #### cliproxyapi
 
