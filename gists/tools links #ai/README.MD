@@ -223,6 +223,9 @@
 - LLMStats: https://llm-stats.com
 - BenchLM: https://benchlm.ai
 
+### Models
+- models.dev: https://models.dev
+
 ### Gaming / Design
 - Google Genie: https://deepmind.google/discover/blog/genie-2-a-large-scale-foundation-world-model
 - World Labs Marble: https://www.worldlabs.ai
