@@ -45,25 +45,38 @@
 - AGENTS.md: https://agents.md
 
 ### Bilder
-- OpenAI ChatGPT: https://chatgpt.com
+- Magnific / Freepik: https://www.magnific.com
+- fal: https://fal.ai
+- OpenAI (GPT Image): https://chatgpt.com
+- Google (Nano Banana): https://cloud.google.com/use-cases/text-to-image-ai / https://deepmind.google/technologies/imagen-3
 - Adobe Firefly: https://firefly.adobe.com
-- FLUX: https://fal.ai/models/fal-ai/flux-realism / https://fal.ai/models/fal-ai/flux/dev / https://blackforestlabs.ai
+- FLUX: https://fal.ai/models/fal-ai/flux-realism / https://blackforestlabs.ai
 - Stable Diffusion: https://beta.dreamstudio.ai/generate / https://leonardo.ai
-- Google Imagegen: https://cloud.google.com/use-cases/text-to-image-ai / https://deepmind.google/technologies/imagen-3
 - Midjourney: https://www.midjourney.com
 - Ideogram (Characters, Schriften): https://ideogram.ai
 - Leonardo: https://app.leonardo.ai
 - MagnificAI (Upscaler): https://magnific.ai
-
-### Inpainting
+- Recraft: https://www.recraft.ai
+- ByteDance Seedream: https://seed.bytedance.com
 - Kling AI: https://klingai.com/text-to-image
 - getimg: https://getimg.ai/image-editor
 
-### Fotos restaurieren
-- DeepImage: https://deep-image.ai
-- Let's Enhance https://letsenhance.io
-- MyHeritage Photo Enhancer: https://www.myheritage.de/photo-enhancer
-- Topaz Gigapixel AI: https://www.topazlabs.com/topaz-gigapixel
+### Videos
+- Magnific / Freepik: https://www.magnific.com
+- Kling AI: https://klingai.com
+- OpenAI Sora: https://www.sora.com
+- RunWay ML: https://runwayml.com
+- Haiper: https://haiper.ai
+- Google Veo: https://deepmind.google/technologies/
+- Pollo: https://pollo.ai
+- Mochi: https://mochi1ai.com
+- Lightricks / LTXV / LTX Studio: https://www.lightricks.com / https://ltx.studio
+- Adobe Firefly: https://www.adobe.com/de/products/firefly.html
+- Luma Dream Machine: https://lumalabs.ai/dream-machine
+- OmniHuman: https://omnihuman-lab.github.io
+- Pika: https://pika.art
+- Adobe Firefly: https://firefly.adobe.com
+- Midjourney Video: https://www.midjourney.com
 
 ### Browser
 - ChatGPT Atlas: https://openai.com/index/introducing-chatgpt-atlas
@@ -141,22 +154,6 @@
 - Meetily: https://github.com/Zackriya-Solutions/meeting-minutes
 - tl;dv: https://tldv.io
 
-### Videos
-- Kling AI: https://klingai.com
-- OpenAI Sora: https://www.sora.com
-- RunWay ML: https://runwayml.com
-- Haiper: https://haiper.ai
-- Google Veo: https://deepmind.google/technologies/
-- Pollo: https://pollo.ai
-- Mochi: https://mochi1ai.com
-- Lightricks / LTXV / LTX Studio: https://www.lightricks.com / https://ltx.studio
-- Adobe Firefly: https://www.adobe.com/de/products/firefly.html
-- Luma Dream Machine: https://lumalabs.ai/dream-machine
-- OmniHuman: https://omnihuman-lab.github.io
-- Pika: https://pika.art
-- Adobe Firefly: https://firefly.adobe.com
-- Midjourney Video: https://www.midjourney.com
-
 ### Produkte
 - SellerPic: https://www.sellerpic.ai
 - Pippit: https://www.pippit.ai
@@ -182,6 +179,12 @@
 - Captions: https://www.captions.ai
 - arcards: https://www.arcads.ai/
 - XBeast: https://xbeast.io
+
+### Fotos restaurieren
+- DeepImage: https://deep-image.ai
+- Let's Enhance https://letsenhance.io
+- MyHeritage Photo Enhancer: https://www.myheritage.de/photo-enhancer
+- Topaz Gigapixel AI: https://www.topazlabs.com/topaz-gigapixel
 
 ### Slideshow / Diashow erstellen
 - CapCut: https://www.capcut.com
