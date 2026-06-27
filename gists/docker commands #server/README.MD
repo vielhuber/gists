@@ -167,8 +167,11 @@ vendor/
 #### login
 - ```docker compose exec app /bin/bash```
 
-#### commands
+#### run command
 - ```docker compose exec app php artisan migrate```
+
+#### pass arguments
+- ```FORCE_BACKUP=1 FORCE_SEED=1 FORCE_UPDATE=1 docker compose up```
 
 #### process
 - ```Dockerfile =[docker build]=> Docker image =[docker run]=> Docker container```
@@ -211,6 +214,7 @@ app:
 ```
 
 #### connect to database
+
 - from host to docker
   - redirect port
     - add this to ```docker compose.yml```: ```mariadb: ports: 3307:3306```
@@ -222,6 +226,7 @@ app:
   - use `host.docker.internal` with port `3306`
 
 #### wsl compatibility
+
 - networking only works, when changing ports from ```127.0.0.1:8080:80``` to ```8080:80```
 - permissions only work, when manually giving special folders write permissions:
 ```
