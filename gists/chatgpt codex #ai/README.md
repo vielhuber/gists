@@ -5,6 +5,7 @@
 
 ## load skills
 
+- `mkdir -p ~/.codex`
 - `mkdir -p ~/.agents`
 - `ln -s /var/www/boilerplate/AGENTS.md ~/.codex/AGENTS.md`
 - `ln -s /var/www/boilerplate/_skills ~/.agents/skills`
