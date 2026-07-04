@@ -171,7 +171,8 @@ vendor/
 - ```docker compose exec app php artisan migrate```
 
 #### pass arguments
-- ```FORCE_BACKUP=1 FORCE_SEED=1 FORCE_UPDATE=1 docker compose up```
+- ```ARG1=1 ARG2=1 docker compose up```
+- Be careful: Different arguments lead to different base images
 
 #### process
 - ```Dockerfile =[docker build]=> Docker image =[docker run]=> Docker container```
