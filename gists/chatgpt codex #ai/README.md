@@ -28,6 +28,13 @@
 - `Tab`
 - `Esc Esc`
 
+
+## settings
+- `nano ~/.codex/config.toml`
+```toml
+notify = ["bash", "/mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh", "codex"]
+```
+
 ## mcp
 
 - `codex mcp add playwright -- npx -y @playwright/mcp@latest`

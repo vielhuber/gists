@@ -26,7 +26,21 @@
 ```js
 {
   "skipDangerousModePermissionPrompt": true,
-  "spinnerTipsEnabled": false
+  "spinnerTipsEnabled": false,
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude-stop",
+            "async": true,
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
