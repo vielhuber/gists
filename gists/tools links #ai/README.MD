@@ -297,6 +297,10 @@
 ### Open Source / Open Weights
 - European Open Source AI Index: https://osai-index.eu/the-index
 
+### Security / Pentesting
+- strix: https://github.com/usestrix/strix
+- Shannon: https://github.com/KeygraphHQ/shannon
+
 ### Jailbroken / Uncensored
 - CLIProxyAPI: https://github.com/router-for-me/CLIProxyAPI
 - GPT4Free: https://github.com/xtekky/gpt4free
