@@ -295,6 +295,8 @@
 - AI-27: https://ai-27.com/prompt
 
 ### Open Source / Open Weights
+- Hugging Face: https://huggingface.co
+- Unsloth: https://unsloth.ai
 - European Open Source AI Index: https://osai-index.eu/the-index
 
 ### Security / Pentesting
