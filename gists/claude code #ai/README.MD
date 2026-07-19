@@ -92,6 +92,7 @@ einer für Tests. Alle arbeiten parallel.
 - log: `tail -F -q .ralph/logs/claude_output_*.log | jq .`
 - reset (soft): `find .ralph -mindepth 1 -maxdepth 1 ! -name '*.md' ! -name '.gitignore' -exec rm -rf {} +`
 - reset (hard): `rm -rf .ralph .ralphrc && ralph-enable`
+- show all sessions: `claude --resume` > `CTRL+A`
 
 ### .ralphrc
 

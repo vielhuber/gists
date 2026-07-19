@@ -27,7 +27,8 @@
 - `/resume`, `/new`, `/clear`, `/diff`, `/review`, `/mcp`, `/skills`
 - `Tab`
 - `Esc Esc`
-
+- show all sessions: `codex resume --all`
+- delete session: `codex delete SESSION_ID`
 
 ## settings
 - `nano ~/.codex/config.toml`
