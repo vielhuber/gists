@@ -39,4 +39,4 @@ notify = ["bash", "/mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh", "codex"]
 ## mcp
 
 - `codex mcp add playwright -- npx -y @playwright/mcp@latest`
-- `codex mcp add context7 -- npx -y @upstash/context7-mcp`
+- `npx ctx7 setup --codex` (=> MCP server)

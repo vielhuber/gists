@@ -145,4 +145,4 @@ CB_NO_PROGRESS_THRESHOLD=2
 
 - `claude mcp add playwright npx @playwright/mcp@latest`
 - alternative: claude code chrome (currently not supported in wsl): https://code.claude.com/docs/de/chrome
-- `claude mcp add context7 -- npx -y @upstash/context7-mcp`
+- `npx ctx7 setup --claude` (=> MCP server)
