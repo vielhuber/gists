@@ -62,7 +62,7 @@
 - getimg: https://getimg.ai/image-editor
 
 ### Videos
-- Magnific / Freepik: https://www.magnific.com
+- Magnific (Freepik): https://www.magnific.com
 - Kling AI: https://klingai.com
 - OpenAI Sora: https://www.sora.com
 - RunWay ML: https://runwayml.com
@@ -194,6 +194,7 @@
 - KREA: https://www.krea.ai
     
 ### Präsentationen erstellen
+- Canva: https://www.canva.com
 - Gamma: https://gamma.app
 - Vidwud: https://www.vidwud.com
 - SlidesGPT: https://slidesgpt.com
@@ -211,6 +212,7 @@
 ### Musik erstellen
 - Suno: https://suno.com
 - Udio: https://www.udio.com
+- Soundful: https://soundful.com
 - LALAL.AI (Stimme entfernen): https://www.lalal.ai
 
 ### Chatbots
