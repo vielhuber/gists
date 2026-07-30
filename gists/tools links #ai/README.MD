@@ -18,6 +18,7 @@
 - Moonshot / Kimi K2: https://www.moonshot.ai / https://www.kimi.com
 - zAI: https://z.ai
 - Taalas: https://chatjimmy.ai
+- OpenCode Go: https://opencode.ai/de/go
 
 ### Programmierung
 - Cursor: https://www.cursor.com
@@ -190,7 +191,8 @@
 - CapCut: https://www.capcut.com
 - CapCut Autocut: https://www.capcut.com/editor-tools/autocut
 
-### 3D-Objekte
+### 3D
+- SpAItial: https://spaitial.ai
 - KREA: https://www.krea.ai
     
 ### Präsentationen erstellen

@@ -7,16 +7,18 @@
 
 - `mkdir ~/.claude`
 - `ln -s /var/www/boilerplate/AGENTS.md ~/.claude/CLAUDE.md`
-- `ln -s /var/www/boilerplate/SKILLS ~/.claude/skills`
+- `ln -s /var/www/boilerplate/_skills ~/.claude/skills`
 
 ## usage
 
+- `IS_SANDBOX=1 claude $(ls "$HOME/.claude/projects/$(pwd | sed "s|[^a-zA-Z0-9]|-|g")"/*.jsonl &>/dev/null && echo --continue) --dangerously-skip-permissions --model claude-opus-5 --effort high`
 - `IS_SANDBOX=1 claude --continue --dangerously-skip-permissions --effort high`
 - `claude`
 - `claude --continue`
 - `/login`
 - `/model`
 - `/usage`
+- `/goal`
 - `/compact`
 - `/permissions`
 - `ctrl+enter`
