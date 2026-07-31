@@ -47,3 +47,8 @@
 ```
 
 - `npx ctx7 setup --opencode` (=> MCP server)
+
+## notificatiopns
+
+- `mkdir -p ~/.config/opencode/plugins`
+- `ln -sfn /mnt/o/DOCS/SCRIPTS/NOTIFY/opencode-notify.js ~/.config/opencode/plugins/notify.js`

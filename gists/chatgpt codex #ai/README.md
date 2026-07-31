@@ -30,13 +30,31 @@
 - show all sessions: `codex resume --all`
 - delete session: `codex delete SESSION_ID`
 
-## settings
-- `nano ~/.codex/config.toml`
-```toml
-notify = ["bash", "/mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh", "codex"]
-```
-
 ## mcp
 
 - `codex mcp add playwright -- npx -y @playwright/mcp@latest`
 - `npx ctx7 setup --codex` (=> MCP server)
+
+## notifications
+- `nano ~/.codex/config.toml`
+```toml
+[features]
+hooks = true
+```
+
+- `nano ~/.codex/config.toml`
+
+```json
+{
+  "description": "Update the taskbar harness overlay.",
+  "hooks": {
+    "SessionStart": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 5}]}],
+    "UserPromptSubmit": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook thinking","timeout": 5}]}],
+    "Stop": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 5}]}],
+    "PermissionRequest": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 5}]}],
+    "SessionEnd": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook remove","timeout": 3}]}]
+  }
+}
+```
+
+- `codex` =>  Trust all and continue

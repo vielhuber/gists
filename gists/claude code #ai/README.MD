@@ -28,21 +28,7 @@
 ```js
 {
   "skipDangerousModePermissionPrompt": true,
-  "spinnerTipsEnabled": false,
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude-stop",
-            "async": true,
-            "timeout": 20
-          }
-        ]
-      }
-    ]
-  }
+  "spinnerTipsEnabled": false
 }
 ```
 
@@ -148,3 +134,19 @@ CB_NO_PROGRESS_THRESHOLD=2
 - `claude mcp add playwright npx @playwright/mcp@latest`
 - alternative: claude code chrome (currently not supported in wsl): https://code.claude.com/docs/de/chrome
 - `npx ctx7 setup --claude` (=> MCP server)
+
+## notifications
+
+- `nano ~/.claude/settings.json`
+```js
+{
+  ...
+  "hooks": {
+    "SessionStart": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude waiting", "timeout": 5}]}],
+    "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude thinking", "timeout": 5}]}],
+    "Stop": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude waiting", "timeout": 5}]}],
+    "Notification": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude waiting", "timeout": 5}]}],
+    "SessionEnd": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude remove", "timeout": 5}]}]
+  }
+}
+```
