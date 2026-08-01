@@ -42,7 +42,7 @@
 hooks = true
 ```
 
-- `nano ~/.codex/config.toml`
+- `nano ~/.codex/hooks.json`
 
 ```json
 {
@@ -51,7 +51,7 @@ hooks = true
     "SessionStart": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 5}]}],
     "UserPromptSubmit": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook thinking","timeout": 5}]}],
     "Stop": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 5}]}],
-    "PermissionRequest": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 5}]}],
+    "PermissionRequest": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook attention","timeout": 5}]}],
     "SessionEnd": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook remove","timeout": 3}]}]
   }
 }

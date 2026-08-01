@@ -49,4 +49,3 @@
 ```
 SECRET_VARIABLE_1=FOO
 ```
-

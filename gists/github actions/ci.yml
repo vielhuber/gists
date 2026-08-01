@@ -20,7 +20,7 @@ on:
 jobs:
     build:
         name: ${{ matrix.operating-system }} (PHP ${{ matrix.php-versions }}, Node ${{ matrix.node-versions }})
-        
+
         strategy:
             max-parallel: 9
             fail-fast: true
@@ -56,7 +56,7 @@ jobs:
             - name: Install libraries
               run: |
                   if [ "$RUNNER_OS" == "Linux" ]; then
-                  	   sudo apt-get update
+                       sudo apt-get update
                        sudo apt-get install -y coreutils nano
                        sudo apt-get install -y libsodium23 libzip-dev libc-client-dev libkrb5-dev
                   elif [ "$RUNNER_OS" == "macOS" ]; then
@@ -77,10 +77,11 @@ jobs:
               uses: shogo82148/actions-setup-mysql@v1
               with:
                   mysql-version: '8.0'
-            	  # use "127.0.0.1" as host and "root" as username
+                  # use "127.0.0.1" as host and "root" as username
                   root-password: 'root'
-                  
+
             - name: Install Composer
+              timeout-minutes: 15
               working-directory: .
               run: composer update && composer install --no-interaction
 
@@ -117,7 +118,7 @@ jobs:
               if: false
               working-directory: .
               run: npm run js:tests
-			  
+
             - name: Docker build - Login
               uses: docker/login-action@v3
               with:
@@ -131,11 +132,13 @@ jobs:
                   context: .
                   push: true
                   tags: ghcr.io/vielhuber/custom:latest
-                  
+
     publish:
-    	if: startsWith(github.ref, 'refs/tags/')
-       	needs: build
+        if: startsWith(github.ref, 'refs/tags/')
+        needs: build
         runs-on: ubuntu-latest
+
+        timeout-minutes: 15
 
         permissions:
             contents: read
@@ -162,4 +165,4 @@ jobs:
               run: npm run prod --if-present
 
             - name: Publish
-              run: npm publish  
+              run: npm publish

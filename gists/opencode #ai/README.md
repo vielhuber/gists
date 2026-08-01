@@ -13,7 +13,10 @@
 
 ## usage
 
-- `OPENCODE_DISABLE_CLAUDE_CODE=true OPENCODE_DISABLE_EXTERNAL_SKILLS=true IS_SANDBOX=1 opencode $([ -n "$(opencode session list --format json --max-count 1 2>/dev/null)" ] && echo --continue) --auto --model opencode-go/glm-5.2`
+- `( export OPENCODE_DISABLE_CLAUDE_CODE=true OPENCODE_DISABLE_EXTERNAL_SKILLS=true IS_SANDBOX=1; directory=$(pwd -P);
+  session_id=$(opencode session list --format json 2>/dev/null | jq -r --arg directory "$directory" '[.[] | select(.directory ==
+  $directory)] | sort_by(.updated) | last | .id // empty'); if [ -n "$session_id" ]; then exec opencode . --session "$session_id"
+  --auto --model opencode-go/kimi-k3; else exec opencode . --auto --model opencode-go/kimi-k3; fi )`
 - `opencode`
 - `opencode --continue`
 - `/connect`
@@ -48,7 +51,7 @@
 
 - `npx ctx7 setup --opencode` (=> MCP server)
 
-## notificatiopns
+## notifications
 
 - `mkdir -p ~/.config/opencode/plugins`
 - `ln -sfn /mnt/o/DOCS/SCRIPTS/NOTIFY/opencode-notify.js ~/.config/opencode/plugins/notify.js`
