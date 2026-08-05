@@ -302,6 +302,7 @@
 - Hugging Face: https://huggingface.co
 - Unsloth: https://unsloth.ai
 - European Open Source AI Index: https://osai-index.eu/the-index
+- canitrun: https://canitrun.dev
 
 ### Security / Pentesting
 - strix: https://github.com/usestrix/strix
