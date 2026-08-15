@@ -48,10 +48,10 @@ hooks = true
 {
   "description": "Update the taskbar harness overlay.",
   "hooks": {
-    "SessionStart": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 5}]}],
-    "UserPromptSubmit": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook thinking","timeout": 5}]}],
-    "Stop": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 5}]}],
-    "PermissionRequest": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook attention","timeout": 5}]}],
+    "SessionStart": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 10}]}],
+    "UserPromptSubmit": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook thinking","timeout": 10}]}],
+    "Stop": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook waiting","timeout": 10}]}],
+    "PermissionRequest": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook attention","timeout": 10}]}],
     "SessionEnd": [{"hooks": [{"type": "command","command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh codex-hook remove","timeout": 3}]}]
   }
 }

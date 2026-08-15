@@ -142,11 +142,11 @@ CB_NO_PROGRESS_THRESHOLD=2
 {
   ...
   "hooks": {
-    "SessionStart": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude waiting", "timeout": 5}]}],
-    "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude thinking", "timeout": 5}]}],
-    "Stop": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude waiting", "timeout": 5}]}],
-    "Notification": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude waiting", "timeout": 5}]}],
-    "SessionEnd": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude remove", "timeout": 5}]}]
+    "SessionStart": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude waiting", "timeout": 10}]}],
+    "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude thinking", "timeout": 10}]}],
+    "Stop": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude waiting", "timeout": 10}]}],
+    "Notification": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude waiting", "timeout": 10}]}],
+    "SessionEnd": [{"hooks": [{"type": "command", "command": "bash /mnt/o/DOCS/SCRIPTS/NOTIFY/notify.sh claude remove", "timeout": 10}]}]
   }
 }
 ```

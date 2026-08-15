@@ -2,7 +2,9 @@
 
 # Settings
 chatgpt_api_key="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-chatgpt_model="gpt-4o"
+chatgpt_base_url="https://api.openai.com/v1"
+chatgpt_model="gpt-5.6-sol"
+chatgpt_reasoning_effort="medium"
 
 debug=false
 declare -A prompts=(
@@ -50,7 +52,7 @@ existing_msg=$(cat "$commit_msg_file")
 data_log="/tmp/prepare-commit-msg-data.log"
 output_log="/tmp/prepare-commit-msg-output.log"
 diff_log="/tmp/prepare-commit-msg-diff.log"
-chatgpt_url="https://api.openai.com/v1/chat/completions"
+chatgpt_url="${chatgpt_base_url%/}/chat/completions"
 
 # Exit if a proper message is already provided
 if [[ "$commit_mode" == "message" && "$existing_msg" != "." ]]; then
@@ -60,7 +62,7 @@ fi
 # Output log file
 echo "⚡ Automatically generating git commit message... ⚡"
 
-# Fetch the staged git diff with unified context of 10 lines, no color and strip out all lines longer than 1000 chars
+# Fetch the staged git diff, omit dependency bundles and package version bumps, and strip long lines
 diff=$(
     git diff \
         --unified=10 \
@@ -70,7 +72,14 @@ diff=$(
             -e '/^diff --git.*node_modules/,/^diff --git/d' \
             -e '/^diff --git.*vendor/,/^diff --git/d' \
             -e '/^diff --git.*bundle\.\(js\|css\)/,/^diff --git/d' \
-            -e '/.\{1000\}./d'
+            -e '/.\{1000\}./d' | \
+        awk '
+            /^diff --git / {
+                ignore_version_bumps = $0 ~ / a\/([^ ]*\/)?(package|composer)\.json b\/([^ ]*\/)?(package|composer)\.json$/
+            }
+            ignore_version_bumps && /^[+-][[:space:]]*"version"[[:space:]]*:/ { next }
+            { print }
+        '
 )
 
 # Log the diff for reference
@@ -99,6 +108,7 @@ done
 # Prepare the payload for the API request
 payload="{
     \"model\": \"$chatgpt_model\",
+    \"reasoning_effort\": \"$chatgpt_reasoning_effort\",
     \"messages\": [
         { \"role\": \"system\", \"content\": \"${prompts["system"]}\" },
         { \"role\": \"user\", \"content\": \"${prompts["user.intro"]}\" },
@@ -121,16 +131,20 @@ response=$(curl "$chatgpt_url" \
 echo "$response" > "$output_log"
 
 # Exit if response contains errors
-if [[ $response == *"\"error\": {"* ]]; then
+if [[ $response =~ \"error\"[[:space:]]*: ]]; then
     echo "Error calling api..."
-    exit
+    exit 1
 fi
 
 # Extract the content from the response (handles potential formatting issues)
-response=$(sed -nr 's/.+content": "(.+?)".+/\1/p' <<< "$response")
+response=$(sed -nr 's/.*"content"[[:space:]]*:[[:space:]]*"(([^"\\]|\\.)*)".*/\1/p' <<< "$response")
 response=$(sed -r 's/\\n/\n/g' <<< "$response")
 response=$(sed -r 's/\\"/"/g' <<< "$response")
 response=$(sed -r 's/\\\\/\\/g' <<< "$response")
+if [[ -z "$response" ]]; then
+    echo "Error parsing api response..."
+    exit 1
+fi
 
 # Delete debug files
 if [[ "$debug" = false ]]; then
