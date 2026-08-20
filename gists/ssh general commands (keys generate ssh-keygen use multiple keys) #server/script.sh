@@ -1,9 +1,9 @@
 # basic
-ssh-keygen -t rsa -C "david@close2.de"
+ssh-keygen -t rsa -C "david@vielhuber.de"
 cat ~/.ssh/id_rsa.pub
 
 # more secure (RSA 4096)
-ssh-keygen -t rsa -b 4096 -C "david@close2.de" -f ~/.ssh/id_rsa_4096
+ssh-keygen -t rsa -b 4096 -C "david@vielhuber.de" -f ~/.ssh/id_rsa_4096
 cat ~/.ssh/id_rsa_4096.pub
 
 # use multiple keys on one client

@@ -15,7 +15,7 @@ RewriteRule ^wp-content\/uploads\/(.*)$ https://www.tld.com/wp-content/uploads/$
 # fetch media from production
 <IfModule mod_rewrite.c>
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{HTTP_HOST} \.local|close2dev\.de$ [NC]
+  RewriteCond %{HTTP_HOST} \.local|rebuhleiv\.xyz$ [NC]
   RewriteRule ^(.*)$ https://www.tld.com/wp-content/uploads/$1 [R=302,L]
 </IfModule>
 ```

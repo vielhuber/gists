@@ -14,7 +14,7 @@ use Baz;
  * @author David Vielhuber <david@vielhuber.de>
  * @author Max Mustermann <max@mustermann.de>
  * @version 1.1.0
- * @copyright 2022 close2 new media GmbH
+ * @copyright 2022 David Vielhuber
  * @since 2022-09-17
  */
 class TestClass {

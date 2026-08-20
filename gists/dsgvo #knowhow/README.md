@@ -1,4 +1,4 @@
-- E-Mail-Adressen sind nicht immer personenbezogen (david@close2.de schon, info@close2.de nicht)
+- E-Mail-Adressen sind nicht immer personenbezogen (david@vielhuber.de schon, david@vielhuber.de nicht)
 - IP-Adressen sind persoenbezogen und dürfen in Logfiles lt. BGH nur 7 Tage gespeichert werden
 - Newsletter-Anmeldung: E-Mail-Adresse muss Pflicht sein, alles andere (beliebige Felder wie religiöse Orientierung darf aber optional abgefragt werden), es muss ein manuelles Häkchen gesetzt werden
 - Nach 7-10 Jahren müssen Kundendaten nach Steuerrecht wenn möglich automatisch gelöscht werden

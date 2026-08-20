@@ -47,7 +47,7 @@
 - `git remote set-url origin git@gitlab.com:vielhuber/vielhuber.git`
 - `git remote set-url origin https://gitlab.com/vielhuber/vielhuber.git`
 - `git remote set-url origin https://username:password@gitlab.com/vielhuber/vielhuber.git`
-- `git remote set-url origin https://david%40close2.de@gitlab.com/vielhuber/vielhuber.git`
+- `git remote set-url origin https://david%40vielhuber.de@gitlab.com/vielhuber/vielhuber.git`
 
 ##### add another remote
 

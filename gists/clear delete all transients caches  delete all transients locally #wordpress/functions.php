@@ -1,7 +1,7 @@
 <?php
 if (
-    @$_SERVER['SERVER_ADMIN'] === 'david@close2.de' ||
-    strpos(@$_SERVER['HTTP_HOST'], 'close2dev') !== false
+    @$_SERVER['SERVER_ADMIN'] === 'david@vielhuber.de' ||
+    strpos(@$_SERVER['HTTP_HOST'], 'vielhuber') !== false
 ) {
     $wpdb->query(
         $wpdb->prepare(

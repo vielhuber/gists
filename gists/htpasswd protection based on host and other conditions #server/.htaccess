@@ -1,11 +1,11 @@
 # wp solution
-SetEnvIf HOST "close2dev\.de" protected
+SetEnvIf HOST "rebuhleiv\.xyz" protected
 SetEnvIf Request_URI "wp-json" !protected
 SetEnvIf Cookie "access_token" !protected
 Order Allow,Deny
 AuthType Basic
 AuthName "Interner Bereich"
-AuthUserFile /www/htdocs/xxxxxxxx/xxx.close2dev.de/.htpasswd
+AuthUserFile /www/htdocs/xxxxxxxx/xxx.rebuhleiv.xyz/.htpasswd
 AuthGroupFile /dev/null
 require valid-user
 Allow from all
