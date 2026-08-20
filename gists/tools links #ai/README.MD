@@ -238,6 +238,8 @@
 - World Labs Marble: https://www.worldlabs.ai
 
 ### KI-Texte humanisieren
+- Pangram: https://www.pangram.com
+- humanizer: https://github.com/blader/humanizer
 - WORTLIGA: https://wortliga.de/ki-text-generator
 - DeepL Write: https://www.deepl.com/de/write
 - ZeroGPT: https://www.zerogpt.com
@@ -247,7 +249,6 @@
 - aihumaize.io: https://aihumanize.io
 - HIX Bypass: https://bypass.hix.ai
 - Prompt Hacks: https://x.com/HeyNayeem/status/2017251056003215866
-- humanizer: https://github.com/blader/humanizer
 
 ### Buch schreiben
 - Sudowrite: https://www.sudowrite.com
