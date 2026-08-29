@@ -7,8 +7,8 @@
 
 - `mkdir -p ~/.codex`
 - `mkdir -p ~/.agents`
-- `ln -s /var/www/boilerplate/AGENTS.md ~/.codex/AGENTS.md`
-- `ln -s /var/www/boilerplate/_skills ~/.agents/skills`
+- `ln -sfn /var/www/skills/AGENTS.md ~/.codex/AGENTS.md`
+- `ln -sfn /var/www/skills ~/.agents/skills`
 
 ## usage
 

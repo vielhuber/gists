@@ -5,9 +5,9 @@
 
 ## load skills
 
-- `mkdir ~/.claude`
-- `ln -s /var/www/boilerplate/AGENTS.md ~/.claude/CLAUDE.md`
-- `ln -s /var/www/boilerplate/_skills ~/.claude/skills`
+- `mkdir -p ~/.claude`
+- `ln -sfn /var/www/skills/AGENTS.md ~/.claude/CLAUDE.md`
+- `ln -sfn /var/www/skills ~/.claude/skills`
 
 ## usage
 

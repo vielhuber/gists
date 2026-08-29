@@ -8,8 +8,8 @@
 ## load skills
 
 - `mkdir -p ~/.config/opencode`
-- `ln -sfn /var/www/boilerplate/AGENTS.md ~/.config/opencode/AGENTS.md`
-- `ln -sfn /var/www/boilerplate/_skills ~/.config/opencode/skills`
+- `ln -sfn /var/www/skills/AGENTS.md ~/.config/opencode/AGENTS.md`
+- `ln -sfn /var/www/skills ~/.config/opencode/skills`
 
 ## usage
 
