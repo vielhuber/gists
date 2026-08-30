@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Settings
-chatgpt_api_key="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-chatgpt_base_url="https://api.openai.com/v1"
+chatgpt_api_key="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+chatgpt_base_url="https://ai.rebuhleiv.xyz/v1"
 chatgpt_model="gpt-5.6-sol"
 chatgpt_reasoning_effort="medium"
 
@@ -64,14 +64,16 @@ echo "⚡ Automatically generating git commit message... ⚡"
 
 # Fetch the staged git diff, omit dependency bundles and package version bumps, and strip long lines
 diff=$(
-    git diff \
+    git -C "$(git rev-parse --show-toplevel)" diff \
         --unified=10 \
         --staged \
-        --no-color | \
+        --no-color \
+        -- . \
+        ':(exclude,glob)**/node_modules/**' \
+        ':(exclude,glob)**/vendor/**' \
+        ':(exclude,glob)**/bundle.js' \
+        ':(exclude,glob)**/bundle.css' | \
         sed \
-            -e '/^diff --git.*node_modules/,/^diff --git/d' \
-            -e '/^diff --git.*vendor/,/^diff --git/d' \
-            -e '/^diff --git.*bundle\.\(js\|css\)/,/^diff --git/d' \
             -e '/.\{1000\}./d' | \
         awk '
             /^diff --git / {

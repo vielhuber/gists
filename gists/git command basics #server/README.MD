@@ -223,12 +223,14 @@ git worktree remove ./main-worker-3
 git branch -d feature/main-worker-1 feature/main-worker-2 feature/main-worker-3
 ```
 
+
 #### rebase vs. merge
 
-| pull | merge |
+feature <= main: always rebase
+main <= feature: always merge
+
+| merge | rebase |
 |---|---|
-| production | local |
-| shared branches (`main`, `develop`, ...) | Only branches where I work alone |
 | `git pull` | `git pull --rebase` |
 | `git merge foo` | `git rebase foo` |
 | `git push` | `git push --force-with-lease` |
@@ -236,16 +238,10 @@ git branch -d feature/main-worker-1 feature/main-worker-2 feature/main-worker-3
 **merge**
 
 - `git pull`
-- `git checkout feature/123`
-- `git merge main`
+- `git checkout main`
+- `git merge feature/123`
 - (`git merge --abort`)
 - `git push`
-
-```
-main:             A---B---C-------M
-                       \         /
-feature/123:            D---E---F
-```
 
 **rebase**
 
@@ -255,10 +251,62 @@ feature/123:            D---E---F
 - (`git rebase --abort`)
 - `git push --force-with-lease`
 
+**workflow (correct)**
+
 ```
-main:          A---B---C
-                        \
-feature/123:             D'--E'--F'
+        C---D  (main)
+       /
+  A---B
+       \
+        E---F  (feature)
+```
+
+`git checkout feature && git rebase main`
+
+```
+  A---B---C---D  (main)
+               \
+                E'---F'  (feature)
+```
+
+`git checkout main && git merge feature`
+
+```
+  A---B---C---D---E'---F'  (main)
+```
+
+**workflow (wrong)**
+
+```
+        C---D  (main)
+       /
+  A---B
+       \
+        E---F  (feature)
+```
+
+`git checkout feature && git merge main`
+
+```
+  A---B---C---D  (main)
+       \       \
+        E---F---M1  (feature)
+```
+
+`git checkout main && git merge feature`
+
+```
+  A---B---C---D
+       \       \
+        E---F---M1  (main)
+```
+
+or
+
+```
+  A---B---C---D-----------M2  (main)
+       \       \         /
+        E---F---M1------'     (feature)
 ```
 
 #### revise commit history
