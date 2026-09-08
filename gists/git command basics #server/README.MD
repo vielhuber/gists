@@ -226,8 +226,12 @@ git branch -d feature/main-worker-1 feature/main-worker-2 feature/main-worker-3
 
 #### rebase vs. merge
 
-feature <= main: always rebase
-main <= feature: always merge
+**tl;dr**
+
+- **feature <= main**: always rebase
+- **main <= feature**: always merge
+- **git pull on feature without ff**: always rebase
+- **git pull on main without ff**: always merge
 
 | merge | rebase |
 |---|---|
