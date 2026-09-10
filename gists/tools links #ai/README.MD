@@ -64,6 +64,8 @@
 
 ### Videos
 - Magnific (Freepik): https://www.magnific.com
+- Higgsfield: https://higgsfield.ai
+- fal: https://fal.ai
 - Kling AI: https://klingai.com
 - OpenAI Sora: https://www.sora.com
 - RunWay ML: https://runwayml.com
