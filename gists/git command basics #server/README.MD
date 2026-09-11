@@ -35,6 +35,19 @@
     - option 1: `ssh-keyscan github.com >> ~/.ssh/known_hosts`
     - option 2: `GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git pull`
 
+#### github error "Key is already in use"
+
+- scenario: private repos A and B should be checked out on the same server
+- github does not allow the same deploy keys on different repositories
+- solution: create and use second key
+  - `ssh-keygen -t rsa -f ~/.ssh/id_rsa_repo2`
+  - `chmod 600 ~/.ssh/id_rsa_repo2`
+  - `cat ~/.ssh/id_rsa_repo2.pub`
+  - `cd /path/to/repo2`
+  - `git clone -c core.sshCommand="ssh -F /dev/null -i \"$HOME/.ssh/id_rsa_repo2\" -o IdentitiesOnly=yes" git@github.com:xxx/yyy.git .`
+  - change existing repository: `git config --local core.sshCommand "ssh -F /dev/null -i \"$HOME/.ssh/id_rsa_repo2\" -o IdentitiesOnly=yes"`
+  - check setting: `cat ./.git/config`
+
 #### change host / remote url
 
 ##### check
