@@ -132,6 +132,17 @@
 - NVIDIA Build: https://build.nvidia.com + https://github.com/sherman-yang/nvidia-model-info
 - Apfel: https://apfel.franzai.com
 
+### Agent Orchestration
+- chaRLy: https://github.com/vielhuber/charly
+- T3 Code: https://t3.codes
+- Bloom: https://runbloom.app
+- Polyscope: https://getpolyscope.com
+- Solo: https://soloterm.com
+- Amp: https://ampcode.com
+- Conductor: https://conductor.build
+- Orca: https://onorca.dev
+- Superset: https://superset.sh
+
 ### Developer Tools
 - Claude Console: https://console.anthropic.com
 - Google AI Studio: https://aistudio.google.com

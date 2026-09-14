@@ -22,6 +22,7 @@
 services:
     app:
         build: .
+        init: true
         volumes:
             # permanently save vscode extensions
             - ~/.vscode-server-docker:/root/.vscode-server
