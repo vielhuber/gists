@@ -44,6 +44,7 @@
 - Cline: https://cline.bot
 - Repomix: https://repomix.com
 - AGENTS.md: https://agents.md
+- TypeSafe: https://typesafe.ai
 
 ### Bilder
 - Magnific / Freepik: https://www.magnific.com
