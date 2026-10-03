@@ -5,10 +5,9 @@
 
 ## load skills
 
-- `mkdir -p ~/.antigravity`
-- `mkdir -p ~/.agents`
-- `ln -sfn /var/www/skills/AGENTS.md ~/.antigravity/AGENTS.md`
-- `ln -sfn /var/www/skills ~/.agents/skills`
+- `mkdir -p ~/.gemini/config`
+- `ln -sfn /var/www/skills/AGENTS.md ~/.gemini/config/AGENTS.md`
+- `ln -sfn /var/www/skills ~/.gemini/config/skills`
 
 ## usage
 - `agy`
@@ -36,7 +35,7 @@
 ```
 
 ## chrome / playwright
-- `nano ~/.antigravity/mcp_config.json`
+- `nano ~/.gemini/config/mcp_config.json`
 ```json
 {
   "mcpServers": {
