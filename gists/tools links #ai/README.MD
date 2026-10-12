@@ -313,6 +313,7 @@
 
 ### Prompt generation
 - AI-27: https://ai-27.com/prompt
+- Semantic Anchors: https://llm-coding.github.io/Semantic-Anchors
 
 ### Open Source / Open Weights / Fine Tuning
 - Hugging Face: https://huggingface.co
