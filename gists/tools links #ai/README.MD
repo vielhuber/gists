@@ -252,8 +252,10 @@
 - World Labs Marble: https://www.worldlabs.ai
 
 ### KI-Texte humanisieren
+- HumanizerBench: https://humanizerbench.com
 - Pangram: https://www.pangram.com
 - WriteHuman: https://writehuman.ai
+- phrasly: https://phrasly.ai
 - humanizer: https://github.com/blader/humanizer
 - WORTLIGA: https://wortliga.de/ki-text-generator
 - DeepL Write: https://www.deepl.com/de/write
