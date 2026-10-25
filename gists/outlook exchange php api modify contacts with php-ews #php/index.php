@@ -254,7 +254,7 @@ if ($switch === 2) {
         'first_name' => '_DIES IST',
         'last_name' => 'EIN TEST',
         'emails' => ['david@vielhuber.de'],
-        'phones' => ['private' => ['+4915158754691'], 'business' => ['+4989546564']]
+        'phones' => ['private' => ['+49999999999'], 'business' => ['+49111111111']]
     ]);
     var_dump($response);
 }
@@ -290,5 +290,5 @@ $exchangecontacts->updateContact([
     'first_name' => 'DIES IST',
     'last_name' => 'EIN TEST',
     'emails' => ['david@vielhuber.de'],
-    'phones' => ['private' => ['+4915158754691'], 'business' => ['+4989546564']]
+    'phones' => ['private' => ['+49999999999'], 'business' => ['+49111111111']]
 ]);
